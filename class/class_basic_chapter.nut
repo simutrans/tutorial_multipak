@@ -683,43 +683,7 @@ class basic_chapter
 
 	function get_wait_time_text(wait)
 	{
-		local txwait= ""
-		switch (wait) {
-			case 7:
-				txwait = "1/512"
-				break
-			case 8:
-				txwait = "1/256"
-				break
-			case 9:
-				txwait = "1/128"
-				break
-			case 10:
-				txwait = "1/64"
-				break
-			case 11:
-				txwait = "1/32"
-				break
-			case 12:
-				txwait = "1/16"
-				break
-			case 13:
-				txwait = "1/8"
-				break
-			case 14:
-				txwait = "1/4"
-				break
-			case 15:
-				txwait = "1/2"
-				break
-			case 16:
-				txwait = "1/1"
-				break
-			default:
-				txwait = ""+wait+""
-				break
-		}
-		return txwait
+		return ""+difftick_to_string(wait*(16))+""
 	}
 
 	function is_station_build(player,coord,good)
@@ -1251,6 +1215,87 @@ class basic_chapter
 		this.step_ext = {a=0, b=0}
 		persistent.step_ext = this.step_ext
 		return null
+	}
+
+	function count_tunnel(coora, max){
+		local way = tile_x(coora.x, coora.y, coora.z).find_object(mo_way)
+		local r_dir = way? way.get_dirs():0
+
+		local result = false
+		if(r_dir == 2){
+			for(local j = 0;true;j++){
+				local t = tile_x((coora.x + j), coora.y , coora.z)
+				if (!t.is_valid()){
+					return false
+				}
+				local w = t.find_object(mo_way)
+				if (!w){
+					t.z--
+					w = t.find_object(mo_way)
+				}
+				local slope = t.get_slope()
+				local dir = w? w.get_dirs():0
+				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+"")
+				if(w && j==max && (dir==2 || dir==10))result = true
+				else if(w && j>max)result = false
+				if(slope != 0) return result	
+			}
+		}
+		else if(r_dir == 8){
+			for(local j = 0;true;j++){
+				local t = tile_x((coora.x - j), coora.y , coora.z)
+				if (!t.is_valid()){
+					return false
+				}
+				local w = t.find_object(mo_way)
+				if (!w){
+					t.z--
+					w = t.find_object(mo_way)
+				}
+				local slope = t.get_slope()
+				local dir = w? w.get_dirs():0
+				if(w && j==max && (dir==2 || dir==10))result = true
+				else if(w && j>max)result = false
+				if(slope != 0) return result	
+			}
+		}
+		else if(r_dir == 4){
+			for(local j = 0;true;j++){
+				local t = tile_x(coora.x, (coora.y + j), coora.z)
+				if (!t.is_valid()){
+					return false
+				}
+				local w = t.find_object(mo_way)
+				if (!w){
+					t.z--
+					w = t.find_object(mo_way)
+				}
+				local slope = t.get_slope()
+				local dir = w? w.get_dirs():0
+				if(w && j==max && (dir==4 || dir==5))result = true
+				else if(w && j>max)result = false
+				if(slope != 0) return result	
+			}
+		}
+		else if(r_dir == 1){
+			for(local j = 0;true;j++){
+				local t = tile_x(coora.x, (coora.y - j), coora.z)
+				if (!t.is_valid()){
+					return false
+				}
+				local w = t.find_object(mo_way)
+				if (!w){
+					t.z--
+					w = t.find_object(mo_way)
+				}
+				local slope = t.get_slope()
+				local dir = w? w.get_dirs():0
+				if(w && j==max && (dir==1 || dir==5))result = true
+				else if(w && j>max)result = false
+				if(slope != 0) return result	
+			}
+		}
+		return result
 	}
 
 	//Comprueba conexion entre vias
@@ -2247,8 +2292,10 @@ class basic_chapter
 		            }
                 }
 		    }        
-		    c_line.change_schedule(play, sched)          
-            cov_list[0].set_line(play, c_line)
+			if(c_line){     
+				c_line.change_schedule(play, sched)          
+				cov_list[0].set_line(play, c_line)
+			}
 
   			return null
         }
@@ -2333,7 +2380,7 @@ class basic_chapter
 						local area = get_tiles_near_factory(tile_list)
 						for(local i=0;i<area.len();i++){
 							local t_water = my_tile(area[i])
-							gui.add_message(""+t_water.x+","+t_water.y+"")
+							//gui.add_message(""+t_water.x+","+t_water.y+"")
 							if (pos.x==t_water.x && pos.y==t_water.y){
 
 								if(t_water.is_water()){
@@ -2599,7 +2646,7 @@ class basic_chapter
 		local result = 0
 
 		for(local j=0;j<nr;j++){
-			gui.add_message(""+glsw[j]+"")
+			//gui.add_message(""+glsw[j]+"")
 			local tile = tile_x(c_list[j].x, c_list[j].y, 0)
             local halt = tile.get_halt()
 			if (halt){         
