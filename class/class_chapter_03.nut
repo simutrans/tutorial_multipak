@@ -1693,7 +1693,7 @@ class tutorial.chapter_03 extends basic_chapter
 						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
 							if(!count_tunn && slope==0 && way && way.is_marked())
 								return null
-							if(count_tunn) return translate("Debe usar la herramienta para bajar el terreno aqui**")+" ("+coorbord.tostring()+".)" 
+							if(count_tunn && pos.z!=end_lvl_z) return translate("Debe usar la herramienta para bajar el terreno aqui**")+" ("+coorbord.tostring()+".)" 
 						}
 					}
 
@@ -1718,7 +1718,11 @@ class tutorial.chapter_03 extends basic_chapter
 											return null
 								}
 							}
-							else if (slope==0)return translate("El tunel no es correcto, use la herramienta [Eliminar] aqui**")+" ("+coorbord.tostring()+".)" 
+							else if (slope==0){
+								if (pos.z == (end_lvl_z))
+									return translate("The tunnel is already at the correct level")+" (-"+end_lvl_z+")."
+								return translate("El tunel no es correcto, use la herramienta [Eliminar] aqui**")+" ("+coorbord.tostring()+".)" 
+							}
 						}
 						else return coorbord!=0 && slope==0? translate("Modify the terrain here")+" ("+coorbord.tostring()+")." : result
 					}
