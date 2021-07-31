@@ -644,9 +644,6 @@ class tutorial.chapter_03 extends basic_chapter
 				return 5
 				break;
 			case 2:
-				rules.clear()
-				set_all_rules(pl)
-
 				//Primer tramo de rieles
 				if (pot0==0){
 					local limi = label1_lim
@@ -776,8 +773,6 @@ class tutorial.chapter_03 extends basic_chapter
 				return 10
 				break;
 			case 3:
-				rules.clear()
-				set_all_rules(pl)
 				glresult = null
 				
 				local passa = good_alias.passa
@@ -812,8 +807,6 @@ class tutorial.chapter_03 extends basic_chapter
 				return 15
 				break
 			case 4:
-				rules.clear()
-				set_all_rules(pl)
 				local tile = my_tile(c_dep1)
 				if(pot0==0){
 					local c_list = [c_dep1_lim.a, c_dep1_lim.b]
@@ -862,8 +855,6 @@ class tutorial.chapter_03 extends basic_chapter
 			case 5:
 				if (!cov_sw)
 					return 0
-				rules.clear()
-				set_all_rules(pl)
 
 				local wt = wt_rail
 
@@ -890,8 +881,6 @@ class tutorial.chapter_03 extends basic_chapter
 				return 30
 				break
 			case 6:
-				rules.clear()
-				set_all_rules(pl)
 				//Primer tramo de rieles
 				if (pot0==0){
 
@@ -1069,8 +1058,7 @@ class tutorial.chapter_03 extends basic_chapter
 			case 7:
 				if (!cov_sw)
 					return 0
-				rules.clear()
-				set_all_rules(pl)
+
 				//Marca las vias del tren
 				local opt = 2
 				local wt = gl_wt
@@ -1111,8 +1099,6 @@ class tutorial.chapter_03 extends basic_chapter
 				return 40
 				break
 			case 8:
-				rules.clear()
-				set_all_rules(pl)
 				//Para el tramo de via
 				if (pot0==0){
 					local coora = coord3d(c_way6.a.x, c_way6.a.y, c_way6.a.z)
@@ -1192,8 +1178,6 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 
 			case 9:
-				rules.clear()
-				set_all_rules(pl)
 				if (pot0==0){
 		            for(local j=0;j<c_way_list1.len();j++){
 						if(glsw[j] == 0){
@@ -1255,8 +1239,6 @@ class tutorial.chapter_03 extends basic_chapter
 			case 10:
 				if (!cov_sw)
 					return 0
-				rules.clear()
-				set_all_rules(pl)
 
 				if (pot0==0){
 		            for(local j=0;j<c_cate_list1.len();j++){
@@ -1306,9 +1288,6 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 			
 			case 11:
-				rules.clear()
-				set_all_rules(pl)
-
             	local c_dep = this.my_tile(c_dep3)
                 set_convoy_schedule(pl,c_dep, gl_wt, line1_name)
 
@@ -2670,7 +2649,19 @@ class tutorial.chapter_03 extends basic_chapter
 				local forbid = [tool_build_station]
 				foreach (tool_id in forbid)
 					rules.forbid_tool(pl, tool_id )	
-				break			
+				break
+
+			case 11:
+				local forbid =	[	tool_build_way,tool_build_roadsign,tool_build_bridge,tool_build_wayobj,
+									tool_build_tunnel,tool_build_station,tool_remover,tool_build_depot,4113,4129
+								]
+				foreach (tool_id in forbid)
+					rules.forbid_way_tool(pl, tool_id, wt_rail )
+
+
+				foreach (tool_id in forbid)
+					rules.forbid_tool(pl, tool_id )	
+				break		
 		}
 	}
 	function is_stations_building(pl, c_list, st_nr, good)

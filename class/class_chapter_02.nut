@@ -54,7 +54,7 @@ class tutorial.chapter_02 extends basic_chapter
     vhe1_name = translate("BuessingLinie")
 	veh1_obj = "BuessingLinie"
 	veh1_load = 100
-	veh1_wait = 12
+	veh1_wait = 10571
 
 	// Step 5 =====================================================================================
 	// Primer puente
@@ -185,6 +185,7 @@ class tutorial.chapter_02 extends basic_chapter
 				text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
 				
 				text.list = list_tx
+				text.nr = siz
 				break
 			case 5:
 				text.bpos1 = brdg1.href("("+brdg1.tostring()+")")

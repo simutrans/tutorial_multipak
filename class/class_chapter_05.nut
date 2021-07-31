@@ -231,6 +231,7 @@ class tutorial.chapter_05 extends basic_chapter
 			text.cir = cov_cir
 			text.load = veh2_load
 			text.wait = get_wait_time_text(veh2_wait)
+			text.nr = siz
 		}
         if (pot2==1 && pot3==0 || !correct_cov){
 			text = ttextfile("chapter_05/04_3-3.txt")
@@ -262,6 +263,7 @@ class tutorial.chapter_05 extends basic_chapter
 			text.ship = veh3_name
 			text.load = veh3_load
 			text.wait = get_wait_time_text(veh3_wait)
+			text.nr = siz
 		}
 		break
 		case 5:
@@ -1120,27 +1122,46 @@ class tutorial.chapter_05 extends basic_chapter
 		foreach (tool_id in forbid)
 		    rules.forbid_tool(pl, tool_id)
 
-        if (this.step == 2){
-		    local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
+		switch (this.step) {
+			case 1:
+				local forbid =	[	4097,4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope,tool_build_way,
+									tool_make_stop_public,tool_build_transformer,tool_build_station,
+									tool_build_bridge,tool_build_depot,tool_remove_way,tool_build_tunnel
+								]
+				foreach (tool_id in forbid)
+					rules.forbid_tool(pl, tool_id )
+			break
 
-		    foreach(wt in all_waytypes)
-			    if (wt != wt_power) {
-			        foreach (tool_id in forbid)
-				        rules.forbid_way_tool(pl, tool_id, wt )
-			}
-        }
+			case 2:
+				local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
 
-        if (this.step == 3){
-		    local forbid = [tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel, tool_build_station,
-                           tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj]
+				foreach(wt in all_waytypes)
+					if (wt != wt_power) {
+					    foreach (tool_id in forbid)
+						    rules.forbid_way_tool(pl, tool_id, wt )
+				}
+			break
 
-		    foreach(wt in all_waytypes)
-			    if (wt != wt_power) {
-			        foreach (tool_id in forbid)
-				        rules.forbid_way_tool(pl, tool_id, wt )
-			}
-            rules.forbid_tool(pl, tool_build_station)
-        }
+			case 3:
+				local forbid = [tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel, tool_build_station,
+		                       tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj]
+
+				foreach(wt in all_waytypes)
+					if (wt != wt_power) {
+					    foreach (tool_id in forbid)
+						    rules.forbid_way_tool(pl, tool_id, wt )
+				}
+		        rules.forbid_tool(pl, tool_build_station)
+			break
+
+			case 4:
+				local forbid =	[	tool_build_transformer,tool_build_way,
+									tool_build_bridge,tool_build_depot,tool_remove_way,tool_build_tunnel
+								]
+				foreach (tool_id in forbid)
+					rules.forbid_tool(pl, tool_id )
+			break
+		}
 	}
 
     function delete_objet(pl, c_list, obj, lab_name, station = false)

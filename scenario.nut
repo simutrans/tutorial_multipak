@@ -91,7 +91,7 @@ active_sch_check <- false
 tool_alias  <- {inspe = translate("Abfrage"), road= translate("ROADTOOLS"), rail = translate("RAILTOOLS"), ship = translate("SHIPTOOLS"), land = translate("SLOPETOOLS"), spec = translate("SPECIALTOOLS")}
 
 // placeholder for good names in pak64
-good_alias  <- {mail = "Post", passa= "Passagiere", goods = "goods_", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
+good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
 
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]

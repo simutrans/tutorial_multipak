@@ -1,7 +1,7 @@
 <br>
 Se requiere transportar <em>pasajeros</em> hacia las zonas turisticas{tur}.<br><br>
 
-Use la herramienta de <em>exploración</em> en el <em>Astillero</em> {dep2} y en la pestaña <em>Ferrys</em> compre un <em>{ship}</em> .<br><br>
+Use la herramienta de <em>exploración</em> en el <em>Astillero</em> {dep1} y en la pestaña <em>Ferrys</em> compre un <em>{ship}</em> .<br><br>
 
 Ahora presione enrutar y seleccione las paradas:<br>
 {list}

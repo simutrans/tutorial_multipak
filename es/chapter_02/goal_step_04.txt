@@ -5,7 +5,7 @@ Ahora que las paradas están colocadas, necesitas comprar un <em>Autobús</em> p
 <em>[2]</em> Para configurar la ruta del vehículo, primero debe hacer clic en el boton <em>Enrutar</em>.<br>
 <em>[3]</em> Con la ventana <em>Enrutar</em> abierta, ahora debes seleccionar en orden todas la paradas de la ciudad para añadirlas a la lista:<br>
 {list}<br>
-<em>[4]</em> Después de añadir las 7 paradas, seleccione la parada <em>{stnam}</em> de la lista y configure de la siguiente forma:<br>
+<em>[4]</em> Después de añadir las {nr} paradas, seleccione la parada <em>{stnam}</em> de la lista y configure de la siguiente forma:<br>
 <em>--> [a]</em> La <em>Carga (Mín)</em> al <em>{load}%</em>.<br>
 <em>--> [b]</em> <em>Esperar (Meses)</em> a <em>{wait}</em>.<br>
 <em>[5]</em> Ahora haga clic en el botón <em>Arrancar</em> para que el vehículo salga del deposito.<br><br>
