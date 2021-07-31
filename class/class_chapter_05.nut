@@ -778,7 +778,7 @@ class tutorial.chapter_05 extends basic_chapter
 				}
 				local cov = d1_cnr
 				local veh = 2
-				local good_nr = good_desc_x(f1_good).get_catg_index() 	 //Coal
+				local good_list = [good_desc_x(f1_good).get_catg_index()] 	 //Coal
 				local name = veh1_obj
 				local st_tile = 1
 
@@ -789,7 +789,7 @@ class tutorial.chapter_05 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(c_sch, depot, id_start, id_end)
 				cov -= cir_nr
 
-				result = is_convoy_correct(depot, cov, veh, good_nr, name, st_tile)
+				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 				if (result!=null){
 					local name = veh1_name
@@ -809,7 +809,7 @@ class tutorial.chapter_05 extends basic_chapter
 				if (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b){
 					local cov = d2_cnr
 					local veh = 1
-					local good_nr = good_desc_x(good_alias.mail).get_catg_index() 	 //Mail
+					local good_list = [good_desc_x(good_alias.mail).get_catg_index()] 	 //Mail
 					local name = veh2_obj
 					local st_tile = 1
 
@@ -820,7 +820,7 @@ class tutorial.chapter_05 extends basic_chapter
 					local cir_nr = get_convoy_number_exp(c_sch, depot, id_start, id_end)
 					cov -= cir_nr
 
-					result = is_convoy_correct(depot, cov, veh, good_nr, name, st_tile)
+					result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 					if (result!=null){
 						local name = veh2_name
@@ -838,10 +838,10 @@ class tutorial.chapter_05 extends basic_chapter
 				else if (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b){
 					local cov = 1
 					local veh = 1
-					local good_nr = good_desc_x(good_alias.mail).get_catg_index() 	 //Mail
+					local good_list = [good_desc_x(good_alias.mail).get_catg_index()] 	 //Mail
 					local name = veh3_obj
 					local st_tile = 1
-					result = is_convoy_correct(depot, cov, veh, good_nr, name, st_tile)
+					result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 					if (result!=null){
 						local name = veh3_name

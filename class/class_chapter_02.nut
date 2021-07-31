@@ -225,31 +225,36 @@ class tutorial.chapter_02 extends basic_chapter
 
 				break
 			case 7:
-                local st_halt = ""
-				if (pot0==1){
-					local tile = my_tile(sch_list3[sch_list3.len()-1])
-					st_halt = tile.get_halt()
-				}
-				
+
 				if (!cov_sw){
-					local st0_name = my_tile(c_st0).get_halt().get_name()
-					local stxt = array(10)
-					for (local j=0;j<sch_list3.len();j++){
-						local c = coord(sch_list3[j].x, sch_list3[j].y)
-						st_halt = my_tile(c).get_halt()
-						if (st_halt) {
-						  stxt[j] = c.href(st_halt.get_name()+" ("+c.tostring()+")")
-						}
-					}
 					local a = 3
 					local b = 3
 					text = ttextfile("chapter_02/07_"+set_step_ext(a,b)+".txt")
 					text.tx = ttext("<em>["+a+"/"+b+"]</em>")
-					text.st1 = stxt[0]
-					text.st2 = stxt[1]
-					text.st3 = stxt[2]
-					text.st4 = stxt[3]
-					text.st5 = stxt[4]	
+					local list_tx = ""
+					local c_list = sch_list3
+					local siz = c_list.len()
+					for (local j=0;j<siz;j++){
+						local c = coord(c_list[j].x, c_list[j].y)
+						local tile = my_tile(c)
+						local st_halt = tile.get_halt()
+						if(sch_cov_correct){
+							list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+							continue
+						}
+						if(tmpsw[j]==0){
+							list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
+						}
+						else{						
+							list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+						}
+					}
+					local c = coord(c_list[siz-1].x, c_list[siz-1].y)
+					local tile = my_tile(c)
+					text.stnam = ""+siz+") "+tile.get_halt().get_name()+" ("+c.tostring()+")"
+					
+					text.list = list_tx
+					text.nr = siz
 				}
 				else if (pot0==0){
 					local a = 1
@@ -289,22 +294,35 @@ class tutorial.chapter_02 extends basic_chapter
 						text.cbor = coord(coorbord.x, coorbord.y).href("("+coorbord.tostring()+")")
 				}
 				else if (pot3==0){
-					local st0_name = my_tile(c_st0).get_halt().get_name()
-					local stxt = array(10)
-					for (local j=0;j<sch_list3.len();j++){
-						local c = coord(sch_list3[j].x, sch_list3[j].y)
-						st_halt = my_tile(c).get_halt()
-						stxt[j] = c.href(st_halt.get_name()+" ("+c.tostring()+")")
-					}
 					local a = 3
 					local b = 3
 					text = ttextfile("chapter_02/07_"+set_step_ext(a,b)+".txt")
 					text.tx = ttext("<em>["+a+"/"+b+"]</em>")
-					text.st1 = stxt[0]
-					text.st2 = stxt[1]
-					text.st3 = stxt[2]
-					text.st4 = stxt[3]
-					text.st5 = stxt[4]
+
+					local list_tx = ""
+					local c_list = sch_list3
+					local siz = c_list.len()
+					for (local j=0;j<siz;j++){
+						local c = coord(c_list[j].x, c_list[j].y)
+						local tile = my_tile(c)
+						local st_halt = tile.get_halt()
+						if(sch_cov_correct){
+							list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+							continue
+						}
+						if(tmpsw[j]==0){
+							list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
+						}
+						else{						
+							list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+						}
+					}
+					local c = coord(c_list[siz-1].x, c_list[siz-1].y)
+					local tile = my_tile(c)
+					text.stnam = ""+siz+") "+tile.get_halt().get_name()+" ("+c.tostring()+")"
+					
+					text.list = list_tx
+					text.nr = siz
 				}
 
 				text.n1 = cty1.c.href(cty1.name.tostring())
@@ -982,27 +1000,26 @@ class tutorial.chapter_02 extends basic_chapter
 		local result=null	// null is equivalent to 'allowed'
 		switch (this.step) {
 			case 4:
-				if (comm_script){
-					cov_save[current_cov]=convoy
-					id_save[current_cov]=convoy.id
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					return null
-				}
-				local cov = 1
-				local veh = 1
-				local good_nr = good_desc_x (good_alias.passa).get_catg_index() 	 //Passengers
-				local name = veh1_obj
-				local st_tile = 1
-				result = is_convoy_correct(depot,cov,veh,good_nr,name, st_tile)
-
-				if (result!=null){
-					reset_tmpsw()
-					local name = vhe1_name
-					return bus_result_message(result, name, veh, cov)
-				}
-
 				if (current_cov>ch2_cov_lim1.a && current_cov<ch2_cov_lim1.b){
+					/*if (comm_script){
+						cov_save[current_cov]=convoy
+						id_save[current_cov]=convoy.id
+						gcov_nr++
+						persistent.gcov_nr = gcov_nr
+						return null
+					}*/
+					local cov = 1
+					local veh = 1
+					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
+					local name = veh1_obj
+					local st_tile = 1
+					result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
+
+					if (result!=null){
+						reset_tmpsw()
+						local name = vhe1_name
+						return bus_result_message(result, name, veh, cov)
+					}
 					local selc = 0
 					local load = veh1_load
 					local wait = veh1_wait
@@ -1014,29 +1031,27 @@ class tutorial.chapter_02 extends basic_chapter
 				}
 			break
 			case 6:
-				if (comm_script){
-					cov_save[current_cov]=convoy
-					id_save[current_cov]=convoy.id
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					current_cov++
-					gall_cov++
-					return null
-				}
-
-				local cov = 1
-				local veh = 1
-				local good_nr = good_desc_x (good_alias.passa).get_catg_index() 	 //Passengers
-				local name = veh1_obj
-				local st_tile = 1
-				result = is_convoy_correct(depot,cov,veh,good_nr,name, st_tile)
-				if (result!=null){
-					reset_tmpsw()
-					local name = vhe1_name
-					return bus_result_message(result, name, veh, cov)
-				}
-
 				if (current_cov>ch2_cov_lim2.a && current_cov<ch2_cov_lim2.b){
+					/*if (comm_script){
+						cov_save[current_cov]=convoy
+						id_save[current_cov]=convoy.id
+						gcov_nr++
+						persistent.gcov_nr = gcov_nr
+						return null
+					}*/
+
+					local cov = 1
+					local veh = 1
+					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
+					local name = veh1_obj
+					local st_tile = 1
+					result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
+					if (result!=null){
+						reset_tmpsw()
+						local name = vhe1_name
+						return bus_result_message(result, name, veh, cov)
+					}
+
 					local selc = 0
 					local load = veh1_load
 					local wait = veh1_wait
@@ -1050,26 +1065,26 @@ class tutorial.chapter_02 extends basic_chapter
 				}
 			break
 			case 7:
-				if (comm_script){
-					cov_save[current_cov]=convoy
-					id_save[current_cov]=convoy.id
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					return null
-				}
-				local cov = 1
-				local veh = 1
-				local good_nr = good_desc_x (good_alias.passa).get_catg_index() 	 //Passengers
-				local name = veh1_obj
-				local st_tile = 1
-				result = is_convoy_correct(depot,cov,veh,good_nr,name, st_tile)
-				if (result!=null){
-					reset_tmpsw()
-					local name = vhe1_name
-					return bus_result_message(result, name, veh, cov)
-				}
-
 				if (current_cov>ch2_cov_lim3.a && current_cov<ch2_cov_lim3.b){
+					/*if (comm_script){
+						cov_save[current_cov]=convoy
+						id_save[current_cov]=convoy.id
+						gcov_nr++
+						persistent.gcov_nr = gcov_nr
+						return null
+					}*/
+					local cov = 1
+					local veh = 1
+					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
+					local name = veh1_obj
+					local st_tile = 1
+					result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
+					if (result!=null){
+						reset_tmpsw()
+						local name = vhe1_name
+						return bus_result_message(result, name, veh, cov)
+					}
+
 					local load = veh1_load
 					local wait = veh1_wait
 					local c_list = sch_list3
@@ -1130,7 +1145,7 @@ class tutorial.chapter_02 extends basic_chapter
 					pot0 = 1
 				}
 
-				if (pot0 == 1 ){
+				if (current_cov>ch2_cov_lim1.a && current_cov<ch2_cov_lim1.b){
 					local pl = player_x(0)
 					local c_depot = my_tile(c_dep)
 
@@ -1138,21 +1153,22 @@ class tutorial.chapter_02 extends basic_chapter
 					local good_nr = 0 //Passengers
 					local name = veh1_obj
 					local cov_nr = 0  //Max convoys nr in depot
-					if (current_cov==0 && correct_cov){
-						if (!comm_set_convoy(cov_nr, c_depot, name))
-							return 0
-						local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
-						local convoy = depot.get_convoy_list()
-						local sched = schedule_x(gl_wt, [])
-						for(local j=0;j<sch_list1.len();j++){
-							if (j==0)
-								sched.entries.append(schedule_entry_x(my_tile(sch_list1[j]), 100, 12))
-							else
-								sched.entries.append(schedule_entry_x(my_tile(sch_list1[j]), 0, 0))
-						}
-						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+
+					if (!comm_set_convoy(cov_nr, c_depot, name))
+						return 0
+					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
+					local convoy = depot.get_convoy_list()
+					local sched = schedule_x(gl_wt, [])
+					local load = veh1_load
+					local wait = veh1_wait
+					for(local j=0;j<sch_list1.len();j++){
+						if (j==0)
+							sched.entries.append(schedule_entry_x(my_tile(sch_list1[j]), load, wait))
+						else
+							sched.entries.append(schedule_entry_x(my_tile(sch_list1[j]), 0, 0))
 					}
-					pot1 = 1
+					comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+
 				}
 				return null
 				break
@@ -1178,27 +1194,31 @@ class tutorial.chapter_02 extends basic_chapter
 
 				comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
 
-				local good_nr = 0 //Passengers
-				local name = veh1_obj
-				local cov_nr = 0  //Max convoys nr in depot
-				local sch_siz = sch_list2.len()
-				for (local j = current_cov; j>=1 && j<=3 && correct_cov; j++){
-					if (!comm_set_convoy(cov_nr, c_depot, name))
-						return 0
-					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
-					local convoy = depot.get_convoy_list()
-					if (convoy.len()==0) continue
-					local sched = schedule_x(gl_wt, [])
-					for(local i=0;i<sch_siz;i++){
-						if (i==0)
-							sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), 100, 12))
-						else
+				if (current_cov>ch2_cov_lim2.a && current_cov<ch2_cov_lim2.b){
+					local good_nr = 0 //Passengers
+					local name = veh1_obj
+					local cov_nr = 0  //Max convoys nr in depot
+					local sch_siz = sch_list2.len()
+					local load = veh1_load
+					local wait = veh1_wait
+					for (local j = current_cov; j>ch2_cov_lim2.a && j<ch2_cov_lim2.b && correct_cov; j++){
+						if (!comm_set_convoy(cov_nr, c_depot, name))
+							return 0
+						local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
+						local convoy = depot.get_convoy_list()
+						if (convoy.len()==0) continue
+						local sched = schedule_x(gl_wt, [])
+						for(local i=0;i<sch_siz;i++){
+							if (i==0)
+								sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), load, wait))
+							else
+								sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), 0, 0))
+						}
+						for(local i=sch_siz-2;i>0;i--){
 							sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), 0, 0))
+						}
+						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 					}
-					for(local i=sch_siz-2;i>0;i--){
-						sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), 0, 0))
-					}
-					comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 				}
 				comm_script = false
 				return null
@@ -1224,7 +1244,7 @@ class tutorial.chapter_02 extends basic_chapter
 					local t = command_x(tool_build_way)			
 					local err = t.work(player_x(1), my_tile(c_label1.a), my_tile(c_label1.b), sc_way_name)
 				}
-				if (current_cov==4 && correct_cov){
+				if (current_cov>ch2_cov_lim3.a && current_cov<ch2_cov_lim3.b){
 					local pl = player_x(0)
 					local c_depot = my_tile(c_dep)
 
@@ -1238,11 +1258,14 @@ class tutorial.chapter_02 extends basic_chapter
 					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 					local convoy = depot.get_convoy_list()
 					local sched = schedule_x(gl_wt, [])
-					sched.entries.append(schedule_entry_x(my_tile(c_st0), 0, 0))
+
 					local sch_siz = sch_list3.len()
+					local load = veh1_load
+					local wait = veh1_wait
+
 					for(local j=0;j<sch_siz;j++){
 						if (j==sch_siz-1)
-							sched.entries.append(schedule_entry_x(my_tile(sch_list3[j]), 100, 12))
+							sched.entries.append(schedule_entry_x(my_tile(sch_list3[j]), load, wait))
 						else
 							sched.entries.append(schedule_entry_x(my_tile(sch_list3[j]), 0, 0))
 					}

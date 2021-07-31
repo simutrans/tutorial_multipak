@@ -607,7 +607,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local cov = d1_cnr
 				local in_dep = true
 				local veh = 1
-				local good_nr = good_desc_x(f1_good).get_catg_index() //Fuels
+				local good_list = [good_desc_x(f1_good).get_catg_index()] //Fuels
 				local name = ship1_name_obj
 				local st_tile = 1
 
@@ -629,7 +629,7 @@ class tutorial.chapter_04 extends basic_chapter
 					local selc = 0
 					local load = ship1_load
 					local time = ship1_wait
-					local c_list = sch_list1 //[sch_list1[1], sch_list1[0]]
+					local c_list = sch_list1
 					local siz = c_list.len()
 					return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
 				}
@@ -651,7 +651,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local cov = d2_cnr
 		        local in_dep = true
 				local veh = 1
-				local good_nr = good_desc_x(f2_good).get_catg_index() //Fuels
+				local good_list = [good_desc_x(f2_good).get_catg_index()] //Fuels
 				local name = ship1_name_obj
 				local st_tile = 1
 
@@ -661,7 +661,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(sch_list2[1], depot, id_start, id_end)
 				cov -= cir_nr
 
-				result = is_convoy_correct(depot,cov,veh,good_nr,name,st_tile)
+				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 				if (result!=null){
 					local name = ship1_name
 					local good = translate(f2_good)
@@ -681,11 +681,11 @@ class tutorial.chapter_04 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep1.tostring()+")."
 				local cov = 1
 				local veh = 1
-				local good_nr = good_desc_x(good_alias.passa).get_catg_index() //Passengers
+				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
 				local name = ship2_name_obj
 				local st_tile = 1
 
-				result = is_convoy_correct(depot,cov,veh,good_nr,name,st_tile)
+				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
 				if (result!=null){
 					local name = ship2_name

@@ -670,7 +670,7 @@ class basic_chapter
 		}
 
 		if (entrie.wait != wait) {
-			gui.add_message(""+entrie.wait+"")
+			//gui.add_message(""+entrie.wait+"")
 			local text = ttext("The waittime in waystop {nr} '{name}' isn't {wait} {pos}")
 			local txwait = get_wait_time_text(wait)
 			text.name = halt.get_name()
@@ -703,7 +703,7 @@ class basic_chapter
 		return result
 	}
 
-	function is_convoy_correct(depot,cov,veh,good_nr,name, max_tile, is_st_tile = false)
+	function is_convoy_correct(depot,cov,veh,good_list,name, max_tile, is_st_tile = false)
 	{
 		local cov_list = depot.get_convoy_list()
 		local cov_nr = cov_list.len()
@@ -717,7 +717,7 @@ class basic_chapter
 		local veh_nr = veh_list.len()
 		//To check the name of the locomotive
 		local veh_name = veh_list[0].get_name()
-		gui.add_message(""+veh_name+"")
+		//gui.add_message(""+veh_name+"")
 		if (veh_name!=name)
 			return 0
 
@@ -743,12 +743,19 @@ class basic_chapter
 		//Check the number of convoys ------------------------
 		if (cov_nr<cov){
 			//Check load type -----------------------------------
-			local good = cov_list[cov_nr-1].get_goods_catg_index()		
+			local good = cov_list[cov_nr-1].get_goods_catg_index()
+			local good_count=0	
 			for(local j=0;j<good.len();j++){
 				//gui.add_message("a = "+good[j]+", b = "+good_nr+"")
-				if(good[j]!=good_nr)
-					return 3
+				for(local i=0;i<good_list.len();i++){
+					if(good[j]==good_list[i])
+						good_count++
+				}
+				//if(good[j]!=good_nr)
+					//return 3
 			}
+			if(good_count != good_list.len() || good_count != good.len())
+				return 3
 			//----------------------------------------------------
 			return 1
 		}
@@ -757,12 +764,19 @@ class basic_chapter
 		//----------------------------------------------------
 
 		//Check load type -----------------------------------
-		local good = cov_list[cov-1].get_goods_catg_index()		
+		local good = cov_list[cov-1].get_goods_catg_index()	
+		local good_count=0		
 		for(local j=0;j<good.len();j++){
-			//gui.add_message(""+good[j]+" deberia salir")
-			if(good[j]!=good_nr)
-				return 3
+			//gui.add_message("a = "+good[j]+", b = "+good_nr+"")
+			for(local i=0;i<good_list.len();i++){
+				if(good[j]==good_list[i])
+					good_count++
+			}
+			//if(good[j]!=good_nr)
+				//return 3
 		}
+		if(good_count != good_list.len() || good_count != good.len())
+			return 3
 		//----------------------------------------------------
 
 		return null

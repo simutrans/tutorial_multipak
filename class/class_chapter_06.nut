@@ -661,11 +661,11 @@ class tutorial.chapter_06 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c1_dep.tostring()+")."
 				local cov = d1_cnr
 				local veh = 1
-				local good_nr = good_desc_x(good_alias.passa).get_catg_index() //Passengers
+				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
 				local name = plane1_obj
 				local st_tile = 1
 
-				result = is_convoy_correct(depot, cov, veh,good_nr, name, st_tile)
+				result = is_convoy_correct(depot, cov, veh,good_list, name, st_tile)
 				if (result!=null){
 					local name = plane1_name
 					local load = translate("Passengers")
@@ -703,7 +703,7 @@ class tutorial.chapter_06 extends basic_chapter
 				local cov = d2_cnr
 				local in_dep = true
 				local veh = 1
-				local good_nr = good_desc_x(good_alias.passa).get_catg_index() 	 //Passengers
+				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] 	 //Passengers
 				local name = veh1_obj
 				local st_tile = 1
 
@@ -713,7 +713,7 @@ class tutorial.chapter_06 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(sch_list2[0], depot, id_start, id_end)
 				cov -= cir_nr
 
-				result = is_convoy_correct(depot, cov, veh, good_nr, name, st_tile)
+				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 				if (result!=null){
 					reset_glsw()
 					return bus_result_message(result, name, veh, cov)
@@ -734,7 +734,7 @@ class tutorial.chapter_06 extends basic_chapter
 				local cov = d3_cnr
 				local in_dep = true
 				local veh = 1
-				local good_nr = good_desc_x(good_alias.passa).get_catg_index() 	 //Passengers
+				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] 	 //Passengers
 				local name = veh2_obj
 				local st_tile = 1
 
@@ -744,7 +744,7 @@ class tutorial.chapter_06 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(sch_list3[0], depot, id_start, id_end)
 				cov -= cir_nr
 
-				result = is_convoy_correct(depot, cov, veh, good_nr, name, st_tile)
+				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 				if (result!=null){
 					reset_glsw()

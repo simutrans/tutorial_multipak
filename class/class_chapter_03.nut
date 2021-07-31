@@ -1940,11 +1940,11 @@ class tutorial.chapter_03 extends basic_chapter
 					return 0
 				local cov = 1
 				local veh = 6
-				local good_nr = good_desc_x(f1_good).get_catg_index() //Wood
+				local good_list = [good_desc_x(f1_good).get_catg_index()] //Wood
 				local name = loc1_name_obj
 				local st_tile = st1_list.len() // 3
 				local is_st_tile = true
-				result = is_convoy_correct(depot,cov,veh,good_nr,name, st_tile, is_st_tile)
+				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 
 				if (result!=null){
 					backward_pot(0)
@@ -1977,11 +1977,11 @@ class tutorial.chapter_03 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep2.tostring()+")."	
 				local cov = 1
 				local veh = 6
-				local good_nr = good_desc_x(f3_good).get_catg_index() //Planks
+				local good_list = [good_desc_x(f2_good).get_catg_index()]
 				local name = loc2_name_obj
 				local st_tile = st3_list.len() // 3
 				local is_st_tile = true
-				result = is_convoy_correct(depot,cov,veh,good_nr,name, st_tile, is_st_tile)
+				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 
 				if (result!=null){
 					local name = loc2_name
@@ -2014,7 +2014,7 @@ class tutorial.chapter_03 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep3.tostring()+")."	
 				local cov = d3_cnr
 				local veh = 8
-				local good_nr = good_desc_x(good_alias.passa).get_catg_index() //Passengers
+				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
 				local name = loc3_name_obj
 				local st_tile = loc3_tile
 				local is_st_tile = true
@@ -2025,7 +2025,7 @@ class tutorial.chapter_03 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(sch_list[0], depot, id_start, id_end)
 				local cov_list = depot.get_convoy_list()
 				cov -= cir_nr
-				result = is_convoy_correct(depot, cov, veh, good_nr, name, st_tile, is_st_tile)
+				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile, is_st_tile)
 
 				if (result!=null){
 					local name = loc3_name
