@@ -75,7 +75,7 @@ class tutorial.chapter_05 extends basic_chapter
     c_dep2 = coord(115,185) // depot
 	line1_name = "Test 6"
 	veh2_load = 100
-	veh2_wait = 12
+	veh2_wait = 10571
 	d2_cnr = 3
 
 	//Para el barco
@@ -83,7 +83,7 @@ class tutorial.chapter_05 extends basic_chapter
     veh3_name = translate("Postschiff")
     veh3_obj = "Postschiff"
 	veh3_load = 100
-	veh3_wait = 16
+	veh3_wait = 42282
     c_dep3 = coord(150,190) // depot
 
 	//Script

@@ -225,7 +225,7 @@ class tutorial.chapter_03 extends basic_chapter
 	loc3_name = translate("NS1000")
 	loc3_tile = 4
 	loc3_load = 100
-	loc3_wait = 16
+	loc3_wait = 25369
 
     line1_name = "Test 4"
 	st_lim_a =	[	{a = coord(55,197), b = coord(58,197)}, {a = coord(116,198), b = coord(119,198)},
@@ -1699,7 +1699,7 @@ class tutorial.chapter_03 extends basic_chapter
 
 					if (tool_id==4100){
 						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
-							if (count_tunn || (slope != 28 && slope!= 0)){
+							if (count_tunn || slope!= 0){
 								if (pos.z == (end_lvl_z))
 									return translate("The tunnel is already at the correct level")+" (-"+end_lvl_z+")."
 								if (slope==0)
@@ -1730,9 +1730,9 @@ class tutorial.chapter_03 extends basic_chapter
 					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
 						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
 							if(ribi == 0 ){
-								//return null
+								return null
 							}
-							if (pos.z < c_tunn1.a.z) return translate("You must upper the ground first")+" ("+coorbord.tostring()+".)"
+							if (way && slope != 28 && slope!= 0) return translate("You must upper the ground first")+" ("+coorbord.tostring()+".)"
 							if (coorbord!=0){
 								if (pos.z < end_lvl_z){
 									local slopebord = tile_x(coorbord.x, coorbord.y, coorbord.z).get_slope()

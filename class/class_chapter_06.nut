@@ -61,7 +61,7 @@ class tutorial.chapter_06 extends basic_chapter
 	plane1_name = translate("DC-3")
 	plane1_obj = "DC-3"
 	plane1_load = 100
-	plane1_wait = 16
+	plane1_wait = 25369
 	sch_list1 = [coord(114,176), coord(168,489)]
 
 	// Step 3 =====================================================================================
@@ -72,7 +72,7 @@ class tutorial.chapter_06 extends basic_chapter
     vhe1_name = translate("BuessingLinie")
 	veh1_obj = "BuessingLinie"
 	veh1_load = 100
-	veh1_wait = 12
+	veh1_wait = 10571
 
 	// Step 4 =====================================================================================
 	line2_name = "Test 8"
