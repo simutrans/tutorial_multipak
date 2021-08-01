@@ -1,17 +1,19 @@
-<br><br>
-
-{tx} En el deposito {dep}, seleccione un camion <em>{veh}</em> para correo y presione <em>Enrutar</em>.<br><br>
-
-<em>Ahora selecciona las paradas:</em><br/>
-{list}<br/>
-Después de añadir las {nr} paradas, seleccione la parada <em>{stnam}</em> de la lista y configure de la siguiente forma:<br/>
-<em>--> [a]</em> La <em>Carga (Mín)</em> al <em>{load}%</em>.<br>
-<em>--> [b]</em> <em>Esperar (Meses)</em> a <em>{wait}</em>.<br>
-Presione el botón <em>[Copiar Vehículo]</em> hasta llegar a <em>{all_cov}</em> convoys, finalmente presione el botón <em>[Arrancar]</em>. 
+<p>
+{tx} En el depósito {dep}, selecciona un camion <em>{veh}</em> para correo y pulsa <em>[Itinerario]</em>.
+</p>
+<p>
+<em>Ahora selecciona las paradas:</em><br>
+{list}
+</p>
+<p>
+Tras añadir todas las {nr} paradas, selecciona la parada <em>{stnam}</em> y configúrala de la siguiente forma:<br>
+<em>--> [a]</em> Configura <em>Carga mínima</em> al <em>{load}%</em>.<br>
+<em>--> [b]</em> Configura <em>Salir después de</em> a <em>{wait}</em>.<br>
+Pulsa el botón <em>[Copiar vehículo]</em> hasta que obtengas <em>{all_cov}</em>. Por último, pulsa el botón <em>[Arrancar]</em>
 </p>
 <p>
 <em>Vehículos en circulación:</em> <st>{cir}/{all_cov}</st>
 </p>
 <p>
-<st>Avanza al siguiente capitulo</st> cuando todos los vhiculos y el barco esten en circulación.
+<st>Avanza al siguiente capítulo</st> cuando todos los vhiculos y el barco esten en circulación.
 </p>

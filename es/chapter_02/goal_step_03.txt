@@ -8,5 +8,5 @@ Es necesario construir paradas de autobús en cada uno de los puntos marcados en
 
 <em>Nota:</em> Las paradas tienen una cobertura de 5x5, por lo tanto es recomendable colocar las paradas a una distancia de 4 baldosa (cuadros).<br><br>
 
-<st>Se avanza al siguiente paso</st> cuando todas las <em>Paradas</em> esté en su lugar.<br><br>
+<st>Se avanza al siguiente paso</st> cuando todas las <em>Paradas</em> estén en su lugar.<br><br>
 

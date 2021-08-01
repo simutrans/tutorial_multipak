@@ -55,6 +55,7 @@ class tutorial.chapter_02 extends basic_chapter
 	veh1_obj = "BuessingLinie"
 	veh1_load = 100
 	veh1_wait = 10571
+	dep_cnr1 = null //auto started
 
 	// Step 5 =====================================================================================
 	// Primer puente
@@ -73,6 +74,7 @@ class tutorial.chapter_02 extends basic_chapter
 
 	sch_list2 = [coord(132,189), coord(126,187), coord(121,189), coord(126,198), coord(120,196)]
 	line2_name = "Test 2"
+	dep_cnr2 = null //auto started
 	cov_nr = 0
 
 	// Step 7 =====================================================================================
@@ -86,6 +88,7 @@ class tutorial.chapter_02 extends basic_chapter
 
 	sch_list3 = [coord(126,187), coord(121,155), coord(127,155), coord(132,155), coord(135,153)]
 	line3_name = "Test 3"
+	dep_cnr3 = null //auto started
 	
 
 	// Step 8 =====================================================================================
@@ -110,6 +113,10 @@ class tutorial.chapter_02 extends basic_chapter
 		dep_lim1 = {a = c_dep, b = coorda}
 		dep_lim2 = {a = c_dep, b = coordb}
 
+		dep_cnr1 = get_dep_cov_nr(ch2_cov_lim1.a,ch2_cov_lim1.b)
+		dep_cnr2 = get_dep_cov_nr(ch2_cov_lim2.a,ch2_cov_lim2.b)
+		dep_cnr3 = get_dep_cov_nr(ch2_cov_lim3.a,ch2_cov_lim3.b)
+
 		local pl = 0
 		//Schedule list form current convoy
 		if(this.step == 4){
@@ -130,7 +137,6 @@ class tutorial.chapter_02 extends basic_chapter
 	}
 
 	function set_goal_text(text){
-
 		switch (this.step) {
 			case 1:
 				text.t1 = c_dep.href("("+c_dep.tostring()+")") 
@@ -222,6 +228,7 @@ class tutorial.chapter_02 extends basic_chapter
 				text.st7 = stxt[6]
 				text.st8 = stxt[7]
 				text.cir = cov_nr
+				text.cov = dep_cnr2
 
 				break
 			case 7:
@@ -655,10 +662,19 @@ class tutorial.chapter_02 extends basic_chapter
 					}
 
 					else if (pot2==1 && pot3 ==0){
+						local c_dep = this.my_tile(c_dep)
+				        local line_name = line3_name //"Test 3"
+						set_convoy_schedule(pl, c_dep, gl_wt, line_name)
 
-					    local c_dep = my_tile(c_dep)
-		                local line_name = line3_name //"Test 3"
-		                set_convoy_schedule(pl,c_dep, gl_wt, line_name)
+						local depot = depot_x(c_dep.x, c_dep.y, c_dep.z)
+						local cov_list = depot.get_convoy_list()		//Lista de vehiculos en el deposito
+						local convoy = convoy_x(gcov_id)
+						if (cov_list.len()>=1){
+							convoy = cov_list[0]
+						}
+						local all_result = checks_convoy_schedule(convoy, pl)
+						sch_cov_correct = all_result.res == null ? true : false
+
 						if (current_cov == ch2_cov_lim3.b){
 							//Desmarca la via en la parada
 							local way_mark = my_tile(c_st0).find_object(mo_way)

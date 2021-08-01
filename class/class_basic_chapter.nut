@@ -2227,6 +2227,14 @@ class basic_chapter
 		return result
 	}
 
+    function get_dep_cov_nr(a,b){
+		local nr = -1
+		for(local j=a;j<b;j++){
+			nr++
+		}
+		return nr
+	}
+
     function start_sch_tmpsw(pl,coord, c_list){
 		local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
 		local cov_list = depot.get_convoy_list() // Lista de vehiculos en el deposito
