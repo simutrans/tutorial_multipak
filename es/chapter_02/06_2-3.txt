@@ -1,13 +1,21 @@
-<br>
-Ahora que el puente fue reparado, la ciudad <em>{name}</em> necesita una linea de autob煤s que parta desde {st1} hasta {st5} para conectar el muelle en construccion.<br><br>
-
-{tx} Arrancando los <em>Autobuses</em>.<br><br>
-
-<em>[1]</em> Usando la herramienta de <em>Exploraci贸n</em> haga clic en el <em>Deposito de Carretera</em>{pos} y en la ventana del deposito elija el <em>Autob煤s {bus1}</em>.<br>
-<em>[2]</em> Si la linea fue creada correctamente, puede hacer clic en el filtro <em>Sirve en linea</em> y luego seleccionar la linea <em>"{line}"</em>, luego haga clic en el bot贸n <em>Arrancar</em>.<br>
-<em>[3]</em> En caso de que la linea no sea correcta, puedes seleccionar todas las paradas nuevamente.<br>
-<em>[4]</em> Cierre la ventana <em>Enrutar</em> y presione el bot贸n <em>Arrancar</em>.<br><br>
-
-<em>Autobuses en circulacion:</em> <st>{cir}/3</st><br><br>
-
-<st>Se avanza al siguiente paso</st> cuando todos los veh铆culos est茅n en circulaci贸n.<br><br>
+<p>
+Ahora que el puente ha sido reparado, la ciudad <em>{name}</em> necesita una l韓ea con <em>[3]</em> autobuses en circulaci髇 para mover turistas desde el muelle en construcci髇 {st1}.
+</p>
+<p>
+{tx} Arrancando los <em>Autobuses</em>.
+</p>
+<p>
+<h1>Asignando l韓eas:</h1>
+Las l韓eas existentes pueden ser asignadas a nuevos veh韈ulos, siempre que sean veh韈ulos de la misma categor韆. En este ejemplo vamos a asigna la l韓ea <em>"{line}"</em> a nuestros nuevos veh韈ulos.
+</p>
+<p>
+<em>[1]</em> Primero compra un Autob鷖 <em>{bus1}</em>.<br>
+<em>[2]</em> Si la l韓ea fue creada correctamente, puedes pulsar sobre el filtro <em>Sirve en l韓ea (por defecto el texto es: [sin itinerario])</em> y luego selecciona la l韓ea <em>"{line}"</em>.<br>
+<em>[3]</em> Finalmente pulsa sobre el bot髇 <em>Arrancar</em>.
+</p>
+<p>
+<em>Autobuses en circulaci髇:</em> <st>{cir}/3</st>
+</p>
+<p>
+<st>Se avanza al siguiente paso</st> cuando todos los veh韈ulos est閚 en circulaci髇.
+</p>

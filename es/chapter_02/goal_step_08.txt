@@ -1,12 +1,14 @@
-<br>
-La ciudad <em>{name}</em> necesita que conectes la linea de <em>Autobuses</em> con la linea de <em>Trenes</em> en construcciÃ³n.<br><br>
-
-En la barra de herramientas seleccione <em>Herramientas especiales de construcciÃ³n</em> y elija la herramienta <em>Make way or stop public</em><br><br>
-
-<em>Seleccione las paradas:</em><br>
+<p>
+La ciudad <em>{name}</em> necesita que conectes la línea de <em>Autobuses</em> con la línea de <em>Trenes</em> en construcción.
+</p>
+<p>
+En la barra de herramientas selecciona <em>'{tool3}'</em> y elige la herramienta <em>Convertir en vía o parada pública</em>
+</p>
+<p>
+<em>Selecciona las paradas:</em><br>
 <em>[1]</em> {st1}.<br>
-<em>[2]</em> {st2}.<br><br>
-
-<st>Se avanza al siguiente capitulo</st> cuando las dos paradas sean publicas.<br><br>
-
-
+<em>[2]</em> {st2}.
+</p>
+<p>
+<st>Se avanza al siguiente capítulo</st> cuando las dos paradas sean públicas.
+</p>
