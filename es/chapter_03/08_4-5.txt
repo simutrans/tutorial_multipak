@@ -24,3 +24,6 @@ Con la <em>Vista Subterránea por Capas</em> activada puedes:<br>
 <p>
 <st>Nota:</st> Cuando construyes estructuras complejas en varias capas, es recomendable usar la <em>Vista Subterránea por Capas</em>.
 </p>
+<p>
+<st>Advertencia: En este punto, debe mantener la tecla Ctrl presionada para extender el tunel.</st>
+</p>

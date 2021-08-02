@@ -54,8 +54,6 @@ Connect the Track here
 Conecte la vía aquí
 Creating Schedules is currently not allowed
 La creación de Itineararios no está permitida actualmente
-Creating Schedules is not currently allowed
-La creación de Itinerarios no está permitida actualmente
 Debes seleccionar un [%s].
 You must select a [%s].
 Dock No.%d must accept [%s]
@@ -194,8 +192,6 @@ Stops should be built in [%s]
 Las paradas deben construirse en [%s]
 Straight slope here
 Pendiente recta aquí.
-Straight slope here!.
-Pendiente recta aquí.
 Taking to the Air
 Ascendiendo a los Cielos
 Text label
@@ -226,8 +222,6 @@ The line is not correct.
 La linea no es correcta.
 The load of waystop {nr} '{name}' isn't {load}% {pos}
 La carga mínima en la parada [{nr}] {name} debe ser de {load}% {pos}
-The load of waystop Nr. {nr} isn't {load}
-La carga mínima en la parada {nr}  debe ser de {load}%
 The number of aircraft in the hangar must be [%d].
 El número de aviones en el hangar debe ser de [%d].
 The number of bus must be [%d].
@@ -256,8 +250,6 @@ The schedule list must not be empty.
 La lista de itinerario no debe estar vacía.
 The schedule needs to have %d waystops, but there are %d.
 La lista de itinerario necesita %d paradas, pero son %d.
-The schedule needs to have two waystops
-El itinerario necesita tener dos paradas
 The second train
 El segundo tren
 The ship must be for [%s].
@@ -272,8 +264,6 @@ The slope points to the [%s].
 La pendiente apunta hacia el [%s].
 The slope points to the Northeast.
 La pendiente apunta hacia el Noroeste.
-The station at {pos} didnt't accept freight
-La estación en {pos} no acepta mercancía
 The station at {pos} doesn't accept freight
 La estación en {pos} no acepta la mercancía
 The station at {pos} isn't your station

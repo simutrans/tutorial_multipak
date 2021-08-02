@@ -176,8 +176,6 @@ Stops should be built in [%s]
 Stopps sollten in [%s] gebaut werden.
 Straight slope here
 Steiler gerader Hang hier
-Straight slope here!.
-Gerader Hang hier!
 Text label
 Textmarker
 The bus must be [Passengers].
@@ -196,8 +194,6 @@ The Hangar is correct.
 Der Hangar ist korrekt.
 The line is not correct.
 Die Linie ist nicht korrekt.
-The load of waystop Nr. {nr} isn't {load}
-Die Mindestbeladung am Wegpunkt Nr. {nr} ist nicht {load}
 The number of bus must be [%d].
 Die Anzahl der Busse muss [%d] sein.
 The number of convoys must be [%d].
@@ -210,12 +206,8 @@ The number of wagons must be [%d].
 Die Anzahl der Wagons muss [%d] betragen.
 The Plane must be for [%s].
 Das Flugzeug muss für [%s] sein.
-The schedule needs to have two waystops
-Der Fahrplan muss zwei Haltepunkte haben
 The second train
 Der zweite Zug
-The station at {pos} didnt't accept freight
-Die Haltestelle an {pos} erlaubt keine Fracht
 The station at {pos} isn't your station
 Die Haltestelle an {pos} ist nicht Deine Haltestelle
 There is already a station.

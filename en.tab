@@ -120,6 +120,10 @@ Select the other station first
 Select the other station first
 Press [Ctrl] to build a tunnel entrance here
 Press [Ctrl] to build a tunnel entrance here
+You must use the tool to raise the ground here
+You must use the tool to raise the ground here
+The tunnel is not correct, use the [Remove] tool here
+The tunnel is not correct, use the [Remove] tool here
 The tunnel is already at the correct level
 The tunnel is already at the correct level
 The slope is ready.
@@ -132,6 +136,8 @@ You must lower the ground first
 You must lower the ground first
 First you must lower the layer level.
 First you must lower the layer level.
+First you must Upper the layer level.
+First you must Upper the layer level.
 Build a Tunnel here
 Build a tunnel here
 Modify the terrain here
@@ -166,8 +172,6 @@ The train cannot be shorter than [%d] tiles.
 #___________________________chapter 03 - Text labels____________________________
 Build Rails form here
 Build Rails here.
-Straight slope here!.
-Straight slope here!.
 Flat slope here!.
 Flat slope here!.
 Place a Tunnel here!.

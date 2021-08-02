@@ -1672,7 +1672,7 @@ class tutorial.chapter_03 extends basic_chapter
 						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
 							if(!count_tunn && slope==0 && way && way.is_marked())
 								return null
-							if(count_tunn && pos.z!=end_lvl_z) return translate("Debe usar la herramienta para bajar el terreno aqui**")+" ("+coorbord.tostring()+".)" 
+							if(count_tunn && pos.z!=end_lvl_z) return translate("You must use the tool to raise the ground here")+" ("+coorbord.tostring()+".)" 
 						}
 					}
 
@@ -1700,16 +1700,16 @@ class tutorial.chapter_03 extends basic_chapter
 							else if (slope==0){
 								if (pos.z == (end_lvl_z))
 									return translate("The tunnel is already at the correct level")+" (-"+end_lvl_z+")."
-								return translate("El tunel no es correcto, use la herramienta [Eliminar] aqui**")+" ("+coorbord.tostring()+".)" 
+								return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)" 
 							}
 						}
 						else return coorbord!=0 && slope==0? translate("Modify the terrain here")+" ("+coorbord.tostring()+")." : result
 					}
 
-					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
+					if tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
 						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
-							if(ribi == 0 ){
-								return null
+							if(way){ //Deberia funcionar sin esto (posible error en simutrans causa problemas)
+								return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
 							}
 							if (way && slope != 28 && slope!= 0) return translate("You must upper the ground first")+" ("+coorbord.tostring()+".)"
 							if (coorbord!=0){
@@ -1722,7 +1722,7 @@ class tutorial.chapter_03 extends basic_chapter
 										local lock = cursor_tile_count(cursor, is_mark, max)
 										if(is_mark || label || lock) return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
 										else if (!count_tunn)
-											return translate("El tunel no es correcto, use la herramienta [Eliminar] aqui**")+" ("+coorbord.tostring()+".)" 
+											return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)" 
 										else return translate("First you must Upper the layer level.")
 									}
 									else if (slopebord==0){
