@@ -44,10 +44,6 @@ Chapter
 Capítulo
 Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).
 Felicitaciones, has completado el Capítulo {number} - {cname}, el siguiente Capítulo '{nextcname}' empieza aqui: ({coord}).
-Chapter {number} - {cname} complete.
-Capítulo {number} - {cname} completado.
-Chapter {number} complete.
-Capítulo {number} completado.
 Choose a different stop.
 Elige una parada diferente.
 Click on the stop
@@ -304,12 +300,8 @@ The vehicle must be [%s].
 El vehículo debe ser [%s].
 The waittime in waystop {nr} '{name}' isn't {wait} {pos}
 El Tiempo de Espera (Meses) en la parada [{nr}] {name} debe ser de {wait} {pos}
-The waittime waystop Nr. {nr} isn't {wait}
-El Tiempo de Espera (Meses) en la parada [{nr}] {name} debe ser de {wait} {pos}
 The waystop {nr} '{name}' isn't on place {pos}
 La parada [{nr}] '{name}' no está en {pos}
-The waystop Nr. {nr} isn't on place {pos}
-La parada {nr} no está en {pos}
 There is already a station.
 Ya existe una Estacion aquí.
 There is already a stop here

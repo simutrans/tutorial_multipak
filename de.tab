@@ -36,8 +36,6 @@ Chapter
 Kapitel
 Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).
 Kapitel {number} - {cname} abgeschlossen, nächstes Kapitel {nextcname} beginnt hier: ({coord}).
-Chapter {number} complete.
-Kapitel {number} komplett.
 Click on the stop
 Klicken Sie auf die Haltestelle
 Connect the road here
@@ -220,10 +218,6 @@ The station at {pos} didnt't accept freight
 Die Haltestelle an {pos} erlaubt keine Fracht
 The station at {pos} isn't your station
 Die Haltestelle an {pos} ist nicht Deine Haltestelle
-The waittime waystop Nr. {nr} isn't {wait}
-Die max. Wartezeit am Wegpunkt Nr. {nr} ist nicht {wait}
-The waystop Nr. {nr} isn't on place {pos}
-Der Wegpunkt Nr. {nr} ist nicht an der Stelle {pos}
 There is already a station.
 Hier gibt es bereits eine Station!
 There is already a stop here
