@@ -1007,11 +1007,11 @@ class tutorial.chapter_04 extends basic_chapter
 		local result = 0
 		local st = {all_correct = true, c = null, nr = 0}
 		local err_tx = translate("Dock No.%d must accept [%s]")
-		for(local j=0;j<c_list.len();j++){
+		local siz = c_list.len()
+		for(local j=0;j<siz;j++){
 			local tile = my_tile(c_list[j])
 			local halt = tile.get_halt()
 			local buil = tile.find_object(mo_building)
-			local label = tile.find_object(mo_label)
 			if(buil && st.all_correct){ 
 				local st_list = building_desc_x.get_available_stations(11/*building_desc_x.station*/, 3, good_desc_x(good))
 				local st_desc = buil.get_desc()
@@ -1034,17 +1034,23 @@ class tutorial.chapter_04 extends basic_chapter
 					if(st.all_correct) result = null
 				}	
 			}
-			else if(tool_id==tool_build_station && result!=null) result = translate("Place the stops at the marked points")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
-			if (j == (c_list.len()-1)){
+			else if(tool_id==tool_build_station && result!=null){
+				local c = coord(c_list[siz-j-1].x,c_list[siz-j-1].y)
+				local tile = my_tile(c)
+				local buil = tile.find_object(mo_building)
+				//local current_halt = my_tile(st.c).get_halt()
+				if(!buil)
+					result = translate("Place the stops at the marked points")+" ("+c.tostring()+")."
+			}
+			if (j == (siz-1)){
 
 				if (tool_id==tool_remover && !st.all_correct){
 					local current_halt = my_tile(st.c).get_halt()
 					if(current_halt){
 						local tile_list = current_halt.get_tile_list()
 						foreach(tile in tile_list){
-							if(pos.x == tile.x && pos.y == tile.y){
+							if(pos.x == tile.x && pos.y == tile.y)
 								return null
-							}
 						}
 					}
 				}

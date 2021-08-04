@@ -45,9 +45,10 @@ class tutorial.chapter_05 extends basic_chapter
 	c_dep1_lim = {a = coord(131,232), b = coord(132,232)}
 	c_dep1 = coord(131,232)
 	
+	//Para el Camion
 	sch_list1 = [coord(132,233), coord(131,209)]
-	veh1_name = translate("Kohletransporter")
-    veh1_obj = "Kohletransporter"
+	veh1_name = translate("Sandtransporter")
+    veh1_obj = "Sandtransporter"
 	veh1_load = 100
 	veh1_wait = 0
 	d1_cnr = 10
@@ -91,7 +92,7 @@ class tutorial.chapter_05 extends basic_chapter
 	sc_way_name = "asphalt_road"
 	sc_station_name = "CarStop"
 	sc_dep_name = "CarDepot"
-	sc_trail_name = "Kohleanhaenger"
+	sc_trail_name = "Sandanhaenger"
 	sc_trail_nr = 1
 
 	sc_power_name = "Powerline"

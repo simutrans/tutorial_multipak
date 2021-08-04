@@ -717,7 +717,7 @@ class basic_chapter
 		local veh_nr = veh_list.len()
 		//To check the name of the locomotive
 		local veh_name = veh_list[0].get_name()
-		//gui.add_message(""+veh_name+"")
+		gui.add_message(""+veh_name+"")
 		if (veh_name!=name)
 			return 0
 
@@ -2332,7 +2332,7 @@ class basic_chapter
     }
 
     function update_convoy_schedule(pl, wt, name, schedule)
-    {			//gui.add_message("noooo")
+    {
         local play =  player_x(pl)
 
 	    // find the line - it is a line without schedule and convoys
