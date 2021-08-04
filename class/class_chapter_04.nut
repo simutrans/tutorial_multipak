@@ -617,7 +617,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(sch_list1[1], depot, id_start, id_end)
 				cov -= cir_nr
 
-				result = is_convoy_correct(depot,cov,veh,good_nr,name,st_tile)
+				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
 				if (result!=null){
 					local name = ship1_name
@@ -1034,6 +1034,7 @@ class tutorial.chapter_04 extends basic_chapter
 					if(st.all_correct) result = null
 				}	
 			}
+			else if(tool_id==tool_build_station && result!=null) result = translate("Place the stops at the marked points")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
 			if (j == (c_list.len()-1)){
 
 				if (tool_id==tool_remover && !st.all_correct){

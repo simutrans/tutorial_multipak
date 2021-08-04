@@ -1706,7 +1706,7 @@ class tutorial.chapter_03 extends basic_chapter
 						else return coorbord!=0 && slope==0? translate("Modify the terrain here")+" ("+coorbord.tostring()+")." : result
 					}
 
-					if tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
+					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
 						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
 							if(way){ //Deberia funcionar sin esto (posible error en simutrans causa problemas)
 								return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
