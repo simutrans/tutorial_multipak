@@ -44,6 +44,8 @@ Chapter
 Capítulo
 Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).
 Felicitaciones, has completado el Capítulo {number} - {cname}, el siguiente Capítulo '{nextcname}' empieza aqui: ({coord}).
+Checking Compatibility
+Comprobando Compatibilidad
 Choose a different stop.
 Elige una parada diferente.
 Click on the stop
@@ -54,8 +56,6 @@ Connect the Track here
 Conecte la vía aquí
 Creating Schedules is currently not allowed
 La creación de Itineararios no está permitida actualmente
-Debes seleccionar un [%s].
-You must select a [%s].
 Dock No.%d must accept [%s]
 El muelle Nr. %d debe aceptar [%s]
 empty chapter
@@ -146,12 +146,6 @@ Place the shipyard here
 Coloca el astillero aquí
 Place the stops at the marked points
 Coloca las paradas en los puntos marcados
-Pleace build a station at {pos}
-Por favor construye una estación en {pos}
-Pleace build railway inside {cube}
-Por favor construye una vía de tren dentro de {cube}
-Pleace build the rail depot at {pos}
-Por favor construye un Depósito de trenes en {pos}
 Press [Ctrl] to build a tunnel entrance here
 Presiona [Ctrl] para construir la entrada del Túnel aquí:
 Press the [Copy Backward] button, then set the Minimum Load and Month Wait Time at the first stop!.

@@ -130,12 +130,6 @@ Place the shipyard here
 Platzieren Sie die Werft hier
 Place the stops at the marked points
 Platzieren Sie die Stationen an den markierten Stellen
-Pleace build a station at {pos}
-Bitte Haltestelle an Position {pos} bauen
-Pleace build railway inside {cube}
-Gleisbau nur innerhalb von {cube}
-Pleace build the rail depot at {pos}
-Bitte ein Bahndepot an Position {pos} bauen
 Press [Ctrl] to build a tunnel entrance here
 Drücken Sie [Strg], um hier einen Tunneleingang zu erstellen
 Press the [Copy Backward] button, then set the Minimum Load and Month Wait Time at the first stop!.
