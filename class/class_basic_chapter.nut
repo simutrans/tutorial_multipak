@@ -717,7 +717,7 @@ class basic_chapter
 		local veh_nr = veh_list.len()
 		//To check the name of the locomotive
 		local veh_name = veh_list[0].get_name()
-		gui.add_message(""+veh_name+"")
+		//gui.add_message(""+veh_name+"")
 		if (veh_name!=name)
 			return 0
 
