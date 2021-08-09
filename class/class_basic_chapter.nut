@@ -9,9 +9,9 @@
 class basic_chapter
 {        // chapter description : this is a placeholder class
 
-	chapter_name	= ""		// placeholder for chapter name
+	chapter_name	= ""	// placeholder for chapter name
+	chapter			= 1		// count the chapter number
 	step			= 1		// count the step inside the chapter  1="step A"
-	step_ext		= {a=1, b=0}	// count the step inside the chapter  1="step A"
 	startcash		= 0		// pl=0 startcash; 0=no reset
 
 	glpos = coord3d(0,0,0)
@@ -52,20 +52,20 @@ class basic_chapter
      constructor(pl)
      {
      	scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
-	this.set_all_rules(pl)
-	this.step = 1
+		this.set_all_rules(pl)
+		this.step = 1
      }
 
 	// FUNCTIONS TO REWRITE
      function set_goal_text(text)
      {
-             return text
+		return text
      }
 
      function get_rule_text(pl,path)
      {
-        local text = ttextfile( path + "rule.txt" )
-             return text.tostring()
+		local text = ttextfile( path + "rule.txt" )
+		return text.tostring()
      }
 
 
@@ -498,25 +498,6 @@ class basic_chapter
 		return "step_" + ( i < 10 ? "0":"" ) + i
 	}
 
-	//Example
-	//local nr_ext = 2
-	//set_step_ext(nr_ext)
-	function set_step_ext(a,b)
-	{
-		this.step_ext.a = a
-		this.step_ext.b = b
-		//persistent.step_ext = this.step_ext
-		return this.my_step_ext(this.step_ext)
-	}
-
-	function my_step_ext(i)
-	{
-		if (i.b==0)
-			return ""
-		else
-			return ""+i.a+"-"+i.b+""
-	}
-
 	function ttxst(i)
 	{
 		return "txtst_" + ( i < 10 ? "0":"" ) + i
@@ -528,7 +509,6 @@ class basic_chapter
 		return "scr"
 	}
 
-
 	function has_way(waytyp,cube)		// cube height is only used from "nw.z" value
 	{
 		local res = true
@@ -539,7 +519,6 @@ class basic_chapter
 		return res
 	}
 
-
 	function is_inside_cube(pos,nw,se)	// two positions coord3d for a cube se.z is lower nw.z
 	{
 		if ( pos.x < nw.x || pos.y < nw.y || pos.x > se.x || pos.y > se.y ||
@@ -547,7 +526,6 @@ class basic_chapter
 			return false
 		else	return true
 	}
-
 
 	function give_ttext(text,coord)		// coord=coord3d or cube={ne,se}  ttext with {pos} or {cube}
 	{
@@ -560,26 +538,22 @@ class basic_chapter
 		return result.tostring()
 	}
 
-
 	function give_title()
 	{
-		return "<br><em>"+translate("Chapter")+" "+persistent.chapter+"</em> - "+translate(this.chapter_name)+"<br><br>"
+		return "<br><em>"+translate("Chapter")+" "+chapter+"</em> - "+translate(this.chapter_name)+"<br><br>"
 	}
-
 
 	function get_goal_text(pl,path)
 	{
 		local text = ttextfile( path + "goal.txt" )
 		local text_step = ttextfile( path + "goal_" + this.my_step(this.step) + ".txt" )
-		for (local i = 1; i <= 15; i++){
+		for (local i = 0; i <= 15; i++){
 			text[this.my_step(i)] = ""
 			text[this.ttxst(i)] = "<em>"
-			text[this.ttxst(i)+"e"] = "</em>"
 		}
 		text_step = this.set_goal_text(text_step)
 		text[my_step(this.step)] = text_step.tostring()
 		text[ttxst(this.step)] = "<st>"
-		text[ttxst(this.step)+"e"] = "</st>"
 		if (correct_cov)
 			text["scr"] = "<em>--></em> <a href='script:script_text()'>"+ translate("Go to next step")+"  >></a>"
 		else
@@ -587,12 +561,10 @@ class basic_chapter
 		return text.tostring()
 	}
 
-
 	function cube_to_text(cube)
 	{
 		return "("+cube.nw.x+","+cube.nw.y+","+cube.nw.z+" - "+cube.se.x+","+cube.se.y+","+cube.se.z+")"
     }
-
 
 	function pos_to_text(pos)
 	{
@@ -606,7 +578,6 @@ class basic_chapter
 		return square_x(coord.x,coord.y).get_ground_tile()
 		//return square_x(coord.x,coord.y).get_tile_at_height(coord.z)
 	}
-
 
 	function is_waystop_correct(player,schedule,nr,load,wait,coord, c_all = false)
 	{
@@ -1222,13 +1193,6 @@ class basic_chapter
 	{	for(local j=0;j<20;j++){				
 		stop_flag[j]=0
 		}
-		return null
-	}
-
-	function reset_step_ext()
-	{				
-		this.step_ext = {a=0, b=0}
-		persistent.step_ext = this.step_ext
 		return null
 	}
 
