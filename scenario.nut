@@ -320,7 +320,7 @@ function is_scenario_completed(pl)
 	if (percentage >= 100){	// give message , be sure to have 100% or more
 		local text = ttext("Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).")
 		text.number = persistent.chapter
-		text.cname = translate(""+chapter.chap_nr_name+"")
+		text.cname = translate(""+chapter.chapter_name+"")
 
 		persistent.chapter++
 		load_chapter(persistent.chapter, pl)
@@ -328,8 +328,8 @@ function is_scenario_completed(pl)
 		percentage = chapter.is_chapter_completed(pl)
 		 // ############## need update of scenario window
 
-		text.nextcname = translate(""+chapter.chap_nr_name+"")
-		text.coord = chapter.chap_nr_coord.tostring()
+		text.nextcname = translate(""+chapter.chapter_name+"")
+		text.coord = chapter.chapter_coord.tostring()
 		chapter.start_chapter()  //Para iniciar variables en los capitulos
 		if (persistent.chapter >1) gui.add_message(text.tostring())
 	}
