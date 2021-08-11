@@ -1977,7 +1977,7 @@ class tutorial.chapter_03 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep2.tostring()+")."	
 				local cov = 1
 				local veh = 6
-				local good_list = [good_desc_x(f2_good).get_catg_index()]
+				local good_list = [good_desc_x(f3_good).get_catg_index()]
 				local name = loc2_name_obj
 				local st_tile = st3_list.len() // 3
 				local is_st_tile = true
@@ -2304,8 +2304,8 @@ class tutorial.chapter_03 extends basic_chapter
 
 				if(pot0==0){
 					local t_start = my_tile(c_dep2_lim.b)
-					t_start.remove_object(player_x(0), mo_label)
 					local t_end = my_tile(c_dep2_lim.a)
+					t_end.remove_object(player_x(0), mo_label)
 					local t = command_x(tool_build_way)			
 					local err = t.work(player_x(1), t_start, t_end, sc_way_name)
 
