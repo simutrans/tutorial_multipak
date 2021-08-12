@@ -606,11 +606,9 @@ class basic_chapter
 		local target = square_x(coord.x,coord.y).get_halt()
 		local target_list = square_x(coord.x,coord.y).get_halt_list()
 
-
-
 		if (!halt) return translate("The schedule is not correct.")
 		local t_list = halt.get_tile_list()
-		local t2_list = targ_t.is_water() ? get_tiles_near_factory(t_list) : target.get_tile_list()
+		local t2_list = targ_t.is_water() ? get_tiles_near_stations(t_list) : target.get_tile_list()
 		local c_buld1 = targ_t.is_water() ? coord : t2_list[0].find_object(mo_building).get_pos()
 		local c_buld2 = targ_t.is_water() ? coord : t_list[0].find_object(mo_building).get_pos()
 
@@ -2373,7 +2371,7 @@ class basic_chapter
 				if(tmpsw[j]==0){
 					//if(max == 1 && t.is_water()) return check_water_tile(result, tile_list[0], pos, j)
 					if(wt == wt_water && t.is_water()){
-						local area = get_tiles_near_factory(tile_list)
+						local area = get_tiles_near_stations(tile_list)
 						for(local i=0;i<area.len();i++){
 							local t_water = my_tile(area[i])
 							//gui.add_message(""+t_water.x+","+t_water.y+"")
@@ -2413,7 +2411,7 @@ class basic_chapter
 		return 0
 	}
 
-	function get_tiles_near_factory(tile_list)
+	function get_tiles_near_stations(tile_list)
 	{
 		local cov = settings.get_station_coverage()
 		local area = []

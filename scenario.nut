@@ -4,7 +4,7 @@
  * 
  *  Can NOT be used in network game !
  */
-const version = 1601
+const version = 1610
 map.file = "tutorial.sve"
 scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
@@ -72,10 +72,8 @@ persistent.current_cov <- 0
 current_cov <- 0
 cov_sw <- true
 correct_cov <- true
+
 //----------------------------------------------------------------
-
-sch_flag <- false 						//Bandera para schedule
-
 tile_delay <- 2						//delay for mark tiles
 tile_delay_list <- 2
 gui_delay <- true					//delay for open win
