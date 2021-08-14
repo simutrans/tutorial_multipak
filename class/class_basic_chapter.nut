@@ -641,7 +641,7 @@ class basic_chapter
 			return text.tostring()
 		}
 
-		if (entrie.wait != wait) {
+		if (abs(entrie.wait-wait)>7) {
 			//gui.add_message(""+entrie.wait+"")
 			local text = ttext("The waittime in waystop {nr} '{name}' isn't {wait} {pos}")
 			local txwait = get_wait_time_text(wait)
@@ -709,8 +709,6 @@ class basic_chapter
 				return 5
 		}
 		//---------------------------------------------------
-
-
 
 		//Check the number of convoys ------------------------
 		if (cov_nr<cov){

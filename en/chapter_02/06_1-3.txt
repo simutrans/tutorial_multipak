@@ -26,9 +26,8 @@ Lines can be managed from the <em>Line Management</em> window and can be accesse
 </p>
 <p>
 <h1>Final steps:</h1>
-<em>[1]</em> Press the <em>Copy backward</em> button to complete the route.<br/>
-<em>[2]</em> Close the <em>Schedule</em> window for the changes to be applied.<br/>
-<em>[3]</em> Finally click the <em>Start</em> button to get the vehicle out of the depot.
+<em>[1]</em> Close the <em>Schedule</em> window for the changes to be applied.<br/>
+<em>[2]</em> Finally click the <em>Start</em> button to get the vehicle out of the depot.
 </p>
 <p>
 <em>Buses in circulation:</em> <st>{cir}/{cov}</st>

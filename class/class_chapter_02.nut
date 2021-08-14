@@ -46,7 +46,7 @@ class tutorial.chapter_02 extends basic_chapter
 	//Parasdas de autobus
 	c_lock = [coord(99,28), coord(98,32), coord(99,32), coord(97,27), coord(97,26)]
 	sch_cov_correct = false
-	sch_list1 =	[coord(111,183), coord(113,190), coord(116,183), coord(118,191),  coord(120,183),  coord(121,189), coord(126,187)]
+	sch_list1 =	[coord(111,183), coord(116,183),  coord(120,183), coord(126,187), coord(121,189), coord(118,191), coord(113,190)]
 
 	// Step 4 =====================================================================================
 	//Primer autobus
@@ -839,7 +839,7 @@ class tutorial.chapter_02 extends basic_chapter
 						local c_list = sch_list2    //Lista de todas las paradas de autobus
 						local c_dep = c_dep    //Coordeadas del deposito 
 						local siz = sch_list2.len()     //Numero de paradas 
-						result = translate("Press the [Copy Backward] button, then set the Minimum Load and Month Wait Time at the first stop!.")	
+						result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
 						return is_stop_allowed(result, siz, c_list, pos)
 					}
 				}
@@ -947,7 +947,7 @@ class tutorial.chapter_02 extends basic_chapter
 				local load = veh1_load
 				local wait = veh1_wait
 				local c_list = sch_list1
-				local sch_siz = sch_list1.len()
+				local sch_siz = c_list.len()
 				result = set_schedule_list(result, pl, schedule, nr, selc, load, wait, c_list, sch_siz)
 				if(result == null){
 					local line_name = line1_name //"Test 1"
@@ -957,37 +957,15 @@ class tutorial.chapter_02 extends basic_chapter
 				return result
 			break
 			case 6:
-				local sch_siz = sch_list2.len()
-				if (nr > sch_siz + 3)
-					return format(translate("The schedule needs to have %d waystops, but there are %d."),sch_siz + 3, nr)
-				if (result==null){
-					local load = veh1_load
-					local wait = veh1_wait
-					for(local j=0;j<sch_siz;j++){
-						if (j==0)
-							result = is_waystop_correct(pl,schedule,j,load,wait,sch_list2[j])
-						else if (result==null)
-							result = is_waystop_correct(pl,schedule,j,0,0,sch_list2[j])
-						else
-							return result
-					}
-
-					local sch_nr = sch_siz
-					for(local j=sch_siz-2;j>0;j--){
-						if (result==null){
-							result = is_waystop_correct(pl,schedule,sch_nr,0,0,sch_list2[j])
-							if (result!=null)
-								result = translate("You must press the [Copy backward] button to complete the route.")
-						}
-						else
-							return result
-						sch_nr++
-					}
-					if(result == null){
-						local line_name = line2_name
-						update_convoy_schedule(pl, gl_wt, line_name, schedule)
-					}
-					return result
+				local selc = 0
+				local load = veh1_load
+				local wait = veh1_wait
+				local c_list = sch_list2
+				local sch_siz = c_list.len()
+				result = set_schedule_list(result, pl, schedule, nr, selc, load, wait, c_list, sch_siz)
+				if(result == null){
+					local line_name = line2_name //"Test 2"
+					update_convoy_schedule(pl, gl_wt, line_name, schedule)
 				}
 				return result
 			break
@@ -995,11 +973,11 @@ class tutorial.chapter_02 extends basic_chapter
 				local load = veh1_load
 				local wait = veh1_wait
 				local c_list = sch_list3
-				local sch_siz = sch_list3.len()
+				local sch_siz = c_list.len()
 				local selc = sch_siz-1
 				result = set_schedule_list(result, pl, schedule, nr, selc, load, wait, c_list, sch_siz)
 				if(result == null){
-					local line_name = line3_name
+					local line_name = line3_name //"Test 3"
 					update_convoy_schedule(pl, gl_wt, line_name, schedule)
 				}
 				return result
@@ -1053,7 +1031,8 @@ class tutorial.chapter_02 extends basic_chapter
 						return null
 					}*/
 
-					local cov = 1
+					local cov_list = depot.get_convoy_list()
+					local cov = cov_list.len()
 					local veh = 1
 					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
 					local name = veh1_obj
@@ -1071,8 +1050,7 @@ class tutorial.chapter_02 extends basic_chapter
 					local c_list = sch_list2
 					local siz = c_list.len()
 					local line = true
-					local back = true
-					result =  set_schedule_convoy_back(result, pl, cov, convoy, selc, load, wait, c_list, siz, line, back)	
+					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)
 					reset_tmpsw()
 					return result		
 				}
@@ -1211,7 +1189,8 @@ class tutorial.chapter_02 extends basic_chapter
 					local good_nr = 0 //Passengers
 					local name = veh1_obj
 					local cov_nr = 0  //Max convoys nr in depot
-					local sch_siz = sch_list2.len()
+					local c_list = sch_list2
+					local sch_siz = c_list.len()
 					local load = veh1_load
 					local wait = veh1_wait
 					for (local j = current_cov; j>ch2_cov_lim2.a && j<ch2_cov_lim2.b && correct_cov; j++){
@@ -1223,12 +1202,9 @@ class tutorial.chapter_02 extends basic_chapter
 						local sched = schedule_x(gl_wt, [])
 						for(local i=0;i<sch_siz;i++){
 							if (i==0)
-								sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), load, wait))
+								sched.entries.append(schedule_entry_x(my_tile(c_list[i]), load, wait))
 							else
-								sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), 0, 0))
-						}
-						for(local i=sch_siz-2;i>0;i--){
-							sched.entries.append(schedule_entry_x(my_tile(sch_list2[i]), 0, 0))
+								sched.entries.append(schedule_entry_x(my_tile(c_list[i]), 0, 0))
 						}
 						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 					}

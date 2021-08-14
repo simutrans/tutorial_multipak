@@ -26,10 +26,8 @@ Las líneas se pueden gestionar desde la ventana <em>Administración de lineas</em
 </p>
 <p>
 <h1>Pasos finales:</h1>
-<em>[1]</em> Presiona el botón <em>Viaje de vuelta</em> para completar la ruta.<br>
-<em>[2]</em> Presiona el botón <em>Crear línea</em> para crear una nueva linea.<br>
-<em>[3]</em> Cierra la ventana <em>Itinerario</em> para que los cambios sean aplicados.<br>
-<em>[4]</em> Por último pulsa sobre el botón <em>Arrancar</em> para que el vehículo salga del depósito.
+<em>[1]</em> Cierra la ventana <em>Itinerario</em> para que los cambios sean aplicados.<br>
+<em>[2]</em> Por último pulsa sobre el botón <em>Arrancar</em> para que el vehículo salga del depósito.
 </p>
 <p>
 <em>Autobuses en circulación:</em> <st>{cir}/{cov}</st>

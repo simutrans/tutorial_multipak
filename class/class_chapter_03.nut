@@ -182,8 +182,8 @@ class tutorial.chapter_03 extends basic_chapter
 
 	//Subterraneo
 	//------------------------------------------------------------------------------------------
-	c_tunn1_lim = {b = coord(91,197), a = coord(64,199)}
-	c_tunn1 = {a = coord3d(90,198,6), b = coord3d(64,198,8)}		//Inicio y Fin de la via (fullway)
+	c_tunn1_lim = {b = coord(91,194), a = coord(64,202)}
+	c_tunn1 = {a = coord3d(90,198,6), b = coord3d(66,198,6)}		//Inicio y Fin de la via (fullway)
 	labex = coord(89,198) //Mark in slope surface
 
 	layer_lvl = 6 
@@ -1708,7 +1708,7 @@ class tutorial.chapter_03 extends basic_chapter
 
 					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
 						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
-							if(way){ //Deberia funcionar sin esto (posible error en simutrans causa problemas)
+							if(coorbord!=0){ //Deberia funcionar sin esto (posible error en simutrans causa problemas)
 								return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
 							}
 							if (way && slope != 28 && slope!= 0) return translate("You must upper the ground first")+" ("+coorbord.tostring()+".)"

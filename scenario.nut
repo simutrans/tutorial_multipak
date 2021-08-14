@@ -5,7 +5,7 @@
  *  Can NOT be used in network game !
  */
 const version = 1610
-map.file = "tutorial.sve"
+map.file = "tutorial64.sve"
 scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
 scenario.author            = "Yona-TYT"
