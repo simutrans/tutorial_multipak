@@ -68,7 +68,7 @@ class tutorial.chapter_05 extends basic_chapter
 	//Step 4 =====================================================================================
     st_name = "PostOffice"
     obj_list1 = [coord(111,182), coord(113,191), coord(116,182), coord(118,192), coord(121,183), coord(121,190), coord(127,187), coord(132,190)]
-    sch_list2 = [coord(111,183), coord(113,190), coord(116,183), coord(118,191),  coord(120,183),  coord(121,189), coord(126,187), coord(132,189)]
+    sch_list2 = [coord(111,183), coord(116,183),  coord(120,183), coord(126,187), coord(132,189), coord(121,189), coord(118,191), coord(113,190)]
 
 	//Para el Camion
     veh2_name = translate("Posttransporter")

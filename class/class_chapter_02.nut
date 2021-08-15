@@ -94,6 +94,7 @@ class tutorial.chapter_02 extends basic_chapter
 	// Step 8 =====================================================================================
 	pub_st1 = coord(120,196)
 	pub_st2 = coord(120,196)
+	price = 1200
 
 	//Script
 	//----------------------------------------------------------------------------------
@@ -344,6 +345,7 @@ class tutorial.chapter_02 extends basic_chapter
 				local st_halt2 = my_tile(pub_st2).get_halt()
 				text.st1 = pub_st1.href(st_halt1.get_name()+" ("+pub_st1.tostring()+")")
 				text.st2 = pub_st2.href(st_halt2.get_name()+" ("+pub_st2.tostring()+")")
+				text.prce = money_to_string(price)
 				break
 		}
 		text.load = veh1_load

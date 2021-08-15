@@ -599,7 +599,10 @@ class basic_chapter
 			reset_tmpsw()   //reinicia las paradas seleccionadas
 			return translate("The schedule list must not be empty.")
 		}
-
+		if(schedule.entries.len()<=1) {
+			reset_tmpsw()   //reinicia las paradas seleccionadas
+			return translate("The schedule list must not be empty.")
+		}
 		local halt   = entrie.get_halt( player_x(player) )
 		local targ_t = this.my_tile(coord)
 
@@ -1199,7 +1202,7 @@ class basic_chapter
 		local way = tile_x(coora.x, coora.y, coora.z).find_object(mo_way)
 		local r_dir = way? way.get_dirs():0
 
-		local result = false
+		local result = true
 		if(r_dir == 2){
 			for(local j = 0;true;j++){
 				local t = tile_x((coora.x + j), coora.y , coora.z)
@@ -1213,9 +1216,10 @@ class basic_chapter
 				}
 				local slope = t.get_slope()
 				local dir = w? w.get_dirs():0
-				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+"")
 				if(w && j==max && (dir==2 || dir==10))result = true
 				else if(w && j>max)result = false
+
+				gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}

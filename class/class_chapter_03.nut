@@ -115,27 +115,27 @@ class tutorial.chapter_03 extends basic_chapter
 	//Primer tramo de rieles
 	//--------------------------------------------------------------------------------------------
 	st3_way_lim = {a = coord(94,155), b = coord(94,160)}		//Limites de la via para la estacion
-	bord3_lim = {a = coord(91,160), b = coord(99,174)}			//Marca area con "X"
+	bord3_lim = {a = coord(91,160), b = coord(96,174)}			//Marca area con "X"
 	label3_lim = coord(94,160)									//Indica el final de un tramo
-	c_way4 = {a = coord3d(94,155,2), b = coord3d(98,173,2)}		//Inicio y Fin de la via (fullway)
+	c_way4 = {a = coord3d(94,155,2), b = coord3d(96,172,3)}		//Inicio y Fin de la via (fullway)
 
 	//Estaciones de la Fabrica
 	st3_list = [coord(94,155), coord(94,156), coord(94,157)]
 	//--------------------------------------------------------------------------------------------	
 
-	//Para el puente
+	//Para el tunel
 	//------------------------------------------------------------------------------------------
-	c_bway_lim2 = {a = coord(98,173), b = coord(102,173)}
-	c_brge2 = {a = coord(99,173), b = coord(101,173)}
+	c_tway_lim2 = {a = coord(96,172), b = coord(104,172)}
+	c_tunn1 = {a = coord3d(96,172,3), b = coord3d(104,172,3)}	//Inicio y Fin de la via (fullway)
 	brge2_z = 1
 	//-------------------------------------------------------------------------------------------
 
 	//Segundo tramo de rieles
 	//--------------------------------------------------------------------------------------------
 	st4_way_lim = {a = coord(109,186), b = coord(109,189)}		//Limites de la via para la estacion
-	bord4_lim = {a = coord(102,172), b = coord(110,186)}		//Marca area con "X"
+	bord4_lim = {a = coord(102,171), b = coord(110,186)}		//Marca area con "X"
 	label4_lim = coord(109,186)									//Indica el final de un tramo
-	c_way5 = {a = coord3d(102,173,2), b = coord3d(109,189,2)}	//Inicio y Fin de la via (fullway)
+	c_way5 = {a = coord3d(104,172,3), b = coord3d(109,189,2)}	//Inicio y Fin de la via (fullway)
 
 	//Estaciones del Consumidor
 	st4_list = [coord(109,189), coord(109,188), coord(109,187)]
@@ -182,14 +182,16 @@ class tutorial.chapter_03 extends basic_chapter
 
 	//Subterraneo
 	//------------------------------------------------------------------------------------------
-	c_tunn1_lim = {b = coord(91,194), a = coord(64,202)}
-	c_tunn1 = {a = coord3d(90,198,6), b = coord3d(66,198,6)}		//Inicio y Fin de la via (fullway)
+	c_tunn2_lim = {b = coord(91,194), a = coord(63,202)}
+	c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8)}		//Inicio y Fin de la via (fullway)
+
+	c_lock_tunn = [coord(65,199),coord(65,197)]
 	labex = coord(89,198) //Mark in slope surface
 
 	layer_lvl = 6 
 	start_lvl_z = 6
 	end_lvl_z = 8
-	c_tun_list = [coord3d(89,198,6), coord3d(88,198,7), coord3d(87,198,8)]
+	c_tun_list = [coord3d(65,198,6), coord3d(64,198,7), coord3d(63,198,8)]
 	//------------------------------------------------------------------------------------------
 
 	//Step 9 =====================================================================================
@@ -380,7 +382,7 @@ class tutorial.chapter_03 extends basic_chapter
 					text = ttextfile("chapter_03/06_5-5.txt")
 					text.tx = ttext("<em>[5/5]</em>")
 				}
-				text.br = c_brge2.b.href("("+c_brge2.b.tostring()+")")
+				text.tu = c_tway_lim2.a.href("("+c_tway_lim2.a.tostring()+")")
 				text.w1 = c1.href("("+c1.tostring()+")")
 				text.w2 = c2.href("("+c2.tostring()+")")
 				text.w3 = c3.href("("+c3.tostring()+")")
@@ -417,38 +419,39 @@ class tutorial.chapter_03 extends basic_chapter
 					text.t1 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
 				}
 				else if(pot3==0){
-					if(coorbord!=0 && coorbord.z<end_lvl_z){
-						text = ttextfile("chapter_03/08_4-5.txt")
-						text.tx = ttext("<em>[4/5]</em>")
-						local tx_list = ""
-						for(local j=0;(j+start_lvl_z)<=end_lvl_z;j++){
-							local c = coord(c_tun_list[j].x, c_tun_list[j].y)
-							local c_z = c_tun_list[j].z
-							if (glsw[j]==0){
-								local link = "<a href=\"("+c.x+","+c.y+")\">("+c.tostring()+","+c_z+")</a>"
-								local layer = translate("Layer level")+" = <st>"+(layer_lvl+j)+"</st>"
-								tx_list += ttext("--> <st>" + format("[%d]</st> %s %s<br>", j+1, link, layer))
-								text.lev = layer_lvl+j
-								text.tunn = link
-								break
-							}
-							else {
-								local tx_ok = translate("OK")
-								local tx_coord = "("+c.tostring()+","+c_z+")"
-								local layer = translate("Layer level")+" = "+(layer_lvl+j)+""
-								tx_list += ttext("<em>"+format("<em>[%d]</em> %s", j+1, tx_coord+" "+layer+" <em>"+tx_ok+"</em><br>"))
-							}
+					text = ttextfile("chapter_03/08_4-5.txt")
+					text.tx = ttext("<em>[4/5]</em>")
+					text.lev = layer_lvl
+					text.t1 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
+					text.t2 = "<a href=\"("+ c_tun_list[0].x+","+ c_tun_list[0].y+")\">("+ c_tun_list[0].tostring()+")</a>"
+					
+				}
+				else if(pot4==0){
+
+					text = ttextfile("chapter_03/08_5-5.txt")
+					text.tx = ttext("<em>[5/5]</em>")
+					local tx_list = ""
+					for(local j=0;(j+start_lvl_z)<=end_lvl_z;j++){
+						local c = coord(c_tun_list[j].x, c_tun_list[j].y)
+						local c_z = c_tun_list[j].z
+						if (glsw[j]==0){
+							local link = "<a href=\"("+c.x+","+c.y+")\">("+c.tostring()+","+c_z+")</a>"
+							local layer = translate("Layer level")+" = <st>"+(layer_lvl+j)+"</st>"
+							tx_list += ttext("--> <st>" + format("[%d]</st> %s %s<br>", j+1, link, layer))
+							text.lev = layer_lvl+j
+							text.tunn = link
+							break
 						}
-						text.mx_lvl = end_lvl_z
-						text.list = tx_list
+						else {
+							local tx_ok = translate("OK")
+							local tx_coord = "("+c.tostring()+","+c_z+")"
+							local layer = translate("Layer level")+" = "+(layer_lvl+j)+""
+							tx_list += ttext("<em>"+format("<em>[%d]</em> %s", j+1, tx_coord+" "+layer+" <em>"+tx_ok+"</em><br>"))
+						}
 					}
-					else{
-						text = ttextfile("chapter_03/08_5-5.txt")
-						text.tx = ttext("<em>[5/5]</em>")
-						text.lev = layer_lvl+(end_lvl_z-start_lvl_z)
-						text.t1 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
-						text.t2 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
-					}
+					text.mx_lvl = end_lvl_z
+					text.list = tx_list
+					
 				}
 				break
 
@@ -945,21 +948,34 @@ class tutorial.chapter_03 extends basic_chapter
 					else 
 						coorbord = fullway
 				}
-				//Para el puente
+				//Para el tunel
 				else if (pot0==1 && pot1==0){
-					local tile = my_tile(c_brge2.a)
-					if ((!tile.find_object(mo_bridge))){
-						label_x.create(c_brge2.a, player_x(0), translate("Build a Bridge here!."))
+					local tile = my_tile(c_tunn1.a)
+					if ((!tile.find_object(mo_tunnel))){
+						label_x.create(c_tunn1.a, player_x(0), translate("Build a Bridge here!."))
 						coorbord = 	coord3d(tile.x, tile.y, tile.z)
 					}
 					else {
 						tile.remove_object(player_x(0), mo_label)
 
-						if (my_tile(c_brge2.b).find_object(mo_bridge)){
-							coorbord = 0
-							pot1=1
+						if (my_tile(c_tunn1.b).find_object(mo_tunnel)){
 						}				
 					}
+					local opt = 0
+					local coora = coord3d(c_tunn1.a.x, c_tunn1.a.y, c_tunn1.a.z)
+					local coorb = coord3d(c_tunn1.b.x, c_tunn1.b.y, c_tunn1.b.z)
+					local obj = false
+					local dir = 5
+					wayend = coorb				
+					local fullway = get_fullway(coora, coorb, dir, obj)
+					if (fullway==0){
+						pot1=1	
+						wayend = 0
+						coorbord = 0		
+					}
+					else 
+						coorbord = fullway
+
 				}
 				//Segundo tramo de rieles
 				else if (pot1==1 && pot2==0){
@@ -1142,24 +1158,38 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 				//Para conectar las dos entradas del tunel
 				else if (pot2==1 && pot3==0){
-					local t_label = my_tile(labex)
-					if (!t_label.find_object(mo_label))
-						label_x.create(labex, player_x(1), translate("X"))
 
-					local coora = coord3d(c_tunn1.a.x, c_tunn1.a.y, c_tunn1.a.z)
-					local coorb = coord3d(c_tunn1.b.x, c_tunn1.b.y, c_tunn1.b.z)
+					local coora = coord3d(c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z)
+					local coorb = coord3d(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
+					local obj = false
+					local tunnel = true
+					local dir = get_dir_start(coora)
+					local fullway = get_fullway(coora, coorb, dir, obj, tunnel)
+					coorbord = fullway
+
+					if (fullway==0){
+						coorbord = 0
+						pot3=1
+						return 45
+					}
+
+				}
+			
+				else if (pot3==1 && pot4==0){
+					local coora = coord3d(c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z)
+					local coorb = coord3d(c_tunn2.b.x, c_tunn2.b.y, c_tunn2.b.z)
 					local obj = false
 					local tunnel = true
 					local dir = get_dir_start(coora)
 					local fullway = get_fullway(coora, coorb, dir, obj, tunnel)
 					coorbord = fullway
 					if (fullway==0){
-						t_label.remove_object(player_x(1), mo_label)						
 						coorbord = 0
-						pot3=1
+						pot4=1
 						return 45
 					}
-					if (coorbord!=0 ){
+
+					if (coorbord!=0){
 						if(coorbord.z<end_lvl_z){
 							local slope = tile_x(coorbord.x, coorbord.y, coorbord.z).get_slope()
 							for(local j=0;(j+start_lvl_z)<end_lvl_z;j++){
@@ -1169,11 +1199,11 @@ class tutorial.chapter_03 extends basic_chapter
 							}
 						}
 					}
+
 				}
-			
-				else if (pot3==1){
+				else if (pot4==1){
 					this.next_step()
-				}		
+				}	
 				return 45
 				break
 
@@ -1314,7 +1344,7 @@ class tutorial.chapter_03 extends basic_chapter
 	}
 		
 	function is_work_allowed_here(pl, tool_id, pos) {
-		glpos = coord3d(pos.x, pos.y, pos.z)
+		//glpos = coord3d(pos.x, pos.y, pos.z)
 		local t = tile_x(pos.x, pos.y, pos.z)
 		local ribi = 0
 		local wt = 0
@@ -1513,16 +1543,11 @@ class tutorial.chapter_03 extends basic_chapter
 					else if(tool_id==tool_build_way && coorbord!=0)
 						return translate("Connect the Track here")+" ("+coorbord.tostring()+")."
 				}
-				//Construye un puente
+				//Construye un tunel
 				else if (pot0==1 && pot1==0){
-					if (pos.x>=c_bway_lim2.a.x && pos.y>=c_bway_lim2.a.y && pos.x<=c_bway_lim2.b.x && pos.y<=c_bway_lim2.b.y){
-						if(tool_id==tool_build_way)
+					if (pos.x>=c_tway_lim2.a.x && pos.y>=c_tway_lim2.a.y && pos.x<=c_tway_lim2.b.x && pos.y<=c_tway_lim2.b.y){
+						if(tool_id==tool_build_way || tool_id==tool_build_tunnel){
 							return null
-						if(tool_id==tool_build_bridge){
-							if(pos.z==brge2_z)
-								return null
-							else
-								return translate("You must build the bridge here")+" ("+c_brge2.a.tostring()+")."
 						}	
 					}
 				}
@@ -1666,10 +1691,25 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 				//Conecta los dos extremos del tunel
 				else if (pot2==1 && pot3==0){
+					if (tool_id==tool_remover){
+						if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
+							if(slope==0)return null
+						}
+					}
+					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
+						if((pos.x>=c_tun_list[0].x)&&(pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y)){
+							if((pos.x == c_lock_tunn[0].x && pos.y == c_lock_tunn[0].y)||( pos.x == c_lock_tunn[1].x && pos.y == c_lock_tunn[1].y))
+								return coorbord!=0? translate("Build a tunnel here")+" ("+coorbord.tostring()+")." : result
+							return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord!=0?coorbord:pos)
+						}
+					}
+				}
+				//Tunel con pendientes
+				else if (pot3==1 && pot4==0){
 					local max = 1
 					local count_tunn = count_tunnel(pos, max)
 					if (tool_id==tool_remover){
-						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
+						if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
 							if(!count_tunn && slope==0 && way && way.is_marked())
 								return null
 							if(count_tunn && pos.z!=end_lvl_z) return translate("You must use the tool to raise the ground here")+" ("+coorbord.tostring()+".)" 
@@ -1677,8 +1717,11 @@ class tutorial.chapter_03 extends basic_chapter
 					}
 
 					if (tool_id==4100){
-						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
-							if (count_tunn || slope!= 0){
+						if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
+							if (pos.z == start_lvl_z && slope!=28){
+								return null
+							}
+							if (count_tunn || slope != 0){
 								if (pos.z == (end_lvl_z))
 									return translate("The tunnel is already at the correct level")+" (-"+end_lvl_z+")."
 								if (slope==0)
@@ -1707,19 +1750,19 @@ class tutorial.chapter_03 extends basic_chapter
 					}
 
 					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
-						if (pos.x>=c_tunn1_lim.a.x && pos.y<=c_tunn1_lim.a.y && pos.x<=c_tunn1_lim.b.x && pos.y>=c_tunn1_lim.b.y){
-							if(coorbord!=0){ //Deberia funcionar sin esto (posible error en simutrans causa problemas)
-								return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
-							}
+						if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
+
 							if (way && slope != 28 && slope!= 0) return translate("You must upper the ground first")+" ("+coorbord.tostring()+".)"
 							if (coorbord!=0){
+								if( count_tunn||(pos.z== start_lvl_z && slope==28)) return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
 								if (pos.z < end_lvl_z){
+
 									local slopebord = tile_x(coorbord.x, coorbord.y, coorbord.z).get_slope()
-									if (slopebord!=0){
+									if (slopebord==28){
 										local is_mark = way? way.is_marked():false 
 										local cursor = t.find_object(mo_pointer)
 										local max = 2
-										local lock = cursor_tile_count(cursor, is_mark, max)
+										local lock = cursor_tile_count(cursor, is_mark, max, pos)
 										if(is_mark || label || lock) return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
 										else if (!count_tunn)
 											return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)" 
@@ -2232,16 +2275,15 @@ class tutorial.chapter_03 extends basic_chapter
 					local text = "X"
 					label_bord(bord3_lim.a, bord3_lim.b, opt, del, text)
 				}
-				//Para el puente
+				//Para el Tunel
 				if (pot1==0){
-					local t_start = my_tile(c_brge2.a)
-					local t_end = my_tile(c_brge2.b)
+					local t_start = my_tile(c_tway_lim2.a)
+					local t_end = my_tile(c_tway_lim2.b)
 
 					t_start.remove_object(player_x(0), mo_label)
 
-					local t = command_x(tool_build_bridge)
-					t.set_flags(2)		
-					local err = t.work(player_x(1), t_start, t_end, sc_bridge_name)
+					local t = command_x(tool_build_tunnel)
+					local err = t.work(player_x(1), t_start, sc_tunn_name)
 				}
 				//Segundo tramo de rieles
 				if (pot2==0){
@@ -2383,8 +2425,8 @@ class tutorial.chapter_03 extends basic_chapter
 						t_tun.work(player_x(1), t_start, c, sc_tunn_name)
 						command_x.set_slope(player_x(1), c, slope.all_up_slope)
 					}
-					local c_start = c_tunn1.a 
-					local c_end = c_tunn1.b 
+					local c_start = c_tunn2.a 
+					local c_end = c_tunn2.b 
 
 					t_tun.work(player_x(1), c_start, c_end, sc_tunn_name)
 
@@ -2606,7 +2648,7 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 
 			case 6:
-				local forbid = [4129,tool_build_tunnel,tool_build_depot,tool_build_roadsign,tool_build_wayobj]
+				local forbid = [4129,tool_build_bridge,tool_build_depot,tool_build_roadsign,tool_build_wayobj]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
 				break
@@ -2783,14 +2825,25 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 		}
 	}
-	function cursor_tile_count(cursor, is_mark, max){
-		if(!cursor && cursor_count>0)cursor_count++
-		if(cursor && is_mark) cursor_count = 1
-		if(cursor_count>max){
-			cursor_count = 0
-			return false
+	function cursor_tile_count(cursor, is_mark, max, pos){
+		if(is_mark && cursor_count==0){
+			cursor_count = 1
+			glpos = coord3d(0,0,0)
+			return true
 		}
-		return true
+		if(pos.x != glpos.x && pos.y != glpos.y){
+			if(!cursor && cursor_count>0)cursor_count++
+			glpos = pos
+			return true
+		}
+
+		if(cursor_count<=max){
+
+			return true
+		}
+		else glpos = coord3d(0,0,0)
+		cursor_count = 0
+		return false
 	}
 }        // END of class
 
