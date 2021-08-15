@@ -112,7 +112,7 @@ function script_text()
 		gui.add_message(""+translate("Advance not allowed"))
 		return null
 	}
-	if(true){
+	if(scr_jump){
 		local result = null
 		scr_jump = false
 		result = chapter.script_text()

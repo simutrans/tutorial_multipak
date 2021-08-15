@@ -1219,7 +1219,7 @@ class basic_chapter
 				if(w && j==max && (dir==2 || dir==10))result = true
 				else if(w && j>max)result = false
 
-				gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
+				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}
