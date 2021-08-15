@@ -630,7 +630,7 @@ class tutorial.chapter_06 extends basic_chapter
 				local load = veh1_load
 				local time = veh1_wait
 				local c_list = sch_list2
-				local siz = sch_list2.len()
+				local siz = c_list.len()
 				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
 				if(result == null){
 					local line_name = line1_name
@@ -645,7 +645,7 @@ class tutorial.chapter_06 extends basic_chapter
 				local load = veh1_load
 				local time = veh1_wait
 				local c_list = sch_list3
-				local siz = sch_list3.len()
+				local siz = c_list.len()
 				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
 				if(result == null){
 					local line_name = line2_name

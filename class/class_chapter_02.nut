@@ -810,7 +810,7 @@ class tutorial.chapter_02 extends basic_chapter
 					if (tool_id==4108) {
 						local c_list = sch_list1   //Lista de todas las paradas de autobus
 						local c_dep = c_dep //Coordeadas del deposito 
-						local siz = sch_list1.len() //Numero de paradas 
+						local siz = c_list.len() //Numero de paradas 
 						result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
 						return is_stop_allowed(result, siz, c_list, pos)
 					}
@@ -840,7 +840,7 @@ class tutorial.chapter_02 extends basic_chapter
 						stop_mark = true
 						local c_list = sch_list2    //Lista de todas las paradas de autobus
 						local c_dep = c_dep    //Coordeadas del deposito 
-						local siz = sch_list2.len()     //Numero de paradas 
+						local siz = c_list.len()     //Numero de paradas 
 						result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
 						return is_stop_allowed(result, siz, c_list, pos)
 					}
@@ -1146,6 +1146,8 @@ class tutorial.chapter_02 extends basic_chapter
 					local good_nr = 0 //Passengers
 					local name = veh1_obj
 					local cov_nr = 0  //Max convoys nr in depot
+					local c_list = sch_list1
+					local sch_siz = c_list.len()
 
 					if (!comm_set_convoy(cov_nr, c_depot, name))
 						return 0
@@ -1154,11 +1156,11 @@ class tutorial.chapter_02 extends basic_chapter
 					local sched = schedule_x(gl_wt, [])
 					local load = veh1_load
 					local wait = veh1_wait
-					for(local j=0;j<sch_list1.len();j++){
+					for(local j=0;j<sch_siz;j++){
 						if (j==0)
-							sched.entries.append(schedule_entry_x(my_tile(sch_list1[j]), load, wait))
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, wait))
 						else
-							sched.entries.append(schedule_entry_x(my_tile(sch_list1[j]), 0, 0))
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
 					comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 
@@ -1250,15 +1252,16 @@ class tutorial.chapter_02 extends basic_chapter
 					local convoy = depot.get_convoy_list()
 					local sched = schedule_x(gl_wt, [])
 
-					local sch_siz = sch_list3.len()
+					local c_list = sch_list3
+					local sch_siz = c_list.len()
 					local load = veh1_load
 					local wait = veh1_wait
 
 					for(local j=0;j<sch_siz;j++){
 						if (j==sch_siz-1)
-							sched.entries.append(schedule_entry_x(my_tile(sch_list3[j]), load, wait))
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, wait))
 						else
-							sched.entries.append(schedule_entry_x(my_tile(sch_list3[j]), 0, 0))
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
 					comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 				}

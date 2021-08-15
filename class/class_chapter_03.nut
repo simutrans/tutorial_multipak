@@ -2418,6 +2418,10 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 				if (pot2==1 && pot3==0){
 					local t_tun = command_x(tool_build_tunnel)
+					local c_start = c_tunn2.a 
+					local c_end = coord3d(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
+					t_tun.work(player_x(1), c_start, c_end, sc_tunn_name)
+
 					local c_list =	c_tun_list
 					local t_start = my_tile(start_tunn)
 					for(local j = 0; j<(c_list.len()-1);j++){
@@ -2425,12 +2429,9 @@ class tutorial.chapter_03 extends basic_chapter
 						t_tun.work(player_x(1), t_start, c, sc_tunn_name)
 						command_x.set_slope(player_x(1), c, slope.all_up_slope)
 					}
-					local c_start = c_tunn2.a 
-					local c_end = c_tunn2.b 
-
-					t_tun.work(player_x(1), c_start, c_end, sc_tunn_name)
-
-				}					
+					t_tun.work(player_x(1), c_start, c_tunn2.b, sc_tunn_name)
+				}
+				
 				return null
 				break
 
