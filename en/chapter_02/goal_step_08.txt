@@ -4,16 +4,15 @@ The city <em>{name}</em> needs to connect the bus line with the train line under
 <p>
 In the toolbar select <em>'{tool3}'</em>  and choose the <em>Make way or stop public</em> tool.
 </p>
-
 <p>
-<h1>Make public stop</h1>
-By making the public stop, the player frees himself from maintaining it and also allows sharing the transport network with other players, but he must be careful since by doing this it can no longer be reversed unless he changes to the public service player.
+<h1>Make stop public</h1>
+By making the stop public, the player frees himself from maintaining it and also allows sharing the transport network with other players. But be careful, since this can't be reversed unless you change to the Public Service player.
 </p>
 <p>
-<st>Warning: Using this tool is very expensive</st> <em>{prce}</em> for each tile.
+<st>Warning: Using this tool is very expensive</st>, <em>{prce}</em> for each tile.
 </p>
 <p>
-Select the <em>Make way or stop public tool</em> and click on the stop {st1}, you will notice that its color will change. 
+Select the <em>Make way or stop public tool</em> and click on the stop {st1}. You will notice that its color will change. 
 </p>
 <p>
 <st>It advances to the next chapter</st> when the stop are made public.
