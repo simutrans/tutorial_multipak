@@ -20,7 +20,7 @@ Ahora debes ensamblar un tren para <em>Pasajeros</em>.<br/>
 <em>Consejo:</em> Usa el filtro para mostrar solo los vehículos de pasajeros.
 </p>
 <p>
-<st>Nota:</st> Los vehículos eléctricos solo aparecen cuando la vía del depósito esta electrificada.
+<st>Nota:</st> Los vehículos eléctricos solo aparecen cuando la vía del depósito está electrificada.
 </p>
 <p>
 <em>[3]</em> Pulsa sobre el botón [Itinerario] para configurar la siguiente ruta:<br/>

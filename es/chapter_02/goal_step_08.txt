@@ -5,7 +5,7 @@ La ciudad <em>{name}</em> necesita que conectes la línea de <em>Autobuses</em> c
 En la barra de herramientas selecciona <em>'{tool3}'</em> y elige la herramienta <em>Convertir en vía o parada pública</em>
 </p>
 <p>
-<h1>Crear parada pública</h1>
+<h1>Convertir en parada pública</h1>
 Al hacer la parada pública, el jugador se ahorra el mantenimiento de la parada a la vez que permite compartir con otros jugadores la red de transporte. Pero debes tener cuidado, ya que esta acción no se puede revertir a no ser que cambies al jugador del Servicio Público.
 </p>
 <p>
