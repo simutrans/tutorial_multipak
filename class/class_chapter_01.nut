@@ -18,10 +18,10 @@ class tutorial.chapter_01 extends basic_chapter
 	c_cty = coord(111,184)
 	c_fac = coord(149,200)
 	c_st  = coord(117,197)
-	tx_cty = ""
-	tx_fac = ""
-	tx_st = ""
-	tx_link = ""
+	tx_cty = "This is a town centre"
+	tx_fac = "This is a factory"
+	tx_st = "This is a station"
+	tx_link = "This is a link"
 
 	//Step 2
 	c_test = coord3d(0,0,1)
@@ -51,17 +51,13 @@ class tutorial.chapter_01 extends basic_chapter
 	}
 
 	function set_goal_text(text) {
-		tx_cty = translate("This is a town centre")
-		tx_fac = translate("This is a factory")
-		tx_st = translate("This is a station")
-		tx_link = translate("This is a link")
 		switch (this.step) {
 			case 1:
 				text.pos = c_cty.href("("+c_cty.tostring()+")")
-				text.pos1 = c_cty.href(""+tx_cty+" ("+c_cty.tostring()+")")
-				text.pos2 = c_fac.href(""+tx_fac+" ("+c_fac.tostring()+")")
-				text.pos3 = c_st.href(""+tx_st+" ("+c_st.tostring()+")")
-				text.link = "<a href='script:script_text()'>"+tx_link+"  >></a>"
+				text.pos1 = c_cty.href(""+translate(tx_cty)+" ("+c_cty.tostring()+")")
+				text.pos2 = c_fac.href(""+translate(tx_fac)+" ("+c_fac.tostring()+")")
+				text.pos3 = c_st.href(""+translate(tx_st)+" ("+c_st.tostring()+")")
+				text.link = "<a href='script:script_text()'>"+translate(tx_link)+"  >></a>"
 			break;
 			case 3: 
 				text.pos = "<a href=\"("+c_buil1.x+","+c_buil1.y+")\">"+buil1_name+" ("+c_buil1.tostring()+")</a>"
