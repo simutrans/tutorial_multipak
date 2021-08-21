@@ -186,7 +186,6 @@ class tutorial.chapter_03 extends basic_chapter
 	c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8)}		//Inicio y Fin de la via (fullway)
 
 	c_lock_tunn = [coord(65,199),coord(65,197)]
-	labex = coord(89,198) //Mark in slope surface
 
 	layer_lvl = 6 
 	start_lvl_z = 6
@@ -952,7 +951,7 @@ class tutorial.chapter_03 extends basic_chapter
 				else if (pot0==1 && pot1==0){
 					local tile = my_tile(c_tunn1.a)
 					if ((!tile.find_object(mo_tunnel))){
-						label_x.create(c_tunn1.a, player_x(0), translate("Build a Bridge here!."))
+						label_x.create(c_tunn1.a, player_x(0), translate("Place a Tunnel here!."))
 						coorbord = 	coord3d(tile.x, tile.y, tile.z)
 					}
 					else {
@@ -1752,23 +1751,24 @@ class tutorial.chapter_03 extends basic_chapter
 					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
 						if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
 
+
 							if (way && slope != 28 && slope!= 0) return translate("You must upper the ground first")+" ("+coorbord.tostring()+".)"
 							if (coorbord!=0){
-								if( count_tunn||(pos.z== start_lvl_z && slope==28)) return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
+								local slopebord = tile_x(coorbord.x, coorbord.y, coorbord.z).get_slope()
+								if((count_tunn && slopebord==28)||(pos.z== start_lvl_z && slope==28)) return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
 								if (pos.z < end_lvl_z){
-
-									local slopebord = tile_x(coorbord.x, coorbord.y, coorbord.z).get_slope()
 									if (slopebord==28){
+										//gui.add_message(""+count_tunn+" "+pos.tostring())
 										local is_mark = way? way.is_marked():false 
 										local cursor = t.find_object(mo_pointer)
 										local max = 2
 										local lock = cursor_tile_count(cursor, is_mark, max, pos)
 										if(is_mark || label || lock) return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord)
-										else if (!count_tunn)
-											return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)" 
-										else return translate("First you must Upper the layer level.")
+											if (!count_tunn) return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)" 
+										return translate("First you must Upper the layer level.")
 									}
 									else if (slopebord==0){
+										if (!count_tunn) return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)" 
 										return translate("You must upper the ground first")+" ("+coorbord.tostring()+".)"
 									}
 								}

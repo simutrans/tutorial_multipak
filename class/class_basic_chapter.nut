@@ -1201,8 +1201,9 @@ class basic_chapter
 	function count_tunnel(coora, max){
 		local way = tile_x(coora.x, coora.y, coora.z).find_object(mo_way)
 		local r_dir = way? way.get_dirs():0
-
-		local result = true
+		if(!way)return true
+		local result = false
+		//gui.add_message(""+r_dir)
 		if(r_dir == 2){
 			for(local j = 0;true;j++){
 				local t = tile_x((coora.x + j), coora.y , coora.z)
@@ -1219,7 +1220,7 @@ class basic_chapter
 				if(w && j==max && (dir==2 || dir==10))result = true
 				else if(w && j>max)result = false
 
-				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
+				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result+" "+j)
 				if(slope != 0) return result	
 			}
 		}
@@ -1238,6 +1239,8 @@ class basic_chapter
 				local dir = w? w.get_dirs():0
 				if(w && j==max && (dir==2 || dir==10))result = true
 				else if(w && j>max)result = false
+
+				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}
@@ -1256,6 +1259,8 @@ class basic_chapter
 				local dir = w? w.get_dirs():0
 				if(w && j==max && (dir==4 || dir==5))result = true
 				else if(w && j>max)result = false
+
+				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}
@@ -1274,6 +1279,8 @@ class basic_chapter
 				local dir = w? w.get_dirs():0
 				if(w && j==max && (dir==1 || dir==5))result = true
 				else if(w && j>max)result = false
+
+				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}
