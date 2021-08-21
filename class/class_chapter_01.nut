@@ -18,10 +18,10 @@ class tutorial.chapter_01 extends basic_chapter
 	c_cty = coord(111,184)
 	c_fac = coord(149,200)
 	c_st  = coord(117,197)
-	tx_cty = translate("This is a town centre")
-	tx_fac = translate("This is a factory")
-	tx_st = translate("This is a station")
-	tx_link = translate("This is a link")
+	tx_cty = ""
+	tx_fac = ""
+	tx_st = ""
+	tx_link = ""
 
 	//Step 2
 	c_test = coord3d(0,0,1)
@@ -50,7 +50,11 @@ class tutorial.chapter_01 extends basic_chapter
 		return 0
 	}
 
-	function set_goal_text(text){
+	function set_goal_text(text) {
+		tx_cty = translate("This is a town centre")
+		tx_fac = translate("This is a factory")
+		tx_st = translate("This is a station")
+		tx_link = translate("This is a link")
 		switch (this.step) {
 			case 1:
 				text.pos = c_cty.href("("+c_cty.tostring()+")")
