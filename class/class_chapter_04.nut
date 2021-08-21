@@ -29,13 +29,13 @@ class tutorial.chapter_04 extends basic_chapter
 
 	//Step 1 =====================================================================================
 	//Productor
-	f1name = translate("Oelbohrinsel")
+	f1name = "Oelbohrinsel"
 	f1_coord = coord(168,189)
 	f1_good = good_alias.oel
 	f1_lim = {a = coord(168,189), b = coord(169,190)}
 	
 	//Fabrica
-	f2name = translate("Raffinerie")
+	f2name = "Raffinerie"
 	f2_coord = coord(149,200)
 	f2_good = good_alias.gas
 	f2_lim = {a = coord(149,200), b = coord(150,201)}
@@ -49,7 +49,6 @@ class tutorial.chapter_04 extends basic_chapter
 	d1_cnr = 5
 
 	//Step 4 =====================================================================================
-	ship1_name = translate("EnCo_Oil_Ship")
 	ship1_name_obj = "EnCo_Oil_Ship"
 	ship1_load = 100
 	ship1_wait = 0
@@ -62,7 +61,7 @@ class tutorial.chapter_04 extends basic_chapter
 	c_way_lim = {a = coord(114, 194), b = coord(140, 194)}
 
 	//Consumidor Final
-	f3name = translate("TANKE")
+	f3name = "TANKE"
 	f3_coord = coord(112,192)
 	f3_good = good_alias.gas
 	d2_cnr = 5
@@ -75,7 +74,6 @@ class tutorial.chapter_04 extends basic_chapter
 
 	//Step 7 =====================================================================================
 	tur = coord(185,135)
-	ship2_name = translate("SlowFerry")
 	ship2_name_obj = "SlowFerry"
 	ship2_load = 100
 	ship2_wait = 42282
@@ -211,7 +209,7 @@ class tutorial.chapter_04 extends basic_chapter
 			local c = coord(list[0].x, list[0].y)
 			text.stnam = "1) "+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
 			text.list = tx_list			
-			text.ship = ship2_name
+			text.ship = translate(ship2_name_obj)
 			text.load = ship2_load
 			text.wait = get_wait_time_text(ship2_wait)
 			break
@@ -222,11 +220,11 @@ class tutorial.chapter_04 extends basic_chapter
 
 		}
 		text.dep1 = c_dep1.href("("+c_dep1.tostring()+")")+""
-		text.sh = ship1_name
+		text.sh = translate(ship1_name_obj)
 		text.cir = cov_cir
-		text.f1 = f1_coord.href(""+f1name+" ("+f1_coord.tostring()+")")+""
-		text.f3 = f2_coord.href(""+f2name+" ("+f2_coord.tostring()+")")+""
-		text.f4 = f3_coord.href(""+f3name+" ("+f3_coord.tostring()+")")+""
+		text.f1 = f1_coord.href(""+translate(f1name)+" ("+f1_coord.tostring()+")")+""
+		text.f3 = f2_coord.href(""+translate(f2name)+" ("+f2_coord.tostring()+")")+""
+		text.f4 = f3_coord.href(""+translate(f3name)+" ("+f3_coord.tostring()+")")+""
 		text.tur = tur.href(" ("+tur.tostring()+")")+""
 		text.good1 = translate(f1_good)
 		text.good2 = translate(f2_good)
@@ -618,7 +616,7 @@ class tutorial.chapter_04 extends basic_chapter
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
 				if (result!=null){
-					local name = ship1_name
+					local name = translate(ship1_name_obj)
 					local good = translate(f1_good)
 	 				return ship_result_message(result, name, good, veh, cov)
 				}
@@ -661,7 +659,7 @@ class tutorial.chapter_04 extends basic_chapter
 
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 				if (result!=null){
-					local name = ship1_name
+					local name = translate(ship1_name_obj)
 					local good = translate(f2_good)
 	 				return ship_result_message(result, name, good, veh, cov)
 				}
@@ -686,7 +684,7 @@ class tutorial.chapter_04 extends basic_chapter
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
 				if (result!=null){
-					local name = ship2_name
+					local name = translate(ship2_name_obj)
 					local good = translate("Passengers")
 	 				return ship_result_message(result, name, good, veh, cov)
 				}

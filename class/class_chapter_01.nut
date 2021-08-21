@@ -14,7 +14,7 @@ class tutorial.chapter_01 extends basic_chapter
 	
 	comm_script = false
 
-	// Step 1
+	// Step 1 =====================================================================================
 	c_cty = coord(111,184)
 	c_fac = coord(149,200)
 	c_st  = coord(117,197)
@@ -23,16 +23,16 @@ class tutorial.chapter_01 extends basic_chapter
 	tx_st = "This is a station"
 	tx_link = "This is a link"
 
-	//Step 2
+	// Step 2 =====================================================================================
 	c_test = coord3d(0,0,1)
 
-	// Step 3
+	// Step 3 =====================================================================================
 	c_buil1=coord3d(113,189,1)
 	c_buil2=coord3d(113,185,1)
-	buil1_name = ""
-	buil2_name = ""
+	buil1_name = ""	//auto started
+	buil2_name = ""	//auto started
 
-	// Step 4
+	// Step 4 =====================================================================================
 	postc={ a = coord(111,184), b = coord(112,185) }
 	city_lim = {a = coord(109,181), b = coord(128,193)}
 	cty1 = {c = coord(111,184), name = ""}
@@ -42,11 +42,11 @@ class tutorial.chapter_01 extends basic_chapter
 		cty1.name = get_city_name(cty1.c)
 		local t1 = my_tile(c_buil1)
 		local buil1 = t1.find_object(mo_building)
-		buil1_name = buil1 ? translate(buil1.get_name()):"No exite"
+		buil1_name = buil1 ? translate(buil1.get_name()):"No existe"
 
 		local t2 = my_tile(c_buil2)
 		local buil2 = t2.find_object(mo_building)
-		buil2_name = buil1 ? translate(buil2.get_name()):"No exite"
+		buil2_name = buil1 ? translate(buil2.get_name()):"No existe"
 		return 0
 	}
 
@@ -79,7 +79,6 @@ class tutorial.chapter_01 extends basic_chapter
 		switch (this.step) {
 			case 1:
 				if (pot0 == 1) {
-					//reset_pot()
 					this.next_step()
 				}
 				return percentage
@@ -92,7 +91,6 @@ class tutorial.chapter_01 extends basic_chapter
 					local del = false
 					local text = "X"
 					label_bord(city_lim.a, city_lim.b, opt, del, text)
-					//reset_pot()
 					this.next_step()
 				}
 				return percentage
@@ -138,7 +136,6 @@ class tutorial.chapter_01 extends basic_chapter
 					pot3=1
 				}
 				if (pot3==1 && pot4==0){
-					//reset_pot()
 					comm_script = false
 					this.next_step()
 				}
@@ -155,7 +152,6 @@ class tutorial.chapter_01 extends basic_chapter
 				}
 
 				if ((pot0 == 1 && next_mark)){
-					//reset_pot()
 					comm_script = false
 					this.next_step()
 				}
@@ -163,7 +159,6 @@ class tutorial.chapter_01 extends basic_chapter
 			case 5:
 				persistent.step=1
 				persistent.status.step = 1
-				//reset_pot()
 				return 100
 			break
 
@@ -255,7 +250,6 @@ class tutorial.chapter_01 extends basic_chapter
 			label_bord(city_lim.a, city_lim.b, opt, del, text)
 			pot0=1
 			pot2=1
-			//this.next_step()
 		}
 		else if (this.step==4){
 			comm_script = true

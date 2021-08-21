@@ -32,7 +32,7 @@ class tutorial.chapter_05 extends basic_chapter
 	c_fab_lim =	[	{a = coord(149,200), b = coord(150,201)}, {a = coord(110,190), b = coord(111,191)},
 					{a = coord(131,235), b = coord(133,237)}, {a = coord(130,207), b = coord(131,208)}
 				]
-	f_name = [translate("Raffinerie"), translate("Materialswholesale"),  translate("Kohlegrube"), translate("Kohlekraftwerk")]
+	f_name = ["Raffinerie", "Materialswholesale",  "Kohlegrube", "Kohlekraftwerk"]
 
 	//Step 2 =====================================================================================
 	//Para la carretera
@@ -47,7 +47,6 @@ class tutorial.chapter_05 extends basic_chapter
 	
 	//Para el Camion
 	sch_list1 = [coord(132,233), coord(131,209)]
-	veh1_name = translate("Sandtransporter")
     veh1_obj = "Sandtransporter"
 	veh1_load = 100
 	veh1_wait = 0
@@ -71,7 +70,6 @@ class tutorial.chapter_05 extends basic_chapter
     sch_list2 = [coord(111,183), coord(116,183),  coord(120,183), coord(126,187), coord(132,189), coord(121,189), coord(118,191), coord(113,190)]
 
 	//Para el Camion
-    veh2_name = translate("Posttransporter")
     veh2_obj = "Posttransporter"
     c_dep2 = coord(115,185) // depot
 	line1_name = "Test 6"
@@ -81,7 +79,6 @@ class tutorial.chapter_05 extends basic_chapter
 
 	//Para el barco
 	sch_list3 = [coord(134,189), coord(168,189)]
-    veh3_name = translate("Postschiff")
     veh3_obj = "Postschiff"
 	veh3_load = 100
 	veh3_wait = 42282
@@ -118,175 +115,176 @@ class tutorial.chapter_05 extends basic_chapter
 		return 0
 	}
 
-	function set_goal_text(text){
-    local ok_tx =  translate("Ok")
-    local trf_name = translate("Build drain")    //Aufspanntransformator 
-    local toolbar = translate("SPECIALTOOLS")
-    
-    switch (this.step) {
-		case 1:
-		break
-		case 2:
-			local c_w1 = coord(c_way1.a.x, c_way1.a.y)
-			local c_w2 = coord(c_way1.b.x, c_way1.b.y)
+	function set_goal_text(text)
+	{
+		local ok_tx =  translate("Ok")
+		local trf_name = translate("Build drain")    //Aufspanntransformator 
+		local toolbar = translate("SPECIALTOOLS")
+		
+		switch (this.step) {
+			case 1:
+			break
+			case 2:
+				local c_w1 = coord(c_way1.a.x, c_way1.a.y)
+				local c_w2 = coord(c_way1.b.x, c_way1.b.y)
 
-			text.w1 = c_w1.href("("+c_w1.tostring()+")")
-			text.w2 = c_w2.href("("+c_w2.tostring()+")")
+				text.w1 = c_w1.href("("+c_w1.tostring()+")")
+				text.w2 = c_w2.href("("+c_w2.tostring()+")")
 
-			text.dep = c_dep1.href("("+c_dep1.tostring()+")")
-			text.veh = veh1_name
-			text.good = translate(f1_good)
-			text.all_cov = d1_cnr
-			text.cir = cov_cir
-			text.load = veh1_load
-			text.wait = get_wait_time_text(veh1_wait)
-		break
-		case 3:
-        if (pot0==0){
-          text = ttextfile("chapter_05/03_1-2.txt")
-          text.tx="<em>[1/2]</em>"
-          text.trf_name = trf_name 
-          text.toolbar = toolbar
+				text.dep = c_dep1.href("("+c_dep1.tostring()+")")
+				text.veh = translate(veh1_obj)
+				text.good = translate(f1_good)
+				text.all_cov = d1_cnr
+				text.cir = cov_cir
+				text.load = veh1_load
+				text.wait = get_wait_time_text(veh1_wait)
+			break
+			case 3:
+		    if (pot0==0){
+		      text = ttextfile("chapter_05/03_1-2.txt")
+		      text.tx="<em>[1/2]</em>"
+		      text.trf_name = trf_name 
+		      text.toolbar = toolbar
 
-          local tran_tx = ""
-          for(local j=0;j<transf_list.len();j++){
-                if (glsw[j]==0){
-                    tran_tx +=format("<st>%s %d</st> ", trf_name, j+1) + transf_list[j].href("("+transf_list[j].tostring()+")") + "<br/>" 
-                }
-                else {
-                    tran_tx +=format("<em>%s %d</em> ",trf_name ,j+1)+"("+transf_list[j].tostring()+") <em>"+ok_tx+"</em><br/>" 
-                }
-            }
-	      text.tran = tran_tx
-	      }
+		      local tran_tx = ""
+		      for(local j=0;j<transf_list.len();j++){
+		            if (glsw[j]==0){
+		                tran_tx +=format("<st>%s %d</st> ", trf_name, j+1) + transf_list[j].href("("+transf_list[j].tostring()+")") + "<br/>" 
+		            }
+		            else {
+		                tran_tx +=format("<em>%s %d</em> ",trf_name ,j+1)+"("+transf_list[j].tostring()+") <em>"+ok_tx+"</em><br/>" 
+		            }
+		        }
+			  text.tran = tran_tx
+			  }
 
-          else if (pot0==1 && pot1==0){
-		      text = ttextfile("chapter_05/03_2-2.txt")
-		      text.tx="<em>[2/2]</em>"
-              text.powerline_tool = translate("Powerline")
-              text.toolbar = toolbar
-           
-              local tran_tx = ""
-              local f_list = c_fab_list
-              for(local j=0;j<f_list.len();j++){
-		         if (glsw[j]==0){
-						tran_tx +=format("<st>%s</st> ",f_name[j]) + f_list[j].href("("+f_list[j].tostring()+")") + "<br/>" 
-                 }
-                  else {
-                    tran_tx +=format("<em>%s</em> ",f_name[j]) + "("+f_list[j].tostring()+") <em>"+translate("OK")+"</em><br/>" 
-                 }
-              }
-              f_power = f_power + f_pow_list[0] + f_pow_list[1] + f_pow_list[2] 
-              text.pow = f_power
-              text.tran = tran_tx
-        }
-		break
-		case 4:
-        if (pot0==1 && pot1==0){
-			text = ttextfile("chapter_05/04_1-3.txt")
-			text.tx="<em>[1/3]</em>"
-			text.toolbar = toolbar
-			local st_tx = ""
-			local c_list = obj_list1  //Lista de build
-			local siz = c_list.len()
-			local offi_name = translate("PostOffice")
-			for(local j=0;j<siz;j++){
-				if (glsw[j]==0){
-					st_tx +=format("<st>%s %d</st> ",offi_name, j+1) + c_list[j].href("("+c_list[j].tostring()+")")+"<br/>" 
+		      else if (pot0==1 && pot1==0){
+				  text = ttextfile("chapter_05/03_2-2.txt")
+				  text.tx="<em>[2/2]</em>"
+		          text.powerline_tool = translate("Powerline")
+		          text.toolbar = toolbar
+		       
+		          local tran_tx = ""
+		          local f_list = c_fab_list
+		          for(local j=0;j<f_list.len();j++){
+				     if (glsw[j]==0){
+							tran_tx +=format("<st>%s</st> ",translate(f_name[j])) + f_list[j].href("("+f_list[j].tostring()+")") + "<br/>" 
+		             }
+		              else {
+		                tran_tx +=format("<em>%s</em> ",translate(f_name[j])) + "("+f_list[j].tostring()+") <em>"+translate("OK")+"</em><br/>" 
+		             }
+		          }
+		          f_power = f_power + f_pow_list[0] + f_pow_list[1] + f_pow_list[2] 
+		          text.pow = f_power
+		          text.tran = tran_tx
+		    }
+			break
+			case 4:
+		    if (pot0==1 && pot1==0){
+				text = ttextfile("chapter_05/04_1-3.txt")
+				text.tx="<em>[1/3]</em>"
+				text.toolbar = toolbar
+				local st_tx = ""
+				local c_list = obj_list1  //Lista de build
+				local siz = c_list.len()
+				local offi_name = translate("PostOffice")
+				for(local j=0;j<siz;j++){
+					if (glsw[j]==0){
+						st_tx +=format("<st>%s %d</st> ",offi_name, j+1) + c_list[j].href("("+c_list[j].tostring()+")")+"<br/>" 
+					}
+					else {
+						st_tx +=format("<em>%s %d</em> ",offi_name ,j+1)+"("+c_list[j].tostring()+")<em>"+ok_tx+"</em><br/>" 
+					}
 				}
-				else {
-					st_tx +=format("<em>%s %d</em> ",offi_name ,j+1)+"("+c_list[j].tostring()+")<em>"+ok_tx+"</em><br/>" 
-				}
+				text.st = st_tx
 			}
-			text.st = st_tx
-		}
-        if (pot1==1 && pot2==0 || !correct_cov){
-			text = ttextfile("chapter_05/04_2-3.txt")
-			text.tx = "<em>[2/3]</em>"
-			local list_tx = ""
-			local c_list = sch_list2
-			local siz = c_list.len()
-			for (local j=0;j<siz;j++){
-				local c = coord(c_list[j].x, c_list[j].y)
+		    if (pot1==1 && pot2==0 || !correct_cov){
+				text = ttextfile("chapter_05/04_2-3.txt")
+				text.tx = "<em>[2/3]</em>"
+				local list_tx = ""
+				local c_list = sch_list2
+				local siz = c_list.len()
+				for (local j=0;j<siz;j++){
+					local c = coord(c_list[j].x, c_list[j].y)
+					local tile = my_tile(c)
+					local st_halt = tile.get_halt()
+					if(sch_cov_correct){
+						list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+						continue
+					}
+					if(tmpsw[j]==0){
+						list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
+					}
+					else{						
+						list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+					}
+				}
+				local c = coord(c_list[0].x, c_list[0].y)
 				local tile = my_tile(c)
-				local st_halt = tile.get_halt()
-				if(sch_cov_correct){
-					list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
-					continue
-				}
-				if(tmpsw[j]==0){
-					list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
-				}
-				else{						
-					list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
-				}
-			}
-			local c = coord(c_list[0].x, c_list[0].y)
-			local tile = my_tile(c)
-			text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
+				text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
 
-			text.list = list_tx
-			text.dep = c_dep2.href("("+c_dep2.tostring()+")")
-			text.veh = veh2_name
-			text.all_cov = d2_cnr
-			text.cir = cov_cir
-			text.load = veh2_load
-			text.wait = get_wait_time_text(veh2_wait)
-			text.nr = siz
-		}
-        if (pot2==1 && pot3==0 || !correct_cov){
-			text = ttextfile("chapter_05/04_3-3.txt")
-			text.tx = "<em>[3/3]</em>"
-			local list_tx = ""
-			local c_list = sch_list3
-			local siz = c_list.len()
-			for (local j=0;j<siz;j++){
-				local c = coord(c_list[j].x, c_list[j].y)
+				text.list = list_tx
+				text.dep = c_dep2.href("("+c_dep2.tostring()+")")
+				text.veh = translate(veh2_obj)
+				text.all_cov = d2_cnr
+				text.cir = cov_cir
+				text.load = veh2_load
+				text.wait = get_wait_time_text(veh2_wait)
+				text.nr = siz
+			}
+		    if (pot2==1 && pot3==0 || !correct_cov){
+				text = ttextfile("chapter_05/04_3-3.txt")
+				text.tx = "<em>[3/3]</em>"
+				local list_tx = ""
+				local c_list = sch_list3
+				local siz = c_list.len()
+				for (local j=0;j<siz;j++){
+					local c = coord(c_list[j].x, c_list[j].y)
+					local tile = my_tile(c)
+					local st_halt = tile.get_halt()
+					if(sch_cov_correct){
+						list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+						continue
+					}
+					if(tmpsw[j]==0){
+						list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
+					}
+					else{						
+						list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+					}
+				}
+				local c = coord(c_list[0].x, c_list[0].y)
 				local tile = my_tile(c)
-				local st_halt = tile.get_halt()
-				if(sch_cov_correct){
-					list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
-					continue
-				}
-				if(tmpsw[j]==0){
-					list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
-				}
-				else{						
-					list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
-				}
+				text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
+
+				text.list = list_tx
+				text.dep = c_dep3.href("("+c_dep3.tostring()+")")
+				text.ship = translate(veh3_obj)
+				text.load = veh3_load
+				text.wait = get_wait_time_text(veh3_wait)
+				text.nr = siz
 			}
-			local c = coord(c_list[0].x, c_list[0].y)
-			local tile = my_tile(c)
-			text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
+			break
+			case 5:
 
-			text.list = list_tx
-			text.dep = c_dep3.href("("+c_dep3.tostring()+")")
-			text.ship = veh3_name
-			text.load = veh3_load
-			text.wait = get_wait_time_text(veh3_wait)
-			text.nr = siz
-		}
-		break
-		case 5:
+			break
+			case 6:
 
-		break
-		case 6:
+			break
+			case 7:
+			break
 
-		break
-		case 7:
-		break
+			case 8:
+			break
 
-		case 8:
-		break
-
-		case 9:	
-        break
+			case 9:	
+		    break
 	    }
 
-        text.f1 = c_fab_list[0].href(""+f_name[0]+" ("+c_fab_list[0].tostring()+")")+""
-	    text.f2 = c_fab_list[1].href(""+f_name[1]+" ("+c_fab_list[1].tostring()+")")+""
-	    text.f3 = c_fab_list[2].href(""+f_name[2]+" ("+c_fab_list[2].tostring()+")")+""
-	    text.f4 = c_fab_list[3].href(""+f_name[3]+" ("+c_fab_list[3].tostring()+")")+""
+        text.f1 = c_fab_list[0].href(""+translate(f_name[0])+" ("+c_fab_list[0].tostring()+")")+""
+	    text.f2 = c_fab_list[1].href(""+translate(f_name[1])+" ("+c_fab_list[1].tostring()+")")+""
+	    text.f3 = c_fab_list[2].href(""+translate(f_name[2])+" ("+c_fab_list[2].tostring()+")")+""
+	    text.f4 = c_fab_list[3].href(""+translate(f_name[3])+" ("+c_fab_list[3].tostring()+")")+""
 
 		text.tool1 = tool_alias.inspe
 		text.tool2 = tool_alias.road
@@ -790,7 +788,7 @@ class tutorial.chapter_05 extends basic_chapter
 				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 				if (result!=null){
-					local name = veh1_name
+					local name = translate(veh1_obj)
 					local good = translate(f1_good)
 					return truck_result_message(result, name, good, veh, cov)
 				}
@@ -821,7 +819,7 @@ class tutorial.chapter_05 extends basic_chapter
 					result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 					if (result!=null){
-						local name = veh2_name
+						local name = translate(veh2_obj)
 						local good = translate(good_alias.mail)
 						return truck_result_message(result, name, good, veh, cov)
 					}
@@ -842,7 +840,7 @@ class tutorial.chapter_05 extends basic_chapter
 					result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 					if (result!=null){
-						local name = veh3_name
+						local name = translate(veh3_obj)
 						local good = translate(good_alias.mail)
 						return ship_result_message(result, name, good, veh, cov)
 					}
