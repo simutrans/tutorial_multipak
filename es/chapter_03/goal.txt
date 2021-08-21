@@ -9,7 +9,7 @@ En este capitulo los <em>Trenes</em> son protagonistas y con ellos aprenderemos 
 {step_01}
 </p>
 <p>
-{txtst_02}Paso B</em> - Construyendo un Túnel<br>
+{txtst_02}Paso B</em> - Conectando a los Proveedores<br>
 {step_02}
 </p>
 <p>
