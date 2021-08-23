@@ -5,6 +5,8 @@
  *  Can NOT be used in network game !
  */
 
+//Global coordinate for mark build tile
+currt_pos <- null
 
 class basic_chapter
 {        // chapter description : this is a placeholder class
@@ -435,7 +437,14 @@ class basic_chapter
 
 	function next_step()
 	{
-
+		if (currt_pos){
+			local t = tile_x(currt_pos.x,currt_pos.y,currt_pos.z)
+			local build = t.find_object(mo_building)
+			if(build){
+				build.unmark()
+				currt_pos = null
+			}
+		}
 		scr_jump = false
 		this.step++
 		persistent.step = this.step
@@ -936,6 +945,26 @@ class basic_chapter
 
 		}
 		return result
+	}
+
+	function jump_to_link_executed(pos)
+	{
+		if (currt_pos){
+			local t = tile_x(currt_pos.x,currt_pos.y,currt_pos.z)
+			local build = t.find_object(mo_building)
+			if(build){
+				build.unmark()
+				currt_pos = null
+			}
+		}
+		local t = tile_x(pos.x,pos.y,pos.z)
+		local build = t.find_object(mo_building)
+
+		if(build){
+			currt_pos = pos
+			build.mark()
+		}
+		return null
 	}
 
 	function tile_list(t_list, coord)
