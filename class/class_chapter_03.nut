@@ -85,9 +85,9 @@ class tutorial.chapter_03 extends basic_chapter
 	//Segundo tramo de rieles
 	//--------------------------------------------------------------------------------------------
 	st2_way_lim = {a = coord(96,151), b = coord(96,155)}		//Limites de la via para la estacion
-	bord2_lim = {a = coord(95,155), b = coord(102,160)}			//Marca area con "X"
+	bord2_lim = {a = coord(95,155), b = coord(103,160)}			//Marca area con "X"
 	label2_lim = coord(96,155)									//Indica el final de un tramo
-	c_way3 = {a = coord3d(102,158,0), b = coord3d(96,151,1)}	//Inicio y Fin de la via (fullway)
+	c_way3 = {a = coord3d(106,158,-1), b = coord3d(96,151,1)}	//Inicio y Fin de la via (fullway)
 
 	//Estaciones de la Fabrica
 	st2_list = [coord(96,151), coord(96,152), coord(96,153)]
@@ -713,7 +713,7 @@ class tutorial.chapter_03 extends basic_chapter
 					else {
 						tile.remove_object(player_x(0), mo_label)
 
-						if (my_tile(c_brge1.a).find_object(mo_bridge)){
+						if (my_tile(c_brge1.b).find_object(mo_bridge)){
 							coorbord = 0
 							pot1=1
 						}				
