@@ -1,5 +1,5 @@
 <p>
-La ciudad {city1} necesita diseñar una red de autobuses que permita mover pasajeros hacia la estacion de tren: {name}.
+La ciudad {city} necesita diseñar una red de autobuses que permita mover pasajeros hacia la estacion de tren: {name}.
 </p>
 <p>
 <em>[1]</em> Coloca una parada de autobús en la posición {stop}.<br>
