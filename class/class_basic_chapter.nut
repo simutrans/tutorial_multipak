@@ -437,14 +437,6 @@ class basic_chapter
 
 	function next_step()
 	{
-		if (currt_pos){
-			local t = tile_x(currt_pos.x,currt_pos.y,currt_pos.z)
-			local build = t.find_object(mo_building)
-			if(build){
-				build.unmark()
-				currt_pos = null
-			}
-		}
 		scr_jump = false
 		this.step++
 		persistent.step = this.step

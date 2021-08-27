@@ -8,7 +8,7 @@ La ciudad {city} necesita diseñar una red de autobuses que permita mover pasajer
 <em>[4]</em> Asegúrate de que todos los autobuses estén conectados a la estación: {name}.
 </p>
 <p>
-Se avanza al siguiete paso, cuando se transporten más de <em>{load}</em> pasajeros hacia {st1_nam} en un mes</em>.
+Se avanza al siguiete paso, cuando se transporten más de <em>{load}</em> pasajeros hacia {name} en un mes</em>.
 </p>
 <p>
 <st>Se han trasportado este mes:</st> <em>{get_load}/{load}</em>
