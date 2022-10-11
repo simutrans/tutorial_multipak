@@ -1735,7 +1735,7 @@ class tutorial.chapter_03 extends basic_chapter
 							else if (slope==0){
 								if (pos.z == (end_lvl_z))
 									return translate("The tunnel is already at the correct level")+" (-"+end_lvl_z+")."
-								return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+")." 
+								return translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)" 
 							}
 						}
 						else return coorbord!=0 && slope==0? translate("Modify the terrain here")+" ("+coorbord.tostring()+")." : result
@@ -2385,8 +2385,7 @@ class tutorial.chapter_03 extends basic_chapter
 				if (pot0==0){
 					local coora = coord3d(c_way6.a.x, c_way6.a.y, c_way6.a.z)
 					local coorb = coord3d(c_way6.b.x, c_way6.b.y, c_way6.b.z)
-					local t = command_x(tool_build_way)	
-					t.set_flags(2)					
+					local t = command_x(tool_build_way)			
 					local err = t.work(player_x(1), coora, coorb, sc_way_name)
 					pot0=1
 				}
