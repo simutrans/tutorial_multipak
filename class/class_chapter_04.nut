@@ -750,10 +750,10 @@ class tutorial.chapter_04 extends basic_chapter
 				local name = ship1_name_obj
 				local cov_nr = d1_cnr  //Max convoys nr in depot
 
-				comm_script = true 
+				comm_script = true
 				if (current_cov> ch4_cov_lim1.a && current_cov< ch4_cov_lim1.b){
 					local sched = schedule_x(gl_wt, [])
-					local c_list = sch_list1
+					local c_list = is_water_entry(sch_list1)
 					for(local j =0;j<c_list.len();j++){
 						if(j == 0)
 							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), ship1_load, ship1_wait))
@@ -881,7 +881,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local cov_nr = 1  //Max convoys nr in depot
 
 				local sched = schedule_x(gl_wt, [])
-				local c_list = sch_list3
+				local c_list = is_water_entry(sch_list3)
 				for(local j =0;j<c_list.len();j++){
 					if(j == 0)
 						sched.entries.append(schedule_entry_x(my_tile(c_list[j]), ship2_load, ship2_wait))
@@ -900,7 +900,6 @@ class tutorial.chapter_04 extends basic_chapter
 		}
 		return null
 	}
-	
 	function set_all_rules(pl) 
 	{
 		local forbid =	[	4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,

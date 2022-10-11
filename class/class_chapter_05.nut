@@ -47,7 +47,7 @@ class tutorial.chapter_05 extends basic_chapter
 	
 	//Para el Camion
 	sch_list1 = [coord(132,233), coord(131,209)]
-    veh1_obj = "Sandtransporter"
+    veh1_obj = "Kohletransporter"
 	veh1_load = 100
 	veh1_wait = 0
 	d1_cnr = 10
@@ -78,7 +78,7 @@ class tutorial.chapter_05 extends basic_chapter
 	d2_cnr = 3
 
 	//Para el barco
-	sch_list3 = [coord(134,189), coord(168,189)]
+	sch_list3 = [coord(133,189), coord(168,189)]
     veh3_obj = "Postschiff"
 	veh3_load = 100
 	veh3_wait = 42282
@@ -89,7 +89,7 @@ class tutorial.chapter_05 extends basic_chapter
 	sc_way_name = "asphalt_road"
 	sc_station_name = "CarStop"
 	sc_dep_name = "CarDepot"
-	sc_trail_name = "Sandanhaenger"
+	sc_trail_name = "Kohleanhaenger"
 	sc_trail_nr = 1
 
 	sc_power_name = "Powerline"
@@ -1074,7 +1074,7 @@ class tutorial.chapter_05 extends basic_chapter
 					comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
 
 					local sched = schedule_x(wt_water, [])
-					local c_list = sch_list3
+					local c_list = is_water_entry(sch_list3)
 					local siz = c_list.len()
 					for(local j = 0;j<siz;j++){
 						if(j==0)

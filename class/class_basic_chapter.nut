@@ -158,7 +158,6 @@ class basic_chapter
 		}
 		return null
 	}
-
 	//----------------------------------------------------------------------------------------------------------------
 
 	//-------------------------
@@ -3060,6 +3059,29 @@ class basic_chapter
 				return translate("The convoy is not correct.")
 				break
 		}
+	}
+
+	function is_water_entry(list)
+	{
+		local siz = list.len()
+		local nw_list = array(siz)
+
+		for (local j = 0;j<siz;j++){
+			local tile = my_tile(list[j])
+			local buil = tile.find_object(mo_building)
+			if (buil) {
+				local t_list = buil.get_tile_list();
+				foreach(t in t_list){
+					if (t.is_water()){
+						nw_list[j] = coord(t.x , t.y)
+						break
+					}
+				}
+			}
+			else nw_list[j] = list[j]
+		}
+
+		return nw_list
 	}
 }
 
