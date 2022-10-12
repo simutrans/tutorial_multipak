@@ -830,9 +830,10 @@ class tutorial.chapter_04 extends basic_chapter
 					local cov_nr = d2_cnr  //Max convoys nr in depot
 
 					comm_script = true 
+					local c_list = is_water_entry(sch_list2)
 					local sched = schedule_x(gl_wt, [])
-					sched.entries.append(schedule_entry_x(my_tile(sch_list1[0]), ship1_load, ship1_wait))
-					sched.entries.append(schedule_entry_x(my_tile(sch_list2[1]), 0, 0))
+					sched.entries.append(schedule_entry_x(my_tile(c_list[0]), ship1_load, ship1_wait))
+					sched.entries.append(schedule_entry_x(my_tile(c_list[1]), 0, 0))
 					local hold_cov = current_cov
 					for (local j = hold_cov; j<(cov_nr+hold_cov) && correct_cov; j++){
 						if (!comm_set_convoy(cov_nr, c_depot, name))

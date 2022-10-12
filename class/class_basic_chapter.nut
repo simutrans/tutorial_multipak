@@ -3069,7 +3069,8 @@ class basic_chapter
 		for (local j = 0;j<siz;j++){
 			local tile = my_tile(list[j])
 			local buil = tile.find_object(mo_building)
-			if (buil) {
+			local way = tile.find_object(mo_way)
+			if (buil && !way) {
 				local t_list = buil.get_tile_list();
 
 				local area = get_tiles_near_stations(t_list)
@@ -3077,13 +3078,15 @@ class basic_chapter
 					local t_water = my_tile(area[i])
 
 					if(t_water.is_water()){
+						local buil = t_water.find_object(mo_building)
 						nw_list[j] = coord(t_water.x , t_water.y)
-						break
+						if(buil)		
+							break
 					}
-
 				}
-
 			}
+			else
+				nw_list[j] = list[j];
 		}
 
 		return nw_list
