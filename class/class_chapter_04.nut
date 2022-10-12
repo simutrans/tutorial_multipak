@@ -740,6 +740,7 @@ class tutorial.chapter_04 extends basic_chapter
 				break;
 
 			case 4:
+				// Para enrutar barcos
 				local pl = player_x(0)
 				local c_depot = my_tile(c_dep1)
 
@@ -808,6 +809,7 @@ class tutorial.chapter_04 extends basic_chapter
 				//Para el cuarto muelle
 				if (pot0==1 && pot1==0){
 					local t = my_tile(sch_list2[1])
+					t.unmark()
 					local label = t.find_object(mo_label)
 					if (label){
 						t.remove_object(player_x(1), mo_label)
@@ -855,14 +857,15 @@ class tutorial.chapter_04 extends basic_chapter
 					local t = command_x(tool_build_depot)			
 					local err = t.work(player_x(0), t_dep, sc_dep_name)
 				}
-				//Para los muelles mercancias
+				//Para los muelles Pasajeros
 				local c_list = dock_list2
 				local name = sc_dock_name3
 				for(local j =0;j<c_list.len();j++){
-					local tile = my_tile(c_list[j])
-					tile.remove_object(player_x(0), mo_label)
+					local t = my_tile(c_list[j])
+					t.unmark()
+					t.remove_object(player_x(0), mo_label)
 					local tool = command_x(tool_build_station)			
-					local err = tool.work(player_x(0), tile, name)
+					local err = tool.work(player_x(0), t, name)
 					glsw[j]=1
 				}
 				return null

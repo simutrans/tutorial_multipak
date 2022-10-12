@@ -2186,6 +2186,8 @@ class tutorial.chapter_03 extends basic_chapter
 				if(pot0==0){
 					local t_start = my_tile(c_dep1_lim.a)
 					local t_end = my_tile(c_dep1_lim.b)
+					t_start.unmark()
+					t_end.unmark()
 					t_start.remove_object(player_x(0), mo_label)
 					local t = command_x(tool_build_way)			
 					local err = t.work(player_x(1), t_start, t_end, sc_way_name)
@@ -2194,10 +2196,10 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 
 				if(pot1==0){
-					local tile = my_tile(c_dep1)
-					tile.remove_object(player_x(0), mo_label)
-					local t = command_x(tool_build_depot)
-					local err = t.work(player_x(0), tile, sc_dep_name)
+					local t = my_tile(c_dep1)
+					t.remove_object(player_x(0), mo_label)
+					local tool = command_x(tool_build_depot)
+					tool.work(player_x(0), t, sc_dep_name)
 					pot1=1
 				}
 				if(pot1==1 && pot2==0){
@@ -2334,16 +2336,18 @@ class tutorial.chapter_03 extends basic_chapter
 				if(pot0==0){
 					local t_start = my_tile(c_dep2_lim.b)
 					local t_end = my_tile(c_dep2_lim.a)
+					t_start.unmark()
+					t_end.unmark()
 					t_end.remove_object(player_x(0), mo_label)
 					local t = command_x(tool_build_way)			
-					local err = t.work(player_x(1), t_start, t_end, sc_way_name)
+					t.work(player_x(1), t_start, t_end, sc_way_name)
 
 					pot0=1	
 				}
 
 				if(pot0==1 && pot1==0){
-					local t2 = command_x(tool_build_depot)
-					local err2 = t2.work(player_x(0), my_tile(c_dep2), sc_dep_name)
+					local t = command_x(tool_build_depot)
+					t.work(player_x(0), my_tile(c_dep2), sc_dep_name)
 					pot1=1
 				}
 				if(pot1==1 && pot2==0){
@@ -2393,7 +2397,8 @@ class tutorial.chapter_03 extends basic_chapter
 				if (pot0==1 && pot1==0){
 					local t_start = my_tile(c_brge3.a)
 					local t_end = my_tile(c_brge3.b)
-
+					t_start.unmark()
+					t_end.unmark()
 					t_start.remove_object(player_x(0), mo_label)
 
 					local t = command_x(tool_build_bridge)

@@ -1113,12 +1113,12 @@ class tutorial.chapter_02 extends basic_chapter
 			case 3:
 
 				for(local j=0;j<sch_list1.len();j++){
-					local tile = my_tile(sch_list1[j])
-					local way = tile.find_object(mo_way)
-					tile.remove_object(player_x(1), mo_label)
+					local t = my_tile(sch_list1[j])
+					local way = t.find_object(mo_way)
+					t.remove_object(player_x(1), mo_label)
 					local tool = command_x(tool_build_station)			
-					local err = tool.work(player_x(0), tile, sc_station_name)
-
+					local err = tool.work(player_x(0), t, sc_station_name)
+					t.unmark()
 					if (way.is_marked()){
 						way.unmark()
 					}
@@ -1217,12 +1217,12 @@ class tutorial.chapter_02 extends basic_chapter
 				comm_script = true
 				if (pot1==0){
 					for(local j=0;j<sch_list3.len();j++){
-						local tile = my_tile(sch_list3[j])
-						local way = tile.find_object(mo_way)
-						tile.remove_object(player_x(1), mo_label)
+						local t = my_tile(sch_list3[j])
+						local way = t.find_object(mo_way)
+						t.remove_object(player_x(1), mo_label)
 						local tool = command_x(tool_build_station)			
-						local err = tool.work(player_x(0), tile, sc_station_name)
-
+						local err = tool.work(player_x(0), t, sc_station_name)
+						t.unmark()
 						if (way.is_marked()){
 							way.unmark()
 						}
