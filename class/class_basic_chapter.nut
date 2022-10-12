@@ -3071,14 +3071,19 @@ class basic_chapter
 			local buil = tile.find_object(mo_building)
 			if (buil) {
 				local t_list = buil.get_tile_list();
-				foreach(t in t_list){
-					if (t.is_water()){
-						nw_list[j] = coord(t.x , t.y)
+
+				local area = get_tiles_near_stations(t_list)
+				for(local i=0;i<area.len();i++){
+					local t_water = my_tile(area[i])
+
+					if(t_water.is_water()){
+						nw_list[j] = coord(t_water.x , t_water.y)
 						break
 					}
+
 				}
+
 			}
-			else nw_list[j] = list[j]
 		}
 
 		return nw_list
