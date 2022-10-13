@@ -2415,19 +2415,31 @@ class tutorial.chapter_03 extends basic_chapter
 					pot2=1					
 				}
 				if (pot2==1 && pot3==0){
+					local siz = (start_tunn.x)-(c_tun_list[0].x)-(1)
+					local opt = 1 //Incrementa x
+					local t = tile_x(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
+					clean_tunn(t, (siz), opt)
 					local t_tun = command_x(tool_build_tunnel)
 					local c_start = c_tunn2.a 
 					local c_end = coord3d(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
 					t_tun.work(player_x(1), c_start, c_end, sc_tunn_name)
 
+				}
+				if (pot3==1 && pot4==0){
+					local t_tun = command_x(tool_build_tunnel)
 					local c_list =	c_tun_list
 					local t_start = my_tile(start_tunn)
 					for(local j = 0; j<(c_list.len()-1);j++){
 						local c = coord3d(c_list[j].x, c_list[j].y, (t_start.z+j))
 						t_tun.work(player_x(1), t_start, c, sc_tunn_name)
+						if(!square_x(c.x, c.y).get_tile_at_height(c.z)){
+							c.z--
+							command_x.set_slope(player_x(1), c, slope.all_up_slope)
+							c.z++
+						}
 						command_x.set_slope(player_x(1), c, slope.all_up_slope)
 					}
-					t_tun.work(player_x(1), c_start, c_tunn2.b, sc_tunn_name)
+					t_tun.work(player_x(1), c_tunn2.a , c_tunn2.b, sc_tunn_name)
 				}
 				
 				return null
@@ -2572,6 +2584,24 @@ class tutorial.chapter_03 extends basic_chapter
 		}
 
 		return null
+	}
+
+	function clean_tunn(t, siz, opt) {
+		local tool = command_x(tool_remover)
+
+		if (opt==1) {
+			for (local j = 0; j<siz;j++){
+				t.x++
+				tool.work(player_x(1), t, "")
+
+			}
+		}
+		else if (opt==2) {
+			for (local j = 0; j<siz;j++){
+				t.y++
+				tool.work(player_x(1), t, "")
+			}
+		}
 	}
 	
 	function set_all_rules(pl) {
