@@ -802,6 +802,15 @@ class tutorial.chapter_05 extends basic_chapter
 				}
 			break
 			case 4:
+				if(comm_script) {
+					cov_save[current_cov]=convoy
+					id_save[current_cov]=convoy.id
+					gcov_nr++
+					persistent.gcov_nr = gcov_nr
+					current_cov++
+					gall_cov++
+					return null
+				}
 				if (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b){
 					local cov = d2_cnr
 					local veh = 1
@@ -858,8 +867,10 @@ class tutorial.chapter_05 extends basic_chapter
 
 	function script_text()
 	{
+		comm_script = false
 		switch (this.step) {
 			case 1:
+				gui.add_message("hi")
 				if(pot0==0) pot0=1
 
 				return null
@@ -883,7 +894,7 @@ class tutorial.chapter_05 extends basic_chapter
 					local err = t.work(player_x(0), t_start, t_end, sc_way_name)
 
 					t = command_x(tool_build_depot)			
-					err = t.work(player_x(0), t_start, sc_dep_name)
+					t.work(player_x(0), t_start, sc_dep_name)
 				}
 
 				if (pot1==0){
@@ -901,7 +912,13 @@ class tutorial.chapter_05 extends basic_chapter
 					local pl = player_x(0)
 					local c_depot = my_tile(c_dep1)
 
-					comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+					try {
+						comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+					}
+					catch(ev) {
+						return null
+					}
+
 
 					local depot = c_depot.find_object(mo_depot_road)
 					local good_nr = good_desc_x(f1_good).get_catg_index()  //Coal
@@ -927,7 +944,6 @@ class tutorial.chapter_05 extends basic_chapter
 					}
 					local convoy = depot.get_convoy_list()
 					comm_start_convoy(pl, wt_road, sched, convoy, depot)
-					comm_script = false
 				}
 
 			break
@@ -1068,7 +1084,7 @@ class tutorial.chapter_05 extends basic_chapter
 					comm_script = false
 				}
 
-				else if (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b){
+				if (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b){
 					local pl = player_x(0)
 					local c_depot = my_tile(c_dep3)
 					comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito

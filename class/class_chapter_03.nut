@@ -1962,6 +1962,8 @@ class tutorial.chapter_03 extends basic_chapter
 					id_save[current_cov]=convoy.id
 					gcov_nr++
 					persistent.gcov_nr = gcov_nr
+					current_cov++
+					gall_cov++
 					return null
 				}
 
@@ -1999,6 +2001,8 @@ class tutorial.chapter_03 extends basic_chapter
 					id_save[current_cov]=convoy.id
 					gcov_nr++
 					persistent.gcov_nr = gcov_nr
+					current_cov++
+					gall_cov++
 					return null
 				}
 
@@ -2210,8 +2214,8 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 			case 5:
 				local wt = wt_rail
-				comm_script = true
 				if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
+					comm_script = true
 					local pl = player_x(0)
 					local c_depot = my_tile(c_dep1)
 
@@ -2238,8 +2242,9 @@ class tutorial.chapter_03 extends basic_chapter
 
 					comm_start_convoy(pl, wt, sched, convoy, depot)
 					pot1=1
+					comm_script = false
 				}
-				comm_script = false
+
 
 				return null
 				break
@@ -2277,7 +2282,13 @@ class tutorial.chapter_03 extends basic_chapter
 					t_start.remove_object(player_x(0), mo_label)
 
 					local t = command_x(tool_build_tunnel)
-					local err = t.work(player_x(1), t_start, sc_tunn_name)
+					try {
+						t.work(player_x(1), t_start, sc_tunn_name)
+					}
+					catch(ev) {
+						return null
+					}
+
 				}
 				//Segundo tramo de rieles
 				if (pot2==0){
@@ -2351,9 +2362,9 @@ class tutorial.chapter_03 extends basic_chapter
 					pot1=1
 				}
 				if(pot1==1 && pot2==0){
-					comm_script = true
 					local wt = wt_rail
 					if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
+						comm_script = true
 						local pl = player_x(0)
 						local c_depot = my_tile(c_dep2)
 
@@ -2377,9 +2388,10 @@ class tutorial.chapter_03 extends basic_chapter
 						sched.entries.append(schedule_entry_x(my_tile(st4_list[0]), 0, 0))
 
 						comm_start_convoy(pl, wt, sched, convoy, depot)
+						comm_script = false	
+						pot3=1
 					}
-					comm_script = false	
-					pot3=1			
+
 				}
 
 				return null
@@ -2423,6 +2435,7 @@ class tutorial.chapter_03 extends basic_chapter
 					local c_start = c_tunn2.a 
 					local c_end = coord3d(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
 					t_tun.work(player_x(1), c_start, c_end, sc_tunn_name)
+					pot3 = 1
 
 				}
 				if (pot3==1 && pot4==0){
@@ -2541,8 +2554,6 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 			
 			case 11:
-
-				comm_script = true
 				local wt = wt_rail
 				local pl = player_x(0)
 				local c_depot = my_tile(c_dep3)
@@ -2564,7 +2575,9 @@ class tutorial.chapter_03 extends basic_chapter
 				local wag_name = sc_wag3_name
 				local wag_nr = sc_wag3_nr
 				local wag = true
+				gui.add_message(""+current_cov +" .. "+ch3_cov_lim3.a+" ... "+ ch3_cov_lim3.b)
 				if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
+					comm_script = true
 					for (local j = 0; j<cov_nr;j++){
 						if (!comm_set_convoy(0, c_depot, name))
 							return 0
@@ -2575,10 +2588,9 @@ class tutorial.chapter_03 extends basic_chapter
 
 						local convoy = depot.get_convoy_list()
 						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
-					}			
+					}
+					comm_script = false		
 				}
-				comm_script = false
-
 				return null
 				break
 		}

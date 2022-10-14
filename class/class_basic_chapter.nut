@@ -1836,7 +1836,8 @@ class basic_chapter
 	}
 
 	function all_control(result, wt, way, ribi, tool_id, pos, coor){
-
+		gui.add_message("id" + pos.tostring())
+		if(coorbord==0) return "lol"
 		if ((tool_id==tool_remove_way)||(tool_id==tool_remover)){
 
 			if (way && way.get_waytype() != wt)
