@@ -870,7 +870,6 @@ class tutorial.chapter_05 extends basic_chapter
 		comm_script = false
 		switch (this.step) {
 			case 1:
-				gui.add_message("hi")
 				if(pot0==0) pot0=1
 
 				return null

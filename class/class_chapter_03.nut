@@ -2575,7 +2575,6 @@ class tutorial.chapter_03 extends basic_chapter
 				local wag_name = sc_wag3_name
 				local wag_nr = sc_wag3_nr
 				local wag = true
-				gui.add_message(""+current_cov +" .. "+ch3_cov_lim3.a+" ... "+ ch3_cov_lim3.b)
 				if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
 					comm_script = true
 					for (local j = 0; j<cov_nr;j++){
