@@ -42,7 +42,6 @@ class tutorial.chapter_03 extends basic_chapter
 	chapter_name  = "Riding the Rails"
 	chapter_coord = coord(93,153)
 	startcash     = 50000000	   				// pl=0 startcash; 0=no reset
-	comm_script = false
 
 	gl_wt = wt_rail
 
@@ -237,6 +236,7 @@ class tutorial.chapter_03 extends basic_chapter
 
 	//Script
 	//----------------------------------------------------------------------------------
+	comm_script = false
 	sc_way_name = "concrete_sleeper_track"
 	sc_tunn_name = "RailTunnel"
 	sc_bridge_name = "ClassicRail"
@@ -1941,7 +1941,8 @@ class tutorial.chapter_03 extends basic_chapter
 				local time = loc3_wait
 				local c_list = sch_list
 				local siz = c_list.len()
-				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+				local line = true
+				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
 				if(result == null){
 					local line_name = line1_name
 					update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -2033,6 +2034,7 @@ class tutorial.chapter_03 extends basic_chapter
 			break
 
 			case 11:
+			if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
 				if (comm_script){
 					cov_save[current_cov]=convoy
 					id_save[current_cov]=convoy.id
@@ -2042,13 +2044,9 @@ class tutorial.chapter_03 extends basic_chapter
 					gall_cov++
 					return null
 				}
-
-				local wt = gl_wt
-				if ((depot.x != c_dep3.x)||(depot.y != c_dep3.y))
-					return translate("You must select the deposit located in")+" ("+c_dep3.tostring()+")."	
 				local cov = d3_cnr
 				local veh = 8
-				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
+				local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
 				local name = loc3_name_obj
 				local st_tile = loc3_tile
 				local is_st_tile = true
@@ -2059,22 +2057,25 @@ class tutorial.chapter_03 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(sch_list[0], depot, id_start, id_end)
 				local cov_list = depot.get_convoy_list()
 				cov -= cir_nr
-				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile, is_st_tile)
 
+				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 				if (result!=null){
-					local name = translate(loc3_name_obj)
-					local good = translate("Passengers")
-					return train_result_message(result, name, good, veh, cov, st_tile)
+					reset_tmpsw()
+					local name = translate(name)
+					return bus_result_message(result, name, veh, cov)
 				}
 
-			if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
-					local selc = 0
-					local load = loc3_load
-					local time = loc3_wait
-					local c_list = sch_list
-					local siz = c_list.len()
-					return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
-				}
+				local selc = 0
+				local load = loc3_load
+				local time = loc3_wait
+				local c_list = sch_list
+				local siz = c_list.len()
+
+				result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+				if(result == null)
+					reset_tmpsw()
+				return result
+			}
 			break
 
 		}
@@ -2427,10 +2428,10 @@ class tutorial.chapter_03 extends basic_chapter
 					pot2=1					
 				}
 				if (pot2==1 && pot3==0){
-					local siz = (start_tunn.x)-(c_tun_list[0].x)-(1)
+					local siz = (start_tunn.x)-(c_tun_list[0].x)
 					local opt = 1 //Incrementa x
 					local t = tile_x(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
-					clean_tunn(t, (siz), opt)
+					clean_track_segment(t, siz, opt)
 					local t_tun = command_x(tool_build_tunnel)
 					local c_start = c_tunn2.a 
 					local c_end = coord3d(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
@@ -2561,58 +2562,48 @@ class tutorial.chapter_03 extends basic_chapter
 
 				local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
-				//Set schedule for all convoys-------------------------------------------------------------
-				local sched = schedule_x(wt, [])
-				for(local j=0;j<sch_list.len();j++){
-					if (j==0)
-						sched.entries.append(schedule_entry_x(my_tile(sch_list[j]), loc3_load, loc3_wait))
-					else
-						sched.entries.append(schedule_entry_x(my_tile(sch_list[j]), 0, 0))
-				}
-
-				local cov_nr = d3_cnr
-				local name = loc3_name_obj
-				local wag_name = sc_wag3_name
-				local wag_nr = sc_wag3_nr
-				local wag = true
 				if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
 					comm_script = true
-					for (local j = 0; j<cov_nr;j++){
-						if (!comm_set_convoy(0, c_depot, name))
+					//Set Schedule
+					local sched = schedule_x(gl_wt, [])
+					local c_list = sch_list
+					local sch_siz = c_list.len()
+					local load = loc3_load
+					local time = loc3_wait
+					for(local j=0;j<sch_siz;j++){
+						if (j==0)
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, time))
+						else
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
+					}
+
+					// Set and run convoys
+					local good_nr = 0 //Passengers
+					local name = loc3_name_obj
+					local cov_nr = d3_cnr  //Max convoys nr in depot
+					local wag_name = sc_wag3_name
+					local wag_nr = sc_wag3_nr
+					local wag = true
+					for (local j = current_cov; j>ch3_cov_lim3.a && j<ch3_cov_lim3.b && correct_cov; j++){
+						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
 						for (local count = 0;count<wag_nr;count++){
 							if (!comm_set_convoy(0, c_depot, wag_name, wag))
 								return 0
 						}
-
+						local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 						local convoy = depot.get_convoy_list()
+						if (convoy.len()==0) continue
+
 						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 					}
-					comm_script = false		
+					comm_script = false
 				}
 				return null
 				break
 		}
 
 		return null
-	}
-
-	function clean_tunn(t, siz, opt) {
-		local tool = command_x(tool_remover)
-
-		if (opt==1) {
-			for (local j = 0; j<siz;j++){
-				t.x++
-				tool.work(player_x(1), t, "")
-
-			}
-		}
-		else if (opt==2) {
-			for (local j = 0; j<siz;j++){
-				t.y++
-				tool.work(player_x(1), t, "")
-			}
-		}
 	}
 	
 	function set_all_rules(pl) {

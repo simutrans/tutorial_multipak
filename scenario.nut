@@ -112,7 +112,7 @@ function script_text()
 		gui.add_message(""+translate("Advance not allowed"))
 		return null
 	}
-	if(/*scr_jump*/true && persistent.chapter<6){
+	if(/*scr_jump*/ persistent.chapter<7){
 		//gui.add_message(""+persistent.chapter)
 		local result = null
 		scr_jump = false

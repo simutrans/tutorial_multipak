@@ -927,7 +927,6 @@ class tutorial.chapter_05 extends basic_chapter
 					local sched = schedule_x(wt_road, [])
 					sched.entries.append(schedule_entry_x(my_tile(sch_list1[0]), veh1_load, veh1_wait))
 					sched.entries.append(schedule_entry_x(my_tile(sch_list1[1]), 0, 0))
-					local hold_cov = current_cov
 
 					local extender_name = sc_trail_name
 					local siz = sc_trail_nr
@@ -1070,7 +1069,6 @@ class tutorial.chapter_05 extends basic_chapter
 							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
 					local depot = c_depot.find_object(mo_depot_road)
-					local hold_cov = current_cov
 					local name = veh2_obj
 					local cov_nr = d2_cnr  //Max convoys nr in depot
 					comm_script = true

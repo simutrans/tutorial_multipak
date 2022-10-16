@@ -339,7 +339,7 @@ class tutorial.chapter_02 extends basic_chapter
 				local st_halt1 = my_tile(pub_st1).get_halt()
 				local st_halt2 = my_tile(pub_st2).get_halt()
 				text.st1 = pub_st1.href(st_halt1.get_name()+" ("+pub_st1.tostring()+")")
-				text.st2 = pub_st2.href(st_halt2.get_name()+" ("+pub_st2.tostring()+")")
+				//text.st2 = pub_st2.href(st_halt2.get_name()+" ("+pub_st2.tostring()+")")
 				text.prce = money_to_string(price)
 				break
 		}
@@ -942,10 +942,11 @@ class tutorial.chapter_02 extends basic_chapter
 			case 4:
 				local selc = 0
 				local load = veh1_load
-				local wait = veh1_wait
+				local time = veh1_wait
 				local c_list = sch_list1
-				local sch_siz = c_list.len()
-				result = set_schedule_list(result, pl, schedule, nr, selc, load, wait, c_list, sch_siz)
+				local siz = c_list.len()
+				local line = true
+				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
 				if(result == null){
 					local line_name = line1_name //"Test 1"
 					update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -956,10 +957,11 @@ class tutorial.chapter_02 extends basic_chapter
 			case 6:
 				local selc = 0
 				local load = veh1_load
-				local wait = veh1_wait
+				local time = veh1_wait
 				local c_list = sch_list2
-				local sch_siz = c_list.len()
-				result = set_schedule_list(result, pl, schedule, nr, selc, load, wait, c_list, sch_siz)
+				local siz = c_list.len()
+				local line = true
+				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
 				if(result == null){
 					local line_name = line2_name //"Test 2"
 					update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -968,11 +970,12 @@ class tutorial.chapter_02 extends basic_chapter
 			break
 			case 7:
 				local load = veh1_load
-				local wait = veh1_wait
+				local time = veh1_wait
 				local c_list = sch_list3
-				local sch_siz = c_list.len()
-				local selc = sch_siz-1
-				result = set_schedule_list(result, pl, schedule, nr, selc, load, wait, c_list, sch_siz)
+				local siz = c_list.len()
+				local selc = siz-1
+				local line = true
+				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
 				if(result == null){
 					local line_name = line3_name //"Test 3"
 					update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -1010,11 +1013,12 @@ class tutorial.chapter_02 extends basic_chapter
 					}
 					local selc = 0
 					local load = veh1_load
-					local wait = veh1_wait
+					local time = veh1_wait
 					local c_list = sch_list1 
 					local siz = c_list.len()
-					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz)
-					reset_tmpsw()
+					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+					if(result == null)
+						reset_tmpsw()
 					return result
 				}
 			break
@@ -1043,12 +1047,13 @@ class tutorial.chapter_02 extends basic_chapter
 
 					local selc = 0
 					local load = veh1_load
-					local wait = veh1_wait
+					local time = veh1_wait
 					local c_list = sch_list2
 					local siz = c_list.len()
 					local line = true
-					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)
-					reset_tmpsw()
+					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line)
+					if(result == null)
+						reset_tmpsw()
 					return result		
 				}
 			break
@@ -1074,12 +1079,13 @@ class tutorial.chapter_02 extends basic_chapter
 					}
 
 					local load = veh1_load
-					local wait = veh1_wait
+					local time = veh1_wait
 					local c_list = sch_list3
 					local siz = c_list.len()
 					local selc = siz-1
-					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz)
-					reset_tmpsw()
+					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+					if(result == null)
+						reset_tmpsw()
 					return result
 				}
 			break
@@ -1150,10 +1156,10 @@ class tutorial.chapter_02 extends basic_chapter
 					local convoy = depot.get_convoy_list()
 					local sched = schedule_x(gl_wt, [])
 					local load = veh1_load
-					local wait = veh1_wait
+					local time = veh1_wait
 					for(local j=0;j<sch_siz;j++){
 						if (j==0)
-							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, wait))
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, time))
 						else
 							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
@@ -1178,7 +1184,6 @@ class tutorial.chapter_02 extends basic_chapter
 				break
 
 			case 6:
-				comm_script = true
 				local pl = player_x(0)
 				local c_depot = my_tile(c_dep)
 
@@ -1191,7 +1196,7 @@ class tutorial.chapter_02 extends basic_chapter
 					local c_list = sch_list2
 					local sch_siz = c_list.len()
 					local load = veh1_load
-					local wait = veh1_wait
+					local time = veh1_wait
 					for (local j = current_cov; j>ch2_cov_lim2.a && j<ch2_cov_lim2.b && correct_cov; j++){
 						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
@@ -1201,14 +1206,13 @@ class tutorial.chapter_02 extends basic_chapter
 						local sched = schedule_x(gl_wt, [])
 						for(local i=0;i<sch_siz;i++){
 							if (i==0)
-								sched.entries.append(schedule_entry_x(my_tile(c_list[i]), load, wait))
+								sched.entries.append(schedule_entry_x(my_tile(c_list[i]), load, time))
 							else
 								sched.entries.append(schedule_entry_x(my_tile(c_list[i]), 0, 0))
 						}
 						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 					}
 				}
-				comm_script = false
 				return null
 				break
 
@@ -1250,11 +1254,11 @@ class tutorial.chapter_02 extends basic_chapter
 					local c_list = sch_list3
 					local sch_siz = c_list.len()
 					local load = veh1_load
-					local wait = veh1_wait
+					local time = veh1_wait
 
 					for(local j=0;j<sch_siz;j++){
 						if (j==sch_siz-1)
-							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, wait))
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, time))
 						else
 							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
@@ -1267,10 +1271,9 @@ class tutorial.chapter_02 extends basic_chapter
 
 			case 8:
 				if (pot0==0){
-					local t1 = command_x(tool_make_stop_public)			
-					local err1 = t1.work(player_x(0), my_tile(pub_st1), "")
-					local t2 = command_x(tool_make_stop_public)			
-					local err2 = t2.work(player_x(0), my_tile(pub_st2), "")
+					local t = command_x(tool_make_stop_public)			
+					t.work(player_x(0), my_tile(pub_st1), "")
+					//t.work(player_x(0), my_tile(pub_st2), "")
 				}
 				return null
 				break
