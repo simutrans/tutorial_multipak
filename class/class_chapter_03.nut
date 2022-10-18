@@ -2044,6 +2044,8 @@ class tutorial.chapter_03 extends basic_chapter
 					gall_cov++
 					return null
 				}
+				if ((depot.x != c_dep3.x)||(depot.y != c_dep3.y))
+					return translate("You must select the deposit located in")+" ("+c_dep3.tostring()+")."	
 				local cov = d3_cnr
 				local veh = 8
 				local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers

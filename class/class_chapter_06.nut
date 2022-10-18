@@ -392,13 +392,13 @@ class tutorial.chapter_06 extends basic_chapter
 		local wt = 0
 		//local tmark = t.is_marked()
 		local buil = t.find_object(mo_building)
-		if(buil){
-			gui.add_message(""+buil.get_desc().get_name())
-		}
+		//if(buil)
+			//gui.add_message(""+buil.get_desc().get_name())
+		
 		local depot = t.find_object(mo_depot_air)
-		if(depot){
-			gui.add_message(""+depot.get_desc().get_name())
-		}
+		//if(depot)
+			//gui.add_message(""+depot.get_desc().get_name())
+		
 		local way = t.find_object(mo_way)
 		//local gcursor = t.find_object(mo_pointer)
 		//local cursor = null

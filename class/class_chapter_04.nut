@@ -572,7 +572,8 @@ class tutorial.chapter_04 extends basic_chapter
 				local time = ship2_wait
 				local c_list = sch_list3
 				local siz = c_list.len()
-				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+				local line = true
+				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
 				if(result == null){
 					local line_name = line1_name
 					update_convoy_schedule(pl, gl_wt, line_name, schedule)
