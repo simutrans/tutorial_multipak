@@ -592,7 +592,6 @@ class basic_chapter
 		local entrie
 
 		try {
-
 			 entrie = schedule.entries[nr]
 		}
 		catch(ev) {
@@ -2381,8 +2380,9 @@ class basic_chapter
 		return 0
 	}
 
-	function is_stop_allowed_ex(result, siz, c_list, pos, wt)
+	function is_stop_allowed_ex(result, siz, list, pos, wt)
 	{
+		local c_list = is_water_entry(list)
 		local t = tile_x(pos.x, pos.y, pos.z)
 		local buil = t.find_object(mo_building)
 		local is_wt = buil ? buil.get_waytype():null

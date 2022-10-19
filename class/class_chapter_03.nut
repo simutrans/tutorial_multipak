@@ -1981,9 +1981,8 @@ class tutorial.chapter_03 extends basic_chapter
 
 				if (result!=null){
 					backward_pot(0)
-					local name = translate(loc1_name_obj)
 					local good = translate(f1_good)
-					return train_result_message(result, name, good, veh, cov, st_tile)
+					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 
 				if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
@@ -2019,9 +2018,8 @@ class tutorial.chapter_03 extends basic_chapter
 				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 
 				if (result!=null){
-					local name = translate(loc2_name_obj)
 					local good = translate(f3_good)
-					return train_result_message(result, name, good, veh, cov, st_tile)
+					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 				if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
 					local selc = 0
@@ -2063,8 +2061,8 @@ class tutorial.chapter_03 extends basic_chapter
 				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 				if (result!=null){
 					reset_tmpsw()
-					local name = translate(name)
-					return bus_result_message(result, name, veh, cov)
+					local good = translate(good_alias.passa)
+					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 
 				local selc = 0
@@ -2280,10 +2278,7 @@ class tutorial.chapter_03 extends basic_chapter
 				//Para el Tunel
 				if (pot1==0){
 					local t_start = my_tile(c_tway_lim2.a)
-					local t_end = my_tile(c_tway_lim2.b)
-
 					t_start.remove_object(player_x(0), mo_label)
-
 					local t = command_x(tool_build_tunnel)
 					try {
 						t.work(player_x(1), t_start, sc_tunn_name)

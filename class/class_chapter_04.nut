@@ -617,9 +617,8 @@ class tutorial.chapter_04 extends basic_chapter
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
 				if (result!=null){
-					local name = translate(ship1_name_obj)
 					local good = translate(f1_good)
-	 				return ship_result_message(result, name, good, veh, cov)
+	 				return ship_result_message(result, translate(name), good, veh, cov)
 				}
 
 				if (current_cov>ch4_cov_lim1.a && current_cov<ch4_cov_lim1.b){
@@ -660,9 +659,8 @@ class tutorial.chapter_04 extends basic_chapter
 
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 				if (result!=null){
-					local name = translate(ship1_name_obj)
 					local good = translate(f2_good)
-	 				return ship_result_message(result, name, good, veh, cov)
+	 				return ship_result_message(result, translate(name), good, veh, cov)
 				}
 				if (current_cov>ch4_cov_lim2.a && current_cov<ch4_cov_lim2.b){
 					local selc = 0
@@ -678,16 +676,15 @@ class tutorial.chapter_04 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep1.tostring()+")."
 				local cov = 1
 				local veh = 1
-				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
+				local good_list = [good_desc_x().get_catg_index()] //Passengers
 				local name = ship2_name_obj
 				local st_tile = 1
 
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
 				if (result!=null){
-					local name = translate(ship2_name_obj)
-					local good = translate("Passengers")
-	 				return ship_result_message(result, name, good, veh, cov)
+					local good = translate(good_alias.passa)
+	 				return ship_result_message(result, translate(name), good, veh, cov)
 				}
 				if (current_cov>ch4_cov_lim3.a && current_cov<ch4_cov_lim3.b){
 					local selc = 0
@@ -752,8 +749,8 @@ class tutorial.chapter_04 extends basic_chapter
 				local name = ship1_name_obj
 				local cov_nr = d1_cnr  //Max convoys nr in depot
 
-				comm_script = true
 				if (current_cov> ch4_cov_lim1.a && current_cov< ch4_cov_lim1.b){
+					comm_script = true
 					local sched = schedule_x(gl_wt, [])
 					local c_list = is_water_entry(sch_list1)
 					for(local j =0;j<c_list.len();j++){
@@ -866,7 +863,7 @@ class tutorial.chapter_04 extends basic_chapter
 					t.unmark()
 					t.remove_object(player_x(0), mo_label)
 					local tool = command_x(tool_build_station)			
-					local err = tool.work(player_x(0), t, name)
+					tool.work(player_x(0), t, name)
 					glsw[j]=1
 				}
 				return null
@@ -905,6 +902,7 @@ class tutorial.chapter_04 extends basic_chapter
 		}
 		return null
 	}
+
 	function set_all_rules(pl) 
 	{
 		local forbid =	[	4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,

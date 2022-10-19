@@ -1008,8 +1008,7 @@ class tutorial.chapter_02 extends basic_chapter
 
 					if (result!=null){
 						reset_tmpsw()
-						local name = translate(veh1_obj)
-						return bus_result_message(result, name, veh, cov)
+						return bus_result_message(result, translate(name), veh, cov)
 					}
 					local selc = 0
 					local load = veh1_load
@@ -1041,8 +1040,7 @@ class tutorial.chapter_02 extends basic_chapter
 					result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
 					if (result!=null){
 						reset_tmpsw()
-						local name = translate(veh1_obj)
-						return bus_result_message(result, name, veh, cov)
+						return bus_result_message(result, translate(name), veh, cov)
 					}
 
 					local selc = 0
@@ -1074,8 +1072,7 @@ class tutorial.chapter_02 extends basic_chapter
 					result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
 					if (result!=null){
 						reset_tmpsw()
-						local name = translate(veh1_obj)
-						return bus_result_message(result, name, veh, cov)
+						return bus_result_message(result, translate(name), veh, cov)
 					}
 
 					local load = veh1_load

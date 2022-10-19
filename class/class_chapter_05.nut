@@ -789,9 +789,8 @@ class tutorial.chapter_05 extends basic_chapter
 				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 				if (result!=null){
-					local name = translate(veh1_obj)
 					local good = translate(f1_good)
-					return truck_result_message(result, name, good, veh, cov)
+					return truck_result_message(result, translate(name), good, veh, cov)
 				}
 				if (current_cov> ch5_cov_lim1.a && current_cov< ch5_cov_lim1.b){
 					local selc = 0
@@ -829,9 +828,8 @@ class tutorial.chapter_05 extends basic_chapter
 					result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 					if (result!=null){
-						local name = translate(veh2_obj)
 						local good = translate(good_alias.mail)
-						return truck_result_message(result, name, good, veh, cov)
+						return truck_result_message(result, translate(name), good, veh, cov)
 					}
 					local selc = 0
 					local load = veh2_load
@@ -850,9 +848,8 @@ class tutorial.chapter_05 extends basic_chapter
 					result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
 
 					if (result!=null){
-						local name = translate(veh3_obj)
 						local good = translate(good_alias.mail)
-						return ship_result_message(result, name, good, veh, cov)
+						return ship_result_message(result, translate(name), good, veh, cov)
 					}
 					local selc = 0
 					local load = veh3_load
