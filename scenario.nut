@@ -4,7 +4,7 @@
  * 
  *  Can NOT be used in network game !
  */
-const version = 1620
+const version = 1630
 map.file = "tutorial64.sve"
 scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
@@ -112,14 +112,15 @@ function script_text()
 		gui.add_message(""+translate("Advance not allowed"))
 		return null
 	}
-	if(scr_jump){
+	if(/*scr_jump*/ persistent.chapter<7){
+		//gui.add_message(""+persistent.chapter)
 		local result = null
 		scr_jump = false
 		result = chapter.script_text()
 		if(result == 0) gui.add_message(""+translate("Advance not allowed")+"")
 		return result
 	}
-	else gui.add_message(""+translate("Updating text ... Waiting ...")+"")
+//	else gui.add_message(""+translate("Updating text ... Waiting ...")+"")
 	return null
 }
 
@@ -535,9 +536,8 @@ function get_line_name(halt)
 function string_analyzer()
 {
 	local result = {pak= false , st = false}
-
 	//Check version and pakset name
-	current_pak = get_pakset_name()
+	current_pak = get_set_name(get_pakset_name())
 	current_st = get_version_number()
 
 	local p_siz = {a = current_pak.len(), b = pak_name.len()}
@@ -616,6 +616,16 @@ function string_analyzer()
 	}
 	//gui.add_message("result st: "+result.st+"  result pak:" +result.pak)
 	return result
+}
+
+//returns pakset name (lower case)
+function get_set_name(name)
+{
+	local s = name.find(" ")
+	name = name.slice(0, s)
+	name = name.tolower()
+
+	return name
 }
 
 // END OF FILE

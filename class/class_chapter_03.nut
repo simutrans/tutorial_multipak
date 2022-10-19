@@ -42,7 +42,6 @@ class tutorial.chapter_03 extends basic_chapter
 	chapter_name  = "Riding the Rails"
 	chapter_coord = coord(93,153)
 	startcash     = 50000000	   				// pl=0 startcash; 0=no reset
-	comm_script = false
 
 	gl_wt = wt_rail
 
@@ -237,6 +236,7 @@ class tutorial.chapter_03 extends basic_chapter
 
 	//Script
 	//----------------------------------------------------------------------------------
+	comm_script = false
 	sc_way_name = "concrete_sleeper_track"
 	sc_tunn_name = "RailTunnel"
 	sc_bridge_name = "ClassicRail"
@@ -1941,7 +1941,8 @@ class tutorial.chapter_03 extends basic_chapter
 				local time = loc3_wait
 				local c_list = sch_list
 				local siz = c_list.len()
-				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+				local line = true
+				result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
 				if(result == null){
 					local line_name = line1_name
 					update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -1962,6 +1963,8 @@ class tutorial.chapter_03 extends basic_chapter
 					id_save[current_cov]=convoy.id
 					gcov_nr++
 					persistent.gcov_nr = gcov_nr
+					current_cov++
+					gall_cov++
 					return null
 				}
 
@@ -1978,9 +1981,8 @@ class tutorial.chapter_03 extends basic_chapter
 
 				if (result!=null){
 					backward_pot(0)
-					local name = translate(loc1_name_obj)
 					local good = translate(f1_good)
-					return train_result_message(result, name, good, veh, cov, st_tile)
+					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 
 				if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
@@ -1999,6 +2001,8 @@ class tutorial.chapter_03 extends basic_chapter
 					id_save[current_cov]=convoy.id
 					gcov_nr++
 					persistent.gcov_nr = gcov_nr
+					current_cov++
+					gall_cov++
 					return null
 				}
 
@@ -2014,9 +2018,8 @@ class tutorial.chapter_03 extends basic_chapter
 				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 
 				if (result!=null){
-					local name = translate(loc2_name_obj)
 					local good = translate(f3_good)
-					return train_result_message(result, name, good, veh, cov, st_tile)
+					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 				if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
 					local selc = 0
@@ -2029,6 +2032,7 @@ class tutorial.chapter_03 extends basic_chapter
 			break
 
 			case 11:
+			if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
 				if (comm_script){
 					cov_save[current_cov]=convoy
 					id_save[current_cov]=convoy.id
@@ -2038,13 +2042,11 @@ class tutorial.chapter_03 extends basic_chapter
 					gall_cov++
 					return null
 				}
-
-				local wt = gl_wt
 				if ((depot.x != c_dep3.x)||(depot.y != c_dep3.y))
 					return translate("You must select the deposit located in")+" ("+c_dep3.tostring()+")."	
 				local cov = d3_cnr
 				local veh = 8
-				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
+				local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
 				local name = loc3_name_obj
 				local st_tile = loc3_tile
 				local is_st_tile = true
@@ -2055,22 +2057,25 @@ class tutorial.chapter_03 extends basic_chapter
 				local cir_nr = get_convoy_number_exp(sch_list[0], depot, id_start, id_end)
 				local cov_list = depot.get_convoy_list()
 				cov -= cir_nr
-				result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile, is_st_tile)
 
+				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 				if (result!=null){
-					local name = translate(loc3_name_obj)
-					local good = translate("Passengers")
-					return train_result_message(result, name, good, veh, cov, st_tile)
+					reset_tmpsw()
+					local good = translate(good_alias.passa)
+					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 
-			if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
-					local selc = 0
-					local load = loc3_load
-					local time = loc3_wait
-					local c_list = sch_list
-					local siz = c_list.len()
-					return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
-				}
+				local selc = 0
+				local load = loc3_load
+				local time = loc3_wait
+				local c_list = sch_list
+				local siz = c_list.len()
+
+				result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+				if(result == null)
+					reset_tmpsw()
+				return result
+			}
 			break
 
 		}
@@ -2186,6 +2191,8 @@ class tutorial.chapter_03 extends basic_chapter
 				if(pot0==0){
 					local t_start = my_tile(c_dep1_lim.a)
 					local t_end = my_tile(c_dep1_lim.b)
+					t_start.unmark()
+					t_end.unmark()
 					t_start.remove_object(player_x(0), mo_label)
 					local t = command_x(tool_build_way)			
 					local err = t.work(player_x(1), t_start, t_end, sc_way_name)
@@ -2194,10 +2201,10 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 
 				if(pot1==0){
-					local tile = my_tile(c_dep1)
-					tile.remove_object(player_x(0), mo_label)
-					local t = command_x(tool_build_depot)
-					local err = t.work(player_x(0), tile, sc_dep_name)
+					local t = my_tile(c_dep1)
+					t.remove_object(player_x(0), mo_label)
+					local tool = command_x(tool_build_depot)
+					tool.work(player_x(0), t, sc_dep_name)
 					pot1=1
 				}
 				if(pot1==1 && pot2==0){
@@ -2208,8 +2215,8 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 			case 5:
 				local wt = wt_rail
-				comm_script = true
 				if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
+					comm_script = true
 					local pl = player_x(0)
 					local c_depot = my_tile(c_dep1)
 
@@ -2236,8 +2243,9 @@ class tutorial.chapter_03 extends basic_chapter
 
 					comm_start_convoy(pl, wt, sched, convoy, depot)
 					pot1=1
+					comm_script = false
 				}
-				comm_script = false
+
 
 				return null
 				break
@@ -2270,12 +2278,15 @@ class tutorial.chapter_03 extends basic_chapter
 				//Para el Tunel
 				if (pot1==0){
 					local t_start = my_tile(c_tway_lim2.a)
-					local t_end = my_tile(c_tway_lim2.b)
-
 					t_start.remove_object(player_x(0), mo_label)
-
 					local t = command_x(tool_build_tunnel)
-					local err = t.work(player_x(1), t_start, sc_tunn_name)
+					try {
+						t.work(player_x(1), t_start, sc_tunn_name)
+					}
+					catch(ev) {
+						return null
+					}
+
 				}
 				//Segundo tramo de rieles
 				if (pot2==0){
@@ -2334,22 +2345,24 @@ class tutorial.chapter_03 extends basic_chapter
 				if(pot0==0){
 					local t_start = my_tile(c_dep2_lim.b)
 					local t_end = my_tile(c_dep2_lim.a)
+					t_start.unmark()
+					t_end.unmark()
 					t_end.remove_object(player_x(0), mo_label)
 					local t = command_x(tool_build_way)			
-					local err = t.work(player_x(1), t_start, t_end, sc_way_name)
+					t.work(player_x(1), t_start, t_end, sc_way_name)
 
 					pot0=1	
 				}
 
 				if(pot0==1 && pot1==0){
-					local t2 = command_x(tool_build_depot)
-					local err2 = t2.work(player_x(0), my_tile(c_dep2), sc_dep_name)
+					local t = command_x(tool_build_depot)
+					t.work(player_x(0), my_tile(c_dep2), sc_dep_name)
 					pot1=1
 				}
 				if(pot1==1 && pot2==0){
-					comm_script = true
 					local wt = wt_rail
 					if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
+						comm_script = true
 						local pl = player_x(0)
 						local c_depot = my_tile(c_dep2)
 
@@ -2373,9 +2386,10 @@ class tutorial.chapter_03 extends basic_chapter
 						sched.entries.append(schedule_entry_x(my_tile(st4_list[0]), 0, 0))
 
 						comm_start_convoy(pl, wt, sched, convoy, depot)
+						comm_script = false	
+						pot3=1
 					}
-					comm_script = false	
-					pot3=1			
+
 				}
 
 				return null
@@ -2385,14 +2399,16 @@ class tutorial.chapter_03 extends basic_chapter
 				if (pot0==0){
 					local coora = coord3d(c_way6.a.x, c_way6.a.y, c_way6.a.z)
 					local coorb = coord3d(c_way6.b.x, c_way6.b.y, c_way6.b.z)
-					local t = command_x(tool_build_way)			
+					local t = command_x(tool_build_way)
+					t.set_flags(2)	
 					local err = t.work(player_x(1), coora, coorb, sc_way_name)
 					pot0=1
 				}
 				if (pot0==1 && pot1==0){
 					local t_start = my_tile(c_brge3.a)
 					local t_end = my_tile(c_brge3.b)
-
+					t_start.unmark()
+					t_end.unmark()
 					t_start.remove_object(player_x(0), mo_label)
 
 					local t = command_x(tool_build_bridge)
@@ -2409,19 +2425,32 @@ class tutorial.chapter_03 extends basic_chapter
 					pot2=1					
 				}
 				if (pot2==1 && pot3==0){
+					local siz = (start_tunn.x)-(c_tun_list[0].x)
+					local opt = 1 //Incrementa x
+					local t = tile_x(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
+					clean_track_segment(t, siz, opt)
 					local t_tun = command_x(tool_build_tunnel)
 					local c_start = c_tunn2.a 
 					local c_end = coord3d(c_tun_list[0].x, c_tun_list[0].y, start_lvl_z)
 					t_tun.work(player_x(1), c_start, c_end, sc_tunn_name)
+					pot3 = 1
 
+				}
+				if (pot3==1 && pot4==0){
+					local t_tun = command_x(tool_build_tunnel)
 					local c_list =	c_tun_list
 					local t_start = my_tile(start_tunn)
 					for(local j = 0; j<(c_list.len()-1);j++){
 						local c = coord3d(c_list[j].x, c_list[j].y, (t_start.z+j))
 						t_tun.work(player_x(1), t_start, c, sc_tunn_name)
+						if(!square_x(c.x, c.y).get_tile_at_height(c.z)){
+							c.z--
+							command_x.set_slope(player_x(1), c, slope.all_up_slope)
+							c.z++
+						}
 						command_x.set_slope(player_x(1), c, slope.all_up_slope)
 					}
-					t_tun.work(player_x(1), c_start, c_tunn2.b, sc_tunn_name)
+					t_tun.work(player_x(1), c_tunn2.a , c_tunn2.b, sc_tunn_name)
 				}
 				
 				return null
@@ -2523,8 +2552,6 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 			
 			case 11:
-
-				comm_script = true
 				local wt = wt_rail
 				local pl = player_x(0)
 				local c_depot = my_tile(c_dep3)
@@ -2532,35 +2559,43 @@ class tutorial.chapter_03 extends basic_chapter
 
 				local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
-				//Set schedule for all convoys-------------------------------------------------------------
-				local sched = schedule_x(wt, [])
-				for(local j=0;j<sch_list.len();j++){
-					if (j==0)
-						sched.entries.append(schedule_entry_x(my_tile(sch_list[j]), loc3_load, loc3_wait))
-					else
-						sched.entries.append(schedule_entry_x(my_tile(sch_list[j]), 0, 0))
-				}
-
-				local cov_nr = d3_cnr
-				local name = loc3_name_obj
-				local wag_name = sc_wag3_name
-				local wag_nr = sc_wag3_nr
-				local wag = true
 				if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
-					for (local j = 0; j<cov_nr;j++){
-						if (!comm_set_convoy(0, c_depot, name))
+					comm_script = true
+					//Set Schedule
+					local sched = schedule_x(gl_wt, [])
+					local c_list = sch_list
+					local sch_siz = c_list.len()
+					local load = loc3_load
+					local time = loc3_wait
+					for(local j=0;j<sch_siz;j++){
+						if (j==0)
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, time))
+						else
+							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
+					}
+
+					// Set and run convoys
+					local good_nr = 0 //Passengers
+					local name = loc3_name_obj
+					local cov_nr = d3_cnr  //Max convoys nr in depot
+					local wag_name = sc_wag3_name
+					local wag_nr = sc_wag3_nr
+					local wag = true
+					for (local j = current_cov; j>ch3_cov_lim3.a && j<ch3_cov_lim3.b && correct_cov; j++){
+						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
 						for (local count = 0;count<wag_nr;count++){
 							if (!comm_set_convoy(0, c_depot, wag_name, wag))
 								return 0
 						}
-
+						local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 						local convoy = depot.get_convoy_list()
-						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
-					}			
-				}
-				comm_script = false
+						if (convoy.len()==0) continue
 
+						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+					}
+					comm_script = false
+				}
 				return null
 				break
 		}
