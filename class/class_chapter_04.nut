@@ -676,7 +676,7 @@ class tutorial.chapter_04 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep1.tostring()+")."
 				local cov = 1
 				local veh = 1
-				local good_list = [good_desc_x().get_catg_index()] //Passengers
+				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
 				local name = ship2_name_obj
 				local st_tile = 1
 
