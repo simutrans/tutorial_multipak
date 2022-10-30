@@ -1648,6 +1648,9 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 
 			case 8:
+				local under_lv = settings.get_underground_view_level()
+				local unde_view = -128
+				local norm_view = 127
 				//Construye tramo de via para el tunel
 				if (pot0==0){
 					if (pos.x>=c_way6_lim.a.x && pos.y<=c_way6_lim.a.y && pos.x<=c_way6_lim.b.x && pos.y>=c_way6_lim.b.y){
@@ -1686,15 +1689,31 @@ class tutorial.chapter_03 extends basic_chapter
 				else if (pot2==1 && pot3==0){
 					if (tool_id==tool_remover){
 						if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
-							if(slope==0)return null
+							if(slope==0 && pos.z == c_tunn2.a.z)
+								return null
 						}
 					}
 					if (tool_id==tool_build_tunnel || tool_id==tool_build_way || tool_id== 4099){
+
+						
 						if((pos.x>=c_tun_list[0].x)&&(pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y)){
-							if((pos.x == c_lock_tunn[0].x && pos.y == c_lock_tunn[0].y)||( pos.x == c_lock_tunn[1].x && pos.y == c_lock_tunn[1].y))
+
+							for(local j = 0 ; j<2; j++) {
+								if(pos.x == c_lock_tunn[j].x && pos.y == c_lock_tunn[j].y)
+									return coorbord!=0? translate("Build a tunnel here")+" ("+coorbord.tostring()+")." : result
+							}
+
+							if (under_lv == unde_view){
+								return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord!=0?coorbord:pos)
+							}
+							else if (under_lv == c_tunn2.a.z) {
+								return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord!=0?coorbord:pos)
+							}
+							else 
 								return coorbord!=0? translate("Build a tunnel here")+" ("+coorbord.tostring()+")." : result
-							return all_control(result, gl_wt, way, ribi, tool_id, pos, coorbord!=0?coorbord:pos)
+							
 						}
+						
 					}
 				}
 				//Tunel con pendientes

@@ -4,7 +4,7 @@
  *
  *  Can NOT be used in network game !
  */
-	simu_version <- "122.0.1"
+	simu_version <- "123.0.2"
 	pak_name <- "pak64"
 
 	current_st <- "0"
