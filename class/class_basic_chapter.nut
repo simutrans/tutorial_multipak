@@ -8,6 +8,12 @@
 //Global coordinate for mark build tile
 currt_pos <- null
 
+
+coorbord <- coord3d(0, 0, 0)
+wayend <- 0
+reached <- 0
+cursor_count <- coord3d(0, 0, 0)
+
 class basic_chapter
 {        // chapter description : this is a placeholder class
 
@@ -49,42 +55,45 @@ class basic_chapter
 	way_mark3 = false
 
 	//Compare good list
-    good_check = ["Post", "Passagiere", "goods_"]
+	good_check = ["Post", "Passagiere", "goods_"]
 
-     constructor(pl)
-     {
-     	scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
+	under_lv = settings.get_underground_view_level()
+	unde_view = -128
+	norm_view = 127
+
+	constructor(pl)
+	{
+		scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
 		this.set_all_rules(pl)
 		this.step = 1
-     }
+	}
 
 	// FUNCTIONS TO REWRITE
      function set_goal_text(text)
-     {
+	{
 		return text
-     }
+	}
 
-     function get_rule_text(pl,path)
-     {
+	function get_rule_text(pl,path)
+	{
 		local text = ttextfile( path + "rule.txt" )
 		return text.tostring()
-     }
+	}
 
-
-     function is_chapter_completed(pl)
-     {
+	function is_chapter_completed(pl)
+	{
 		local percentage = 0
 		return percentage
-     }
+	}
 
 	// BASIC FUNCTIONS, NO REWRITE
 
 	//Para arrancar vehiculos usando comm  ----------------------------------------------------------------
 	function comm_set_convoy(cov_nr, coord, name, veh_nr = false) 
-    /*1 Numero de convoy actual,******
-    * 2 coord del deposito, 	     *
-    * 3 Name del vehiculo,		     *
-    * 4 Numero de remolques/bagones)*/
+	/*1 Numero de convoy actual,******
+	* 2 coord del deposito, 	     *
+	* 3 Name del vehiculo,		     *
+	* 4 Numero de remolques/bagones)*/
 	{
 		local pl = player_x(0)
 		local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
@@ -1413,10 +1422,11 @@ class basic_chapter
 			local t_type = false
 			local way = false
 			local ribi = false
-
+			local squ = square_x(coora.x,coora.y)
 			local c_z = coora.z -1
 			for(local j = c_z;j<=(c_z+2);j++){
-				local c_test = square_x(coora.x,coora.y).get_tile_at_height(j)
+
+				local c_test = squ.get_tile_at_height(j)
 				local is_tile = true
 				local brig_height = false
 				local brig_height_z = null
@@ -1461,18 +1471,19 @@ class basic_chapter
 				}
 			}
 
-			/*if (tun && false){
+			/*if (tun && squ.get_ground_tile().z != coora.z){
+				//gui.add_message("pos: "+coora)
 				type = mo_tunnel
 				local height_min = -3
 				local height_max = my_tile(coord(coora.x, coora.y)).z
 				for(;height_max>=height_min;height_max--){
 					local tile = tile_x(coora.x, coora.y, height_max)
 					if (tile.is_tunnel()){
-						coora.z = height_max	
+						//coora.z = height_max	
 						break
 					}
 				}
-			} */
+			}*/
 			local t = tile_x(coora.x, coora.y, coora.z)
 			way = t.find_object(mo_way)
 			if(way){
@@ -1836,40 +1847,42 @@ class basic_chapter
 		
 	}
 
-	function all_control(result, wt, way, ribi, tool_id, pos, coor){
+	function all_control(result, wt, way, ribi, tool_id, pos, coor, plus = 0){
 		if(coorbord==0) return "Err"
 		if ((tool_id==tool_remove_way)||(tool_id==tool_remover)){
-
 			if (way && way.get_waytype() != wt)
 				return result
 			else
 				return null	
 		}
-
 		else if (lock_way)
 			return translate("The track is stuck, use the [Remove] tool here!")+" ("+coor.tostring()+")."
 
 		//Control para que los puentes funcionen bien
 		bridge_control(way, tool_id)
-
 		if (bridge_sw){
 			return null
 		}
-
 		else if ((pos.x == coor.x && pos.y == coor.y && pos.z == coor.z)||(cursor_sw)){
-
 			if (tool_id==tool_build_way || tool_id==tool_build_tunnel){
 				if ((ribi==0) || (ribi==1) || (ribi==2) || (ribi==4) || (ribi==8)){
 					return null
 				}
-				else
+				else{
+					if (under_lv == unde_view){
+						local slope = tile_x(pos.x, pos.y, pos.z).get_slope()
+						if(slope != 0 || pos.z != (coor.z + plus))
+							return null
+					}
+					
 					return translate("No intersections allowed")+" ("+pos.tostring()+")."
+				}
 			}
 			else
 				return translate("Action not allowed")+" ("+pos.tostring()+")."
 		}
 		else{
-			return translate("Connect the Track here")+" ("+coord(coor.x, coor.y).tostring()+")."
+			return translate("Connect the Track here")+" ("+coord3d(coor.x, coor.y, coor.z).tostring()+")."
 		}
 
 		return ""
@@ -3117,6 +3130,79 @@ class basic_chapter
 				tool.work(player_x(1), t, "")
 				t.y++
 			}
+		}
+	}
+
+	function tunnel_build_check(start, under,  max, dir){
+		local result =  translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)"
+		if(coorbord==0) return "Err"
+		if(coorbord.x == start.x && coorbord.y == start.y)
+			return null
+
+		local count = 0
+		local t = tile_x(coorbord.x, coorbord.y, coorbord.z)
+
+		if (dir == 8) {
+			for (local j = start.x; j<t.x ;j++){
+				count++
+			}
+		}
+		else if (dir == 1) {
+			for (local j = start.y; j<t.y ;j++){
+				count++
+			}
+		}
+		else if (dir == 2) {
+			for (local j = start.x; j>t.x ;j--){
+				count++
+			}
+		}
+		else if (dir == 4) {
+			for (local j = start.y; j>t.y ;j--){
+				count++
+			}
+		}
+		//gui.add_message(""+ribi)
+		if(count <= max) {
+			return under_way_check(under, dir)
+		}
+
+		return result
+	}
+
+	function under_way_check(under, dir){
+		local result =  translate("The tunnel is not correct, use the [Remove] tool here")+" ("+coorbord.tostring()+".)"
+		if(coorbord==0) return "Err"
+		local t = tile_x(coorbord.x, coorbord.y, coorbord.z)
+		local way = t.find_object(mo_way)
+		local ribi = way? way.get_dirs() : 0
+	
+		//gui.add_message(""+ribi)
+		if(ribi != dir)
+			return result
+
+		local z = square_x(t.x, t.y).get_ground_tile().z
+		for (local j = z; j>=under;j--){
+			if (j == coorbord.z)
+				continue
+			t.z = j
+			if (t.find_object(mo_way))
+				return result
+
+			//gui.add_message(""+t.x +","+t.y+","+t.z)
+		}
+		return null
+	}
+	function underground_message(plus = 0){
+		if(coorbord==0) return "Err"
+		under_lv = settings.get_underground_view_level()
+		if(under_lv == norm_view)
+			return translate("First you need to activate the underground view / sliced map view.")
+
+		else if(under_lv != unde_view){
+			if(under_lv != coorbord.z + plus)
+				return format(translate("Layer level in sliced map view should be: %d"), coorbord.z + plus)
+				
 		}
 	}
 }
