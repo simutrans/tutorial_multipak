@@ -1811,7 +1811,6 @@ class basic_chapter
 	}
 
 	function all_control(result, wt, way, ribi, tool_id, pos, coor, plus = 0){
-		if(r_way.c==0) return "Err"
 		if ((tool_id==tool_remove_way)||(tool_id==tool_remover)){
 			if (way && way.get_waytype() != wt)
 				return result
@@ -3098,7 +3097,6 @@ class basic_chapter
 
 	function tunnel_build_check(start, under,  max, dir){
 		local result =  translate("The tunnel is not correct, use the [Remove] tool here")+" ("+r_way.c.tostring()+".)"
-		if(r_way.c==0) return "Err"
 		if(r_way.c.x == start.x && r_way.c.y == start.y)
 			return null
 
@@ -3135,7 +3133,6 @@ class basic_chapter
 
 	function under_way_check(under, dir){
 		local result =  translate("The tunnel is not correct, use the [Remove] tool here")+" ("+r_way.c.tostring()+".)"
-		if(r_way.c==0) return "Err"
 		local t = tile_x(r_way.c.x, r_way.c.y, r_way.c.z)
 		local way = t.find_object(mo_way)
 		local ribi = way? way.get_dirs() : 0
@@ -3157,7 +3154,6 @@ class basic_chapter
 		return null
 	}
 	function underground_message(plus = 0){
-		if(r_way.c==0) return "Err"
 		under_lv = settings.get_underground_view_level()
 		if(under_lv == norm_view)
 			return translate("First you need to activate the underground view / sliced map view.")
