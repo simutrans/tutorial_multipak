@@ -23,8 +23,7 @@ class tutorial.chapter_04 extends basic_chapter
 	startcash     = 1000000	   				// pl=0 startcash; 0=no reset
 	gl_wt = wt_water
 
-	wayend = 0
-	coorbord = 0
+	c_way =  coord3d(0, 0, 0)
 	cov_cir = 0
 
 	//Step 1 =====================================================================================
@@ -57,8 +56,8 @@ class tutorial.chapter_04 extends basic_chapter
 
 	//Step 5 =====================================================================================
 	//Para el canal acuatico
-	c_way = {a = coord3d(140,194,-3), b = coord3d(114,194,1)}
-	c_way_lim = {a = coord(114, 194), b = coord(140, 194)}
+	c1_way = {a = coord3d(140,194,-3), b = coord3d(114,194,1)}
+	c1_way_lim = {a = coord(114, 194), b = coord(140, 194)}
 
 	//Consumidor Final
 	f3name = "TANKE"
@@ -140,8 +139,8 @@ class tutorial.chapter_04 extends basic_chapter
 			break
 
 		case 5:
-			local c1 = coord(c_way.a.x, c_way.a.y)
-			local c2 = coord(c_way.b.x, c_way.b.y)
+			local c1 = coord(c1_way.a.x, c1_way.a.y)
+			local c2 = coord(c1_way.b.x, c1_way.b.y)
 			if(!correct_cov){
 				local a = 3
 				local b = 3
@@ -282,7 +281,7 @@ class tutorial.chapter_04 extends basic_chapter
 				//Para el canal acuatico
 				if (pot0==0){
 					//Inicio del canal
-					local c_start = coord(c_way.a.x, c_way.a.y)
+					local c_start = coord(c1_way.a.x, c1_way.a.y)
 					local t_start = my_tile(c_start)
 					local way_start = t_start.find_object(mo_way)
 					if (way_start && way_start.get_desc().get_topspeed()==0){
@@ -295,7 +294,7 @@ class tutorial.chapter_04 extends basic_chapter
 					}
 
 					//Final del canal
-					local c_end = coord(c_way.b.x, c_way.b.y)
+					local c_end = coord(c1_way.b.x, c1_way.b.y)
 					local t_end = my_tile(c_end)
 					local way_end = t_end.find_object(mo_way)
 					if (way_end &&  way_end.get_desc().get_topspeed()==0){
@@ -307,8 +306,8 @@ class tutorial.chapter_04 extends basic_chapter
 						t_end.remove_object(player_x(1), mo_label)
 					}
 
-					local coora = {x = c_way.a.x, y = c_way.a.y, z = c_way.a.z }
-					local coorb = {x = c_way.b.x, y = c_way.b.y, z = c_way.b.z }
+					local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
+					local coorb = {x = c1_way.b.x, y = c1_way.b.y, z = c1_way.b.z }
 
 					local obj = false
 					local dir = 6
@@ -317,13 +316,11 @@ class tutorial.chapter_04 extends basic_chapter
 					local wt = gl_wt
 					local fullway = update_way(coora, coorb, vel_min, wt) //test			
 
-					if (fullway.result){	
-						wayend = 0
-						coorbord = 0
+					if (fullway.result){
 						pot0=1		
 					}
 					else 
-						coorbord = fullway.c
+						c_way = fullway.c
 				}
 				//Para el cuarto muelle
 				else if (pot0==1 && pot1==0){
@@ -478,11 +475,11 @@ class tutorial.chapter_04 extends basic_chapter
 				break
 			case 5:
 				if (pot0==0){
-                    if(pos.x==c_way.a.x && pos.y==c_way.a.y){
+                    if(pos.x==c1_way.a.x && pos.y==c1_way.a.y){
                         if(tool_id==tool_remove_way || tool_id==4097)
 							return result
                     }
-					if (pos.x>=c_way_lim.a.x && pos.y>=c_way_lim.a.y && pos.x<=c_way_lim.b.x && pos.y<=c_way_lim.b.y){
+					if (pos.x>=c1_way_lim.a.x && pos.y>=c1_way_lim.a.y && pos.x<=c1_way_lim.b.x && pos.y<=c1_way_lim.b.y){
 						if (tool_id == tool_build_way && way && wt == wt_water)
 							return null
 					}
@@ -778,7 +775,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 5:
 				//Para el canal acuatico
 				if (pot0==0){
-					local t1 = my_tile(coord(c_way.a.x, c_way.a.y))
+					local t1 = my_tile(coord(c1_way.a.x, c1_way.a.y))
 					local t2 = my_tile(sch_list2[1])
 					local way = t1.find_object(mo_way)
 					local is_lab1 = t1.find_object(mo_label)
@@ -795,8 +792,8 @@ class tutorial.chapter_04 extends basic_chapter
 					if (way)
 						way.unmark()
 
-					local coora = {x = c_way.a.x, y = c_way.a.y, z = c_way.a.z }
-					local coorb = {x = c_way.b.x, y = c_way.b.y, z = c_way.b.z }
+					local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
+					local coorb = {x = c1_way.b.x, y = c1_way.b.y, z = c1_way.b.z }
 					
 					local t = command_x(tool_build_way)	
 					t.set_flags(2)		
