@@ -10,9 +10,13 @@ currt_pos <- null
 
 // Results for fullway, c = coord3d, p = plus, r = result, m = marked, l = look, s = slope
 r_way <- { c = coord3d(0, 0, 0), p = 0, r = false, m = false, l = false, s = 0}
+r_way_list <- {}
 wayend <- coord3d(0, 0, 0)
+
+// Mark / Unmark build in to link
+gl_buil_list <- {}
+
 reached <- 0
-cursor_count <- coord3d(0, 0, 0)
 
 class basic_chapter
 {        // chapter description : this is a placeholder class
@@ -41,16 +45,9 @@ class basic_chapter
 	cursor_sw = false
 	bridge_sw = false
 	sch_sw = false
-
 	stop_sw = false
-
 	bridge_count = 0
 
-//--------------------waypoint mark in ground ------------------------------------
-
-	way_mark1 = false
-	way_mark2 = false
-	way_mark3 = false
 
 	//Compare good list
 	good_check = ["Post", "Passagiere", "goods_"]
@@ -952,7 +949,11 @@ class basic_chapter
 			local t = tile_x(currt_pos.x,currt_pos.y,currt_pos.z)
 			local build = t.find_object(mo_building)
 			if(build){
-				build.unmark()
+				local t_list = gl_buil_list
+				foreach(t in t_list){
+					t.find_object(mo_building).unmark()
+				}
+				gl_buil_list = {}
 				currt_pos = null
 			}
 		}
@@ -960,8 +961,12 @@ class basic_chapter
 		local build = t.find_object(mo_building)
 
 		if(build){
+			local t_list = build.get_tile_list()
+			foreach(t in t_list){
+				gl_buil_list[coord3d_to_key(t)] <- t
+				t.find_object(mo_building).mark()
+			}
 			currt_pos = pos
-			build.mark()
 		}
 		return null
 	}
@@ -1444,6 +1449,8 @@ class basic_chapter
 						}
 					}
 					if(way){
+						if(!tun && sq_z != c_test.z)
+							continue
 						//gui.add_message("way "+coora.x+" :: "+coora.z+","+c_test.z+"  -p "+res.p+" :: slp "+ slope.to_dir(c_test.get_slope()) +" - "+slope.to_dir(res.s))
 						if(sq_z != c_test.z && ( slp != 0 && slope.to_dir(c_test.get_slope()) == res.s)&&(c_test.z == coora.z || res.p == 1 )){
 							res.p = 1
@@ -1460,19 +1467,7 @@ class basic_chapter
 				}
 			}
 
-			/*if (tun && squ.get_ground_tile().z != coora.z){
-				//gui.add_message("pos: "+coora)
-				type = mo_tunnel
-				local height_min = -3
-				local height_max = my_tile(coord(coora.x, coora.y)).z
-				for(;height_max>=height_min;height_max--){
-					local tile = tile_x(coora.x, coora.y, height_max)
-					if (tile.is_tunnel()){
-						//coora.z = height_max	
-						break
-					}
-				}
-			}*/
+			r_way_list[coord3d_to_key(coora)] <- coora
 			res.c = coora
 			local t = tile_x(coora.x, coora.y, coora.z)
 			way = t.find_object(mo_way)
@@ -1814,8 +1809,20 @@ class basic_chapter
 		if ((tool_id==tool_remove_way)||(tool_id==tool_remover)){
 			if (way && way.get_waytype() != wt)
 				return result
-			else
-				return null	
+
+			else {
+				local cur_key = coord3d_to_key(pos)
+				result = translate("Action not allowed")+" ("+pos.tostring()+")."
+				foreach(key, c in r_way_list){
+					if(key == cur_key){
+						//delete r_way_list[key] //Delate objt example
+						//gui.add_message("key: "+key+" ckey: "+cur_key)
+						return null
+						break
+					}
+				}
+				return result
+			}
 		}
 		else if (r_way.l)
 			return translate("The track is stuck, use the [Remove] tool here!")+" ("+coor.tostring()+")."
@@ -1878,82 +1885,6 @@ class basic_chapter
 
 		return null
 	}
-
-	function tool_delay()
-	{
-		if (gl_tool_delay > 0){
-			gl_tool_delay--
-			return false
-		}
-		else
-			return true
-	}
-
-	function sch_gui_is_open(pos, off = false )
-	{
-		if (off){
-			local t = tile_x(pos.x, pos.y, pos.z)
-			foreach(obj in t.get_objects()){
-				tile_x(pos.x, pos.y, pos.z).find_object(obj.get_type()).unmark()
-			}
-			return false
-		}	
-		mark_sch_gui(pos)
-		if (way_mark3 || way_mark2){	
-			return true
-		}
-		else{
-			return false
-		}
-	}
-
-	function mark_sch_gui(pos)
-	{
-		local t = tile_x(pos.x, pos.y, pos.z)
-			foreach(obj in t.get_objects()){
-				local mo_obje = obj.get_type()
-				local t_objet = tile_x(pos.x, pos.y, pos.z).find_object(obj.get_type())	
-				if (mo_obje == mo_building){
-					if (t_objet.is_marked()){
-						way_mark3 = true
-						return 0
-					}
-					else{
-						way_mark3 = false
-						return 0
-					}
-				}
-				if (mo_obje == mo_way){			
-					if (!way_mark2){
-						if (way_mark1 && !t_objet.is_marked()){
-							way_mark2 = true
-							return 0
-						}
-
-						if (!t_objet.is_marked()){
-							t_objet.mark()
-							way_mark1 = true
-							return 0
-						}
-					}
-					else{
-						if (!t_objet.is_marked()){
-							t_objet.mark()
-							return 0
-						}
-						else{
-							way_mark1 = false
-							way_mark2 = false
-							way_mark3 = false
-							t_objet.unmark()
-							return 0
-						}	
-					}
-				}		
-			}
-		return 0
-	}
-
 
 	function get_corret_slope(slope, corret_slope)
 	{
@@ -3153,6 +3084,7 @@ class basic_chapter
 		}
 		return null
 	}
+
 	function underground_message(plus = 0){
 		under_lv = settings.get_underground_view_level()
 		if(under_lv == norm_view)

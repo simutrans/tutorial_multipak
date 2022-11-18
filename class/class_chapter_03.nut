@@ -2823,26 +2823,6 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 		}
 	}
-	function cursor_tile_count(cursor, is_mark, max, pos){
-		if(is_mark && cursor_count==0){
-			cursor_count = 1
-			glpos = coord3d(0,0,0)
-			return true
-		}
-		if(pos.x != glpos.x && pos.y != glpos.y){
-			if(!cursor && cursor_count>0)cursor_count++
-			glpos = pos
-			return true
-		}
-
-		if(cursor_count<=max){
-
-			return true
-		}
-		else glpos = coord3d(0,0,0)
-		cursor_count = 0
-		return false
-	}
 }        // END of class
 
 // END OF FILE

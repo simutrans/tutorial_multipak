@@ -992,7 +992,6 @@ class tutorial.chapter_06 extends basic_chapter
 					}
 				}
 				return null
-				return null
 			break
 		}
 		return null
