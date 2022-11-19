@@ -888,9 +888,7 @@ class tutorial.chapter_03 extends basic_chapter
 						local text = "X"
 						label_bord(bord3_lim.a, bord3_lim.b, opt, del, text)
 					}
-
-					//gui.add_message(""+r_way.c.tostring()+"")
-					if (tile2.find_object(mo_label) && r_way.c.y>=limi.y){
+					if (tile_x(r_way.c.x, r_way.c.y, r_way.c.z).find_object(mo_way) && r_way.c.y>=limi.y){
 
 						tile2.remove_object(player_x(0), mo_label)
 						if (!tile_x(wayend.x, wayend.y, wayend.z).find_object(mo_way))
@@ -900,7 +898,6 @@ class tutorial.chapter_03 extends basic_chapter
 						local del = false
 						local text = "X"
 						label_bord(bord3_lim.a, bord3_lim.b, opt, del, text)
-						
 					}
 
 					local opt = 0
@@ -943,9 +940,10 @@ class tutorial.chapter_03 extends basic_chapter
 					local coora = coord3d(c_tunn1.a.x, c_tunn1.a.y, c_tunn1.a.z)
 					local coorb = coord3d(c_tunn1.b.x, c_tunn1.b.y, c_tunn1.b.z)
 					local obj = false
+					local tunnel = true
 					local dir = 5
 					wayend = coorb				
-					r_way = get_fullway(coora, coorb, dir, obj)
+					r_way = get_fullway(coora, coorb, dir, obj, tunnel)
 					if (r_way.r){
 						pot1=1	
 						wayend = 0
@@ -1360,6 +1358,12 @@ class tutorial.chapter_03 extends basic_chapter
 				
 				//Primer tramo de rieles
 				if (pot0==0){
+					local lab_t = my_tile(label1_lim)
+					local lab = lab_t.find_object(mo_label)
+					if(pos.x < lab_t.x && lab && lab.get_owner().nr == 0){
+						if(tool_id==tool_build_way)
+							return ""
+					}
 					if (pos.x>=st1_way_lim.a.x && pos.y>=st1_way_lim.a.y && pos.x<=st1_way_lim.b.x && pos.y<=st1_way_lim.b.y){
 						if(tool_id==tool_build_way || tool_id==4113 || tool_id==tool_remover)
 							return null						
@@ -1489,6 +1493,12 @@ class tutorial.chapter_03 extends basic_chapter
 			case 6:				
 				//Primer tramo de rieles
 				if (pot0==0){
+					local lab_t = my_tile(label3_lim)
+					local lab = lab_t.find_object(mo_label)
+					if(pos.y > lab_t.y && lab && lab.get_owner().nr == 0){
+						if(tool_id==tool_build_way)
+							return ""
+					}
 					if (pos.x>=st3_way_lim.a.x && pos.y>=st3_way_lim.a.y && pos.x<=st3_way_lim.b.x && pos.y<=st3_way_lim.b.y){			
 						if(tool_id==tool_build_way || tool_id==4113 || tool_id==tool_remover)
 							return null						
@@ -1514,9 +1524,7 @@ class tutorial.chapter_03 extends basic_chapter
 				//Segundo tramo de rieles
 				if (pot1==1&&pot2==0){
 					if (pos.x>=st4_way_lim.a.x && pos.y>=st4_way_lim.a.y && pos.x<=st4_way_lim.b.x && pos.y<=st4_way_lim.b.y){
-						
-							return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
-						
+							return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)					
 					}
 					if (pos.x>=bord4_lim.a.x && pos.y>=bord4_lim.a.y && pos.x<=bord4_lim.b.x && pos.y<=bord4_lim.b.y){
 						if (!way && label && label.get_text()=="X"){

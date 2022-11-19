@@ -4,12 +4,12 @@
  * 
  *  Can NOT be used in network game !
  */
-const version = 1630
+const version = 1640
 map.file = "tutorial64.sve"
 scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
 scenario.author            = "Yona-TYT"
-scenario.version           = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10) +""
+scenario.version           = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10) +" beta"
 scenario.translation      <- ttext("Translator")
 
 resul_version <- {pak= false , st = false}
@@ -30,6 +30,8 @@ scr_jump <- true
 
 gl_percentage <- 0
 persistent.gl_percentage <- 0
+
+persistent.r_way_list <- {}				//Save way list in fullway 
 
 //----------------------------------------------------------------
 
@@ -255,6 +257,11 @@ function get_about_text(pl)
 	return about
 }
 
+function get_debug_text(pl)
+{
+	return ""
+}
+
 function start()
 {
 	gui_delay = false
@@ -369,8 +376,8 @@ function is_work_allowed_here(pl, tool_id, pos)
 
 function fail_count_message(result, tool_id)
 {
-	//gui.add_message(result)
-	if(tool_id != tool_build_tunnel){
+	//gui.add_message(result+" "+fail_count)
+	if(tool_id != tool_build_tunnel && result != ""){
 		//gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)
 		if (fail_count && result != null){
 			fail_count++
@@ -498,6 +505,8 @@ function resume_game()
 		persistent.glsw[j]=glsw[j]
 	}
 
+	r_way_list = persistent.r_way_list
+
 	load_chapter(persistent.chapter,0)      // load correct chapter for player=0
 
 	chapter.step = persistent.step		// set chapter step from persistent
@@ -623,6 +632,11 @@ function get_set_name(name)
 	name = name.slice(0, s)
 	name = name.tolower()
 	return name
+}
+
+function coord3d_to_key(c)
+{
+	return ("coord3d_" + c.x + "_" + c.y + "_" + c.z).toalnum();
 }
 
 // END OF FILE
