@@ -1524,6 +1524,8 @@ class basic_chapter
 					return res
 				}
 				else{
+					r_way_list = {}
+					persistent.r_way_list = r_way_list
 					res.r = true
 					return res
 				}

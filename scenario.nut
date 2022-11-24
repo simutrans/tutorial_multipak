@@ -363,7 +363,7 @@ function get_about_text(pl)
 
 function get_debug_text(pl)
 {
-	return ""
+	return null
 }
 
 function start()
