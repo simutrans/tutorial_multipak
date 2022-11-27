@@ -2827,33 +2827,33 @@ class basic_chapter
 		return null
 	}
 
-	function delay_mark_tile_list(c_list, siz, stop = false)
+	function delay_mark_tile_list(list, m_buil, stop = false)
 	{
 		if (stop){
-			for (local j = 0 ;j<siz;j++){
-				local tile = tile_x(c_list[j].x,c_list[j].y,0)
-				tile.unmark()
-
+			foreach(t in list){
+				local buil = m_buil ? t.find_object(mo_building): null
+				buil ? buil.unmark() : t.unmark()
 			}
 			return true
 		}
-		if(tile_delay_list>=2){
-			for (local j = 0 ;j<siz;j++){
-				local tile = tile_x(c_list[j].x,c_list[j].y,0)
-				tile.mark()
+		if(tile_delay_list>=3){
+			foreach(t in list){
+				//gui.add_message("list: "+t.x)
+				local buil = m_buil ? t.find_object(mo_building): null
+				buil ? buil.mark() : t.mark()
 			}
 			tile_delay_list = 0
 			return false
 		}
 		else {
-			for (local j = 0 ;j<siz;j++){
-				local tile = tile_x(c_list[j].x,c_list[j].y,0)
-				tile.unmark()
+			foreach(t in list){
+				local buil = m_buil ? t.find_object(mo_building): null
+				buil ? buil.unmark() : t.unmark()
 			}
+
 			tile_delay_list++
 			return true
 		}
-		
 	}
 
 	function delay_mark_tile(coora, coorb, opt, stop = false)

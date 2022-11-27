@@ -365,10 +365,10 @@ class tutorial.chapter_02 extends basic_chapter
 		switch (this.step) {
 			case 1:
 				local next_mark = true
-				local c_list = [coordb, coorda, c_dep]
-				local siz = c_list.len()
+				local c_list = [my_tile(coordb), my_tile(coorda), my_tile(c_dep)]
+				local m_buil = true
 				try {
-					 next_mark = delay_mark_tile_list(c_list, siz,0)
+					 next_mark = delay_mark_tile_list(c_list, m_buil)
 				}
 				catch(ev) {
 					return 0

@@ -47,13 +47,11 @@ class tutorial.chapter_03 extends basic_chapter
 
 	//Step 1 =====================================================================================
 	//Productor
-	f1name = "Nutzwald"
-	f1_coord = coord(123,160)
+	fac_1 = {c = coord(123,160), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.wood}
 	f1_lim = {a = coord(123,160), b = coord(125,162)}
 	
 	//Fabrica
-	f2name = "SaegewerkMHz"
-	f2_coord = coord(93,153)
+	fac_2 = {c = coord(93,153), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.plan}
 	f2_lim = {a = coord(93,153), b = coord(94,154)}
 
 	//Step 2 =====================================================================================
@@ -99,7 +97,6 @@ class tutorial.chapter_03 extends basic_chapter
 	loc1_load = 100
 	loc1_wait = 0
 	f1_reached = 60
-	f1_good = good_alias.wood
 
 	//Step 6 =====================================================================================
 	c_lock = [coord(60,10), coord(77,25)]  //Futuros transformadores
@@ -146,10 +143,8 @@ class tutorial.chapter_03 extends basic_chapter
 	loc2_wait = 0
 
 	//Consumidor Final
-	f3name = "Materialswholesale"
-	f3_coord = coord(110,190)
+	fac_3 = {c = coord(110,190), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.plan}
 	f3_reached = 30
-	f3_good = good_alias.plan
 
 	//Step 8 =====================================================================================
 	//Tramo de via para el tunel
@@ -225,7 +220,9 @@ class tutorial.chapter_03 extends basic_chapter
 					{a = coord(120,380), b= coord(120,383)}, {a = coord(121,326), b= coord(121,329)}, 
 					{a = coord(121,266), b= coord(121,269)}, {a = coord(116,197), b = coord(119,197)}
 				]
-	sch_list = [coord(55,198), coord(116,198), coord(120,266), coord(120,326), coord(120,380), coord(120,326), coord(120,266), coord(116,198)]
+	sch_list =	[	coord(55,198), coord(116,198), coord(120,266), coord(120,326),
+					coord(120,380), coord(120,326), coord(120,266), coord(116,198)
+				]
 	d3_cnr = 3
 	tmp_d3_cnr = 0
 
@@ -250,6 +247,20 @@ class tutorial.chapter_03 extends basic_chapter
 	function start_chapter(){  //Inicia solo una vez por capitulo
 		rules.clear()
 		set_all_rules(0)
+
+		local t = my_tile(fac_1.c)
+		local buil = t.find_object(mo_building)
+		if(buil) {
+			fac_1.c_list = buil.get_tile_list()
+			fac_1.name = translate(buil.get_name())
+		}
+
+		t = my_tile(fac_2.c)
+		buil = t.find_object(mo_building)
+		if(buil) {
+			fac_2.c_list = buil.get_tile_list()
+			fac_2.name = translate(buil.get_name())
+		}
 
 		start_lvl_z = c_tunn2.a.z
 		end_lvl_z = c_tunn2.b.z
@@ -552,12 +563,12 @@ class tutorial.chapter_03 extends basic_chapter
 
 				break
 		}
-		text.f1 = f1_coord.href(translate(f1name)+" ("+f1_coord.tostring()+")")
-		text.f2 = f2_coord.href(translate(f2name)+" ("+f2_coord.tostring()+")")
-		text.f3 = f3_coord.href(translate(f3name)+" ("+f3_coord.tostring()+")")
-		text.cfar=f1_coord.href(translate(f1name)+" ("+f1_coord.tostring()+")")
-		text.cmi=f2_coord.href(translate(f2name)+" ("+f2_coord.tostring()+")")
-		text.cba=f3_coord.href(translate(f3name)+" ("+f3_coord.tostring()+")")
+		text.f1 = fac_1.c.href(translate(fac_1.name)+" ("+fac_1.c.tostring()+")")
+		text.f2 = fac_2.c.href(translate(fac_2.name)+" ("+fac_2.c.tostring()+")")
+		text.f3 = fac_3.c.href(translate(fac_3.name)+" ("+fac_3.c.tostring()+")")
+		text.cfar=fac_1.c.href(translate(fac_1.name)+" ("+fac_1.c.tostring()+")")
+		text.cmi=fac_2.c.href(translate(fac_2.name)+" ("+fac_2.c.tostring()+")")
+		text.cba=fac_3.c.href(translate(fac_3.name)+" ("+fac_3.c.tostring()+")")
 		text.cdep=c_dep1.href("("+c_dep1.tostring()+")")
 		text.way1=c_dep2.href("("+c_dep2.tostring()+")")
 
@@ -582,8 +593,8 @@ class tutorial.chapter_03 extends basic_chapter
 		text.tool2 = tool_alias.rail
 		text.tool3 = tool_alias.land
 
-		text.good1 = translate(f1_good)
-		text.good2 = translate(f3_good)
+		text.good1 = translate(fac_1.good)
+		text.good2 = translate(fac_2.good)
 		return text
 
 	}
@@ -598,41 +609,31 @@ class tutorial.chapter_03 extends basic_chapter
 		switch (this.step) {
 			case 1:
 				local next_mark = false
-				if(pot0==0){
+				if(pot0==0 || pot1 == 0){
+					local list = fac_2.c_list
+					local m_buil = true
 					try {
-						next_mark = delay_mark_tile(f2_lim.a, f2_lim.b, 0)
+						next_mark = delay_mark_tile_list(list, m_buil)
 					}
 					catch(ev) {
 						return 0
 					}
-				}
-				else if (pot0==1 && pot1==0){
-					try {
-						next_mark = delay_mark_tile(f2_lim.a, f2_lim.b, 0)
-					}
-					catch(ev) {
-						return 0
-					}
-					if(next_mark)
+					if(next_mark && pot0 == 1){
 						pot1=1
+					}
 				}
-				else if (pot1==1 && pot2==0){
+				else if (pot2==0 || pot3==0){
+					local list = fac_1.c_list
+					local m_buil = true
 					try {
-						next_mark = delay_mark_tile(f1_lim.a, f1_lim.b, 0)
+						next_mark = delay_mark_tile_list(list, m_buil)
 					}
 					catch(ev) {
 						return 0
 					}
-				}
-				else if (pot2==1 && pot3==0){
-					try {
-						next_mark = delay_mark_tile(f1_lim.a, f1_lim.b, 0)
-					}
-					catch(ev) {
-						return 0
-					}
-					if(next_mark)
+					if(next_mark && pot2 == 1){
 						pot3=1
+					}
 				}
 				else if (pot3==1 && pot4==0){
 					this.next_step()
@@ -845,7 +846,7 @@ class tutorial.chapter_03 extends basic_chapter
 				local wt = wt_rail
 
 				if (current_cov == ch3_cov_lim1.b){
-					reached = get_reached_target(f2_coord, f1_good)
+					reached = get_reached_target(fac_2.c, fac_1.good)
 					if (reached>= f1_reached){
 						pot1=1
 					}	
@@ -1069,7 +1070,7 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 
 				else if(current_cov == ch3_cov_lim2.b){
-					reached = get_reached_target(f3_coord, f3_good)
+					reached = get_reached_target(fac_3.c, fac_2.good)
 					if (reached>=f3_reached){
 						pot3=1
 					}
@@ -1331,26 +1332,28 @@ class tutorial.chapter_03 extends basic_chapter
 
 		switch (this.step) {
 			case 1:
-				if ((pos.x>=f2_lim.a.x)&&(pos.y>=f2_lim.a.y)&&(pos.x<=f2_lim.b.x)&&(pos.y<=f2_lim.b.y)){
-					if (tool_id == 4096){
-						if (pot0==0){
-							pot0=1
-							return null
-						}			
+				if (tool_id == 4096){
+					if (pot0==0){
+						local list = fac_2.c_list
+						foreach(t in list){
+							if(pos.x == t.x && pos.y == t.y) {
+								pot0 = 1
+								return null
+							}
+						}
 					}
-					else
-						translate("You must use the inspection tool")+" ("+pos.tostring()+")."	
+					else if (pot1==1){
+						local list = fac_1.c_list
+						foreach(t in list){
+							if(pos.x == t.x && pos.y == t.y) {
+								pot2 = 1
+								return null
+							}
+						}
+					}
 				}
-				if ((pos.x>=f1_lim.a.x)&&(pos.y>=f1_lim.a.y)&&(pos.x<=f1_lim.b.x)&&(pos.y<=f1_lim.b.y)){
-					if (tool_id == 4096){
-						if (pot1==1){
-							pot2=1
-							return null
-						}			
-					}
-					else
-						translate("You must use the inspection tool")+" ("+pos.tostring()+")."	
-				}	
+				else
+					return translate("You must use the inspection tool")+" ("+pos.tostring()+")."
 				break;
 			//Conectando los rieles con la segunda fabrica
 			case 2:
@@ -1901,7 +1904,10 @@ class tutorial.chapter_03 extends basic_chapter
 				local time = loc1_wait
 				local c_list = [st1_list[0], st2_list[0]]
 				local siz = c_list.len()
-				return set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+				result =  set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+				if(result != null)
+					reset_stop_flag()
+				return result
 			break
 
 			case 7:
@@ -1910,7 +1916,10 @@ class tutorial.chapter_03 extends basic_chapter
 				local time = loc2_wait
 				local c_list = [st3_list[0], st4_list[0]]
 				local siz = c_list.len()
-				return set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+				result =  set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+				if(result != null)
+					reset_stop_flag()
+				return result
 			break
 
 			case 11:
@@ -1951,7 +1960,7 @@ class tutorial.chapter_03 extends basic_chapter
 					return 0
 				local cov = 1
 				local veh = 6
-				local good_list = [good_desc_x(f1_good).get_catg_index()] //Wood
+				local good_list = [good_desc_x(fac_1.good).get_catg_index()] //Wood
 				local name = loc1_name_obj
 				local st_tile = st1_list.len() // 3
 				local is_st_tile = true
@@ -1959,7 +1968,7 @@ class tutorial.chapter_03 extends basic_chapter
 
 				if (result!=null){
 					backward_pot(0)
-					local good = translate(f1_good)
+					local good = translate(fac_1.good)
 					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 
@@ -1989,14 +1998,14 @@ class tutorial.chapter_03 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep2.tostring()+")."	
 				local cov = 1
 				local veh = 6
-				local good_list = [good_desc_x(f3_good).get_catg_index()]
+				local good_list = [good_desc_x(fac_2.good).get_catg_index()]
 				local name = loc2_name_obj
 				local st_tile = st3_list.len() // 3
 				local is_st_tile = true
 				result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile, is_st_tile)
 
 				if (result!=null){
-					local good = translate(f3_good)
+					local good = translate(fac_2.good)
 					return train_result_message(result, translate(name), good, veh, cov, st_tile)
 				}
 				if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
