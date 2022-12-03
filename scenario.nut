@@ -480,7 +480,7 @@ function is_work_allowed_here(pl, tool_id, pos)
 
 function fail_count_message(result, tool_id)
 {
-	//gui.add_message(result+" "+fail_count)
+	gui.add_message(result+" ")
 	//Desabilitado
 	/*if(tool_id != tool_build_tunnel && result != ""){
 		//gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)

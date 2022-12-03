@@ -171,9 +171,7 @@ class tutorial.chapter_03 extends basic_chapter
 	c_tunn2_lim = {b = coord(91,194), a = coord(63,202)}
 	c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8)}		//Inicio y Fin de la via (fullway)
 
-	c_lock_tunn = [coord(65,199),coord(65,197)]
-
-	sl_dir1 = 28 //Direccion de la ladera 
+	dir_1 = {s = 28, r = 2 }		//Direccion de la slope y Way ribi
 	layer_lvl = 6 
 	start_lvl_z = 6
 	end_lvl_z = 8
@@ -195,11 +193,19 @@ class tutorial.chapter_03 extends basic_chapter
 
 	//Step 10 =====================================================================================
 	dir_list = [0,5,2,6,5,2,2,2]
-	c_cate_list1 =	[	{a = coord3d(55,198,11), b = coord3d(120,198,0) }, {a = coord3d(120,198,0), b = coord3d(120,383,9) }, 
-						{a = coord3d(121,383,9), b = coord3d(121,197,0)}, {a = coord3d(120,197,0), b = coord3d(55,197,11)}
+	c_cate_list1 =	[	{a = coord3d(55,198,11), b = coord3d(90,198,6), dir = 0, tunn = true},
+						{a = coord3d(90,198,6), b = coord3d(120,198,0), dir = 0, tunn = false},
+						{a = coord3d(120,198,0), b = coord3d(120,383,9), dir = 5, tunn = false}, 
+						{a = coord3d(121,383,9), b = coord3d(121,197,0), dir = 2, tunn = false},
+						{a = coord3d(120,197,0), b = coord3d(91,197,6), dir = 6, tunn = false},
+						{a = coord3d(91,197,6), b = coord3d(55,197,11), dir = 6, tunn = true}
 					]
-	c_cate_lim1 =	[	{a = coord3d(55,198,11), b = coord3d(120,198,0) }, {a = coord3d(120,198,0), b = coord3d(120,383,9) }, 
-						{b = coord3d(121,383,9), a = coord3d(121,197,0)}, {b = coord3d(120,197,0), a = coord3d(55,197,11)}
+	c_cate_lim1 =	[	{a = coord3d(55,198,11), b = coord3d(90,198,6) },
+						{a = coord3d(90,198,6), b = coord3d(120,198,0) },
+						{a = coord3d(120,198,0), b = coord3d(120,383,9) }, 
+						{b = coord3d(121,383,9), a = coord3d(121,197,0)}, 
+						{b = coord3d(120,197,0), a = coord3d(91,197,6)},
+						{b = coord3d(91,197,6), a = coord3d(55,197,11)}
 					]
 
 	//Limites del deposito y rieles
@@ -422,7 +428,7 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 				else if(pot3==0){
 					local slope = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
-					if(r_way.c.z<end_lvl_z && slope != sl_dir1){
+					if(r_way.c.z<end_lvl_z && slope != dir_1.s){
 						text = ttextfile("chapter_03/08_4-5.txt")
 						text.tx = ttext("<em>[4/5]</em>")
 						local tx_list = ""
@@ -1151,7 +1157,7 @@ class tutorial.chapter_03 extends basic_chapter
 							if(glsw[j] == 0){
 
 								local slope = tile.get_slope()
-								if (slope== sl_dir1 /*28*/){
+								if (slope== dir_1.s /*28*/){
 									c_tun_list[j].x = tile.x
 									c_tun_list[j].y = tile.y
 									c_tun_list[j].z = tile.z
@@ -1242,8 +1248,8 @@ class tutorial.chapter_03 extends basic_chapter
 							local coora = coord3d(c_cate_list1[j].a.x, c_cate_list1[j].a.y, c_cate_list1[j].a.z)
 							local coorb = coord3d(c_cate_list1[j].b.x, c_cate_list1[j].b.y, c_cate_list1[j].b.z)
 							local elect = mo_wayobj
-							local dir = dir_list[j]
-							local tunn = true
+							local dir = c_cate_list1[j].dir
+							local tunn = c_cate_list1[j].tunn
 							
 							r_way = get_fullway(coora, coorb, dir, elect, tunn)
 							if (r_way.r){
@@ -1630,6 +1636,7 @@ class tutorial.chapter_03 extends basic_chapter
 							return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
 						}
 					}
+					else return  translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
 				}
 				//Construye un puente
 				else if (pot0==1 && pot1==0){
@@ -1663,7 +1670,7 @@ class tutorial.chapter_03 extends basic_chapter
 					local squ_bor = square_x(r_way.c.x, r_way.c.y)
 					local z_bor = squ_bor.get_ground_tile().z
 					local slp_way = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
-					local plus = r_way.p//slp_way==sl_dir1 && z_bor!=r_way.c.z?1:0 //compensacion de altura en pendientes
+					local plus = r_way.p//slp_way==dir_1.s && z_bor!=r_way.c.z?1:0 //compensacion de altura en pendientes
 					local res = underground_message(plus)
 
 					if(res != null)
@@ -1692,7 +1699,7 @@ class tutorial.chapter_03 extends basic_chapter
 								return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
 							}
 							local under = c_tunn2.a.z
-							local dir = 2
+							local dir = dir_1.r
 							result = under_way_check(under, dir)
 							local start = c_tunn1.a
 							if(result != null && r_way.c.x != start.x && r_way.c.y != start.y)
@@ -1710,7 +1717,8 @@ class tutorial.chapter_03 extends basic_chapter
 								return result
 							}
 							if(pos.x > r_way.c.x -3){
-								if(slp_way == sl_dir1 )
+								//gui.add_message(""+slp_way+" "+ dir_1.s)
+								if(slp_way == dir_1.s )
 									return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
 								else
 									return translate("You must use the tool to raise the ground here")+" ("+r_way.c.tostring()+")."
@@ -1740,10 +1748,10 @@ class tutorial.chapter_03 extends basic_chapter
 						if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
 							local slp_way = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
 							local end_z = c_tunn2.b.z
-							if (slp_way == sl_dir1)
+							if (slp_way == dir_1.s)
 								return translate("The slope is ready.")
 							else if (pos.z < end_z){
-								local dir = 2		
+								local dir = dir_1.r	
 								local under = end_z
 								result = under_way_check(under, dir)
 								return result
