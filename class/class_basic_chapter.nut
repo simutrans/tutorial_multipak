@@ -1455,7 +1455,7 @@ class basic_chapter
 				}
 			}
 			else{
-			gui.add_message("way "+coora.x+","+coora.y+","+coora.z+"  - "+res.z+"")
+				//gui.add_message("way "+coora.x+","+coora.y+","+coora.z+"  - "+res.z+"")
 				if(res.z != null){
 					for(local j = 0;j<3;j++){
 						local t_test = squ.get_tile_at_height(tile.z + j)

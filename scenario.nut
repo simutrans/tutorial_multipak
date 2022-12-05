@@ -26,7 +26,7 @@ script_test <- true
 
 persistent.st_nr <- array(30)			//Numero de estaciones/paradas
 
-scr_jump <- true 
+scr_jump <- false 
 
 gl_percentage <- 0
 persistent.gl_percentage <- 0
@@ -215,12 +215,18 @@ function script_text()
 		gui.add_message(""+translate("Advance not allowed"))
 		return null
 	}
-	if(/*scr_jump*/ persistent.chapter<7){
+	if(persistent.chapter<7){
+		if(scr_jump)
+			return null
+		else
+			scr_jump = true
+
 		//gui.add_message(""+persistent.chapter)
 		local result = null
-		scr_jump = false
 		result = chapter.script_text()
 		if(result == 0) gui.add_message(""+translate("Advance not allowed")+"")
+
+		scr_jump = false
 		return result
 	}
 //	else gui.add_message(""+translate("Updating text ... Waiting ...")+"")
@@ -297,22 +303,17 @@ function get_info_text(pl)
 	local help = ""
 	local i = 0
 	//foreach (chap in tutorial)
-	for (i=1;i<=chapter_max;i++)
-		help+= "<em>"+translate("Chapter")+" "+(i)+"</em> - "+translate(tutorial["chapter_"+(i<10?"0":"")+i].chapter_name)+"<br>"
-	info.list_of_chapters = help
+	//for (i=1;i<=chapter_max;i++)
+		//help+= "<em>"+translate("Chapter")+" "+(i)+"</em> - "+translate(tutorial["chapter_"+(i<10?"0":"")+i].chapter_name)+"<br>"
+	//info.list_of_chapters = help
 
-	info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
+	//info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
     return info
 }
 
 function get_rule_text(pl)
 {
-	return chapter.give_title() + chapter.get_rule_text( pl, my_chapter() )
-}
-
-function get_goal_text(pl)
-{
-		/*local tx = ""
+		local tx = ""
 		local j=0
 		for(j;j<gcov_nr;j++){
 			local result = true
@@ -331,13 +332,19 @@ function get_goal_text(pl)
 			}
 
 			if (result) {
-				tx += "<em>["+j+"]</em> "+id_save[j]+"::"+cov_save[j].id+" <a href=\"("+cov_save[j].get_pos().tostring()+")\"> ("+cov_save[j].get_pos().tostring()+")</a> "+cov_save[j].get_name()+"<br>"
+				tx += "<em>["+j+"]</em> "+id_save[j]+"::"+cov_save[j].id+" <a href=\"("+cov_save[j].get_pos().tostring()+")\"> ("+cov_save[j].get_pos().tostring()+")</a> "+cov_save[j].get_name()+" :: "+cov_save[j].id+"<br>"
 			}
 			else
 				tx += "<st>["+j+"]</st> "+id_save[j]+"::"+cov_save[j]+"<br>"
 		}
-		return tx*/
-	scr_jump = true
+
+		return tx
+	//return chapter.give_title() + chapter.get_rule_text( pl, my_chapter() )
+}
+
+function get_goal_text(pl)
+{
+
 	return chapter.give_title() + chapter.get_goal_text( pl, my_chapter() )
 }
 
@@ -404,7 +411,7 @@ function is_scenario_completed(pl)
 		gui_delay = false
 	}
 
-	//gui.add_message(""+current_cov+"  "+gall_cov+"")
+	gui.add_message(""+current_cov+"  "+gall_cov+"")
 	//Para los convoys ---------------------
 	if (gall_cov != current_cov) chapter.checks_convoy_removed(pl)
 	gall_cov = checks_all_convoys()
@@ -466,12 +473,15 @@ function is_work_allowed_here(pl, tool_id, pos)
 
 	//return tile_x(pos.x,pos.y,pos.z).find_object(mo_way).get_dirs()
 	if (pl != 0) return null
+	if(scr_jump){
+		return null
+	}
+	local result = translate("Action not allowed")
 	if (correct_cov){
 		local result = chapter.is_work_allowed_here(pl, tool_id, pos)
 		return fail_count_message(result, tool_id)
 	}
 	else {
-		local result = translate("Action not allowed")
 		if (tool_id==4108 || tool_id==4096)
 			result = null
 	}
@@ -524,7 +534,7 @@ function is_convoy_allowed(pl, convoy, depot)
 	//gui.add_message("Run ->"+current_cov+","+correct_cov+" - "+gall_cov+"")
 	if (pl != 0) return null
 	result = chapter.is_convoy_allowed(pl, convoy, depot)
-	//gui.add_message(""+result+"")
+	gui.add_message(""+result+"")
 	return result
 }
 

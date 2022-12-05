@@ -260,10 +260,10 @@ class tutorial.chapter_04 extends basic_chapter
 				local depot = t1.find_object(mo_depot_water)
 
 				if (!depot){
-					label_x.create(c_dep1, player_x(0), translate("Build Shipyard here!."))
+					label_x.create(c_dep1, player_x(pl), translate("Build Shipyard here!."))
 				}
 				else{
-					t1.remove_object(player_x(0), mo_label)
+					t1.remove_object(player_x(pl), mo_label)
 					glsw[0]=1
 				}
 				return 10+percentage
@@ -327,7 +327,7 @@ class tutorial.chapter_04 extends basic_chapter
 					local t = my_tile(sch_list2[1])
 					local dock4 = t.find_object(mo_building)
 					if (!dock4){
-					label_x.create(sch_list2[1], player_x(0), translate("Build a Dock here!."))
+					label_x.create(sch_list2[1], player_x(pl), translate("Build a Dock here!."))
 					}
 					else{
 						if (is_station_build(0, sch_list2[1], good_alias.goods)==null)
@@ -494,7 +494,7 @@ class tutorial.chapter_04 extends basic_chapter
 					}					
 					if(pos.x==sch_list2[1].x && pos.y==sch_list2[1].y){
 						if(tool_id==tool_build_station){
-							t.remove_object(player_x(0), mo_label)
+							t.remove_object(player_x(pl), mo_label)
 							return null
 						}	
 					}
@@ -698,6 +698,7 @@ class tutorial.chapter_04 extends basic_chapter
 
 	function script_text()
 	{
+		local pl = 0
 		switch (this.step) {
 			case 1:
 				this.next_step()
@@ -711,7 +712,7 @@ class tutorial.chapter_04 extends basic_chapter
 					local tile = my_tile(c_list[j])
 					tile.remove_object(player_x(1), mo_label)
 					local tool = command_x(tool_build_station)			
-					local err = tool.work(player_x(0), tile, name)
+					local err = tool.work(player_x(pl), tile, name)
 				}
 				return null
 				break;
@@ -722,11 +723,11 @@ class tutorial.chapter_04 extends basic_chapter
 				local label = t1.find_object(mo_label)
 
 				if (label){
-					t1.remove_object(player_x(0), mo_label)
+					t1.remove_object(player_x(pl), mo_label)
 				}
 				
 				local tool = command_x(tool_build_depot)			
-				local err = tool.work(player_x(0), t1, sc_dep_name)
+				local err = tool.work(player_x(pl), t1, sc_dep_name)
 
 				if (t1.find_object(mo_depot_water)){
 					this.next_step()
@@ -736,10 +737,10 @@ class tutorial.chapter_04 extends basic_chapter
 
 			case 4:
 				// Para enrutar barcos
-				local pl = player_x(0)
+				local player = player_x(pl)
 				local c_depot = my_tile(c_dep1)
 
-				comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+				comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
 				local depot = c_depot.find_object(mo_depot_water)
 				local good_nr = good_desc_x(f1_good).get_catg_index()  //Fuels
@@ -761,7 +762,7 @@ class tutorial.chapter_04 extends basic_chapter
 						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
 						local convoy = depot.get_convoy_list()
-						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+						comm_start_convoy(player, gl_wt, sched, convoy, depot)
 					}
 				}	
 				comm_script = false
@@ -810,16 +811,16 @@ class tutorial.chapter_04 extends basic_chapter
 						t.remove_object(player_x(1), mo_label)
 					}
 					local tool = command_x(tool_build_station)			
-					local err = tool.work(player_x(0), t, sc_dock_name2)
+					local err = tool.work(player_x(pl), t, sc_dock_name2)
 
 					pot1=1
 				}
 				if (current_cov> ch4_cov_lim2.a && current_cov< ch4_cov_lim2.b){
 
-					local pl = player_x(0)
+					local player = player_x(pl)
 					local c_depot = my_tile(c_dep1)
 
-					comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+					comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
 					local depot = c_depot.find_object(mo_depot_water)
 					local good_nr = good_desc_x(f2_good).get_catg_index()  //Fuels
@@ -836,7 +837,7 @@ class tutorial.chapter_04 extends basic_chapter
 						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
 						local convoy = depot.get_convoy_list()
-						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+						comm_start_convoy(player, gl_wt, sched, convoy, depot)
 					}
 					comm_script = false
 					pot2=1
@@ -850,7 +851,7 @@ class tutorial.chapter_04 extends basic_chapter
 
 				if (!depot){
 					local t = command_x(tool_build_depot)			
-					local err = t.work(player_x(0), t_dep, sc_dep_name)
+					local err = t.work(player_x(pl), t_dep, sc_dep_name)
 				}
 				//Para los muelles Pasajeros
 				local c_list = dock_list2
@@ -858,19 +859,19 @@ class tutorial.chapter_04 extends basic_chapter
 				for(local j =0;j<c_list.len();j++){
 					local t = my_tile(c_list[j])
 					t.unmark()
-					t.remove_object(player_x(0), mo_label)
+					t.remove_object(player_x(pl), mo_label)
 					local tool = command_x(tool_build_station)			
-					tool.work(player_x(0), t, name)
+					tool.work(player_x(pl), t, name)
 					glsw[j]=1
 				}
 				return null
 				break;
 
 			case 7:
-				local pl = player_x(0)
+				local player = player_x(pl)
 				local c_depot = my_tile(c_dep1)
 
-				comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+				comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
 				local depot = c_depot.find_object(mo_depot_water)
 
@@ -892,7 +893,7 @@ class tutorial.chapter_04 extends basic_chapter
 					return 0
 
 				local convoy = depot.get_convoy_list()
-				comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+				comm_start_convoy(player, gl_wt, sched, convoy, depot)
 				
 				return null
 				break;

@@ -313,7 +313,7 @@ class tutorial.chapter_06 extends basic_chapter
 			case 2:
 
 				if(current_cov == ch6_cov_lim1.b){
-				    this.next_step()
+					this.next_step()
 				}
 
 				return 50
@@ -678,35 +678,36 @@ class tutorial.chapter_06 extends basic_chapter
 				local wt = gl_wt
 				if ((depot.x != c_dep1.x)||(depot.y != c_dep1.y))
 					return translate("You must select the deposit located in")+" ("+c_dep1.tostring()+")."
-				local cov = d1_cnr
-				local veh = 1
-				local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
-				local name = plane1_obj
-				local st_tile = 1
-
-				result = is_convoy_correct(depot, cov, veh,good_list, name, st_tile)
-				if (result!=null){
-					local name = translate(plane1_obj)
-					local load = translate(good_alias.passa)
-					if (result==0)
-						return format(translate("You must select a [%s]."),translate(name))
-
-					if (result==1)
-						return format(translate("The number of aircraft in the hangar must be [%d]."),cov)
-
-					if (result==2)
-						return format(translate("The number of convoys must be [%d], press the [Sell] button."),cov)
-
-					if (result==3)
-						return format(translate("The Plane must be for [%s]."),load)
-
-					if (result==4)
-						return translate("Extensions are not allowed.")
-
-					if (result==5)
-						return format(translate("The number of planes in the hangar must be [%d], use the [sell] button."),cov)
-				}
 				if (current_cov>ch6_cov_lim1.a && current_cov<ch6_cov_lim1.b){
+					local cov = d1_cnr
+					local veh = 1
+					local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
+					local name = plane1_obj
+					local st_tile = 1
+
+					result = is_convoy_correct(depot, cov, veh,good_list, name, st_tile)
+					if (result!=null){
+						local name = translate(plane1_obj)
+						local load = translate(good_alias.passa)
+						if (result==0)
+							return format(translate("You must select a [%s]."),translate(name))
+
+						if (result==1)
+							return format(translate("The number of aircraft in the hangar must be [%d]."),cov)
+
+						if (result==2)
+							return format(translate("The number of convoys must be [%d], press the [Sell] button."),cov)
+
+						if (result==3)
+							return format(translate("The Plane must be for [%s]."),load)
+
+						if (result==4)
+							return translate("Extensions are not allowed.")
+
+						if (result==5)
+							return format(translate("The number of planes in the hangar must be [%d], use the [sell] button."),cov)
+					}
+
 					local selc = 0
 					local load = plane1_load
 					local time = plane1_wait
@@ -793,7 +794,7 @@ class tutorial.chapter_06 extends basic_chapter
 
 	function script_text()
 	{
-		local pl = player_x(0)
+		local player = player_x(0)
 		switch (this.step) {
 			case 1:
 				// Pista de aterrizaje --------------------------
@@ -824,7 +825,7 @@ class tutorial.chapter_06 extends basic_chapter
 					coora = my_tile(c1_track.a)
 					coorb = my_tile(c1_track.b)
 					local t = command_x(tool_build_way)
-					t.work(player_x(0), coora, coorb, obj1_way_name)
+					t.work(player, coora, coorb, obj1_way_name)
 					pot0=1
 				}
 
@@ -859,21 +860,21 @@ class tutorial.chapter_06 extends basic_chapter
 					coorb = my_tile(c2_track.b)
 
 					local t = command_x(tool_build_way)
-					t.work(player_x(0), coora, coorb, obj2_way_name)
+					t.work(player, coora, coorb, obj2_way_name)
 					pot1 = 1
 				}
 				// Parada aerea ---------------------------------
 				if(pot2 == 0) {
 					local tile = my_tile(st1_pos)
 					local t = command_x(tool_build_station)			
-					t.work(player_x(0), tile, sc_sta1)
+					t.work(player, tile, sc_sta1)
 					pot2 = 1
 				}
 				// Terminal -------------------------------------
 				if(pot3 == 0) {
 					local tile = my_tile(st2_pos)
 					local t = command_x(tool_build_station)			
-					t.work(player_x(0), tile, sc_sta2)
+					t.work(player, tile, sc_sta2)
 					pot3 = 1
 				}
 
@@ -882,15 +883,15 @@ class tutorial.chapter_06 extends basic_chapter
 					local coora = my_tile(c_dep_lim1.a)
 					local coorb = my_tile(c_dep_lim1.b)
 					local t = command_x(tool_build_way)
-					t.work(player_x(0), coora, coorb, obj2_way_name)
+					t.work(player, coora, coorb, obj2_way_name)
 					local tile = my_tile(c_dep1)
 					t = command_x(tool_build_depot)			
-					t.work(player_x(0), tile, sc_dep1)
+					t.work(player, tile, sc_dep1)
 					pot4 = 1
 				}
 				if(pot5 == 0) {
 					local t = command_x(tool_make_stop_public)			
-					t.work(player_x(0), my_tile(st1_pos), "")
+					t.work(player, my_tile(st1_pos), "")
 					pot5 = 1
 				}
 				return null
@@ -899,7 +900,7 @@ class tutorial.chapter_06 extends basic_chapter
 				//gui.add_message(""+current_cov+" -- "+ch6_cov_lim1.a +" -- "+ ch6_cov_lim1.b)
 				if (current_cov> ch6_cov_lim1.a && current_cov< ch6_cov_lim1.b){
 
-					local pl = player_x(0)
+					local pl = player
 					local c_depot = my_tile(c_dep1)
 
 					try {
@@ -929,7 +930,7 @@ class tutorial.chapter_06 extends basic_chapter
 			break
 			case 3:
 				local c_depot = my_tile(c_dep2)
-				comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+				comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 				//gui.add_message(""+current_cov+" -- "+ch6_cov_lim2.a +" -- "+ ch6_cov_lim2.b)
 				if (current_cov>ch6_cov_lim2.a && current_cov<ch6_cov_lim2.b){
 					local good_nr = 0 //Passengers
@@ -952,7 +953,7 @@ class tutorial.chapter_06 extends basic_chapter
 							else
 								sched.entries.append(schedule_entry_x(my_tile(c_list[i]), 0, 0))
 						}
-						comm_start_convoy(pl, wt_road, sched, convoy, depot)
+						comm_start_convoy(player, wt_road, sched, convoy, depot)
 					}
 				}
 				return null
@@ -962,10 +963,10 @@ class tutorial.chapter_06 extends basic_chapter
 				if(pot0==0){
 
 					local tool = command_x(tool_build_depot)
-					tool.work(player_x(0), c_depot, sc_dep2)
+					tool.work(player, c_depot, sc_dep2)
 					pot0=1
 				}
-				comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+				comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 				//gui.add_message(""+current_cov+" -- "+ch6_cov_lim3.a +" -- "+ ch6_cov_lim3.b)
 				if (current_cov>ch6_cov_lim3.a && current_cov<ch6_cov_lim3.b){
 					local good_nr = 0 //Passengers
@@ -988,7 +989,7 @@ class tutorial.chapter_06 extends basic_chapter
 							else
 								sched.entries.append(schedule_entry_x(my_tile(c_list[i]), 0, 0))
 						}
-						comm_start_convoy(pl, wt_road, sched, convoy, depot)
+						comm_start_convoy(player, wt_road, sched, convoy, depot)
 					}
 				}
 				return null
