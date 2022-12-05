@@ -2521,8 +2521,6 @@ class tutorial.chapter_03 extends basic_chapter
 							local coorb = c_cate_list1[j].b
 							local t = command_x(tool_build_wayobj)		
 							local err = t.work(player_x(pl), coora, coorb, sc_caten_name)
-							gui.add_message("err: "+err)
-					
 						}
 		            }
 				}

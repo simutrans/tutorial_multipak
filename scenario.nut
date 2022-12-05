@@ -229,7 +229,6 @@ function script_text()
 		scr_jump = false
 		return result
 	}
-//	else gui.add_message(""+translate("Updating text ... Waiting ...")+"")
 	return null
 }
 
@@ -313,7 +312,7 @@ function get_info_text(pl)
 
 function get_rule_text(pl)
 {
-		local tx = ""
+		/*local tx = ""
 		local j=0
 		for(j;j<gcov_nr;j++){
 			local result = true
@@ -338,8 +337,8 @@ function get_rule_text(pl)
 				tx += "<st>["+j+"]</st> "+id_save[j]+"::"+cov_save[j]+"<br>"
 		}
 
-		return tx
-	//return chapter.give_title() + chapter.get_rule_text( pl, my_chapter() )
+		return tx*/
+	return chapter.give_title() + chapter.get_rule_text( pl, my_chapter() )
 }
 
 function get_goal_text(pl)
@@ -411,7 +410,7 @@ function is_scenario_completed(pl)
 		gui_delay = false
 	}
 
-	gui.add_message(""+current_cov+"  "+gall_cov+"")
+	//gui.add_message(""+current_cov+"  "+gall_cov+"")
 	//Para los convoys ---------------------
 	if (gall_cov != current_cov) chapter.checks_convoy_removed(pl)
 	gall_cov = checks_all_convoys()
@@ -490,7 +489,7 @@ function is_work_allowed_here(pl, tool_id, pos)
 
 function fail_count_message(result, tool_id)
 {
-	gui.add_message(result+" ")
+	//gui.add_message(result+" ")
 	//Desabilitado
 	/*if(tool_id != tool_build_tunnel && result != ""){
 		//gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)
@@ -534,7 +533,7 @@ function is_convoy_allowed(pl, convoy, depot)
 	//gui.add_message("Run ->"+current_cov+","+correct_cov+" - "+gall_cov+"")
 	if (pl != 0) return null
 	result = chapter.is_convoy_allowed(pl, convoy, depot)
-	gui.add_message(""+result+"")
+	//gui.add_message(""+result+"")
 	return result
 }
 

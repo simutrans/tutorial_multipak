@@ -1220,7 +1220,6 @@ class tutorial.chapter_02 extends basic_chapter
 					}
 				}
 				if (pot2==0){
-					gui.add_message("sssssss: "+c_way1.a +"  "+scr_jump)
 					local t = command_x(tool_build_way)			
 					local err = t.work(player_x(pl), c_way1.a, c_way1.b, sc_way_name)
 				}
