@@ -60,7 +60,7 @@ class tutorial.chapter_03 extends basic_chapter
 	st1_way_lim = {a = coord(120,163), b = coord(125,163)}		//Limites de la via para la estacion
 	bord1_lim = {a = coord(106,154), b = coord(120,167)}		//Marca area con "X"
 	label1_lim = coord(120,163)									//Indica el final de un tramo
-	c_way1 = {a = coord3d(125,163,0), b = coord3d(107,158,0)}	//Inicio y Fin de la via (fullway)
+	c_way1 = {a = coord3d(125,163,0), b = coord3d(107,158,0), dir = 6}	//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones del Productor
 	st1_list = [coord(125,163), coord(124,163), coord(123,163)]
@@ -78,7 +78,7 @@ class tutorial.chapter_03 extends basic_chapter
 	st2_way_lim = {a = coord(96,151), b = coord(96,155)}		//Limites de la via para la estacion
 	bord2_lim = {a = coord(95,155), b = coord(103,160)}			//Marca area con "X"
 	label2_lim = coord(96,155)									//Indica el final de un tramo
-	c_way3 = {a = coord3d(106,158,-1), b = coord3d(96,151,1)}	//Inicio y Fin de la via (fullway)
+	c_way3 = {a = coord3d(106,158,-1), b = coord3d(96,151,1), dir = 6}	//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones de la Fabrica
 	st2_list = [coord(96,151), coord(96,152), coord(96,153)]
@@ -103,10 +103,10 @@ class tutorial.chapter_03 extends basic_chapter
 
 	//Primer tramo de rieles
 	//--------------------------------------------------------------------------------------------
-	st3_way_lim = {a = coord(94,155), b = coord(94,160)}		//Limites de la via para la estacion
-	bord3_lim = {a = coord(91,160), b = coord(96,174)}			//Marca area con "X"
-	label3_lim = coord(94,160)									//Indica el final de un tramo
-	c_way4 = {a = coord3d(94,155,2), b = coord3d(96,172,3)}		//Inicio y Fin de la via (fullway)
+	st3_way_lim = {a = coord(94,155), b = coord(94,160)}					//Limites de la via para la estacion
+	bord3_lim = {a = coord(91,160), b = coord(96,174)}						//Marca area con "X"
+	label3_lim = coord(94,160)												//Indica el final de un tramo
+	c_way4 = {a = coord3d(94,155,2), b = coord3d(96,172,3), dir = 3}		//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones de la Fabrica
 	st3_list = [coord(94,155), coord(94,156), coord(94,157)]
@@ -115,16 +115,16 @@ class tutorial.chapter_03 extends basic_chapter
 	//Para el tunel
 	//------------------------------------------------------------------------------------------
 	c_tway_lim2 = {a = coord(96,172), b = coord(104,172)}
-	c_tunn1 = {a = coord3d(96,172,3), b = coord3d(104,172,3)}	//Inicio y Fin de la via (fullway)
+	c_tunn1 = {a = coord3d(96,172,3), b = coord3d(104,172,3), dir = 5}	//Inicio, Fin de la via y direccion(fullway)
 	brge2_z = 1
 	//-------------------------------------------------------------------------------------------
 
 	//Segundo tramo de rieles
 	//--------------------------------------------------------------------------------------------
-	st4_way_lim = {a = coord(109,186), b = coord(109,189)}		//Limites de la via para la estacion
-	bord4_lim = {a = coord(102,171), b = coord(110,186)}		//Marca area con "X"
-	label4_lim = coord(109,186)									//Indica el final de un tramo
-	c_way5 = {a = coord3d(104,172,3), b = coord3d(109,189,2)}	//Inicio y Fin de la via (fullway)
+	st4_way_lim = {a = coord(109,186), b = coord(109,189)}					//Limites de la via para la estacion
+	bord4_lim = {a = coord(102,171), b = coord(110,186)}					//Marca area con "X"
+	label4_lim = coord(109,186)												//Indica el final de un tramo
+	c_way5 = {a = coord3d(104,172,3), b = coord3d(109,189,2), dir = 5}		//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones del Consumidor
 	st4_list = [coord(109,189), coord(109,188), coord(109,187)]
@@ -149,7 +149,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//Step 8 =====================================================================================
 	//Tramo de via para el tunel
 	c_way6_lim = {a = coord(93,198), b = coord(114,198)}
-	c_way6 = {a = coord3d(114,198,0), b = coord3d(93,198,5)}		//Inicio y Fin de la via (fullway)
+	c_way6 = {a = coord3d(114,198,0), b = coord3d(93,198,5), dir = 123}		//Inicio, Fin de la via y direccion(fullway)
 	//------------------------------------------------------------------------------------------
 
 	//Para el puente
@@ -169,7 +169,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//Subterraneo
 	//------------------------------------------------------------------------------------------
 	c_tunn2_lim = {b = coord(91,194), a = coord(63,202)}
-	c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8)}		//Inicio y Fin de la via (fullway)
+	c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8), dir = null}		//Inicio, Fin de la via y direccion(fullway)
 
 	dir_1 = {s = 28, r = 2 }		//Direccion de la slope y Way ribi
 	layer_lvl = 6 
@@ -683,7 +683,7 @@ class tutorial.chapter_03 extends basic_chapter
 					local opt = 0
 					local coora = coord3d(c_way1.a.x, c_way1.a.y, c_way1.a.z)
 					local coorb = coord3d(c_way1.b.x, c_way1.b.y, c_way1.b.z)
-					local dir = 6
+					local dir = c_way1.dir
 					local obj = false
 					local wt = wt_rail
 
@@ -745,7 +745,7 @@ class tutorial.chapter_03 extends basic_chapter
 					local opt = 0
 					local coora = coord3d(c_way3.a.x, c_way3.a.y, c_way3.a.z)
 					local coorb = coord3d(c_way3.b.x, c_way3.b.y, c_way3.b.z)
-					local dir = 6
+					local dir = c_way3.dir
 					local obj = false
 					wayend = coorb
 
@@ -911,7 +911,7 @@ class tutorial.chapter_03 extends basic_chapter
 					local coora = coord3d(c_way4.a.x, c_way4.a.y, c_way4.a.z)
 					local coorb = coord3d(c_way4.b.x, c_way4.b.y, c_way4.b.z)
 					local obj = false
-					local dir = 3
+					local dir = c_way4.dir	// 3
 
 					wayend = coorb
 
@@ -948,7 +948,7 @@ class tutorial.chapter_03 extends basic_chapter
 					local coorb = coord3d(c_tunn1.b.x, c_tunn1.b.y, c_tunn1.b.z)
 					local obj = false
 					local tunnel = true
-					local dir = 5
+					local dir = c_tunn1.dir	// 5
 					wayend = coorb				
 					r_way = get_fullway(coora, coorb, dir, obj, tunnel)
 					if (r_way.r){
@@ -984,7 +984,7 @@ class tutorial.chapter_03 extends basic_chapter
 					local coora = coord3d(c_way5.a.x, c_way5.a.y, c_way5.a.z)
 					local coorb = coord3d(c_way5.b.x, c_way5.b.y, c_way5.b.z)
 					local obj = false
-					local dir = 5
+					local dir = c_way5.dir
 					wayend = coorb				
 					r_way = get_fullway(coora, coorb, dir, obj)
 					if (r_way.r){

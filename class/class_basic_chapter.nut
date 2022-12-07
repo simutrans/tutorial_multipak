@@ -1861,7 +1861,7 @@ class basic_chapter
 						local sq = square_x(pos.x,pos.y)
 						local sq_z = sq.get_ground_tile().z
 						local c_test = sq.get_tile_at_height(coor.z)
-						if(!c_test && !way && under_lv <= coor.z && pos.z < sq_z){
+						if((!c_test || !way) && under_lv <= coor.z && pos.z < sq_z){
 							//gui.add_message("pos: "+coor.z+" plus: "+ribi )
 							return null
 						//local slope = tile_x(pos.x, pos.y, pos.z).get_slope()

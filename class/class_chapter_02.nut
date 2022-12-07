@@ -81,7 +81,7 @@ class tutorial.chapter_02 extends basic_chapter
 
 	cty2 = {c = coord(129,154), name = ""}
 	c_way_limi1 = {a = coord(127,159), b = coord(133,186)}
-	c_way1 = {a = coord3d(130,160,0), b = coord3d(130,185,0)}
+	c_way1 = {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}	//Inicio, Fin de la via y direccion(fullway)
 	c_st0 = coord(126,187)
 
 	sch_list3 = [coord(126,187), coord(121,155), coord(127,155), coord(132,155), coord(135,153)]
@@ -616,7 +616,7 @@ class tutorial.chapter_02 extends basic_chapter
 						//Comprueba la conexion de la via
 						local coora = coord3d(c_way1.a.x,c_way1.a.y,c_way1.a.z)
 						local coorb = coord3d(c_way1.b.x,c_way1.b.y,c_way1.b.z)
-						local dir = 3
+						local dir = c_way1.dir
 						local obj = false		
 						local r_way = get_fullway(coora, coorb, dir, obj)
 
