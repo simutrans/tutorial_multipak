@@ -36,7 +36,7 @@ class tutorial.chapter_05 extends basic_chapter
 	//Para la carretera
 	//------------------------------------------------------------------------------------------
 	c_way_lim1 = {a = coord(127,209), b = coord(136,233)}
-	c_way1 = {a = coord3d(132,233,0), b = coord3d(131,209,-1, dir = 2)}	//Inicio, Fin de la via y direccion(fullway)
+	c_way1 = {a = coord3d(132,233,0), b = coord3d(131,209,-1), dir = 2}	//Inicio, Fin de la via y direccion(fullway)
 
 	//Limites del deposito y carretera
 	//--------------------------------------------------------------------------------------------

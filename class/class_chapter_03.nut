@@ -15,20 +15,6 @@ ch3_cov_lim2 <- {a = 5, b = 7}
 //Step 11 =====================================================================================
 ch3_cov_lim3 <- {a = 6, b = 10}
 
-
-//----------------Para las señales de paso------------------------
-persistent.sigcoord <- [{x=null, y=null}]
-sigcoord  <- [{x=null, y=null}]
-persistent.signal <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-gsignal <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-persistent.point <- [0,0,0,0,0,0,0,0,0,0,0]
-point <- [0,0,0,0,0,0,0,0,0]
-
-signal <-	[	{coor=coord3d(94,197,6), ribi=8}, {coor=coord3d(112,198,2), ribi=2}, 
-				{coor=coord3d(121,199,0), ribi=1}, {coor=coord3d(120,263,3), ribi=4},
-				{coor=coord3d(121,271,3), ribi=1}, {coor=coord3d(120,324,5), ribi=4},
-				{coor=coord3d(121,331,5), ribi=1}, {coor=coord3d(120,377,9), ribi=4}, 
-			]
 //----------------------------------------------------------------
 
 class tutorial.chapter_03 extends basic_chapter
@@ -189,7 +175,12 @@ class tutorial.chapter_03 extends basic_chapter
 						{a = coord(120,331), b = coord(120,377) }, {b = coord(121,377), a = coord(121,331) }
 					]
 	
-	signr = signal.len()
+
+	sign_list = [	{coor=coord3d(94,197,6), ribi=8}, {coor=coord3d(112,198,2), ribi=2}, 
+					{coor=coord3d(121,199,0), ribi=1}, {coor=coord3d(120,263,3), ribi=4},
+					{coor=coord3d(121,271,3), ribi=1}, {coor=coord3d(120,324,5), ribi=4},
+					{coor=coord3d(121,331,5), ribi=1}, {coor=coord3d(120,377,9), ribi=4}, 
+				]
 
 	//Step 10 =====================================================================================
 	dir_list = [0,5,2,6,5,2,2,2]
@@ -497,8 +488,9 @@ class tutorial.chapter_03 extends basic_chapter
 					text = ttextfile("chapter_03/09_2-2.txt")
 					text.tx = ttext("<em>[2/2]</em>")
 					local sigtxt = ""
-					for(local j=0;j<signr;j++){
-						local c = signal[j].coor
+					local list = sign_list
+					for(local j=0;j<list.len();j++){
+						local c = list[j].coor
 						if (glsw[j]==0){
 							local link = "<a href=\"("+c.x+","+c.y+")\">("+c.tostring()+")</a><br>"
 							sigtxt += ttext("<st>" + format(translate("Signal Nr.%d") + "</st> %s", j+1, link))
@@ -607,8 +599,6 @@ class tutorial.chapter_03 extends basic_chapter
 	
 	function is_chapter_completed(pl) {
 		local percentage=0
-		persistent.sigcoord = sigcoord
-		persistent.point = point
 		save_pot()
 		save_glsw()
 
@@ -1181,6 +1171,7 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 
 			case 9:
+				//Para las vias
 				if (pot0==0){
 		            for(local j=0;j<c_way_list1.len();j++){
 						if(glsw[j] == 0){
@@ -1213,22 +1204,26 @@ class tutorial.chapter_03 extends basic_chapter
 						}
 		            }
 				}
+				//Para las señales de paso
 				else if (pot0==1 && pot1==0){
 					local sign_nr=0
-					for(local j=0;j<signr;j++){
-						local tile = tile_x(signal[j].coor.x, signal[j].coor.y, signal[j].coor.z)
-						if (!tile.find_object(mo_signal) && !tile.find_object(mo_roadsign)){
-							label_x.create(signal[j].coor, player_x(1), translate("Place Singnal here!."))
-							tile.find_object(mo_way).mark()
+					for(local j=0;j<sign_list.len();j++){
+						local t = tile_x(sign_list[j].coor.x, sign_list[j].coor.y, sign_list[j].coor.z)
+						if(sigcoord){
+							t.find_object(mo_way).mark()
+						}
+						if ((!t.find_object(mo_signal) && !t.find_object(mo_roadsign) )){
+							label_x.create(sign_list[j].coor, player_x(1), translate("Place Singnal here!."))
+							t.find_object(mo_way).mark()
 						}
 						else{
-							local ribi = way_x(signal[j].coor.x, signal[j].coor.y, signal[j].coor.z).get_dirs_masked()
-							tile.remove_object(player_x(1), mo_label)			
-							if (ribi==signal[j].ribi){
-								tile.find_object(mo_way).unmark()
+							local ribi = way_x(sign_list[j].coor.x, sign_list[j].coor.y, sign_list[j].coor.z).get_dirs_masked()
+							t.remove_object(player_x(1), mo_label)			
+							if (ribi == sign_list[j].ribi){
+								t.find_object(mo_way).unmark()
 								sign_nr++
-								glsw[j]=1
-								if (sign_nr==signr){
+								glsw[j] = 1
+								if (sign_nr == sign_list.len()){
 									this.next_step()
 								}
 							}
@@ -1307,7 +1302,6 @@ class tutorial.chapter_03 extends basic_chapter
 				persistent.step=1
 				persistent.status.step = 1
 				reset_stop_flag()
-				persistent.point = null
 				return 100
 				break
 		}
@@ -1787,8 +1781,8 @@ class tutorial.chapter_03 extends basic_chapter
 					//Elimina las señales
 					if (tool_id==tool_remover){
 						if (sign || roadsign){
-							for(local j=0;j<signr;j++){
-								if (pos.x==signal[j].coor.x && pos.y==signal[j].coor.y){
+							for(local j=0;j<sign_list.len();j++){
+								if (pos.x == sign_list[j].coor.x && pos.y==sign_list[j].coor.y){
 									backward_glsw(j)
 									return null
 								}
@@ -1800,28 +1794,27 @@ class tutorial.chapter_03 extends basic_chapter
 					//Construye señales de paso					
 					if (tool_id==4116){
 						if (!sign){
-							for(local j=0;j<signr;j++){
-								local tile = tile_x(signal[j].coor.x, signal[j].coor.y, signal[j].coor.z)
+							for(local j=0;j<sign_list.len();j++){
+								local tile = tile_x(sign_list[j].coor.x, sign_list[j].coor.y, sign_list[j].coor.z)
 								local r
 								if (tile.find_object(mo_signal)){
-									r = get_signa(signal[j].coor,j,signal[j].ribi)
-									if (r==null)
-										return translate("The signal does not point in the correct direction")+" ("+signal[j].coor.tostring()+")."
+									r = get_signa(tile, j, sign_list[j].ribi)
+									if (r == null)
+										return translate("The signal does not point in the correct direction")+" ("+sign_list[j].coor.tostring()+")."
 								}
 								else
-									result = translate("Place a block signal here")+" ("+signal[j].coor.tostring()+")."
+									result = translate("Place a block signal here")+" ("+sign_list[j].coor.tostring()+")."
 
 								if (tile.find_object(mo_roadsign))
-									return translate("It must be a block signal!")+" ("+signal[j].coor.tostring()+")."
+									return translate("It must be a block signal!")+" ("+sign_list[j].coor.tostring()+")."
 							}	
 						}
-						for(local j=0;j<signr;j++){
-							local tile = tile_x(signal[j].coor.x, signal[j].coor.y, signal[j].coor.z)
+						for(local j=0;j<sign_list.len();j++){
+							local tile = tile_x(sign_list[j].coor.x, sign_list[j].coor.y, sign_list[j].coor.z)
 							if (tile.find_object(mo_roadsign))
-								return translate("It must be a block signal!")+" ("+signal[j].coor.tostring()+")."
-							if ((pos.x==signal[j].coor.x)&&(pos.y==signal[j].coor.y)){
-								if (label)point[0]++
-								return get_signa(pos,j,signal[j].ribi)
+								return translate("It must be a block signal!")+" ("+sign_list[j].coor.tostring()+")."
+							if ((pos.x == sign_list[j].coor.x) && (pos.y == sign_list[j].coor.y)){
+								return get_signa(t, j, sign_list[j].ribi)
 							}
 						}
 						return result
@@ -2480,9 +2473,9 @@ class tutorial.chapter_03 extends basic_chapter
 		            }
 				}
 				if (pot0==1 && pot1==0){
-					for(local j=0;j<signr;j++){
+					for(local j=0;j<sign_list.len();j++){
 						
-						local tile = tile_x(signal[j].coor.x, signal[j].coor.y, signal[j].coor.z)
+						local tile = tile_x(sign_list[j].coor.x, sign_list[j].coor.y, sign_list[j].coor.z)
 						local way = tile.find_object(mo_way)
 						local rsign = tile.find_object(mo_roadsign)
 						local sign = tile.find_object(mo_signal)
@@ -2495,9 +2488,9 @@ class tutorial.chapter_03 extends basic_chapter
 
 						local t = command_x(tool_build_roadsign)
 						while(true){
-							local err = t.work(player_x(1), my_tile(coord(signal[j].coor.x, signal[j].coor.y)), sc_sign_name)
+							local err = t.work(player_x(1), my_tile(coord(sign_list[j].coor.x, sign_list[j].coor.y)), sc_sign_name)
 							local ribi = way.get_dirs_masked()
-							if (ribi == signal[j].ribi)
+							if (ribi == sign_list[j].ribi)
 								break
 						}
 					}				

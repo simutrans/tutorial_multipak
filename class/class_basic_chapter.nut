@@ -8,14 +8,22 @@
 //Global coordinate for mark build tile
 currt_pos <- null
 
+//----------------Para las señales de paso------------------------
+persistent.sigcoord <- null
+sigcoord  <- null
+//-----------------------------------------------------------------
+
+//Para la gestion de vias
 // Results for fullway, c = coord3d, p = plus, r = result, m = marked, l = look, s = slope, z = coor.z save
 r_way <- { c = coord3d(0, 0, 0), p = 0, r = false, m = false, l = false, s = 0, z = null}
 r_way_list <- {}
 wayend <- coord3d(0, 0, 0)
+//-------------------------------------------------------------------------------------------------------------
 
 // Mark / Unmark build in to link
 gl_buil_list <- {}
 
+// Total de carga recibida
 reached <- 0
 
 class basic_chapter
@@ -39,19 +47,18 @@ class basic_chapter
 	//Para las pendientes
 	slope_estatus = [0,0,0,0,0,0]
 
-	waypos=null
-
-//--------------------way scan ------------------------------------
+	//--------------------way scan ------------------------------------
 	cursor_sw = false
 	bridge_sw = false
 	sch_sw = false
 	stop_sw = false
 	bridge_count = 0
-
+	//-----------------------------------------------------------------
 
 	//Compare good list
 	good_check = ["Post", "Passagiere", "goods_"]
 
+	//Underground View
 	under_lv = resul_version.st? settings.get_underground_view_level() : 127
 	unde_view = -128
 	norm_view = 127
@@ -1987,30 +1994,33 @@ class basic_chapter
 
 	}
 
-	function get_signa(pos,nr,addr)
+	function get_signa(t, nr, addr)
 	{
 		local ribi
-		if  (tile_x(pos.x, pos.y, 0).find_object(mo_signal))
-			ribi = way_x(pos.x,pos.y,pos.z).get_dirs_masked()
+		if  (t.find_object(mo_signal))
+			ribi = way_x(t.x, t.y, t.z).get_dirs_masked()
 		else ribi = 0
 
-		if (tile_x(pos.x, pos.y, 0).find_object(mo_roadsign)){
-			//tile_x(pos.x, pos.y, 0).remove_object(player_x(0), mo_roadsign)
-			glsw[nr]=0
-			sigcoord = [{x=null, y=null}]
-			return translate("It must be a block signal!")+" ("+pos.tostring()+")."
+		if (t.find_object(mo_roadsign)){
+			//t.remove_object(player_x(0), mo_roadsign)
+			glsw[nr] = 0
+			sigcoord = null
+			persistent.sigcoord = sigcoord
+			return translate("It must be a block signal!")+" ("+t.tostring()+")."
 		}
-		if (glsw[nr]==0 && ribi!=addr){
-			sigcoord = [{x=pos.x, y=pos.y}]
+		if (glsw[nr] == 0 && ribi != addr){
+			sigcoord = t
+			persistent.sigcoord = sigcoord
 			return null
 		}
-		else if (glsw[nr]==1)return translate("The signal is ready!")+" ("+pos.tostring()+")."
+		else if (glsw[nr] == 1)return translate("The signal is ready!")+" ("+t.tostring()+")."
 
-		if (pos.x==sigcoord[0].x && pos.y==sigcoord[0].y){
-			if (ribi==addr){
-				glsw[nr]=1
-				sigcoord = [{x=null, y=null}]
-				return translate("The signal is ready!")+" ("+pos.tostring()+")."
+		if (sigcoord && t.x == sigcoord.x && t.y == sigcoord.y){
+			if (ribi == addr){
+				glsw[nr] = 1
+				sigcoord = null
+				persistent.sigcoord = sigcoord
+				return translate("The signal is ready!")+" ("+t.tostring()+")."
 			} 
 
 		}

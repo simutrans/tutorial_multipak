@@ -589,13 +589,10 @@ function resume_game()
 	cov_save  = data_save().convoys_save()
 
 //-------------------------------------------------------
-
-	point = persistent.point
 	gcov_nr = persistent.gcov_nr
 	gall_cov = persistent.gall_cov
 	current_cov = persistent.current_cov
 	gcov_id = persistent.gcov_id
-	gsignal = persistent.signal
 	sigcoord = persistent.sigcoord
 	id_save = persistent.id_save
 	ignore_save = persistent.ignore_save
