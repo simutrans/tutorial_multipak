@@ -38,7 +38,7 @@ class basic_chapter
 	gltool = null
 	glresult = null
 	tmpsw = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    tmpcoor = [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
+    tmpcoor = []
 	stop_flag = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	st_cover = settings.get_station_coverage()
 
@@ -64,38 +64,39 @@ class basic_chapter
 	norm_view = 127
 
 	constructor(pl)
-	{
-		scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
+	 {
+	 	scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
 		this.set_all_rules(pl)
 		this.step = 1
-	}
+	 }
 
 	// FUNCTIONS TO REWRITE
-     function set_goal_text(text)
-	{
-		return text
-	}
+	 function set_goal_text(text)
+	 {
+		     return text
+	 }
 
-	function get_rule_text(pl,path)
-	{
+	 function get_rule_text(pl,path)
+	 {
 		local text = ttextfile( path + "rule.txt" )
-		return text.tostring()
-	}
+		     return text.tostring()
+	 }
 
-	function is_chapter_completed(pl)
-	{
+
+	 function is_chapter_completed(pl)
+	 {
 		local percentage = 0
 		return percentage
-	}
+	 }
 
 	// BASIC FUNCTIONS, NO REWRITE
 
 	//Para arrancar vehiculos usando comm  ----------------------------------------------------------------
 	function comm_set_convoy(cov_nr, coord, name, veh_nr = false) 
-	/*1 Numero de convoy actual,******
-	* 2 coord del deposito, 	     *
-	* 3 Name del vehiculo,		     *
-	* 4 Numero de remolques/bagones)*/
+    /*1 Numero de convoy actual,******
+    * 2 coord del deposito, 	     *
+    * 3 Name del vehiculo,		     *
+    * 4 Numero de remolques/bagones)*/
 	{
 		local pl = player_x(0)
 		local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
@@ -107,7 +108,7 @@ class basic_chapter
 		local veh_list = vehicle_desc_x.get_available_vehicles(wt)  //Lista de todos los vehiculos
 		for(local j = 0;j<veh_list.len();j++){
 			local veh_name = veh_list[j].get_name()
-					//gui.add_message(""+veh_name+" --> "+name+"")
+			//gui.add_message(""+veh_name+" --> "+name+"")
 			if (veh_name == name) {
 				if (veh_nr){
 					if (!cov_list)
@@ -143,11 +144,32 @@ class basic_chapter
 		return true
 	}
 
-	function comm_start_convoy(pl, wt, sched, cov_list, depot)
+
+	function comm_start_convoy(player, cov, depot, all = false)
 	{
-		pl.create_line(wt)
+		if(all) {
+			depot.start_all_convoys(player)
+		}
+		else{
+			depot.start_convoy(player, cov)
+			/*for(local j = cov_list.len()-1; j>=0;j--){
+				try {
+					cov_list[j].set_line(player, c_line)
+					depot.start_convoy(player, cov_list[j])
+				}
+				catch(ev) {
+					continue
+				}			
+			}*/
+		}
+		return null
+	}
+
+	function comm_get_line(player, wt, sched)
+	{
+		player.create_line(wt)
 		// find the line - it is a line without schedule and convoys
-		local list = pl.get_line_list()
+		local list = player.get_line_list()
 		local c_line = null
 		foreach(line in list) {
 			if (line.get_waytype() == wt  &&  line.get_schedule().entries.len()==0) {
@@ -156,19 +178,13 @@ class basic_chapter
 				break
 			}
 		}
-		c_line.change_schedule(pl, sched)
-		for(local j = cov_list.len()-1; j>=0;j--){
-			
-			try {
-				cov_list[j].set_line(pl, c_line)
-				depot.start_convoy(pl, cov_list[j])
-			}
-			catch(ev) {
-				continue
-			}			
-		}
-		return null
+		//gui.add_message(""+sched.entries.len()+" "+sched.waytype)
+		if(wt != sched.waytype) return gui.add_message("Err Waytype: "+wt +" :: "+ sched.waytype)
+		c_line.change_schedule(player, sched)
+		
+		return c_line
 	}
+
 	//----------------------------------------------------------------------------------------------------------------
 
 	//-------------------------
@@ -205,6 +221,7 @@ class basic_chapter
 				result = false
 			}
 			if (result){
+				//gui.add_message(""+j+"::"+cov_save[nr+j].is_in_depot()+"")
 				if (cov_save[nr+j].is_in_depot())
 					continue
 				else
@@ -247,6 +264,7 @@ class basic_chapter
 				cov_sw = false
 			}
 			if (result){
+				//gui.add_message(""+convoy_x(id_save[j]).is_in_depot()+"")
 				if (convoy_x(id_save[j]).is_in_depot()){
 					cov_sw = false
 					cov_save[j] = null
@@ -519,6 +537,7 @@ class basic_chapter
 		return "scr"
 	}
 
+
 	function has_way(waytyp,cube)		// cube height is only used from "nw.z" value
 	{
 		local res = true
@@ -529,6 +548,7 @@ class basic_chapter
 		return res
 	}
 
+
 	function is_inside_cube(pos,nw,se)	// two positions coord3d for a cube se.z is lower nw.z
 	{
 		if ( pos.x < nw.x || pos.y < nw.y || pos.x > se.x || pos.y > se.y ||
@@ -536,6 +556,7 @@ class basic_chapter
 			return false
 		else	return true
 	}
+
 
 	function give_ttext(text,coord)		// coord=coord3d or cube={ne,se}  ttext with {pos} or {cube}
 	{
@@ -548,10 +569,12 @@ class basic_chapter
 		return result.tostring()
 	}
 
+
 	function give_title()
 	{
 		return "<br><em>"+translate("Chapter")+" "+this.chap_nr+"</em> - "+translate(this.chapter_name)+"<br><br>"
 	}
+
 
 	function get_goal_text(pl,path)
 	{
@@ -656,8 +679,9 @@ class basic_chapter
 			return text.tostring()
 		}
 
+		//gui.add_message(""+entrie.wait+" "+wait +" "+nr)
 		if (abs(entrie.wait-wait)>7) {
-			//gui.add_message(""+entrie.wait+"")
+
 			local text = ttext("The waittime in waystop {nr} '{name}' isn't {wait} {pos}")
 			local txwait = get_wait_time_text(wait)
 			text.name = target_list[0].get_name()
@@ -752,8 +776,8 @@ class basic_chapter
 		local good = cov_list[cov-1].get_goods_catg_index()	
 		local good_count=0		
 		for(local j=0;j<good.len();j++){
-			//gui.add_message("a = "+good[j]+", b = "+good_nr+"")
 			for(local i=0;i<good_list.len();i++){
+				//gui.add_message("a = "+good[j]+", b = "+good_list[i]+"")
 				if(good[j]==good_list[i])
 					good_count++
 			}
@@ -858,7 +882,7 @@ class basic_chapter
 
 		for(local j=0;j<siz;j++){
 			if (j==selc){
-				result = is_waystop_correct(pl, schedule, j, load, time, c_list[j], line)
+				result = is_waystop_correct(pl, schedule, j, load, time, c_list[j]), line
 			}
 
 			else if (result==null){
@@ -927,6 +951,7 @@ class basic_chapter
 
 			else break
 		}
+		//gui.add_message(""+result)
 		if (result!=null){
 			switch (result) {
 				case 4:
@@ -948,6 +973,17 @@ class basic_chapter
 
 		}
 		return result
+	}
+
+	function tile_list(t_list, coord)
+	{
+		local t_nr = t_list.len()
+		for(local j=0;j<t_nr;j++){
+			if ((t_list[j].x==coord.x)&&(t_list[j].y==coord.y)){
+				return true
+			}
+		}
+		return false
 	}
 
 	function jump_to_link_executed(pos)
@@ -978,35 +1014,6 @@ class basic_chapter
 		return null
 	}
 
-	function tile_list(t_list, coord)
-	{
-		local t_nr = t_list.len()
-		for(local j=0;j<t_nr;j++){
-			if ((t_list[j].x==coord.x)&&(t_list[j].y==coord.y)){
-				return true
-			}
-		}
-		return false
-	}
-
-/*	function is_convoy_number_correct(coord, nr, wt,)
-	{
-		local cov_nr = get_convoy_number(coord, wt)
-		if (cov_nr>nr){
-			return format(translate("The number max of vehicles in circulation must be [%d]."),nr)
-		}
-		return null
-	}
-
-	function is_convoy_number_correct_exp(coord, nr, c_dep, id_a, id_b)
-	{
-		local cov_nr = get_convoy_number_exp(coord, c_dep, id_a, id_b)
-		if (cov_nr>nr){
-			return format(translate("The number max of vehicles in circulation must be [%d]."),nr)
-		}
-		return null
-	}
-*/
 	function get_convoy_number(coord, wt, in_dep = false)  //Permite contar los vehiculos en las estaciones /paradas
 	{
 		local halt = this.my_tile(coord).get_halt()
@@ -1225,9 +1232,10 @@ class basic_chapter
 
 	function reset_tmpsw()
 	{	for(local j=0;j<20;j++){
-            tmpcoor[j]=null
-			tmpsw[j]=0
+			tmpsw[j] = 0
+
 		}
+		tmpcoor = []
 		return null
 	}
 
@@ -1237,13 +1245,12 @@ class basic_chapter
 		}
 		return null
 	}
-
+	
 	function count_tunnel(coora, max){
 		local way = tile_x(coora.x, coora.y, coora.z).find_object(mo_way)
 		local r_dir = way? way.get_dirs():0
 		if(!way)return true
 		local result = false
-		//gui.add_message(""+r_dir)
 		if(r_dir == 2){
 			for(local j = 0;true;j++){
 				local t = tile_x((coora.x + j), coora.y , coora.z)
@@ -1257,10 +1264,9 @@ class basic_chapter
 				}
 				local slope = t.get_slope()
 				local dir = w? w.get_dirs():0
+				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+"")
 				if(w && j==max && (dir==2 || dir==10))result = true
 				else if(w && j>max)result = false
-
-				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result+" "+j)
 				if(slope != 0) return result	
 			}
 		}
@@ -1279,8 +1285,6 @@ class basic_chapter
 				local dir = w? w.get_dirs():0
 				if(w && j==max && (dir==2 || dir==10))result = true
 				else if(w && j>max)result = false
-
-				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}
@@ -1299,8 +1303,6 @@ class basic_chapter
 				local dir = w? w.get_dirs():0
 				if(w && j==max && (dir==4 || dir==5))result = true
 				else if(w && j>max)result = false
-
-				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}
@@ -1319,21 +1321,18 @@ class basic_chapter
 				local dir = w? w.get_dirs():0
 				if(w && j==max && (dir==1 || dir==5))result = true
 				else if(w && j>max)result = false
-
-				//gui.add_message(""+t.x+","+t.y+","+t.z+"::"+slope+" "+result)
 				if(slope != 0) return result	
 			}
 		}
 		return result
 	}
-
 	//Comprueba conexion entre vias
 	//dir 0 = auto
 	//dir 2 = coorda.y--
 	//dir 3 = coorda.y++
 	//dir 5 = coorda.x++
 	//dir 6 = coorda.x--
-		function get_fullway(coora, coorb, dir, obj, tun=false)
+	function get_fullway(coora, coorb, dir, obj, tun=false)
 	{
 		local tilea = tile_x(coora.x,coora.y,coora.z)
 		local tileb = tile_x(coorb.x,coorb.y,coorb.z)
@@ -1462,7 +1461,6 @@ class basic_chapter
 				}
 			}
 			else{
-				//gui.add_message("way "+coora.x+","+coora.y+","+coora.z+"  - "+res.z+"")
 				if(res.z != null){
 					for(local j = 0;j<3;j++){
 						local t_test = squ.get_tile_at_height(tile.z + j)
@@ -1500,7 +1498,7 @@ class basic_chapter
 			if( nw_slp == 0) res.p = 0
 			
 			res.s = nw_slp
-
+					//gui.add_message("way "+coora.x+","+coora.y+","+coora.z+"  - "+squ.get_tile_at_height(coora.z)+"")
 			if(way){
 				if (res.m && t.is_marked() || !res.m && !t.is_marked()){
 					if (count>1){
@@ -1869,7 +1867,6 @@ class basic_chapter
 						local sq_z = sq.get_ground_tile().z
 						local c_test = sq.get_tile_at_height(coor.z)
 						if((!c_test || !way) && under_lv <= coor.z && pos.z < sq_z){
-							//gui.add_message("pos: "+coor.z+" plus: "+ribi )
 							return null
 						//local slope = tile_x(pos.x, pos.y, pos.z).get_slope()
 						//if(slope != 0 || pos.z != (coor.z + plus))
@@ -1921,7 +1918,7 @@ class basic_chapter
 
 	function get_corret_slope(slope, corret_slope)
 	{
-
+		//gui.add_message(""+slope +" "+corret_slope)
 		if (slope==corret_slope ) { //72
 			return true
 		}
@@ -2181,6 +2178,7 @@ class basic_chapter
 			return null
 		}
 		if(depot){
+			local c2d = "coord"
 			local cov_list = depot.get_convoy_list() // Lista de vehiculos en el deposito
 			local d_nr = cov_list.len()   //Numero de vehiculos en el deposito
 			if (d_nr > 0){
@@ -2196,16 +2194,18 @@ class basic_chapter
 							catch(ev) {
 								continue
 							}
-							local halt1   = sch.entries[j].get_halt( player_x(pl) )
-							local tile_c = my_tile(c_list[j])
+							local c = c_list[j]
+							local type = typeof(c)
+							local halt1 = sch.entries[j].get_halt( player_x(pl) )
+							local tile_c = type == c2d ? my_tile(c) : tile_x(c.x, c.y, c.z)
 							local halt2 = tile_c.get_halt()
 							local t1_list = halt1.get_tile_list()
 							local t2_list = halt2.get_tile_list()
 							local c_buld1 = t1_list[0].find_object(mo_building).get_pos()
 							local c_buld2 = t2_list[0].find_object(mo_building).get_pos()
 							if(c_buld1.x == c_buld2.x && c_buld1.y == c_buld2.y){
-								tmpsw[j]=1
-								tmpcoor[j]=c_list[j]
+								tmpsw[j] = 1
+								tmpcoor.push(tile_c)
 							}
 						}
 					}
@@ -2214,7 +2214,7 @@ class basic_chapter
 		}
 	}
 
-    function set_convoy_schedule(pl,coord, wt, line_name) 
+    function set_convoy_schedule(pl, coord, wt, line_name) 
     {
 		local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
 		local cov_list = depot.get_convoy_list() // Lista de vehiculos en el deposito
@@ -2225,12 +2225,14 @@ class basic_chapter
             local cov_line = cov_list[0].get_line()
             local play =  player_x(pl)
             local sched = schedule_x(wt, [])
-	        for(local j=0;j<tmpsw.len();j++){
-		        if (tmpsw[j]==1)
-			        sched.entries.append(schedule_entry_x(my_tile(tmpcoor[j]), 0, 0))
-                else if (j == 0){
-                    return null
-                }
+			for(local j = 0; j < tmpsw.len(); j++) {
+		        if (tmpsw[j] == 1){
+					//gui.add_message("("+tmpcoor[j].x+","+tmpcoor[j].y+")")
+			        sched.entries.append(schedule_entry_x(tmpcoor[j], 0, 0))
+				}
+				else {
+					break
+				}
 	        }
 		    local entrie
 
@@ -2265,7 +2267,7 @@ class basic_chapter
 			            break
 		            }
                 }
-		    }        
+		    }
 			if(c_line){     
 				c_line.change_schedule(play, sched)          
 				cov_list[0].set_line(play, c_line)
@@ -2277,7 +2279,7 @@ class basic_chapter
     }
 
     function update_convoy_schedule(pl, wt, name, schedule)
-    {
+    {			//gui.add_message("noooo")
         local play =  player_x(pl)
 
 	    // find the line - it is a line without schedule and convoys
@@ -2302,19 +2304,23 @@ class basic_chapter
 				st_count++
 		}
 		if (st_count<siz){
+			local c2d = "coord"
 			for(local j=0;j<siz;j++){
+				local c = c_list[j]
+				local type = typeof(c)
+				local t = type == c2d ? my_tile(c) : tile_x(c.x, c.y, c.z)
 				if(tmpsw[j]==0){
-					if ((pos.x==c_list[j].x)&&(pos.y==c_list[j].y)){
-						tmpsw[j]=1
-                        tmpcoor[j]= coord(c_list[j].x,c_list[j].y)
+					if ((pos.x == c.x)&&(pos.y == c.y)){
+						tmpsw[j] = 1
+						tmpcoor.push(t)
 						return null
 					}
 					else{
-						local halt = my_tile(c_list[j]).get_halt()
-						return format(translate("Select station No.%d [%s]"),j+1 , halt.get_name())+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+						local halt = t.get_halt()
+						return format(translate("Select station No.%d [%s]"),j+1 , halt.get_name())+" ("+t.tostring()+")."
 					}
 				}
-				if (j==siz-(1))
+				if (j == siz-(1))
 					return result
 			}	
 		}
@@ -2324,7 +2330,7 @@ class basic_chapter
 
 	function is_stop_allowed_ex(result, siz, list, pos, wt)
 	{
-		local c_list = is_water_entry(list)
+		local t_list = is_water_entry(list)
 		local t = tile_x(pos.x, pos.y, pos.z)
 		local buil = t.find_object(mo_building)
 		local is_wt = buil ? buil.get_waytype():null
@@ -2343,53 +2349,66 @@ class basic_chapter
 				st_count++
 		}
 		if (st_count<siz){
-			for(local j=0;j<siz;j++){
-				local halt = my_tile(c_list[j]).get_halt()
-				if(!halt)break
+			local j = 0
+			local c2d = "coord"
+			foreach(t in t_list){
+
+				local c = list[j]
+				local type = typeof(c)
+				local st_t = type == c2d ? my_tile(c) : tile_x(c.x, c.y, c.z)
+				local halt = st_t.get_halt()
 				local tile_list = halt.get_tile_list()
 				local max = tile_list.len()
-				local c_lim_list = {a = tile_list[0], b = tile_list[max-1]}
-				if(tmpsw[j]==0){
+				//local c_lim_list = {a = tile_list[0], b = tile_list[max-1]}
+				//gui.add_message(""+j+" :: "+tmpsw[j])
+				if(tmpsw[j] == 0){
 					//if(max == 1 && t.is_water()) return check_water_tile(result, tile_list[0], pos, j)
 					if(wt == wt_water && t.is_water()){
 						local area = get_tiles_near_stations(tile_list)
 						for(local i=0;i<area.len();i++){
 							local t_water = my_tile(area[i])
+							//t_water.mark()
 							//gui.add_message(""+t_water.x+","+t_water.y+"")
-							if (pos.x==t_water.x && pos.y==t_water.y){
-
+							if (pos.x == t_water.x && pos.y == t_water.y){
 								if(t_water.is_water()){
-									tmpsw[j]=1
-						            tmpcoor[j]= coord(c_list[j].x,c_list[j].y)
-									return null
+									tmpsw[j] = 1
+									tmpcoor.push(t)
+									result = null
+									break
 								}
 								else
-									result = format(translate("Select station No.%d"),j+1)+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+									result = format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
 							}
 							else
-								result = format(translate("Select station No.%d"),j+1)+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+								result = format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
 						}
 						return result
 					}
 					foreach(tile in tile_list){
-						if (pos.x==tile.x && pos.y==tile.y){
+						if (pos.x == tile.x && pos.y == tile.y && pos.z == tile.z){
 							if(has_way && wt == is_wt){
-								tmpsw[j]=1
-				                tmpcoor[j]= coord(c_list[j].x,c_list[j].y)
+								tmpsw[j] = 1
+								tmpcoor.push(st_t)
 								return null
 							}
 							else
-								return format(translate("Select station No.%d"),j+1)+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+								return format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
 						}
 					}
-					return format(translate("Select station No.%d"),j+1)+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+					return format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
 				}
-				if (j==siz-(1))
+				j++
+				if (j == t_list.len())
 					return result
 			}
 		}
 
 		return 0
+	}
+	function get_c_key(c, i){
+		local res =  ("coord_" + c.x + "_" + c.y + "_" + c.z +"_"+i).toalnum()
+		gui.add_message(""+res)
+		return res
 	}
 
 	function get_tiles_near_stations(tile_list)
@@ -2417,38 +2436,38 @@ class basic_chapter
 		return area.len() > 0 ?  area : []
 	}
 
-	function check_water_tile(result, tile, pos, nr)
+	function check_water_tile(result, t, pos, nr)
 	{
-		local t = my_tile(pos)
-		local halt = t.get_halt()
+		local tile = my_tile(pos)
+		local halt = tile.get_halt()
 		local slope = tile.get_slope()
-		local c = coord(tile.x, tile.y)
+
 
 		switch (slope){
 			case 0:
 			break
 			case 4:
-				c.y--
+				t.y--
 			break
 
 			case 12:
-				c.x--
+				t.x--
 			break
 
 			case 28:
-				c.x++
+				t.x++
 			break
 
 			case 36:
-				c.y++
+				t.y++
 			break
 
 			case 56:
-				c.x++
+				t.x++
 			break
 
 			case 72:
-				c.y++
+				t.y++
 			break
 
 			default:
@@ -2457,8 +2476,8 @@ class basic_chapter
 		}
 		if(pos.x == c.x && pos.y == c.y){
 			if(tmpsw[nr]==0){
-				tmpsw[nr]=1
-				tmpcoor[nr]= coord(c.x,c.y)
+				tmpsw[nr] = 1
+				tmpcoor.push(t)
 				return null
 			}
 			return result
@@ -2583,7 +2602,6 @@ class basic_chapter
 			local goods = good_alias.goods
 			if ((pos.x == st_c.x) && (pos.y == st_c.y)){
 				if (glsw[j]==0){
-					tile.remove_object(player_x(1), mo_label)
 					way.unmark()	
 					return null
 				}
@@ -2907,7 +2925,7 @@ class basic_chapter
 		}
 
 		local tile = tile_x(coora.x, coora.y, 0)
-		if(tile_delay>=2){
+		if(tile_delay>=3){
 			if (opt == 0){
 				for (local j = coora.x ;j<=coorb.x;j++){
 					for (local i = coora.y;i<=coorb.y;i++){
@@ -3013,37 +3031,55 @@ class basic_chapter
 		}
 	}
 
-	function is_water_entry(list)
+	function is_water_entry(list, under = false)
 	{
 		local siz = list.len()
-		local nw_list = array(siz)
-
-		for (local j = 0;j<siz;j++){
-			local tile = my_tile(list[j])
+		local nw_list = []
+		local c2d = "coord"
+		for (local j = 0; j<siz; j++){
+			local c = list[j]
+			local type = typeof(c)
+			if(type != c2d) {
+				local t = tile_x(c.x, c.y, c.z)
+				nw_list.push(t)
+				continue
+			}
+			local tile = my_tile(c)
 			local buil = tile.find_object(mo_building)
 			local way = tile.find_object(mo_way)
+
 			if (buil && !way) {
 				local t_list = buil.get_tile_list();
-
 				local area = get_tiles_near_stations(t_list)
+				local save_t = null
 				for(local i=0;i<area.len();i++){
 					local t_water = my_tile(area[i])
-
 					if(t_water.is_water()){
-						local buil = t_water.find_object(mo_building)
-						nw_list[j] = coord(t_water.x , t_water.y)
-						if(buil)		
+						local buil2 = t_water.find_object(mo_building)
+						save_t = t_water
+						if(buil2){
+							save_t = t_water
 							break
+						}
 					}
 				}
+				nw_list.push(save_t)
+				continue
 			}
-			else
-				nw_list[j] = list[j];
+			else{
+
+				local t = my_tile(list[j])
+				nw_list.push(t)
+			}
 		}
 
 		return nw_list
 	}
 
+	//dir 1 = x++
+	//dir 2 = y++
+	//dir 3 = x--
+	//dir 4 = y--
 	function clean_track_segment(t, siz, opt) {
 		local tool = command_x(tool_remover)
 
@@ -3058,6 +3094,18 @@ class basic_chapter
 			for (local j = 0; j<siz;j++){
 				tool.work(player_x(1), t, "")
 				t.y++
+			}
+		}
+		else if (opt==3) {
+			for (local j = 0; j<siz;j++){
+				tool.work(player_x(1), t, "")
+				t.x--
+			}
+		}
+		else if (opt==4) {
+			for (local j = 0; j<siz;j++){
+				tool.work(player_x(1), t, "")
+				t.y--
 			}
 		}
 	}

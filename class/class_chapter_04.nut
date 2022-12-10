@@ -264,7 +264,10 @@ class tutorial.chapter_04 extends basic_chapter
 				}
 				else{
 					t1.remove_object(player_x(pl), mo_label)
-					glsw[0]=1
+					pot0=1
+				}
+				if (pot1==1){
+					this.next_step()
 				}
 				return 10+percentage
 				break
@@ -448,19 +451,20 @@ class tutorial.chapter_04 extends basic_chapter
 			case 3:
 				//Primer Astillero
 				if (pos.x==c_dep1.x && pos.y==c_dep1.y){			
-					if (glsw[0]==0){
+					if (pot0==0){
 						if (tool_id==4117){
+							pot0=1
 							return null
 						}
 					}
-					else if (glsw[0]==1 && glsw[1]==0){
+					else if (pot0==1 && pot1==0){
 						if (tool_id==4096){
-							this.next_step()
+							pot1=1
 							return null
 						}
 					}
 				}
-				else if (glsw[0]==0)
+				else if (pot0==0)
 					result = translate("Place the shipyard here")+" ("+c_dep1.tostring()+")."
 				break
 				//Enrutar barcos
@@ -728,9 +732,8 @@ class tutorial.chapter_04 extends basic_chapter
 				
 				local tool = command_x(tool_build_depot)			
 				local err = tool.work(player_x(pl), t1, sc_dep_name)
-
 				if (t1.find_object(mo_depot_water)){
-					this.next_step()
+					pot1=1
 				}
 				return null
 				break;
@@ -748,7 +751,6 @@ class tutorial.chapter_04 extends basic_chapter
 				local cov_nr = d1_cnr  //Max convoys nr in depot
 
 				if (current_cov> ch4_cov_lim1.a && current_cov< ch4_cov_lim1.b){
-					comm_script = true
 					local sched = schedule_x(gl_wt, [])
 					local c_list = is_water_entry(sch_list1)
 					for(local j =0;j<c_list.len();j++){
@@ -765,11 +767,6 @@ class tutorial.chapter_04 extends basic_chapter
 						comm_start_convoy(player, gl_wt, sched, convoy, depot)
 					}
 				}	
-				comm_script = false
-				reset_pot()
-				reset_glsw()
-				reset_stop_flag()
-
 				return null
 				break;
 
@@ -799,11 +796,9 @@ class tutorial.chapter_04 extends basic_chapter
 					local t = command_x(tool_build_way)	
 					t.set_flags(2)		
 					local err = t.work(player_x(1), coora, coorb, sc_way_name)
-
-					pot0=1
 				}
 				//Para el cuarto muelle
-				if (pot0==1 && pot1==0){
+				if (pot1==0){
 					local t = my_tile(sch_list2[1])
 					t.unmark()
 					local label = t.find_object(mo_label)
@@ -813,7 +808,7 @@ class tutorial.chapter_04 extends basic_chapter
 					local tool = command_x(tool_build_station)			
 					local err = tool.work(player_x(pl), t, sc_dock_name2)
 
-					pot1=1
+
 				}
 				if (current_cov> ch4_cov_lim2.a && current_cov< ch4_cov_lim2.b){
 
@@ -827,7 +822,6 @@ class tutorial.chapter_04 extends basic_chapter
 					local name = ship1_name_obj
 					local cov_nr = d2_cnr  //Max convoys nr in depot
 
-					comm_script = true 
 					local c_list = is_water_entry(sch_list2)
 					local sched = schedule_x(gl_wt, [])
 					sched.entries.append(schedule_entry_x(my_tile(c_list[0]), ship1_load, ship1_wait))
@@ -839,8 +833,6 @@ class tutorial.chapter_04 extends basic_chapter
 						local convoy = depot.get_convoy_list()
 						comm_start_convoy(player, gl_wt, sched, convoy, depot)
 					}
-					comm_script = false
-					pot2=1
 				}
 				return null
 				break;
