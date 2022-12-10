@@ -915,16 +915,15 @@ class tutorial.chapter_05 extends basic_chapter
 						return null
 					}
 
-
 					local depot = c_depot.find_object(mo_depot_road)
 					local good_nr = good_desc_x(f1_good).get_catg_index()  //Coal
-					local name = veh1_obj
-					local cov_nr = d1_cnr  //Max convoys nr in depot
-
 					local sched = schedule_x(wt_road, [])
 					sched.entries.append(schedule_entry_x(my_tile(sch_list1[0]), veh1_load, veh1_wait))
 					sched.entries.append(schedule_entry_x(my_tile(sch_list1[1]), 0, 0))
+					local c_line = comm_get_line(player, wt_road, sched)
 
+					local name = veh1_obj
+					local cov_nr = d1_cnr  //Max convoys nr in depot
 					local extender_name = sc_trail_name
 					local siz = sc_trail_nr
 					local extender = true
@@ -935,9 +934,12 @@ class tutorial.chapter_05 extends basic_chapter
 							if (!comm_set_convoy(j, c_depot, extender_name, extender))
 								return 0
 						}
+						local conv = depot.get_convoy_list()
+						conv[j].set_line(player, c_line)
 					}
-					local convoy = depot.get_convoy_list()
-					comm_start_convoy(player, wt_road, sched, convoy, depot)
+					local convoy = false
+					local all = true
+					comm_start_convoy(player, convoy, depot, all)	
 				}
 
 			break
@@ -1049,6 +1051,7 @@ class tutorial.chapter_05 extends basic_chapter
 					pot1=1
 					reset_glsw()
                 }
+
 				local ok = false
 				if (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b){
 
@@ -1065,15 +1068,21 @@ class tutorial.chapter_05 extends basic_chapter
 						else
 							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
-					local depot = c_depot.find_object(mo_depot_road)
+					local c_line = comm_get_line(player, wt_road, sched)
+
 					local name = veh2_obj
 					local cov_nr = d2_cnr  //Max convoys nr in depot
+					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 					for (local j = 0; j<(cov_nr); j++){
-						if (!comm_set_convoy(cov_nr, c_depot, name))
+						if (!comm_set_convoy(j, c_depot, name))
 							return 0
+						local conv = depot.get_convoy_list()
+						conv[j].set_line(player, c_line)
 					}
-					local convoy = depot.get_convoy_list()
-					comm_start_convoy(player, wt_road, sched, convoy, depot)
+					local convoy = false
+					local all = true
+					comm_start_convoy(player, convoy, depot, all)
+
 					ok = true
 				}
 
@@ -1092,17 +1101,19 @@ class tutorial.chapter_05 extends basic_chapter
 						else
 							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
+					local c_line = comm_get_line(player, wt_water, sched)
 
-					local depot = c_depot.find_object(mo_depot_water)
 					local name = veh3_obj
 					local cov_nr = d3_cnr  //Max convoys nr in depot
 					if (!comm_set_convoy(cov_nr, c_depot, name))
 						return 0
 
-					local convoy = depot.get_convoy_list()
-					comm_start_convoy(player, wt_water, sched, convoy, depot)
-					gall_cov = checks_all_convoys()
+					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
+					local conv = depot.get_convoy_list()
+					conv[0].set_line(player, c_line)
+					comm_start_convoy(player, conv[0], depot)
 
+					gall_cov = checks_all_convoys()
 					current_cov = gall_cov
 				}
                 

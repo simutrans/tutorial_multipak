@@ -2205,11 +2205,14 @@ class tutorial.chapter_03 extends basic_chapter
 			case 5:
 				local wt = wt_rail
 				if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
-					comm_script = true
 					local player = player_x(pl)
 					local c_depot = my_tile(c_dep1)
-
 					comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
+
+					local sched = schedule_x(wt, [])
+					sched.entries.append(schedule_entry_x(my_tile(st1_list[0]), loc1_load, loc1_wait))
+					sched.entries.append(schedule_entry_x(my_tile(st2_list[0]), 0, 0))
+					local c_line = comm_get_line(player, gl_wt, sched)
 
 					local good_nr = 0 //Passengers
 					local name = loc1_name_obj
@@ -2224,15 +2227,13 @@ class tutorial.chapter_03 extends basic_chapter
 						if (!comm_set_convoy(cov_nr, c_depot, wag_name, wag))
 							return 0
 					}
-					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
-					local convoy = depot.get_convoy_list()
-					local sched = schedule_x(wt, [])
-					sched.entries.append(schedule_entry_x(my_tile(st1_list[0]), loc1_load, loc1_wait))
-					sched.entries.append(schedule_entry_x(my_tile(st2_list[0]), 0, 0))
 
-					comm_start_convoy(player, wt, sched, convoy, depot)
+					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
+					local conv = depot.get_convoy_list()
+					conv[0].set_line(player, c_line)
+					comm_start_convoy(player, conv[0], depot)
+
 					pot1=1
-					comm_script = false
 				}
 
 
@@ -2354,8 +2355,13 @@ class tutorial.chapter_03 extends basic_chapter
 						comm_script = true
 						local player = player_x(pl)
 						local c_depot = my_tile(c_dep2)
-
 						comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
+
+						local name = loc2_name_obj
+						local sched = schedule_x(wt, [])
+						sched.entries.append(schedule_entry_x(my_tile(st3_list[0]), loc2_load, loc2_wait))
+						sched.entries.append(schedule_entry_x(my_tile(st4_list[0]), 0, 0))
+						local c_line = comm_get_line(player, gl_wt, sched)
 
 						local name = loc2_name_obj
 						local wag_name = sc_veh2_name
@@ -2368,14 +2374,12 @@ class tutorial.chapter_03 extends basic_chapter
 							if (!comm_set_convoy(cov_nr, c_depot, wag_name, wag))
 								return 0
 						}
-						local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
-						local convoy = depot.get_convoy_list()
-						local sched = schedule_x(wt, [])
-						sched.entries.append(schedule_entry_x(my_tile(st3_list[0]), loc2_load, loc2_wait))
-						sched.entries.append(schedule_entry_x(my_tile(st4_list[0]), 0, 0))
 
-						comm_start_convoy(player, wt, sched, convoy, depot)
-						comm_script = false	
+						local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
+						local conv = depot.get_convoy_list()
+						conv[0].set_line(player, c_line)
+						comm_start_convoy(player, conv[0], depot)
+
 						pot3=1
 					}
 
@@ -2555,6 +2559,7 @@ class tutorial.chapter_03 extends basic_chapter
 						else
 							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
 					}
+					local c_line = comm_get_line(player, gl_wt, sched)
 
 					// Set and run convoys
 					local good_nr = 0 //Passengers
@@ -2563,20 +2568,21 @@ class tutorial.chapter_03 extends basic_chapter
 					local wag_name = sc_wag3_name
 					local wag_nr = sc_wag3_nr
 					local wag = true
-					for (local j = current_cov; j>ch3_cov_lim3.a && j<ch3_cov_lim3.b && correct_cov; j++){
+					for (local j = 0; j<cov_nr;j++){
 						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
 						for (local count = 0;count<wag_nr;count++){
-							if (!comm_set_convoy(0, c_depot, wag_name, wag))
+							if (!comm_set_convoy(j, c_depot, wag_name, wag))
 								return 0
 						}
-						local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
-						local convoy = depot.get_convoy_list()
-						if (convoy.len()==0) continue
-
-						comm_start_convoy(player, gl_wt, sched, convoy, depot)
+						local conv = depot.get_convoy_list()
+						conv[j].set_line(player, c_line)
 					}
-					comm_script = false
+					local convoy = false
+					local all = true
+					comm_start_convoy(player, convoy, depot, all)	
+					gall_cov = checks_all_convoys()
+					current_cov = gall_cov
 				}
 				return null
 				break
