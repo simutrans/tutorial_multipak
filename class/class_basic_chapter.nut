@@ -55,9 +55,6 @@ class basic_chapter
 	bridge_count = 0
 	//-----------------------------------------------------------------
 
-	//Compare good list
-	good_check = ["Post", "Passagiere", "goods_"]
-
 	//Underground View
 	under_lv = resul_version.st? settings.get_underground_view_level() : 127
 	unde_view = -128
@@ -369,14 +366,6 @@ class basic_chapter
 				else if (this.step != 3) step_nr(3)
 				return null
 			}
-			else if (current_cov>ch6_cov_lim3.a && current_cov<ch6_cov_lim3.b){
-				if(persistent.chapter != 6) {
-					load_chapter2(6,pl)
-					step_nr(4)
-				}
-				else if (this.step != 4) step_nr(4)
-				return null
-			}
 		}
 		return null
 	}
@@ -642,6 +631,9 @@ class basic_chapter
 		local targ_t = this.my_tile(coord)
 
 		local target = square_x(coord.x,coord.y).get_halt()
+		if(!target)
+			return gui.add_message("Error aqui, not station here!. "+ coord)
+
 		local target_list = square_x(coord.x,coord.y).get_halt_list()
 
 		if (!halt) return translate("The schedule is not correct.")
@@ -2225,10 +2217,12 @@ class basic_chapter
             local cov_line = cov_list[0].get_line()
             local play =  player_x(pl)
             local sched = schedule_x(wt, [])
-			for(local j = 0; j < tmpsw.len(); j++) {
+			local siz = tmpcoor.len()
+			for(local j = 0; j < siz; j++) {
+				local c = tmpcoor[j]
 		        if (tmpsw[j] == 1){
 					//gui.add_message("("+tmpcoor[j].x+","+tmpcoor[j].y+")")
-			        sched.entries.append(schedule_entry_x(tmpcoor[j], 0, 0))
+			        sched.entries.append(schedule_entry_x(c, 0, 0))
 				}
 				else {
 					break
@@ -2237,13 +2231,11 @@ class basic_chapter
 		    local entrie
 
 		    try {
-
 			     entrie = sched.entries[1]
 		    }
 		    catch(ev) {
 			    return null
 		    }
-
             if (!cov_line)
                 play.create_line(wt)
 
@@ -2486,86 +2478,92 @@ class basic_chapter
 		return format(translate("Select station No.%d"),nr+1)+" ("+c.tostring()+")."
 	}
 
-	function is_stop_building(siz, c_list, lab_name, load, label_sw = false)
+	function is_stop_building(siz, c_list, lab_name, good, label_sw = false)
 	{
+		local player = player_x(1)
 		local count = 0
 		for(local j=0;j<siz;j++){
-			local tile = my_tile(c_list[j])
-			local build = tile.find_object(mo_building)
-			local label = tile.find_object(mo_label)
-			local way = tile.find_object(mo_way)
-			local halt = tile.get_halt()
-			if(build && halt){
-				local sw = false
-				local st_desc = build.get_desc()
-				local st_list = building_desc_x.get_available_stations(st_desc.get_type(), st_desc.get_waytype(), good_desc_x(load))
-							
-				foreach(st in st_list){
-					if (st.get_name() == st_desc.get_name()){
-						sw=true
-					}
-				}
+			local c = c_list[j]
+			local t = my_tile(c)
+			local buil = t.find_object(mo_building)
+			local label = t.find_object(mo_label)
+			local way = t.find_object(mo_way)
+			local halt = t.get_halt()
+			if(t.is_marked())
+				t.remove_object(player, mo_label)
 
-				if (sw){
+			if(buil && halt){
+				local desc = buil.get_desc()
+				local g_list = get_build_load_type(desc)
+				local is_good = station_compare_load(good, g_list)
+				if(is_good) {
+					if(way){
+						way.unmark()
+					}
 					glsw[j]=1
 					count++
-					tile.remove_object(player_x(1), mo_label)
 					if (count==siz) {
 						return true
 					}
 				}
 			}
-			else if (glsw[j]==1){
-				tile.mark()
-				if (!label && label_sw)
-					label_x.create(c_list[j], player_x(0), lab_name)
+			else{
 				if (way && !way.is_marked()){
 					way.mark()
 				}
-				glsw[j]=0
-			}
-			else if (!halt){
-				tile.mark()
-				if (way && !way.is_marked()){
-					way.mark()
+				if (!label && !t.is_marked()) {
+					label_x.create(c, player, lab_name)
 				}
-				if (!label && label_sw)
-					label_x.create(c_list[j], player_x(0), lab_name)
-
-				glsw[j]=0
 			}
 		}
 		return false
 	}
 
-	function is_stop_building_ex(siz, c_list, lab_name, load)
+	function is_stop_building_ex(siz, list, lab_name, load)
 	{
+		local player = player_x(1)
 		local count = 0
 		for(local j=0;j<siz;j++){
-			local tile = my_tile(c_list[j])
-			local label = tile.find_object(mo_label)
-			local halt = tile.get_halt()
-			if (halt  && halt.accepts_good(good_desc_x(load))){
-				glsw[j]=1
-				count++
-				tile.remove_object(player_x(1), mo_label)
-				if (count==siz) {
-					return true
+			local c = list[j].c
+			local name = list[j].name
+			local good = list[j].good
+			local t = my_tile(c)
+			local label = t.find_object(mo_label)
+			local way = t.find_object(mo_way)
+			local buil = t.find_object(mo_building)
+			local halt = t.get_halt()
+
+			//gui.add_message("b"+glsw[j]+" "+j)
+
+			if(buil && halt){
+				local desc = buil.get_desc()
+				local g_list = get_build_load_type(desc)
+				local is_good = station_compare_load(good, g_list)
+				if(name == "" && is_good) {
+					if(way){
+						way.unmark()
+					}
+					glsw[j]=1
+					count++
+					if (count==siz) {
+						return true
+					}
 				}
-			}
-			else if (glsw[j]==1){
-				tile.mark()
-				if (!label)
-					label_x.create(c_list[j], player_x(1), lab_name)
-
-				glsw[j]=0
-			}
-			else if (!halt){
-				tile.mark()
-				if (!label)
-					label_x.create(c_list[j], player_x(1), lab_name)
-
-				glsw[j]=0
+				if(name == desc.get_name() && is_good){
+					glsw[j]=1
+					count++
+					if (count==siz) {
+						return true
+					}
+				}
+			}	
+			else {
+				if(way){
+					way.mark()
+				}
+				else{
+					public_label(t, lab_name)
+				}
 			}
 		}
 		return false
@@ -2614,40 +2612,104 @@ class basic_chapter
 		return result
 
 	}
-
-	function build_stop_ex(nr, c_list, tile, label, pos, good, name)
+	function get_build_load_type(desc)
 	{
-		local result = 0
+		local list = []
+		if (desc.enables_pax())
+			list.push(good_alias.passa)
 
-		for(local j=0;j<nr;j++){
-			//gui.add_message(""+glsw[j]+"")
-			local tile = tile_x(c_list[j].x, c_list[j].y, 0)
-            local halt = tile.get_halt()
-			if (halt){         
-				local halt_name = halt.get_name()
-				local is_good = halt.accepts_good(good_desc_x(good))//compare_good(good, halt)
-				if (!is_good){
-					return format(translate("The extension building for station [%s] must be for [%s], use the 'Remove' tool"),halt_name, translate(good))+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+		if (desc.enables_mail())
+			list.push(good_alias.mail)
+
+		if (desc.enables_freight())
+			list.push(good_alias.goods)
+		
+		return list
+	}
+
+	function station_compare_load(good, g_list)
+	{
+		local is_good = false
+		local type = typeof(good)
+		if(type == "array"){
+			local siz =  good.len()
+			local count = 0
+			foreach(g in g_list){
+				foreach(i in good){
+					if(i == g)
+						count++
 				}
-
-                local build_name = tile.find_object(mo_building).get_desc().get_name()
-                local st_name = translate(""+name+"")
-                if (build_name != name)
-                    return format(translate("The extension building for station [%s] must be a [%s], use the 'Remove' tool"), halt_name, st_name )+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+			}
+			if(count == siz)
+				is_good = true
+		}
+		else {
+			foreach(g in g_list){
+				if(g == good)
+					is_good = true
 			}
 		}
-		for(local j=0;j<nr;j++){
-			local st_c = coord(c_list[j].x, c_list[j].y)
-			if ((pos.x == st_c.x) && (pos.y == st_c.y)){
+		return is_good
+	}
+	function get_good_text(good)
+	{
+		local tx = ""
+		local type = typeof(good)
+		if(type=="array"){
+			foreach(i in good){
+				if(tx != "")
+					tx+= ", "
+				tx+= translate(i)+""
+			}
+		}
+		else
+			return translate(good)
+
+		return tx
+	}
+
+	function build_stop_ex(nr, list, tile)
+	{
+		local result = 0 
+		for(local j=0; j<nr; j++){
+			local good = list[j].good
+			local name = list[j].name
+			local c = list[j].c
+			//gui.add_message(""+glsw[j]+" "+j+" "+nr+" "+c)
+			local tile = my_tile(c)
+			local buil = tile.find_object(mo_building)
+            local halt = tile.get_halt()
+			if(buil){  
+				local desc = buil.get_desc()
+				local halt_name = halt.get_name()
+				local g_list = get_build_load_type(desc)
+				local is_good = station_compare_load(good, g_list)
+				if (!is_good){
+					local tx_good = get_good_text(good)
+					local tx = "The extension building for station [%s] must be for [%s], use the 'Remove' tool"
+					return format(translate(tx), halt_name, tx_good)+" ("+c.tostring()+")."
+				}
+
+                local build_name = buil.get_desc().get_name()
+                local st_name = translate(""+name+"")
+                if (name != "" && build_name != name){
+					local tx = "The extension building for station [%s] must be a [%s], use the 'Remove' tool"
+                    return format(translate(tx), halt_name, st_name )+" ("+c.tostring()+")."
+				}
+			}
+		}
+		for(local j=0; j<nr; j++){
+			local c = list[j].c
+			//gui.add_message("a"+glsw[j])
+			if ((tile.x == c.x) && (tile.y == c.y)){
 				if (glsw[j]==0){
-					tile.remove_object(player_x(1), mo_label)
 					return null
 				}
 				else
-					return translate("There is already a stop here")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+					return translate("There is already a stop here")+" ("+c.tostring()+")."
 			}
 			else if (glsw[j]==0)
-				result = translate("Place the stops at the marked points")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+				result = translate("Place the stops at the marked points")+" ("+c.tostring()+")."
 		}					
 		return result
 
@@ -2667,32 +2729,19 @@ class basic_chapter
 		return translate("You can only delete the stops.")
 	}
 
-	function delete_stop_ex(nr, c_list, pos)
+	function delete_stop_ex(nr, list, pos)
 	{
 		for(local j=0;j<nr;j++){
-			if (c_list[j] != null){
-				local stop = tile_x(c_list[j].x,c_list[j].y,0).find_object(mo_building)
-				if ((pos.x==c_list[j].x)&&(pos.y==c_list[j].y)&&(stop)){
+			local c = list[j].c
+			if (c != null){
+				local stop = my_tile(c).find_object(mo_building)
+				if ((pos.x == c.x)&&(pos.y == c.y)&&(stop)){
 					return null
 				}
 			}
 		}
 		return translate("You can only delete the stops.")
 	}
-
-    function compare_good(good, halt)
-    {
-        local   is_good = false
-        for (local j = 0; j < good_check.len();j++) {
-            local current_good = good_check[j]
-            is_good = halt.accepts_good(good_desc_x(current_good))
-            if (is_good  && good != good_check[j]){
-                is_good = false
-                break
-            }     
-        }
-        return is_good
-    }
 
 	function tile_bord(coora, coorb, opt, del)
 	{
@@ -2900,6 +2949,7 @@ class basic_chapter
 			foreach(t in list){
 				local buil = m_buil ? t.find_object(mo_building): null
 				buil ? buil.unmark() : t.unmark()
+
 			}
 
 			tile_delay_list++
@@ -2913,28 +2963,26 @@ class basic_chapter
 			for (local j = coora.x ;j<=coorb.x;j++){
 				for (local i = coora.y;i<=coorb.y;i++){
                     local c = coord(j,i)
-					local tile = my_tile(c)
-					tile.unmark()
-					foreach(obj in tile.get_objects()){
+					local t = my_tile(c)
+					t.unmark()
+					foreach(obj in t.get_objects()){
 						local type = obj.get_type()
-						tile.find_object(type).unmark()
+						t.find_object(type).unmark()
 					}
 				}
 			}
 			return true
 		}
-
-		local tile = tile_x(coora.x, coora.y, 0)
 		if(tile_delay>=3){
 			if (opt == 0){
 				for (local j = coora.x ;j<=coorb.x;j++){
 					for (local i = coora.y;i<=coorb.y;i++){
                         local c = coord(j,i)
-						local tile = my_tile(c)
-						tile.mark()
-						foreach(obj in tile.get_objects()){
+						local t = my_tile(c)
+						t.mark()
+						foreach(obj in t.get_objects()){
 							local type = obj.get_type()
-							tile.find_object(type).mark()
+							t.find_object(type).mark()
 						}
 					}
 				}
@@ -2946,10 +2994,10 @@ class basic_chapter
 				for (local j = coora.x ;j<=coorb.x;j++){
 					for (local i = coora.y;i<=coorb.y;i++){
                         local c = coord(j,i)
-						local tile = my_tile(c)
-						foreach(obj in tile.get_objects()){
+						local t = my_tile(c)
+						foreach(obj in t.get_objects()){
 							local type = obj.get_type()
-							tile.find_object(type).mark()
+							t.find_object(type).mark()
 						}
 					}
 				}
@@ -2961,8 +3009,8 @@ class basic_chapter
 				for (local j = coora.x ;j<=coorb.x;j++){
 					for (local i = coora.y;i<=coorb.y;i++){
                         local c = coord(j,i)
-						local tile = my_tile(c)
-						tile.mark()
+						local t = my_tile(c)
+						t.mark()
 					}
 				}
 				tile_delay = 0
@@ -2974,11 +3022,10 @@ class basic_chapter
 			for (local j = coora.x ;j<=coorb.x;j++){
 				for (local i = coora.y;i<=coorb.y;i++){
                     local c = coord(j,i)
-					local tile = my_tile(c)
-					tile.unmark()
-					foreach(obj in tile.get_objects()){
+					local t = my_tile(c)
+					foreach(obj in t.get_objects()){
 						local type = obj.get_type()
-						tile.find_object(type).unmark()
+						t.find_object(type).unmark()
 					}
 				}
 			}
@@ -3179,6 +3226,24 @@ class basic_chapter
 				return format(translate("Layer level in sliced map view should be: %d"), r_way.c.z + plus)
 				
 		}
+	}
+
+	function public_label(t, name)
+	{
+		if(t.is_marked())
+			t.remove_object(player_x(1), mo_label)
+
+		local label = t.find_object(mo_label)
+		local cursor = t.find_object(mo_pointer)
+
+		if(!label && !t.is_marked() && !cursor){
+			label_x.create(t, player_x(1), name)
+
+			label = t.find_object(mo_label)
+			if(label)
+				label.mark()
+		}
+		return null
 	}
 }
 
