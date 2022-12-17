@@ -379,8 +379,56 @@ function start()
     resume_game()
 }
 
+function labels_text_debug()
+{
+	local t1 = tile_x(0, 0, -2)
+	local t2 = tile_x(1, 0, -2)
+
+	if(!t1.find_object(mo_label) || !t2.find_object(mo_label)){
+		label_x.create(t1, player_x(1), translate(""+persistent.chapter))
+		label_x.create(t2, player_x(1), translate(""+chapter.step))
+	}
+	else {
+		local l1 = label_x(t1.x, t1.y, t1.z)
+		local l2 = label_x(t2.x, t2.y, t2.z)
+
+		if(correct_cov){
+			local ch_nr = l1.get_text().tointeger()
+			local st_nr = l2.get_text().tointeger()
+			if(persistent.chapter == ch_nr){
+				l1.set_text(""+persistent.chapter)
+
+				if(chapter.step <= (st_nr+1)){
+					l2.set_text(""+chapter.step)
+				}
+				else {
+					gui.add_message("Error1 here: CH "+persistent.chapter +" : ST "+chapter.step)
+
+					//Se se regresa al valor anterior en caso de error
+					persistent.status.step = st_nr
+					persistent.step = st_nr
+					chapter.step = st_nr
+				}
+			}
+			else {
+				if(chapter.step != 1){
+					gui.add_message("Error2 here: CH "+persistent.chapter +" : ST "+chapter.step)
+
+					//Se restauran todos en caso de error
+					persistent.status.step = 1
+					persistent.step = 1
+					chapter.step = 1
+				}
+				l1.set_text(""+persistent.chapter)
+				l2.set_text("1")
+			}
+		}
+	}
+}
+
 function is_scenario_completed(pl)
 {
+	labels_text_debug()
 //gui.add_message(""+glsw[0]+"")
 //gui.add_message("!!!!!"+persistent.step+" ch a "+st_nr[0]+"  !!!!! "+persistent.status.step+"  -- "+chapter.step+"")				
 	if (pl != 0) return 0			// other player get only 0%
@@ -572,7 +620,12 @@ convoy_x._save <- function()
 //-----------------------------------------------------------
 
 function resume_game()
-{	
+{
+	//Mark all text labels
+	foreach(label in world.get_label_list()){
+		if(label.get_owner().nr == 1)
+			label.mark()
+	}
 	//Check version and pakset name
 	resul_version = string_analyzer()
 

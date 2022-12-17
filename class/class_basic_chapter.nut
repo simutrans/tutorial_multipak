@@ -2519,7 +2519,7 @@ class basic_chapter
 		return false
 	}
 
-	function is_stop_building_ex(siz, list, lab_name, load)
+	function is_stop_building_ex(siz, list, lab_name)
 	{
 		local player = player_x(1)
 		local count = 0

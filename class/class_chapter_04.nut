@@ -899,7 +899,7 @@ class tutorial.chapter_04 extends basic_chapter
 				for(local j =0;j<c_list.len();j++){
 					local t = my_tile(c_list[j])
 					t.unmark()
-					t.remove_object(player_x(pl), mo_label)
+					t.remove_object(player_x(1), mo_label)
 					local tool = command_x(tool_build_station)			
 					tool.work(player_x(pl), t, name)
 					glsw[j]=1

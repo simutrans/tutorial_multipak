@@ -34,13 +34,13 @@ class tutorial.chapter_06 extends basic_chapter
 
 	// Step 1 =====================================================================================
 	// Pista de aterrizaje --------------------------
-	c1_track = {a = coord(112,174), b = coord(112,178)}
+	c1_track = {a = coord(112,174), b = coord(112,178), dir = 4}
 	c1_start = coord(112,174)
 	c1_is_way = null
 	obj1_way_name = "runway_modern"
 
 	// Pista de maniobras --------------------------
-	c2_track = {a = coord(112,176), b = coord(114,176)}
+	c2_track = {a = coord(112,176), b = coord(114,176), dir = 2}
 	c2_start = coord(112,176)
 	c2_is_way = null
 	obj2_way_name = "taxiway"
@@ -238,12 +238,10 @@ class tutorial.chapter_06 extends basic_chapter
 
 					local ta = my_tile(c1_track.a)
 					local tb = my_tile(c1_track.b)
-					local coora = coord3d(ta.x, ta.y, ta.z)
-					local coorb = coord3d(tb.x, tb.y, tb.z)
 					local wt = gl_wt
 					local name_list = [obj1_way_name]
-					local dir = 4
-					local fullway = check_way(coora, coorb, wt, name_list, dir)
+					local dir = c1_track.dir
+					local fullway = check_way(ta, tb, wt, name_list, dir)
 					if (fullway.result){
 						c_way =  coord(0,0)
 						pot0=1
@@ -260,12 +258,10 @@ class tutorial.chapter_06 extends basic_chapter
 
 					local ta = my_tile(c2_track.a)
 					local tb = my_tile(c2_track.b)
-					local coora = coord3d(ta.x, ta.y, ta.z)
-					local coorb = coord3d(tb.x, tb.y, tb.z)
 					local wt = gl_wt
 					local name_list = [obj1_way_name, obj2_way_name]
-					local dir = 2
-					local fullway = check_way(coora, coorb, wt, name_list, dir)
+					local dir = c2_track.dir
+					local fullway = check_way(ta, tb, wt, name_list, dir)
 					if (fullway.result){
 						c_way = coord(0,0)
 						pot1=1
@@ -280,6 +276,8 @@ class tutorial.chapter_06 extends basic_chapter
 					local tile = my_tile(st1_pos)
 					local way = tile.find_object(mo_way)
 					local buil = tile.find_object(mo_building)
+					local name = translate("Build here")
+					public_label(tile, name)
 					if(way && buil){
 						pot2 = 1
 					}
@@ -289,6 +287,8 @@ class tutorial.chapter_06 extends basic_chapter
 				else if (pot2==1 && pot3==0){
 					local tile = my_tile(st2_pos)
 					local buil = tile.find_object(mo_building)
+					local name = translate("Build here")
+					public_label(tile, name)
 					if(buil){
 						pot3 = 1
 					}
@@ -299,7 +299,10 @@ class tutorial.chapter_06 extends basic_chapter
 					local tile = my_tile(c_dep1)
 					local way = tile.find_object(mo_way)
 					local depot = tile.find_object(mo_depot_air)
+					local name = translate("Build here")
+					public_label(tile, name)
 					if(way && depot){
+						tile.remove_object(player_x(1), mo_label)
 						pot4 = 1
 					}
 					return 25
@@ -1040,18 +1043,22 @@ class tutorial.chapter_06 extends basic_chapter
 		    rules.forbid_tool(pl, tool_id)
 	}
 
-
+	//case 1:  //y--
+	//case 2:  //x++
+	//case 4:  //y++
+	//case 8:  //x--
 	function check_way(coora, coorb, wt, name_list, dir = false)
 	{
 		local sve_coord = coora
 		local tile_start =  tile_x(coora.x, coora.y, coora.z)
 		local way_start = tile_start.find_object(mo_way)
+		local name = translate("Build here")
 		if(way_start){
 			way_start.mark()
-			tile_start.mark()
+			public_label(tile_start, name)
 			local start_wt = way_start.get_waytype()
 			if(start_wt != wt) {
-				tile_start.mark()
+				public_label(tile_start, name)
 				return {c = coora, result = false}
 			}
 			local start_name = way_start.get_name()
@@ -1060,7 +1067,7 @@ class tutorial.chapter_06 extends basic_chapter
 					break
 				}
 				if(j == name_list.len()-1) {
-					tile_start.mark()
+					public_label(tile_start, name)
 					return {c = coora, result = false}
 				}
 			}
@@ -1108,7 +1115,7 @@ class tutorial.chapter_06 extends basic_chapter
 			}
 
 			way_start.unmark()
-			tile_start.unmark()
+			tile_start.remove_object(player_x(1), mo_label)
 
 			while(true){
 				local current_dir = 0
@@ -1116,12 +1123,10 @@ class tutorial.chapter_06 extends basic_chapter
 				local way = tile.find_object(mo_way)
 				if(way){
 					way.unmark()
-					tile.unmark()
-
 					local current_wt = way.get_waytype()
 					if(current_wt != wt){
 						way.mark()
-						tile.mark()
+						public_label(tile_start, name)
 						return {c = coora, result = false}
 					}
 
@@ -1166,7 +1171,7 @@ class tutorial.chapter_06 extends basic_chapter
 					}
 					if ((current_dir==1)||(current_dir==2)||(current_dir==4)||(current_dir==8)){
 						way.mark()
-						tile.mark()
+						public_label(tile_start, name)
 						return {c = coora, result = false}					
 					}
 					else if(dir_start == 1){ //y--
@@ -1243,13 +1248,13 @@ class tutorial.chapter_06 extends basic_chapter
 					}
 				}
 				else {
-					tile.mark()
+					public_label(tile_start, name)
 					return {c = coora, result = false}
 				}
 			}
 		}
 		else {
-			tile_start.mark()
+			public_label(tile_start, name)
 			return {c = coora, result = false}
 		}
 	}

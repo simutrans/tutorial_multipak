@@ -250,6 +250,10 @@ class tutorial.chapter_03 extends basic_chapter
 		if(buil) {
 			fac_1.c_list = buil.get_tile_list()
 			fac_1.name = translate(buil.get_name())
+			local fields = buil.get_factory().get_fields_list()
+			foreach(t in fields){
+				fac_1.c_list.push(t)
+			}
 		}
 
 		t = my_tile(fac_2.c)
@@ -257,6 +261,21 @@ class tutorial.chapter_03 extends basic_chapter
 		if(buil) {
 			fac_2.c_list = buil.get_tile_list()
 			fac_2.name = translate(buil.get_name())
+			local fields = buil.get_factory().get_fields_list()
+			foreach(t in fields){
+				fac_2.c_list.push(t)
+			}
+		}
+
+		t = my_tile(fac_3.c)
+		buil = t.find_object(mo_building)
+		if(buil) {
+			fac_3.c_list = buil.get_tile_list()
+			fac_3.name = translate(buil.get_name())
+			/*local fields = buil.get_factory().get_fields_list()
+			foreach(t in fields){
+				fac_3.c_list.push(t)
+			}*/
 		}
 
 		start_lvl_z = c_tunn2.a.z
