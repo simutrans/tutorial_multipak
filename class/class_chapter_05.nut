@@ -5,14 +5,6 @@
  *  Can NOT be used in network game !
  */
 
-//Step 2 =====================================================================================
-ch5_cov_lim1 <- {a = 20 , b = 31}
-
-//Step 4 =====================================================================================
-ch5_cov_lim2 <- {a = 30 , b = 34}
-ch5_cov_lim3 <- {a = 33 , b = 35}
-
-
 class tutorial.chapter_05 extends basic_chapter
 {
 	chapter_name  = "Industrial Efficiency"
@@ -21,7 +13,13 @@ class tutorial.chapter_05 extends basic_chapter
 
 	cov_cir = 0
 
-	comm_script = false
+
+	//Step 2 =====================================================================================
+	ch5_cov_lim1 = {a = 20 , b = 31}
+
+	//Step 4 =====================================================================================
+	ch5_cov_lim2 = {a = 30 , b = 34}
+	ch5_cov_lim3 = {a = 33 , b = 35}
 
 	sch_cov_correct = false
 
@@ -121,6 +119,11 @@ class tutorial.chapter_05 extends basic_chapter
 	{
 		rules.clear()
 		set_all_rules(0)
+
+		local lim_idx = cv_list[(persistent.chapter - 2)].idx
+		ch5_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
+		ch5_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
+		ch5_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
 
 		d1_cnr = get_dep_cov_nr(ch5_cov_lim1.a,ch5_cov_lim1.b)
 		d2_cnr = get_dep_cov_nr(ch5_cov_lim2.a,ch5_cov_lim2.b)
@@ -805,15 +808,6 @@ class tutorial.chapter_05 extends basic_chapter
 
 		switch (this.step) {
 			case 2:
-				if(comm_script) {
-					cov_save[current_cov]=convoy
-					id_save[current_cov]=convoy.id
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					current_cov++
-					gall_cov++
-					return null
-				}
 				local cov = d1_cnr
 				local veh = 2
 				local good_list = [good_desc_x(f1_good).get_catg_index()] 	 //Coal
@@ -844,15 +838,6 @@ class tutorial.chapter_05 extends basic_chapter
 				}
 			break
 			case 4:
-				if(comm_script) {
-					cov_save[current_cov]=convoy
-					id_save[current_cov]=convoy.id
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					current_cov++
-					gall_cov++
-					return null
-				}
 				if (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b){
 					local cov = d2_cnr
 					local veh = 1

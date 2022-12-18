@@ -5,15 +5,6 @@
  *  Can NOT be used in network game !
  */
 
-//Step 2 =====================================================================================
-ch6_cov_lim1 <- {a = 34, b = 36}
-
-//Step 3 =====================================================================================
-ch6_cov_lim2 <- {a = 35, b = 38}
-
-//Step 4 =====================================================================================
-ch6_cov_lim3 <- {a = 37, b = 43}
-
 class tutorial.chapter_06 extends basic_chapter
 {
 	chapter_name  = "The forgotten Air transport"
@@ -21,6 +12,15 @@ class tutorial.chapter_06 extends basic_chapter
 	startcash     = 500000	   				// pl=0 startcash; 0=no reset
 
 	gl_wt = wt_air
+
+	//Step 2 =====================================================================================
+	ch6_cov_lim1 = {a = 34, b = 36}
+
+	//Step 3 =====================================================================================
+	ch6_cov_lim2 = {a = 35, b = 38}
+
+	//Step 4 =====================================================================================
+	ch6_cov_lim3 = {a = 37, b = 43}
 
 	c_way = coord(0,0)
 
@@ -82,7 +82,6 @@ class tutorial.chapter_06 extends basic_chapter
 
 	//Script
 	//----------------------------------------------------------------------------------
-	comm_script = false
 
 	sc_sta1 = "AirStop"
 	sc_sta2 = "Tower1930"
@@ -94,6 +93,11 @@ class tutorial.chapter_06 extends basic_chapter
 	{
 		rules.clear()
 		set_all_rules(0)
+
+		local lim_idx = cv_list[(persistent.chapter - 2)].idx
+		ch6_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
+		ch6_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
+		ch6_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
 
 		d1_cnr = get_dep_cov_nr(ch6_cov_lim1.a,ch6_cov_lim1.b)
 		d2_cnr = get_dep_cov_nr(ch6_cov_lim2.a,ch6_cov_lim2.b)
@@ -723,14 +727,6 @@ class tutorial.chapter_06 extends basic_chapter
 				if ((depot.x != c_dep2.x)||(depot.y != c_dep2.y))
 					return translate("You must select the deposit located in")+" ("+c_dep2.tostring()+")."
 				if (current_cov>ch6_cov_lim2.a && current_cov<ch6_cov_lim2.b){
-					/*if (comm_script){
-						cov_save[current_cov]=convoy
-						id_save[current_cov]=convoy.id
-						gcov_nr++
-						persistent.gcov_nr = gcov_nr
-						return null
-					}*/
-
 					local cov_list = depot.get_convoy_list()
 					local cov = cov_list.len()
 					local veh = 1
@@ -759,14 +755,6 @@ class tutorial.chapter_06 extends basic_chapter
 				if ((depot.x != c_dep3.x)||(depot.y != c_dep3.y))
 					return translate("You must select the deposit located in")+" ("+c_dep3.tostring()+")."
 				if (current_cov>ch6_cov_lim3.a && current_cov<ch6_cov_lim3.b){
-					/*if (comm_script){
-						cov_save[current_cov]=convoy
-						id_save[current_cov]=convoy.id
-						gcov_nr++
-						persistent.gcov_nr = gcov_nr
-						return null
-					}*/
-
 					local cov_list = depot.get_convoy_list()
 					local cov = cov_list.len()
 					local veh = 1

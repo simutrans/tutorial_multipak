@@ -5,16 +5,6 @@
  *  Can NOT be used in network game !
  */
 
-//Step 4 =====================================================================================
-ch4_cov_lim1 <- {a = 9, b = 15}
-
-//Step 5 =====================================================================================
-ch4_cov_lim2 <- {a = 14, b = 20}
-
-//Step 7 =====================================================================================
-ch4_cov_lim3 <- {a = 19, b = 21}
-
-
 class tutorial.chapter_04 extends basic_chapter
 {
 	chapter_name  = "Setting Sail"
@@ -22,6 +12,15 @@ class tutorial.chapter_04 extends basic_chapter
 
 	startcash     = 1000000	   				// pl=0 startcash; 0=no reset
 	gl_wt = wt_water
+
+	//Step 4 =====================================================================================
+	ch4_cov_lim1 = {a = 0, b = 0}
+
+	//Step 5 =====================================================================================
+	ch4_cov_lim2 = {a = 0, b = 0}
+
+	//Step 7 =====================================================================================
+	ch4_cov_lim3 = {a = 0, b = 0}
 
 	c_way =  coord3d(0, 0, 0)
 	cov_cir = 0
@@ -84,6 +83,13 @@ class tutorial.chapter_04 extends basic_chapter
 	{		
 		rules.clear()
 		set_all_rules(0)
+
+		local lim_idx = cv_list[(persistent.chapter - 2)].idx
+		ch4_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
+		ch4_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
+		ch4_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
+
+		//gui.add_message("tyt: "+ch4_cov_lim2.a +" "+ch4_cov_lim2.b + " "+lim_idx)
 
 		d1_cnr = get_dep_cov_nr(ch4_cov_lim1.a,ch4_cov_lim1.b)
 		d2_cnr = get_dep_cov_nr(ch4_cov_lim2.a,ch4_cov_lim2.b)

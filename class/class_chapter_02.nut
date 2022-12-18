@@ -5,26 +5,25 @@
  *  Can NOT be used in network game !
  */
 
-// Step 3 =====================================================================================
-ch2_cov_lim1 <- {a = (-1), b = 1}
-
-// Step 5 =====================================================================================
-ch2_cov_lim2 <- {a = 0, b = 4}
-
-// Step 6 =====================================================================================
-ch2_cov_lim3 <- {a = 3, b = 5}
-	
 class tutorial.chapter_02 extends basic_chapter
 {
 	chapter_name  = "Ruling the Roads"
 	chapter_coord = coord(115,185)
 
 	startcash     = 800000	   				// pl=0 startcash; 0=no reset
-	comm_script = false
 	stop_mark = false 
 
 	gltool = null
 	gl_wt = wt_road
+
+	// Step 3 =====================================================================================
+	ch2_cov_lim1 = {a = 0, b = 0}
+
+	// Step 6 =====================================================================================
+	ch2_cov_lim2 = {a = 0, b = 0}
+
+	// Step 7 =====================================================================================
+	ch2_cov_lim3 = {a = 0, b = 0}
 
 	//Limites para las ciudades
 	city1_lim = {a = coord(109,181), b = coord(128,193)}
@@ -111,6 +110,11 @@ class tutorial.chapter_02 extends basic_chapter
 
 		dep_lim1 = {a = c_dep, b = coorda}
 		dep_lim2 = {a = c_dep, b = coordb}
+
+		local lim_idx = cv_list[(persistent.chapter - 2)].idx
+		ch2_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
+		ch2_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
+		ch2_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
 
 		dep_cnr1 = get_dep_cov_nr(ch2_cov_lim1.a,ch2_cov_lim1.b)
 		dep_cnr2 = get_dep_cov_nr(ch2_cov_lim2.a,ch2_cov_lim2.b)
@@ -437,11 +441,7 @@ class tutorial.chapter_02 extends basic_chapter
 				}
 				return 10+percentage
 				break
-			case 4:
-				
-				if (gcov_nr != 0 && gcov_nr != 1){
-					return 0
-				}
+			case 4:		
 				if (pot0 == 0){
 					local next_mark = true
 					try {
@@ -481,19 +481,20 @@ class tutorial.chapter_02 extends basic_chapter
 				}
 				if (current_cov == ch2_cov_lim1.b){
 					local conv = my_tile(sch_list1[0]).find_object(mo_car)
-					if (conv || comm_script) {						
-						comm_script = false
-						this.next_step()
-						//Crear cuadro label
-						local opt = 0
-						label_bord(brdg_lim.a, brdg_lim.b, opt, false, "X")
-						//Elimina cuadro label
-						label_bord(del_lim1.a, del_lim1.b, opt, true, "X")
-						//label_bord(c_lock.a, c_lock.b, opt, true, "X")
-                        lock_tile_list(c_lock, c_lock.len(), true, 1)
-
+					if (conv) {						
+						pot2=1
 					}
 				}
+				if (pot2 == 1 ){
+					this.next_step()
+					//Crear cuadro label
+					local opt = 0
+					label_bord(brdg_lim.a, brdg_lim.b, opt, false, "X")
+					//Elimina cuadro label
+					label_bord(del_lim1.a, del_lim1.b, opt, true, "X")
+					//label_bord(c_lock.a, c_lock.b, opt, true, "X")
+                    lock_tile_list(c_lock, c_lock.len(), true, 1)
+				}	
 
 				return 50
 				break
@@ -544,9 +545,6 @@ class tutorial.chapter_02 extends basic_chapter
 				break
 
 			case 6:
-				if (gcov_nr < 1 && gcov_nr>3)
-					return 0
-
                 local c_dep = this.my_tile(c_dep)
                 local line_name = line2_name //"Test 2"
                 set_convoy_schedule(pl,c_dep, gl_wt, line_name)
@@ -576,12 +574,6 @@ class tutorial.chapter_02 extends basic_chapter
 				break
 
 			case 7:
-				if (gcov_nr != 4 && gcov_nr != 5)
-					return 0
-
-				if (comm_script)
-					return 0
-			
 				if (pot0==0){
 
 					local siz = sch_list3.len()
@@ -981,13 +973,6 @@ class tutorial.chapter_02 extends basic_chapter
 		switch (this.step) {
 			case 4:
 				if (current_cov>ch2_cov_lim1.a && current_cov<ch2_cov_lim1.b){
-					/*if (comm_script){
-						cov_save[current_cov]=convoy
-						id_save[current_cov]=convoy.id
-						gcov_nr++
-						persistent.gcov_nr = gcov_nr
-						return null
-					}*/
 					local cov = 1
 					local veh = 1
 					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
@@ -1012,14 +997,6 @@ class tutorial.chapter_02 extends basic_chapter
 			break
 			case 6:
 				if (current_cov>ch2_cov_lim2.a && current_cov<ch2_cov_lim2.b){
-					/*if (comm_script){
-						cov_save[current_cov]=convoy
-						id_save[current_cov]=convoy.id
-						gcov_nr++
-						persistent.gcov_nr = gcov_nr
-						return null
-					}*/
-
 					local cov_list = depot.get_convoy_list()
 					local cov = cov_list.len()
 					local veh = 1
@@ -1046,13 +1023,6 @@ class tutorial.chapter_02 extends basic_chapter
 			break
 			case 7:
 				if (current_cov>ch2_cov_lim3.a && current_cov<ch2_cov_lim3.b){
-					/*if (comm_script){
-						cov_save[current_cov]=convoy
-						id_save[current_cov]=convoy.id
-						gcov_nr++
-						persistent.gcov_nr = gcov_nr
-						return null
-					}*/
 					local cov = 1
 					local veh = 1
 					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
@@ -1121,7 +1091,6 @@ class tutorial.chapter_02 extends basic_chapter
 				break
 			case 4:
 				//delay_mark_tile(c_dep, c_dep,0, true)
-				comm_script = true
 				if (pot0 == 0){
 					pot0 = 1
 				}
@@ -1211,8 +1180,6 @@ class tutorial.chapter_02 extends basic_chapter
 				break
 
 			case 7:
-
-				comm_script = true
 				if (pot1==0){
 					for(local j=0;j<sch_list3.len();j++){
 						local t = my_tile(sch_list3[j])
@@ -1259,8 +1226,6 @@ class tutorial.chapter_02 extends basic_chapter
 					conv[0].set_line(player, c_line)
 					comm_start_convoy(player, conv[0], depot)
 				}
-
-				comm_script = false
 				return null
 				break
 

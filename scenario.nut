@@ -4,7 +4,7 @@
  * 
  *  Can NOT be used in network game !
  */
-const version = 1642
+const version = 1645
 map.file = "tutorial64.sve"
 scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
@@ -201,6 +201,7 @@ function string_analyzer()
 {
 	//Check version and pakset name
 	resul_version = string_analyzer()
+	include(nut_path+"class_basic_convoys") 		// include class for detect eliminated convoys
 	include(nut_path+"class_basic_chapter") 		// include class for basic chapter structure
 
 }
@@ -269,7 +270,7 @@ function load_chapter(number,pl)
 	}
 }
 
-function load_chapter2(number,pl)
+function load_conv_ch(number, step, pl)
 {
     rules.clear()
 	if (!resul_version.pak || !resul_version.st){
@@ -282,8 +283,11 @@ function load_chapter2(number,pl)
 
 		if ( (number == persistent.chapter) && (chapter.startcash > 0) )  // set cash money here
 			player_x(0).book_cash( (chapter.startcash - player_x(0).get_cash()[0]) * 100)
-			persistent.chapter = number
-			chapter.chap_nr = number
+
+		chapter.step_nr(step)
+		persistent.chapter = number
+		chapter.chap_nr = number
+		chapter.start_chapter()
 	}
 }
 
@@ -302,11 +306,11 @@ function get_info_text(pl)
 	local help = ""
 	local i = 0
 	//foreach (chap in tutorial)
-	//for (i=1;i<=chapter_max;i++)
-		//help+= "<em>"+translate("Chapter")+" "+(i)+"</em> - "+translate(tutorial["chapter_"+(i<10?"0":"")+i].chapter_name)+"<br>"
-	//info.list_of_chapters = help
+	for (i=1;i<=chapter_max;i++)
+		help+= "<em>"+translate("Chapter")+" "+(i)+"</em> - "+translate(tutorial["chapter_"+(i<10?"0":"")+i].chapter_name)+"<br>"
+	info.list_of_chapters = help
 
-	//info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
+	info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
     return info
 }
 
@@ -381,8 +385,8 @@ function start()
 
 function labels_text_debug()
 {
-	local t1 = tile_x(0, 0, -2)
-	local t2 = tile_x(1, 0, -2)
+	local t1 = tile_x(0, 0, 27)
+	local t2 = tile_x(1, 0, 27)
 
 	if(!t1.find_object(mo_label) || !t2.find_object(mo_label)){
 		label_x.create(t1, player_x(1), translate(""+persistent.chapter))
@@ -428,9 +432,9 @@ function labels_text_debug()
 
 function is_scenario_completed(pl)
 {
-	labels_text_debug()
-//gui.add_message(""+glsw[0]+"")
-//gui.add_message("!!!!!"+persistent.step+" ch a "+st_nr[0]+"  !!!!! "+persistent.status.step+"  -- "+chapter.step+"")				
+	//labels_text_debug()
+	//gui.add_message(""+glsw[0]+"")
+	//gui.add_message("!!!!!"+persistent.step+" ch a "+st_nr[0]+"  !!!!! "+persistent.status.step+"  -- "+chapter.step+"")				
 	if (pl != 0) return 0			// other player get only 0%
 
 	if (currt_pos){
@@ -460,30 +464,28 @@ function is_scenario_completed(pl)
 
 	//gui.add_message(""+current_cov+"  "+gall_cov+"")
 	//Para los convoys ---------------------
-	if (gall_cov != current_cov) chapter.checks_convoy_removed(pl)
-	gall_cov = checks_all_convoys()
-	correct_cov = chapter.correct_cov_list()
+	if (gall_cov != current_cov){
+		basic_convoys().checks_convoy_removed(pl)
+	}
+	
+	gall_cov = basic_convoys().checks_all_convoys()
+	if(!correct_cov && gall_cov==gcov_nr){
+		load_conv_ch(persistent.status.chapter, persistent.status.step, pl)
+	}
+	correct_cov = basic_convoys().correct_cov_list()
 	persistent.gall_cov = gall_cov
 
 //gui.add_message("gall_cov-> "+gall_cov+":: gcov_nr-> "+gcov_nr+":: current_cov-> "+current_cov+":: Step-> "+chapter.step+":: PersisStep-> "+persistent.step+":: Status->"+persistent.status.step+"")
-	if (correct_cov) {
-		if (persistent.status.chapter > persistent.chapter){
-			load_chapter2(persistent.status.chapter,pl)
-		}
-		if (persistent.status.step != persistent.step){
-			chapter.step_nr(persistent.status.step)
-		}
-	}
-	else {
+
+	if(!correct_cov) {
 		if (!resul_version.pak || !resul_version.st)
 			chapter.step = 1
 
 		else chapter.step = persistent.step
 		chapter.start_chapter()
-		return 0
+		return 1
 	}
 
-	//if(cov_delay>0) cov_delay--
 	chapter.step = persistent.step
 	local percentage = chapter.is_chapter_completed(pl)
 	gl_percentage = percentage
@@ -495,6 +497,8 @@ function is_scenario_completed(pl)
 		text.cname = translate(""+chapter.chapter_name+"")
 
 		persistent.chapter++
+		persistent.status.chapter++
+
 		load_chapter(persistent.chapter, pl)
 		chapter.chap_nr = persistent.chapter
 		percentage = chapter.is_chapter_completed(pl)
@@ -577,11 +581,10 @@ function is_convoy_allowed(pl, convoy, depot)
 	if (pause) return translate("Advance is not allowed with the game paused.")
 
 	local result = null
-	chapter.checks_convoy_removed(pl)
+	basic_convoys().checks_convoy_removed(pl)
 	//gui.add_message("Run ->"+current_cov+","+correct_cov+" - "+gall_cov+"")
 	if (pl != 0) return null
 	result = chapter.is_convoy_allowed(pl, convoy, depot)
-	gui.add_message(""+result+"")
 	return result
 }
 
@@ -621,6 +624,7 @@ convoy_x._save <- function()
 
 function resume_game()
 {
+	basic_convoys().set_convoy_limit()
 	//Mark all text labels
 	foreach(label in world.get_label_list()){
 		if(label.get_owner().nr == 1)
@@ -678,21 +682,6 @@ function resume_game()
 	select_option_halt = tile_x( 0, 0, select_option.z ).find_object(mo_label)
 
     chapter.start_chapter()
-}
-
-function checks_all_convoys()
-{
-	local cov_list = world.get_convoy_list()
-	local cov_nr = 0
-	foreach(cov in cov_list) {
-		local id = cov.id
-		if (id>gcov_id)
-			gcov_id = id
-
-		if (!cov.is_in_depot() && !ignore_save[id])
-			cov_nr++	
-	}	
-	return cov_nr
 }
 
 function get_line_name(halt)
