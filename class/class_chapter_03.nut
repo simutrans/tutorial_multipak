@@ -2574,8 +2574,6 @@ class tutorial.chapter_03 extends basic_chapter
 					local convoy = false
 					local all = true
 					comm_start_convoy(player, convoy, depot, all)	
-					gall_cov = checks_all_convoys()
-					current_cov = gall_cov
 				}
 				return null
 				break

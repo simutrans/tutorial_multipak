@@ -209,17 +209,18 @@ class tutorial.chapter_04 extends basic_chapter
 			break
 
 		case 6:
-			local c_list = dock_list2
+			local list = dock_list2
 			local txdoc = ""
             local dock_name = translate("Dock")
             local ok_tex = translate("OK")
-			for(local j=0;j<c_list.len();j++){
+			for(local j=0;j<list.len();j++){
+				local c = coord(list[j].x, list[j].y)
 				if (glsw[j]==0)
-					txdoc += format("<a><st>%s %d</st>",dock_name,j+1) + c_list[j].href(" ("+c_list[j].tostring()+")")+"<br>" 
+					txdoc += format("<a><st>%s %d</st>",dock_name,j+1) + c.href(" ("+c.tostring()+")")+"<br>" 
 				else
-					txdoc += format("<em>%s %d</em>",dock_name,j+1) + " ("+c_list[j].tostring()+") <em>"+ok_tex+"</em><br>" 
+					txdoc += format("<em>%s %d</em>",dock_name,j+1) + " ("+c.tostring()+") <em>"+ok_tex+"</em><br>" 
 			}
-			text.nr = c_list.len()
+			text.nr = list.len()
 			text.dock = txdoc
 			break
 
@@ -233,7 +234,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local st_halt = tile.get_halt()
 
 				if(tmpsw[j]==0 ){
-					tx_list += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
+					tx_list += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+"("+c.tostring()+")"))
 				}
 				else{						
 					tx_list += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
@@ -392,12 +393,12 @@ class tutorial.chapter_04 extends basic_chapter
 				else if (pot0==1 && pot1==0){
 					local t = my_tile(sch_list2[1])
 					local dock4 = t.find_object(mo_building)
-					if (!dock4){
-					label_x.create(sch_list2[1], player_x(pl), translate("Build a Dock here!."))
-					}
-					else{
-						if (is_station_build(0, sch_list2[1], good_alias.goods)==null)
+					public_label(t, translate("Build a Dock here!."))
+					if(dock4){
+						if(is_station_build(0, sch_list2[1], good_alias.goods)==null){
+							t.remove_object(player_x(1), mo_label)
 							pot1=1
+						}
 					}
 				}
 				//Vehiculos en circulacion
@@ -477,7 +478,8 @@ class tutorial.chapter_04 extends basic_chapter
 		}
 		local result = translate("Action not allowed")		// null is equivalent to 'allowed'
 		//glbpos = coord3d(pos.x,pos.y,pos.y)
-		gltool = tool_id			
+		gltool = tool_id	
+
 		switch (this.step) {
 			case 1:
 				if (tool_id == 4096){
@@ -561,7 +563,6 @@ class tutorial.chapter_04 extends basic_chapter
 					}					
 					if(pos.x==sch_list2[1].x && pos.y==sch_list2[1].y){
 						if(tool_id==tool_build_station){
-							t.remove_object(player_x(pl), mo_label)
 							return null
 						}	
 					}
@@ -816,9 +817,7 @@ class tutorial.chapter_04 extends basic_chapter
 					}
 					local convoy = false
 					local all = true
-					comm_start_convoy(player, convoy, depot, all)	
-					gall_cov = checks_all_convoys()
-					current_cov = gall_cov	
+					comm_start_convoy(player, convoy, depot, all)		
 				}	
 				return null
 				break;
@@ -885,8 +884,6 @@ class tutorial.chapter_04 extends basic_chapter
 					local convoy = false
 					local all = true
 					comm_start_convoy(player, convoy, depot, all)	
-					gall_cov = checks_all_convoys()
-					current_cov = gall_cov
 				}
 				return null
 				break;

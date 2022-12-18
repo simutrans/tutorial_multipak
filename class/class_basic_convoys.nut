@@ -8,7 +8,7 @@
 //Number of convoys in each chapter are listed
 cv_list <-	[
 				//Chapter_02: [Step..], [Cov_nr..], Index --------------
-				{stp = [3,6,7], cov = [1,3,1], idx = 0},
+				{stp = [4,6,7], cov = [1,3,1], idx = 0},
 
 				//Chapter_03: [Step..], [Cov_nr..], Index --------------
 				{stp = [5,7,11], cov = [1,1,3], idx = 0}
@@ -115,8 +115,9 @@ class basic_convoys
 		local pl = 0
 		foreach(lim in cv_lim) {
 			//gui.add_message(""+lim.a +" :: "+lim.b + " - "+lim.ch+ " :: "+lim.stp+" :: index "+cv_list[1].idx)
-			if (cov_nr > lim.a && cov_nr < lim.b && persistent.chapter >= lim.ch){
-				load_conv_ch(lim.ch, lim.stp, pl)
+			if (cov_nr > lim.a && cov_nr < lim.b && persistent.status.chapter >= lim.ch){
+				if(lim.stp < persistent.step || persistent.status.chapter != lim.ch)
+					load_conv_ch(lim.ch, lim.stp, pl)
 				break
 			}
 

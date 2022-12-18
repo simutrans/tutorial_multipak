@@ -57,7 +57,7 @@ class tutorial.chapter_06 extends basic_chapter
 	d1_cnr = null //auto started
 	plane1_obj = "DC-3"
 	plane1_load = 100
-	plane1_wait = 25369
+	plane1_wait = 42282
 	sch_list1 = [coord(114,176), coord(168,489)]
 
 	// Step 3 =====================================================================================
@@ -728,11 +728,19 @@ class tutorial.chapter_06 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep2.tostring()+")."
 				if (current_cov>ch6_cov_lim2.a && current_cov<ch6_cov_lim2.b){
 					local cov_list = depot.get_convoy_list()
-					local cov = cov_list.len()
+					local cov = d2_cnr
 					local veh = 1
 					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
 					local name = veh1_obj
 					local st_tile = 1
+
+					//Para arracar varios vehiculos
+					local id_start = ch6_cov_lim2.a
+					local id_end = ch6_cov_lim2.b
+					local c_list = sch_list2
+					local cir_nr = get_convoy_number_exp(c_list[0], depot, id_start, id_end)
+					cov -= cir_nr
+
 					result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
 					if (result!=null){
 						reset_tmpsw()
@@ -742,7 +750,6 @@ class tutorial.chapter_06 extends basic_chapter
 					local selc = 0
 					local load = veh1_load
 					local wait = veh1_wait
-					local c_list = sch_list2
 					local siz = c_list.len()
 					local line = false
 					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)
@@ -756,11 +763,19 @@ class tutorial.chapter_06 extends basic_chapter
 					return translate("You must select the deposit located in")+" ("+c_dep3.tostring()+")."
 				if (current_cov>ch6_cov_lim3.a && current_cov<ch6_cov_lim3.b){
 					local cov_list = depot.get_convoy_list()
-					local cov = cov_list.len()
+					local cov = d3_cnr
 					local veh = 1
 					local good_list = [good_desc_x (good_alias.passa).get_catg_index()] 	 //Passengers
 					local name = veh1_obj
 					local st_tile = 1
+
+					//Para arracar varios vehiculos
+					local id_start = ch6_cov_lim3.a
+					local id_end = ch6_cov_lim3.b
+					local c_list = sch_list3
+					local cir_nr = get_convoy_number_exp(c_list[0], depot, id_start, id_end)
+					cov -= cir_nr
+
 					result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
 					if (result!=null){
 						reset_tmpsw()
@@ -770,7 +785,6 @@ class tutorial.chapter_06 extends basic_chapter
 					local selc = 0
 					local load = veh1_load
 					local wait = veh1_wait
-					local c_list = sch_list3
 					local siz = c_list.len()
 					local line = false
 					result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)

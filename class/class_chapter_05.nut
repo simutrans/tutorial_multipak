@@ -244,7 +244,7 @@ class tutorial.chapter_05 extends basic_chapter
 				}
 				text.st = st_tx
 			}
-		    if (pot1==1 && pot2==0 || !correct_cov){
+		    if (pot1==1 && pot2==0 || (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b)){
 				text = ttextfile("chapter_05/04_2-3.txt")
 				text.tx = "<em>[2/3]</em>"
 				local list_tx = ""
@@ -278,7 +278,7 @@ class tutorial.chapter_05 extends basic_chapter
 				text.wait = get_wait_time_text(veh2_wait)
 				text.nr = siz
 			}
-		    if (pot2==1 && pot3==0 || !correct_cov){
+		    if (pot2==1 && pot3==0 || (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b)){
 				text = ttextfile("chapter_05/04_3-3.txt")
 				text.tx = "<em>[3/3]</em>"
 				local list_tx = ""
@@ -1101,9 +1101,6 @@ class tutorial.chapter_05 extends basic_chapter
 					local conv = depot.get_convoy_list()
 					conv[0].set_line(player, c_line)
 					comm_start_convoy(player, conv[0], depot)
-
-					gall_cov = checks_all_convoys()
-					current_cov = gall_cov
 				}
                 
 				return null

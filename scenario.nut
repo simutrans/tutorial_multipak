@@ -585,6 +585,7 @@ function is_convoy_allowed(pl, convoy, depot)
 	//gui.add_message("Run ->"+current_cov+","+correct_cov+" - "+gall_cov+"")
 	if (pl != 0) return null
 	result = chapter.is_convoy_allowed(pl, convoy, depot)
+	gui.add_message("TYT: "+result +" "+current_cov)
 	return result
 }
 

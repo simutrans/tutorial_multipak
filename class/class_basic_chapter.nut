@@ -136,7 +136,12 @@ class basic_chapter
 		if ( d_nr == 0)
 			return true
 		for (local j = 0;j<d_nr;j++){
-			cov_list[j].destroy(pl)
+ 			try {
+				cov_list[j].destroy(pl)
+			}
+			catch(ev) {
+				continue
+			}
 		}
 		return true
 	}
