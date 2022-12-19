@@ -5,16 +5,6 @@
  *  Can NOT be used in network game !
  */
 
-//Step 4 =====================================================================================
-ch4_cov_lim1 <- {a = 9, b = 15}
-
-//Step 5 =====================================================================================
-ch4_cov_lim2 <- {a = 14, b = 20}
-
-//Step 7 =====================================================================================
-ch4_cov_lim3 <- {a = 19, b = 21}
-
-
 class tutorial.chapter_04 extends basic_chapter
 {
 	chapter_name  = "Setting Sail"
@@ -23,21 +13,25 @@ class tutorial.chapter_04 extends basic_chapter
 	startcash     = 1000000	   				// pl=0 startcash; 0=no reset
 	gl_wt = wt_water
 
-	wayend = 0
-	coorbord = 0
+	//Step 4 =====================================================================================
+	ch4_cov_lim1 = {a = 0, b = 0}
+
+	//Step 5 =====================================================================================
+	ch4_cov_lim2 = {a = 0, b = 0}
+
+	//Step 7 =====================================================================================
+	ch4_cov_lim3 = {a = 0, b = 0}
+
+	c_way =  coord3d(0, 0, 0)
 	cov_cir = 0
 
 	//Step 1 =====================================================================================
 	//Productor
-	f1name = "Oelbohrinsel"
-	f1_coord = coord(168,189)
-	f1_good = good_alias.oel
+	fac_1 = {c = coord(168,189), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.oel}
 	f1_lim = {a = coord(168,189), b = coord(169,190)}
 	
 	//Fabrica
-	f2name = "Raffinerie"
-	f2_coord = coord(149,200)
-	f2_good = good_alias.gas
+	fac_2 = {c = coord(149,200), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
 	f2_lim = {a = coord(149,200), b = coord(150,201)}
 
 	//Step 2 =====================================================================================
@@ -46,7 +40,7 @@ class tutorial.chapter_04 extends basic_chapter
 
 	//Step 3 =====================================================================================
 	c_dep1 = coord(150, 190)
-	d1_cnr = 5
+	d1_cnr = null //auto started
 
 	//Step 4 =====================================================================================
 	ship1_name_obj = "EnCo_Oil_Ship"
@@ -57,15 +51,13 @@ class tutorial.chapter_04 extends basic_chapter
 
 	//Step 5 =====================================================================================
 	//Para el canal acuatico
-	c_way = {a = coord3d(140,194,-3), b = coord3d(114,194,1)}
-	c_way_lim = {a = coord(114, 194), b = coord(140, 194)}
+	c1_way = {a = coord3d(140,194,-3), b = coord3d(114,194,1)}
+	c1_way_lim = {a = coord(114, 194), b = coord(140, 194)}
 
 	//Consumidor Final
-	f3name = "TANKE"
-	f3_coord = coord(112,192)
-	f3_good = good_alias.gas
-	d2_cnr = 5
+	fac_3 = {c = coord(112,192), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
 
+	d2_cnr = null //auto started
 	sch_list2 = [coord(151, 198), coord(114, 194)]
 
 	//Step 6 =====================================================================================
@@ -87,12 +79,51 @@ class tutorial.chapter_04 extends basic_chapter
 	sc_dock_name3 = "ShipStop"
 	sc_dep_name = "ShipDepot"
 
-	comm_script = false
-
 	function start_chapter()  //Inicia solo una vez por capitulo
 	{		
 		rules.clear()
 		set_all_rules(0)
+
+		local lim_idx = cv_list[(persistent.chapter - 2)].idx
+		ch4_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
+		ch4_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
+		ch4_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
+
+		d1_cnr = get_dep_cov_nr(ch4_cov_lim1.a,ch4_cov_lim1.b)
+		d2_cnr = get_dep_cov_nr(ch4_cov_lim2.a,ch4_cov_lim2.b)
+
+		local t = my_tile(fac_1.c)
+		local buil = t.find_object(mo_building)
+		if(buil) {
+			fac_1.c_list = buil.get_tile_list()
+			fac_1.name = translate(buil.get_name())
+			local fields = buil.get_factory().get_fields_list()
+			foreach(t in fields){
+				fac_1.c_list.push(t)
+			}
+		}
+
+		t = my_tile(fac_2.c)
+		buil = t.find_object(mo_building)
+		if(buil) {
+			fac_2.c_list = buil.get_tile_list()
+			fac_2.name = translate(buil.get_name())
+			local fields = buil.get_factory().get_fields_list()
+			foreach(t in fields){
+				fac_2.c_list.push(t)
+			}
+		}
+
+		t = my_tile(fac_3.c)
+		buil = t.find_object(mo_building)
+		if(buil) {
+			fac_3.c_list = buil.get_tile_list()
+			fac_3.name = translate(buil.get_name())
+			/*local fields = buil.get_factory().get_fields_list()
+			foreach(t in fields){
+				fac_3.c_list.push(t)
+			}*/
+		}
 
 		local pl = 0
 		if(this.step == 7){
@@ -140,8 +171,8 @@ class tutorial.chapter_04 extends basic_chapter
 			break
 
 		case 5:
-			local c1 = coord(c_way.a.x, c_way.a.y)
-			local c2 = coord(c_way.b.x, c_way.b.y)
+			local c1 = coord(c1_way.a.x, c1_way.a.y)
+			local c2 = coord(c1_way.b.x, c1_way.b.y)
 			if(!correct_cov){
 				local a = 3
 				local b = 3
@@ -169,24 +200,25 @@ class tutorial.chapter_04 extends basic_chapter
 			text.w1 = c1.href(" ("+c1.tostring()+")")+""
 			text.w2 = c2.href(" ("+c2.tostring()+")")+""
 			text.dock = sch_list2[1].href("("+sch_list2[1].tostring()+")")+""
-			text.all_cov = d1_cnr
+			text.all_cov = d2_cnr
 			text.load = ship1_load
 			text.wait = get_wait_time_text(ship1_wait)
 			
 			break
 
 		case 6:
-			local c_list = dock_list2
+			local list = dock_list2
 			local txdoc = ""
             local dock_name = translate("Dock")
             local ok_tex = translate("OK")
-			for(local j=0;j<c_list.len();j++){
+			for(local j=0;j<list.len();j++){
+				local c = coord(list[j].x, list[j].y)
 				if (glsw[j]==0)
-					txdoc += format("<a><st>%s %d</st>",dock_name,j+1) + c_list[j].href(" ("+c_list[j].tostring()+")")+"<br>" 
+					txdoc += format("<a><st>%s %d</st>",dock_name,j+1) + c.href(" ("+c.tostring()+")")+"<br>" 
 				else
-					txdoc += format("<em>%s %d</em>",dock_name,j+1) + " ("+c_list[j].tostring()+") <em>"+ok_tex+"</em><br>" 
+					txdoc += format("<em>%s %d</em>",dock_name,j+1) + " ("+c.tostring()+") <em>"+ok_tex+"</em><br>" 
 			}
-			text.nr = c_list.len()
+			text.nr = list.len()
 			text.dock = txdoc
 			break
 
@@ -200,7 +232,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local st_halt = tile.get_halt()
 
 				if(tmpsw[j]==0 ){
-					tx_list += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
+					tx_list += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+"("+c.tostring()+")"))
 				}
 				else{						
 					tx_list += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
@@ -222,22 +254,51 @@ class tutorial.chapter_04 extends basic_chapter
 		text.dep1 = c_dep1.href("("+c_dep1.tostring()+")")+""
 		text.sh = translate(ship1_name_obj)
 		text.cir = cov_cir
-		text.f1 = f1_coord.href(""+translate(f1name)+" ("+f1_coord.tostring()+")")+""
-		text.f3 = f2_coord.href(""+translate(f2name)+" ("+f2_coord.tostring()+")")+""
-		text.f4 = f3_coord.href(""+translate(f3name)+" ("+f3_coord.tostring()+")")+""
+		text.f1 = fac_1.c.href(""+translate(fac_1.name)+" ("+fac_1.c.tostring()+")")+""
+		text.f3 = fac_2.c.href(""+translate(fac_2.name)+" ("+fac_2.c.tostring()+")")+""
+		text.f4 = fac_3.c.href(""+translate(fac_3.name)+" ("+fac_3.c.tostring()+")")+""
 		text.tur = tur.href(" ("+tur.tostring()+")")+""
-		text.good1 = translate(f1_good)
-		text.good2 = translate(f2_good)
+		text.good1 = translate(fac_1.good)
+		text.good2 = translate(fac_2.good)
 		return text
 	}
 	
 	function is_chapter_completed(pl) {
 		local percentage=0
-		persistent.point = point
 		save_pot()
 		save_glsw()
 		switch (this.step) {
 			case 1:
+				local next_mark = false
+				if(pot0==0 || pot1 == 0){
+					local list = fac_2.c_list
+					local m_buil = true
+					try {
+						next_mark = delay_mark_tile_list(list, m_buil)
+					}
+					catch(ev) {
+						return 0
+					}
+					if(next_mark && pot0 == 1){
+						pot1=1
+					}
+				}
+				else if (pot2==0 || pot3==0){
+					local list = fac_1.c_list
+					local m_buil = true
+					try {
+						next_mark = delay_mark_tile_list(list, m_buil)
+					}
+					catch(ev) {
+						return 0
+					}
+					if(next_mark && pot2 == 1){
+						pot3=1
+					}
+				}
+				else if (pot3==1 && pot4==0){
+					this.next_step()
+				}
 				return 5
 				break;
 			case 2:
@@ -261,11 +322,14 @@ class tutorial.chapter_04 extends basic_chapter
 				local depot = t1.find_object(mo_depot_water)
 
 				if (!depot){
-					label_x.create(c_dep1, player_x(0), translate("Build Shipyard here!."))
+					label_x.create(c_dep1, player_x(pl), translate("Build Shipyard here!."))
 				}
 				else{
-					t1.remove_object(player_x(0), mo_label)
-					glsw[0]=1
+					t1.remove_object(player_x(pl), mo_label)
+					pot0=1
+				}
+				if (pot1==1){
+					this.next_step()
 				}
 				return 10+percentage
 				break
@@ -282,7 +346,7 @@ class tutorial.chapter_04 extends basic_chapter
 				//Para el canal acuatico
 				if (pot0==0){
 					//Inicio del canal
-					local c_start = coord(c_way.a.x, c_way.a.y)
+					local c_start = coord(c1_way.a.x, c1_way.a.y)
 					local t_start = my_tile(c_start)
 					local way_start = t_start.find_object(mo_way)
 					if (way_start && way_start.get_desc().get_topspeed()==0){
@@ -295,7 +359,7 @@ class tutorial.chapter_04 extends basic_chapter
 					}
 
 					//Final del canal
-					local c_end = coord(c_way.b.x, c_way.b.y)
+					local c_end = coord(c1_way.b.x, c1_way.b.y)
 					local t_end = my_tile(c_end)
 					local way_end = t_end.find_object(mo_way)
 					if (way_end &&  way_end.get_desc().get_topspeed()==0){
@@ -307,8 +371,8 @@ class tutorial.chapter_04 extends basic_chapter
 						t_end.remove_object(player_x(1), mo_label)
 					}
 
-					local coora = {x = c_way.a.x, y = c_way.a.y, z = c_way.a.z }
-					local coorb = {x = c_way.b.x, y = c_way.b.y, z = c_way.b.z }
+					local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
+					local coorb = {x = c1_way.b.x, y = c1_way.b.y, z = c1_way.b.z }
 
 					local obj = false
 					local dir = 6
@@ -317,24 +381,22 @@ class tutorial.chapter_04 extends basic_chapter
 					local wt = gl_wt
 					local fullway = update_way(coora, coorb, vel_min, wt) //test			
 
-					if (fullway.result){	
-						wayend = 0
-						coorbord = 0
+					if (fullway.result){
 						pot0=1		
 					}
 					else 
-						coorbord = fullway.c
+						c_way = fullway.c
 				}
 				//Para el cuarto muelle
 				else if (pot0==1 && pot1==0){
 					local t = my_tile(sch_list2[1])
 					local dock4 = t.find_object(mo_building)
-					if (!dock4){
-					label_x.create(sch_list2[1], player_x(0), translate("Build a Dock here!."))
-					}
-					else{
-						if (is_station_build(0, sch_list2[1], good_alias.goods)==null)
+					public_label(t, translate("Build a Dock here!."))
+					if(dock4){
+						if(is_station_build(0, sch_list2[1], good_alias.goods)==null){
+							t.remove_object(player_x(1), mo_label)
 							pot1=1
+						}
 					}
 				}
 				//Vehiculos en circulacion
@@ -386,7 +448,6 @@ class tutorial.chapter_04 extends basic_chapter
 				this.step=1
 				persistent.step=1
 				persistent.status.step = 1
-				persistent.point = null
 				return 100
 				break
 		}
@@ -415,30 +476,32 @@ class tutorial.chapter_04 extends basic_chapter
 		}
 		local result = translate("Action not allowed")		// null is equivalent to 'allowed'
 		//glbpos = coord3d(pos.x,pos.y,pos.y)
-		gltool = tool_id			
+		gltool = tool_id	
+
 		switch (this.step) {
 			case 1:
-				if ((pos.x>=f2_lim.a.x)&&(pos.y>=f2_lim.a.y)&&(pos.x<=f2_lim.b.x)&&(pos.y<=f2_lim.b.y)){
-					if (tool_id == 4096){
-						if (pot0==0){
-							pot0=1
-							return null
-						}			
+				if (tool_id == 4096){
+					if (pot0==0){
+						local list = fac_2.c_list
+						foreach(t in list){
+							if(pos.x == t.x && pos.y == t.y) {
+								pot0 = 1
+								return null
+							}
+						}
 					}
-					else
-						translate("You must use the inspection tool")+" ("+pos.tostring()+")."	
-				}
-
-				if ((pos.x>=f1_lim.a.x)&&(pos.y>=f1_lim.a.y)&&(pos.x<=f1_lim.b.x)&&(pos.y<=f1_lim.b.y)){
-					if (tool_id == 4096){
-						if (pot0==1){
-							this.next_step()
-							return null
-						}			
+					else if (pot1==1){
+						local list = fac_1.c_list
+						foreach(t in list){
+							if(pos.x == t.x && pos.y == t.y) {
+								pot2 = 1
+								return null
+							}
+						}
 					}
-					else
-						translate("You must use the inspection tool")+" ("+pos.tostring()+")."	
 				}
+				else
+					return translate("You must use the inspection tool")+" ("+pos.tostring()+")."
 		
 				break;
 			//Construyendo los Muelles
@@ -451,19 +514,20 @@ class tutorial.chapter_04 extends basic_chapter
 			case 3:
 				//Primer Astillero
 				if (pos.x==c_dep1.x && pos.y==c_dep1.y){			
-					if (glsw[0]==0){
-						if (tool_id==4117){
+					if (pot0==0){
+						if (tool_id == tool_build_depot){
+							pot0=1
 							return null
 						}
 					}
-					else if (glsw[0]==1 && glsw[1]==0){
-						if (tool_id==4096){
-							this.next_step()
+					else if (pot0==1 && pot1==0){
+						if (tool_id == 4096){
+							pot1=1
 							return null
 						}
 					}
 				}
-				else if (glsw[0]==0)
+				else if (pot0==0)
 					result = translate("Place the shipyard here")+" ("+c_dep1.tostring()+")."
 				break
 				//Enrutar barcos
@@ -478,11 +542,11 @@ class tutorial.chapter_04 extends basic_chapter
 				break
 			case 5:
 				if (pot0==0){
-                    if(pos.x==c_way.a.x && pos.y==c_way.a.y){
+                    if(pos.x==c1_way.a.x && pos.y==c1_way.a.y){
                         if(tool_id==tool_remove_way || tool_id==4097)
 							return result
                     }
-					if (pos.x>=c_way_lim.a.x && pos.y>=c_way_lim.a.y && pos.x<=c_way_lim.b.x && pos.y<=c_way_lim.b.y){
+					if (pos.x>=c1_way_lim.a.x && pos.y>=c1_way_lim.a.y && pos.x<=c1_way_lim.b.x && pos.y<=c1_way_lim.b.y){
 						if (tool_id == tool_build_way && way && wt == wt_water)
 							return null
 					}
@@ -497,7 +561,6 @@ class tutorial.chapter_04 extends basic_chapter
 					}					
 					if(pos.x==sch_list2[1].x && pos.y==sch_list2[1].y){
 						if(tool_id==tool_build_station){
-							t.remove_object(player_x(0), mo_label)
 							return null
 						}	
 					}
@@ -590,21 +653,12 @@ class tutorial.chapter_04 extends basic_chapter
 		local wt = gl_wt
 		switch (this.step) {
 			case 4:
-				if(comm_script) {
-					cov_save[current_cov]=convoy
-					id_save[current_cov]=convoy.id
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					current_cov++
-					gall_cov++
-					return null
-				}
 				if ((depot.x != c_dep1.x)||(depot.y != c_dep1.y))
 					return translate("You must select the deposit located in")+" ("+c_dep1.tostring()+")."	
 				local cov = d1_cnr
 				local in_dep = true
 				local veh = 1
-				local good_list = [good_desc_x(f1_good).get_catg_index()] //Fuels
+				local good_list = [good_desc_x(fac_1.good).get_catg_index()] //Fuels
 				local name = ship1_name_obj
 				local st_tile = 1
 
@@ -617,7 +671,7 @@ class tutorial.chapter_04 extends basic_chapter
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
 				if (result!=null){
-					local good = translate(f1_good)
+					local good = translate(fac_1.good)
 	 				return ship_result_message(result, translate(name), good, veh, cov)
 				}
 
@@ -632,22 +686,12 @@ class tutorial.chapter_04 extends basic_chapter
 
 			break
 			case 5:
-				if(comm_script) {
-					cov_save[current_cov]=convoy
-					id_save[current_cov]=convoy.id
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					current_cov++
-					gall_cov++
-					return null
-				}
-
 				if ((depot.x != c_dep1.x)||(depot.y != c_dep1.y))
 					return translate("You must select the deposit located in")+" ("+c_dep1.tostring()+")."
 				local cov = d2_cnr
 		        local in_dep = true
 				local veh = 1
-				local good_list = [good_desc_x(f2_good).get_catg_index()] //Fuels
+				local good_list = [good_desc_x(fac_2.good).get_catg_index()] //Fuels
 				local name = ship1_name_obj
 				local st_tile = 1
 
@@ -659,7 +703,7 @@ class tutorial.chapter_04 extends basic_chapter
 
 				result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 				if (result!=null){
-					local good = translate(f2_good)
+					local good = translate(fac_2.good)
 	 				return ship_result_message(result, translate(name), good, veh, cov)
 				}
 				if (current_cov>ch4_cov_lim2.a && current_cov<ch4_cov_lim2.b){
@@ -701,9 +745,15 @@ class tutorial.chapter_04 extends basic_chapter
 
 	function script_text()
 	{
+		local pl = 0
 		switch (this.step) {
 			case 1:
-				this.next_step()
+				if(pot0==0){
+					pot0=1
+				}
+				if (pot2==0){
+					pot2=1
+				}
 				return null
 				break;
 			case 2:
@@ -714,7 +764,7 @@ class tutorial.chapter_04 extends basic_chapter
 					local tile = my_tile(c_list[j])
 					tile.remove_object(player_x(1), mo_label)
 					local tool = command_x(tool_build_station)			
-					local err = tool.work(player_x(0), tile, name)
+					local err = tool.work(player_x(pl), tile, name)
 				}
 				return null
 				break;
@@ -725,60 +775,55 @@ class tutorial.chapter_04 extends basic_chapter
 				local label = t1.find_object(mo_label)
 
 				if (label){
-					t1.remove_object(player_x(0), mo_label)
+					t1.remove_object(player_x(pl), mo_label)
 				}
 				
 				local tool = command_x(tool_build_depot)			
-				local err = tool.work(player_x(0), t1, sc_dep_name)
-
+				local err = tool.work(player_x(pl), t1, sc_dep_name)
 				if (t1.find_object(mo_depot_water)){
-					this.next_step()
+					pot1=1
 				}
 				return null
 				break;
 
 			case 4:
 				// Para enrutar barcos
-				local pl = player_x(0)
+				local player = player_x(pl)
 				local c_depot = my_tile(c_dep1)
-
-				comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
-
-				local depot = c_depot.find_object(mo_depot_water)
-				local good_nr = good_desc_x(f1_good).get_catg_index()  //Fuels
-				local name = ship1_name_obj
-				local cov_nr = d1_cnr  //Max convoys nr in depot
+				comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
+				local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
 				if (current_cov> ch4_cov_lim1.a && current_cov< ch4_cov_lim1.b){
-					comm_script = true
 					local sched = schedule_x(gl_wt, [])
-					local c_list = is_water_entry(sch_list1)
-					for(local j =0;j<c_list.len();j++){
+					local t_list = is_water_entry(sch_list1)
+					for(local j =0;j<t_list.len();j++){
 						if(j == 0)
-							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), ship1_load, ship1_wait))
+							sched.entries.append(schedule_entry_x(t_list[j], ship1_load, ship1_wait))
 						else
-							sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
+							sched.entries.append(schedule_entry_x(t_list[j], 0, 0))
 					}
-					local hold_cov = current_cov
-					for (local j = hold_cov; j<(cov_nr+hold_cov) && correct_cov; j++){
+					local c_line = comm_get_line(player, gl_wt, sched)
+
+					local good_nr = good_desc_x(fac_1.good).get_catg_index()  //Fuels
+					local name = ship1_name_obj
+					local cov_nr = d1_cnr  //Max convoys nr in depot
+					for (local j = 0; j < cov_nr ; j++){
 						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
-						local convoy = depot.get_convoy_list()
-						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+						local conv = depot.get_convoy_list()
+						conv[j].set_line(player, c_line)
 					}
+					local convoy = false
+					local all = true
+					comm_start_convoy(player, convoy, depot, all)		
 				}	
-				comm_script = false
-				reset_pot()
-				reset_glsw()
-				reset_stop_flag()
-
 				return null
 				break;
 
 			case 5:
 				//Para el canal acuatico
 				if (pot0==0){
-					local t1 = my_tile(coord(c_way.a.x, c_way.a.y))
+					local t1 = my_tile(coord(c1_way.a.x, c1_way.a.y))
 					local t2 = my_tile(sch_list2[1])
 					local way = t1.find_object(mo_way)
 					local is_lab1 = t1.find_object(mo_label)
@@ -795,17 +840,15 @@ class tutorial.chapter_04 extends basic_chapter
 					if (way)
 						way.unmark()
 
-					local coora = {x = c_way.a.x, y = c_way.a.y, z = c_way.a.z }
-					local coorb = {x = c_way.b.x, y = c_way.b.y, z = c_way.b.z }
+					local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
+					local coorb = {x = c1_way.b.x, y = c1_way.b.y, z = c1_way.b.z }
 					
 					local t = command_x(tool_build_way)	
 					t.set_flags(2)		
 					local err = t.work(player_x(1), coora, coorb, sc_way_name)
-
-					pot0=1
 				}
 				//Para el cuarto muelle
-				if (pot0==1 && pot1==0){
+				if (pot1==0){
 					local t = my_tile(sch_list2[1])
 					t.unmark()
 					local label = t.find_object(mo_label)
@@ -813,36 +856,32 @@ class tutorial.chapter_04 extends basic_chapter
 						t.remove_object(player_x(1), mo_label)
 					}
 					local tool = command_x(tool_build_station)			
-					local err = tool.work(player_x(0), t, sc_dock_name2)
-
-					pot1=1
+					local err = tool.work(player_x(pl), t, sc_dock_name2)
 				}
 				if (current_cov> ch4_cov_lim2.a && current_cov< ch4_cov_lim2.b){
-
-					local pl = player_x(0)
+					local player = player_x(pl)
 					local c_depot = my_tile(c_dep1)
+					comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
+					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
-					comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+					local t_list = is_water_entry(sch_list2)
+					local sched = schedule_x(gl_wt, [])
+					sched.entries.append(schedule_entry_x(t_list[0], ship1_load, ship1_wait))
+					sched.entries.append(schedule_entry_x(t_list[1], 0, 0))
+					local c_line = comm_get_line(player, gl_wt, sched)
 
-					local depot = c_depot.find_object(mo_depot_water)
-					local good_nr = good_desc_x(f2_good).get_catg_index()  //Fuels
+					local good_nr = good_desc_x(fac_2.good).get_catg_index()  //Fuels
 					local name = ship1_name_obj
 					local cov_nr = d2_cnr  //Max convoys nr in depot
-
-					comm_script = true 
-					local c_list = is_water_entry(sch_list2)
-					local sched = schedule_x(gl_wt, [])
-					sched.entries.append(schedule_entry_x(my_tile(c_list[0]), ship1_load, ship1_wait))
-					sched.entries.append(schedule_entry_x(my_tile(c_list[1]), 0, 0))
-					local hold_cov = current_cov
-					for (local j = hold_cov; j<(cov_nr+hold_cov) && correct_cov; j++){
+					for (local j = 0; j < cov_nr; j++){
 						if (!comm_set_convoy(cov_nr, c_depot, name))
 							return 0
-						local convoy = depot.get_convoy_list()
-						comm_start_convoy(pl, gl_wt, sched, convoy, depot)
+						local conv = depot.get_convoy_list()
+						conv[j].set_line(player, c_line)
 					}
-					comm_script = false
-					pot2=1
+					local convoy = false
+					local all = true
+					comm_start_convoy(player, convoy, depot, all)	
 				}
 				return null
 				break;
@@ -853,7 +892,7 @@ class tutorial.chapter_04 extends basic_chapter
 
 				if (!depot){
 					local t = command_x(tool_build_depot)			
-					local err = t.work(player_x(0), t_dep, sc_dep_name)
+					local err = t.work(player_x(pl), t_dep, sc_dep_name)
 				}
 				//Para los muelles Pasajeros
 				local c_list = dock_list2
@@ -861,41 +900,41 @@ class tutorial.chapter_04 extends basic_chapter
 				for(local j =0;j<c_list.len();j++){
 					local t = my_tile(c_list[j])
 					t.unmark()
-					t.remove_object(player_x(0), mo_label)
+					t.remove_object(player_x(1), mo_label)
 					local tool = command_x(tool_build_station)			
-					tool.work(player_x(0), t, name)
+					tool.work(player_x(pl), t, name)
 					glsw[j]=1
 				}
 				return null
 				break;
 
 			case 7:
-				local pl = player_x(0)
-				local c_depot = my_tile(c_dep1)
+				local player = player_x(pl)
+				if (current_cov> ch4_cov_lim3.a && current_cov< ch4_cov_lim3.b){
+					local c_depot = my_tile(c_dep1)
+					comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
+					local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
-				comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
+					local sched = schedule_x(gl_wt, [])
+					local t_list = is_water_entry(sch_list3)
+					for(local j =0;j<t_list.len();j++){
+						if(j == 0)
+							sched.entries.append(schedule_entry_x(t_list[j], ship2_load, ship2_wait))
+						else
+							sched.entries.append(schedule_entry_x(t_list[j], 0, 0))
+					}
+					local c_line = comm_get_line(player, gl_wt, sched)
 
-				local depot = c_depot.find_object(mo_depot_water)
+					local good_nr = good_desc_x(good_alias.passa).get_catg_index() //Passengers
+					local name = ship2_name_obj
+					local cov_nr = 1  //Max convoys nr in depot
+					if (!comm_set_convoy(cov_nr, c_depot, name))
+						return 0
 
-				local good_nr = good_desc_x(good_alias.passa).get_catg_index() //Passengers
-				local name = ship2_name_obj
-
-				local cov_nr = 1  //Max convoys nr in depot
-
-				local sched = schedule_x(gl_wt, [])
-				local c_list = is_water_entry(sch_list3)
-				for(local j =0;j<c_list.len();j++){
-					if(j == 0)
-						sched.entries.append(schedule_entry_x(my_tile(c_list[j]), ship2_load, ship2_wait))
-					else
-						sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
+					local conv = depot.get_convoy_list()
+					conv[0].set_line(player, c_line)
+					comm_start_convoy(player, conv[0], depot)
 				}
-
-				if (!comm_set_convoy(cov_nr, c_depot, name))
-					return 0
-
-				local convoy = depot.get_convoy_list()
-				comm_start_convoy(pl, gl_wt, sched, convoy, depot)
 				
 				return null
 				break;
