@@ -61,7 +61,7 @@ class tutorial.chapter_02 extends basic_chapter
 	brdg1 = coord(126,193)
 	brdg2 = coord(126,195)
 
-	c_brdg1 = {a = coord3d(126,193,-1), b = coord3d(126,196,0)}
+	c_brdg1 = {a = coord3d(126,193,-1), b = coord3d(126,196,0), dir = 3}	//Inicio, Fin de la via y direccion(fullway)
 	c_brdg_limi1 = {a = coord(126,192), b = coord(126,196)}
 
 	// Step 6 =====================================================================================
@@ -105,12 +105,6 @@ class tutorial.chapter_02 extends basic_chapter
 		rules.clear()
 		set_all_rules(0)
 
-		cty1.name = get_city_name(cty1.c)
-		cty2.name = get_city_name(cty2.c)
-
-		dep_lim1 = {a = c_dep, b = coorda}
-		dep_lim2 = {a = c_dep, b = coordb}
-
 		local lim_idx = cv_list[(persistent.chapter - 2)].idx
 		ch2_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
 		ch2_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
@@ -119,6 +113,12 @@ class tutorial.chapter_02 extends basic_chapter
 		dep_cnr1 = get_dep_cov_nr(ch2_cov_lim1.a,ch2_cov_lim1.b)
 		dep_cnr2 = get_dep_cov_nr(ch2_cov_lim2.a,ch2_cov_lim2.b)
 		dep_cnr3 = get_dep_cov_nr(ch2_cov_lim3.a,ch2_cov_lim3.b)
+
+		cty1.name = get_city_name(cty1.c)
+		cty2.name = get_city_name(cty2.c)
+
+		dep_lim1 = {a = c_dep, b = coorda}
+		dep_lim2 = {a = c_dep, b = coordb}
 
 		local pl = 0
 		//Schedule list form current convoy
@@ -501,14 +501,13 @@ class tutorial.chapter_02 extends basic_chapter
 			case 5:
 				local t_label = my_tile(brdg1)
 				local label = t_label.find_object(mo_label)
-
-				local c_lim = {a = coord(c_brdg1.a.x, c_brdg1.a.y), b = coord(c_brdg1.b.x, c_brdg1.b.y)} 
+				local c_lim = {a = c_brdg1.a, b = c_brdg1.b}
 				local next_mark = true
 				if (pot0 == 0){
-					if (!label)
+					if(!label)
 						label_x.create(brdg1, player_x(pl), translate("Build a Bridge here!."))
 					try {
-						 next_mark = delay_mark_tile(c_lim.a, c_lim.a, 0, stop_mark)
+						 next_mark = delay_mark_tile(c_lim.a, c_lim.a, 0)
 					}
 					catch(ev) {
 						return 0
@@ -528,11 +527,11 @@ class tutorial.chapter_02 extends basic_chapter
 					//Comprueba la conexion de la via
 					local coora = coord3d(c_brdg1.a.x, c_brdg1.a.y, c_brdg1.a.z)
 					local coorb = coord3d(c_brdg1.b.x, c_brdg1.b.y, c_brdg1.b.z)
-					local dir = 3
+					local dir = c_brdg1.dir
 					local obj = false		
 					local r_way = get_fullway(coora, coorb, dir, obj)
 					if (r_way.r){
-						t_label.remove_object(player_x(pl), mo_label)
+						t_label.remove_object(player_x(1), mo_label)
 						this.next_step()
 						//Crear cuadro label
 						local opt = 0

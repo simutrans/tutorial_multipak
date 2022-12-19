@@ -2038,7 +2038,8 @@ class tutorial.chapter_03 extends basic_chapter
 				//Para arracar varios vehiculos
 				local id_start = ch3_cov_lim3.a
 				local id_end = ch3_cov_lim3.b
-				local cir_nr = get_convoy_number_exp(sch_list[0], depot, id_start, id_end)
+				local c_list = sch_list
+				local cir_nr = get_convoy_number_exp(c_list[0], depot, id_start, id_end)
 				local cov_list = depot.get_convoy_list()
 				cov -= cir_nr
 
@@ -2052,7 +2053,6 @@ class tutorial.chapter_03 extends basic_chapter
 				local selc = 0
 				local load = loc3_load
 				local time = loc3_wait
-				local c_list = sch_list
 				local siz = c_list.len()
 
 				result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)

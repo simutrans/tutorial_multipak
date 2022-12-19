@@ -11,16 +11,14 @@ class tutorial.chapter_05 extends basic_chapter
 	chapter_coord = coord(60,7)
 	startcash     = 500000	   				// pl=0 startcash; 0=no reset
 
-	cov_cir = 0
-
-
 	//Step 2 =====================================================================================
-	ch5_cov_lim1 = {a = 20 , b = 31}
+	ch5_cov_lim1 = {a = 0 , b = 0}
 
 	//Step 4 =====================================================================================
-	ch5_cov_lim2 = {a = 30 , b = 34}
-	ch5_cov_lim3 = {a = 33 , b = 35}
+	ch5_cov_lim2 = {a = 0 , b = 0}
+	ch5_cov_lim3 = {a = 0 , b = 0}
 
+	cov_cir = 0
 	sch_cov_correct = false
 
 	//Step 1 =====================================================================================
@@ -226,7 +224,7 @@ class tutorial.chapter_05 extends basic_chapter
 		    }
 			break
 			case 4:
-		    if (pot0==1 && pot1==0){
+			if (pot0==1 && pot1==0){
 				text = ttextfile("chapter_05/04_1-3.txt")
 				text.tx="<em>[1/3]</em>"
 				text.toolbar = toolbar
@@ -244,7 +242,7 @@ class tutorial.chapter_05 extends basic_chapter
 				}
 				text.st = st_tx
 			}
-		    if (pot1==1 && pot2==0 || (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b)){
+			else if (pot1==1 && pot2==0 || (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b)){
 				text = ttextfile("chapter_05/04_2-3.txt")
 				text.tx = "<em>[2/3]</em>"
 				local list_tx = ""
@@ -278,7 +276,7 @@ class tutorial.chapter_05 extends basic_chapter
 				text.wait = get_wait_time_text(veh2_wait)
 				text.nr = siz
 			}
-		    if (pot2==1 && pot3==0 || (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b)){
+			else if (pot2==1 && pot3==0 || (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b)){
 				text = ttextfile("chapter_05/04_3-3.txt")
 				text.tx = "<em>[3/3]</em>"
 				local list_tx = ""

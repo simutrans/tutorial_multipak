@@ -89,8 +89,6 @@ class tutorial.chapter_04 extends basic_chapter
 		ch4_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
 		ch4_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
 
-		//gui.add_message("tyt: "+ch4_cov_lim2.a +" "+ch4_cov_lim2.b + " "+lim_idx)
-
 		d1_cnr = get_dep_cov_nr(ch4_cov_lim1.a,ch4_cov_lim1.b)
 		d2_cnr = get_dep_cov_nr(ch4_cov_lim2.a,ch4_cov_lim2.b)
 
@@ -202,7 +200,7 @@ class tutorial.chapter_04 extends basic_chapter
 			text.w1 = c1.href(" ("+c1.tostring()+")")+""
 			text.w2 = c2.href(" ("+c2.tostring()+")")+""
 			text.dock = sch_list2[1].href("("+sch_list2[1].tostring()+")")+""
-			text.all_cov = d1_cnr
+			text.all_cov = d2_cnr
 			text.load = ship1_load
 			text.wait = get_wait_time_text(ship1_wait)
 			

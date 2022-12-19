@@ -4,7 +4,7 @@
  * 
  *  Can NOT be used in network game !
  */
-const version = 1645
+const version = 1650
 map.file = "tutorial64.sve"
 scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
@@ -585,7 +585,6 @@ function is_convoy_allowed(pl, convoy, depot)
 	//gui.add_message("Run ->"+current_cov+","+correct_cov+" - "+gall_cov+"")
 	if (pl != 0) return null
 	result = chapter.is_convoy_allowed(pl, convoy, depot)
-	gui.add_message("TYT: "+result +" "+current_cov)
 	return result
 }
 
