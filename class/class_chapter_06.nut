@@ -283,6 +283,7 @@ class tutorial.chapter_06 extends basic_chapter
 					local name = translate("Build here")
 					public_label(tile, name)
 					if(way && buil){
+						tile.remove_object(player_x(1), mo_label)
 						pot2 = 1
 					}
 					return 15
@@ -294,6 +295,7 @@ class tutorial.chapter_06 extends basic_chapter
 					local name = translate("Build here")
 					public_label(tile, name)
 					if(buil){
+						tile.remove_object(player_x(1), mo_label)
 						pot3 = 1
 					}
 					return 20
@@ -307,9 +309,18 @@ class tutorial.chapter_06 extends basic_chapter
 					public_label(tile, name)
 					if(way && depot){
 						tile.remove_object(player_x(1), mo_label)
+						tile.remove_object(player_x(1), mo_label)
 						pot4 = 1
 					}
 					return 25
+				}
+				else if (pot4==1 && pot5==0){
+					local tile = my_tile(st1_pos)
+					local buil = tile.find_object(mo_building)
+					if(buil && buil.get_owner().nr == 1){
+						pot5 = 1
+					}
+					return 30
 				}
 				else if (pot5==1 && pot6==0){
 					this.next_step()
@@ -437,27 +448,6 @@ class tutorial.chapter_06 extends basic_chapter
 						else if (way) result = translate("The track is correct.")
 
 						if(tool_id == tool_build_way) return null
-
-/*
-						if (!c1_is_way){
-							local cursor = my_tile(c1_start).find_object(mo_pointer)
-							if (cursor) hold_pos=pos 
-							local tmark = hold_pos ? my_tile(hold_pos).is_marked() : false
-							if((pos.x != c1_start.x || pos.y != c1_start.y)&&(!cursor)&&(!tmark))
-								return translate("Build the track from here") + " ("+c1_start.tostring()+")."
-
-							if(tool_id == tool_build_way) return null
-						}
-						else {
-							if(way && way.get_name() != obj1_way_name)
-								return format(translate("The track is not correct it must be: %s, use the 'Remove' tool"),translate(obj1_way_name)) + " ("+c1_start.tostring()+")."
-							else if(tool_id == tool_build_way)									
-								return all_control(result, gl_wt, way, ribi, tool_id, pos, c_way)
-						
-							if (way && way.get_name() == obj1_way_name){
-								return translate("The track is correct.")
-							}
-						}*/
 					}
 					else return translate("Build here") + ": ("+c_way.tostring()+")!."
 				}
@@ -480,30 +470,6 @@ class tutorial.chapter_06 extends basic_chapter
 						else if (way) result = translate("The track is correct.")
 
 						if(tool_id == tool_build_way) return null
-
-						
-						/*if (!c2_is_way){
-							local cursor = my_tile(c2_start).find_object(mo_pointer)
-							if (cursor) hold_pos=pos 
-							local tmark = hold_pos ? my_tile(hold_pos).is_marked() : false
-							if((pos.x != c2_start.x || pos.y != c2_start.y)&&(!cursor)&&(!tmark))
-								return translate("Build the track from here") + " ("+c2_start.tostring()+")!."
-							if(tool_id == tool_build_way) return null
-						}
-						else {
-							if (tool_id == tool_build_way && pos.x == c2_track.a.x && pos.y == c2_track.a.y)
-								return null
-
-							else if (way && way.get_name() != obj2_way_name){
-								return format(translate("The track is not correct it must be: %s, use the 'Remove' tool"),translate(obj2_way_name)) + " ("+c2_start.tostring()+")!."
-							}
-							else if(tool_id == tool_build_way)									
-								return all_control(result, gl_wt, way, ribi, tool_id, pos, c_way)
-						}
-						
-						if (way && way.get_name() == obj2_way_name){
-							return translate("The track is correct.")
-						}*/
 					}
 					else return translate("Build here") + ": ("+c_way.tostring()+")!."
 				}
@@ -556,7 +522,6 @@ class tutorial.chapter_06 extends basic_chapter
 					if(pos.x == st1_pos.x && pos.y == st1_pos.y){
 						if(tool_id == tool_make_stop_public){
 							if(buil){
-								pot5 = 1
 								return null
 							}
 							else return null
@@ -809,7 +774,7 @@ class tutorial.chapter_06 extends basic_chapter
 
 					local wt = gl_wt
 					local name_list = [obj1_way_name]
-					local dir = 4
+					local dir = c1_track.dir
 					local fullway = check_way(coora, coorb, wt, name_list, dir)
 					if (fullway.result){
 						c_way =  coord(0,0)
@@ -831,7 +796,6 @@ class tutorial.chapter_06 extends basic_chapter
 					coorb = my_tile(c1_track.b)
 					local t = command_x(tool_build_way)
 					t.work(player, coora, coorb, obj1_way_name)
-					pot0=1
 				}
 
 				// Pista de maniobras --------------------------
@@ -841,7 +805,7 @@ class tutorial.chapter_06 extends basic_chapter
 
 					local wt = gl_wt
 					local name_list = [obj2_way_name]
-					local dir = 2
+					local dir = c2_track.dir
 					local fullway = check_way(coora, coorb, wt, name_list, dir)
 					if (fullway.result){
 						c_way =  coord(0,0)
@@ -852,7 +816,7 @@ class tutorial.chapter_06 extends basic_chapter
 						if(way)
 							way.unmark()
 
-						local siz = (coorb.x)-(coora.x)
+						local siz = (coorb.x)-(coora.x)-1
 						//gui.add_message(""+siz+" -- "+coorb.x)
 						local opt = 1 //Incrementa x
 						coora.x++
@@ -866,21 +830,20 @@ class tutorial.chapter_06 extends basic_chapter
 
 					local t = command_x(tool_build_way)
 					t.work(player, coora, coorb, obj2_way_name)
-					pot1 = 1
 				}
 				// Parada aerea ---------------------------------
 				if(pot2 == 0) {
 					local tile = my_tile(st1_pos)
+					tile.remove_object(player_x(1), mo_label)
 					local t = command_x(tool_build_station)			
 					t.work(player, tile, sc_sta1)
-					pot2 = 1
 				}
 				// Terminal -------------------------------------
 				if(pot3 == 0) {
 					local tile = my_tile(st2_pos)
+					tile.remove_object(player_x(1), mo_label)
 					local t = command_x(tool_build_station)			
 					t.work(player, tile, sc_sta2)
-					pot3 = 1
 				}
 
 				//  Hangar --------------------------------------
@@ -892,12 +855,10 @@ class tutorial.chapter_06 extends basic_chapter
 					local tile = my_tile(c_dep1)
 					t = command_x(tool_build_depot)			
 					t.work(player, tile, sc_dep1)
-					pot4 = 1
 				}
 				if(pot5 == 0) {
 					local t = command_x(tool_make_stop_public)			
 					t.work(player, my_tile(st1_pos), "")
-					pot5 = 1
 				}
 				return null
 			break;
@@ -1018,12 +979,6 @@ class tutorial.chapter_06 extends basic_chapter
 		return null
 	}
 
-	function script_experimento()
-	{
-		exp = true
-		return null
-	}
-	
 	function set_all_rules(pl) 
     {
 		local forbid = [	tool_remove_wayobj, tool_build_bridge, tool_build_way, tool_build_tunnel,tool_build_station,
