@@ -536,7 +536,7 @@ class basic_chapter
 
 	function get_wait_time_text(wait)
 	{
-		return ""+difftick_to_string(wait*(16))+""
+		return ""+difftick_to_string(wait*(tick_wait))+""
 	}
 
 	function is_station_build(player,coord,good)

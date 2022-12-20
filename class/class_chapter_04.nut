@@ -325,7 +325,7 @@ class tutorial.chapter_04 extends basic_chapter
 					label_x.create(c_dep1, player_x(pl), translate("Build Shipyard here!."))
 				}
 				else{
-					t1.remove_object(player_x(pl), mo_label)
+					t1.remove_object(player_x(1), mo_label)
 					pot0=1
 				}
 				if (pot1==1){
@@ -775,7 +775,7 @@ class tutorial.chapter_04 extends basic_chapter
 				local label = t1.find_object(mo_label)
 
 				if (label){
-					t1.remove_object(player_x(pl), mo_label)
+					t1.remove_object(player_x(1), mo_label)
 				}
 				
 				local tool = command_x(tool_build_depot)			
@@ -845,7 +845,7 @@ class tutorial.chapter_04 extends basic_chapter
 					
 					local t = command_x(tool_build_way)	
 					t.set_flags(2)		
-					local err = t.work(player_x(1), coora, coorb, sc_way_name)
+					local err = t.work(player_x(pl), coora, coorb, sc_way_name)
 				}
 				//Para el cuarto muelle
 				if (pot1==0){

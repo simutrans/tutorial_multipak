@@ -9,7 +9,7 @@ map.file = "tutorial64.sve"
 scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
 scenario.author            = "Yona-TYT"
-scenario.version           = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10) +" beta"
+scenario.version           = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10)
 scenario.translation      <- ttext("Translator")
 
 resul_version <- {pak= false , st = false}
@@ -93,6 +93,9 @@ good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Hol
 
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
+
+// Complemento para obtener tiempo de espera
+tick_wait <- 16
 
 chapter            <- null			// used later for class
 chapter_max        <- 7				// amount of chapter
