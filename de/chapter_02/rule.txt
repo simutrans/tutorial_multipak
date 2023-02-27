@@ -1,3 +1,4 @@
+<p>
 Es sind nicht alle Tools eingeblendet.
 Es sind oft nur die Aktionen möglich, die für den aktuellen Schritt notwendig sind.<br>
 <br>
@@ -6,3 +7,4 @@ Es sind oft nur die Aktionen möglich, die für den aktuellen Schritt notwendig si
 <em>·</em> Erdarbeiten kosten jeweils {price_terra}.<br>
 <em>·</em> Die nächst gelegene Stadt entscheidet über Erdarbeiten.<br>
 <br>
+</p>

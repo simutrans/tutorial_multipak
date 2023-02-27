@@ -1,3 +1,4 @@
+<p>
 <em>Tutorial A</em><br>
 <br>
 <st>
@@ -34,3 +35,4 @@ Bekannte Probleme:<br>
 - verzögerte Anzeige im Scriptfenster bei einigen Aktionen, da gui.open_info_win() unzureichend<br>
 - Text Notes/Markierungen auf der Karte könnten Hilfreich sein<br>
 <br>
+</p>

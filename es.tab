@@ -72,6 +72,8 @@ First you must lower the layer level.
 Primero debes baja el nivel de la capa.
 First you must Upper the layer level.
 Primero debes subir el nivel de la capa.
+First you need to activate the underground view / sliced map view.
+Primero necesitas activar la vista subterránea / vista subterránea por capas.
 Flat slope here!.
 Pendiente plana aquí.
 Getting Started
@@ -98,6 +100,8 @@ It must be a block signal!
 Debe ser una señal de bloqueo
 It must be a slope.
 Debe ser una pendiente.
+Layer level in sliced map view should be: %d
+El nivel de capa en la vista subterránea por capas debe ser: %d
 Let's go on!
 ¡Sigamos adelante!
 Let's start!
