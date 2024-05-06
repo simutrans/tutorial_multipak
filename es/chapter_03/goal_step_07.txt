@@ -20,7 +20,7 @@ Ahora selecciona la estación en {f3} y presiona <em>Arrancar</em>.
 Se avanza al siguiente paso cuando el {f3} reciba <em>{t_reach}t</em> de <em>{good2}</em>.
 </p>
 <p>
-<em>Consejo:</em> Pulse la tecla<em> "W" (letra may¨²scula)</em> para activar el avance r¨¢pido.
+<em>Consejo:</em> Pulse la tecla<em> "W" (letra mayúscula)</em> para activar el avance rápido.
 </p>
 <p>
 <em>Cantidad recibida:</em> <st>{reached}t</st>
