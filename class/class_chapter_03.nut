@@ -396,11 +396,11 @@ class tutorial.chapter_03 extends basic_chapter
 					text = ttextfile("chapter_03/06_3-5.txt")
 					text.tx=ttext("<em>[3/5]</em>")
 				}
-				else if (glsw[0]==0){
+				else if (pot3==0){
 					text = ttextfile("chapter_03/06_4-5.txt")
 					text.tx=ttext("<em>[4/5]</em>")
 				}
-				else if (glsw[1]==0){
+				else if (pot4==0){
 					text = ttextfile("chapter_03/06_5-5.txt")
 					text.tx = ttext("<em>[5/5]</em>")
 				}
@@ -2290,11 +2290,11 @@ class tutorial.chapter_03 extends basic_chapter
 					t = command_x(tool_build_way)			
 					err = t.work(player, t_start, t_end, sc_way_name)
 				}
+				glresult = null
+				local passa = good_alias.passa
+				local mail = good_alias.mail
+				//Estaciones de la Fabrica
 				if (pot3==0){
-					glresult = null
-					local passa = good_alias.passa
-					local mail = good_alias.mail
-					//Estaciones de la Fabrica
 					for(local j=0;j<st4_list.len();j++){
 						local tile = my_tile(st4_list[j])
 						tile.find_object(mo_way).unmark()
@@ -2305,7 +2305,9 @@ class tutorial.chapter_03 extends basic_chapter
 							local err = tool.work(player, my_tile(st4_list[j]), sc_station_name)
 						}
 					}
-					//Estaciones del Productor
+				}
+				//Estaciones del Productor
+				if (pot4==0){
 					for(local j=0;j<st3_list.len();j++){
 						local tile = my_tile(st3_list[j])
 						tile.find_object(mo_way).unmark()
@@ -2593,7 +2595,7 @@ class tutorial.chapter_03 extends basic_chapter
 			rules.forbid_tool(pl, tool_id )
 		}
 			
-		local forbid =	[	4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope, tool_add_city,
+		local forbid =	[	4103,4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope, tool_add_city,
 							tool_make_stop_public,4137,tool_build_transformer,4107,4102,4127,4131
 						]
 		foreach (tool_id in forbid)
