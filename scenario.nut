@@ -158,10 +158,6 @@ function string_analyzer()
 	local val_a = []
 	local val_b = []
 
-	local try_count = 0
-	local try_max = 15
-	local max_numb = 10
-
 	// Analyzer scenario simutrans version -----------------------------------------------------------------------------------------
 	local value_a = ""
 	for(local j=nr_a;j<s_siz.a;j++){
