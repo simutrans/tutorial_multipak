@@ -312,8 +312,6 @@ class tutorial.chapter_07 extends basic_chapter
 				break;
 
 			case 5:
-				reset_stop_flag()
-				persistent.point = null
 		        return 90
 				break;
 			}
