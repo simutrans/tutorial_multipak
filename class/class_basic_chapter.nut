@@ -60,6 +60,8 @@ class basic_chapter
 	unde_view = -128
 	norm_view = 127
 
+	map_siz = world.get_size()
+
 	constructor(pl)
 	 {
 	 	scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
@@ -448,6 +450,54 @@ class basic_chapter
 	{
 		return square_x(coord.x,coord.y).get_ground_tile()
 		//return square_x(coord.x,coord.y).get_tile_at_height(coord.z)
+	}
+
+	function my_compass()
+	{
+		local c_max = {x = map_siz.x-1, y = map_siz.y-1}
+		local c = coord(0,0)
+		local text = c.tostring()
+
+		local res_c = {x = 0, y = 0}
+		local ttx = ""
+		local siz = text.len()
+		for(local j=0;j<siz;j++){
+			local tx = format("%c",text[j])
+			try {
+				tx.tointeger()
+			}
+			catch(ev) {
+				if(tx==","){
+					res_c.x = ttx.tointeger()
+					ttx = ""
+					continue
+				}
+				continue
+			}
+			ttx+=tx
+			if(j == siz-1){
+				res_c.y = ttx.tointeger()
+			}
+		}
+		//gui.add_message("Res: "+ res_c.x +" -- "+res_c.y)
+		//gui.add_message("MAX: "+ c_max.x +" -- "+c_max.y)
+		if(res_c.x == 0 && res_c.y == 0){
+			//gui.add_message("N")
+			return 0
+		}
+		else if(res_c.x == c_max.y && res_c.y == 0){
+			//gui.add_message("W")
+			return 1
+		}
+		else if(res_c.x == c_max.x && res_c.y == c_max.y){
+			//gui.add_message("S")
+			return 2
+		}
+		else if(res_c.x == 0 && res_c.y == c_max.x){
+			//gui.add_message("E")
+			return 3
+		}
+		return null
 	}
 
 	function is_waystop_correct(player,schedule,nr,load,wait,coord, line = false)
@@ -1845,21 +1895,21 @@ class basic_chapter
 			glsw[nr] = 0
 			sigcoord = null
 			persistent.sigcoord = sigcoord
-			return translate("It must be a block signal!")+" ("+t.tostring()+")."
+			return translate("It must be a block signal!")+" ("+coord3d_to_string(t)+")."
 		}
 		if (glsw[nr] == 0 && ribi != addr){
 			sigcoord = t
 			persistent.sigcoord = sigcoord
 			return null
 		}
-		else if (glsw[nr] == 1)return translate("The signal is ready!")+" ("+t.tostring()+")."
+		else if (glsw[nr] == 1)return translate("The signal is ready!")+" ("+coord3d_to_string(t)+")."
 
 		if (sigcoord && t.x == sigcoord.x && t.y == sigcoord.y){
 			if (ribi == addr){
 				glsw[nr] = 1
 				sigcoord = null
 				persistent.sigcoord = sigcoord
-				return translate("The signal is ready!")+" ("+t.tostring()+")."
+				return translate("The signal is ready!")+" ("+coord3d_to_string(t)+")."
 			} 
 
 		}
@@ -2159,7 +2209,7 @@ class basic_chapter
 					}
 					else{
 						local halt = t.get_halt()
-						return format(translate("Select station No.%d [%s]"),j+1 , halt.get_name())+" ("+t.tostring()+")."
+						return format(translate("Select station No.%d [%s]"),j+1 , halt.get_name())+" ("+coord3d_to_string(t)+")."
 					}
 				}
 				if (j == siz-(1))
@@ -2516,6 +2566,30 @@ class basic_chapter
 			return translate(good)
 
 		return tx
+	}
+
+	function get_build_name(siz, desc, freight, wt) 
+	{
+		local list = building_desc_x.get_available_stations(desc, wt, good_desc_x(freight))
+		foreach(build in list) {
+			if (build.is_available(0) && (siz == null || build.get_size(0).x == siz.x &&  build.get_size(0).y == siz.y)) {
+				//gui.add_message(""+build.get_name())
+				return build.get_name()
+			}
+		}
+		return "No have build!"
+	}
+
+	function get_way_name(kh, wt, st) 
+	{
+		local list = way_desc_x.get_available_ways(wt, st)
+		foreach(way in list) {
+			if (way.is_available(0) && way.get_topspeed() >= kh) {
+				//gui.add_message(""+way.get_name())
+				return way.get_name()
+			}
+		}
+		return "No have way!"
 	}
 
 	function build_stop_ex(nr, list, tile)
