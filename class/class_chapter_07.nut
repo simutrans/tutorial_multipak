@@ -133,7 +133,7 @@ class tutorial.chapter_07 extends basic_chapter
     			break
 
 			case 4:
-				local c = st4_c
+				local t = st4_c
 				local halt = t.get_halt()
 				text.name = t.href(""+halt.get_name()+" ("+coord3d_to_string(t)+")")+""
 				text.city = cty4.c.href(""+cty4.name +" ("+cty4.c.tostring()+")")+""
