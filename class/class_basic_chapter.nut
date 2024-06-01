@@ -229,26 +229,22 @@ class basic_chapter
 	function update_convoy_removed(convoy, pl)
 	{
 		//gui.add_message("update_convoy_removed: "+convoy + " Correct "+correct_cov)
-		if(convoy){
-			if(cov_save.len() <= current_cov) {
-				cov_save.push(convoy)
-				//id_save.push(convoy.id)
-				if(correct_cov){
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					current_cov = gcov_nr
-					persistent.current_cov = gcov_nr	
-				}
+		if(cov_save.len() <= current_cov) {
+			cov_save.push(convoy)
+			if(correct_cov){
+				gcov_nr++
+				persistent.gcov_nr = gcov_nr
+				current_cov = gcov_nr
+				persistent.current_cov = gcov_nr	
 			}
-			else{
-				cov_save[current_cov]=convoy
-				//id_save[current_cov]=convoy.id
-				if(correct_cov){
-					gcov_nr++
-					persistent.gcov_nr = gcov_nr
-					current_cov = gcov_nr
-					persistent.current_cov = gcov_nr	
-				}
+		}
+		else{
+			cov_save[current_cov]=convoy
+			if(correct_cov){
+				gcov_nr++
+				persistent.gcov_nr = gcov_nr
+				current_cov = gcov_nr
+				persistent.current_cov = gcov_nr	
 			}
 		}
 	}

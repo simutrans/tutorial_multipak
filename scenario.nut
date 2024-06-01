@@ -36,11 +36,9 @@ persistent.r_way_list <- {}				//Save way list in fullway
 //----------------------------------------------------------------
 
 cov_save <- [convoy_x(0)]					//Guarda los convoys en lista
-//id_save <- []								//Guarda id de los convoys en lista
 ignore_save <- [{id = -1, ig = true}]		//Marca convoys ingnorados
 
 persistent.ignore_save <- []
-persistent.id_save <- []
 
 //-------------Guarda el estado del script------------------------
 persistent.pot <- [0,0,0,0,0,0,0,0,0,0,0]
@@ -390,10 +388,10 @@ function get_rule_text(pl)
 		}
 
 		if (result) {
-			tx += "<em>["+j+"]</em> "+id_save[j]+"::"+cov_save[j].id+" <a href=\"("+cov_save[j].get_pos().tostring()+")\"> ("+cov_save[j].get_pos().tostring()+")</a> "+cov_save[j].get_name()+" :: "+cov_save[j].id+"<br>"
+			tx += "<em>["+j+"]</em> "+cov_save[j].id+"::"+cov_save[j].id+" <a href=\"("+cov_save[j].get_pos().tostring()+")\"> ("+cov_save[j].get_pos().tostring()+")</a> "+cov_save[j].get_name()+" :: "+cov_save[j].id+"<br>"
 		}
 		else
-			tx += "<st>["+j+"]</st> "+id_save[j]+"::"+cov_save[j]+"<br>"
+			tx += "<st>["+j+"]</st> "+cov_save[j].id+"::"+cov_save[j]+"<br>"
 	}
 
 	return tx
@@ -713,7 +711,6 @@ function resume_game()
 	current_cov = persistent.current_cov
 	gcov_id = persistent.gcov_id
 	sigcoord = persistent.sigcoord
-	//id_save = persistent.id_save
 	ignore_save = persistent.ignore_save
 	
 	pot0=persistent.pot[0]

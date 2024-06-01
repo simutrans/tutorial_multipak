@@ -94,7 +94,6 @@ class basic_convoys
 				break
 			}
 			if (result){
-				//gui.add_message(""+convoy_x(id_save[j]).is_in_depot()+"")
 				if (cov_save[j].is_in_depot()){
 					cov_save[j] = null						
 				}
