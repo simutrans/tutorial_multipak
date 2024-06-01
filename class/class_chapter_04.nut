@@ -8,7 +8,7 @@
 class tutorial.chapter_04 extends basic_chapter
 {
 	chapter_name  = "Setting Sail"
-	chapter_coord = coord(95,39)
+	chapter_coord = coord(156,190)
 
 	startcash     = 1000000	   				// pl=0 startcash; 0=no reset
 	gl_wt = wt_water
