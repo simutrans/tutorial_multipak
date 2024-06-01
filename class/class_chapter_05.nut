@@ -8,7 +8,7 @@
 class tutorial.chapter_05 extends basic_chapter
 {
 	chapter_name  = "Industrial Efficiency"
-	chapter_coord = coord(60,7)
+	chapter_coord = coord(130,220)
 	startcash     = 500000	   				// pl=0 startcash; 0=no reset
 
 	//Step 2 =====================================================================================

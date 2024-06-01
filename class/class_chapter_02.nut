@@ -442,6 +442,12 @@ class tutorial.chapter_02 extends basic_chapter
 				return 10+percentage
 				break
 			case 4:		
+				local conv = cov_save[0]
+				local cov_valid = is_cov_valid(conv)
+				if(cov_valid){
+					pot0 = 1
+				}
+
 				if (pot0 == 0){
 					local next_mark = true
 					try {
@@ -479,9 +485,8 @@ class tutorial.chapter_02 extends basic_chapter
 					sch_cov_correct = all_result.res == null ? true : false
 
 				}
-				if (current_cov == ch2_cov_lim1.b){
-					local conv = convoy_x(ch2_cov_lim1.b)
-					if (conv && conv.is_followed()) {						
+				if (cov_valid && current_cov == ch2_cov_lim1.b){
+					if (conv.is_followed()) {						
 						pot2=1
 					}
 				}
@@ -775,21 +780,20 @@ class tutorial.chapter_02 extends basic_chapter
 					return format(translate("Only %d stops are necessary."),sch_list1.len())
 				
 				//Enrutar vehiculo
-				if ((pot4==0)){
-					if ((pos.x == c_dep.x && pos.y == c_dep.y)){
-						if(tool_id==4096){
-							pot0 = 1
-							return null
-						}
-					}
-					if (tool_id==4108) {
-						local c_list = sch_list1   //Lista de todas las paradas de autobus
-						local c_dep = c_dep //Coordeadas del deposito 
-						local siz = c_list.len() //Numero de paradas 
-						result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-						return is_stop_allowed(result, siz, c_list, pos)
+				if ((pos.x == c_dep.x && pos.y == c_dep.y)){
+					if(tool_id==4096){
+						pot0 = 1
+						return null
 					}
 				}
+				if (tool_id==4108) {
+					local c_list = sch_list1   //Lista de todas las paradas de autobus
+					local c_dep = c_dep //Coordeadas del deposito 
+					local siz = c_list.len() //Numero de paradas 
+					result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
+					return is_stop_allowed(result, siz, c_list, pos)
+				}
+
 				break;
 			//Construye un puente
 			case 5:

@@ -9,7 +9,7 @@
 class tutorial.chapter_07 extends basic_chapter
 {
 	chapter_name  = "Bus networks"
-	chapter_coord = coord(26,107)
+	chapter_coord = coord(50,195)
 	startcash     = 500000	   				// pl=0 startcash; 0=no reset
 	load = 0
 
@@ -524,7 +524,7 @@ class tutorial.chapter_07 extends basic_chapter
 				return translate("The bus must be [Passengers].")
 		}
 		if (result == null){
-			ignore_save[convoy.id] = true  //Ingnora el vehiculo
+			ignore_save.push({id = convoy.id, ig = true})  //Ingnora el vehiculo
 			return null
         }
 		return result = translate("It is not allowed to start vehicles.")

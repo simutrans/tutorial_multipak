@@ -2501,7 +2501,7 @@ class tutorial.chapter_03 extends basic_chapter
 				if (r_way.c != 0){
 					local tile = tile_x(r_way.c.x, r_way.c.y, r_way.c.z)
 					local way = tile.find_object(mo_way)
-					way.unmark()
+					if(way) way.unmark()
 					tile.remove_object(player_x(1), mo_label)
 				}
 				if (pot0==0){
