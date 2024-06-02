@@ -13,6 +13,7 @@ Ahora que las paradas están colocadas, necesitas comprar un <em>Autobús</em> par
 <p>
 <em>Consejo:</em> Presiona la tecla <em>["]</em> para ocultar los edificios urbanos.
 </p>
+<p>
 <h1>Siguiendo convoyes</h1>
 Esta opciósn le permite seguir los vehícculos mientras recorren su ruta, para que permanezcan a la vista sin importar a dósnde vayan, incluso si van bajo tierra. Se activa desde la ventana Convoy y es el cuarto icono en la barra de tíctulo de esa ventana (el ojo).
 </p>
