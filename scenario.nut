@@ -262,7 +262,7 @@ chapter            <- tutorial.chapter_02      	// must be placed here !!!
 function script_text()
 {	
 	local pause = debug.is_paused()
-	if (pause) return translate("Advance is not allowed with the game paused.")
+	if (pause) return gui.add_message(translate("Advance is not allowed with the game paused."))
 	if(!correct_cov){
 		gui.add_message(""+translate("Advance not allowed"))
 		return null

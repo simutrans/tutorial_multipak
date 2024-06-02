@@ -969,7 +969,7 @@ class basic_chapter
 				if (cov_dep.x == c_dep.x && cov_dep.y == c_dep.y){
 					//gui.add_message("("+cov.is_in_depot()+" .. "+cov.id+") .. ??"+id_end+"")
 					if(!cov.is_in_depot()){
-						for (local j =id_start ;j<id_end;j++){
+						for (local j =id_start ;j<cov_save.len();j++){
 							if(cov.id == cov_save[j].id){
 								cov_nr++
 								break
