@@ -160,7 +160,7 @@ class tutorial.chapter_03 extends basic_chapter
 	layer_lvl = 6 
 	start_lvl_z = 6
 	end_lvl_z = 8
-	c_tun_list = [coord3d(65,198,6), coord3d(64,198,7), coord3d(63,198,8)]
+	c_tun_list = [coord3d(89,198,6), coord3d(88,198,7), coord3d(87,198,8)]
 	//------------------------------------------------------------------------------------------
 
 	//Step 9 =====================================================================================
@@ -442,7 +442,7 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 				else if(pot3==0){
 					local slope = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
-					if(r_way.c.z<end_lvl_z && slope != dir_1.s){
+					if(r_way.c.z<end_lvl_z){
 						text = ttextfile("chapter_03/08_4-5.txt")
 						text.tx = ttext("<em>[4/5]</em>")
 						local tx_list = ""
@@ -1417,6 +1417,8 @@ class tutorial.chapter_03 extends basic_chapter
 				//Segundo tramo de rieles
 				if (pot1==1&&pot2==0){
 					if (pos.x>=st2_way_lim.a.x && pos.y>=st2_way_lim.a.y && pos.x<=st2_way_lim.b.x && pos.y<=st2_way_lim.b.y){
+						if(tool_id==tool_build_bridge)
+							return result
 						return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)	
 					}
 					if (pos.x>=bord2_lim.a.x && pos.y>=bord2_lim.a.y && pos.x<=bord2_lim.b.x && pos.y<=bord2_lim.b.y){
@@ -1548,7 +1550,9 @@ class tutorial.chapter_03 extends basic_chapter
 				//Segundo tramo de rieles
 				if (pot1==1&&pot2==0){
 					if (pos.x>=st4_way_lim.a.x && pos.y>=st4_way_lim.a.y && pos.x<=st4_way_lim.b.x && pos.y<=st4_way_lim.b.y){
-							return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)					
+						if(tool_id==tool_build_bridge)
+							return result
+						return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)					
 					}
 					if (pos.x>=bord4_lim.a.x && pos.y>=bord4_lim.a.y && pos.x<=bord4_lim.b.x && pos.y<=bord4_lim.b.y){
 						if (!way && label && label.get_text()=="X"){
