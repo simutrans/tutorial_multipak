@@ -555,6 +555,16 @@ class tutorial.chapter_07 extends basic_chapter
 		    rules.forbid_tool(pl, tool_id)
 	}
 
+	function is_tool_active(pl, tool_id, wt) {
+		local result = true
+		return result
+	}
+
+	function is_tool_allowed(pl, tool_id, wt){
+		local result = true
+		return result
+	}
+
 }        // END of class
 
 // END OF FILE

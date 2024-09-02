@@ -84,10 +84,13 @@ fail_count <- 1            		//if tool fail more of 10 try
 active_sch_check <- false
 
 // placeholder for tools names in simutrans
-tool_alias  <- {inspe = translate("Abfrage"), road= translate("ROADTOOLS"), rail = translate("RAILTOOLS"), ship = translate("SHIPTOOLS"), land = translate("SLOPETOOLS"), spec = translate("SPECIALTOOLS")}
+tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
 
 // placeholder for good names in pak64
 good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
+
+// placeholder for some menus icon
+t_icon <- {road = 0x8005, rail = 0x8002, ship = 0x8006, plane = 0x8007, other = 0x8008, slope = 0x8001}
 
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
@@ -680,13 +683,25 @@ function is_convoy_allowed(pl, convoy, depot)
 
 function is_tool_allowed(pl, tool_id, wt)
 {
+	local result = true
 	//if (tool_id == 0x2000) return false // prevent players toggling pause mode
 	if (tool_id == 0x2005) return false 
 	else if (tool_id == 0x4006) return false 
 	else if (tool_id == 0x4029) return false 
 	else if (tool_id == 0x401c) return false 
+	else if (tool_id == 0x8004) return false  //Tramsway Tools
+	
+	result = chapter.is_tool_allowed(pl, tool_id, wt)
+    return result
+}
 
-    return true
+function is_tool_active(pl, tool_id, wt)
+{
+	local result = true
+	if (pl != 0) return false
+
+	result = chapter.is_tool_active(pl, tool_id, wt)
+	return result
 }
 
 function jump_to_link_executed(pos)
