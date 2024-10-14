@@ -1024,7 +1024,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 1:
 				local t_list = []
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1032,7 +1032,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 2:
 				local t_list = [tool_build_station]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1040,7 +1040,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 3:
 				local t_list = [-tool_remover, tool_build_depot]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1048,7 +1048,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 4://Schedule
 				local t_list = [-tool_remover, -t_icon.ship]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1056,7 +1056,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 5:
 				local t_list = [tool_build_way, tool_remove_way, tool_build_station]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1064,7 +1064,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 6: 
 				local t_list = [tool_build_station]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1072,7 +1072,7 @@ class tutorial.chapter_04 extends basic_chapter
 			case 7://Schedule
 				local t_list = [-tool_remover, -t_icon.ship]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1084,7 +1084,7 @@ class tutorial.chapter_04 extends basic_chapter
 		local result = true
 		local t_list = [0] // 0 = all tools allowed
 		local wt_list = [gl_wt]
-		local res = upedate_tools(t_list, tool_id, wt_list, wt)
+		local res = update_tools(t_list, tool_id, wt_list, wt)
 		result = res.result
 		if(res.ok)  return result
 		return result

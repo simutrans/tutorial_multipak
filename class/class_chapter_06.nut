@@ -1006,7 +1006,7 @@ class tutorial.chapter_06 extends basic_chapter
 			case 1:
 				local t_list = [tool_build_way, tool_build_station, tool_build_depot]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1014,7 +1014,7 @@ class tutorial.chapter_06 extends basic_chapter
 			case 2://Schedule
 				local t_list = [-t_icon.plane, -t_icon.other, -tool_remover, -tool_make_stop_public]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1022,7 +1022,7 @@ class tutorial.chapter_06 extends basic_chapter
 			case 3://Schedule
 				local t_list = [-t_icon.plane, -t_icon.other, -tool_remover, -tool_make_stop_public]
 				local wt_list = [gl_wt]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1030,7 +1030,7 @@ class tutorial.chapter_06 extends basic_chapter
 			case 4:
 				local t_list = [-t_icon.plane, -t_icon.other, -tool_remover, -tool_make_stop_public, tool_build_depot]
 				local wt_list = [wt_road]
-				local res = upedate_tools(t_list, tool_id, wt_list, wt)
+				local res = update_tools(t_list, tool_id, wt_list, wt)
 				result = res.result
 				if(res.ok)  return result
 				break
@@ -1043,7 +1043,7 @@ class tutorial.chapter_06 extends basic_chapter
 		if(step < 4) {
 			local t_list = [0] // 0 = all tools allowed
 			local wt_list = [gl_wt]
-			local res = upedate_tools(t_list, tool_id, wt_list, wt)
+			local res = update_tools(t_list, tool_id, wt_list, wt)
 			result = res.result
 			if(res.ok)  return result
 			return result
@@ -1051,7 +1051,7 @@ class tutorial.chapter_06 extends basic_chapter
 		else {
 			local t_list = [0] // 0 = all tools allowed
 			local wt_list = [gl_wt, wt_road]
-			local res = upedate_tools(t_list, tool_id, wt_list, wt)
+			local res = update_tools(t_list, tool_id, wt_list, wt)
 			result = res.result
 			if(res.ok)  return result
 			return result
