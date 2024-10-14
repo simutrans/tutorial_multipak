@@ -3216,7 +3216,7 @@ class basic_chapter
 		return null
 	}
 
-	function upedate_tools(list, id, wt_list, wt) {
+	function update_tools(list, id, wt_list, wt) {
 		local res = {ok = false, result = false }
 		local wt_res = false
 		if(wt < 0){
