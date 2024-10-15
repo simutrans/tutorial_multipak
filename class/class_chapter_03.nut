@@ -160,7 +160,7 @@ class tutorial.chapter_03 extends basic_chapter
 	layer_lvl = 6 
 	start_lvl_z = 6
 	end_lvl_z = 8
-	c_tun_list = [coord3d(89,198,6), coord3d(88,198,7), coord3d(87,198,8)]
+	c_tun_list = [coord3d(88,198,6), coord3d(87,198,7), coord3d(86,198,8)]
 	//------------------------------------------------------------------------------------------
 
 	//Step 9 =====================================================================================
@@ -452,7 +452,8 @@ class tutorial.chapter_03 extends basic_chapter
 							local c = slope==0?c_bord:coord(c_tun_list[j].x, c_tun_list[j].y)
 							local c_z = c_tun_list[j].z
 							if (glsw[j]==0){
-								local link = "<a href=\"("+c.x+","+c.y+","+c_z+")\">("+c.tostring()+","+c_z+")</a>"
+								c = coord3d(c.x, c.y, c_z)
+								local link = c.href("("+c.tostring()+")")
 								local layer = translate("Layer level")+" = <st>"+(layer_lvl)+"</st>"
 								tx_list += ttext("--> <st>" + format("[%d]</st> %s %s<br>", j+1, link, layer))
 								text.lev = layer_lvl
