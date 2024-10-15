@@ -1434,7 +1434,7 @@ class tutorial.chapter_02 extends basic_chapter
 	function is_tool_allowed(pl, tool_id, wt){
 		local result = true
 		if(step < 8) {
-			local t_list = [-tool_make_stop_public, 0] // 0 = all tools allowed
+			local t_list = [-t_icon.tram, -tool_make_stop_public, 0] // 0 = all tools allowed
 			local wt_list = [gl_wt]
 			local res = update_tools(t_list, tool_id, wt_list, wt)
 			result = res.result
@@ -1442,7 +1442,7 @@ class tutorial.chapter_02 extends basic_chapter
 			return result
 		}
 		else {
-			local t_list = [0] // 0 = all tools allowed
+			local t_list = [-t_icon.tram, 0] // 0 = all tools allowed
 			local wt_list = [gl_wt, -1]
 			local res = update_tools(t_list, tool_id, wt_list, wt)
 			result = res.result

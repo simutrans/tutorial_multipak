@@ -1039,6 +1039,11 @@ class tutorial.chapter_06 extends basic_chapter
 	}
 
 	function is_tool_allowed(pl, tool_id, wt){
+		local gt_list =	[	t_icon.tram	]
+		foreach (id in gt_list){
+			if(id == tool_id)
+				return false
+		}
 		local result = true
 		if(step < 4) {
 			local t_list = [0] // 0 = all tools allowed

@@ -1200,7 +1200,11 @@ class tutorial.chapter_05 extends basic_chapter
 	}
 
 	function is_tool_allowed(pl, tool_id, wt){
-		local t_list = {road = 0x8005, other = 0x8008, slope = 0x8001}
+		local gt_list =	[	t_icon.tram	]
+		foreach (id in gt_list){
+			if(id == tool_id)
+				return false
+		}
 		local result = true
 		switch (this.step) {
 			case 1:
