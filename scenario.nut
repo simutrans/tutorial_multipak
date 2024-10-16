@@ -90,7 +90,7 @@ tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship =
 good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
 
 // placeholder for some menus icon
-t_icon <- {road = 0x8005, rail = 0x8002, ship = 0x8006, plane = 0x8007, other = 0x8008, slope = 0x8001, tram = 0x8005}
+t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005}
 
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
