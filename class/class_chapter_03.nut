@@ -156,7 +156,10 @@ class tutorial.chapter_03 extends basic_chapter
 	c_tunn2_lim = {b = coord(91,194), a = coord(63,202)}
 	c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8), dir = null}		//Inicio, Fin de la via y direccion(fullway)
 
+	c_end_tunn = coord3d(60,198,11)
+
 	dir_1 = {s = 28, r = 2 }		//Direccion de la slope y Way ribi
+	layer_list = [6,7,8]
 	layer_lvl = 6 
 	start_lvl_z = 6
 	end_lvl_z = 8
@@ -446,25 +449,30 @@ class tutorial.chapter_03 extends basic_chapter
 						text = ttextfile("chapter_03/08_4-5.txt")
 						text.tx = ttext("<em>[4/5]</em>")
 						local tx_list = ""
-						layer_lvl = r_way.c.z
+
 						local c_bord = coord(r_way.c.x, r_way.c.y)
-						for(local j=0;(start_lvl_z+j)<end_lvl_z;j++){
+						for(local j=0; j < layer_list.len(); j++){
 							local c = slope==0?c_bord:coord(c_tun_list[j].x, c_tun_list[j].y)
 							local c_z = c_tun_list[j].z
+							local layer_lvl = layer_list[j]
 							if (glsw[j]==0){
 								c = coord3d(c.x, c.y, c_z)
 								local link = c.href("("+c.tostring()+")")
 								local layer = translate("Layer level")+" = <st>"+(layer_lvl)+"</st>"
 								tx_list += ttext("--> <st>" + format("[%d]</st> %s %s<br>", j+1, link, layer))
-								text.lev = layer_lvl
+								text.lev =layer_lvl
 								text.tunn = link
 								break
 							}
 							else {
+								c = coord3d(c.x, c.y, c_z)
+								local link = c.href("("+c.tostring()+")")
 								local tx_ok = translate("OK")
 								local tx_coord = "("+coord(c_tun_list[j].x, c_tun_list[j].y).tostring()+","+c_z+")"
-								local layer = translate("Layer level")+" = "+(layer_lvl+j)+""
+								local layer = translate("Layer level")+" = "+(layer_lvl)+""
 								tx_list += ttext("<em>"+format("<em>[%d]</em> %s", j+1, tx_coord+" "+layer+" <em>"+tx_ok+"</em><br>"))
+								text.lev = layer_lvl
+								text.tunn = link
 							}
 						}
 						text.mx_lvl = end_lvl_z
@@ -475,7 +483,7 @@ class tutorial.chapter_03 extends basic_chapter
 						text.tx = ttext("<em>[5/5]</em>")
 						text.lev = end_lvl_z
 						text.t1 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
-						text.t2 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
+						text.t2 = "<a href=\"("+ c_end_tunn.x+","+ c_end_tunn.y+")\">("+ c_end_tunn.tostring()+")</a>"
 					}
 				}
 				break
