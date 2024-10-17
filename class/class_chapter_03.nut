@@ -569,7 +569,7 @@ class tutorial.chapter_03 extends basic_chapter
 				local nr = sch_list.len()
 				local list = sch_list
 				for (local j=0;j<nr;j++){
-					local c = coord(sch_list[j].x, sch_list[j].y)
+					local c = coord(list[j].x, list[j].y)
 					local tile = my_tile(c)
 					local st_halt = tile.get_halt()
 
