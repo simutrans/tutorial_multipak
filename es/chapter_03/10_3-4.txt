@@ -6,5 +6,5 @@ El <em>Servicio Público</em> necesita que completes la red ferroviaria que recor
 {tx} Selecciona <em>'{tool2}'</em> en la barra de herramientas y elige la herramienta de <em>Catenaria</em> para electrificar la vía de tren del <em>Depósito de Trenes</em> {dep}
 </p>
 <p>
-Nota: Los vehículos eléctricos solo aparecen cuando la vía del depósito está electrificada.
+<em>Nota:</em> Los vehículos eléctricos solo aparecen cuando la vía del depósito está electrificada.
 </p>
