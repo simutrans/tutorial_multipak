@@ -219,8 +219,8 @@ class tutorial.chapter_03 extends basic_chapter
 					{a = coord(120,380), b= coord(120,383)}, {a = coord(121,326), b= coord(121,329)}, 
 					{a = coord(121,266), b= coord(121,269)}, {a = coord(116,197), b = coord(119,197)}
 				]
-	sch_list =	[	coord(55,198), coord(116,198), coord(120,266), coord(120,326),
-					coord(120,380), coord(120,326), coord(120,266), coord(116,198)
+	sch_list =	[	coord(55,197), coord(116,198), coord(120,266), coord(120,326),
+					coord(120,380), coord(121,326), coord(121,266), coord(116,197)
 				]
 	dep_cnr3 = null //auto started
 
@@ -569,7 +569,7 @@ class tutorial.chapter_03 extends basic_chapter
 				local nr = sch_list.len()
 				local list = sch_list
 				for (local j=0;j<nr;j++){
-					local c = coord(list[j].x, list[j].y)
+					local c = coord(sch_list[j].x, sch_list[j].y)
 					local tile = my_tile(c)
 					local st_halt = tile.get_halt()
 
