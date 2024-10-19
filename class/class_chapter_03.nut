@@ -44,7 +44,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st1_way_lim = {a = coord(120,163), b = coord(125,163)}		//Limites de la via para la estacion
 	bord1_lim = {a = coord(106,154), b = coord(120,167)}		//Marca area con "X"
-	label1_lim = coord(120,163)									//Indica el final de un tramo
+	label1_lim = coord3d(120,163,0)									//Indica el final de un tramo
 	c_way1 = {a = coord3d(125,163,0), b = coord3d(107,158,0), dir = 6}	//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones del Productor
@@ -62,7 +62,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st2_way_lim = {a = coord(96,151), b = coord(96,155)}		//Limites de la via para la estacion
 	bord2_lim = {a = coord(95,155), b = coord(103,160)}			//Marca area con "X"
-	label2_lim = coord(96,155)									//Indica el final de un tramo
+	label2_lim = coord3d(96,155,1)									//Indica el final de un tramo
 	c_way3 = {a = coord3d(102,158,0), b = coord3d(96,151,1), dir = 6}	//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones de la Fabrica
@@ -90,7 +90,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st3_way_lim = {a = coord(94,155), b = coord(94,160)}					//Limites de la via para la estacion
 	bord3_lim = {a = coord(91,160), b = coord(96,174)}						//Marca area con "X"
-	label3_lim = coord(94,160)												//Indica el final de un tramo
+	label3_lim = coord3d(94,160,2)												//Indica el final de un tramo
 	c_way4 = {a = coord3d(94,155,2), b = coord3d(96,172,3), dir = 3}		//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones de la Fabrica
@@ -108,7 +108,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st4_way_lim = {a = coord(109,186), b = coord(109,189)}					//Limites de la via para la estacion
 	bord4_lim = {a = coord(102,171), b = coord(110,186)}					//Marca area con "X"
-	label4_lim = coord(109,186)												//Indica el final de un tramo
+	label4_lim = coord3d(109,186,2)												//Indica el final de un tramo
 	c_way5 = {a = coord3d(104,172,3), b = coord3d(109,189,2), dir = 5}		//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones del Consumidor
@@ -316,12 +316,17 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 				break
 			case 2:
-				local c1 = coord(c_way1.a.x, c_way1.a.y)
-				local c2 = coord(c_way1.b.x, c_way1.b.y)
-				local c3 = coord(c_way3.a.x, c_way3.a.y)
-				local c4 = coord(c_way3.b.x, c_way3.b.y)
+				local c1 = c_way1.a.href("("+c_way1.a.tostring()+")")
+				local c2 = c_way1.b.href("("+c_way1.b.tostring()+")")
+				local c3 = c_way3.a.href("("+c_way3.a.tostring()+")")
+				local c4 = c_way3.b.href("("+c_way3.b.tostring()+")")
 
 				if (pot0==0){
+					local c = label1_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c2 = c_label
+
 					text = ttextfile("chapter_03/02_1-3.txt")
 					text.tx = ttext("<em>[1/3]</em>")
 				}
@@ -330,14 +335,19 @@ class tutorial.chapter_03 extends basic_chapter
 					text.tx = ttext("<em>[2/3]</em>")
 				}
 				else if (pot2==0){
+					local c = label2_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c4 = c_label
+
 					text = ttextfile("chapter_03/02_3-3.txt")
 					text.tx = ttext("<em>[3/3]</em>")
 				}
 				text.br = c_brge1.a.href("("+c_brge1.a.tostring()+")")	
-				text.w1 = c1.href("("+c1.tostring()+")")
-				text.w2 = c2.href("("+c2.tostring()+")")
-				text.w3 = c3.href("("+c3.tostring()+")")
-				text.w4 = c4.href("("+c4.tostring()+")")
+				text.w1 = c1
+				text.w2 = c2
+				text.w3 = c3
+				text.w4 = c4
 
 				if (r_way.r)
 					text.cbor = "<em>" + translate("Ok") + "</em>"
@@ -383,11 +393,17 @@ class tutorial.chapter_03 extends basic_chapter
 				text.wait = get_wait_time_text(loc1_wait)
 				break
 			case 6:
-				local c1 = coord(c_way4.a.x, c_way4.a.y)
-				local c2 = coord(c_way4.b.x, c_way4.b.y)
-				local c3 = coord(c_way5.a.x, c_way5.a.y)
-				local c4 = coord(c_way5.b.x, c_way5.b.y)
+				local c1 = c_way4.a.href("("+c_way4.a.tostring()+")")
+				local c2 = c_way4.b.href("("+c_way4.b.tostring()+")")
+				local c3 = c_way5.a.href("("+c_way5.a.tostring()+")")
+				local c4 = c_way5.b.href("("+c_way5.b.tostring()+")")
+
 				if (pot0==0){
+					local c = label3_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c2 = c_label
+
 					text = ttextfile("chapter_03/06_1-5.txt")
 					text.tx=ttext("<em>[1/5]</em>")
 				}
@@ -396,6 +412,11 @@ class tutorial.chapter_03 extends basic_chapter
 					text.tx=ttext("<em>[2/5]</em>")
 				}
 				else if (pot2==0){
+					local c = label4_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c4 = c_label
+
 					text = ttextfile("chapter_03/06_3-5.txt")
 					text.tx=ttext("<em>[3/5]</em>")
 				}
@@ -408,10 +429,10 @@ class tutorial.chapter_03 extends basic_chapter
 					text.tx = ttext("<em>[5/5]</em>")
 				}
 				text.tu = c_tway_lim2.a.href("("+c_tway_lim2.a.tostring()+")")
-				text.w1 = c1.href("("+c1.tostring()+")")
-				text.w2 = c2.href("("+c2.tostring()+")")
-				text.w3 = c3.href("("+c3.tostring()+")")
-				text.w4 = c4.href("("+c4.tostring()+")")
+				text.w1 = c1
+				text.w2 = c2
+				text.w3 = c3
+				text.w4 = c4
 				text.tile = loc2_tile
 				break
 			case 7:
