@@ -15,6 +15,11 @@ class tutorial.chapter_07 extends basic_chapter
 
 	compass_nr = 0
 
+	t_allowed_list = [
+						tool_build_way, tool_build_station, tool_build_depot, tool_build_wayobj, tool_build_roadsign, 4108,
+						tool_remove_way, tool_remove_wayobj, tool_make_stop_public, tool_stop_mover, tool_merge_stop, 4103
+					]
+
 	cty1 = {c = coord(52,194), name = ""}
 	c_cty_lim1 = {a = coord(0,0), b = coord(0,0)}
 
@@ -354,10 +359,12 @@ class tutorial.chapter_07 extends basic_chapter
 						}
 
 						else {
-							if ((tool_id==4110)||(tool_id==4115)||(tool_id==4117)||(tool_id==4097)||(tool_id==4108)||(tool_id==4109))
-								return null
-							else
-								return translate("Action not allowed") +" ("+pos.tostring()+")."
+							foreach(tool in t_allowed_list){
+								if(tool == tool_id){
+									return null
+								}
+							}
+							return translate("Action not allowed") +" ("+pos.tostring()+")."
 						}
 					}
 					else if(tool_id==4110 && pot1==1)
@@ -398,10 +405,12 @@ class tutorial.chapter_07 extends basic_chapter
 						}
 
 						else {
-							if ((tool_id==4110)||(tool_id==4115)||(tool_id==4117)||(tool_id==4097)||(tool_id==4108)||(tool_id==4109))
-								return null
-							else
-								return translate("Action not allowed")+" ("+pos.tostring()+")."
+							foreach(tool in t_allowed_list){
+								if(tool == tool_id){
+									return null
+								}
+							}
+							return translate("Action not allowed") +" ("+pos.tostring()+")."
 						}
 					}
 					else if(tool_id==4110 && pot1==1)
@@ -442,10 +451,12 @@ class tutorial.chapter_07 extends basic_chapter
 						}
 
 						else {
-							if ((tool_id==4110)||(tool_id==4115)||(tool_id==4117)||(tool_id==4097)||(tool_id==4108)||(tool_id==4109))
-								return null
-							else
-								return translate("Action not allowed")+" ("+pos.tostring()+")."
+							foreach(tool in t_allowed_list){
+								if(tool == tool_id){
+									return null
+								}
+							}
+							return translate("Action not allowed") +" ("+pos.tostring()+")."
 						}
 					}
 					else if(tool_id==4110 && pot1==1)
@@ -486,10 +497,12 @@ class tutorial.chapter_07 extends basic_chapter
 						}
 
 						else {
-							if ((tool_id==4110)||(tool_id==4115)||(tool_id==4117)||(tool_id==4097)||(tool_id==4108)||(tool_id==4109))
-								return null
-							else
-								return translate("Action not allowed")+" ("+pos.tostring()+")."
+							foreach(tool in t_allowed_list){
+								if(tool == tool_id){
+									return null
+								}
+							}
+							return translate("Action not allowed") +" ("+pos.tostring()+")."
 						}
 					}
 					else if(tool_id==4110 && pot1==1)
@@ -547,12 +560,25 @@ class tutorial.chapter_07 extends basic_chapter
 			}
 
 		// tool "climate zones" = 4135
-		local forbid = [4134,4135, tool_lower_land, tool_raise_land, tool_setslope, tool_build_roadsign,
-        tool_restoreslope, tool_plant_tree, tool_set_marker, tool_stop_mover, tool_buy_house, tool_build_wayobj,
-        tool_remove_wayobj, tool_build_tunnel, tool_build_transformer, tool_build_bridge, tool_build_way,tool_remove_way]
+		local forbid = [ 4134,4135, tool_plant_tree, tool_set_marker, tool_buy_house, tool_build_tunnel, tool_build_transformer, tool_build_bridge, tool_add_city ]
 
 		foreach (tool_id in forbid)
 		    rules.forbid_tool(pl, tool_id)
+	}
+
+	function is_tool_active(pl, tool_id, wt) {
+		local result = true
+		return result
+	}
+
+	function is_tool_allowed(pl, tool_id, wt){
+		local gt_list =	[ t_icon.tram, t_icon.rail, t_icon.slope ]
+		foreach (id in gt_list){
+			if(id == tool_id)
+				return false
+		}
+		local result = true
+		return result
 	}
 
 }        // END of class

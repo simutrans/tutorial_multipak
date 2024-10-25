@@ -74,7 +74,7 @@ class tutorial.chapter_01 extends basic_chapter
 			
 		}
 		text.town = cty1.name
-		text.tool1 = tool_alias.inspe
+		text.tool1 =  translate(tool_alias.inspe)
 		return text
 	}
 	
@@ -244,6 +244,17 @@ class tutorial.chapter_01 extends basic_chapter
 		foreach (tool_id in forbid)
 			rules.forbid_tool(pl, tool_id )
 	}
+
+	function is_tool_active(pl, tool_id, wt) {
+		local result = true
+		return result
+	}
+
+	function is_tool_allowed(pl, tool_id, wt){
+		local result = true
+		return result
+	}
+
 	function script_text()
 	{
 		if (this.step==1){

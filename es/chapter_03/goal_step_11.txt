@@ -36,7 +36,7 @@ Ahora debes ensamblar un tren para <em>Pasajeros</em>.<br/>
 Este botón permite copiar el vehículo, incluyendo su itinerario o linea.
 </p>
 <p>
-- Usa el boton <em>[Copiar Vehículo]</em> <st>"{cnr} veces"</st> para hacer duplicados exactos del tren eléctrico.
+- Usa el boton <em>[Copiar Vehículo]</em> para hacer duplicados exactos del tren eléctrico y obtener un total de <st>"{cnr}"</st>.
 </p>
 <p>
 <h1>Arrancar los trenes:</h1>Una vez que tengas los <em>[{cnr}]</em> trenes correctamente configurados, es momento de presionar el botón <em>[Arrancar]</em>.

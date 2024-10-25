@@ -330,9 +330,9 @@ class tutorial.chapter_05 extends basic_chapter
 	    text.f3 = fab_list[2].c.href(""+translate(fab_list[2].name)+" ("+fab_list[2].c.tostring()+")")+""
 	    text.f4 = fab_list[3].c.href(""+translate(fab_list[3].name)+" ("+fab_list[3].c.tostring()+")")+""
 
-		text.tool1 = tool_alias.inspe
-		text.tool2 = tool_alias.road
-		text.tool3 = tool_alias.spec
+		text.tool1 = translate(tool_alias.inspe)
+		text.tool2 = translate(tool_alias.road)
+		text.tool3 = translate(tool_alias.spec)
 
 	    return text
 	}
@@ -1135,32 +1135,131 @@ class tutorial.chapter_05 extends basic_chapter
 				local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
 
 				foreach(wt in all_waytypes)
-					if (wt != wt_power) {
+					if (wt != wt_road) {
 					    foreach (tool_id in forbid)
 						    rules.forbid_way_tool(pl, tool_id, wt )
 				}
 			break
 
 			case 3:
-				local forbid = [tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel, tool_build_station,
-		                       tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj]
+				local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
 
 				foreach(wt in all_waytypes)
-					if (wt != wt_power) {
+					if (wt != wt_power && wt != wt_road) {
 					    foreach (tool_id in forbid)
 						    rules.forbid_way_tool(pl, tool_id, wt )
 				}
-		        rules.forbid_tool(pl, tool_build_station)
 			break
 
 			case 4:
-				local forbid =	[	tool_build_transformer,tool_build_way,
-									tool_build_bridge,tool_build_depot,tool_remove_way,tool_build_tunnel
-								]
+				local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
+
 				foreach (tool_id in forbid)
 					rules.forbid_tool(pl, tool_id )
 			break
 		}
+	}
+
+	function is_tool_active(pl, tool_id, wt) {
+		local t_list = {road = 0x8005, other = 0x8008, slope = 0x8001}
+		local result = false
+		switch (this.step) {
+			case 1:
+				local t_list = []
+				local wt_list = [0]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result	
+
+			case 2:
+				local t_list = [tool_build_way, tool_remove_way, tool_remover, tool_build_depot, tool_build_station]
+				local wt_list = [wt_road]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result				
+				break
+
+			case 3:
+				local t_list = [-t_icon.road, tool_build_transformer, tool_build_bridge, tool_build_tunnel, tool_build_way, tool_remove_way, tool_remover]
+				local wt_list = [wt_power]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result				
+				break
+
+			case 4:
+				local t_list = [-t_icon.road, tool_build_station]
+				local wt_list = [0]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result				
+				break
+		}
+
+		return result
+	}
+
+	function is_tool_allowed(pl, tool_id, wt){
+		local gt_list =	[	t_icon.tram	]
+		foreach (id in gt_list){
+			if(id == tool_id)
+				return false
+		}
+		local result = true
+		switch (this.step) {
+			case 1:
+				local t_list = [0] // 0 = all tools allowed
+				local wt_list = [-1]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+			case 2:
+				local t_list = [-t_icon.other, -tool_build_bridge, -tool_build_tunnel, 0] // 0 = all tools allowed
+				local wt_list = [wt_road]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result				
+				break
+
+			case 3:
+				if(wt == wt_road){
+					local t_list = [-t_icon.other, -tool_build_bridge, -tool_build_tunnel, 0] // 0 = all tools allowed
+					local wt_list = [wt_road]
+					local res = update_tools(t_list, tool_id, wt_list, wt)
+					result = res.result
+					if(res.ok)  return result				
+					break
+				}
+				else {
+					local t_list = [0] // 0 = all tools allowed
+					local wt_list = [wt_power]
+					local res = update_tools(t_list, tool_id, wt_list, wt)
+					result = res.result
+					if(res.ok)  return result				
+					break
+				}
+
+			case 4:
+				if(wt == wt_road){
+					local t_list = [-t_icon.other, -tool_build_bridge, -tool_build_tunnel, 0] // 0 = all tools allowed
+					local wt_list = [wt_road]
+					local res = update_tools(t_list, tool_id, wt_list, wt)
+					result = res.result
+					if(res.ok)  return result				
+					break
+				}
+				else {
+					local t_list = [0] // 0 = all tools allowed
+					local wt_list = [0, wt_power]
+					local res = update_tools(t_list, tool_id, wt_list, wt)
+					result = res.result
+					if(res.ok)  return result				
+					break
+				}
+		}
+		return result
 	}
 
     function delete_objet(player, list, obj, lab_name, station = false)

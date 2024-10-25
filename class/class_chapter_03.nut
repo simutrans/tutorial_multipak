@@ -44,7 +44,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st1_way_lim = {a = coord(120,163), b = coord(125,163)}		//Limites de la via para la estacion
 	bord1_lim = {a = coord(106,154), b = coord(120,167)}		//Marca area con "X"
-	label1_lim = coord(120,163)									//Indica el final de un tramo
+	label1_lim = coord3d(120,163,0)									//Indica el final de un tramo
 	c_way1 = {a = coord3d(125,163,0), b = coord3d(107,158,0), dir = 6}	//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones del Productor
@@ -62,8 +62,8 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st2_way_lim = {a = coord(96,151), b = coord(96,155)}		//Limites de la via para la estacion
 	bord2_lim = {a = coord(95,155), b = coord(103,160)}			//Marca area con "X"
-	label2_lim = coord(96,155)									//Indica el final de un tramo
-	c_way3 = {a = coord3d(106,158,-1), b = coord3d(96,151,1), dir = 6}	//Inicio, Fin de la via y direccion(fullway)
+	label2_lim = coord3d(96,155,1)									//Indica el final de un tramo
+	c_way3 = {a = coord3d(102,158,0), b = coord3d(96,151,1), dir = 6}	//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones de la Fabrica
 	st2_list = [coord(96,151), coord(96,152), coord(96,153)]
@@ -90,7 +90,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st3_way_lim = {a = coord(94,155), b = coord(94,160)}					//Limites de la via para la estacion
 	bord3_lim = {a = coord(91,160), b = coord(96,174)}						//Marca area con "X"
-	label3_lim = coord(94,160)												//Indica el final de un tramo
+	label3_lim = coord3d(94,160,2)												//Indica el final de un tramo
 	c_way4 = {a = coord3d(94,155,2), b = coord3d(96,172,3), dir = 3}		//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones de la Fabrica
@@ -108,7 +108,7 @@ class tutorial.chapter_03 extends basic_chapter
 	//--------------------------------------------------------------------------------------------
 	st4_way_lim = {a = coord(109,186), b = coord(109,189)}					//Limites de la via para la estacion
 	bord4_lim = {a = coord(102,171), b = coord(110,186)}					//Marca area con "X"
-	label4_lim = coord(109,186)												//Indica el final de un tramo
+	label4_lim = coord3d(109,186,2)												//Indica el final de un tramo
 	c_way5 = {a = coord3d(104,172,3), b = coord3d(109,189,2), dir = 5}		//Inicio, Fin de la via y direccion(fullway)
 
 	//Estaciones del Consumidor
@@ -156,11 +156,14 @@ class tutorial.chapter_03 extends basic_chapter
 	c_tunn2_lim = {b = coord(91,194), a = coord(63,202)}
 	c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8), dir = null}		//Inicio, Fin de la via y direccion(fullway)
 
+	c_end_tunn = coord3d(60,198,11)
+
 	dir_1 = {s = 28, r = 2 }		//Direccion de la slope y Way ribi
+	layer_list = [6,7,8]
 	layer_lvl = 6 
 	start_lvl_z = 6
 	end_lvl_z = 8
-	c_tun_list = [coord3d(89,198,6), coord3d(88,198,7), coord3d(87,198,8)]
+	c_tun_list = [coord3d(88,198,6), coord3d(87,198,7), coord3d(86,198,8)]
 	//------------------------------------------------------------------------------------------
 
 	//Step 9 =====================================================================================
@@ -216,8 +219,8 @@ class tutorial.chapter_03 extends basic_chapter
 					{a = coord(120,380), b= coord(120,383)}, {a = coord(121,326), b= coord(121,329)}, 
 					{a = coord(121,266), b= coord(121,269)}, {a = coord(116,197), b = coord(119,197)}
 				]
-	sch_list =	[	coord(55,198), coord(116,198), coord(120,266), coord(120,326),
-					coord(120,380), coord(120,326), coord(120,266), coord(116,198)
+	sch_list =	[	coord(55,197), coord(116,198), coord(120,266), coord(120,326),
+					coord(120,380), coord(121,326), coord(121,266), coord(116,197)
 				]
 	dep_cnr3 = null //auto started
 
@@ -313,12 +316,17 @@ class tutorial.chapter_03 extends basic_chapter
 				}
 				break
 			case 2:
-				local c1 = coord(c_way1.a.x, c_way1.a.y)
-				local c2 = coord(c_way1.b.x, c_way1.b.y)
-				local c3 = coord(c_way3.a.x, c_way3.a.y)
-				local c4 = coord(c_way3.b.x, c_way3.b.y)
+				local c1 = c_way1.a.href("("+c_way1.a.tostring()+")")
+				local c2 = c_way1.b.href("("+c_way1.b.tostring()+")")
+				local c3 = c_way3.a.href("("+c_way3.a.tostring()+")")
+				local c4 = c_way3.b.href("("+c_way3.b.tostring()+")")
 
 				if (pot0==0){
+					local c = label1_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c2 = c_label
+
 					text = ttextfile("chapter_03/02_1-3.txt")
 					text.tx = ttext("<em>[1/3]</em>")
 				}
@@ -327,14 +335,19 @@ class tutorial.chapter_03 extends basic_chapter
 					text.tx = ttext("<em>[2/3]</em>")
 				}
 				else if (pot2==0){
+					local c = label2_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c4 = c_label
+
 					text = ttextfile("chapter_03/02_3-3.txt")
 					text.tx = ttext("<em>[3/3]</em>")
 				}
 				text.br = c_brge1.a.href("("+c_brge1.a.tostring()+")")	
-				text.w1 = c1.href("("+c1.tostring()+")")
-				text.w2 = c2.href("("+c2.tostring()+")")
-				text.w3 = c3.href("("+c3.tostring()+")")
-				text.w4 = c4.href("("+c4.tostring()+")")
+				text.w1 = c1
+				text.w2 = c2
+				text.w3 = c3
+				text.w4 = c4
 
 				if (r_way.r)
 					text.cbor = "<em>" + translate("Ok") + "</em>"
@@ -380,11 +393,17 @@ class tutorial.chapter_03 extends basic_chapter
 				text.wait = get_wait_time_text(loc1_wait)
 				break
 			case 6:
-				local c1 = coord(c_way4.a.x, c_way4.a.y)
-				local c2 = coord(c_way4.b.x, c_way4.b.y)
-				local c3 = coord(c_way5.a.x, c_way5.a.y)
-				local c4 = coord(c_way5.b.x, c_way5.b.y)
+				local c1 = c_way4.a.href("("+c_way4.a.tostring()+")")
+				local c2 = c_way4.b.href("("+c_way4.b.tostring()+")")
+				local c3 = c_way5.a.href("("+c_way5.a.tostring()+")")
+				local c4 = c_way5.b.href("("+c_way5.b.tostring()+")")
+
 				if (pot0==0){
+					local c = label3_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c2 = c_label
+
 					text = ttextfile("chapter_03/06_1-5.txt")
 					text.tx=ttext("<em>[1/5]</em>")
 				}
@@ -393,6 +412,11 @@ class tutorial.chapter_03 extends basic_chapter
 					text.tx=ttext("<em>[2/5]</em>")
 				}
 				else if (pot2==0){
+					local c = label4_lim
+					local c_label = c.href("("+c.tostring()+")")
+					local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
+					if(!way) c4 = c_label
+
 					text = ttextfile("chapter_03/06_3-5.txt")
 					text.tx=ttext("<em>[3/5]</em>")
 				}
@@ -405,10 +429,10 @@ class tutorial.chapter_03 extends basic_chapter
 					text.tx = ttext("<em>[5/5]</em>")
 				}
 				text.tu = c_tway_lim2.a.href("("+c_tway_lim2.a.tostring()+")")
-				text.w1 = c1.href("("+c1.tostring()+")")
-				text.w2 = c2.href("("+c2.tostring()+")")
-				text.w3 = c3.href("("+c3.tostring()+")")
-				text.w4 = c4.href("("+c4.tostring()+")")
+				text.w1 = c1
+				text.w2 = c2
+				text.w3 = c3
+				text.w4 = c4
 				text.tile = loc2_tile
 				break
 			case 7:
@@ -446,24 +470,30 @@ class tutorial.chapter_03 extends basic_chapter
 						text = ttextfile("chapter_03/08_4-5.txt")
 						text.tx = ttext("<em>[4/5]</em>")
 						local tx_list = ""
-						layer_lvl = r_way.c.z
+
 						local c_bord = coord(r_way.c.x, r_way.c.y)
-						for(local j=0;(start_lvl_z+j)<end_lvl_z;j++){
+						for(local j=0; j < layer_list.len(); j++){
 							local c = slope==0?c_bord:coord(c_tun_list[j].x, c_tun_list[j].y)
 							local c_z = c_tun_list[j].z
+							local layer_lvl = layer_list[j]
 							if (glsw[j]==0){
-								local link = "<a href=\"("+c.x+","+c.y+","+c_z+")\">("+c.tostring()+","+c_z+")</a>"
+								c = coord3d(c.x, c.y, c_z)
+								local link = c.href("("+c.tostring()+")")
 								local layer = translate("Layer level")+" = <st>"+(layer_lvl)+"</st>"
 								tx_list += ttext("--> <st>" + format("[%d]</st> %s %s<br>", j+1, link, layer))
-								text.lev = layer_lvl
+								text.lev =layer_lvl
 								text.tunn = link
 								break
 							}
 							else {
+								c = coord3d(c.x, c.y, c_z)
+								local link = c.href("("+c.tostring()+")")
 								local tx_ok = translate("OK")
 								local tx_coord = "("+coord(c_tun_list[j].x, c_tun_list[j].y).tostring()+","+c_z+")"
-								local layer = translate("Layer level")+" = "+(layer_lvl+j)+""
+								local layer = translate("Layer level")+" = "+(layer_lvl)+""
 								tx_list += ttext("<em>"+format("<em>[%d]</em> %s", j+1, tx_coord+" "+layer+" <em>"+tx_ok+"</em><br>"))
+								text.lev = layer_lvl
+								text.tunn = link
 							}
 						}
 						text.mx_lvl = end_lvl_z
@@ -474,7 +504,7 @@ class tutorial.chapter_03 extends basic_chapter
 						text.tx = ttext("<em>[5/5]</em>")
 						text.lev = end_lvl_z
 						text.t1 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
-						text.t2 = "<a href=\"("+ start_tunn.x+","+ start_tunn.y+")\">("+ start_tunn.tostring()+")</a>"
+						text.t2 = "<a href=\"("+ c_end_tunn.x+","+ c_end_tunn.y+")\">("+ c_end_tunn.tostring()+")</a>"
 					}
 				}
 				break
@@ -587,9 +617,7 @@ class tutorial.chapter_03 extends basic_chapter
 		text.f1 = fac_1.c.href(translate(fac_1.name)+" ("+fac_1.c.tostring()+")")
 		text.f2 = fac_2.c.href(translate(fac_2.name)+" ("+fac_2.c.tostring()+")")
 		text.f3 = fac_3.c.href(translate(fac_3.name)+" ("+fac_3.c.tostring()+")")
-		text.cfar=fac_1.c.href(translate(fac_1.name)+" ("+fac_1.c.tostring()+")")
-		text.cmi=fac_2.c.href(translate(fac_2.name)+" ("+fac_2.c.tostring()+")")
-		text.cba=fac_3.c.href(translate(fac_3.name)+" ("+fac_3.c.tostring()+")")
+
 		text.cdep=c_dep1.href("("+c_dep1.tostring()+")")
 		text.way1=c_dep2.href("("+c_dep2.tostring()+")")
 
@@ -610,9 +638,9 @@ class tutorial.chapter_03 extends basic_chapter
 		else
 			text.cbor = coord(r_way.c.x, r_way.c.y).href("("+r_way.c.tostring()+")")
 
-		text.tool1 = tool_alias.inspe
-		text.tool2 = tool_alias.rail
-		text.tool3 = tool_alias.land
+		text.tool1 = translate(tool_alias.inspe)
+		text.tool2 = translate(tool_alias.rail)
+		text.tool3 = translate(tool_alias.land)
 
 		text.good1 = translate(fac_1.good)
 		text.good2 = translate(fac_2.good)
@@ -2585,7 +2613,7 @@ class tutorial.chapter_03 extends basic_chapter
 	}
 	
 	function set_all_rules(pl) {
-		local forbid =	[	4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
+		local forbid =	[	tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
 							tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj
 						]
 		foreach(wt in all_waytypes)
@@ -2593,10 +2621,11 @@ class tutorial.chapter_03 extends basic_chapter
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt )
 			}
-		if (this.step!=2 && this.step!=8){
+		if (this.step < 8 ){
 			local forbid = [tool_setslope]
-			foreach (tool_id in forbid)
-			rules.forbid_tool(pl, tool_id )
+			foreach (tool_id in forbid) {
+				rules.forbid_tool(pl, tool_id )
+			}
 		}
 			
 		local forbid =	[	4103,4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope, tool_add_city,
@@ -2607,7 +2636,7 @@ class tutorial.chapter_03 extends basic_chapter
 
 		switch (this.step) {
 			case 1:
-				local forbid=	[	4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
+				local forbid=	[	tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
 									tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj
 								]
 				foreach (tool_id in forbid)
@@ -2619,7 +2648,7 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 
 			case 2:
-				local forbid = [4129,tool_build_tunnel,tool_build_station,tool_build_depot,tool_build_roadsign,tool_build_wayobj]
+				local forbid = [tool_remove_wayobj,tool_build_tunnel,tool_build_station,tool_build_depot,tool_build_roadsign,tool_build_wayobj]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
 
@@ -2629,87 +2658,171 @@ class tutorial.chapter_03 extends basic_chapter
 				break
 
 			case 3:
-				local forbid =	[	4129,tool_build_way,tool_remove_way,tool_build_roadsign,tool_build_bridge,
-									tool_build_tunnel,tool_build_depot,tool_build_roadsign,tool_build_wayobj
+				local forbid =	[	tool_remove_wayobj, tool_remove_way, tool_build_roadsign, tool_build_tunnel,
+									tool_build_depot, tool_build_roadsign, tool_build_wayobj
 								]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
 				break
 
 			case 4:
-				local forbid =	[	4129,tool_build_bridge,tool_build_tunnel,tool_build_station,
-									tool_remove_way,tool_build_roadsign,tool_build_wayobj
-								]
+				local forbid =	[	tool_remove_wayobj, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj	]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
 				break
 
 			case 5:
-				local forbid =	[	4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_depot,
-									tool_build_station,tool_remove_way,tool_build_roadsign,tool_build_wayobj
-								]
+				local forbid =	[	tool_remove_wayobj, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj	]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
 
-				local forbid = [tool_build_station,tool_remover]
-				foreach (tool_id in forbid)
-					rules.forbid_tool(pl, tool_id )	
 				break
 
 			case 6:
-				local forbid = [4129,tool_build_bridge,tool_build_depot,tool_build_roadsign,tool_build_wayobj]
+				local forbid = [tool_remove_wayobj, tool_build_roadsign, tool_build_wayobj]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
 				break
 
 			case 7:
-				local forbid = [tool_build_bridge,tool_build_tunnel,tool_build_roadsign]
+				local forbid = [tool_remove_wayobj, tool_build_roadsign, tool_build_wayobj]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
 				break
 
 			case 8:
-				local forbid =	[	4129,tool_build_roadsign,tool_build_station,
-									tool_build_depot,tool_build_roadsign,tool_build_wayobj
-								]
+				local forbid = [tool_remove_wayobj, tool_build_roadsign, tool_build_wayobj]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
-
-				local forbid = [tool_build_station]
-				foreach (tool_id in forbid)
-					rules.forbid_tool(pl, tool_id )		
 				break
 
 			case 9:
-				local forbid = [tool_build_bridge,tool_build_tunnel,tool_build_wayobj,tool_build_station]
-					foreach (tool_id in forbid)
-						rules.forbid_way_tool(pl, tool_id, wt_rail )
-				break	
-			case 10:
-				local forbid =	[	tool_build_way,tool_build_roadsign,tool_build_bridge,
-									tool_build_tunnel,tool_build_station,4113,4129
-								]
+				local forbid = [tool_remove_wayobj, tool_build_wayobj]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
+				break
 
-				local forbid = [tool_build_station]
+			case 10:
+				local forbid = [tool_remove_wayobj]
 				foreach (tool_id in forbid)
-					rules.forbid_tool(pl, tool_id )	
+					rules.forbid_way_tool(pl, tool_id, wt_rail )
 				break
 
 			case 11:
-				local forbid =	[	tool_build_way,tool_build_roadsign,tool_build_bridge,tool_build_wayobj,
-									tool_build_tunnel,tool_build_station,tool_remover,tool_build_depot,4113,4129
-								]
+				local forbid = [tool_remove_wayobj]
 				foreach (tool_id in forbid)
 					rules.forbid_way_tool(pl, tool_id, wt_rail )
-
-
-				foreach (tool_id in forbid)
-					rules.forbid_tool(pl, tool_id )	
-				break		
+				break	
 		}
 	}
+
+	function is_tool_active(pl, tool_id, wt) {
+		local result = false
+		switch (this.step) {
+			case 1:
+				local t_list = []
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+			case 2:
+				local t_list = [tool_build_way, tool_build_bridge, tool_remove_way]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break	
+
+			case 3:
+				local t_list = [tool_build_station]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+			case 4:
+				local t_list = [-tool_remover, tool_build_way, tool_build_depot]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break	
+
+			case 5://Schedule
+				local t_list = [-tool_remover, -t_icon.rail]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+			case 6: 
+				local t_list = [tool_build_way, tool_remove_way, tool_build_tunnel, tool_remover, tool_build_station]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break	
+
+			case 7:
+				local t_list = [tool_build_way, tool_build_depot]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break	
+
+			case 8:
+				local t_list = [tool_build_way, tool_build_bridge, tool_remove_way, tool_build_tunnel]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break	
+
+			case 9:
+				local t_list = [-t_icon.slope, -tool_setslope, tool_build_way, tool_build_roadsign]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break	
+
+			case 10:
+				local t_list = [-t_icon.slope, -tool_setslope, -tool_remover, tool_build_depot, tool_build_wayobj]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+			case 11://Schedule
+				local t_list = [-t_icon.slope, -tool_setslope, -tool_remover, -t_icon.rail]
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+		}
+		return result
+	}
+
+
+	function is_tool_allowed(pl, tool_id, wt){
+
+		local result = true
+		local t_list = [-t_icon.tram, 0] // 0 = all tools allowed
+		local wt_list = [gl_wt]
+		local res = update_tools(t_list, tool_id, wt_list, wt)
+		result = res.result
+		if(res.ok)  return result
+		return result
+	}
+
 	function is_stations_building(pl, c_list, st_nr, good)
 	{
 		local sw = true
