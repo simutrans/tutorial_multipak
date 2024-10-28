@@ -14,7 +14,7 @@ cv_list <-	[
 				{stp = [5,7,11], cov = [1,1,3], idx = 0}
 
 				//Chapter_04: [Step..], [Cov_nr..], Index --------------
-				{stp = [4,5,7], cov = [5,5,1], idx = 0}
+				{stp = [4,5,7], cov = [2,2,1], idx = 0}
 
 				//Chapter_05: [Step..], [Cov_nr..], Index --------------
 				{stp = [2,4,4], cov = [10,3,1], idx = 0}
