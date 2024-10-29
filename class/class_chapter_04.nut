@@ -1082,7 +1082,7 @@ class tutorial.chapter_04 extends basic_chapter
 
 	function is_tool_allowed(pl, tool_id, wt){
 		local result = true
-		local t_list = [0] // 0 = all tools allowed
+		local t_list = [-t_icon.other, 0] // 0 = all tools allowed
 		local wt_list = [gl_wt]
 		local res = update_tools(t_list, tool_id, wt_list, wt)
 		result = res.result

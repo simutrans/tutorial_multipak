@@ -102,13 +102,12 @@ good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Hol
 // placeholder for some menus icon
   switch (pak_name) {
     case "pak64":
-      t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005}
+      t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005, mono = 0x8004}
       break
     case "pak64.german":
       t_icon <- {road = 0x800e, rail = 0x800a, ship = 0x800f, plane = 0x8010, other = 0x8009, slope = 0x8002, tram = 0x800d, build = 0x8002, stats = 0x8003, exted = 0x8004, mag = 0x800b, narr = 0x800c, powe = 0x8011 }
       break
   }
-
 
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
@@ -705,11 +704,11 @@ function is_tool_allowed(pl, tool_id, wt)
   else if (tool_id == 0x4006) return false
   else if (tool_id == 0x4029) return false
   else if (tool_id == 0x401c) return false
-  else if (tool_id == t_icon.tram) return false //Tramsway Tools
+  else if(tool_id == t_icon.mono) return false
 
   result = chapter.is_tool_allowed(pl, tool_id, wt)
   return result
-}
+
 
 function is_tool_active(pl, tool_id, wt)
 {
