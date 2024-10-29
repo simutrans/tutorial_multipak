@@ -2628,8 +2628,8 @@ class tutorial.chapter_03 extends basic_chapter
 			}
 		}
 			
-		local forbid =	[	4103,4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope, tool_add_city,
-							tool_make_stop_public,4137,tool_build_transformer,4107,4102,4127,4131
+		local forbid =	[
+							tool_lower_land, tool_raise_land, tool_restoreslope, 4103
 						]
 		foreach (tool_id in forbid)
 			rules.forbid_tool(pl, tool_id )
@@ -2815,7 +2815,8 @@ class tutorial.chapter_03 extends basic_chapter
 	function is_tool_allowed(pl, tool_id, wt){
 
 		local gt_list =	[
-							t_icon.road, t_icon.ship, t_icon.plane, t_icon.tram, t_icon.other
+							t_icon.road, t_icon.ship, t_icon.plane, t_icon.tram, t_icon.other, tool_lower_land,
+							tool_raise_land, tool_restoreslope, tool_set_climate, 4103 
 						]
 		if(step < 2){
 			gt_list.push(t_icon.rail)
