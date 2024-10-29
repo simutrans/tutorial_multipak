@@ -2814,12 +2814,41 @@ class tutorial.chapter_03 extends basic_chapter
 
 	function is_tool_allowed(pl, tool_id, wt){
 
+		local gt_list =	[
+							t_icon.road, t_icon.ship, t_icon.plane, t_icon.tram, t_icon.other
+						]
+		if(step < 2){
+			gt_list.push(t_icon.rail)
+		}
+		if(step < 8){
+			gt_list.push(t_icon.slope)
+		}
+
+		foreach (id in gt_list){
+			if(id == tool_id)
+				return false
+		}
+
 		local result = true
-		local t_list = [-t_icon.tram, 0] // 0 = all tools allowed
-		local wt_list = [gl_wt]
-		local res = update_tools(t_list, tool_id, wt_list, wt)
-		result = res.result
-		if(res.ok)  return result
+
+		switch (this.step) {
+			case 1:
+				local t_list = [-tool_remover, 0] // 0 = all tools allowed
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+			case 9:
+				local t_list = [0] // 0 = all tools allowed
+				local wt_list = [gl_wt]
+				local res = update_tools(t_list, tool_id, wt_list, wt)
+				result = res.result
+				if(res.ok)  return result
+				break
+
+		}
 		return result
 	}
 
