@@ -90,7 +90,7 @@ tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship =
 good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
 
 // placeholder for some menus icon
-t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005}
+t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005, mono = 0x8004}
 
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
@@ -684,13 +684,13 @@ function is_convoy_allowed(pl, convoy, depot)
 function is_tool_allowed(pl, tool_id, wt)
 {
 	local result = true
-	//if (tool_id == 0x2000) return false // prevent players toggling pause mode
+
 	if (tool_id == 0x2005) return false 
 	else if (tool_id == 0x4006) return false 
 	else if (tool_id == 0x4029) return false 
 	else if (tool_id == 0x401c) return false 
-	else if (tool_id == 0x8004) return false  //Tramsway Tools
-	
+	else if(tool_id == t_icon.mono) return false
+
 	result = chapter.is_tool_allowed(pl, tool_id, wt)
     return result
 }
