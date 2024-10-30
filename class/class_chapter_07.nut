@@ -341,7 +341,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop1.x && pos.y==stop1.y)
 									return null
 								else
-									return translate("Build Stop here:")+ " ("+stop1.tostring()+")."
+									return translate("Build Stop here:")+ " ("+coord3d_to_string(stop1)+")."
 							}
 							else
 								return translate("Action not allowed") + " ("+pos.tostring()+")."
@@ -352,7 +352,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop1.x && pos.y==stop1.y)
 									return null
 								else
-									return translate("Click on the stop")+ " ("+stop1.tostring()+")."
+									return translate("Click on the stop")+ " ("+coord3d_to_string(stop1)+")."
 							}
 							else
 								return translate("Action not allowed") + " ("+pos.tostring()+")."
@@ -387,7 +387,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop2.x && pos.y==stop2.y)
 									return null
 								else
-									return translate("Build Stop here:")+ " ("+stop2.tostring()+")."
+									return translate("Build Stop here:")+ " ("+coord3d_to_string(stop2)+")."
 							}
 							else
 								return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -398,7 +398,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop2.x && pos.y==stop2.y)
 									return null
 								else
-									return translate("Click on the stop")+ " ("+stop2.tostring()+")."
+									return translate("Click on the stop")+ " ("+coord3d_to_string(stop2)+")."
 							}
 							else
 								return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -433,7 +433,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop3.x && pos.y==stop3.y)
 									return null
 								else
-									return translate("Build Stop here:")+ " ("+stop3.tostring()+")."
+									return translate("Build Stop here:")+ " ("+coord3d_to_string(stop3)+")."
 							}
 							else
 								return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -444,7 +444,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop3.x && pos.y==stop3.y)
 									return null
 								else
-									return translate("Click on the stop")+ " ("+stop3.tostring()+")."
+									return translate("Click on the stop")+ " ("+coord3d_to_string(stop3)+")."
 							}
 							else
 								return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -479,7 +479,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop4.x && pos.y==stop4.y)
 									return null
 								else
-									return translate("Build Stop here:")+ " ("+stop4.tostring()+")."
+									return translate("Build Stop here:")+ " ("+coord3d_to_string(stop4)+")."
 							}
 							else
 								return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -490,7 +490,7 @@ class tutorial.chapter_07 extends basic_chapter
 								if(pos.x==stop4.x && pos.y==stop4.y)
 									return null
 								else
-									return translate("Click on the stop")+ " ("+stop4.tostring()+")."
+									return translate("Click on the stop")+ " ("+coord3d_to_string(stop4)+")."
 							}
 							else
 								return translate("Action not allowed")+" ("+pos.tostring()+")."
