@@ -708,7 +708,7 @@ function is_tool_allowed(pl, tool_id, wt)
 
   result = chapter.is_tool_allowed(pl, tool_id, wt)
   return result
-
+}
 
 function is_tool_active(pl, tool_id, wt)
 {
