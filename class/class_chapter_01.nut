@@ -224,11 +224,7 @@ class tutorial.chapter_01 extends basic_chapter
 		return result	
 	}
 	
-	function is_schedule_allowed(pl, schedule) {
-		local result=null	// null is equivalent to 'allowed'
-		return translate("Creating Schedules is currently not allowed")
-	}
-	
+
 	function set_all_rules(pl) {
 		local forbid =	[	4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
 							tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj

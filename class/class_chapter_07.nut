@@ -520,11 +520,6 @@ class tutorial.chapter_07 extends basic_chapter
 		return tool_id
 
 	}
-	
-	function is_schedule_allowed(pl, schedule) {
-		local result=null	// null is equivalent to 'allowed'
-		return result
-	}
 
 	function is_convoy_allowed(pl, convoy, depot)
 	{
