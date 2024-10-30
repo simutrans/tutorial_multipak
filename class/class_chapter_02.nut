@@ -95,6 +95,19 @@ class tutorial.chapter_02 extends basic_chapter
 
   //Script
   //----------------------------------------------------------------------------------
+  //obj_search = find_object("way", wt_road, 50)
+  //gui.add_message("test")
+
+  //  sc_way_name = obj_search.get_name() //"asphalt_road"
+  /*if ( obj_desc == null ) {.()get_desc
+
+  } else {
+  }
+
+  /*obj_desc = find_object("bridge", wt_road, 50)
+  sc_bridge_name = obj_desc.get_name() //"tb_classic_road"
+  obj_desc = find_station(wt_road)
+  sc_station_name = obj_desc.get_name() //"BusStop"*/
   sc_way_name = get_obj_ch2(1)
   sc_bridge_name = get_obj_ch2(2)
   sc_station_name = get_obj_ch2(3)
@@ -1245,8 +1258,10 @@ class tutorial.chapter_02 extends basic_chapter
 
 
   function set_all_rules(pl) {
-    local forbid =  [ tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel, tool_build_station,
-                        tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj
+    general_disabled_tools(pl)
+
+    /*local forbid =  [ tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel, tool_build_station,
+                        tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj,tool_exec_script
             ]
 
     foreach(wt in all_waytypes){
@@ -1256,6 +1271,13 @@ class tutorial.chapter_02 extends basic_chapter
       }
         }
 
+    forbid =  [ 4103, 4134, 4135, tool_lower_land, tool_raise_land, tool_setslope, tool_build_transformer,
+                    tool_restoreslope, tool_plant_tree, tool_set_marker, tool_add_city, 4137, tool_stop_mover, tool_buy_house,
+                    tool_exec_script,tool_exec_two_click_script, t_icon.rail, t_icon.tram
+          ]
+
+    foreach (tool_id in forbid)
+        rules.forbid_tool(pl, tool_id )*/
 
     switch (this.step) {
       case 1:
@@ -1264,9 +1286,14 @@ class tutorial.chapter_02 extends basic_chapter
 
                 ]
         foreach (tool_id in forbid)
+
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
-        break
+        local forbid = [tool_build_station,tool_remover,tool_make_stop_public,tool_exec_script,tool_exec_two_click_script]
+        foreach (tool_id in forbid)
+          rules.forbid_tool(pl, tool_id )
+          break
+
 
       case 2:
         local forbid =  [ tool_remove_wayobj,tool_build_bridge,tool_build_tunnel,tool_build_station,
@@ -1275,7 +1302,11 @@ class tutorial.chapter_02 extends basic_chapter
         foreach (tool_id in forbid)
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
+        local forbid = [tool_build_station,tool_remover,tool_make_stop_public,tool_exec_script,tool_exec_two_click_script]
+        foreach (tool_id in forbid)
+          rules.forbid_tool(pl, tool_id )
         break
+
       case 3:
         local forbid= [ tool_remove_wayobj,tool_build_bridge,tool_build_tunnel,
                   tool_remove_way,tool_build_roadsign,tool_build_wayobj
@@ -1283,6 +1314,10 @@ class tutorial.chapter_02 extends basic_chapter
         foreach (tool_id in forbid)
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
+        local forbid = [tool_make_stop_public,tool_exec_script,tool_exec_two_click_script]
+        foreach (tool_id in forbid)
+
+          rules.forbid_tool(pl, tool_id )
         break
 
       case 4:
@@ -1292,6 +1327,9 @@ class tutorial.chapter_02 extends basic_chapter
         foreach (tool_id in forbid)
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
+        local forbid = [tool_make_stop_public,tool_exec_script,tool_exec_two_click_script]
+        foreach (tool_id in forbid)
+          rules.forbid_tool(pl, tool_id )
         break
 
       case 5:
@@ -1301,6 +1339,10 @@ class tutorial.chapter_02 extends basic_chapter
         foreach (tool_id in forbid)
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
+
+        local forbid = [tool_make_stop_public,tool_exec_script,tool_exec_two_click_script]
+        foreach (tool_id in forbid)
+          rules.forbid_tool(pl, tool_id )
         break
 
       case 6:
@@ -1310,6 +1352,9 @@ class tutorial.chapter_02 extends basic_chapter
         foreach (tool_id in forbid)
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
+        local forbid = [ tool_make_stop_public,tool_exec_script,tool_exec_two_click_script]
+        foreach (tool_id in forbid)
+          rules.forbid_tool(pl, tool_id )
         break
 
       case 7:
@@ -1319,23 +1364,21 @@ class tutorial.chapter_02 extends basic_chapter
           foreach (tool_id in forbid)
             rules.forbid_way_tool(pl, tool_id, wt_road)
 
+        local forbid = [ tool_exec_script]
+        foreach (tool_id in forbid)
+          rules.forbid_tool(pl, tool_id )
         break
 
       case 8:
         local forbid =  [ tool_remove_wayobj,tool_build_tunnel,
-                  tool_build_roadsign,tool_build_wayobj
+                  tool_build_roadsign,tool_build_wayobj,tool_exec_script,tool_exec_two_click_script
                 ]
         foreach (tool_id in forbid)
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
-        forbid =  [
-                tool_remove_way, tool_remove_wayobj, tool_stop_mover, tool_merge_stop, 4103
-                tool_build_transformer, tool_plant_tree, tool_set_marker, tool_add_city, tool_buy_house
-              ]
-
+        local forbid = [ tool_exec_script]
         foreach (tool_id in forbid)
           rules.forbid_tool(pl, tool_id )
-
         break
     }
   }
@@ -1411,48 +1454,23 @@ class tutorial.chapter_02 extends basic_chapter
   }
 
   function is_tool_allowed(pl, tool_id, wt){
-    local gt_list = [
-              t_icon.rail, t_icon.ship, t_icon.plane, t_icon.slope, t_icon.tram
-
-            ]
-    if(step < 8){
-      gt_list.push(t_icon.other)
-    }
-
-    foreach (id in gt_list){
-      if(id == tool_id)
-        return false
-    }
-
     local result = true
-
-    switch (this.step) {
-      case 1:
-        local t_list = [-tool_remover, 0] // 0 = all tools allowed
-        local wt_list = [gl_wt]
-        local res = update_tools(t_list, tool_id, wt_list, wt)
-        result = res.result
-        if(res.ok)  return result
-        break
-
-      case 2:
-        local t_list = [-tool_remover, 0] // 0 = all tools allowed
-        local wt_list = [gl_wt]
-        local res = update_tools(t_list, tool_id, wt_list, wt)
-        result = res.result
-        if(res.ok)  return result
-        break
-
-      case 8:
-        local t_list = [-tool_build_station, 0] // 0 = all tools allowed
-        local wt_list = [1]
-        local res = update_tools(t_list, tool_id, wt_list, wt)
-        result = res.result
-        if(res.ok)  return result
-        break
-
+    if(step < 8) {
+      local t_list = [-t_icon.tram, -tool_make_stop_public, 0] // 0 = all tools allowed
+      local wt_list = [gl_wt]
+      local res = update_tools(t_list, tool_id, wt_list, wt)
+      result = res.result
+      if(res.ok)  return result
+      return result
     }
-    return result
+    else {
+      local t_list = [-t_icon.tram, 0] // 0 = all tools allowed
+      local wt_list = [gl_wt, -1]
+      local res = update_tools(t_list, tool_id, wt_list, wt)
+      result = res.result
+      if(res.ok)  return result
+      return result
+    }
   }
 
   function sch_conv_list(pl, coord) {
