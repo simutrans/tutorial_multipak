@@ -6,37 +6,37 @@
  */
 const version = 1670
 map.file = "tutorial64.sve"
-scenario_name              <- "Tutorial Scenario"
+scenario_name             <- "Tutorial Scenario"
 scenario.short_description = scenario_name
 scenario.author            = "Yona-TYT"
 scenario.version           = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10)
-scenario.translation       <- ttext("Translator")
+scenario.translation      <- ttext("Translator")
 
 resul_version <- {pak= false , st = false}
 
 const nut_path      = "class/"    // path to folder with *.nut files
-persistent.version  <- version  // stores version of script
-persistent.select   <- null     // stores user selection
-persistent.chapter  <- 1    // stores chapter number
-persistent.step     <- 1     // stores step number of chapter
+persistent.version <- version   // stores version of script
+persistent.select  <- null      // stores user selection
+persistent.chapter <- 1     // stores chapter number
+persistent.step    <- 1     // stores step number of chapter
 
 persistent.status <- {chapter=1, step=1} // save step y chapter
 
 script_test <- true
 
-persistent.st_nr <- array(30)    //Numero de estaciones/paradas
+persistent.st_nr <- array(30)     //Numero de estaciones/paradas
 
 scr_jump <- false
 
-gl_percentage            <- 0
+gl_percentage <- 0
 persistent.gl_percentage <- 0
 
-persistent.r_way_list <- {}      //Save way list in fullway
+persistent.r_way_list <- {}       //Save way list in fullway
 
 //----------------------------------------------------------------
 
-cov_save    <- [convoy_x(0)]        //Guarda los convoys en lista
-ignore_save <- [{id = -1, ig = true}]  //Marca convoys ingnorados
+cov_save <- [convoy_x(0)]         //Guarda los convoys en lista
+ignore_save <- [{id = -1, ig = true}]   //Marca convoys ingnorados
 
 persistent.ignore_save <- []
 
@@ -44,40 +44,40 @@ persistent.ignore_save <- []
 persistent.pot <- [0,0,0,0,0,0,0,0,0,0,0]
 
 persistent.glsw <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-pglsw           <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+pglsw <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-pot0  <- 0
-pot1  <- 0
-pot2  <- 0
-pot3  <- 0
-pot4  <- 0
-pot5  <- 0
-pot6  <- 0
-pot7  <- 0
-pot8  <- 0
-pot9  <- 0
+pot0 <- 0
+pot1 <- 0
+pot2 <- 0
+pot3 <- 0
+pot4 <- 0
+pot5 <- 0
+pot6 <- 0
+pot7 <- 0
+pot8 <- 0
+pot9 <- 0
 pot10 <- 0
-glsw  <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+glsw <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 //---------------------Contador global de vehiculos----------------------------
-persistent.gcov_nr     <- 0
-gcov_nr                <- 0
-persistent.gcov_id     <- 1
-gcov_id                <- 0
-persistent.gall_cov    <- 0
-gall_cov               <-0
+persistent.gcov_nr <- 0
+gcov_nr <- 0
+persistent.gcov_id <- 1
+gcov_id <- 0
+persistent.gall_cov <- 0
+gall_cov <-0
 persistent.current_cov <- 0
-current_cov            <- 0
-cov_sw                 <- true
-correct_cov            <- true
+current_cov <- 0
+cov_sw <- true
+correct_cov <- true
 
 //----------------------------------------------------------------
-tile_delay      <- 2        //delay for mark tiles
+tile_delay <- 2         //delay for mark tiles
 tile_delay_list <- 2
-gui_delay       <- true     //delay for open win
+gui_delay <- true       //delay for open win
 
-fail_num        <- 20       //numr for the count of try
-fail_count      <- 1        //if tool fail more of 10 try
+fail_num <- 20          //numr for the count of try
+fail_count <- 1               //if tool fail more of 10 try
 
 
 //Schedule activate
@@ -85,16 +85,14 @@ active_sch_check <- false
 
   simu_version  <- "124.0.1"
   current_st    <- "0"
-  pak_name      <- "pak64"
-  current_pak   <- "pak"
-  //pak_name      <- "pak64.german"
-  //current_pak   <- "pak64.german"
+
+include("set_data")        // include set data
 
 include(nut_path+"class_basic_data")        // include class for object data
-
+include(nut_path+"class_basic_gui")        // include class for object data
 
 // placeholder for tools names in simutrans
-tool_alias  <- {inspe = "Abfrage", road = "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS", plane = "AIRTOOLS"}
+tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
 
 // placeholder for good names in pak64
 good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
@@ -105,7 +103,7 @@ good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Hol
       t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005, mono = 0x8004}
       break
     case "pak64.german":
-      t_icon <- {road = 0x800e, rail = 0x800a, ship = 0x800f, plane = 0x8010, other = 0x8009, slope = 0x8002, tram = 0x800d, build = 0x8002, stats = 0x8003, exted = 0x8004, mag = 0x800b, narr = 0x800c, powe = 0x8011 }
+      t_icon <- {road = 0x800e, rail = 0x800a, ship = 0x800f, plane = 0x8010, other = 0x8009, slope = 0x8001, tram = 0x800d, build = 0x8002, stats = 0x8003, exted = 0x8004, mag = 0x800b, narr = 0x800c, powe = 0x8011 }
       break
   }
 
@@ -115,11 +113,11 @@ all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
 // Complemento para obtener tiempo de espera
 tick_wait <- 16
 
-chapter             <- null     // used later for class
-chapter_max         <- 7       // amount of chapter
-select_option       <- { x = 0, y = 0, z = 1 } // place of station to control name
-select_option_halt  <- null      // placeholder for halt_x
-tutorial            <- {}       // placeholder for all chapter CLASS
+chapter            <- null      // used later for class
+chapter_max        <- 7       // amount of chapter
+select_option      <- { x = 0, y = 0, z = 1 } // place of station to control name
+select_option_halt <- null      // placeholder for halt_x
+tutorial      <- {}       // placeholder for all chapter CLASS
 
 //returns pakset name (lower case)
 function get_set_name(name)
@@ -130,7 +128,6 @@ function get_set_name(name)
   return name
 }
 
-
 function string_analyzer()
 {
   local result = {pak= false , st = false}
@@ -140,7 +137,7 @@ function string_analyzer()
 
   local p_siz = {a = pak_name.len(), b = current_pak.len()}
 
-  //Pak name analyzer ----------------------------------------------------------------------------------------------------------
+  //Pak name analyzer  ----------------------------------------------------------------------------------------------------------
   local siz_a = max(p_siz.a, p_siz.a)
   local count_a = 0
   local tx_a = ""
@@ -161,7 +158,7 @@ function string_analyzer()
     }
   }
   if(pak_name == tx_a) result.pak = true
-  //gui.add_message("Current: "+current_pak+" Tx: "+tx_a+"  Pak: "+pak_name+" result: "+result.pak)
+  //gui.add_message("Current: "+current_pak+"  Tx: "+tx_a+"  Pak: "+pak_name+" result: "+result.pak)
   //------------------------------------------------------------------------------------------------------------------------------
 
   local s_siz = {a = simu_version.len(), b = current_st.len()}
@@ -268,11 +265,9 @@ function string_analyzer()
     }
   }
   //-------------------------------------------------------------------------------------------------------------------------------
-  //gui.add_message("result st: "+result.st+" result pak:" +result.pak)
+  //gui.add_message("result st: "+result.st+"  result pak:" +result.pak)
   return result
 }
-
-
 
 function get_integral(tx)
 {
@@ -296,16 +291,16 @@ function get_integral(tx)
 }
 
 {
-
-  resul_version = string_analyzer()          //Check version and pakset name
-  include(nut_path+"class_basic_convoys")    // include class for detect eliminated convoys
-  include(nut_path+"class_basic_chapter")    // include class for basic chapter structure
+  //Check version and pakset name
+  resul_version = string_analyzer()
+  include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
+  include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
 
 }
 
 for (local i = 0; i <= chapter_max; i++)    // include amount of chapter classes
   include(nut_path+"class_chapter_"+(i < 10 ? "0"+i:i) )
-  chapter           <- tutorial.chapter_02       // must be placed here !!!
+chapter            <- tutorial.chapter_02       // must be placed here !!!
 
 function script_text()
 {
@@ -371,7 +366,7 @@ function load_chapter(number,pl)
 
 function load_conv_ch(number, step, pl)
 {
-  rules.clear()
+    rules.clear()
   if (!resul_version.pak || !resul_version.st){
     number = 0
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
@@ -401,7 +396,7 @@ function set_city_names()
 
 function get_info_text(pl)
 {
-  local info = ttextfile("info.txt")
+    local info = ttextfile("info.txt")
   local help = ""
   local i = 0
   //foreach (chap in tutorial)
@@ -409,7 +404,7 @@ function get_info_text(pl)
     help+= "<em>"+translate("Chapter")+" "+(i)+"</em> - "+translate(tutorial["chapter_"+(i<10?"0":"")+i].chapter_name)+"<br>"
   info.list_of_chapters = help
 
-  info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+" >></a>"
+  info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
     return info
 }
 
@@ -483,7 +478,7 @@ function start()
 {
   gui_delay = false
   set_city_names()
-  resume_game()
+    resume_game()
 }
 
 function labels_text_debug()
@@ -537,9 +532,9 @@ function is_scenario_completed(pl)
 {
   //-------Debug ====================================
   //gui.add_message(""+glsw[0]+"")
-  //gui.add_message("!!!!!"+persistent.step+" ch a "+st_nr[0]+" !!!!! "+persistent.status.step+"  -- "+chapter.step+"")
+  //gui.add_message("!!!!!"+persistent.step+" ch a "+st_nr[0]+"  !!!!! "+persistent.status.step+"  -- "+chapter.step+"")
   //------------------------------------------------------------------------------------------------------------------------------
-  if (pl != 0) return 0    // other player get only 0%
+  if (pl != 0) return 0     // other player get only 0%
 
   if (currt_pos){
     local t = tile_x(currt_pos.x,currt_pos.y,currt_pos.z)
@@ -614,7 +609,7 @@ function is_scenario_completed(pl)
 
     text.nextcname = translate(""+chapter.chapter_name+"")
     text.coord = chapter.chapter_coord.tostring()
-    chapter.start_chapter() //Para iniciar variables en los capitulos
+    chapter.start_chapter()  //Para iniciar variables en los capitulos
     if (persistent.chapter >1) gui.add_message(text.tostring())
   }
   percentage = scenario_percentage(percentage)
@@ -699,15 +694,15 @@ function is_convoy_allowed(pl, convoy, depot)
 function is_tool_allowed(pl, tool_id, wt)
 {
   local result = true
-  //if (tool_id == 0x2000) return false // prevent players toggling pause mode
+
   if (tool_id == 0x2005) return false
   else if (tool_id == 0x4006) return false
   else if (tool_id == 0x4029) return false
   else if (tool_id == 0x401c) return false
-  else if(tool_id == t_icon.mono) return false
+  //else if(tool_id == t_icon.mono) return false
 
   result = chapter.is_tool_allowed(pl, tool_id, wt)
-  return result
+    return result
 }
 
 function is_tool_active(pl, tool_id, wt)
@@ -800,7 +795,7 @@ function resume_game()
 
   select_option_halt = tile_x( 0, 0, select_option.z ).find_object(mo_label)
 
-  chapter.start_chapter()
+    chapter.start_chapter()
 }
 
 function get_line_name(halt)
