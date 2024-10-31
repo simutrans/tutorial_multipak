@@ -343,6 +343,7 @@ class basic_chapter
     reset_tmpsw()
     reset_glsw()
     rules.clear()
+    general_disabled_tools(player_x.nr)
     rules.gui_needs_update
     set_all_rules(0)
     //-------------------------------------------------------
@@ -361,6 +362,7 @@ class basic_chapter
     reset_tmpsw()
     reset_glsw()
     rules.clear()
+    general_disabled_tools(player_x.nr)
     rules.gui_needs_update
     set_all_rules(0)
     //-------------------------------------------------------
@@ -379,6 +381,7 @@ class basic_chapter
     reset_tmpsw()
     reset_glsw()
     rules.clear()
+    general_disabled_tools(player_x.nr)
     rules.gui_needs_update
     set_all_rules(0)
     //-------------------------------------------------------
@@ -3217,55 +3220,6 @@ class basic_chapter
     return null
   }
 
-  function update_tools(list, id, wt_list, wt) {
-    local res = {ok = false, result = false }
-    local wt_res = false
-    if(wt < 0){
-      foreach (tool_id in list){
-        if(tool_id == id){
-          res.ok = true
-          res.result = true
-          return res
-          break
-        }
-        else if(tool_id < 0 && tool_id*(-1) == id){
-          res.ok = true
-          res.result = false
-          return res
-          break
-        }
-      }
-      res.result = true
-      return res
-    }
-    foreach (way_t in wt_list){
-      if(way_t == wt){
-        wt_res = true
-      }
-    }
-    if (!wt_res){
-      return res
-    }
-    foreach (tool_id in list){
-      if(tool_id == id){
-        res.ok = true
-        res.result = true
-        break
-      }
-      else if(tool_id < 0 && tool_id*(-1) == id){
-        res.ok = true
-        res.result = false
-        break
-      }
-      else if(tool_id == 0){
-        res.ok = true
-        res.result = true
-        return res
-        break
-      }
-    }
-    return res
-  }
 }
 
 // END OF FILE

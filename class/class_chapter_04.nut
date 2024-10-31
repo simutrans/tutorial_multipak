@@ -81,7 +81,8 @@ class tutorial.chapter_04 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
-    rules.clear()
+    //rules.clear()
+    //general_disabled_tools(player_x.nr)
     set_all_rules(0)
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
@@ -942,8 +943,8 @@ class tutorial.chapter_04 extends basic_chapter
     return null
   }
 
-  function set_all_rules(pl)
-  {
+  function set_all_rules(pl) {
+    /*
     local forbid =  [ tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
               tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj
             ]
@@ -959,11 +960,12 @@ class tutorial.chapter_04 extends basic_chapter
 
 
     local forbid =  [ 4103, 4134, 4135, tool_lower_land, tool_raise_land, tool_restoreslope, tool_add_city,
-              tool_make_stop_public, 4137, tool_build_transformer, 4107, 4102, 4127, 4131
+              tool_make_stop_public, 4137, tool_build_transformer, 4107, 4102, 4127, 4131, t_icon.rail, t_icon.tram, t_icon.road
             ]
 
     foreach (tool_id in forbid)
       rules.forbid_tool(pl, tool_id )
+    */
 
     switch (this.step) {
       case 1:
@@ -1082,7 +1084,7 @@ class tutorial.chapter_04 extends basic_chapter
 
   function is_tool_allowed(pl, tool_id, wt){
     local result = true
-    local t_list = [-t_icon.other, 0] // 0 = all tools allowed
+    local t_list = [0] // 0 = all tools allowed
     local wt_list = [gl_wt]
     local res = update_tools(t_list, tool_id, wt_list, wt)
     result = res.result

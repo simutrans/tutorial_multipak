@@ -177,7 +177,7 @@ class tutorial.chapter_03 extends basic_chapter
             {a = coord(120,271), b = coord(120,324) }, {b = coord(121,324), a = coord(121,271) },
             {a = coord(120,331), b = coord(120,377) }, {b = coord(121,377), a = coord(121,331) }
           ]
-  //Para las seÃ±ales de paso
+  //Para las señales de paso
   sign_list = [ {c = coord3d(94,197,6), ribi = 8}, {c = coord3d(112,198,2), ribi = 2},
           {c = coord3d(121,199,0), ribi = 1}, {c = coord3d(120,263,3), ribi = 4},
           {c = coord3d(121,271,3), ribi = 1}, {c = coord3d(120,324,5), ribi = 4},
@@ -232,17 +232,19 @@ class tutorial.chapter_03 extends basic_chapter
   sc_station_name = get_obj_ch3(3)
   sc_dep_name = get_obj_ch3(4)
   sc_veh1_name = get_veh_ch3(4)
-  sc_wag1_nr = 5
+  //sc_wag1_nr = calc_train_lenght(get_veh_ch3(1), get_veh_ch3(4), 3)
+  sc_wag1_nr = 4
   sc_veh2_name = get_veh_ch3(5)
-  sc_wag2_nr = 5
+  sc_wag2_nr = 4
   sc_wag3_name = get_veh_ch3(6)
-  sc_wag3_nr = 7
+  sc_wag3_nr = 5
   sc_sign_name = get_obj_ch3(6)
   sc_caten_name = get_obj_ch3(7)
   //------------------------------------------------------------------------------------
 
   function start_chapter(){  //Inicia solo una vez por capitulo
-    rules.clear()
+    //rules.clear()
+    //general_disabled_tools(player_x.nr)
     set_all_rules(0)
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
@@ -1253,7 +1255,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
                 }
         }
-        //Para las seÃ±ales de paso
+        //Para las señales de paso
         else if (pot0==1 && pot1==0){
           local sign_nr = 0
           for(local j=0;j<sign_list.len();j++){
@@ -1835,7 +1837,7 @@ class tutorial.chapter_03 extends basic_chapter
           return result
         }
         if (pot0==1 && pot1==0){
-          //Elimina las seÃ±ales
+          //Elimina las señales
           if (tool_id==tool_remover){
             if (sign || roadsign){
               for(local j=0;j<sign_list.len();j++){
@@ -1848,7 +1850,7 @@ class tutorial.chapter_03 extends basic_chapter
             else
               return translate("Only delete signals.")
           }
-          //Construye seÃ±ales de paso
+          //Construye señales de paso
           if (tool_id == 4116){
             if (!sign){
               for(local j=0;j<sign_list.len();j++){
@@ -2613,6 +2615,7 @@ class tutorial.chapter_03 extends basic_chapter
   }
 
   function set_all_rules(pl) {
+    /*
     local forbid =  [ tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
               tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj
             ]
@@ -2628,12 +2631,12 @@ class tutorial.chapter_03 extends basic_chapter
       }
     }
 
-    local forbid =  [
-              tool_lower_land, tool_raise_land, tool_restoreslope, 4103
+    local forbid =  [ 4103,4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope, tool_add_city,
+              tool_make_stop_public,4137,tool_build_transformer,4107,4102,4127,4131, t_icon.tram, t_icon.road
             ]
     foreach (tool_id in forbid)
       rules.forbid_tool(pl, tool_id )
-
+    */
     switch (this.step) {
       case 1:
         local forbid= [ tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
@@ -2814,42 +2817,12 @@ class tutorial.chapter_03 extends basic_chapter
 
   function is_tool_allowed(pl, tool_id, wt){
 
-    local gt_list = [
-              t_icon.road, t_icon.ship, t_icon.plane, t_icon.tram, t_icon.other, tool_lower_land,
-              tool_raise_land, tool_restoreslope, tool_set_climate, 4103
-            ]
-    if(step < 2){
-      gt_list.push(t_icon.rail)
-    }
-    if(step < 8){
-      gt_list.push(t_icon.slope)
-    }
-
-    foreach (id in gt_list){
-      if(id == tool_id)
-        return false
-    }
-
     local result = true
-
-    switch (this.step) {
-      case 1:
-        local t_list = [-tool_remover, 0] // 0 = all tools allowed
-        local wt_list = [gl_wt]
-        local res = update_tools(t_list, tool_id, wt_list, wt)
-        result = res.result
-        if(res.ok)  return result
-        break
-
-      case 9:
-        local t_list = [0] // 0 = all tools allowed
-        local wt_list = [gl_wt]
-        local res = update_tools(t_list, tool_id, wt_list, wt)
-        result = res.result
-        if(res.ok)  return result
-        break
-
-    }
+    local t_list = [-t_icon.tram, 0] // 0 = all tools allowed
+    local wt_list = [gl_wt]
+    local res = update_tools(t_list, tool_id, wt_list, wt)
+    result = res.result
+    if(res.ok)  return result
     return result
   }
 

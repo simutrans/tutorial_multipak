@@ -225,7 +225,7 @@ class tutorial.chapter_01 extends basic_chapter
   }
 
   function set_all_rules(pl) {
-    general_disabled_tools(pl)
+    //general_disabled_tools(pl)
 
     /*local forbid =  [ 4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
               tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj,tool_exec_script
@@ -241,6 +241,7 @@ class tutorial.chapter_01 extends basic_chapter
             ]
     foreach (tool_id in forbid)
       rules.forbid_tool(pl, tool_id )*/
+
   }
 
   function is_tool_active(pl, tool_id, wt) {
