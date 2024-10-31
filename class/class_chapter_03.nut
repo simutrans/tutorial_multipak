@@ -245,8 +245,8 @@ class tutorial.chapter_03 extends basic_chapter
  /*  if ( pak_name == "pak64.german" ) {
      sc_wag1_nr = 4
       sc_wag2_nr = 4
-      sc_wag3_nr = 5*/
-  }
+      sc_wag3_nr = 5
+  }*/
 /*
   switch (pak_name) {
     case "pak64":
