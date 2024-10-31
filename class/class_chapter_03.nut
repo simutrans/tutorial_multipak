@@ -232,14 +232,25 @@ class tutorial.chapter_03 extends basic_chapter
   sc_station_name = get_obj_ch3(3)
   sc_dep_name = get_obj_ch3(4)
   sc_veh1_name = get_veh_ch3(4)
-  //sc_wag1_nr = calc_train_lenght(get_veh_ch3(1), get_veh_ch3(4), 3)
-  sc_wag1_nr = 4
   sc_veh2_name = get_veh_ch3(5)
-  sc_wag2_nr = 4
   sc_wag3_name = get_veh_ch3(6)
-  sc_wag3_nr = 5
   sc_sign_name = get_obj_ch3(6)
   sc_caten_name = get_obj_ch3(7)
+  // different wg lenght
+  // todo write func calc_train_lenght - actual not work
+  //sc_wag1_nr = calc_train_lenght(get_veh_ch3(1), get_veh_ch3(4), 3)
+  switch (pak_name) {
+    case "pak64":
+      sc_wag1_nr = 5
+      sc_wag2_nr = 5
+      sc_wag3_nr = 7
+      break
+    case "pak64.german":
+      sc_wag1_nr = 4
+      sc_wag2_nr = 4
+      sc_wag3_nr = 5
+      break
+  }
   //------------------------------------------------------------------------------------
 
   function start_chapter(){  //Inicia solo una vez por capitulo
