@@ -239,6 +239,15 @@ class tutorial.chapter_03 extends basic_chapter
   // different wg lenght
   // todo write func calc_train_lenght - actual not work
   //sc_wag1_nr = calc_train_lenght(get_veh_ch3(1), get_veh_ch3(4), 3)
+      sc_wag1_nr = 5
+      sc_wag2_nr = 5
+      sc_wag3_nr = 7
+ /*  if ( pak_name == "pak64.german" ) {
+     sc_wag1_nr = 4
+      sc_wag2_nr = 4
+      sc_wag3_nr = 5*/
+  }
+/*
   switch (pak_name) {
     case "pak64":
       sc_wag1_nr = 5
@@ -250,7 +259,7 @@ class tutorial.chapter_03 extends basic_chapter
       sc_wag2_nr = 4
       sc_wag3_nr = 5
       break
-  }
+  }*/
   //------------------------------------------------------------------------------------
 
   function start_chapter(){  //Inicia solo una vez por capitulo
