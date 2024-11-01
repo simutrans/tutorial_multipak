@@ -481,6 +481,14 @@ function get_obj_ch6(id) {
   }
 }
 
+/*
+ *  set count wg for train
+ *
+ *  id 1 - chapter 3 : train good Holz
+ *  id 2 - chapter 3 : train good Bretter
+ *  id 3 - chapter 3 : train good Passagiere
+ *
+ */
 function set_train_lenght(id) {
 
   switch (pak_name) {
