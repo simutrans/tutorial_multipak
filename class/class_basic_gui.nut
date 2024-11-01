@@ -134,13 +134,27 @@ function chapter_disabled_tools( pl ) {
       case 3:
         // chapter 3
         local _tools = [  4134,
-                          4135
+                          4135,
+                          tool_setslope,
+                          tool_raise_land,
+                          tool_lower_land,
+                          tool_restoreslope,
+                          tool_build_way,
+                          tool_build_station,
+                          tool_build_bridge,
+                          tool_build_tunnel,
+                          tool_build_depot,
+                          tool_setslope,
+                          tool_build_roadsign,
+                          tool_build_wayobj,
+                          tool_remove_wayobj,
+                          tool_remove_way
         ]
 
         unused_tools.extend(_tools)
 
         local _pak64_tools = [ 0x8006, 0x8007, 0x8008, 0x8009 ]
-        local _pak64german_tools = [ 0x8005 0x800e, 0x800f, 0x8010, 0x8011, 1004 ]
+        local _pak64german_tools = [ 0x8005 0x800e, 0x800f, 0x8010, 0x8011, 1004, 0x8004, 0x8019, 0x8022 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
@@ -223,8 +237,8 @@ function chapter_disabled_tools( pl ) {
 /*
  *  disabled tools for chapter step
  *
- *
- *
+ *  allowed tools for steps must be allowed in all subsequent steps of the chapter
+ *  allowed tools not persistent save in rules
  *
  */
 function chapter_step_disabled_tools( pl ) {
@@ -254,13 +268,16 @@ function chapter_step_disabled_tools( pl ) {
 
   switch (chapter_nr) {
     case 1:
+      // chapter 1
       // no tools used
 
       break
     case 2:
+      // chapter 2
       switch (step_nr) {
         case 1:
           // chaoter 2 step A
+          // no tools used
           /*
           local _tools = [
           ]
@@ -281,7 +298,7 @@ function chapter_step_disabled_tools( pl ) {
 
           _wt.append(wt_road)*/
           break
-        case 2:tool_build_depot
+        case 2:
           // chaoter 2 step B
           local _enabled_tools = [  tool_build_depot,
                                     tool_build_way
@@ -351,7 +368,138 @@ function chapter_step_disabled_tools( pl ) {
       }
       break
     case 3:
+      // chapter 3
+      switch (step_nr) {
+        case 1:
+          // chaoter 3 step A
+          // no tools used
+          /*
+          local _tools = [
+          ]
 
+          local _pl_tools = [
+          ]
+
+          local _enabled_tools = [
+          ]
+
+          local _enabled_pl_tools = [
+          ]
+
+          unused_tools.extend(_tools)
+          unused_pl_tools.extend(_pl_tools)
+          enabled_tools.extend(_enabled_tools)
+          enabled_pl_tools.extend(_enabled_pl_tools)
+
+          _wt.append(wt_road)*/
+          break
+        case 2:
+          // chaoter 3 step B
+          local _enabled_tools = [  tool_build_way
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+
+          //_wt.append(wt_road)
+          break
+        case 3:
+          // chaoter 3 step C
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 4:
+          // chaoter 3 step D
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 5:
+          // chaoter 3 step E
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 6:
+          // chaoter 3 step F
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 7:
+          // chaoter 3 step G
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_tunnel
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 8:
+          // chaoter 3 step H
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_tunnel,
+                                    tool_build_bridge,
+                                    tool_setslope
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 9:
+          // chaoter 3 step I
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_tunnel,
+                                    tool_build_bridge,
+                                    tool_setslope
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 10:
+          // chaoter 3 step J
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_tunnel,
+                                    tool_build_bridge,
+                                    tool_setslope,
+                                    tool_build_roadsign,
+                                    tool_build_wayobj
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+        case 11:
+          // chaoter 3 step K
+          local _enabled_tools = [  tool_build_way,
+                                    tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_tunnel,
+                                    tool_build_bridge,
+                                    tool_setslope,
+                                    tool_build_roadsign,
+                                    tool_build_wayobj
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+          break
+      }
       break
     case 4:
 

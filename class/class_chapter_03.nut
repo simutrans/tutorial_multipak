@@ -239,27 +239,9 @@ class tutorial.chapter_03 extends basic_chapter
   // different wg lenght
   // todo write func calc_train_lenght - actual not work
   //sc_wag1_nr = calc_train_lenght(get_veh_ch3(1), get_veh_ch3(4), 3)
-      sc_wag1_nr = 5
-      sc_wag2_nr = 5
-      sc_wag3_nr = 7
- /*  if ( pak_name == "pak64.german" ) {
-     sc_wag1_nr = 4
-      sc_wag2_nr = 4
-      sc_wag3_nr = 5
-  }*/
-/*
-  switch (pak_name) {
-    case "pak64":
-      sc_wag1_nr = 5
-      sc_wag2_nr = 5
-      sc_wag3_nr = 7
-      break
-    case "pak64.german":
-      sc_wag1_nr = 4
-      sc_wag2_nr = 4
-      sc_wag3_nr = 5
-      break
-  }*/
+  sc_wag1_nr = set_train_lenght(1)
+  sc_wag2_nr = set_train_lenght(2)
+  sc_wag3_nr = set_train_lenght(3)
   //------------------------------------------------------------------------------------
 
   function start_chapter(){  //Inicia solo una vez por capitulo
@@ -2656,7 +2638,7 @@ class tutorial.chapter_03 extends basic_chapter
             ]
     foreach (tool_id in forbid)
       rules.forbid_tool(pl, tool_id )
-    */
+
     switch (this.step) {
       case 1:
         local forbid= [ tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
@@ -2736,7 +2718,7 @@ class tutorial.chapter_03 extends basic_chapter
         foreach (tool_id in forbid)
           rules.forbid_way_tool(pl, tool_id, wt_rail )
         break
-    }
+    }*/
   }
 
   function is_tool_active(pl, tool_id, wt) {
