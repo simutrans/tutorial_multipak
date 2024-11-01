@@ -346,6 +346,7 @@ function scenario_percentage(percentage)
 function load_chapter(number,pl)
 {
     rules.clear()
+    general_disabled_tools(pl)
   if (!resul_version.pak || !resul_version.st){
     number = 0
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
@@ -367,6 +368,7 @@ function load_chapter(number,pl)
 function load_conv_ch(number, step, pl)
 {
     rules.clear()
+    general_disabled_tools(pl)
   if (!resul_version.pak || !resul_version.st){
     number = 0
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
@@ -396,7 +398,7 @@ function set_city_names()
 
 function get_info_text(pl)
 {
-    local info = ttextfile("info.txt")
+  local info = ttextfile("info.txt")
   local help = ""
   local i = 0
   //foreach (chap in tutorial)

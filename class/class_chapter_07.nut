@@ -68,7 +68,8 @@ class tutorial.chapter_07 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
-    rules.clear()
+    //rules.clear()
+    //general_disabled_tools(player_x.nr)
     set_all_rules(0)
 
     cty1.name = get_city_name(cty1.c)
@@ -341,7 +342,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop1.x && pos.y==stop1.y)
                   return null
                 else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop1)+")."
+                  return translate("Build Stop here:")+ " ("+stop1.tostring()+")."
               }
               else
                 return translate("Action not allowed") + " ("+pos.tostring()+")."
@@ -352,7 +353,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop1.x && pos.y==stop1.y)
                   return null
                 else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop1)+")."
+                  return translate("Click on the stop")+ " ("+stop1.tostring()+")."
               }
               else
                 return translate("Action not allowed") + " ("+pos.tostring()+")."
@@ -387,7 +388,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop2.x && pos.y==stop2.y)
                   return null
                 else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop2)+")."
+                  return translate("Build Stop here:")+ " ("+stop2.tostring()+")."
               }
               else
                 return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -398,7 +399,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop2.x && pos.y==stop2.y)
                   return null
                 else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop2)+")."
+                  return translate("Click on the stop")+ " ("+stop2.tostring()+")."
               }
               else
                 return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -433,7 +434,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop3.x && pos.y==stop3.y)
                   return null
                 else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop3)+")."
+                  return translate("Build Stop here:")+ " ("+stop3.tostring()+")."
               }
               else
                 return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -444,7 +445,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop3.x && pos.y==stop3.y)
                   return null
                 else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop3)+")."
+                  return translate("Click on the stop")+ " ("+stop3.tostring()+")."
               }
               else
                 return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -479,7 +480,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop4.x && pos.y==stop4.y)
                   return null
                 else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop4)+")."
+                  return translate("Build Stop here:")+ " ("+stop4.tostring()+")."
               }
               else
                 return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -490,7 +491,7 @@ class tutorial.chapter_07 extends basic_chapter
                 if(pos.x==stop4.x && pos.y==stop4.y)
                   return null
                 else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop4)+")."
+                  return translate("Click on the stop")+ " ("+stop4.tostring()+")."
               }
               else
                 return translate("Action not allowed")+" ("+pos.tostring()+")."
@@ -543,8 +544,8 @@ class tutorial.chapter_07 extends basic_chapter
     return null
   }
 
-  function set_all_rules(pl)
-    {
+  function set_all_rules(pl) {
+    /*
     local forbid = [tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel,tool_build_station,
                        tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj]
 
@@ -559,6 +560,7 @@ class tutorial.chapter_07 extends basic_chapter
 
     foreach (tool_id in forbid)
         rules.forbid_tool(pl, tool_id)
+    */
   }
 
   function is_tool_active(pl, tool_id, wt) {

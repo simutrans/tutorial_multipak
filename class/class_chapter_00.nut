@@ -65,6 +65,7 @@ class tutorial.chapter_00 extends basic_chapter
             ]
     foreach (tool_id in forbid)
       rules.forbid_tool(pl, tool_id )*/
+      //general_disabled_tools(pl)
   }
 
   function is_tool_active(pl, tool_id, wt) {

@@ -115,7 +115,8 @@ class tutorial.chapter_02 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
-    rules.clear()
+    //rules.clear()
+    //general_disabled_tools(player_x.nr)
     set_all_rules(0)
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
@@ -1258,7 +1259,7 @@ class tutorial.chapter_02 extends basic_chapter
 
 
   function set_all_rules(pl) {
-    general_disabled_tools(pl)
+    //general_disabled_tools(pl)
 
     /*local forbid =  [ tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel, tool_build_station,
                         tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj,tool_exec_script
@@ -1289,7 +1290,7 @@ class tutorial.chapter_02 extends basic_chapter
 
           rules.forbid_way_tool(pl, tool_id, wt_road)
 
-        local forbid = [tool_build_station,tool_remover,tool_make_stop_public,tool_exec_script,tool_exec_two_click_script]
+        local forbid = [tool_build_station,tool_remover,tool_make_stop_public]
         foreach (tool_id in forbid)
           rules.forbid_tool(pl, tool_id )
           break

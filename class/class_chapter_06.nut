@@ -91,7 +91,8 @@ class tutorial.chapter_06 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
-    rules.clear()
+    //rules.clear()
+    //general_disabled_tools(player_x.nr)
     set_all_rules(0)
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
@@ -979,8 +980,8 @@ class tutorial.chapter_06 extends basic_chapter
     return null
   }
 
-  function set_all_rules(pl)
-    {
+  function set_all_rules(pl) {
+    /*
     local forbid = [  tool_remove_wayobj, tool_build_bridge, tool_build_way, tool_build_tunnel,tool_build_station,
                           tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj
             ]
@@ -992,11 +993,12 @@ class tutorial.chapter_06 extends basic_chapter
       }
 
     local forbid =  [ 4103, 4134, 4135, tool_lower_land, tool_raise_land, tool_setslope, tool_restoreslope,
-              tool_plant_tree, tool_set_marker, tool_add_city, 4137, tool_stop_mover, tool_buy_house, tool_build_transformer
+              tool_plant_tree, tool_set_marker, tool_add_city, 4137, tool_stop_mover, tool_buy_house, tool_build_transformer, t_icon.rail, t_icon.tram, t_icon.road
             ]
 
     foreach (tool_id in forbid)
         rules.forbid_tool(pl, tool_id)
+    */
   }
 
   function is_tool_active(pl, tool_id, wt) {
