@@ -115,9 +115,6 @@ class tutorial.chapter_05 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
-    //rules.clear()
-    //general_disabled_tools(player_x.nr)
-    set_all_rules(0)
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch5_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
@@ -324,18 +321,18 @@ class tutorial.chapter_05 extends basic_chapter
 
       case 9:
         break
-      }
+    }
 
-      text.f1 = fab_list[0].c.href(""+translate(fab_list[0].name)+" ("+fab_list[0].c.tostring()+")")+""
-      text.f2 = fab_list[1].c.href(""+translate(fab_list[1].name)+" ("+fab_list[1].c.tostring()+")")+""
-      text.f3 = fab_list[2].c.href(""+translate(fab_list[2].name)+" ("+fab_list[2].c.tostring()+")")+""
-      text.f4 = fab_list[3].c.href(""+translate(fab_list[3].name)+" ("+fab_list[3].c.tostring()+")")+""
+    text.f1 = fab_list[0].c.href(""+translate(fab_list[0].name)+" ("+fab_list[0].c.tostring()+")")+""
+    text.f2 = fab_list[1].c.href(""+translate(fab_list[1].name)+" ("+fab_list[1].c.tostring()+")")+""
+    text.f3 = fab_list[2].c.href(""+translate(fab_list[2].name)+" ("+fab_list[2].c.tostring()+")")+""
+    text.f4 = fab_list[3].c.href(""+translate(fab_list[3].name)+" ("+fab_list[3].c.tostring()+")")+""
 
     text.tool1 = translate(tool_alias.inspe)
     text.tool2 = translate(tool_alias.road)
     text.tool3 = translate(tool_alias.spec)
 
-      return text
+    return text
   }
 
   function is_chapter_completed(pl) {
@@ -1102,66 +1099,6 @@ class tutorial.chapter_05 extends basic_chapter
       break
     }
     return null
-  }
-
-  function set_all_rules(pl) {
-    /*
-    rules.clear()
-    local forbid = [tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel, tool_build_station,
-                       tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj]
-
-    foreach(wt in all_waytypes)
-      if (wt != wt_power && wt != wt_road) {
-          foreach (tool_id in forbid)
-            rules.forbid_way_tool(pl, tool_id, wt )
-      }
-
-    local forbid =  [ 4103, 4134, 4135, tool_lower_land, tool_raise_land, tool_setslope, tool_build_roadsign,
-                  tool_restoreslope, tool_plant_tree, tool_set_marker, tool_stop_mover, tool_buy_house,
-              tool_add_city, tool_make_stop_public, 4137, tool_build_wayobj,tool_remove_wayobj, t_icon.rail, t_icon.tram
-            ]
-
-    foreach (tool_id in forbid)
-        rules.forbid_tool(pl, tool_id)
-
-
-    switch (this.step) {
-      case 1:
-        local forbid =  [ 4097,4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope,tool_build_way,
-                  tool_make_stop_public,tool_build_transformer,tool_build_station,
-                  tool_build_bridge,tool_build_depot,tool_remove_way,tool_build_tunnel
-                ]
-        foreach (tool_id in forbid)
-          rules.forbid_tool(pl, tool_id )
-      break
-
-      case 2:
-        local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
-
-        foreach(wt in all_waytypes)
-          if (wt != wt_road) {
-              foreach (tool_id in forbid)
-                rules.forbid_way_tool(pl, tool_id, wt )
-        }
-      break
-
-      case 3:
-        local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
-
-        foreach(wt in all_waytypes)
-          if (wt != wt_power && wt != wt_road) {
-              foreach (tool_id in forbid)
-                rules.forbid_way_tool(pl, tool_id, wt )
-        }
-      break
-
-      case 4:
-        local forbid = [tool_remove_wayobj, tool_build_bridge, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj]
-
-        foreach (tool_id in forbid)
-          rules.forbid_tool(pl, tool_id )
-      break
-    }*/
   }
 
   function is_tool_active(pl, tool_id, wt) {

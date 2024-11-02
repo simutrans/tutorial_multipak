@@ -224,26 +224,6 @@ class tutorial.chapter_01 extends basic_chapter
     return result
   }
 
-  function set_all_rules(pl) {
-    //general_disabled_tools(pl)
-
-    /*local forbid =  [ 4129,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
-              tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj,tool_exec_script
-            ]
-    foreach(wt in all_waytypes)
-      foreach (tool_id in forbid) {
-        rules.forbid_way_tool(pl, tool_id, wt )
-      }
-    local forbid =  [ 4103,tool_remover,tool_set_marker,tool_add_city,tool_plant_tree,tool_add_citycar,tool_buy_house,
-              tool_change_water_height,tool_set_climate,tool_lower_land,tool_raise_land,tool_setslope, 4137,
-              tool_restoreslope,tool_make_stop_public,tool_stop_mover,tool_build_transformer,tool_build_station,
-              tool_exec_script,tool_exec_two_click_script, t_icon.rail, t_icon.tram
-            ]
-    foreach (tool_id in forbid)
-      rules.forbid_tool(pl, tool_id )*/
-
-  }
-
   function is_tool_active(pl, tool_id, wt) {
     local result = true
     return result

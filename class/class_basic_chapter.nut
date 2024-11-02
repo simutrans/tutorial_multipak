@@ -66,7 +66,7 @@ class basic_chapter
    {
     scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
     general_disabled_tools(pl)
-    this.set_all_rules(pl)
+    //this.set_all_rules(pl)
     this.step = 1
    }
 
@@ -346,7 +346,7 @@ class basic_chapter
     general_disabled_tools(player_x.nr)
     chapter_step_enabled_tools(player_x.nr)
     //rules.gui_needs_update
-    set_all_rules(0)
+    //set_all_rules(0)
     //-------------------------------------------------------
 
     // make here screen refresh
@@ -362,10 +362,11 @@ class basic_chapter
     reset_pot() //reset all pot test
     reset_tmpsw()
     reset_glsw()
-    rules.clear()
+    //rules.clear()
     general_disabled_tools(player_x.nr)
-    rules.gui_needs_update
-    set_all_rules(0)
+    chapter_step_enabled_tools(player_x.nr)
+    //rules.gui_needs_update
+    //set_all_rules(0)
     //-------------------------------------------------------
 
     // make here screen refresh
@@ -385,7 +386,7 @@ class basic_chapter
     general_disabled_tools(player_x.nr)
     chapter_step_enabled_tools(player_x.nr)
     //rules.gui_needs_update
-    set_all_rules(0)
+    //set_all_rules(0)
     //-------------------------------------------------------
 
     // make here screen refresh
