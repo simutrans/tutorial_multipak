@@ -19,9 +19,6 @@ function general_disabled_tools( pl ) {
                           tool_buy_house,
                           tool_change_water_height,
                           tool_set_climate,
-                          tool_raise_land,
-                          tool_lower_land,
-                          tool_restoreslope,
                           tool_stop_mover,
                           tool_exec_script,
                           tool_exec_two_click_script,
@@ -254,7 +251,7 @@ function chapter_disabled_tools( pl ) {
 
         unused_tools.extend(_tools)
 
-        local _pak64_tools = [ 0x8002, 0x8003, 0x8006 0x8007, tool_build_transformer ]
+        local _pak64_tools = [ 0x8002, 0x8003, 0x8006, 0x8007, tool_build_transformer ]
         local _pak64german_tools = [ 0x8001, 0x8003, 0x8004, 0x800a, 0x800e, 0x800f, 0x8011, 1004 ]
 
         pak64_tools.extend(_pak64_tools)
@@ -269,6 +266,35 @@ function chapter_disabled_tools( pl ) {
 
         // waytypes for unused tools
         _wt.append(wt_power)
+
+        pak64_pl_tools.extend(_pak64_pl_tools)
+        pak64german_pl_tools.extend(_pak64german_pl_tools)
+
+        break
+     case 7:
+        // chapter 7
+        local _tools = [  tool_remove_wayobj,
+                          tool_remover,
+                          tool_build_roadsign
+        ]
+
+        unused_tools.extend(_tools)
+
+        local _pak64_tools = [ 0x8002, 0x8003, 0x8008 0x8007 ]
+        local _pak64german_tools = [ 0x8001, 0x8003, 0x8004, 0x800a, 0x8010, 0x800f, 0x8011, 1004 ]
+
+        pak64_tools.extend(_pak64_tools)
+        pak64german_tools.extend(_pak64german_tools)
+
+        local _pl_tools = [  ]
+
+        unused_pl_tools.extend(_pl_tools)
+
+        local _pak64_pl_tools = [  ]
+        local _pak64german_pl_tools = [  ]
+
+        // waytypes for unused tools
+        //_wt.append()
 
         pak64_pl_tools.extend(_pak64_pl_tools)
         pak64german_pl_tools.extend(_pak64german_pl_tools)
@@ -320,18 +346,16 @@ function chapter_disabled_tools( pl ) {
     enabled_tools.append(tool_remover)
     for ( local x = 0; x < enabled_tools.len(); x++ ) {
       rules.allow_tool( pl, enabled_tools[x] )
-      gui.add_message("enabled_tools["+x+"]: "+enabled_tools[x])
+      //gui.add_message("enabled_tools["+x+"]: "+enabled_tools[x])
     }
   }
 
   chapter_step_enabled_tools( pl )
 
-  rules.gui_needs_update()
-
 }
 
 /*
- *  disabled tools for chapter step
+ *  enabled tools for chapter step
  *
  *  allowed tools for steps must be allowed in all subsequent steps of the chapter
  *  allowed tools not persistent save in rules
@@ -540,8 +564,7 @@ function chapter_step_enabled_tools( pl ) {
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_build_station,
-                                    tool_build_depot,
-                                    tool_build_tunnel
+                                    tool_build_depot
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -569,7 +592,7 @@ function chapter_step_enabled_tools( pl ) {
 
           enabled_tools.extend(_enabled_tools)
 
-          local _pak64_tools = [ 0x8002 ]
+          local _pak64_tools = [ 0x8001 ]
           local _pak64german_tools = [ 0x8002 ]
 
           enabled_tools_pak64.extend(_pak64_tools)
@@ -583,13 +606,12 @@ function chapter_step_enabled_tools( pl ) {
                                     tool_build_station,
                                     tool_build_depot,
                                     tool_build_tunnel,
-                                    tool_setslope,
-                                    tool_build_roadsign
+                                    tool_setslope
           ]
 
           enabled_tools.extend(_enabled_tools)
 
-          local _pak64_tools = [ 0x8002 ]
+          local _pak64_tools = [ 0x8001 ]
           local _pak64german_tools = [ 0x8002 ]
 
           enabled_tools_pak64.extend(_pak64_tools)
@@ -610,7 +632,7 @@ function chapter_step_enabled_tools( pl ) {
 
           enabled_tools.extend(_enabled_tools)
 
-          local _pak64_tools = [ 0x8002 ]
+          local _pak64_tools = [ 0x8001 ]
           local _pak64german_tools = [ 0x8002 ]
 
           enabled_tools_pak64.extend(_pak64_tools)
@@ -631,7 +653,7 @@ function chapter_step_enabled_tools( pl ) {
 
           enabled_tools.extend(_enabled_tools)
 
-          local _pak64_tools = [ 0x8002 ]
+          local _pak64_tools = [ 0x8001 ]
           local _pak64german_tools = [ 0x8002 ]
 
           enabled_tools_pak64.extend(_pak64_tools)
