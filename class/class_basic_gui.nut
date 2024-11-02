@@ -299,6 +299,8 @@ function chapter_disabled_tools( pl ) {
     }
   }
 
+  chapter_step_enabled_tools( pl )
+
   rules.gui_needs_update()
 
 }
@@ -644,7 +646,12 @@ function chapter_step_enabled_tools( pl ) {
 
           enabled_tools.extend(_enabled_tools)
 
-          //_wt.append(wt_road)
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 3:
           // chaoter 4 step C
@@ -653,6 +660,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 4:
           // chaoter 4 step D
@@ -661,6 +675,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 5:
           // chaoter 4 step E
@@ -669,6 +690,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 6:
           // chaoter 4 step F
@@ -677,6 +705,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 7:
           // chaoter 4 step G
@@ -685,6 +720,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         }
       break
