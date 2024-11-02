@@ -300,6 +300,8 @@ function chapter_disabled_tools( pl ) {
     }
   }
 
+  chapter_step_enabled_tools( pl )
+
   rules.gui_needs_update()
 
 }
@@ -481,6 +483,7 @@ function chapter_step_enabled_tools( pl ) {
           local _enabled_tools = [  tool_build_way,
                                     tool_remover,
                                     tool_build_bridge
+                                    tool_build_bridge,
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -490,9 +493,8 @@ function chapter_step_enabled_tools( pl ) {
         case 3:
           // chaoter 3 step C
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
-                                    tool_build_station,
+                                    tool_build_station
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -500,7 +502,6 @@ function chapter_step_enabled_tools( pl ) {
         case 4:
           // chaoter 3 step D
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot
@@ -511,7 +512,6 @@ function chapter_step_enabled_tools( pl ) {
         case 5:
           // chaoter 3 step E
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot
@@ -522,7 +522,6 @@ function chapter_step_enabled_tools( pl ) {
         case 6:
           // chaoter 3 step F
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot
@@ -545,7 +544,6 @@ function chapter_step_enabled_tools( pl ) {
         case 8:
           // chaoter 3 step H
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot,
@@ -565,7 +563,6 @@ function chapter_step_enabled_tools( pl ) {
         case 9:
           // chaoter 3 step I
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot,
@@ -585,7 +582,6 @@ function chapter_step_enabled_tools( pl ) {
         case 10:
           // chaoter 3 step J
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot,
@@ -607,7 +603,6 @@ function chapter_step_enabled_tools( pl ) {
         case 11:
           // chaoter 3 step K
           local _enabled_tools = [  tool_build_way,
-                                    tool_remover,
                                     tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot,
@@ -662,7 +657,12 @@ function chapter_step_enabled_tools( pl ) {
 
           enabled_tools.extend(_enabled_tools)
 
-          //_wt.append(wt_road)
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 3:
           // chaoter 4 step C
@@ -672,6 +672,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 4:
           // chaoter 4 step D
@@ -681,6 +688,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 5:
           // chaoter 4 step E
@@ -690,6 +704,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 6:
           // chaoter 4 step F
@@ -699,6 +720,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         case 7:
           // chaoter 4 step G
@@ -708,6 +736,13 @@ function chapter_step_enabled_tools( pl ) {
           ]
 
           enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8002, 0x801e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
           break
         }
       break

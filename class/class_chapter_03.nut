@@ -245,9 +245,6 @@ class tutorial.chapter_03 extends basic_chapter
   //------------------------------------------------------------------------------------
 
   function start_chapter(){  //Inicia solo una vez por capitulo
-    //rules.clear()
-    //general_disabled_tools(player_x.nr)
-    set_all_rules(0)
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch3_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
@@ -2614,111 +2611,6 @@ class tutorial.chapter_03 extends basic_chapter
     }
 
     return null
-  }
-
-  function set_all_rules(pl) {
-    /*
-    local forbid =  [ tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
-              tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj
-            ]
-    foreach(wt in all_waytypes)
-      if (wt != wt_rail){
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt )
-      }
-    if (this.step < 8 ){
-      local forbid = [tool_setslope]
-      foreach (tool_id in forbid) {
-        rules.forbid_tool(pl, tool_id )
-      }
-    }
-
-    local forbid =  [ 4103,4134,4135,tool_lower_land,tool_raise_land,tool_restoreslope, tool_add_city,
-              tool_make_stop_public,4137,tool_build_transformer,4107,4102,4127,4131, t_icon.tram, t_icon.road
-            ]
-    foreach (tool_id in forbid)
-      rules.forbid_tool(pl, tool_id )
-
-    switch (this.step) {
-      case 1:
-        local forbid= [ tool_remove_wayobj,tool_build_way,tool_build_bridge,tool_build_tunnel,tool_build_station,
-                  tool_remove_way,tool_build_depot,tool_build_roadsign,tool_build_wayobj
-                ]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail)
-
-        local forbid = [tool_build_station,tool_remover]
-        foreach (tool_id in forbid)
-          rules.forbid_tool(pl, tool_id )
-        break
-
-      case 2:
-        local forbid = [tool_remove_wayobj,tool_build_tunnel,tool_build_station,tool_build_depot,tool_build_roadsign,tool_build_wayobj]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-
-        local forbid = [tool_build_station]
-        foreach (tool_id in forbid)
-          rules.forbid_tool(pl, tool_id )
-        break
-
-      case 3:
-        local forbid =  [ tool_remove_wayobj, tool_remove_way, tool_build_roadsign, tool_build_tunnel,
-                  tool_build_depot, tool_build_roadsign, tool_build_wayobj
-                ]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-
-      case 4:
-        local forbid =  [ tool_remove_wayobj, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj ]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-
-      case 5:
-        local forbid =  [ tool_remove_wayobj, tool_build_tunnel, tool_build_roadsign, tool_build_wayobj ]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-
-        break
-
-      case 6:
-        local forbid = [tool_remove_wayobj, tool_build_roadsign, tool_build_wayobj]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-
-      case 7:
-        local forbid = [tool_remove_wayobj, tool_build_roadsign, tool_build_wayobj]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-
-      case 8:
-        local forbid = [tool_remove_wayobj, tool_build_roadsign, tool_build_wayobj]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-
-      case 9:
-        local forbid = [tool_remove_wayobj, tool_build_wayobj]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-
-      case 10:
-        local forbid = [tool_remove_wayobj]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-
-      case 11:
-        local forbid = [tool_remove_wayobj]
-        foreach (tool_id in forbid)
-          rules.forbid_way_tool(pl, tool_id, wt_rail )
-        break
-    }*/
   }
 
   function is_tool_active(pl, tool_id, wt) {
