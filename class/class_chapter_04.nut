@@ -965,7 +965,7 @@ class tutorial.chapter_04 extends basic_chapter
 
     foreach (tool_id in forbid)
       rules.forbid_tool(pl, tool_id )
-    */
+
 
     switch (this.step) {
       case 1:
@@ -1016,7 +1016,7 @@ class tutorial.chapter_04 extends basic_chapter
         break
 
 
-    }
+    }*/
   }
 
   function is_tool_active(pl, tool_id, wt) {
