@@ -1,0 +1,8 @@
+
+*.orig
+*.rej
+*.diff
+*.patch
+*.kdev4
+*.ods#
+.~lock*
