@@ -207,6 +207,45 @@ function chapter_disabled_tools( pl ) {
         pak64german_pl_tools.extend(_pak64german_pl_tools)
 
         break
+      case 5:
+        // chapter 5
+        local _tools = [  4102,
+                          4127,
+                          4131,
+                          tool_remove_wayobj,
+                          tool_remove_way,
+                          tool_remover,
+                          tool_make_stop_public,
+                          tool_build_station,
+                          tool_build_bridge,
+                          tool_build_tunnel,
+                          tool_build_depot,
+                          tool_build_roadsign,
+                          tool_build_wayobj
+        ]
+
+        unused_tools.extend(_tools)
+
+        local _pak64_tools = [ 0x8002, 0x8003, 0x8007, 0x8008 ]
+        local _pak64german_tools = [ 0x8001, 0x800a, 0x800f, 0x8010, 0x8011, 1004, 0x8004, 0x801d, 0x802a, 0x800e ]
+
+        pak64_tools.extend(_pak64_tools)
+        pak64german_tools.extend(_pak64german_tools)
+
+        local _pl_tools = [  ]
+
+        unused_tools.extend(_pl_tools)
+
+        local _pak64_pl_tools = [  ]
+        local _pak64german_pl_tools = [  ]
+
+        // waytypes for used tools
+        _wt.append(wt_road)
+
+        pak64_pl_tools.extend(_pak64_pl_tools)
+        pak64german_pl_tools.extend(_pak64german_pl_tools)
+
+        break
   }
 
 
@@ -613,7 +652,78 @@ function chapter_step_disabled_tools( pl ) {
         }
       break
     case 5:
+      // chapter 5
+      switch (step_nr) {
+        case 1:
+          // chaoter 5 step A
+          // no tools used
+          /*
+          local _tools = [
+          ]
 
+          local _pl_tools = [
+          ]
+
+          local _enabled_tools = [
+          ]
+
+          local _enabled_pl_tools = [
+          ]
+
+          unused_tools.extend(_tools)
+          unused_pl_tools.extend(_pl_tools)
+          enabled_tools.extend(_enabled_tools)
+          enabled_pl_tools.extend(_enabled_pl_tools)
+
+          _wt.append(wt_road)*/
+          break
+        case 2:
+          // chaoter 5 step B
+          local _enabled_tools = [  tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_way
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [ 0x8006 ]
+          local _pak64german_tools = [ 0x8002, 0x800e ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+          //_wt.append(wt_road)
+
+          break
+        case 3:
+          // chaoter 5 step C
+          local _enabled_tools = [  tool_build_transformer,
+                                    tool_build_way
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [ 0x8009 ]
+          local _pak64german_tools = [ 0x8011 ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
+          break
+        case 4:
+          // chaoter 5 step D
+          local _enabled_tools = [ tool_build_station
+          ]
+
+          enabled_tools.extend(_enabled_tools)
+
+          local _pak64_tools = [  ]
+          local _pak64german_tools = [ 0x8004 ]
+
+          enabled_tools_pak64.extend(_pak64_tools)
+          enabled_tools_pak64german.extend(_pak64german_tools)
+
+          break
+      }
       break
     case 6:
 
@@ -622,6 +732,25 @@ function chapter_step_disabled_tools( pl ) {
 
       break
 
+  }
+
+  switch (pak_name) {
+    case "pak64":
+      if ( pak64_pl_tools.len() > 0 ) {
+        unused_pl_tools.extend(pak64_pl_tools)
+      }
+      if ( enabled_tools_pak64.len() > 0 ) {
+        enabled_tools.extend(enabled_tools_pak64)
+      }
+      break
+    case "pak64.german":
+      if ( pak64german_pl_tools.len() > 0 ) {
+        unused_pl_tools.extend(pak64german_pl_tools)
+      }
+      if ( enabled_tools_pak64german.len() > 0 ) {
+        enabled_tools.extend(enabled_tools_pak64german)
+      }
+      break
   }
 
   // tools enabled
