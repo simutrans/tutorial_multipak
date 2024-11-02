@@ -344,7 +344,7 @@ class basic_chapter
     reset_glsw()
     //rules.clear()
     general_disabled_tools(player_x.nr)
-    chapter_step_disabled_tools(player_x.nr)
+    chapter_step_enabled_tools(player_x.nr)
     //rules.gui_needs_update
     set_all_rules(0)
     //-------------------------------------------------------
@@ -383,7 +383,7 @@ class basic_chapter
     reset_glsw()
     //rules.clear()
     general_disabled_tools(player_x.nr)
-    chapter_step_disabled_tools(player_x.nr)
+    chapter_step_enabled_tools(player_x.nr)
     //rules.gui_needs_update
     set_all_rules(0)
     //-------------------------------------------------------
