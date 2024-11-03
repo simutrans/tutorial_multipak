@@ -982,7 +982,7 @@ class tutorial.chapter_06 extends basic_chapter
     switch (this.step) {
 
       case 1:
-        local t_list = [tool_build_way, tool_build_station, tool_build_depot]
+        local t_list = [tool_remove_way, tool_build_way, tool_build_station, tool_build_depot]
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
