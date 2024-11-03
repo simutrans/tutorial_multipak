@@ -144,7 +144,8 @@ function chapter_disabled_tools( pl ) {
                           tool_build_roadsign,
                           tool_build_wayobj,
                           tool_remove_wayobj,
-                          tool_remove_way
+                          tool_remove_way,
+                          tool_remover
         ]
 
         unused_tools.extend(_tools)
@@ -530,6 +531,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step B
           local _enabled_tools = [  tool_build_way
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -540,6 +543,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step C
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station
           ]
 
@@ -549,6 +554,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step D
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot
           ]
@@ -559,6 +566,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step E
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot
           ]
@@ -569,6 +578,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step F
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot,
                                     tool_build_tunnel
@@ -580,6 +591,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step G
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot,
                                     tool_build_tunnel
@@ -591,6 +604,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step H
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot,
                                     tool_build_tunnel,
@@ -610,6 +625,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step I
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot,
                                     tool_build_tunnel,
@@ -630,6 +647,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step J
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot,
                                     tool_build_tunnel,
@@ -651,6 +670,8 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 3 step K
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
+                                    tool_remove_way,
+                                    tool_remover,
                                     tool_build_station,
                                     tool_build_depot,
                                     tool_build_tunnel,
