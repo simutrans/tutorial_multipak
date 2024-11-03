@@ -847,7 +847,9 @@ function chapter_step_enabled_tools( pl ) {
           // chaoter 5 step B
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
-                                    tool_build_way
+                                    tool_build_way,
+                                    tool_remove_way,
+                                    tool_remover
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -862,7 +864,12 @@ function chapter_step_enabled_tools( pl ) {
           break
         case 3:
           // chaoter 5 step C
-          local _enabled_tools = [  tool_build_transformer,
+          local _enabled_tools = [  tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_way,
+                                    tool_remove_way,
+                                    tool_remover
+                                    tool_build_transformer,
                                     tool_build_way
           ]
 
@@ -877,7 +884,13 @@ function chapter_step_enabled_tools( pl ) {
           break
         case 4:
           // chaoter 5 step D
-          local _enabled_tools = [ tool_build_station
+          local _enabled_tools = [  tool_build_station,
+                                    tool_build_depot,
+                                    tool_build_way,
+                                    tool_remove_way,
+                                    tool_remover
+                                    tool_build_transformer,
+                                    tool_build_way
           ]
 
           enabled_tools.extend(_enabled_tools)
