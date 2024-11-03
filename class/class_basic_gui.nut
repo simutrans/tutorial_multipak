@@ -719,7 +719,8 @@ function chapter_step_enabled_tools( pl ) {
           break
         case 2:
           // chaoter 4 step B
-          local _enabled_tools = [  tool_build_station
+          local _enabled_tools = [  tool_build_station,
+                                    tool_remover
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -734,6 +735,7 @@ function chapter_step_enabled_tools( pl ) {
         case 3:
           // chaoter 4 step C
           local _enabled_tools = [  tool_build_station,
+                                    tool_remover,
                                     tool_build_depot
           ]
 
@@ -749,6 +751,7 @@ function chapter_step_enabled_tools( pl ) {
         case 4:
           // chaoter 4 step D
           local _enabled_tools = [  tool_build_station,
+                                    tool_remover,
                                     tool_build_depot
           ]
 
@@ -764,7 +767,9 @@ function chapter_step_enabled_tools( pl ) {
         case 5:
           // chaoter 4 step E
           local _enabled_tools = [  tool_build_station,
-                                    tool_build_depot
+                                    tool_remover,
+                                    tool_build_depot,
+                                    tool_build_way
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -779,7 +784,9 @@ function chapter_step_enabled_tools( pl ) {
         case 6:
           // chaoter 4 step F
           local _enabled_tools = [  tool_build_station,
-                                    tool_build_depot
+                                    tool_remover,
+                                    tool_build_depot,
+                                    tool_build_way
           ]
 
           enabled_tools.extend(_enabled_tools)
@@ -794,7 +801,9 @@ function chapter_step_enabled_tools( pl ) {
         case 7:
           // chaoter 4 step G
           local _enabled_tools = [  tool_build_station,
-                                    tool_build_depot
+                                    tool_remover,
+                                    tool_build_depot,
+                                    tool_build_way
           ]
 
           enabled_tools.extend(_enabled_tools)
