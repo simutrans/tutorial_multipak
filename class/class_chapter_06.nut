@@ -991,7 +991,7 @@ class tutorial.chapter_06 extends basic_chapter
 
       case 2://Schedule
         local t_list = [-t_icon.plane, -t_icon.other, -tool_remover, -tool_make_stop_public]
-        local wt_list = [gl_wt]
+        local wt_list = []
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
         if(res.ok)  return result
