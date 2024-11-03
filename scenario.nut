@@ -88,8 +88,8 @@ active_sch_check <- false
 
 include("set_data")        // include set data
 
-include(nut_path+"class_basic_data")        // include class for object data
-include(nut_path+"class_basic_gui")        // include class for object data
+include(nut_path+"class_basic_data")  // include class for object data
+include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
 
 // placeholder for tools names in simutrans
 tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}

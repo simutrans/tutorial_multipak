@@ -68,9 +68,6 @@ class tutorial.chapter_07 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
-    //rules.clear()
-    //general_disabled_tools(player_x.nr)
-    set_all_rules(0)
 
     cty1.name = get_city_name(cty1.c)
     local cty_buil1 = my_tile(cty1.c).find_object(mo_building).get_city()
@@ -542,25 +539,6 @@ class tutorial.chapter_07 extends basic_chapter
   function script_text()
   {
     return null
-  }
-
-  function set_all_rules(pl) {
-    /*
-    local forbid = [tool_remove_wayobj, tool_build_way, tool_build_bridge, tool_build_tunnel,tool_build_station,
-                       tool_remove_way, tool_build_depot, tool_build_roadsign, tool_build_wayobj]
-
-    foreach(wt in all_waytypes)
-      if (wt != wt_road) {
-          foreach (tool_id in forbid)
-            rules.forbid_way_tool(pl, tool_id, wt )
-      }
-
-    // tool "climate zones" = 4135
-    local forbid = [ 4134,4135, tool_plant_tree, tool_set_marker, tool_buy_house, tool_build_tunnel, tool_build_transformer, tool_build_bridge, tool_add_city ]
-
-    foreach (tool_id in forbid)
-        rules.forbid_tool(pl, tool_id)
-    */
   }
 
   function is_tool_active(pl, tool_id, wt) {
