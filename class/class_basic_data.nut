@@ -1,3 +1,29 @@
+
+// placeholder for tools names in simutrans
+tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
+
+// placeholder for good names in pak64
+good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
+
+
+/*
+ *  rename factory names
+ *  translate object name in to language by start scenario
+ */
+function rename_factory_names() {
+
+  local list = factory_list_x()
+  foreach(factory in list) {
+    // factory is an instance of the factory_x class
+    local f_tile = factory.get_tile_list()
+    local f_name = factory_x(f_tile[0].x, f_tile[0].y).get_desc().get_name()
+    //gui.add_message("Current: "+factory_x(f_tile[0].x, f_tile[0].y).get_desc().get_name()+" translate: "+translate(f_name))
+
+    factory_x(f_tile[0].x, f_tile[0].y).set_name(translate(f_name))
+
+  }
+}
+
 /*
  *  set vehicle for chapter 2 step 4
  *

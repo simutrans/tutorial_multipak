@@ -4,6 +4,16 @@
  *
  */
 
+// placeholder for some menus icon
+  switch (pak_name) {
+    case "pak64":
+      t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005, mono = 0x8004, exted = 0x0000}
+      break
+    case "pak64.german":
+      t_icon <- {road = 0x800e, rail = 0x800a, ship = 0x800f, plane = 0x8010, other = 0x8005, slope = 0x8001, tram = 0x800d, build = 0x8002, stats = 0x8003, exted = 0x8004, mag = 0x800b, narr = 0x800c, powe = 0x8011 }
+      break
+  }
+
 /*
  *  general disabled not used menu and tools
  *
@@ -256,7 +266,7 @@ function chapter_disabled_tools( pl ) {
         unused_tools.extend(_tools)
 
         local _pak64_tools = [ 0x8002, 0x8003, ]
-        local _pak64german_tools = [ 0x8001, 0x8003, 0x8004, 0x800a, 0x800e, 0x800f, 0x8011, 1004 ]
+        local _pak64german_tools = [ 0x8001, 0x8003, 0x8004, 0x800a, 0x800f, 0x8011, 1004 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)

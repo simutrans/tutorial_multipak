@@ -91,22 +91,6 @@ include("set_data")        // include set data
 include(nut_path+"class_basic_data")  // include class for object data
 include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
 
-// placeholder for tools names in simutrans
-tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
-
-// placeholder for good names in pak64
-good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
-
-// placeholder for some menus icon
-  switch (pak_name) {
-    case "pak64":
-      t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005, mono = 0x8004, exted = 0x0000}
-      break
-    case "pak64.german":
-      t_icon <- {road = 0x800e, rail = 0x800a, ship = 0x800f, plane = 0x8010, other = 0x8005, slope = 0x8001, tram = 0x800d, build = 0x8002, stats = 0x8003, exted = 0x8004, mag = 0x800b, narr = 0x800c, powe = 0x8011 }
-      break
-  }
-
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
 
@@ -479,8 +463,12 @@ function get_debug_text(pl)
 function start()
 {
   gui_delay = false
+
+  // rename factorys to language translate
+  rename_factory_names()
+
   set_city_names()
-    resume_game()
+  resume_game()
 }
 
 function labels_text_debug()
