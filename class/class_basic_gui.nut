@@ -29,7 +29,6 @@ function general_disabled_tools( pl ) {
                           tool_increase_industry,
                           tool_merge_stop,
                           dialog_enlarge_map,
-                          tool_setslope,
                           tool_raise_land,
                           tool_lower_land,
                           tool_restoreslope
