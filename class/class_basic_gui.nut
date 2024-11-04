@@ -28,7 +28,11 @@ function general_disabled_tools( pl ) {
                           tool_rotate_building,
                           tool_increase_industry,
                           tool_merge_stop,
-                          dialog_enlarge_map
+                          dialog_enlarge_map,
+                          tool_setslope,
+                          tool_raise_land,
+                          tool_lower_land,
+                          tool_restoreslope
   ]
 
   local pak64_tools = [ 0x8004, 0x8005, tool_set_climate ]
@@ -614,8 +618,8 @@ function chapter_step_enabled_tools( pl ) {
 
           enabled_tools.extend(_enabled_tools)
 
-          local _pak64_tools = [ 0x8001 ]
-          local _pak64german_tools = [ 0x8002 ]
+          local _pak64_tools = [ 0x8002 ]
+          local _pak64german_tools = [ 0x8001 ]
 
           enabled_tools_pak64.extend(_pak64_tools)
           enabled_tools_pak64german.extend(_pak64german_tools)
@@ -963,7 +967,7 @@ function chapter_step_enabled_tools( pl ) {
                                     tool_build_depot,
                                     tool_build_way,
                                     tool_build_transformer
-                                    
+
           ]
 
           enabled_tools.extend(_enabled_tools)
