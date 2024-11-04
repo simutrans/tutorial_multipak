@@ -45,7 +45,7 @@ class tutorial.chapter_05 extends basic_chapter
 
   //Para el Camion
   sch_list1 = [coord(132,233), coord(131,209)]
-    veh1_obj = get_veh_ch5(1)
+  veh1_obj = get_veh_ch5(1)
   veh1_load = 100
   veh1_wait = 0
   d1_cnr = null //auto started
@@ -110,11 +110,19 @@ class tutorial.chapter_05 extends basic_chapter
             {a = coord3d(134,235,0) , b = coord3d(130,206,-1)},
             {a = coord3d(148,201,-1) , b = coord3d(130,206,-1)}
           ]
+
   sc_power_name = get_obj_ch5(3)
   sc_transf_name = get_obj_ch5(4)
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
+
+    // tile check for pak64.german
+    // check factory tile
+    if ( tile_x(133,235,0).find_object(mo_building) == null ) {
+      transf_list[2] = coord(133,235)
+      tile_x(134,235,0).remove_object(player_x(1), mo_label)
+    }
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch5_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
@@ -969,26 +977,26 @@ class tutorial.chapter_05 extends basic_chapter
       break
       case 3:
 
-                if (pot0==0){
-                    for(local j=0;j<transf_list.len();j++){
-                        local tile = my_tile(transf_list[j])
-                        local label = tile.find_object(mo_label)
-                        if (label){
+        if (pot0==0){
+          for(local j=0;j<transf_list.len();j++){
+            local tile = my_tile(transf_list[j])
+            local label = tile.find_object(mo_label)
+            if (label){
               tile.remove_object(player_x(1), mo_label)
-                        }
+            }
 
             local tool = command_x(tool_build_transformer)
             local err = tool.work(player, tile, sc_transf_name)
-                    }
-                }
-                if (pot1 == 0){
-                local list = sc_tran_list
+          }
+        }
+        if (pot1 == 0){
+          local list = sc_tran_list
           local t_name = sc_power_name
           local tool = command_x(tool_build_way)
           for(local j = 0; j<list.len(); j++){
             tool.work(player, list[j].a, list[j].b, t_name)
           }
-              }
+        }
         return null
         break;
       case 4:
@@ -1298,6 +1306,7 @@ class tutorial.chapter_05 extends basic_chapter
     }
     return result
   }
+
   function ship_result_message(nr, name, good, veh, cov)
   {
     switch (nr) {
