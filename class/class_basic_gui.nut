@@ -966,7 +966,7 @@ function chapter_step_enabled_tools( pl ) {
                                     tool_build_depot,
                                     tool_build_way,
                                     tool_build_transformer
-                                    
+
           ]
 
           enabled_tools.extend(_enabled_tools)
