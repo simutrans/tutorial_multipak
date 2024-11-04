@@ -91,12 +91,6 @@ include("set_data")        // include set data
 include(nut_path+"class_basic_data")  // include class for object data
 include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
 
-// placeholder for tools names in simutrans
-tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
-
-// placeholder for good names in pak64
-good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
-
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
 

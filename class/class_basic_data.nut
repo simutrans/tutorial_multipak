@@ -1,3 +1,12 @@
+
+
+// placeholder for tools names in simutrans
+tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
+
+// placeholder for good names in pak64
+good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
+
+
 /*
  *  set vehicle for chapter 2 step 4
  *
