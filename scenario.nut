@@ -463,8 +463,12 @@ function get_debug_text(pl)
 function start()
 {
   gui_delay = false
+
+  // rename factorys to language translate
+  rename_factory_names()
+
   set_city_names()
-    resume_game()
+  resume_game()
 }
 
 function labels_text_debug()
