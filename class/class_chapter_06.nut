@@ -1018,6 +1018,9 @@ class tutorial.chapter_06 extends basic_chapter
 
   function is_tool_allowed(pl, tool_id, wt){
     local gt_list = [ t_icon.tram ]
+    if(step < 4){
+        gt_list.push(t_icon.road)
+    }
     foreach (id in gt_list){
       if(id == tool_id)
         return false
