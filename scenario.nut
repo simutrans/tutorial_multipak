@@ -6,19 +6,19 @@
  */
 const version = 1670
 map.file = "tutorial64.sve"
-scenario_name             <- "Tutorial Scenario"
-scenario.short_description = scenario_name
-scenario.author            = "Yona-TYT"
-scenario.version           = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10)
-scenario.translation      <- ttext("Translator")
+scenario_name               <- "Tutorial Scenario"
+scenario.short_description  = scenario_name
+scenario.author             = "Yona-TYT"
+scenario.version            = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10)
+scenario.translation        <- ttext("Translator")
 
 resul_version <- {pak= false , st = false}
 
-const nut_path      = "class/"    // path to folder with *.nut files
-persistent.version <- version   // stores version of script
-persistent.select  <- null      // stores user selection
-persistent.chapter <- 1     // stores chapter number
-persistent.step    <- 1     // stores step number of chapter
+const nut_path      = "class/"  // path to folder with *.nut files
+persistent.version  <- version  // stores version of script
+persistent.select   <- null     // stores user selection
+persistent.chapter  <- 1        // stores chapter number
+persistent.step     <- 1        // stores step number of chapter
 
 persistent.status <- {chapter=1, step=1} // save step y chapter
 
@@ -35,7 +35,7 @@ persistent.r_way_list <- {}       //Save way list in fullway
 
 //----------------------------------------------------------------
 
-cov_save <- [convoy_x(0)]         //Guarda los convoys en lista
+cov_save <- [convoy_x(0)]               //Guarda los convoys en lista
 ignore_save <- [{id = -1, ig = true}]   //Marca convoys ingnorados
 
 persistent.ignore_save <- []
@@ -72,12 +72,12 @@ cov_sw <- true
 correct_cov <- true
 
 //----------------------------------------------------------------
-tile_delay <- 2         //delay for mark tiles
+tile_delay      <- 2       //delay for mark tiles
 tile_delay_list <- 2
-gui_delay <- true       //delay for open win
+gui_delay       <- true    //delay for open win
 
-fail_num <- 20          //numr for the count of try
-fail_count <- 1               //if tool fail more of 10 try
+fail_num        <- 20      //numr for the count of try
+fail_count      <- 1       //if tool fail more of 10 try
 
 
 //Schedule activate
@@ -88,6 +88,8 @@ active_sch_check <- false
 
 include("set_data")        // include set data
 
+translate_objects_list <- {}
+
 include(nut_path+"class_basic_data")  // include class for object data
 include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
 
@@ -97,11 +99,12 @@ all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
 // Complemento para obtener tiempo de espera
 tick_wait <- 16
 
-chapter            <- null      // used later for class
-chapter_max        <- 7       // amount of chapter
+chapter            <- null                    // used later for class
+chapter_max        <- 7                       // amount of chapter
 select_option      <- { x = 0, y = 0, z = 1 } // place of station to control name
-select_option_halt <- null      // placeholder for halt_x
-tutorial      <- {}       // placeholder for all chapter CLASS
+select_option_halt <- null                    // placeholder for halt_x
+tutorial           <- {}                      // placeholder for all chapter CLASS
+
 
 //returns pakset name (lower case)
 function get_set_name(name)
@@ -465,7 +468,9 @@ function start()
   gui_delay = false
 
   // rename factorys to language translate
-  rename_factory_names()
+  //rename_factory_names() // call in translate_objects()
+  // set translate objects
+  translate_objects()
 
   set_city_names()
   resume_game()

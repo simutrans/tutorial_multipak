@@ -144,13 +144,23 @@ class tutorial.chapter_02 extends basic_chapter
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     else if(this.step == 7){
-            local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(c_dep)
       local c_list = sch_list3
       start_sch_tmpsw(pl,c_dep, c_list)
     }
   }
 
   function set_goal_text(text){
+
+    if ( translate_objects_list.rawin("inspec") ) {
+      if ( translate_objects_list.inspec != translate("Abfrage") ) {
+        gui.add_message("change language")
+        translate_objects()
+      }
+    } else {
+      gui.add_message("error language object key")
+    }
+
     switch (this.step) {
       case 1:
         text.t1 = c_dep.href("("+c_dep.tostring()+")")
@@ -363,9 +373,9 @@ class tutorial.chapter_02 extends basic_chapter
     text.bus1 = translate(veh1_obj)
     text.name = cty1.c.href(cty1.name.tostring())
     text.name2 = cty2.c.href(cty2.name.tostring())
-    text.tool1 = translate(tool_alias.inspe)
-    text.tool2 = translate(tool_alias.road)
-    text.tool3 = translate(tool_alias.spec)
+    text.tool1 = translate_objects_list.inspec
+    text.tool2 = translate_objects_list.tools_road
+    text.tool3 = translate_objects_list.tools_special
 
     return text
   }
