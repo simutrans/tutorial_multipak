@@ -25,6 +25,45 @@ function rename_factory_names() {
 }
 
 /*
+ *  translate objects
+ *
+ *
+ */
+function translate_objects() {
+
+  //translate_objects_list.inspec <- translate("Abfrage")
+  translate_objects_list.rawset("inspec", translate("Abfrage"))
+
+  translate_objects_list.rawset("tools_road", translate("ROADTOOLS"))
+  translate_objects_list.rawset("tools_rail", translate("RAILTOOLS"))
+  translate_objects_list.rawset("tools_ship", translate("SLOPETOOLS"))
+  translate_objects_list.rawset("tools_special", translate("SPECIALTOOLS"))
+  translate_objects_list.rawset("tools_slope", translate("SLOPETOOLS"))
+
+  translate_objects_list.rawset("depot_road", translate("CarDepot"))
+  translate_objects_list.rawset("depot_rail", translate("TrainDepot"))
+  translate_objects_list.rawset("depot_ship", translate("ShipDepot"))
+  translate_objects_list.rawset("depot_air", translate("1930AirDepot"))
+
+  translate_objects_list.rawset("good_goods", translate("Goods"))
+
+  translate_objects_list.rawset("good_mail", translate("Post"))
+  translate_objects_list.rawset("good_passa", translate("Passagiere"))
+  translate_objects_list.rawset("good_wood", translate("Holz"))
+  translate_objects_list.rawset("good_plan", translate("Bretter"))
+  translate_objects_list.rawset("good_coal", translate("Kohle"))
+  translate_objects_list.rawset("good_oel", translate("Oel"))
+  translate_objects_list.rawset("good_gas", translate("Gasoline"))
+
+  if ( pak_name == "pak64.german" ) {
+    translate_objects_list.rawset("tools_power", translate("POWERLINE"))
+  }
+  //gui.add_message("Current: "+translate_objects_list.inspec)
+
+  rename_factory_names()
+}
+
+/*
  *  set vehicle for chapter 2 step 4
  *
  */
