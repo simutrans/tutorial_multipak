@@ -139,7 +139,7 @@ class tutorial.chapter_05 extends basic_chapter
       local buil = t.find_object(mo_building)
       if(buil){
         fab_list[j].c_list = buil.get_tile_list()
-        fab_list[j].name = translate(buil.get_name())
+        fab_list[j].name = buil.get_name()
         local fields = buil.get_factory().get_fields_list()
         foreach(t in fields){
           fab_list[j].c_list.push(t)
