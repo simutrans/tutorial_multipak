@@ -257,29 +257,31 @@ class tutorial.chapter_03 extends basic_chapter
     local buil = t.find_object(mo_building)
     if(buil) {
       fac_1.c_list = buil.get_tile_list()
-      fac_1.name = buil.get_desc().get_name()
+      //fac_1.name = buil.get_name()
       local fields = buil.get_factory().get_fields_list()
-      foreach(t in fields){
+      fac_1.c_list.extend(fields)
+      /*      foreach(t in fields){
         fac_1.c_list.push(t)
-      }
+      }*/
     }
 
     t = my_tile(fac_2.c)
     buil = t.find_object(mo_building)
     if(buil) {
       fac_2.c_list = buil.get_tile_list()
-      fac_2.name = buil.get_desc().get_name()
+      //fac_2.name = buil.get_name()
       local fields = buil.get_factory().get_fields_list()
-      foreach(t in fields){
+      fac_2.c_list.extend(fields)
+      /*foreach(t in fields){
         fac_2.c_list.push(t)
-      }
+      }*/
     }
 
     t = my_tile(fac_3.c)
     buil = t.find_object(mo_building)
     if(buil) {
       fac_3.c_list = buil.get_tile_list()
-      fac_3.name = buil.get_desc().get_name()
+      //fac_3.name = buil.get_name()
       /*local fields = buil.get_factory().get_fields_list()
       foreach(t in fields){
         fac_3.c_list.push(t)
@@ -304,6 +306,15 @@ class tutorial.chapter_03 extends basic_chapter
   }
 
   function set_goal_text(text){
+
+    if ( translate_objects_list.rawin("inspec") ) {
+      if ( translate_objects_list.inspec != translate("Abfrage") ) {
+        gui.add_message("change language")
+        translate_objects()
+      }
+    } else {
+      gui.add_message("error language object key")
+    }
 
     switch (this.step) {
       case 1:
@@ -615,9 +626,9 @@ class tutorial.chapter_03 extends basic_chapter
 
         break
     }
-    text.f1 = fac_1.c.href(translate(fac_1.name)+" ("+fac_1.c.tostring()+")")
-    text.f2 = fac_2.c.href(translate(fac_2.name)+" ("+fac_2.c.tostring()+")")
-    text.f3 = fac_3.c.href(translate(fac_3.name)+" ("+fac_3.c.tostring()+")")
+    text.f1 = fac_1.c.href(translate_objects_list.fac_1_name+" ("+fac_1.c.tostring()+")")
+    text.f2 = fac_2.c.href(translate_objects_list.fac_2_name+" ("+fac_2.c.tostring()+")")
+    text.f3 = fac_3.c.href(translate_objects_list.fac_3_name+" ("+fac_3.c.tostring()+")")
 
     text.cdep=c_dep1.href("("+c_dep1.tostring()+")")
     text.way1=c_dep2.href("("+c_dep2.tostring()+")")
@@ -643,8 +654,8 @@ class tutorial.chapter_03 extends basic_chapter
     text.tool2 = translate_objects_list.tools_rail
     text.tool3 = translate_objects_list.tools_slope
 
-    text.good1 = translate(fac_1.good)
-    text.good2 = translate(fac_2.good)
+    text.good1 = translate_objects_list.good_wood
+    text.good2 = translate_objects_list.good_plan
     return text
 
   }

@@ -21,7 +21,19 @@ function rename_factory_names() {
 
     factory_x(f_tile[0].x, f_tile[0].y).set_name(translate(f_name))
 
+    if ( f_tile[0].x == 123 && f_tile[0].y == 160 ) {
+      translate_objects_list.rawset("fac_1_name", translate(f_name))
+    }
+    if ( f_tile[0].x == 93 && f_tile[0].y == 153 ) {
+      translate_objects_list.rawset("fac_2_name", translate(f_name))
+    }
+    if ( f_tile[0].x == 110 && f_tile[0].y == 190 ) {
+      translate_objects_list.rawset("fac_3_name", translate(f_name))
+    }
+
   }
+
+
 }
 
 /*
