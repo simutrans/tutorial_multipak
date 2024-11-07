@@ -129,8 +129,11 @@ function translate_objects() {
   translate_objects_list.rawset("good_oil", translate("Oel"))
   translate_objects_list.rawset("good_gas", translate("Gasoline"))
 
+  // set toolbar with powerline tools
   if ( pak_name == "pak64.german" ) {
     translate_objects_list.rawset("tools_power", translate("POWERLINE"))
+  } else {
+    translate_objects_list.rawset("tools_power", translate("SPECIALTOOLS"))
   }
   //gui.add_message("Current: "+translate_objects_list.inspec)
 

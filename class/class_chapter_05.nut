@@ -151,8 +151,8 @@ class tutorial.chapter_05 extends basic_chapter
   function set_goal_text(text)
   {
     local ok_tx =  translate("Ok")
-    local trf_name = translate("Build drain")    //Aufspanntransformator
-    local toolbar = translate("SPECIALTOOLS")
+    local trf_name = translate("Build drain")           // Aufspanntransformator
+    local toolbar = translate_objects_list.tools_power  // toolbar with powerline tools
 
     local fab_list =  [
           factory_data.rawget("5"),
@@ -201,7 +201,7 @@ class tutorial.chapter_05 extends basic_chapter
         else if (pot0==1 && pot1==0){
           text = ttextfile("chapter_05/03_2-2.txt")
           text.tx="<em>[2/2]</em>"
-          text.powerline_tool = translate("Powerline")
+          text.powerline_tool = translate(get_obj_ch5(3)) // tool powerline
           text.toolbar = toolbar
 
           local tran_tx = ""
