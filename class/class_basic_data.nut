@@ -5,10 +5,17 @@ tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship =
 // placeholder for good names in pak64
 good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
 
+factory_data <- {}
+function get_factory_data(id) {
+  local t = factory_data.rawget(id)
+  return t
+}
 
 /*
  *  rename factory names
  *  translate object name in to language by start scenario
+ *
+ *  set factory data
  */
 function rename_factory_names() {
 
@@ -22,17 +29,72 @@ function rename_factory_names() {
     factory_x(f_tile[0].x, f_tile[0].y).set_name(translate(f_name))
 
     if ( f_tile[0].x == 123 && f_tile[0].y == 160 ) {
-      translate_objects_list.rawset("fac_1_name", translate(f_name))
+      // Timber plantation
+      //translate_objects_list.rawset("fac_1_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      local f = factory_x(f_tile[0].x, f_tile[0].y).get_fields_list()
+      t.extend(f)
+
+      factory_data.rawset("1", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
+      /*local d = factory_data.rawget("1")
+      gui.add_message("factory_data rawin: "+factory_data.rawin("1"))
+      gui.add_message("factory_data d.rawin: "+d.rawget("c_list"))
+      //factory_data.1.rawset(")*/
     }
     if ( f_tile[0].x == 93 && f_tile[0].y == 153 ) {
+      // Saw mill
       translate_objects_list.rawset("fac_2_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      factory_data.rawset("2", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
     if ( f_tile[0].x == 110 && f_tile[0].y == 190 ) {
+      // Construction Wholesaler
       translate_objects_list.rawset("fac_3_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      factory_data.rawset("3", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
+    }
+    if ( f_tile[0].x == 168 && f_tile[0].y == 189 ) {
+      // Oil rig
+      translate_objects_list.rawset("fac_4_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      factory_data.rawset("4", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
+    }
+    if ( f_tile[0].x == 149 && f_tile[0].y == 200 ) {
+      // Oil refinery
+      translate_objects_list.rawset("fac_5_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      factory_data.rawset("5", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
+    }
+    if ( f_tile[0].x == 112 && f_tile[0].y == 192 ) {
+      // Gas station
+      translate_objects_list.rawset("fac_6_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      factory_data.rawset("6", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
+    }
+    if ( f_tile[0].x == 131 && f_tile[0].y == 235 ) {
+      // Coal mine
+      translate_objects_list.rawset("fac_7_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      factory_data.rawset("7", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
+    }
+    if ( f_tile[0].x == 130 && f_tile[0].y == 207 ) {
+      // Coal power station
+      translate_objects_list.rawset("fac_8_name", translate(f_name))
+      local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
+      factory_data.rawset("8", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
 
   }
-
+      /*
+      gui.add_message("factory_data rawin 1: "+factory_data.rawin("1"))
+      gui.add_message("factory_data rawin 2: "+factory_data.rawin("2"))
+      gui.add_message("factory_data rawin 3: "+factory_data.rawin("3"))
+      gui.add_message("factory_data rawin 4: "+factory_data.rawin("4"))
+      gui.add_message("factory_data rawin 5: "+factory_data.rawin("5"))
+      gui.add_message("factory_data rawin 6: "+factory_data.rawin("6"))
+      gui.add_message("factory_data rawin 7: "+factory_data.rawin("7"))
+      gui.add_message("factory_data rawin 8: "+factory_data.rawin("8"))
+      */
 
 }
 
@@ -64,11 +126,14 @@ function translate_objects() {
   translate_objects_list.rawset("good_wood", translate("Holz"))
   translate_objects_list.rawset("good_plan", translate("Bretter"))
   translate_objects_list.rawset("good_coal", translate("Kohle"))
-  translate_objects_list.rawset("good_oel", translate("Oel"))
+  translate_objects_list.rawset("good_oil", translate("Oel"))
   translate_objects_list.rawset("good_gas", translate("Gasoline"))
 
+  // set toolbar with powerline tools
   if ( pak_name == "pak64.german" ) {
     translate_objects_list.rawset("tools_power", translate("POWERLINE"))
+  } else {
+    translate_objects_list.rawset("tools_power", translate("SPECIALTOOLS"))
   }
   //gui.add_message("Current: "+translate_objects_list.inspec)
 
@@ -240,7 +305,7 @@ function get_obj_ch3(id) {
     case "pak64.german":
       switch (id) {
         case 1:
-          return "Gleis_100"
+          return "Gleis_140"
           break
         case 2:
           return "ClassicRail"

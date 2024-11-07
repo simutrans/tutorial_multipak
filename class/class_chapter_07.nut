@@ -113,8 +113,7 @@ class tutorial.chapter_07 extends basic_chapter
         text.name = t.href(""+halt.get_name()+" ("+coord3d_to_string(t)+")")+""
         text.city = cty1.c.href(""+cty1.name +" ("+cty1.c.tostring()+")")+""
         text.stop = stop1.href("("+coord3d_to_string(stop1)+")")+""
-                text.load = goal_lod1
-
+        text.load = goal_lod1
         break
 
       case 2:
@@ -123,8 +122,8 @@ class tutorial.chapter_07 extends basic_chapter
         text.name = t.href(""+halt.get_name()+" ("+coord3d_to_string(t)+")")+""
         text.city = cty2.c.href(""+cty2.name +" ("+cty2.c.tostring()+")")+""
         text.stop = stop2.href("("+coord3d_to_string(stop2)+")")+""
-                text.load =  goal_lod2
-          break
+        text.load =  goal_lod2
+        break
 
       case 3:
         local t = st3_c
@@ -132,8 +131,8 @@ class tutorial.chapter_07 extends basic_chapter
         text.name = t.href(""+halt.get_name()+" ("+coord3d_to_string(t)+")")+""
         text.city = cty3.c.href(""+cty3.name +" ("+cty3.c.tostring()+")")+""
         text.stop = stop3.href("("+coord3d_to_string(stop3)+")")+""
-                text.load =  goal_lod3
-          break
+        text.load =  goal_lod3
+        break
 
       case 4:
         local t = st4_c
@@ -141,14 +140,14 @@ class tutorial.chapter_07 extends basic_chapter
         text.name = t.href(""+halt.get_name()+" ("+coord3d_to_string(t)+")")+""
         text.city = cty4.c.href(""+cty4.name +" ("+cty4.c.tostring()+")")+""
         text.stop = stop4.href("("+coord3d_to_string(stop4)+")")+""
-                text.load =  goal_lod4
-          break
+        text.load =  goal_lod4
+        break
 
       case 5:
         break
-      }
-      text.get_load = load
-      return text
+    }
+    text.get_load = load
+    return text
   }
 
   function is_chapter_completed(pl) {
@@ -156,8 +155,8 @@ class tutorial.chapter_07 extends basic_chapter
 
     switch (this.step) {
       case 1:
-                if (!correct_cov)
-                   return 0
+        if (!correct_cov)
+          return 0
 
         if (pot0==0){
           local buld = stop1.find_object(mo_building)
@@ -196,8 +195,8 @@ class tutorial.chapter_07 extends basic_chapter
         break;
 
       case 2:
-                if (!correct_cov)
-                   return 0
+        if (!correct_cov)
+          return 0
 
         if (pot0==0){
           local buld = stop2.find_object(mo_building)
@@ -236,8 +235,8 @@ class tutorial.chapter_07 extends basic_chapter
         break;
 
       case 3:
-                if (!correct_cov)
-                   return 0
+        if (!correct_cov)
+          return 0
 
         if (pot0==0){
           local buld = stop3.find_object(mo_building)
@@ -276,8 +275,8 @@ class tutorial.chapter_07 extends basic_chapter
         break;
 
       case 4:
-                if (!correct_cov)
-                   return 0
+        if (!correct_cov)
+          return 0
 
         if (pot0==0){
           local buld = stop4.find_object(mo_building)
@@ -315,11 +314,11 @@ class tutorial.chapter_07 extends basic_chapter
         break;
 
       case 5:
-            return 90
+        return 90
         break;
-      }
-      percentage=(this.step-1)+1
-      return percentage
+    }
+    percentage=(this.step-1)+1
+    return percentage
   }
 
   function is_work_allowed_here(pl, tool_id, pos) {
@@ -515,8 +514,8 @@ class tutorial.chapter_07 extends basic_chapter
     }
     if (tool_id==4096)
       return null
-    return tool_id
 
+    return tool_id
   }
 
   function is_convoy_allowed(pl, convoy, depot)
@@ -532,7 +531,7 @@ class tutorial.chapter_07 extends basic_chapter
     if (result == null){
       ignore_save.push({id = convoy.id, ig = true})  //Ingnora el vehiculo
       return null
-        }
+    }
     return result = translate("It is not allowed to start vehicles.")
   }
 

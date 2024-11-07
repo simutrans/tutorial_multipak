@@ -27,12 +27,13 @@ class tutorial.chapter_04 extends basic_chapter
 
   //Step 1 =====================================================================================
   //Productor
-  fac_1 = {c = coord(168,189), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.oel}
-  f1_lim = {a = coord(168,189), b = coord(169,190)}
+  //fac_1 = {c = coord(168,189), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.oel}
+  //fac_1 = factory_data.rawget("4")
+  //f1_lim = {a = coord(168,189), b = coord(169,190)}
 
   //Fabrica
-  fac_2 = {c = coord(149,200), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
-  f2_lim = {a = coord(149,200), b = coord(150,201)}
+  //fac_2 = {c = coord(149,200), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
+  //f2_lim = {a = coord(149,200), b = coord(150,201)}
 
   //Step 2 =====================================================================================
   //Para los muelles
@@ -55,7 +56,7 @@ class tutorial.chapter_04 extends basic_chapter
   c1_way_lim = {a = coord(114, 194), b = coord(140, 194)}
 
   //Consumidor Final
-  fac_3 = {c = coord(112,192), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
+  //fac_3 = {c = coord(112,192), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
 
   d2_cnr = null //auto started
   sch_list2 = [coord(151, 198), coord(114, 194)]
@@ -90,39 +91,6 @@ class tutorial.chapter_04 extends basic_chapter
     d1_cnr = get_dep_cov_nr(ch4_cov_lim1.a,ch4_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch4_cov_lim2.a,ch4_cov_lim2.b)
 
-    local t = my_tile(fac_1.c)
-    local buil = t.find_object(mo_building)
-    if(buil) {
-      fac_1.c_list = buil.get_tile_list()
-      fac_1.name = buil.get_desc().get_name()
-      local fields = buil.get_factory().get_fields_list()
-      foreach(t in fields){
-        fac_1.c_list.push(t)
-      }
-    }
-
-    t = my_tile(fac_2.c)
-    buil = t.find_object(mo_building)
-    if(buil) {
-      fac_2.c_list = buil.get_tile_list()
-      fac_2.name = buil.get_desc().get_name()
-      local fields = buil.get_factory().get_fields_list()
-      foreach(t in fields){
-        fac_2.c_list.push(t)
-      }
-    }
-
-    t = my_tile(fac_3.c)
-    buil = t.find_object(mo_building)
-    if(buil) {
-      fac_3.c_list = buil.get_tile_list()
-      fac_3.name = buil.get_desc().get_name()
-      /*local fields = buil.get_factory().get_fields_list()
-      foreach(t in fields){
-        fac_3.c_list.push(t)
-      }*/
-    }
-
     local pl = 0
     if(this.step == 7){
             local c_dep = this.my_tile(c_dep1)
@@ -133,7 +101,12 @@ class tutorial.chapter_04 extends basic_chapter
   }
 
   function set_goal_text(text){
-  switch (this.step) {
+
+    local fac_1 = factory_data.rawget("4")
+    local fac_2 = factory_data.rawget("5")
+    local fac_3 = factory_data.rawget("6")
+
+   switch (this.step) {
     case 1:
 
       if (pot0==0){
@@ -248,16 +221,16 @@ class tutorial.chapter_04 extends basic_chapter
 
       break
 
-    }
+   }
     text.dep1 = c_dep1.href("("+c_dep1.tostring()+")")+""
     text.sh = translate(ship1_name_obj)
     text.cir = cov_cir
-    text.f1 = fac_1.c.href(""+translate(fac_1.name)+" ("+fac_1.c.tostring()+")")+""
-    text.f3 = fac_2.c.href(""+translate(fac_2.name)+" ("+fac_2.c.tostring()+")")+""
-    text.f4 = fac_3.c.href(""+translate(fac_3.name)+" ("+fac_3.c.tostring()+")")+""
+    text.f1 = fac_1.c.href(""+fac_1.name+" ("+fac_1.c.tostring()+")")+""
+    text.f3 = fac_2.c.href(""+fac_2.name+" ("+fac_2.c.tostring()+")")+""
+    text.f4 = fac_3.c.href(""+fac_3.name+" ("+fac_3.c.tostring()+")")+""
     text.tur = tur.href(" ("+tur.tostring()+")")+""
-    text.good1 = translate(fac_1.good)
-    text.good2 = translate(fac_2.good)
+    text.good1 = translate_objects_list.good_oil
+    text.good2 = translate_objects_list.good_gas
     return text
   }
 
@@ -265,6 +238,11 @@ class tutorial.chapter_04 extends basic_chapter
     local percentage=0
     save_pot()
     save_glsw()
+
+    local fac_1 = factory_data.rawget("4")
+    local fac_2 = factory_data.rawget("5")
+    local fac_3 = factory_data.rawget("6")
+
     switch (this.step) {
       case 1:
         local next_mark = false
@@ -465,6 +443,11 @@ class tutorial.chapter_04 extends basic_chapter
     local building = t.find_object(mo_building)
     local sign = t.find_object(mo_signal)
     local roadsign = t.find_object(mo_roadsign)
+
+    local fac_1 = factory_data.rawget("4")
+    local fac_2 = factory_data.rawget("5")
+    local fac_3 = factory_data.rawget("6")
+
     if (way){
       wt = way.get_waytype()
       if (tool_id!=4111)
@@ -656,7 +639,7 @@ class tutorial.chapter_04 extends basic_chapter
         local cov = d1_cnr
         local in_dep = true
         local veh = 1
-        local good_list = [good_desc_x(fac_1.good).get_catg_index()] //Fuels
+        local good_list = [good_desc_x(good_alias.oel).get_catg_index()] //Fuels
         local name = ship1_name_obj
         local st_tile = 1
 
@@ -669,7 +652,7 @@ class tutorial.chapter_04 extends basic_chapter
         result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
 
         if (result!=null){
-          local good = translate(fac_1.good)
+          local good = translate_objects_list.good_oil
           return ship_result_message(result, translate(name), good, veh, cov)
         }
 
@@ -689,7 +672,7 @@ class tutorial.chapter_04 extends basic_chapter
         local cov = d2_cnr
             local in_dep = true
         local veh = 1
-        local good_list = [good_desc_x(fac_2.good).get_catg_index()] //Fuels
+        local good_list = [good_desc_x(good_alias.gas).get_catg_index()] //Fuels
         local name = ship1_name_obj
         local st_tile = 1
 
@@ -701,7 +684,7 @@ class tutorial.chapter_04 extends basic_chapter
 
         result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
         if (result!=null){
-          local good = translate(fac_2.good)
+          local good = translate_objects_list.good_gas
           return ship_result_message(result, translate(name), good, veh, cov)
         }
         if (current_cov>ch4_cov_lim2.a && current_cov<ch4_cov_lim2.b){
@@ -802,7 +785,7 @@ class tutorial.chapter_04 extends basic_chapter
           }
           local c_line = comm_get_line(player, gl_wt, sched)
 
-          local good_nr = good_desc_x(fac_1.good).get_catg_index()  //Fuels
+          local good_nr = good_desc_x(good_alias.oel).get_catg_index()  //Fuels
           local name = ship1_name_obj
           local cov_nr = d1_cnr  //Max convoys nr in depot
           for (local j = 0; j < cov_nr ; j++){
@@ -868,7 +851,7 @@ class tutorial.chapter_04 extends basic_chapter
           sched.entries.append(schedule_entry_x(t_list[1], 0, 0))
           local c_line = comm_get_line(player, gl_wt, sched)
 
-          local good_nr = good_desc_x(fac_2.good).get_catg_index()  //Fuels
+          local good_nr = good_desc_x(good_alias.gas).get_catg_index()  //Fuels
           local name = ship1_name_obj
           local cov_nr = d2_cnr  //Max convoys nr in depot
           for (local j = 0; j < cov_nr; j++){
