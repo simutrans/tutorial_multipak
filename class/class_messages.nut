@@ -10,7 +10,7 @@
  *
  *  id - message id
  *   1 = You can only delete the stops.
- *
+ *   2 = Action not allowed
  *
  *
  *
@@ -28,7 +28,7 @@ function get_message(id) {
       txt_message = translate("You can only delete the stops.")
       break
     case: 2
-
+      txt_message = translate("Action not allowed")
       break
     case: 3
 
