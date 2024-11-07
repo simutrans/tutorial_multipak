@@ -410,7 +410,7 @@ function chapter_step_enabled_tools( pl ) {
       // chapter 2
       switch (step_nr) {
         case 1:
-          // chaoter 2 step A
+          // chapter 2 step A
           // no tools used
           /*
           local _tools = [
@@ -433,7 +433,7 @@ function chapter_step_enabled_tools( pl ) {
           _wt.append(wt_road)*/
           break
         case 2:
-          // chaoter 2 step B
+          // chapter 2 step B
           local _enabled_tools = [  tool_build_depot,
                                     tool_build_way
           ]
@@ -441,7 +441,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 3:
-          // chaoter 2 step C
+          // chapter 2 step C
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way,
@@ -451,7 +451,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 4:
-          // chaoter 2 step D
+          // chapter 2 step D
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way,
@@ -461,7 +461,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 5:
-          // chaoter 2 step E
+          // chapter 2 step E
           local _enabled_tools = [  tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot,
@@ -472,7 +472,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 6:
-          // chaoter 2 step F
+          // chapter 2 step F
           local _enabled_tools = [  tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot,
@@ -483,7 +483,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 7:
-          // chaoter 2 step G
+          // chapter 2 step G
           local _enabled_tools = [  tool_build_bridge,
                                     tool_build_station,
                                     tool_build_depot,
@@ -494,7 +494,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 8:
-          // chaoter 2 step H
+          // chapter 2 step H
           local _enabled_tools = [  tool_make_stop_public,
                                     tool_build_bridge,
                                     tool_build_station,
@@ -518,7 +518,7 @@ function chapter_step_enabled_tools( pl ) {
       // chapter 3
       switch (step_nr) {
         case 1:
-          // chaoter 3 step A
+          // chapter 3 step A
           // no tools used
           /*
           local _tools = [
@@ -541,7 +541,7 @@ function chapter_step_enabled_tools( pl ) {
           _wt.append(wt_road)*/
           break
         case 2:
-          // chaoter 3 step B
+          // chapter 3 step B
           local _enabled_tools = [  tool_build_way
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -553,7 +553,7 @@ function chapter_step_enabled_tools( pl ) {
           //_wt.append(wt_road)
           break
         case 3:
-          // chaoter 3 step C
+          // chapter 3 step C
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -564,7 +564,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 4:
-          // chaoter 3 step D
+          // chapter 3 step D
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -576,7 +576,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 5:
-          // chaoter 3 step E
+          // chapter 3 step E
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -588,7 +588,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 6:
-          // chaoter 3 step F
+          // chapter 3 step F
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -601,7 +601,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 7:
-          // chaoter 3 step G
+          // chapter 3 step G
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -614,7 +614,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools.extend(_enabled_tools)
           break
         case 8:
-          // chaoter 3 step H
+          // chapter 3 step H
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -635,7 +635,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 9:
-          // chaoter 3 step I
+          // chapter 3 step I
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -657,7 +657,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 10:
-          // chaoter 3 step J
+          // chapter 3 step J
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -680,7 +680,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 11:
-          // chaoter 3 step K
+          // chapter 3 step K
           local _enabled_tools = [  tool_build_way,
                                     tool_build_bridge,
                                     tool_remove_way,
@@ -708,7 +708,7 @@ function chapter_step_enabled_tools( pl ) {
       // chapter 4
       switch (step_nr) {
         case 1:
-          // chaoter 4 step A
+          // chapter 4 step A
           // no tools used
           /*
           local _tools = [
@@ -731,7 +731,7 @@ function chapter_step_enabled_tools( pl ) {
           _wt.append(wt_road)*/
           break
         case 2:
-          // chaoter 4 step B
+          // chapter 4 step B
           local _enabled_tools = [  tool_build_station,
                                     tool_remover
           ]
@@ -746,7 +746,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 3:
-          // chaoter 4 step C
+          // chapter 4 step C
           local _enabled_tools = [  tool_build_station,
                                     tool_remover,
                                     tool_build_depot
@@ -762,7 +762,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 4:
-          // chaoter 4 step D
+          // chapter 4 step D
           local _enabled_tools = [  tool_build_station,
                                     tool_remover,
                                     tool_build_depot
@@ -778,7 +778,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 5:
-          // chaoter 4 step E
+          // chapter 4 step E
           local _enabled_tools = [  tool_build_station,
                                     tool_remover,
                                     tool_build_depot,
@@ -795,7 +795,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 6:
-          // chaoter 4 step F
+          // chapter 4 step F
           local _enabled_tools = [  tool_build_station,
                                     tool_remover,
                                     tool_build_depot,
@@ -812,7 +812,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 7:
-          // chaoter 4 step G
+          // chapter 4 step G
           local _enabled_tools = [  tool_build_station,
                                     tool_remover,
                                     tool_build_depot,
@@ -834,7 +834,7 @@ function chapter_step_enabled_tools( pl ) {
       // chapter 5
       switch (step_nr) {
         case 1:
-          // chaoter 5 step A
+          // chapter 5 step A
           // no tools used
           /*
           local _tools = [
@@ -857,7 +857,7 @@ function chapter_step_enabled_tools( pl ) {
           _wt.append(wt_road)*/
           break
         case 2:
-          // chaoter 5 step B
+          // chapter 5 step B
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way,
@@ -876,7 +876,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 3:
-          // chaoter 5 step C
+          // chapter 5 step C
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way,
@@ -896,7 +896,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 4:
-          // chaoter 5 step D
+          // chapter 5 step D
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way,
@@ -917,7 +917,7 @@ function chapter_step_enabled_tools( pl ) {
           break
       break
     case 6:
-          // chaoter 6 step A
+          // chapter 6 step A
           // no tools used
           /*
           local _tools = [
@@ -954,7 +954,7 @@ function chapter_step_enabled_tools( pl ) {
           enabled_tools_pak64german.extend(_pak64german_tools)
           break
         case 2:
-          // chaoter 6 step B
+          // chapter 6 step B
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way
@@ -971,7 +971,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 3:
-          // chaoter 6 step C
+          // chapter 6 step C
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way,
@@ -989,7 +989,7 @@ function chapter_step_enabled_tools( pl ) {
 
           break
         case 4:
-          // chaoter 6 step D
+          // chapter 6 step D
           local _enabled_tools = [  tool_build_station,
                                     tool_build_depot,
                                     tool_build_way,
