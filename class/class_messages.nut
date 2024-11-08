@@ -132,7 +132,7 @@ function get_tile_message(id, tile) {
  *
  *
  */
-function get_tile_message(id, data) {
+function get_data_message(id, data) {
   local txt_message = ""
 
   switch(id) {
@@ -173,7 +173,7 @@ function get_tile_message(id, data) {
  *
  *  id list
  *   1 = Stops should be built in [%s] (x, y, z).
- *   2 = You must build a stop in [%s] first"), data (x, y, z).
+ *   2 = You must build a stop in [%s] first (x, y, z).
  *   3 = Select station No.%d") (x, y, z).
  *
  *
@@ -181,7 +181,7 @@ function get_tile_message(id, data) {
  *
  *
  */
-function get_tile_message(id, data, tile) {
+function get_tiledata_message(id, data, tile) {
   local txt_tile = ""
   if ( tile.len() == 2 ) {
     txt_tile = coord_to_string(tile)
