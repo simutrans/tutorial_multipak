@@ -13,6 +13,9 @@ class tutorial.chapter_07 extends basic_chapter
   startcash     = 500000            // pl=0 startcash; 0=no reset
   load = 0
 
+  gl_wt = wt_road
+  gl_good = 0 //Passengers
+
   compass_nr = 0
 
   t_allowed_list = [
@@ -158,38 +161,10 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        if (pot0==0){
-          local buld = stop1.find_object(mo_building)
-          if(buld){
-            local halt = stop1.get_halt()
-            if(halt)
-              pot0 = 1
-
-          }
-        }
-        else if (pot0==1 && pot1==0){
-          local buld = stop1.find_object(mo_building)
-          if(buld){
-            local halt = stop1.get_halt()
-            if(halt){
-              if(halt.get_owner().nr==1)
-                pot1 = 1
-            }
-            else
-              backward_pot(0)
-          }
-          else
-            backward_pot(0)
-        }
-        else if (pot1==1 && pot2==0){
-          local wt = wt_road
-          local good = 0 //Passengers
-          local pass = cov_pax(stop1, wt, good)
-          load = pass
-          if(pass>goal_lod1){
-            load = 0
-            this.next_step()
-          }
+        load = cov_pax(stop1, gl_wt, gl_good)
+        if(load>goal_lod1){
+          load = 0
+          this.next_step()
         }
         return 5
         break;
@@ -198,38 +173,10 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        if (pot0==0){
-          local buld = stop2.find_object(mo_building)
-          if(buld){
-            local halt = stop2.get_halt()
-            if(halt)
-              pot0 = 1
-
-          }
-        }
-        else if (pot0==1 && pot1==0){
-          local buld = stop2.find_object(mo_building)
-          if(buld){
-            local halt = stop2.get_halt()
-            if(halt){
-              if(halt.get_owner().nr==1)
-                pot1 = 1
-            }
-            else
-              backward_pot(0)
-          }
-          else
-            backward_pot(0)
-        }
-        else {
-          local wt = wt_road
-          local good = 0 //Passengers
-          local pass = cov_pax(stop2, wt, good)
-          load = pass
-          if(pass>goal_lod2){
-            load = 0
-            this.next_step()
-          }
+        load = cov_pax(stop2, gl_wt, gl_good)
+        if(load>goal_lod2){
+          load = 0
+          this.next_step()
         }
         return 50
         break;
@@ -238,38 +185,10 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        if (pot0==0){
-          local buld = stop3.find_object(mo_building)
-          if(buld){
-            local halt = stop3.get_halt()
-            if(halt)
-              pot0 = 1
-
-          }
-        }
-        else if (pot0==1 && pot1==0){
-          local buld = stop3.find_object(mo_building)
-          if(buld){
-            local halt = stop3.get_halt()
-            if(halt){
-              if(halt.get_owner().nr==1)
-                pot1 = 1
-            }
-            else
-              backward_pot(0)
-          }
-          else
-            backward_pot(0)
-        }
-        else {
-          local wt = wt_road
-          local good = 0 //Passengers
-          local pass = cov_pax(stop3, wt, good)
-          load = pass
-          if(pass>goal_lod3){
-            load = 0
-            this.next_step()
-          }
+        load = cov_pax(stop3, gl_wt, gl_good)
+        if(load>goal_lod3){
+          load = 0
+          this.next_step()
         }
         return 50
         break;
@@ -278,37 +197,10 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        if (pot0==0){
-          local buld = stop4.find_object(mo_building)
-          if(buld){
-            local halt = stop4.get_halt()
-            if(halt)
-              pot0 = 1
-
-          }
-        }
-        else if (pot0==1 && pot1==0){
-          local buld = stop4.find_object(mo_building)
-          if(buld){
-            local halt = stop4.get_halt()
-            if(halt){
-              if(halt.get_owner().nr==1)
-                pot1 = 1
-            }
-            else
-              backward_pot(0)
-          }
-          else
-            backward_pot(0)
-        }
-        else {
-          local wt = wt_road
-          local good = 0 //Passengers
-          local pass = cov_pax(my_tile(stop4), wt, good)
-          load = pass
-          if(pass>goal_lod4){
-            this.next_step()
-          }
+        load = cov_pax(stop4, gl_wt, gl_good)
+        if(load>goal_lod4){
+          load = 0
+          this.next_step()
         }
         return 50
         break;
@@ -333,36 +225,12 @@ class tutorial.chapter_07 extends basic_chapter
 
         if ((pos.x>=c_cty_lim1[nr].a.x-(1))&&(pos.y>=c_cty_lim1[nr].a.y-(1))&&(pos.x<=c_cty_lim1[nr].b.x+(1))&&(pos.y<=c_cty_lim1[nr].b.y+(1))){
           if (way){
-            if(pot0==0){
-              if(tool_id==4115){
-                if(pos.x==stop1.x && pos.y==stop1.y)
-                  return null
-                else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop1)+")."
-              }
-              else
-                return translate("Action not allowed") + " ("+pos.tostring()+")."
-            }
-
-            else if(pot0==1 && pot1==0){
-              if(tool_id==4128){
-                if(pos.x==stop1.x && pos.y==stop1.y)
-                  return null
-                else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop1)+")."
-              }
-              else
-                return translate("Action not allowed") + " ("+pos.tostring()+")."
-            }
-
-            else {
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
               return translate("Action not allowed") +" ("+pos.tostring()+")."
-            }
           }
           else if(tool_id==4110 && pot1==1)
             return null
@@ -379,36 +247,12 @@ class tutorial.chapter_07 extends basic_chapter
 
         if ((pos.x>=c_cty_lim2[nr].a.x-(1))&&(pos.y>=c_cty_lim2[nr].a.y-(1))&&(pos.x<=c_cty_lim2[nr].b.x+(1))&&(pos.y<=c_cty_lim2[nr].b.y+(1))){
           if (way){
-            if(pot0==0){
-              if(tool_id==4115){
-                if(pos.x==stop2.x && pos.y==stop2.y)
-                  return null
-                else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop2)+")."
-              }
-              else
-                return translate("Action not allowed")+" ("+pos.tostring()+")."
-            }
-
-            else if(pot0==1 && pot1==0){
-              if(tool_id==4128){
-                if(pos.x==stop2.x && pos.y==stop2.y)
-                  return null
-                else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop2)+")."
-              }
-              else
-                return translate("Action not allowed")+" ("+pos.tostring()+")."
-            }
-
-            else {
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
               return translate("Action not allowed") +" ("+pos.tostring()+")."
-            }
           }
           else if(tool_id==4110 && pot1==1)
             return null
@@ -425,36 +269,12 @@ class tutorial.chapter_07 extends basic_chapter
 
         if ((pos.x>=c_cty_lim3[nr].a.x-(1))&&(pos.y>=c_cty_lim3[nr].a.y-(1))&&(pos.x<=c_cty_lim3[nr].b.x+(1))&&(pos.y<=c_cty_lim3[nr].b.y+(1))){
           if (way){
-            if(pot0==0){
-              if(tool_id==4115){
-                if(pos.x==stop3.x && pos.y==stop3.y)
-                  return null
-                else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop3)+")."
-              }
-              else
-                return translate("Action not allowed")+" ("+pos.tostring()+")."
-            }
-
-            else if(pot0==1 && pot1==0){
-              if(tool_id==4128){
-                if(pos.x==stop3.x && pos.y==stop3.y)
-                  return null
-                else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop3)+")."
-              }
-              else
-                return translate("Action not allowed")+" ("+pos.tostring()+")."
-            }
-
-            else {
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
               return translate("Action not allowed") +" ("+pos.tostring()+")."
-            }
           }
           else if(tool_id==4110 && pot1==1)
             return null
@@ -471,36 +291,12 @@ class tutorial.chapter_07 extends basic_chapter
 
         if ((pos.x>=c_cty_lim4[nr].a.x-(1))&&(pos.y>=c_cty_lim4[nr].a.y-(1))&&(pos.x<=c_cty_lim4[nr].b.x+(1))&&(pos.y<=c_cty_lim4[nr].b.y+(1))){
           if (way){
-            if(pot0==0){
-              if(tool_id==4115){
-                if(pos.x==stop4.x && pos.y==stop4.y)
-                  return null
-                else
-                  return translate("Build Stop here:")+ " ("+coord3d_to_string(stop4)+")."
-              }
-              else
-                return translate("Action not allowed")+" ("+pos.tostring()+")."
-            }
-
-            else if(pot0==1 && pot1==0){
-              if(tool_id==4128){
-                if(pos.x==stop4.x && pos.y==stop4.y)
-                  return null
-                else
-                  return translate("Click on the stop")+ " ("+coord3d_to_string(stop4)+")."
-              }
-              else
-                return translate("Action not allowed")+" ("+pos.tostring()+")."
-            }
-
-            else {
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
               return translate("Action not allowed") +" ("+pos.tostring()+")."
-            }
           }
           else if(tool_id==4110 && pot1==1)
             return null
