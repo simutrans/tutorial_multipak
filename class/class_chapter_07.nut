@@ -55,6 +55,8 @@ class tutorial.chapter_07 extends basic_chapter
   st4_c = tile_x(120,381,9)
   stop4 = tile_x(122,381,9)
 
+  transfer_pass = 0
+
   function load_limits(city)  //Load all limits for citys
   {
     local list = []
@@ -161,9 +163,14 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        load = cov_pax(stop1, gl_wt, gl_good)
+        if ( check_halt_merge(st1_c, stop1) ) {
+          load = cov_pax(stop1, gl_wt, gl_good) - transfer_pass
+        } else {
+          transfer_pass = cov_pax(stop2, gl_wt, gl_good)
+        }
         if(load>goal_lod1){
           load = 0
+          transfer_pass = 0
           this.next_step()
         }
         return 5
@@ -173,9 +180,14 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        load = cov_pax(stop2, gl_wt, gl_good)
+        if ( check_halt_merge(st2_c, stop2) ) {
+          load = cov_pax(stop2, gl_wt, gl_good) - transfer_pass
+        } else {
+          transfer_pass = cov_pax(stop2, gl_wt, gl_good)
+        }
         if(load>goal_lod2){
           load = 0
+          transfer_pass = 0
           this.next_step()
         }
         return 50
@@ -185,9 +197,14 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        load = cov_pax(stop3, gl_wt, gl_good)
+        if ( check_halt_merge(st3_c, stop3) ) {
+          load = cov_pax(stop3, gl_wt, gl_good) - transfer_pass
+        } else {
+          transfer_pass = cov_pax(stop2, gl_wt, gl_good)
+        }
         if(load>goal_lod3){
           load = 0
+          transfer_pass = 0
           this.next_step()
         }
         return 50
@@ -197,9 +214,14 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        load = cov_pax(stop4, gl_wt, gl_good)
+        if ( check_halt_merge(st4_c, stop4) ) {
+          load = cov_pax(stop4, gl_wt, gl_good) - transfer_pass
+        } else {
+          transfer_pass = cov_pax(stop2, gl_wt, gl_good)
+        }
         if(load>goal_lod4){
           load = 0
+          transfer_pass = 0
           this.next_step()
         }
         return 50
