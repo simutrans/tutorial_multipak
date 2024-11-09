@@ -264,10 +264,31 @@ class basic_chapter
     return result
   }
 
+  /*
+   *  check is tile halt2 in tilelist halt1
+   *
+   *  halt1 = tile_x
+   *  halt2 = tile_x
+   *
+   */
+  function check_halt_merge(halt1, halt2) {
+    local tile_list = halt1.get_halt().get_tile_list()
+    local check_tile = coord3d_to_string(halt2)
+
+    for ( local x = 0; x < tile_list.len(); x++ ) {
+      if ( coord3d_to_string(tile_list[x]) == check_tile ) {
+        //gui.add_message("check_halt_merge "+check_tile + " return true")
+        return true
+      }
+    }
+
+    return false
+  }
+
   function cov_pax(c, wt, good){
     local halt = tile_x(c.x, c.y, c.z).get_halt()
-        local cov_nr = 0
-        if(halt) {
+    local cov_nr = 0
+    if(halt) {
         local cov_list = halt.get_convoy_list()
         foreach(cov in cov_list) {
           if (cov.get_waytype()!=wt)
@@ -293,7 +314,7 @@ class basic_chapter
             }
           }
         }
-        }
+    }
     return cov_nr
   }
 
@@ -445,6 +466,9 @@ class basic_chapter
   {
     local text = ttextfile( path + "goal.txt" )
     local text_step = ttextfile( path + "goal_" + this.my_step(this.step) + ".txt" )
+    if ( persistent.chapter == 7 && this.step > 0 && this.step < 5 ) {
+      text_step = ttextfile( path + "goal_step_01x04.txt" )
+    }
     for (local i = 0; i <= 15; i++){
       text[this.my_step(i)] = ""
       text[this.ttxst(i)] = "<em>"
