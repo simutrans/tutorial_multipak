@@ -383,7 +383,10 @@ class tutorial.chapter_02 extends basic_chapter
   function is_chapter_completed(pl) {
     if (pl != 0) return 0   // only human player = 0
 
-    local percentage=0
+    local chapter_steps = 9
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
 
     save_glsw()
     save_pot()
@@ -419,7 +422,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
 
-        return 0
+        //return 0
         break;
       case 2:
         local next_mark = true
@@ -440,7 +443,7 @@ class tutorial.chapter_02 extends basic_chapter
           waydepo.unmark()
           this.next_step()
         }
-        return 0
+        //return 0
         break;
       case 3:
         if (pot0==0){
@@ -460,7 +463,7 @@ class tutorial.chapter_02 extends basic_chapter
         if (all_stop && pot0==1){
           this.next_step()
         }
-        return 10+percentage
+        //return 10+percentage
         break
       case 4:
         local conv = cov_save[0]
@@ -521,7 +524,7 @@ class tutorial.chapter_02 extends basic_chapter
                     lock_tile_list(c_lock, c_lock.len(), true, 1)
         }
 
-        return 50
+        //return 50
         break
       case 5:
         local t_label = my_tile(brdg1)
@@ -565,7 +568,7 @@ class tutorial.chapter_02 extends basic_chapter
             label_bord(del_lim2.a, del_lim2.b, opt, true, "X")
           }
         }
-        return 65
+        //return 65
         break
 
       case 6:
@@ -594,7 +597,7 @@ class tutorial.chapter_02 extends basic_chapter
           label_bord(city2_lim.a, city2_lim.b, opt, false, "X")
         }
 
-        return 70
+        //return 70
         break
 
       case 7:
@@ -689,7 +692,7 @@ class tutorial.chapter_02 extends basic_chapter
             this.next_step()
           }
         }
-        return 95
+        //return 95
         break
 
       case 8:
@@ -709,17 +712,17 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
 
-        return 98
+        //return 98
         break
       case 9:
         this.step=1
         persistent.step=1
         persistent.status.step = 1
 
-        return 100
+        //return 100
         break
     }
-    percentage=(this.step-1)+1
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
   function is_work_allowed_here(pl, tool_id, pos) {

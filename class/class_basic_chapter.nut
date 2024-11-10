@@ -86,6 +86,31 @@ class basic_chapter
     return text.tostring()
    }
 
+  /*
+   *  calculate persentage chapter complete
+   *
+   *  ch_steps  = count chapter steps
+   *  step      = actual chapter step
+   *  sup_steps = count sub steps in a chapter step
+   *  sub_step  = actual sub step in a chapter step
+   *
+   *  no sub steps in chapter step, then set sub_steps and sub_step to 0
+   *
+   */
+   function chapter_percentage(ch_steps, step, sub_steps, sub_step)
+   {
+    local percentage_steps = 100 / ch_steps
+
+    local percentage = percentage_steps * (step - 1)
+
+    local percentage_sub_steps = 0
+    if ( sub_steps > 0 ) {
+      percentage_sub_steps = (percentage_steps / sub_steps) * (sub_steps - 1)
+      percentage += percentage_sub_steps
+    }
+
+    return percentage
+   }
 
    function is_chapter_completed(pl)
    {

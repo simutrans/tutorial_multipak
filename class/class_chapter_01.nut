@@ -79,14 +79,18 @@ class tutorial.chapter_01 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    local percentage=0
+    local chapter_steps = 4
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
+
     local txt=c_test.tostring()
     switch (this.step) {
       case 1:
         if (pot0 == 1) {
           this.next_step()
         }
-        return percentage
+        //return chapter_percentage(chapter_steps, 1, 0, 0)
         break
 
       case 2:
@@ -98,7 +102,7 @@ class tutorial.chapter_01 extends basic_chapter
           label_bord(city_lim.a, city_lim.b, opt, del, text)
           this.next_step()
         }
-        return percentage
+        //return chapter_percentage(chapter_steps, 2, 0, 0)
         break
 
       case 3:
@@ -144,7 +148,7 @@ class tutorial.chapter_01 extends basic_chapter
           comm_script = false
           this.next_step()
         }
-        return percentage
+        //return chapter_percentage(chapter_steps, 3, 0, 0)
         break
       case 4:
         local next_mark = true
@@ -164,12 +168,12 @@ class tutorial.chapter_01 extends basic_chapter
       case 5:
         persistent.step=1
         persistent.status.step = 1
-        return 100
+        //return 100
       break
 
     }
-    //percentage=33*(this.step-1)+1
-    return 0
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
+    return percentage
   }
 
   function is_work_allowed_here(pl, tool_id, pos) {

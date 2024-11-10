@@ -634,9 +634,13 @@ class tutorial.chapter_03 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    local percentage=0
     save_pot()
     save_glsw()
+
+    local chapter_steps = 11
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
 
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
@@ -674,7 +678,7 @@ class tutorial.chapter_03 extends basic_chapter
         else if (pot3==1 && pot4==0){
           this.next_step()
         }
-        return 5
+        //return 5
         break;
       case 2:
         //Primer tramo de rieles
@@ -827,7 +831,7 @@ class tutorial.chapter_03 extends basic_chapter
             this.next_step()
           }
         }
-        return 15
+        //return 15
         break
       case 4:
         local tile = my_tile(c_dep1)
@@ -872,7 +876,7 @@ class tutorial.chapter_03 extends basic_chapter
         else if(pot2==1){
           this.next_step()
         }
-        return 16
+        //return 16
         break
       case 5:
         if (!cov_sw)
@@ -900,7 +904,7 @@ class tutorial.chapter_03 extends basic_chapter
           reset_stop_flag()
           reached = 0
         }
-        return 30
+        //return 30
         break
       case 6:
         //Primer tramo de rieles
@@ -1116,7 +1120,7 @@ class tutorial.chapter_03 extends basic_chapter
           reached = 0
         }
 
-        return 40
+        //return 40
         break
       case 8:
         //Para el tramo de via
@@ -1205,7 +1209,7 @@ class tutorial.chapter_03 extends basic_chapter
         else if (pot3==1){
           this.next_step()
         }
-        return 45
+        //return 45
         break
 
       case 9:
@@ -1268,7 +1272,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
         }
-        return 50
+        //return 50
         break
 
       case 10:
@@ -1318,7 +1322,7 @@ class tutorial.chapter_03 extends basic_chapter
         if (pot2==1 && pot3==0){
           this.next_step()
         }
-        return 97
+        //return 97
         break
 
       case 11:
@@ -1331,7 +1335,7 @@ class tutorial.chapter_03 extends basic_chapter
           reset_stop_flag()
           return 90
         }
-        return 90
+        //return 90
         break
 
       case 12:
@@ -1343,6 +1347,7 @@ class tutorial.chapter_03 extends basic_chapter
         return 100
         break
     }
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
 
