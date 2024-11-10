@@ -80,7 +80,10 @@ class basic_chapter
    function get_rule_text(pl,path)
    {
     local text = ttextfile( path + "rule.txt" )
-         return text.tostring()
+    if ( persistent.chapter > 0 ) {
+      text = ttextfile( "rule.txt" )
+    }
+    return text.tostring()
    }
 
 
