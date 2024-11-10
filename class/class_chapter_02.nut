@@ -590,6 +590,8 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         if (current_cov==ch2_cov_lim2.b){
+          chapter_sub_step = 1  // sub step finish
+
           this.next_step()
           //Elimina cuadro label
           local opt = 0
@@ -598,10 +600,7 @@ class tutorial.chapter_02 extends basic_chapter
           label_bord(dock_lim.a, dock_lim.b, opt, true, "X")
           //Creea un cuadro label
           label_bord(city2_lim.a, city2_lim.b, opt, false, "X")
-        } else {
-          chapter_sub_step = 1
         }
-
         //return 70
         break
 
@@ -639,6 +638,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         else if (pot1==1 && pot2==0){
+          chapter_sub_step = 1  // sub step finish
           //Comprueba la conexion de la via
           local coora = coord3d(c_way1.a.x,c_way1.a.y,c_way1.a.z)
           local coorb = coord3d(c_way1.b.x,c_way1.b.y,c_way1.b.z)
@@ -670,12 +670,11 @@ class tutorial.chapter_02 extends basic_chapter
             label_bord(city2_lim.a, city2_lim.b, opt, false, "X")
 
             pot2=1
-          } else {
-            chapter_sub_step = 1
           }
         }
 
         else if (pot2==1 && pot3==0) {
+          chapter_sub_step = 2  // sub step finish
           local c_dep = this.my_tile(c_dep)
               local line_name = line3_name //"Test 3"
           set_convoy_schedule(pl, c_dep, gl_wt, line_name)
@@ -699,8 +698,6 @@ class tutorial.chapter_02 extends basic_chapter
             //label_bord(city1_lim.a, city1_lim.b, opt, true, "X")
             label_bord(city2_lim.a, city2_lim.b, opt, true, "X")
             this.next_step()
-          } else {
-            chapter_sub_step = 2
           }
         }
         //return 95

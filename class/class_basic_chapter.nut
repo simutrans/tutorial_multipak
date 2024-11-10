@@ -109,6 +109,10 @@ class basic_chapter
       percentage += percentage_sub_step
     }
 
+    if ( ch_step < ch_steps ) {
+      percentage -= percentage_step
+    }
+
     //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
 
     return percentage
