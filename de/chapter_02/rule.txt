@@ -1,10 +1,1 @@
-<p>
-Es sind nicht alle Tools eingeblendet.
-Es sind oft nur die Aktionen möglich, die für den aktuellen Schritt notwendig sind.<br>
-<br>
-
-<em>·</em> Der Gebirgsdruck über Tunnelbauten ist für deren Genehmigung relevant.<br>
-<em>·</em> Erdarbeiten kosten jeweils {price_terra}.<br>
-<em>·</em> Die nächst gelegene Stadt entscheidet über Erdarbeiten.<br>
-<br>
-</p>
+<p>Es werden nicht alle Werkzeuge angezeigt. Es stehen nur die für den aktuellen Schritt notwendigen Aktionen zur Verfügung.</p><p><em>·</em> Regeln beschreiben<br><em>·</em> Ratschläge geben<br><em>·</em> Anleitungen zu bekannten Problemen<br></p>
