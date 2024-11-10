@@ -190,7 +190,7 @@ class tutorial.chapter_07 extends basic_chapter
           transfer_pass = 0
           this.next_step()
         }
-        return 50
+        return 25
         break;
 
       case 3:
@@ -224,7 +224,7 @@ class tutorial.chapter_07 extends basic_chapter
           transfer_pass = 0
           this.next_step()
         }
-        return 50
+        return 75
         break;
 
       case 5:
@@ -252,7 +252,7 @@ class tutorial.chapter_07 extends basic_chapter
                   return null
                 }
               }
-              return translate("Action not allowed") +" ("+pos.tostring()+")."       
+              return translate("Action not allowed") +" ("+pos.tostring()+")."
         }
         else
           return translate("You can only use this tool in the city")+ " " + cty1.name.tostring()+" ("+cty1.c.tostring()+")."
@@ -269,7 +269,7 @@ class tutorial.chapter_07 extends basic_chapter
                   return null
                 }
               }
-              return translate("Action not allowed") +" ("+pos.tostring()+")."        
+              return translate("Action not allowed") +" ("+pos.tostring()+")."
         }
         else
           return translate("You can only use this tool in the city")+cty2.name.tostring()+" ("+cty2.c.tostring()+")."
