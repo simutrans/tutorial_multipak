@@ -97,17 +97,19 @@ class basic_chapter
    *  no sub steps in chapter step, then set sub_steps and sub_step to 0
    *
    */
-   function chapter_percentage(ch_steps, step, sub_steps, sub_step)
+   function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
    {
-    local percentage_steps = 100 / ch_steps
+    local percentage_step = 100 / ch_steps
 
-    local percentage = percentage_steps * (step - 1)
+    local percentage = percentage_step * ch_step
 
-    local percentage_sub_steps = 0
+    local percentage_sub_step = 0
     if ( sub_steps > 0 ) {
-      percentage_sub_steps = (percentage_steps / sub_steps) * (sub_steps - 1)
-      percentage += percentage_sub_steps
+      percentage_sub_step = (percentage_step / (sub_steps - 1 ) ) * sub_step
+      percentage += percentage_sub_step
     }
+
+    //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
 
     return percentage
    }

@@ -383,13 +383,14 @@ class tutorial.chapter_02 extends basic_chapter
   function is_chapter_completed(pl) {
     if (pl != 0) return 0   // only human player = 0
 
-    local chapter_steps = 9
+    save_glsw()
+    save_pot()
+
+    local chapter_steps = 8
     local chapter_step = persistent.step
     local chapter_sub_steps = 0 // count all sub steps
     local chapter_sub_step = 0  // actual sub step
 
-    save_glsw()
-    save_pot()
     switch (this.step) {
       case 1:
         local next_mark = true
@@ -572,9 +573,11 @@ class tutorial.chapter_02 extends basic_chapter
         break
 
       case 6:
-                local c_dep = this.my_tile(c_dep)
-                local line_name = line2_name //"Test 2"
-                set_convoy_schedule(pl,c_dep, gl_wt, line_name)
+        chapter_sub_steps = 2
+
+        local c_dep = this.my_tile(c_dep)
+        local line_name = line2_name //"Test 2"
+        set_convoy_schedule(pl,c_dep, gl_wt, line_name)
 
         local id_start = 1
         local id_end = 3
@@ -595,12 +598,16 @@ class tutorial.chapter_02 extends basic_chapter
           label_bord(dock_lim.a, dock_lim.b, opt, true, "X")
           //Creea un cuadro label
           label_bord(city2_lim.a, city2_lim.b, opt, false, "X")
+        } else {
+          chapter_sub_step = 1
         }
 
         //return 70
         break
 
       case 7:
+        chapter_sub_steps = 3
+
         if (pot0==0){
 
           local siz = sch_list3.len()
@@ -663,10 +670,12 @@ class tutorial.chapter_02 extends basic_chapter
             label_bord(city2_lim.a, city2_lim.b, opt, false, "X")
 
             pot2=1
+          } else {
+            chapter_sub_step = 1
           }
         }
 
-        else if (pot2==1 && pot3 ==0){
+        else if (pot2==1 && pot3==0) {
           local c_dep = this.my_tile(c_dep)
               local line_name = line3_name //"Test 3"
           set_convoy_schedule(pl, c_dep, gl_wt, line_name)
@@ -680,7 +689,7 @@ class tutorial.chapter_02 extends basic_chapter
           local all_result = checks_convoy_schedule(convoy, pl)
           sch_cov_correct = all_result.res == null ? true : false
 
-          if (current_cov == ch2_cov_lim3.b){
+          if (current_cov == ch2_cov_lim3.b) {
             //Desmarca la via en la parada
             local way_mark = my_tile(c_st0).find_object(mo_way)
             way_mark.unmark()
@@ -690,6 +699,8 @@ class tutorial.chapter_02 extends basic_chapter
             //label_bord(city1_lim.a, city1_lim.b, opt, true, "X")
             label_bord(city2_lim.a, city2_lim.b, opt, true, "X")
             this.next_step()
+          } else {
+            chapter_sub_step = 2
           }
         }
         //return 95
@@ -715,7 +726,7 @@ class tutorial.chapter_02 extends basic_chapter
         //return 98
         break
       case 9:
-        this.step=1
+        //this.step=1
         persistent.step=1
         persistent.status.step = 1
 
