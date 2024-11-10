@@ -4,8 +4,9 @@
  *
  *  Can NOT be used in network game !
  */
+include("set_data")        // include set data
+
 const version = 1670
-map.file = "tutorial64.sve"
 scenario_name               <- "Tutorial Scenario"
 scenario.short_description  = scenario_name
 scenario.author             = "Yona-TYT"
@@ -85,8 +86,6 @@ active_sch_check <- false
 
   simu_version  <- "124.0.1"
   current_st    <- "0"
-
-include("set_data")        // include set data
 
 translate_objects_list <- {}
 
