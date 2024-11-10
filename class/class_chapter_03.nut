@@ -1371,6 +1371,10 @@ class tutorial.chapter_03 extends basic_chapter
         ribi = 0
     }
 
+    local fac_1 =  factory_data.rawget("1")
+    local fac_2 =  factory_data.rawget("2")
+    local fac_3 =  factory_data.rawget("3")
+
     local result = translate("Action not allowed")    // null is equivalent to 'allowed'
 
     switch (this.step) {
