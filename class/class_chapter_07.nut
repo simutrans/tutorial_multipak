@@ -20,7 +20,7 @@ class tutorial.chapter_07 extends basic_chapter
 
   t_allowed_list = [
             tool_build_way, tool_build_station, tool_build_depot, tool_build_wayobj, tool_build_roadsign, 4108,
-            tool_remove_way, tool_remove_wayobj, tool_make_stop_public, tool_stop_mover, tool_merge_stop, 4103
+            tool_remove_way, tool_remove_wayobj, tool_make_stop_public, tool_stop_mover, tool_merge_stop, 4103, tool_remover
           ]
 
   cty1 = {c = coord(52,194), name = ""}
@@ -246,18 +246,13 @@ class tutorial.chapter_07 extends basic_chapter
           return null
 
         if ((pos.x>=c_cty_lim1[nr].a.x-(1))&&(pos.y>=c_cty_lim1[nr].a.y-(1))&&(pos.x<=c_cty_lim1[nr].b.x+(1))&&(pos.y<=c_cty_lim1[nr].b.y+(1))){
-          if (way){
+
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
-              return translate("Action not allowed") +" ("+pos.tostring()+")."
-          }
-          else if(tool_id==4110 && pot1==1)
-            return null
-          else
-            return translate("You can only use this tool on a road.")
+              return translate("Action not allowed") +" ("+pos.tostring()+")."       
         }
         else
           return translate("You can only use this tool in the city")+ " " + cty1.name.tostring()+" ("+cty1.c.tostring()+")."
@@ -268,18 +263,13 @@ class tutorial.chapter_07 extends basic_chapter
           return null
 
         if ((pos.x>=c_cty_lim2[nr].a.x-(1))&&(pos.y>=c_cty_lim2[nr].a.y-(1))&&(pos.x<=c_cty_lim2[nr].b.x+(1))&&(pos.y<=c_cty_lim2[nr].b.y+(1))){
-          if (way){
+
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
-              return translate("Action not allowed") +" ("+pos.tostring()+")."
-          }
-          else if(tool_id==4110 && pot1==1)
-            return null
-          else
-            return translate("You can only use this tool on a road.")
+              return translate("Action not allowed") +" ("+pos.tostring()+")."        
         }
         else
           return translate("You can only use this tool in the city")+cty2.name.tostring()+" ("+cty2.c.tostring()+")."
@@ -290,18 +280,12 @@ class tutorial.chapter_07 extends basic_chapter
           return null
 
         if ((pos.x>=c_cty_lim3[nr].a.x-(1))&&(pos.y>=c_cty_lim3[nr].a.y-(1))&&(pos.x<=c_cty_lim3[nr].b.x+(1))&&(pos.y<=c_cty_lim3[nr].b.y+(1))){
-          if (way){
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
               return translate("Action not allowed") +" ("+pos.tostring()+")."
-          }
-          else if(tool_id==4110 && pot1==1)
-            return null
-          else
-            return translate("You can only use this tool on a road.")
         }
         else
           return translate("You can only use this tool in the city")+cty3.name.tostring()+" ("+cty3.c.tostring()+")."
@@ -312,18 +296,12 @@ class tutorial.chapter_07 extends basic_chapter
           return null
 
         if ((pos.x>=c_cty_lim4[nr].a.x-(1))&&(pos.y>=c_cty_lim4[nr].a.y-(1))&&(pos.x<=c_cty_lim4[nr].b.x+(1))&&(pos.y<=c_cty_lim4[nr].b.y+(1))){
-          if (way){
               foreach(tool in t_allowed_list){
                 if(tool == tool_id){
                   return null
                 }
               }
               return translate("Action not allowed") +" ("+pos.tostring()+")."
-          }
-          else if(tool_id==4110 && pot1==1)
-            return null
-          else
-            return translate("You can only use this tool on a road.")
         }
         else
           return translate("You can only use this tool in the city")+cty4.name.tostring()+" ("+cty4.c.tostring()+")."
