@@ -108,7 +108,7 @@ class tutorial.chapter_01 extends basic_chapter
       case 3:
         local next_mark = true
 
-        if(pot0==0){
+        if (pot0==0) {
           try {
              next_mark = delay_mark_tile(c_buil1, c_buil1, 0)
           }
@@ -116,7 +116,7 @@ class tutorial.chapter_01 extends basic_chapter
             return 0
           }
         }
-        else if (pot0==1 && pot1==0){
+        else if (pot0==1 && pot1==0) {
           local stop_mark = true
           try {
              next_mark = delay_mark_tile(c_buil1, c_buil1, stop_mark)
@@ -126,7 +126,7 @@ class tutorial.chapter_01 extends basic_chapter
           }
           pot1=1
         }
-        if(pot1==1 && pot2==0){
+        if (pot1==1 && pot2==0) {
           try {
              next_mark = delay_mark_tile(c_buil2, c_buil2, 0)
           }
@@ -134,7 +134,7 @@ class tutorial.chapter_01 extends basic_chapter
             return 0
           }
         }
-        else if (pot2==1 && pot3==0){
+        else if (pot2==1 && pot3==0) {
           local stop_mark = true
           try {
              next_mark = delay_mark_tile(c_buil2, c_buil2, stop_mark)
@@ -160,16 +160,16 @@ class tutorial.chapter_01 extends basic_chapter
         catch(ev) {
           return 0
         }
-        if ((pot0 == 1 && next_mark)){
+        if (pot0 == 1 && next_mark) {
           comm_script = false
           this.next_step()
         }
-      break
+        break
       case 5:
         persistent.step=1
         persistent.status.step = 1
         //return 100
-      break
+        break
 
     }
     local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)

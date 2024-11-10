@@ -36,22 +36,22 @@ class tutorial.chapter_07 extends basic_chapter
   c_cty_lim4 = {a = coord(0,0), b = coord(0,0)}
 
   // Step 1
-    goal_lod1 = 20
+  goal_lod1 = set_transportet_goods(3)
   st1_c = tile_x(57,198,11)
   stop1 = tile_x(56,196,11)
 
   // Step 2
-  goal_lod2 = 40
+  goal_lod2 = set_transportet_goods(4)
   st2_c = tile_x(120,267,3)
   stop2 = tile_x(119,266,3)
 
   // Step 3
-  goal_lod3 = 80
+  goal_lod3 = set_transportet_goods(5)
   st3_c = tile_x(120,327,5)
   stop3 = tile_x(122,330,5)
 
   // Step 4
-  goal_lod4 = 160
+  goal_lod4 = set_transportet_goods(6)
   st4_c = tile_x(120,381,9)
   stop4 = tile_x(122,381,9)
 

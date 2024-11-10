@@ -662,3 +662,150 @@ function set_train_lenght(id) {
       break
   }
 }
+
+/*
+ *  set transportet goods
+ *
+ *  id 1 - chapter 3 : train good Holz
+ *  id 2 - chapter 3 : train good Bretter
+ *  id 3 - chapter 7 : bus city Hepplock
+ *  id 4 - chapter 7 : bus city Appingbury
+ *  id 5 - chapter 7 : bus city Hillcross
+ *  id 6 - chapter 7 : bus city Springville
+ *
+ */
+function set_transportet_goods(id) {
+
+  switch (pak_name) {
+    case "pak64":
+      switch (id) {
+        case 1:
+          return 60
+          break
+        case 2:
+          return 30
+        break
+        case 3:
+          return 20
+          break
+        case 4:
+          return 40
+          break
+        case 5:
+          return 80
+          break
+        case 6:
+          return 160
+          break
+      }
+      break
+    case "pak64.german":
+      switch (id) {
+        case 1:
+          return 120
+          break
+        case 2:
+          return 150
+        break
+        case 3:
+          return 35
+          break
+        case 4:
+          return 48
+          break
+        case 5:
+          return 27
+          break
+        case 6:
+          return 55
+          break
+      }
+      break
+  }
+
+}
+
+/*
+ *  set loading capacity
+ *
+ *  id 1 - chapter 2 step 4 : bus city Pollingwick
+ *  id 2 - chapter 2 step 6 : bus Pollingwick - Dock
+ *  id 3 - chapter 2 step 7 : bus Pollingwick - Malliby
+ *
+ */
+function set_loading_capacity(id) {
+
+  switch (pak_name) {
+    case "pak64":
+      switch (id) {
+        case 1:
+          return 100
+          break
+        case 2:
+          return 100
+          break
+        case 3:
+          return 100
+          break
+      }
+      break
+    case "pak64.german":
+      switch (id) {
+        case 1:
+          return 60
+          break
+        case 2:
+          return 60
+          break
+        case 3:
+          return 60
+          break
+      }
+      break
+  }
+
+}
+
+/*
+ *  set waiting time
+ *
+ *  id 1 - chapter 2 step 4 : bus city Pollingwick
+ *  id 2 - chapter 2 step 6 : bus Pollingwick - Dock
+ *  id 3 - chapter 2 step 7 : bus Pollingwick - Malliby
+ *
+ *
+ *  1 day   = 2115
+ *  1 hour  = 88
+ */
+function set_waiting_time(id) {
+
+  switch (pak_name) {
+    case "pak64":
+      switch (id) {
+        case 1:
+          return 10571
+          break
+        case 2:
+          return 10571
+          break
+        case 3:
+          return 10571
+          break
+      }
+      break
+    case "pak64.german":
+      switch (id) {
+        case 1:
+          return 2115
+          break
+        case 2:
+          return 881
+          break
+        case 3:
+          return 2555
+          break
+      }
+      break
+  }
+
+}

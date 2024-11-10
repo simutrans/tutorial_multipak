@@ -50,8 +50,8 @@ class tutorial.chapter_02 extends basic_chapter
   //Primer autobus
   line1_name = "Test 1"
   veh1_obj = get_veh_ch2_st4()
-  veh1_load = 100
-  veh1_wait = 10571
+  veh1_load = set_loading_capacity(1)
+  veh1_wait = set_waiting_time(1)
   dep_cnr1 = null //auto started
 
   // Step 5 =====================================================================================
@@ -134,12 +134,12 @@ class tutorial.chapter_02 extends basic_chapter
     local pl = 0
     //Schedule list form current convoy
     if(this.step == 4){
-            local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(c_dep)
       local c_list = sch_list1
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     else if(this.step == 6){
-            local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(c_dep)
       local c_list = sch_list2
       start_sch_tmpsw(pl,c_dep, c_list)
     }
@@ -222,6 +222,9 @@ class tutorial.chapter_02 extends basic_chapter
         text.bpos2 = brdg2.href("("+brdg2.tostring()+")")
         break
       case 6:
+        veh1_load = set_loading_capacity(2)
+        veh1_wait = set_waiting_time(2)
+
         local stxt = array(10)
         local halt = my_tile(sch_list2[0]).get_halt()
 
@@ -252,6 +255,8 @@ class tutorial.chapter_02 extends basic_chapter
 
         break
       case 7:
+        veh1_load = set_loading_capacity(3)
+        veh1_wait = set_waiting_time(3)
 
         if (!cov_sw){
           local a = 3

@@ -109,7 +109,7 @@ class basic_chapter
       percentage += percentage_sub_step
     }
 
-    if ( ch_step < ch_steps ) {
+    if ( ch_step <= ch_steps ) {
       percentage -= percentage_step
     }
 

@@ -84,7 +84,7 @@ class tutorial.chapter_03 extends basic_chapter
   loc1_tile = 3
   loc1_load = 100
   loc1_wait = 0
-  f1_reached = 60
+  f1_reached = set_transportet_goods(1)
 
   //Step 6 =====================================================================================
   c_lock = [coord(60,10), coord(77,25)]  //Futuros transformadores
@@ -133,7 +133,7 @@ class tutorial.chapter_03 extends basic_chapter
   //Consumidor Final
   //fac_3 = {c = coord(110,190), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.plan}
   //fac_3 = get_factory_data("3")
-  f3_reached = 30
+  f3_reached = set_transportet_goods(2)
 
   //Step 8 =====================================================================================
   //Tramo de via para el tunel
