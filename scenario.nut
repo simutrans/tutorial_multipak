@@ -4,7 +4,11 @@
  *
  *  Can NOT be used in network game !
  */
-include("set_data")        // include set data
+const nut_path = "class/"             // path to folder with *.nut files
+include("set_data")                   // include set data
+include(nut_path+"class_basic_data")  // include class for object data
+translate_objects_list <- {}          // translate list
+translate_objects()                   // add objects to translate list
 
 const version = 1670
 scenario_name               <- "Tutorial Scenario"
@@ -15,7 +19,6 @@ scenario.translation        <- ttext("Translator")
 
 resul_version <- {pak= false , st = false}
 
-const nut_path      = "class/"  // path to folder with *.nut files
 persistent.version  <- version  // stores version of script
 persistent.select   <- null     // stores user selection
 persistent.chapter  <- 1        // stores chapter number
@@ -87,9 +90,6 @@ active_sch_check <- false
   simu_version  <- "124.0.1"
   current_st    <- "0"
 
-translate_objects_list <- {}
-
-include(nut_path+"class_basic_data")  // include class for object data
 include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
 
 // table containing all system_types
@@ -663,6 +663,7 @@ function is_schedule_allowed(pl, schedule)
     local result = null
 
   if (pl != 0) return null
+
   result = chapter.is_schedule_allowed(pl, schedule)
     if (result != null)
          active_sch_check = true
