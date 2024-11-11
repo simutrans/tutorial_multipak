@@ -104,8 +104,8 @@ class basic_chapter
     local percentage = percentage_step * ch_step
 
     local percentage_sub_step = 0
-    if ( sub_steps > 0 ) {
-      percentage_sub_step = (percentage_step / (sub_steps - 1 ) ) * sub_step
+    if ( sub_steps > 0 && sub_step > 0) {
+      percentage_sub_step = (percentage_step / sub_steps ) * sub_step
       percentage += percentage_sub_step
     }
 
