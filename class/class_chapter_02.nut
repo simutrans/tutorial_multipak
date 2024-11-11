@@ -594,9 +594,12 @@ class tutorial.chapter_02 extends basic_chapter
           reset_glsw()
         }
 
-        if (current_cov==ch2_cov_lim2.b){
+        //gui.add_message("current_cov "+current_cov+" cov_nr "+cov_nr+" all_result "+all_result+" all_result.cov "+all_result.cov)
+        if ( cov_nr>=1 ) {
           chapter_sub_step = 1  // sub step finish
+        }
 
+        if (current_cov==ch2_cov_lim2.b){
           this.next_step()
           //Elimina cuadro label
           local opt = 0
