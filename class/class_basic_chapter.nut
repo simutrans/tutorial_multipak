@@ -80,9 +80,43 @@ class basic_chapter
    function get_rule_text(pl,path)
    {
     local text = ttextfile( path + "rule.txt" )
-         return text.tostring()
+    if ( persistent.chapter > 0 ) {
+      text = ttextfile( "rule.txt" )
+    }
+    return text.tostring()
    }
 
+  /*
+   *  calculate persentage chapter complete
+   *
+   *  ch_steps  = count chapter steps
+   *  step      = actual chapter step
+   *  sup_steps = count sub steps in a chapter step
+   *  sub_step  = actual sub step in a chapter step
+   *
+   *  no sub steps in chapter step, then set sub_steps and sub_step to 0
+   *
+   */
+   function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
+   {
+    local percentage_step = 100 / ch_steps
+
+    local percentage = percentage_step * ch_step
+
+    local percentage_sub_step = 0
+    if ( sub_steps > 0 ) {
+      percentage_sub_step = (percentage_step / (sub_steps - 1 ) ) * sub_step
+      percentage += percentage_sub_step
+    }
+
+    if ( ch_step <= ch_steps ) {
+      percentage -= percentage_step
+    }
+
+    //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
+
+    return percentage
+   }
 
    function is_chapter_completed(pl)
    {

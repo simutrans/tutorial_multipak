@@ -50,8 +50,8 @@ class tutorial.chapter_02 extends basic_chapter
   //Primer autobus
   line1_name = "Test 1"
   veh1_obj = get_veh_ch2_st4()
-  veh1_load = 100
-  veh1_wait = 10571
+  veh1_load = set_loading_capacity(1)
+  veh1_wait = set_waiting_time(1)
   dep_cnr1 = null //auto started
 
   // Step 5 =====================================================================================
@@ -134,12 +134,12 @@ class tutorial.chapter_02 extends basic_chapter
     local pl = 0
     //Schedule list form current convoy
     if(this.step == 4){
-            local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(c_dep)
       local c_list = sch_list1
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     else if(this.step == 6){
-            local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(c_dep)
       local c_list = sch_list2
       start_sch_tmpsw(pl,c_dep, c_list)
     }
@@ -222,6 +222,9 @@ class tutorial.chapter_02 extends basic_chapter
         text.bpos2 = brdg2.href("("+brdg2.tostring()+")")
         break
       case 6:
+        veh1_load = set_loading_capacity(2)
+        veh1_wait = set_waiting_time(2)
+
         local stxt = array(10)
         local halt = my_tile(sch_list2[0]).get_halt()
 
@@ -252,6 +255,8 @@ class tutorial.chapter_02 extends basic_chapter
 
         break
       case 7:
+        veh1_load = set_loading_capacity(3)
+        veh1_wait = set_waiting_time(3)
 
         if (!cov_sw){
           local a = 3
@@ -383,10 +388,14 @@ class tutorial.chapter_02 extends basic_chapter
   function is_chapter_completed(pl) {
     if (pl != 0) return 0   // only human player = 0
 
-    local percentage=0
-
     save_glsw()
     save_pot()
+
+    local chapter_steps = 8
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
+
     switch (this.step) {
       case 1:
         local next_mark = true
@@ -419,7 +428,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
 
-        return 0
+        //return 0
         break;
       case 2:
         local next_mark = true
@@ -440,7 +449,7 @@ class tutorial.chapter_02 extends basic_chapter
           waydepo.unmark()
           this.next_step()
         }
-        return 0
+        //return 0
         break;
       case 3:
         if (pot0==0){
@@ -460,7 +469,7 @@ class tutorial.chapter_02 extends basic_chapter
         if (all_stop && pot0==1){
           this.next_step()
         }
-        return 10+percentage
+        //return 10+percentage
         break
       case 4:
         local conv = cov_save[0]
@@ -521,7 +530,7 @@ class tutorial.chapter_02 extends basic_chapter
                     lock_tile_list(c_lock, c_lock.len(), true, 1)
         }
 
-        return 50
+        //return 50
         break
       case 5:
         local t_label = my_tile(brdg1)
@@ -565,13 +574,15 @@ class tutorial.chapter_02 extends basic_chapter
             label_bord(del_lim2.a, del_lim2.b, opt, true, "X")
           }
         }
-        return 65
+        //return 65
         break
 
       case 6:
-                local c_dep = this.my_tile(c_dep)
-                local line_name = line2_name //"Test 2"
-                set_convoy_schedule(pl,c_dep, gl_wt, line_name)
+        chapter_sub_steps = 2
+
+        local c_dep = this.my_tile(c_dep)
+        local line_name = line2_name //"Test 2"
+        set_convoy_schedule(pl,c_dep, gl_wt, line_name)
 
         local id_start = 1
         local id_end = 3
@@ -584,6 +595,8 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         if (current_cov==ch2_cov_lim2.b){
+          chapter_sub_step = 1  // sub step finish
+
           this.next_step()
           //Elimina cuadro label
           local opt = 0
@@ -593,11 +606,12 @@ class tutorial.chapter_02 extends basic_chapter
           //Creea un cuadro label
           label_bord(city2_lim.a, city2_lim.b, opt, false, "X")
         }
-
-        return 70
+        //return 70
         break
 
       case 7:
+        chapter_sub_steps = 3
+
         if (pot0==0){
 
           local siz = sch_list3.len()
@@ -629,6 +643,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         else if (pot1==1 && pot2==0){
+          chapter_sub_step = 1  // sub step finish
           //Comprueba la conexion de la via
           local coora = coord3d(c_way1.a.x,c_way1.a.y,c_way1.a.z)
           local coorb = coord3d(c_way1.b.x,c_way1.b.y,c_way1.b.z)
@@ -663,7 +678,8 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
 
-        else if (pot2==1 && pot3 ==0){
+        else if (pot2==1 && pot3==0) {
+          chapter_sub_step = 2  // sub step finish
           local c_dep = this.my_tile(c_dep)
               local line_name = line3_name //"Test 3"
           set_convoy_schedule(pl, c_dep, gl_wt, line_name)
@@ -677,7 +693,7 @@ class tutorial.chapter_02 extends basic_chapter
           local all_result = checks_convoy_schedule(convoy, pl)
           sch_cov_correct = all_result.res == null ? true : false
 
-          if (current_cov == ch2_cov_lim3.b){
+          if (current_cov == ch2_cov_lim3.b) {
             //Desmarca la via en la parada
             local way_mark = my_tile(c_st0).find_object(mo_way)
             way_mark.unmark()
@@ -689,7 +705,7 @@ class tutorial.chapter_02 extends basic_chapter
             this.next_step()
           }
         }
-        return 95
+        //return 95
         break
 
       case 8:
@@ -709,17 +725,17 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
 
-        return 98
+        //return 98
         break
       case 9:
-        this.step=1
+        //this.step=1
         persistent.step=1
         persistent.status.step = 1
 
-        return 100
+        //return 100
         break
     }
-    percentage=(this.step-1)+1
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
   function is_work_allowed_here(pl, tool_id, pos) {

@@ -36,22 +36,22 @@ class tutorial.chapter_07 extends basic_chapter
   c_cty_lim4 = {a = coord(0,0), b = coord(0,0)}
 
   // Step 1
-    goal_lod1 = 20
+  goal_lod1 = set_transportet_goods(3)
   st1_c = tile_x(57,198,11)
   stop1 = tile_x(56,196,11)
 
   // Step 2
-  goal_lod2 = 40
+  goal_lod2 = set_transportet_goods(4)
   st2_c = tile_x(120,267,3)
   stop2 = tile_x(119,266,3)
 
   // Step 3
-  goal_lod3 = 80
+  goal_lod3 = set_transportet_goods(5)
   st3_c = tile_x(120,327,5)
   stop3 = tile_x(122,330,5)
 
   // Step 4
-  goal_lod4 = 160
+  goal_lod4 = set_transportet_goods(6)
   st4_c = tile_x(120,381,9)
   stop4 = tile_x(122,381,9)
 
@@ -156,7 +156,10 @@ class tutorial.chapter_07 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    local percentage=0
+    local chapter_steps = 5
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
@@ -173,7 +176,7 @@ class tutorial.chapter_07 extends basic_chapter
           transfer_pass = 0
           this.next_step()
         }
-        return 5
+        //return 5
         break;
 
       case 2:
@@ -190,7 +193,7 @@ class tutorial.chapter_07 extends basic_chapter
           transfer_pass = 0
           this.next_step()
         }
-        return 50
+        //return 25
         break;
 
       case 3:
@@ -207,7 +210,7 @@ class tutorial.chapter_07 extends basic_chapter
           transfer_pass = 0
           this.next_step()
         }
-        return 50
+        //return 50
         break;
 
       case 4:
@@ -224,14 +227,14 @@ class tutorial.chapter_07 extends basic_chapter
           transfer_pass = 0
           this.next_step()
         }
-        return 50
+        //return 75
         break;
 
       case 5:
-        return 90
+        //return 90
         break;
     }
-    percentage=(this.step-1)+1
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
 
@@ -252,7 +255,7 @@ class tutorial.chapter_07 extends basic_chapter
                   return null
                 }
               }
-              return translate("Action not allowed") +" ("+pos.tostring()+")."       
+              return translate("Action not allowed") +" ("+pos.tostring()+")."
         }
         else
           return translate("You can only use this tool in the city")+ " " + cty1.name.tostring()+" ("+cty1.c.tostring()+")."
@@ -269,7 +272,7 @@ class tutorial.chapter_07 extends basic_chapter
                   return null
                 }
               }
-              return translate("Action not allowed") +" ("+pos.tostring()+")."        
+              return translate("Action not allowed") +" ("+pos.tostring()+")."
         }
         else
           return translate("You can only use this tool in the city")+cty2.name.tostring()+" ("+cty2.c.tostring()+")."
