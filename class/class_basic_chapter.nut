@@ -30,17 +30,17 @@ class basic_chapter
 {        // chapter description : this is a placeholder class
 
   chapter_name  = ""  // placeholder for chapter name
-  chap_nr     = 1   // count the chapter number
-  step      = 1   // count the step inside the chapter  1="step A"
-  startcash   = 0   // pl=0 startcash; 0=no reset
+  chap_nr       = 1   // count the chapter number
+  step          = 1   // count the step inside the chapter  1="step A"
+  startcash     = 0   // pl=0 startcash; 0=no reset
 
-  glpos = coord3d(0,0,0)
-  gltool = null
-  glresult = null
-  tmpsw = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    tmpcoor = []
+  glpos     = coord3d(0,0,0)
+  gltool    = null
+  glresult  = null
+  tmpsw     = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  tmpcoor   = []
   stop_flag = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-  st_cover = settings.get_station_coverage()
+  st_cover  = settings.get_station_coverage()
 
   glmark = coord3d(0,0,0) //coordenadas para realizar  unmark
 
@@ -48,43 +48,48 @@ class basic_chapter
   slope_estatus = [0,0,0,0,0,0]
 
   //--------------------way scan ------------------------------------
-  cursor_sw = false
-  bridge_sw = false
-  sch_sw = false
-  stop_sw = false
-  bridge_count = 0
+  cursor_sw     = false
+  bridge_sw     = false
+  sch_sw        = false
+  stop_sw       = false
+  bridge_count  = 0
   //-----------------------------------------------------------------
 
   //Underground View
-  under_lv = resul_version.st? settings.get_underground_view_level() : 127
+  under_lv  = resul_version.st? settings.get_underground_view_level() : 127
   unde_view = -128
   norm_view = 127
 
   map_siz = world.get_size()
 
   constructor(pl)
-   {
+  {
     scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
     // tools disabled/enabled
     general_disabled_tools(pl)
     //this.set_all_rules(pl)
     this.step = 1
-   }
+  }
 
   // FUNCTIONS TO REWRITE
-   function set_goal_text(text)
-   {
-         return text
-   }
+  function set_goal_text(text)
+  {
+    return text
+  }
 
-   function get_rule_text(pl,path)
-   {
-    local text = ttextfile( path + "rule.txt" )
-    if ( persistent.chapter > 0 ) {
-      text = ttextfile( "rule.txt" )
+  function get_rule_text(pl,path)
+  {
+    local text = ""
+    switch (persistent.chapter) {
+      case 0 :
+        text = ttextfile( path + "rule.txt" )
+        break
+      default :
+        text = ttextfile( "rule.txt" )
+        break
     }
     return text.tostring()
-   }
+  }
 
   /*
    *  calculate persentage chapter complete
@@ -97,8 +102,8 @@ class basic_chapter
    *  no sub steps in chapter step, then set sub_steps and sub_step to 0
    *
    */
-   function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
-   {
+  function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
+  {
     local percentage_step = 100 / ch_steps
 
     local percentage = percentage_step * ch_step
@@ -116,13 +121,13 @@ class basic_chapter
     //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
 
     return percentage
-   }
+  }
 
-   function is_chapter_completed(pl)
-   {
+  function is_chapter_completed(pl)
+  {
     local percentage = 0
     return percentage
-   }
+  }
 
   // BASIC FUNCTIONS, NO REWRITE
 
