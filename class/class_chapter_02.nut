@@ -115,6 +115,12 @@ class tutorial.chapter_02 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
+    if ( pak_name == "pak128" ) {
+      brdg1 = coord(126,192)
+      brdg2 = coord(126,194)
+      c_brdg1 = {a = coord3d(126,192,-1), b = coord3d(126,195,0), dir = 3}  //Inicio, Fin de la via y direccion(fullway)
+      c_brdg_limi1 = {a = coord(126,191), b = coord(126,195)}
+    }
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch2_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}

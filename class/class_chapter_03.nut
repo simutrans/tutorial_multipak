@@ -157,7 +157,7 @@ class tutorial.chapter_03 extends basic_chapter
 
   //Subterraneo
   //------------------------------------------------------------------------------------------
-  c_tunn2_lim = {b = coord(91,194), a = coord(63,202)}
+  c_tunn2_lim = {b = coord(92,194), a = coord(63,202)}
   c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8), dir = null}    //Inicio, Fin de la via y direccion(fullway)
 
   c_end_tunn = coord3d(60,198,11)
@@ -217,7 +217,7 @@ class tutorial.chapter_03 extends basic_chapter
   loc3_load = 100
   loc3_wait = 25369
 
-    line1_name = "Test 4"
+  line1_name = "Test 4"
   st_lim_a =  [ {a = coord(55,197), b = coord(58,197)}, {a = coord(116,198), b = coord(119,198)},
           {a = coord(120,266), b= coord(120,269)}, {a = coord(120,326), b= coord(120,329)},
           {a = coord(120,380), b= coord(120,383)}, {a = coord(121,326), b= coord(121,329)},
@@ -249,6 +249,37 @@ class tutorial.chapter_03 extends basic_chapter
   //------------------------------------------------------------------------------------
 
   function start_chapter(){  //Inicia solo una vez por capitulo
+
+    if ( pak_name == "pak128" ) {
+      c_brge1.a = coord(100,158)
+      c_way1.b = coord3d(107,158,1)
+      c_way3.a = coord3d(99,158,1)
+      //bord3_lim.b = coord(96,172)
+      c_tway_lim2.a = coord(95,172)
+      c_way4.b = coord3d(95,172,3)
+      c_bway_lim1.a = coord(99,158)
+      c_way6_lim.a = coord(94,198)
+      c_way6.b = coord3d(94,198,6)
+      c_bway_lim3.b =  coord(94,198)
+      c_tunn2.a = coord3d(90,198,7)
+      //end_tunn = coord(91,198)
+      layer_list = [7,8]
+      layer_lvl = 7
+      start_lvl_z = 7
+      end_lvl_z = 8
+      c_tun_list = [coord3d(88,198,7), coord3d(87,198,8)]
+
+      c_cate_list1[0].b = c_tunn2.a
+      c_cate_list1[1].a = c_tunn2.a
+      c_cate_list1[4].b = coord3d(90,197,7)
+      c_cate_list1[5].a = coord3d(90,197,7)
+      c_cate_lim1[0].b = c_tunn2.a
+      c_cate_lim1[1].a = c_tunn2.a
+      c_cate_lim1[4].a = coord3d(91,197,5)
+      c_cate_lim1[5].b = coord3d(91,197,5)
+
+      dir_1.s = 56
+    }
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch3_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
@@ -1781,6 +1812,30 @@ class tutorial.chapter_03 extends basic_chapter
               local dir = dir_1.r
               result = under_way_check(under, dir)
               local start = c_tunn1.a
+
+              /*
+               *  FIX built tunnel end of bridge pak128
+               */
+              if ( pak_name == "pak128" ) {
+                local tile_t = tile_x( c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z )
+                local tile_b = tile_x( c_tunn2.a.x+1, c_tunn2.a.y, c_tunn2.a.z-2 )
+                //local tile_w = tile_x( c_tunn2.a.x+4, c_tunn2.a.y, c_tunn2.a.z-1 )
+
+                  //gui.add_message("tile_t.find_object(mo_tunnel) " + tile_t.find_object(mo_tunnel))
+                  //gui.add_message("tile_b.find_object(mo_bridge) " + tile_b.find_object(mo_bridge))
+                  //gui.add_message("tile_w.find_object(mo_way) " + tile_w.find_object(mo_way))
+                local way = tile_t.find_object(mo_way)
+                local ribi = way? way.get_dirs() : 0
+
+
+                if ( ribi == 0 && tile_t.find_object(mo_tunnel) && tile_b.find_object(mo_bridge) ) {
+                  //local way_obj = tile_w.find_object(mo_way)
+                  local tool = command_x(tool_build_way)
+                  local err = tool.work(player_x(0), tile_t, tile_b, sc_way_name)
+                }
+
+              }
+
               if(result != null && r_way.c.x != start.x && r_way.c.y != start.y)
                 return result
 
@@ -2327,6 +2382,9 @@ class tutorial.chapter_03 extends basic_chapter
         //Para el Tunel
         if (pot1==0){
           local t_start = my_tile(c_tway_lim2.a)
+          if ( pak_name == "pak128" ) {
+            t_start.x += 1
+          }
           t_start.remove_object(player_x(1), mo_label)
           local t = command_x(tool_build_tunnel)
           try {
@@ -2475,6 +2533,28 @@ class tutorial.chapter_03 extends basic_chapter
           t.set_flags(2)
           t.work(player, t_tunn, sc_tunn_name)
           pot2=1
+              /*
+               *  FIX built tunnel end of bridge pak128
+               */
+              if ( pak_name == "pak128" ) {
+                local tile_t = my_tile(start_tunn)
+                local tile_b = tile_x( tile_t.x+1, tile_t.y, tile_t.z-2 )
+                //local tile_w = tile_x( c_tunn2.a.x+4, c_tunn2.a.y, c_tunn2.a.z-1 )
+
+                  //gui.add_message("tile_t.find_object(mo_tunnel) " + tile_t.find_object(mo_tunnel))
+                  //gui.add_message("tile_b.find_object(mo_bridge) " + tile_b.find_object(mo_bridge))
+                  //gui.add_message("tile_w.find_object(mo_way) " + tile_w.find_object(mo_way))
+                local way = tile_t.find_object(mo_way)
+                local ribi = way? way.get_dirs() : 0
+
+
+                if ( ribi == 0 && tile_t.find_object(mo_tunnel) && tile_b.find_object(mo_bridge) ) {
+                  //local way_obj = tile_w.find_object(mo_way)
+                  local tool = command_x(tool_build_way)
+                  local err = tool.work(player_x(0), tile_t, tile_b, sc_way_name)
+                }
+
+              }
         }
         if (pot2==1 && pot3==0){
           local siz = (start_tunn.x)-(c_tun_list[0].x)
