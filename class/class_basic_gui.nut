@@ -316,9 +316,9 @@ function chapter_disabled_tools( pl ) {
 
         unused_tools.extend(_tools)
 
-        local _pak64_tools = [ 0x8002, 0x8003, 0x8007, 0x8008 ]
-        local _pak64german_tools = [ 0x8001, 0x8003, 0x8004, 0x800a, 0x8010, 0x800f, 0x8011, 1004 ]
-        local _pak128_tools = [ 0x8001, 0x8002, 0x8007, 0x8008 ]
+        local _pak64_tools = [ 0x8003, 0x8007, 0x8008 ]
+        local _pak64german_tools = [ 0x8003, 0x8004, 0x800a, 0x8010, 0x800f, 0x8011, 1004 ]
+        local _pak128_tools = [ 0x8002, 0x8007, 0x8008 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
