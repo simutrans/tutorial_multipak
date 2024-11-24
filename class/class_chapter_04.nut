@@ -52,7 +52,7 @@ class tutorial.chapter_04 extends basic_chapter
 
   //Step 5 =====================================================================================
   //Para el canal acuatico
-  c1_way = {a = coord3d(140,194,-3), b = coord3d(114,194,1)}
+  c1_way = {a = coord3d(140,194,-3), b = coord3d(114,194,1), c = coord3d(127,194,-1)}
   c1_way_lim = {a = coord(114, 194), b = coord(140, 194)}
 
   //Consumidor Final
@@ -82,6 +82,12 @@ class tutorial.chapter_04 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
+
+    if ( pak_name == "pak128" ) {
+      c1_way_lim.a = coord(114, 193)
+      c1_way.c = coord3d(127,193,-1)
+
+    }
 
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch4_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
@@ -823,10 +829,15 @@ class tutorial.chapter_04 extends basic_chapter
 
           local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
           local coorb = {x = c1_way.b.x, y = c1_way.b.y, z = c1_way.b.z }
+          local coorc = {x = c1_way.c.x, y = c1_way.c.y, z = c1_way.c.z }
 
           local t = command_x(tool_build_way)
-          t.set_flags(2)
-          local err = t.work(player_x(pl), coora, coorb, sc_way_name)
+          t.set_flags(1)
+
+          local err = t.work(player_x(pl), coora, coorc, sc_way_name)
+          err = t.work(player_x(pl), coorb, coorc, sc_way_name)
+
+
         }
         //Para el cuarto muelle
         if (pot1==0){

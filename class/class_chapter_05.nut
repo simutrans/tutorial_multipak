@@ -117,9 +117,14 @@ class tutorial.chapter_05 extends basic_chapter
   function start_chapter()  //Inicia solo una vez por capitulo
   {
 
-    // tile check for pak64.german
-    // check factory tile
-    if ( tile_x(133,235,0).find_object(mo_building) == null ) {
+    if ( pak_name == "pak128" ) {
+      c_way_lim1.a = coord(127,211)
+      c_way1.b = coord3d(132,211,0)
+      sch_list1[1] = coord(132,211)
+      transf_list[2] = coord(135,235)
+    }
+
+    if ( pak_name == "pak64.german" ) {
       transf_list[2] = coord(133,235)
       tile_x(134,235,0).remove_object(player_x(1), mo_label)
     }

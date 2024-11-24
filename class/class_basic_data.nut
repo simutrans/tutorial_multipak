@@ -152,6 +152,9 @@ function get_veh_ch2_st4() {
     case "pak64.german":
       return "BuessingLinie"
       break
+    case "pak128":
+      return "S_Kroytor_LiAZ-677"
+      break
   }
 
 }
@@ -193,6 +196,22 @@ function get_obj_ch2(id) {
         break
         case 3:
           return "BusHalt_1"
+          break
+        case 4:
+          return "CarDepot"
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "Road_050"
+          break
+        case 2:
+          return "Road_070_Bridge"
+          break
+        case 3:
+          return "medium_classic_bus_stop"
           break
         case 4:
           return "CarDepot"
@@ -259,6 +278,28 @@ function get_veh_ch3(id) {
           break
       }
       break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "Haru_F7A"
+          break
+        case 2:
+          return "Haru_F7A"
+          break
+        case 3:
+          return "Renfe_279_(Benemerita)"
+          break
+        case 4:
+          return "Holzwagen_0"
+          break
+        case 5:
+          return "Holzwagen_0"
+          break
+        case 6:
+          return "Passanger_waggon_2"
+          break
+      }
+    break
   }
 
 }
@@ -323,7 +364,32 @@ function get_obj_ch3(id) {
           return "Signals"
           break
         case 7:
-          return "SlowOverheadpower"
+          return "classic_metal_mesh_catenary"
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "Rail_140_Tracks"
+          break
+        case 2:
+          return "Rail_100_Bridge"
+          break
+        case 3:
+          return "Container1TrainStop"
+          break
+        case 4:
+          return "TrainDepot"
+          break
+        case 5:
+          return "Rail_140_Tunnel"
+          break
+        case 6:
+          return "Signals"
+          break
+        case 7:
+          return "gray_type_catenary"
           break
       }
       break
@@ -348,7 +414,7 @@ function get_veh_ch4(id) {
           return "SlowFerry"
           break
       }
-    break
+      break
     case "pak64.german":
       switch (id) {
         case 1:
@@ -359,6 +425,16 @@ function get_veh_ch4(id) {
           break
       }
       break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "MHz-OT5_Oil_Barge"
+          break
+        case 2:
+          return "MV_Balmoral"
+          break
+      }
+    break
   }
 
 }
@@ -413,6 +489,25 @@ function get_obj_ch4(id) {
           break
       }
       break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "canal_030"
+          break
+        case 2:
+          return "Long_Goods_Dock"
+          break
+        case 3:
+          return "canal_ware_stop"
+          break
+        case 4:
+          return "ShipStop"
+          break
+        case 5:
+          return "ShipDepot"
+          break
+      }
+      break
   }
 }
 
@@ -442,7 +537,7 @@ function get_veh_ch5(id) {
           return "Postschiff"
           break
       }
-    break
+      break
     case "pak64.german":
       switch (id) {
         case 1:
@@ -456,6 +551,22 @@ function get_veh_ch5(id) {
           break
         case 4:
           return "Tugboat"
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "PMNV_50_Mack"
+          break
+        case 2:
+          return "PMNV_Mack_Bulk_Trailer_0"
+          break
+        case 3:
+          return "RVg_Post_Truck_1"
+          break
+        case 4:
+          return "Post_Barge"
           break
       }
       break
@@ -520,6 +631,28 @@ function get_obj_ch5(id) {
           break
       }
       break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "Road_070"
+          break
+        case 2:
+          return "CarStop"
+          break
+        case 3:
+          return "Powerline"
+          break
+        case 4:
+          return "Aufspanntransformator"
+          break
+        case 5:
+          return "CarDepot"
+          break
+        case 6:
+          return "PostOffice"
+          break
+      }
+      break
   }
 }
 
@@ -545,7 +678,7 @@ function get_veh_ch6(id) {
           return "BuessingLinie"
           break
       }
-    break
+      break
     case "pak64.german":
       switch (id) {
         case 1:
@@ -556,6 +689,19 @@ function get_veh_ch6(id) {
           break
         case 3:
           return "BuessingLinie"
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "SAC-Lockheed_Constellation_128_set"
+          break
+        case 2:
+          return "S_Kroytor_LiAZ-677"
+          break
+        case 3:
+          return "S_Kroytor_LiAZ-677"
           break
       }
       break
@@ -620,6 +766,28 @@ function get_obj_ch6(id) {
           break
       }
       break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return "runway_modern"
+          break
+        case 2:
+          return "air_movement_area"
+          break
+        case 3:
+          return "AirStop_AirportBlg"
+          break
+        case 4:
+          return "Terminal1950_AirportBlg_S"
+          break
+        case 5:
+          return "1940AirDepot"
+          break
+        case 6:
+          return "CarDepot"
+          break
+      }
+      break
   }
 }
 
@@ -657,6 +825,19 @@ function set_train_lenght(id) {
         break
         case 3:
           return 5
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return 5
+          break
+        case 2:
+          return 5
+        break
+        case 3:
+          return 7
           break
       }
       break
@@ -721,6 +902,28 @@ function set_transportet_goods(id) {
           break
       }
       break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return 60
+          break
+        case 2:
+          return 30
+        break
+        case 3:
+          return 20
+          break
+        case 4:
+          return 40
+          break
+        case 5:
+          return 80
+          break
+        case 6:
+          return 160
+          break
+      }
+      break
   }
 
 }
@@ -759,6 +962,19 @@ function set_loading_capacity(id) {
           break
         case 3:
           return 60
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return 100
+          break
+        case 2:
+          return 100
+          break
+        case 3:
+          return 100
           break
       }
       break
@@ -803,6 +1019,19 @@ function set_waiting_time(id) {
           break
         case 3:
           return 2555
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return 10571
+          break
+        case 2:
+          return 10571
+          break
+        case 3:
+          return 10571
           break
       }
       break
