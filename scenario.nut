@@ -614,7 +614,7 @@ function is_scenario_completed(pl)
   return percentage
 }
 
-function is_work_allowed_here(pl, tool_id, pos)
+function is_work_allowed_here(pl, tool_id, name, pos, tool)
 {
   local pause = debug.is_paused()
   //if (pause) return translate("Advance is not allowed with the game paused.")
@@ -626,7 +626,7 @@ function is_work_allowed_here(pl, tool_id, pos)
   }
   local result = translate("Action not allowed")
   if (correct_cov){
-    local result = chapter.is_work_allowed_here(pl, tool_id, pos)
+    local result = chapter.is_work_allowed_here(pl, tool_id, name, pos, tool)
     return fail_count_message(result, tool_id)
   }
   else {
@@ -686,7 +686,7 @@ function is_convoy_allowed(pl, convoy, depot)
   return result
 }
 
-function is_tool_allowed(pl, tool_id, wt)
+function is_tool_allowed(pl, tool_id, wt, name)
 {
   local result = true
 
@@ -700,7 +700,7 @@ function is_tool_allowed(pl, tool_id, wt)
     return result
 }
 
-function is_tool_active(pl, tool_id, wt)
+function is_tool_active(pl, tool_id, wt, name)
 {
   local result = true
   if (pl != 0) return false
