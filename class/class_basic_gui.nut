@@ -373,7 +373,6 @@ function chapter_disabled_tools( pl ) {
 
 
   for ( local x = 0; x < unused_tools.len(); x++ ) {
-	gui.add_message(format("%x", unused_tools[x]))
     rules.forbid_tool( pl, unused_tools[x] )
   }
 
