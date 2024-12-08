@@ -392,7 +392,7 @@ function chapter_disabled_tools( pl ) {
   if ( enabled_tools.len() > 0 ) {
     enabled_tools.append(tool_remover)
     for ( local x = 0; x < enabled_tools.len(); x++ ) {
-      rules.allow_tool( pl, enabled_tools[x] )
+      rules.clear_forbid_tool( pl, enabled_tools[x] )
       //gui.add_message("enabled_tools["+x+"]: "+enabled_tools[x])
     }
   }
@@ -1068,7 +1068,7 @@ function chapter_step_enabled_tools( pl ) {
   // tools enabled
   if ( enabled_tools.len() > 0 ) {
     for ( local x = 0; x < enabled_tools.len(); x++ ) {
-      rules.allow_tool( pl, enabled_tools[x] )
+      rules.clear_forbid_tool( pl, enabled_tools[x] )
     }
   }
 
