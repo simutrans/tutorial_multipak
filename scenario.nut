@@ -80,8 +80,8 @@ tile_delay      <- 2       //delay for mark tiles
 tile_delay_list <- 2
 gui_delay       <- true    //delay for open win
 
-fail_num        <- 20      //numr for the count of try
-fail_count      <- 1       //if tool fail more of 10 try
+fail_num        <- 5       //numr for the count of try
+fail_count      <- 1       //if tool fail more of fail_num try
 
 
 //Schedule activate
@@ -546,7 +546,7 @@ function is_scenario_completed(pl)
     if (fail_num <= 0){
       gui.open_info_win_at("goal")
       fail_count = 1
-      fail_num = 20
+      fail_num = 5
     }
     else fail_num--
   }
@@ -627,32 +627,31 @@ function is_work_allowed_here(pl, tool_id, name, pos, tool)
   local result = translate("Action not allowed")
   if (correct_cov){
     local result = chapter.is_work_allowed_here(pl, tool_id, name, pos, tool)
-    return fail_count_message(result, tool_id)
+    return fail_count_message(result, tool_id, tool)
   }
   else {
     if (tool_id==4108 || tool_id==4096)
       result = null
   }
-  return fail_count_message(result, tool_id)
+  return fail_count_message(result, tool_id, tool)
 }
 
-function fail_count_message(result, tool_id)
+function fail_count_message(result, tool_id, tool)
 {
-  //gui.add_message(result+" ")
-  //Desabilitado
-  /*if(tool_id != tool_build_tunnel && result != ""){
-    //gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)
-    if (fail_count && result != null){
-      fail_count++
-      if (fail_count >= fail_num){
-        fail_count = null
-        return translate("Are you lost ?, see the instructions shown below.")
-      }
-    }
-    else if (result == null)
-        fail_count = 1
-  }*/
-  return result
+	//gui.add_message(result+" ")
+	if(result != "" && !tool.is_drag_tool){
+		//gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)
+		if (fail_count && result != null){
+			fail_count++
+			if (fail_count >= fail_num){
+				fail_count = null
+				return translate("Are you lost ?, see the instructions shown below.")
+			}
+		}
+		else if (result == null)
+			fail_count = 1
+	}
+	return result
 }
 
 function is_schedule_allowed(pl, schedule)
