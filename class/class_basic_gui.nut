@@ -1042,6 +1042,30 @@ function chapter_step_enabled_tools( pl ) {
       break
     case 7:
 
+      // chapter 7 all steps
+      local _enabled_tools = [ tool_build_way,
+                               tool_build_station,
+                               tool_build_depot,
+                               tool_build_wayobj,
+                               tool_build_roadsign,
+                               4108,
+                               tool_remove_way,
+                               tool_remove_wayobj,
+                               tool_make_stop_public,
+                               tool_stop_mover,
+                               tool_merge_stop,
+                               tool_clear_reservation,
+                               tool_remover
+      ]
+
+      enabled_tools.extend(_enabled_tools)
+
+      local _pak64_tools = [ 0x8006 ]
+      local _pak64german_tools = [ 0x800e, 0x8002 ]
+
+      enabled_tools_pak64.extend(_pak64_tools)
+      enabled_tools_pak64german.extend(_pak64german_tools)
+
       break
 
   }
