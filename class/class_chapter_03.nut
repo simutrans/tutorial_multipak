@@ -13,6 +13,7 @@ class tutorial.chapter_03 extends basic_chapter
   startcash     = 50000000
 
   gl_wt = wt_rail
+  gl_st = st_flat
 
   //Step 5 =====================================================================================
   ch3_cov_lim1 = {a = 0, b = 0}
@@ -1483,7 +1484,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1506,13 +1507,13 @@ class tutorial.chapter_03 extends basic_chapter
           if (pos.x>=st2_way_lim.a.x && pos.y>=st2_way_lim.a.y && pos.x<=st2_way_lim.b.x && pos.y<=st2_way_lim.b.y){
             if(tool_id==tool_build_bridge)
               return result
-            return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           if (pos.x>=bord2_lim.a.x && pos.y>=bord2_lim.a.y && pos.x<=bord2_lim.b.x && pos.y<=bord2_lim.b.y){
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1620,7 +1621,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1639,13 +1640,13 @@ class tutorial.chapter_03 extends basic_chapter
           if (pos.x>=st4_way_lim.a.x && pos.y>=st4_way_lim.a.y && pos.x<=st4_way_lim.b.x && pos.y<=st4_way_lim.b.y){
             if(tool_id==tool_build_bridge)
               return result
-            return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           if (pos.x>=bord4_lim.a.x && pos.y>=bord4_lim.a.y && pos.x<=bord4_lim.b.x && pos.y<=bord4_lim.b.y){
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
 
           else if(tool_id==tool_build_way)
@@ -1739,7 +1740,7 @@ class tutorial.chapter_03 extends basic_chapter
         if (pot0==0){
           if (pos.x>=c_way6_lim.a.x && pos.y<=c_way6_lim.a.y && pos.x<=c_way6_lim.b.x && pos.y>=c_way6_lim.b.y){
             if (tool_id==tool_build_way || tool_id == tool_build_bridge || tool_id == tool_build_tunnel){
-              return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c)
+              return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
             }
           }
           else return  translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1787,7 +1788,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
               //El Tunel ya tiene la altura correcta
               if (r_way.c.z+plus == c_tunn2.b.z) {
-                return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
+                return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
               }
               if(!count_tunn && slope==0 && way && way.is_marked())
                 return null
@@ -1806,7 +1807,7 @@ class tutorial.chapter_03 extends basic_chapter
               }
               //El Tunel ya tiene la altura correcta
               if (r_way.c.z+plus == c_tunn2.b.z) {
-                return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
+                return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
               }
               local under = c_tunn2.a.z
               local dir = dir_1.r
@@ -1846,23 +1847,23 @@ class tutorial.chapter_03 extends basic_chapter
                 local max = 3
                 result = tunnel_build_check(start, under,  max, dir)
                 if(result == null)
-                  return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
+                  return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
 
                 return result
               }
               if(pos.x > r_way.c.x -3){
                 //gui.add_message(""+slp_way+" "+ dir_1.s)
                 if(slp_way == dir_1.s )
-                  return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
+                  return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
                 else
                   return translate("You must use the tool to raise the ground here")+" ("+r_way.c.tostring()+")."
 
                 if (!squ.get_tile_at_height(pos.z))
-                  return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
+                  return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
               }
               if(slp_way == 0 ){
                 if(pos.z != r_way.c.z)
-                  return all_control(result, gl_wt, way, ribi, tool_id, pos, r_way.c, plus)
+                  return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
 
                 if(pos.z == r_way.c.z) {
                   return translate("You must upper the ground first")+" ("+r_way.c.tostring()+".)"
