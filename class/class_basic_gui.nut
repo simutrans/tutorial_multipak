@@ -1106,7 +1106,7 @@ function chapter_step_enabled_tools( pl ) {
   }
 
   // tools enabled
-  gui.add_message(" "+enabled_tools.len())
+  //gui.add_message(" "+enabled_tools.len())
   if ( enabled_tools.len() > 0 ) {
     for ( local x = 0; x < enabled_tools.len(); x++ ) {
       rules.clear_forbid_tool( pl, enabled_tools[x] )

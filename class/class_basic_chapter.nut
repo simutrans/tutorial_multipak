@@ -3209,7 +3209,7 @@ class basic_chapter
     local count = tunnel_get_max(start, end, max, dir)
     local t = tile_x(r_way.c.x, r_way.c.y, r_way.c.z)
 
-    gui.add_message(""+count+" :: "+max+" :: "+start.tostring()+" :: "+dir+" :: "+r_way.c.tostring())
+    //gui.add_message(""+count+" :: "+max+" :: "+start.tostring()+" :: "+dir+" :: "+r_way.c.tostring())
     if(count <= max) {
       return under_way_check(under, dir)
     }

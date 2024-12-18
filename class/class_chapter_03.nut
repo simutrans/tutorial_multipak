@@ -13,8 +13,7 @@ class tutorial.chapter_03 extends basic_chapter
   startcash     = 50000000
 
   gl_wt = wt_rail
-  gl_st_a = st_flat
-  gl_st_b = st_tram
+  gl_st = st_flat
   gl_tool = 0
 
   //Step 5 =====================================================================================
@@ -1213,7 +1212,7 @@ class tutorial.chapter_03 extends basic_chapter
 
           if (!t_tunn.find_object(mo_tunnel)){
             local label_t =  my_tile(start_tunn)
-			local lab = label_t.find_object(mo_label)
+      local lab = label_t.find_object(mo_label)
             if(lab){
               if(label_t.is_marked()){
                 if(gl_tool == tool_build_tunnel){
@@ -1241,29 +1240,28 @@ class tutorial.chapter_03 extends basic_chapter
         else if (pot2==1 && pot3==0){
           chapter_sub_step = 3  // sub step finish
 
-              /*
-               *  FIX built tunnel end of bridge pak128
-               */
-              if ( pak_name == "pak128" ) {
-                local tile_t = tile_x( c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z )
-                local tile_b = tile_x( c_tunn2.a.x+1, c_tunn2.a.y, c_tunn2.a.z-2 )
-                //local tile_w = tile_x( c_tunn2.a.x+4, c_tunn2.a.y, c_tunn2.a.z-1 )
+          /*
+           *  FIX built tunnel end of bridge pak128
+           */
+          if ( pak_name == "pak128" ) {
+            local tile_t = tile_x( c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z )
+            local tile_b = tile_x( c_tunn2.a.x+1, c_tunn2.a.y, c_tunn2.a.z-2 )
+            //local tile_w = tile_x( c_tunn2.a.x+4, c_tunn2.a.y, c_tunn2.a.z-1 )
 
-                  //gui.add_message("tile_t.find_object(mo_tunnel) " + tile_t.find_object(mo_tunnel))
-                  //gui.add_message("tile_b.find_object(mo_bridge) " + tile_b.find_object(mo_bridge))
-                  //gui.add_message("tile_w.find_object(mo_way) " + tile_w.find_object(mo_way))
-                local way = tile_t.find_object(mo_way)
-                local ribi = way? way.get_dirs() : 0
+            //gui.add_message("tile_t.find_object(mo_tunnel) " + tile_t.find_object(mo_tunnel))
+            //gui.add_message("tile_b.find_object(mo_bridge) " + tile_b.find_object(mo_bridge))
+            //gui.add_message("tile_w.find_object(mo_way) " + tile_w.find_object(mo_way))
+            local way = tile_t.find_object(mo_way)
+            local ribi = way? way.get_dirs() : 0
 
 
-                if ( ribi == 0 && tile_t.find_object(mo_tunnel) && tile_b.find_object(mo_bridge) ) {
-                  //local way_obj = tile_w.find_object(mo_way)
-                  local tool = command_x(tool_build_way)
-                  local err = tool.work(player_x(0), tile_t, tile_b, sc_way_name)
-                  gui.add_message(err)
-                }
-
-              }
+            if ( ribi == 0 && tile_t.find_object(mo_tunnel) && tile_b.find_object(mo_bridge) ) {
+              //local way_obj = tile_w.find_object(mo_way)
+              local tool = command_x(tool_build_way)
+              local err = tool.work(player_x(0), tile_t, tile_b, sc_way_name)
+              //gui.add_message(err)
+            }
+          }
 
           local coora = coord3d(c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z)
           local coorb = coord3d(c_tunn2.b.x, c_tunn2.b.y, c_tunn2.b.z)
@@ -1537,7 +1535,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1560,13 +1558,13 @@ class tutorial.chapter_03 extends basic_chapter
           if (pos.x>=st2_way_lim.a.x && pos.y>=st2_way_lim.a.y && pos.x<=st2_way_lim.b.x && pos.y<=st2_way_lim.b.y){
             if(tool_id==tool_build_bridge)
               return result
-            return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           if (pos.x>=bord2_lim.a.x && pos.y>=bord2_lim.a.y && pos.x<=bord2_lim.b.x && pos.y<=bord2_lim.b.y){
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1680,7 +1678,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1699,13 +1697,13 @@ class tutorial.chapter_03 extends basic_chapter
           if (pos.x>=st4_way_lim.a.x && pos.y>=st4_way_lim.a.y && pos.x<=st4_way_lim.b.x && pos.y<=st4_way_lim.b.y){
             if(tool_id==tool_build_bridge)
               return result
-            return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           if (pos.x>=bord4_lim.a.x && pos.y>=bord4_lim.a.y && pos.x<=bord4_lim.b.x && pos.y<=bord4_lim.b.y){
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
 
           else if(tool_id==tool_build_way)
@@ -1799,7 +1797,7 @@ class tutorial.chapter_03 extends basic_chapter
         if (pot0==0){
           if (pos.x>=c_way6_lim.a.x && pos.y<=c_way6_lim.a.y && pos.x<=c_way6_lim.b.x && pos.y>=c_way6_lim.b.y){
             if (tool_id==tool_build_way || tool_id == tool_build_bridge || tool_id == tool_build_tunnel){
-              return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name)
+              return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
             }
           }
           else return  translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1848,7 +1846,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
               //El Tunel ya tiene la altura correcta
               if (r_way.c.z+plus == c_tunn2.b.z) {
-                return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
+                return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
               }
               if(!count_tunn && slope==0 && way && way.is_marked())
                 return null
@@ -1861,145 +1859,59 @@ class tutorial.chapter_03 extends basic_chapter
               //El Tunel ya tiene la altura correcta
               if (r_way.c.z+plus == c_tunn2.b.z) {
                 //gui.add_message("Z: "+r_way.c.z+plus)
-                return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
+                return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
               }
-
               local dir = dir_1.r
-				local t_r_way = my_tile(r_way.c)
-				local tunn_r_way = t_r_way.find_object(mo_tunnel)
-				if(tunn_r_way){
-					if ( pak_name == "pak128" ) {
-						if(way_x(r_way.c.x, r_way.c.y, r_way.c.z).get_dirs() == 0){
-							return null
-						}
-					}
-					//Se comprueba el primer tramo despues de la entrada del tunel----------------------------------
-              		local under = c_tunn2.a.z
-					result = under_way_check(under, dir)
-					if(result != null){
-						return result
-					}
-             		local start = c_tunn2.a
-				    local max = 3
-	 				local new_max = tunnel_get_max(start, pos, max, dir)
-					if(new_max < max){
-				        result = tunnel_build_check(start, pos, under,  max, dir)
-				        if(result == null){
-				          return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
-						}
-					}
-					else{
-						return ""
-					}
-					//--------------------------------------------------------------------------------------------------
-				}
-				//Entonces se comprueba ahora desde las pendientes
-				else{
-					
-              		local slp_way = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
-
-					//Si es distinto a flat
-					if(slp_way != 0){
-						local start = r_way.c
-						local max = 2
- 						local new_max = tunnel_get_max(start, pos, max, dir)
-						//return new_max
-						if(new_max < max){
-		             		return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
-						}
-					}
-					else{
-                		  return translate("You must upper the ground first")+" ("+r_way.c.tostring()+".)"
-					}
-				}
-
-				/*
-              local squ = square_x(pos.x, pos.y)
-              //Ingnora algunas comprobaciones
-              local z = squ.get_ground_tile().z
-              if( z == pos.z){
-                //gui.add_message("pos: "+pos)
-                return null
-              }
-              //El Tunel ya tiene la altura correcta
-              if (r_way.c.z+plus == c_tunn2.b.z) {
-                gui.add_message("Z: "+r_way.c.z+plus)
-                return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
-              }
-              local under = c_tunn2.a.z
-              local dir = dir_1.r
-              result = under_way_check(under, dir)
-              local start = c_tunn1.a
-
-              /*
-               *  FIX built tunnel end of bridge pak128
-               */
-				/*
-              if ( pak_name == "pak128" ) {
-                local tile_t = tile_x( c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z )
-                local tile_b = tile_x( c_tunn2.a.x+1, c_tunn2.a.y, c_tunn2.a.z-2 )
-                //local tile_w = tile_x( c_tunn2.a.x+4, c_tunn2.a.y, c_tunn2.a.z-1 )
-
-                  //gui.add_message("tile_t.find_object(mo_tunnel) " + tile_t.find_object(mo_tunnel))
-                  //gui.add_message("tile_b.find_object(mo_bridge) " + tile_b.find_object(mo_bridge))
-                  //gui.add_message("tile_w.find_object(mo_way) " + tile_w.find_object(mo_way))
-                local way = tile_t.find_object(mo_way)
-                local ribi = way? way.get_dirs() : 0
-
-
-                if ( ribi == 0 && tile_t.find_object(mo_tunnel) && tile_b.find_object(mo_bridge) ) {
-                  //local way_obj = tile_w.find_object(mo_way)
-                  local tool = command_x(tool_build_way)
-                  local err = tool.work(player_x(0), tile_t, tile_b, sc_way_name)
+              local t_r_way = my_tile(r_way.c)
+              local tunn_r_way = t_r_way.find_object(mo_tunnel)
+              if(tunn_r_way){
+                if ( pak_name == "pak128" ) {
+                  if(way_x(r_way.c.x, r_way.c.y, r_way.c.z).get_dirs() == 0){
+                    return null
+                  }
                 }
-
-              }
-
-              if(result != null && r_way.c.x != start.x && r_way.c.y != start.y)
-                return result
-
-              //gui.add_message("ztz "+z+" -- "+pos.z)
-              if (z == r_way.c.z && pos.z == c_tunn2.a.z && pos.x > r_way.c.x -3 ) {
-                // Check if not have more tunnel
-
+                //Se comprueba el primer tramo despues de la entrada del tunel----------------------------------
+                local under = c_tunn2.a.z
+                result = under_way_check(under, dir)
+                if(result != null){
+                  return result
+                }
+                local start = c_tunn2.a
                 local max = 3
-                result = tunnel_build_check(start, under,  max, dir)
-                if(result == null)
-                  return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
-
-                return result
+                local new_max = tunnel_get_max(start, pos, max, dir)
+                if(new_max < max){
+                  result = tunnel_build_check(start, pos, under,  max, dir)
+                  if(result == null){
+                    return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
+                  }
+                }
+                else{
+                  return ""
+                }
+               //--------------------------------------------------------------------------------------------------
               }
-              if(pos.x > r_way.c.x -3){
-                //gui.add_message(""+slp_way+" "+ dir_1.s)
-                if(slp_way == dir_1.s ){
-                  return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
-				}
-                else
-                  return translate("You must use the tool to raise the ground here")+" ("+r_way.c.tostring()+")."
-
-                //gui.add_message(""+slp_way+" "+ dir_1.s)
-                if (!squ.get_tile_at_height(pos.z))
-                  return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
-              }
-              if(slp_way == 0 ){
-                if(pos.z != r_way.c.z)
-                  return all_control(result, gl_wt, gl_st_a, way, ribi, tool_id, pos, r_way.c, name, plus)
-
-                if(pos.z == r_way.c.z) {
+              //Entonces se comprueba ahora desde las pendientes
+              else{      
+                local slp_way = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
+                //Si es distinto a flat
+                if(slp_way != 0){
+                  local start = r_way.c
+                  local max = 2
+                   local new_max = tunnel_get_max(start, pos, max, dir)
+                  //return new_max
+                  if(new_max < max){
+                    return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
+                  }
+                }
+                else{
                   return translate("You must upper the ground first")+" ("+r_way.c.tostring()+".)"
                 }
               }
-
-              if (under_lv != unde_view && pos.x < r_way.c.x -3) return null
-
-              if(pos.z == r_way.c.z+plus)return ""*/
-
-
             }
             else return translate("Build a tunnel here")+" ("+r_way.c.tostring()+")."
           }
           //Tunel Con pendientes
-          if (name == t_name.up){
+          if (tool_id == tool_setslope){
             if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
               local slp_way = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
               local end_z = c_tunn2.b.z
@@ -2009,34 +1921,41 @@ class tutorial.chapter_03 extends basic_chapter
                 local dir = dir_1.r
                 local under = end_z
                 result = under_way_check(under, dir)
+                if(result == null){
+                  if(name == t_name.up){
+                    return null
+                  }
+                  else if(name == t_name.down){
+                    return translate("Action not allowed") 
+                  }
+                  return translate("Only up and down movement in the underground!") 
+                }
                 return result
               }
               if (pos.z == end_z)
                 return translate("The tunnel is already at the correct level")+" ("+end_z+")."
             }
-			else{
-				return translate("Action not allowed") 
-			}
-			
+            else{
+              return translate("Action not allowed") 
+            }
             if(slope==0) return translate("Modify the terrain here")+" ("+r_way.c.tostring()+")."
           }
         }
-
         break
       case 9:
         if (pot0==0){
           result = r_way.c != 0? translate("Connect the Track here")+" ("+r_way.c.tostring()+").":result
-                for(local j=0;j<c_way_lim1.len();j++){
+          for(local j=0;j<c_way_lim1.len();j++){
             if(glsw[j] == 0){
               if(pos.x>=c_way_lim1[j].a.x && pos.y>=c_way_lim1[j].a.y && pos.x<=c_way_lim1[j].b.x && pos.y<=c_way_lim1[j].b.y){
 
                 if(tool_id == tool_build_way){
                    return null
                 }
-                 }
-               else if (j== c_way_lim1.len()-1){
+              }
+              else if (j== c_way_lim1.len()-1){
                 result = translate("You are outside the allowed limits!")+" ("+pos.tostring()+")."
-                }
+              }
               break
             }
           }
