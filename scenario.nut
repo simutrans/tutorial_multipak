@@ -87,7 +87,7 @@ fail_count      <- 1       //if tool fail more of fail_num try
 //Schedule activate
 active_sch_check <- false
 
-  simu_version  <- "124.0.1"
+  simu_version  <- "124.2.3"
   current_st    <- "0"
 
 include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
