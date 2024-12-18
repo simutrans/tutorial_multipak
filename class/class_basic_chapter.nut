@@ -56,7 +56,7 @@ class basic_chapter
   //-----------------------------------------------------------------
 
   //Underground View
-  under_lv  = resul_version.st? settings.get_underground_view_level() : 127
+  under_lv  = settings.get_underground_view_level()
   unde_view = -128
   norm_view = 127
 
@@ -1810,6 +1810,7 @@ class basic_chapter
   function all_control(result, wt, st, way, ribi, tool_id, pos, coor, name, plus = 0){
     local t = tile_x(coor.x, coor.y, coor.z)
     local brig = t.find_object(mo_bridge)
+    local desc = way_desc_x.get_available_ways(wt, st)
     if ((tool_id==tool_remove_way)||(tool_id==tool_remover)){
       if (way && way.get_waytype() != wt)
         return result
@@ -1854,9 +1855,12 @@ class basic_chapter
     else if ((pos.x == t.x && pos.y == t.y && pos.z == t.z)||(cursor_sw)){
       if (tool_id==tool_build_way || tool_id==tool_build_tunnel){
         if ((ribi==0) || (ribi==1) || (ribi==2) || (ribi==4) || (ribi==8)){
-          local way_desc =  way_desc_x.get_available_ways(wt, st)
-          foreach(desc in way_desc){
-            if(desc.get_name() == name){
+		if(t.find_object(mo_tunnel)){
+			return null
+		}
+          foreach(d in desc){
+            //gui.add_message(d.get_name()+" :: "+name)
+            if(d.get_name() == name){
               return null
             }
           }
@@ -1887,9 +1891,9 @@ class basic_chapter
       }
     }
     else{
-      local way_desc =  way_desc_x.get_available_ways(wt, st)
-      foreach(desc in way_desc){
-        if(desc.get_name() == name){
+      foreach(d in desc){
+        //gui.add_message(d.get_name()+" :: "+name)
+        if(d.get_name() == name){
           return translate("Connect the Track here")+" ("+coord3d(coor.x, coor.y, coor.z).tostring()+")."
         }
       }
@@ -2527,6 +2531,7 @@ class basic_chapter
         }
       }
       else{
+        glsw[j]=0
         if (way && !way.is_marked()){
           way.mark()
         }
@@ -3200,40 +3205,44 @@ class basic_chapter
     }
   }
 
-  function tunnel_build_check(start, under,  max, dir){
-    local result =  translate("The tunnel is not correct, use the [Remove] tool here")+" ("+r_way.c.tostring()+".)"
-    if(r_way.c.x == start.x && r_way.c.y == start.y)
-      return null
-
-    local count = 0
+  function tunnel_build_check(start, end, under,  max, dir){
+    local count = tunnel_get_max(start, end, max, dir)
     local t = tile_x(r_way.c.x, r_way.c.y, r_way.c.z)
 
-    if (dir == 8) {
-      for (local j = start.x; j<t.x ;j++){
-        count++
-      }
-    }
-    else if (dir == 1) {
-      for (local j = start.y; j<t.y ;j++){
-        count++
-      }
-    }
-    else if (dir == 2) {
-      for (local j = start.x; j>t.x ;j--){
-        count++
-      }
-    }
-    else if (dir == 4) {
-      for (local j = start.y; j>t.y ;j--){
-        count++
-      }
-    }
-    //gui.add_message(""+ribi)
+    gui.add_message(""+count+" :: "+max+" :: "+start.tostring()+" :: "+dir+" :: "+r_way.c.tostring())
     if(count <= max) {
       return under_way_check(under, dir)
     }
 
-    return result
+    return "lol"
+  }
+
+  function tunnel_get_max(start, end, max, dir){
+
+    local count = 0
+
+    if (dir == 8) {
+      for (local j = start.x; j<end.x ;j++){
+        count++
+      }
+    }
+    else if (dir == 1) {
+      for (local j = start.y; j<end.y ;j++){
+        count++
+      }
+    }
+    else if (dir == 2) {
+      for (local j = start.x; j>end.x ;j--){
+        count++
+      }
+    }
+    else if (dir == 4) {
+      for (local j = start.y; j>end.y ;j--){
+        count++
+      }
+    }
+
+    return count
   }
 
   function under_way_check(under, dir){

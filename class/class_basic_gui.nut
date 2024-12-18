@@ -8,12 +8,15 @@
   switch (pak_name) {
     case "pak64":
       t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x8009, slope = 0x8002, tram = 0x8005, mono = 0x8004, exted = 0x0000}
+      t_name <- {down = "83 #all down slope", up = "82 #all up slope"}
       break
     case "pak64.german":
       t_icon <- {road = 0x800e, rail = 0x800a, ship = 0x800f, plane = 0x8010, other = 0x8005, slope = 0x8001, tram = 0x800d, build = 0x8002, stats = 0x8003, exted = 0x8004, mag = 0x800b, narr = 0x800c, powe = 0x8011 }
+      t_name <- {down = "83 #all down slope", up = "82 #all up slope"}
       break
     case "pak128":
-      t_icon <- {road = 0x8006, rail = 0x8002, ship = 0x8007, plane = 0x8008, other = 0x800a, slope = 0x8001, tram = 0x8005, mono = 0x8003, exted = 0x0000, mag = 0x8004, narr = 0x8009}
+      t_icon <- {road = 0x8006, rail = 0x8003, ship = 0x8007, plane = 0x8008, other = 0x800a, slope = 0x8002, tram = 0x8005, mono = 0x8003, exted = 0x0000, mag = 0x8004, narr = 0x8009}
+      t_name <- {down = "83 #all down slope", up = "82 #all up slope"}
       break
   }
 
@@ -49,7 +52,7 @@ function general_disabled_tools( pl ) {
 
   local pak64_tools = [ 0x8004, 0x8005, tool_set_climate ]
   local pak64german_tools = [ 0x800b, 0x800c, 0x800d, 0x8013, 0x8014, 0x8015, 0x8023, 0x8025, 0x8027, 0x8007 ]
-  local pak128_tools = [ 0x8003, 0x8004, 0x8005, 0x8009, tool_set_climate ]
+  local pak128_tools = [0x8004, 0x8005, 0x8009, tool_set_climate ]
 
   switch (pak_name) {
     case "pak64":
@@ -113,7 +116,7 @@ function chapter_disabled_tools( pl ) {
 
         local _pak64_tools = [ 0x8002, 0x8003, 0x8006 0x8007, 0x8008, 0x8009, tool_build_transformer ]
         local _pak64german_tools = [ 0x8001, 0x8003, 0x8004, 0x8005, 0x800a, 0x800e, 0x800f, 0x8010, 0x8011, 1004 ]
-        local _pak128_tools = [ 0x8001, 0x8002, 0x8006 0x8007, 0x8008, 0x800a, tool_build_transformer ]
+        local _pak128_tools = [ 0x8002, 0x8003, 0x8006 0x8007, 0x8008, 0x800a, tool_build_transformer ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
@@ -138,7 +141,7 @@ function chapter_disabled_tools( pl ) {
 
         local _pak64_tools = [ 0x8002, 0x8003, 0x8007, 0x8008, 0x8009 ]
         local _pak64german_tools = [ 0x8001, 0x8005, 0x800a, 0x800f, 0x8010, 0x8011, 1004, 0x8004, 0x801d, 0x802a ]
-        local _pak128_tools = [ 0x8001, 0x8002, 0x8007, 0x8008, 0x8009 ]
+        local _pak128_tools = [ 0x8002, 0x8003, 0x8007, 0x8008, 0x8009 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
@@ -179,7 +182,7 @@ function chapter_disabled_tools( pl ) {
 
         local _pak64_tools = [ 0x8002, 0x8006, 0x8007, 0x8008, 0x8009 ]
         local _pak64german_tools = [ 0x8001, 0x8005 0x800e, 0x800f, 0x8010, 0x8011, 1004, 0x8004, 0x8019, 0x8022 ]
-        local _pak128_tools = [ 0x8001, 0x8006, 0x8007, 0x8008, 0x8009 ]
+        local _pak128_tools = [ 0x8002, 0x8006, 0x8007, 0x8008, 0x8009 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
@@ -215,7 +218,7 @@ function chapter_disabled_tools( pl ) {
 
         local _pak64_tools = [ 0x8002, 0x8003, 0x8006, 0x8008, 0x8009 ]
         local _pak64german_tools = [ 0x8001, 0x800a, 0x800e, 0x8010, 0x8011, 1004, 0x8004, 0x801e, 0x802c ]
-        local _pak128_tools = [ 0x8001, 0x8002, 0x8006, 0x8008, 0x8009 ]
+        local _pak128_tools = [ 0x8002, 0x8003, 0x8006, 0x8008, 0x8009 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
@@ -256,7 +259,7 @@ function chapter_disabled_tools( pl ) {
 
         local _pak64_tools = [ 0x8002, 0x8003, 0x8007, 0x8008 ]
         local _pak64german_tools = [ 0x8001, 0x800a, 0x800f, 0x8010, 0x8011, 1004, 0x8004, 0x801d, 0x802a, 0x800e ]
-        local _pak128_tools = [ 0x8001, 0x8002, 0x8007, 0x8008 ]
+        local _pak128_tools = [ 0x8002, 0x8003, 0x8007, 0x8008 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
@@ -287,7 +290,7 @@ function chapter_disabled_tools( pl ) {
 
         local _pak64_tools = [ 0x8002, 0x8003 ]
         local _pak64german_tools = [ 0x8001, 0x8003, 0x8004, 0x800a, 0x800f, 0x8011, 1004 ]
-        local _pak128_tools = [ 0x8001, 0x8002 ]
+        local _pak128_tools = [ 0x8002, 0x8003 ]
 
         pak64_tools.extend(_pak64_tools)
         pak64german_tools.extend(_pak64german_tools)
@@ -423,11 +426,13 @@ function chapter_step_enabled_tools( pl ) {
   local unused_pl_tools = []
   local pak64_pl_tools = []
   local pak64german_pl_tools = []
+  local pak128_pl_tools = []
   local _wt = []
 
   local enabled_tools = []
   local enabled_tools_pak64 = []
   local enabled_tools_pak64german = []
+  local enabled_tools_pak128 = []
 
   local enabled_pl_tools = []
   local enabled_pl_tools_pak64 = []
@@ -662,9 +667,11 @@ function chapter_step_enabled_tools( pl ) {
 
           local _pak64_tools = [ 0x8002 ]
           local _pak64german_tools = [ 0x8001 ]
+          local _pak128_tools = [ 0x8002 ]
 
           enabled_tools_pak64.extend(_pak64_tools)
           enabled_tools_pak64german.extend(_pak64german_tools)
+          enabled_tools_pak128.extend(_pak128_tools)
 
           break
         case 9:
@@ -1087,9 +1094,19 @@ function chapter_step_enabled_tools( pl ) {
         enabled_tools.extend(enabled_tools_pak64german)
       }
       break
+    case "pak128":
+
+      if ( pak128_pl_tools.len() > 0 ) {
+        unused_pl_tools.extend(pak128_pl_tools)
+      }
+      if ( enabled_tools_pak128.len() > 0 ) {
+        enabled_tools.extend(enabled_tools_pak128)
+      }
+      break
   }
 
   // tools enabled
+  gui.add_message(" "+enabled_tools.len())
   if ( enabled_tools.len() > 0 ) {
     for ( local x = 0; x < enabled_tools.len(); x++ ) {
       rules.clear_forbid_tool( pl, enabled_tools[x] )

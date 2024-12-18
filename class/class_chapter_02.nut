@@ -771,12 +771,12 @@ class tutorial.chapter_02 extends basic_chapter
       //Construye un tramo de carretera
       case 1:
         if (tool_id==tool_build_way){
-          local way_desc =  way_desc_x.get_available_ways(gl_wt, st_flat)
+          local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
           foreach(desc in way_desc){
             if(desc.get_name() == name){
               if ((pos.x>=dep_lim1.a.x)&&(pos.y>=dep_lim1.a.y)&&(pos.x<=dep_lim1.b.x)&&(pos.y<=dep_lim1.b.y)){
                 if(!cursor_b)
-                  return null
+                return null
               }
               if ((pos.x>=dep_lim2.a.x)&&(pos.y>=dep_lim2.a.y)&&(pos.x<=dep_lim2.b.x)&&(pos.y<=dep_lim2.b.y)){
                 if(!cursor_a)
@@ -784,7 +784,8 @@ class tutorial.chapter_02 extends basic_chapter
               }
               return translate("Connect the road here")+" ("+c_dep.tostring()+")."
             }
-          }
+          }        
+          return translate("Connect the road here")+" ("+c_dep.tostring()+")."
         }
         break;
       //Construye un deposito de carreteras
@@ -804,6 +805,7 @@ class tutorial.chapter_02 extends basic_chapter
         break;
       //Construye las paradas de autobus
       case 3:
+
         if (pos.x == c_dep.x && pos.y == c_dep.y )
           return format(translate("You must build the %d stops first."),7)
         if (pos.x>city1_lim.a.x && pos.y>city1_lim.a.y && pos.x<city1_lim.b.x && pos.y<city1_lim.b.y){

@@ -639,7 +639,7 @@ function is_work_allowed_here(pl, tool_id, name, pos, tool)
 function fail_count_message(result, tool_id, tool)
 {
 	//gui.add_message(result+" ")
-	if(result != "" && !tool.is_drag_tool){
+	if(result != "" && !tool.is_drag_tool && tool_id != tool_build_tunnel){
 		//gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)
 		if (fail_count && result != null){
 			fail_count++
