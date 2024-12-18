@@ -1910,7 +1910,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
             else return translate("Build a tunnel here")+" ("+r_way.c.tostring()+")."
           }
-          //Tunel Con pendientes
+          //Tunel Con pendientes ---------------------------------------------------------------------------------------
           if (tool_id == tool_setslope){
             if (pos.x>=c_tunn2_lim.a.x && pos.y<=c_tunn2_lim.a.y && pos.x<=c_tunn2_lim.b.x && pos.y>=c_tunn2_lim.b.y){
               local slp_way = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
@@ -1940,6 +1940,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
             if(slope==0) return translate("Modify the terrain here")+" ("+r_way.c.tostring()+")."
           }
+          //--------------------------------------------------------------------------------------------------------------------------
         }
         break
       case 9:
