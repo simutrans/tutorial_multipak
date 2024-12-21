@@ -1212,7 +1212,7 @@ class tutorial.chapter_03 extends basic_chapter
 
           if (!t_tunn.find_object(mo_tunnel)){
             local label_t =  my_tile(start_tunn)
-      local lab = label_t.find_object(mo_label)
+            local lab = label_t.find_object(mo_label)
             if(lab){
               if(label_t.is_marked()){
                 if(gl_tool == tool_build_tunnel){
@@ -1239,30 +1239,6 @@ class tutorial.chapter_03 extends basic_chapter
         //Para conectar las dos entradas del tunel
         else if (pot2==1 && pot3==0){
           chapter_sub_step = 3  // sub step finish
-
-          /*
-           *  FIX built tunnel end of bridge pak128
-           */
-          if ( pak_name == "pak128" ) {
-            local tile_t = tile_x( c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z )
-            local tile_b = tile_x( c_tunn2.a.x+1, c_tunn2.a.y, c_tunn2.a.z-2 )
-            //local tile_w = tile_x( c_tunn2.a.x+4, c_tunn2.a.y, c_tunn2.a.z-1 )
-
-            //gui.add_message("tile_t.find_object(mo_tunnel) " + tile_t.find_object(mo_tunnel))
-            //gui.add_message("tile_b.find_object(mo_bridge) " + tile_b.find_object(mo_bridge))
-            //gui.add_message("tile_w.find_object(mo_way) " + tile_w.find_object(mo_way))
-            local way = tile_t.find_object(mo_way)
-            local ribi = way? way.get_dirs() : 0
-
-
-            if ( ribi == 0 && tile_t.find_object(mo_tunnel) && tile_b.find_object(mo_bridge) ) {
-              //local way_obj = tile_w.find_object(mo_way)
-              local tool = command_x(tool_build_way)
-              local err = tool.work(player_x(0), tile_t, tile_b, sc_way_name)
-              //gui.add_message(err)
-            }
-          }
-
           local coora = coord3d(c_tunn2.a.x, c_tunn2.a.y, c_tunn2.a.z)
           local coorb = coord3d(c_tunn2.b.x, c_tunn2.b.y, c_tunn2.b.z)
           local obj = false
@@ -1817,6 +1793,10 @@ class tutorial.chapter_03 extends basic_chapter
         }
         //Construye Entrada del tunel
         else if (pot1==1 && pot2==0){
+          if (tool_id==tool_build_way){
+            if(t.find_object(mo_bridge))
+              return null
+          }
           if (tool_id==tool_build_tunnel){
             //if (pos.x==c_tun_lock.x && pos.y==c_tun_lock.y)
               //return translate("Press [Ctrl] to build a tunnel entrance here")+" ("+start_tunn.tostring()+".)"
@@ -1865,11 +1845,6 @@ class tutorial.chapter_03 extends basic_chapter
               local t_r_way = my_tile(r_way.c)
               local tunn_r_way = t_r_way.find_object(mo_tunnel)
               if(tunn_r_way){
-                if ( pak_name == "pak128" ) {
-                  if(way_x(r_way.c.x, r_way.c.y, r_way.c.z).get_dirs() == 0){
-                    return null
-                  }
-                }
                 //Se comprueba el primer tramo despues de la entrada del tunel----------------------------------
                 local under = c_tunn2.a.z
                 result = under_way_check(under, dir)
