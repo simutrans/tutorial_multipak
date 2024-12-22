@@ -80,7 +80,7 @@ tile_delay      <- 2       //delay for mark tiles
 tile_delay_list <- 2
 gui_delay       <- true    //delay for open win
 
-fail_num        <- 5       //numr for the count of try
+fail_num        <- 10       //numr for the count of try
 fail_count      <- 1       //if tool fail more of fail_num try
 
 
@@ -546,7 +546,7 @@ function is_scenario_completed(pl)
     if (fail_num <= 0){
       gui.open_info_win_at("goal")
       fail_count = 1
-      fail_num = 5
+      fail_num = 10
     }
     else fail_num--
   }

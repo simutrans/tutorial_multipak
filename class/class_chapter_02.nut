@@ -785,7 +785,6 @@ class tutorial.chapter_02 extends basic_chapter
               return translate("Connect the road here")+" ("+c_dep.tostring()+")."
             }
           }        
-          return translate("Connect the road here")+" ("+c_dep.tostring()+")."
         }
         break;
       //Construye un deposito de carreteras
