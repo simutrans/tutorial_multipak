@@ -12,7 +12,7 @@
       break
     case "pak64.german":
       t_icon <- {road = 0x800e, rail = 0x800a, ship = 0x800f, plane = 0x8010, other = 0x8005, slope = 0x8001, tram = 0x800d, build = 0x8002, stats = 0x8003, exted = 0x8004, mag = 0x800b, narr = 0x800c, powe = 0x8011 }
-      t_name <- {down = "83 #all down slope", up = "82 #all up slope"}
+      t_name <- {down = "17 #all down slope", up = "16 #all up slope"}
       break
     case "pak128":
       t_icon <- {road = 0x8007, rail = 0x8003, ship = 0x8008, plane = 0x8009, other = 0x800b, slope = 0x8002, tram = 0x8006, mono = 0x8004, exted = 0x0000, mag = 0x8005, narr = 0x800a}
