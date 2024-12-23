@@ -11,8 +11,8 @@ You can activate the <em>Sliced underground</em> mode by pressing <em>[ctrl] + U
 </p>
 <p>
 While in <em>Sliced underground</em> mode you can:<br/>
-<em>[1]</em> Go one level deeper by pressing <em>[+]</em>.<br/>
-<em>[2]</em> Go one level higher by pressing <em>[-]</em>.
+<em>[1]</em> Go one level deeper by pressing <em>[{plus}]</em>.<br/>
+<em>[2]</em> Go one level higher by pressing <em>[{minus}]</em>.
 </p>
 <p>
 <st>Note:</st> When building complicated structures on several layers, it is recommended to use the <em>sliced underground</em> mode.

@@ -9,8 +9,8 @@ The <em>Public service</em> wants you to complete the rail network running throu
 You can activate the <em>Underground</em> mode by pressing <em>[shift] + U</em> or by going to the <em>Display</em> settings.<br/>
 You can activate the <em>Sliced underground</em> mode by pressing <em>[ctrl] + U</em> or by going to the <em>Display</em> settings.<br/>
 While in <em>Sliced underground</em> mode you can:<br/>
-<em>[1]</em> Go one level deeper by pressing <em>[+]</em>.<br/>
-<em>[2]</em> Go one level higher by pressing <em>[-]</em>.
+<em>[1]</em> Go one level deeper by pressing <em>[{plus}]</em>.<br/>
+<em>[2]</em> Go one level higher by pressing <em>[{minus}]</em>.
 </p>
 <p>
 <st>Note:</st> When building complicated structures on several layers, it is recommended to use the <em>sliced underground</em> mode.

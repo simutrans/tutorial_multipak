@@ -18,8 +18,8 @@ Lista de túneles:<br>
 <p>
 Puedes activar la <em>Vista Subterránea por Capas</em> presionando <em>[CTRL] + U</em> o yendo a la configuración de <em>Pantalla</em>.<br/>
 Con la <em>Vista Subterránea por Capas</em> activada puedes:<br>
-<em>[1]</em> Bajar un nivel pulsando <em>[+]</em>.<br>
-<em>[2]</em> Subir un nivel pulsando <em>[-]</em>.
+<em>[1]</em> Bajar un nivel pulsando <em>[{plus}]</em>.<br>
+<em>[2]</em> Subir un nivel pulsando <em>[{minus}]</em>.
 </p>
 <p>
 <st>Nota:</st> Cuando construyes estructuras complejas en varias capas, es recomendable usar la <em>Vista Subterránea por Capas</em>.
