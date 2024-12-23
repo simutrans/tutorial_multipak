@@ -5,6 +5,19 @@ tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship =
 // placeholder for good names in pak64
 good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
 
+// placeholder for shortcut keys names
+  switch (pak_name) {
+    case "pak64":
+      key_alias  <- {plus_s = "+", minus_s = "-"}
+      break
+    case "pak64.german":
+      key_alias  <- {plus_s = "+", minus_s = "-"}
+      break
+    case "pak128":
+      key_alias  <- {plus_s = "Home", minus_s = "End"}
+      break
+  }
+
 factory_data <- {}
 function get_factory_data(id) {
   local t = factory_data.rawget(id)

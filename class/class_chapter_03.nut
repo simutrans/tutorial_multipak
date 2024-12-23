@@ -525,6 +525,8 @@ class tutorial.chapter_03 extends basic_chapter
             text.t2 = "<a href=\"("+ c_end_tunn.x+","+ c_end_tunn.y+")\">("+ c_end_tunn.tostring()+")</a>"
           }
         }
+        text.plus = key_alias.plus_s
+        text.minus = key_alias.minus_s
         break
 
       case 9:
@@ -1498,7 +1500,7 @@ class tutorial.chapter_03 extends basic_chapter
               return ""
           }
           if (pos.x>=st1_way_lim.a.x && pos.y>=st1_way_lim.a.y && pos.x<=st1_way_lim.b.x && pos.y<=st1_way_lim.b.y){
-            if(tool_id==tool_build_way || tool_id==4113 || tool_id==tool_remover){
+            if(tool_id==tool_build_way || tool_id==tool_remove_way || tool_id==tool_remover){
               local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
               foreach(desc in way_desc){
                 if(desc.get_name() == name){
@@ -1641,7 +1643,7 @@ class tutorial.chapter_03 extends basic_chapter
               return ""
           }
           if (pos.x>=st3_way_lim.a.x && pos.y>=st3_way_lim.a.y && pos.x<=st3_way_lim.b.x && pos.y<=st3_way_lim.b.y){
-            if(tool_id==tool_build_way || tool_id==4113 || tool_id==tool_remover){
+            if(tool_id==tool_build_way || tool_id==tool_remove_way || tool_id==tool_remover){
               local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
               foreach(desc in way_desc){
                 if(desc.get_name() == name){

@@ -11,8 +11,8 @@ Puedes activar la <em>Vista Subterránea por Capas</em> presionando <em>[Ctrl] + 
 </p>
 <p>
 Con la <em>Vista Subterránea por Capas</em> activada puedes:<br>
-<em>[1]</em> Bajar un nivel pulsando <em>[+]</em>.<br>
-<em>[2]</em> Subir un nivel pulsando <em>[-]</em>.
+<em>[1]</em> Bajar un nivel pulsando <em>[{plus}]</em>.<br>
+<em>[2]</em> Subir un nivel pulsando <em>[{minus}]</em>.
 </p>
 <p>
 <st>Nota:</st> Cuando construyes estructuras complejas en varias capas, es recomendable usar la <em>Vista Subterránea por Capas</em>.
