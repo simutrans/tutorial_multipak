@@ -47,7 +47,8 @@ function general_disabled_tools( pl ) {
                           dialog_enlarge_map,
                           tool_raise_land,
                           tool_lower_land,
-                          tool_restoreslope
+                          tool_restoreslope,
+                          4144  //pipette
   ]
 
   local pak64_tools = [ 0x8004, 0x8005, tool_set_climate ]
