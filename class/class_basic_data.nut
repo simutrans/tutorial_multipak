@@ -1169,3 +1169,50 @@ function get_good_data(id, select = null) {
   return output
 
  }
+
+function get_info_file(txt_file) {
+
+  //ttextfile("info/build_bridge.txt")
+  switch (pak_name) {
+    case "pak64":
+      switch (txt_file) {
+        case "bridge":
+          return ""
+          break
+        case "tunnel":
+          return ""
+          break
+        case "":
+          return ""
+          break
+      }
+      break
+    case "pak64.german":
+      switch (txt_file) {
+        case "bridge":
+          return ""
+          break
+        case "tunnel":
+          return ""
+          break
+        case "":
+          return ""
+          break
+      }
+      break
+    case "pak128":
+      switch (txt_file) {
+        case "bridge":
+          return ttextfile("info/build_bridge_128.txt")
+          break
+        case "tunnel":
+          return ttextfile("info/build_tunnel_128.txt")
+          break
+        case "":
+          return ""
+          break
+      }
+      break
+  }
+
+}
