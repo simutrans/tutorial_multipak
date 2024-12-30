@@ -634,6 +634,11 @@ class tutorial.chapter_03 extends basic_chapter
 
         break
     }
+
+    if ( this.step >= 8 && this.step <= 10 ) {
+      text.step_hinfo = "chapter_03/step_8-10_hinfo.txt"
+    }
+
     text.f1 = fac_1.c.href(fac_1.name+" ("+fac_1.c.tostring()+")")
     text.f2 = fac_2.c.href(fac_2.name+" ("+fac_2.c.tostring()+")")
     text.f3 = fac_3.c.href(fac_3.name+" ("+fac_3.c.tostring()+")")
