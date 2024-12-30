@@ -178,7 +178,10 @@ class tutorial.chapter_05 extends basic_chapter
 
         text.dep = c_dep1.href("("+c_dep1.tostring()+")")
         text.veh = translate(veh1_obj)
-        text.good = translate_objects_list.good_coal
+
+        text.good     = get_good_data(5, 3) //translate_objects_list.good_coal
+        //text.g_metric = get_good_data(5, 1)
+
         text.all_cov = d1_cnr
         text.cir = cov_cir
         text.load = veh1_load
