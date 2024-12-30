@@ -661,11 +661,21 @@ class tutorial.chapter_03 extends basic_chapter
     text.tool1 = translate_objects_list.inspec
     text.tool2 = translate_objects_list.tools_rail
     text.tool3 = translate_objects_list.tools_slope
-
-    text.good1 = get_good_data(1, 3) //translate_objects_list.good_wood
+    // good data
+    text.good1 = translate_objects_list.good_wood
     text.g1_metric = get_good_data(1, 1)
-    text.good2 = get_good_data(2, 3) //translate_objects_list.good_plan
+    text.good2 = translate_objects_list.good_plan
     text.g2_metric =get_good_data(2, 1)
+    // prod data
+    local g_in = read_prod_data(fac_2.c, 1, "in")
+    text.prod_in   = g_in[0]
+    text.g1_factor = g_in[2]
+    text.g1_consum = g_in[1]
+    local g_out = read_prod_data(fac_2.c, 2, "out")
+    text.prod_out  = g_out[0]
+    text.g2_factor = g_out[2]
+    text.g2_prod   = g_out[1]
+
     return text
 
   }

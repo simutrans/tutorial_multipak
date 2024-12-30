@@ -1107,3 +1107,65 @@ function get_good_data(id, select = null) {
 
   return output
 }
+
+/*
+ *  factory prod and good data for textfiles
+ *
+ *  tile = tile_x factory
+ *  g_id = good name
+ *  read = "in" / "out"
+ *
+ *  return array[base_production, base_consumption, factor]
+ */
+ function read_prod_data(tile, g_id, read = null) {
+
+  // actual not read good data
+  local t = square_x(tile.x, tile.y).get_ground_tile()
+  local good = get_good_data(g_id, 2)
+
+  local obj = t.find_object(mo_building).get_factory()
+  local obj_desc = obj.get_desc()
+
+  local output = [0, 0, 0]
+
+  if ( read == "in" ) {
+    foreach(key,value in obj.input) {
+      // print raw name of the good
+      gui.add_message("Input slot key: " + key)
+      // print current storage
+      if ( key == good ) {
+        //gui.add_message("get_base_production(): " + value.get_base_production())
+        //gui.add_message("get_base_consumption(): " + value.get_base_consumption())
+        //gui.add_message("get_consumption_factor(): " + value.get_consumption_factor())
+
+        output[0] = value.get_base_production()
+        output[1] = value.get_base_consumption()
+        output[2] = value.get_consumption_factor()
+
+        break
+      }
+    }
+  }
+
+  if ( read == "out" ) {
+    foreach(key,value in obj.output) {
+      // print raw name of the good
+      gui.add_message("Output slot key: " + key)
+      // print current storage
+      if ( key == good ) {
+        //gui.add_message("get_base_production(): " + value.get_base_production())
+        //gui.add_message("get_base_consumption(): " + value.get_base_consumption())
+        //gui.add_message("get_production_factor(): " + value.get_production_factor())
+
+        output[0] = value.get_base_production()
+        output[1] = value.get_base_consumption()
+        output[2] = value.get_production_factor()
+
+        break
+      }
+    }
+  }
+
+  return output
+
+ }
