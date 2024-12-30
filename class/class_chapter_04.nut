@@ -235,8 +235,11 @@ class tutorial.chapter_04 extends basic_chapter
     text.f3 = fac_2.c.href(""+fac_2.name+" ("+fac_2.c.tostring()+")")+""
     text.f4 = fac_3.c.href(""+fac_3.name+" ("+fac_3.c.tostring()+")")+""
     text.tur = tur.href(" ("+tur.tostring()+")")+""
-    text.good1 = translate_objects_list.good_oil
-    text.good2 = translate_objects_list.good_gas
+
+    text.good1     = get_good_data(3, 3) //translate_objects_list.good_oil
+    //text.g1_metric = get_good_data(3, 1)
+    text.good2     = get_good_data(4, 3) //translate_objects_list.good_gas
+    //text.g2_metric = get_good_data(4, 1)
     return text
   }
 

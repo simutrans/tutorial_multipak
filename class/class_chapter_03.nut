@@ -662,9 +662,9 @@ class tutorial.chapter_03 extends basic_chapter
     text.tool2 = translate_objects_list.tools_rail
     text.tool3 = translate_objects_list.tools_slope
 
-    text.good1 = translate_objects_list.good_wood
+    text.good1 = get_good_data(1, 3) //translate_objects_list.good_wood
     text.g1_metric = get_good_data(1, 1)
-    text.good2 = translate_objects_list.good_plan
+    text.good2 = get_good_data(2, 3) //translate_objects_list.good_plan
     text.g2_metric =get_good_data(2, 1)
     return text
 
