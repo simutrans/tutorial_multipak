@@ -227,6 +227,9 @@ class tutorial.chapter_02 extends basic_chapter
       case 5:
         text.bpos1 = brdg1.href("("+brdg1.tostring()+")")
         text.bpos2 = brdg2.href("("+brdg2.tostring()+")")
+
+        text.bridge_info = get_info_file("bridge")
+
         break
       case 6:
         veh1_load = set_loading_capacity(2)
@@ -784,7 +787,7 @@ class tutorial.chapter_02 extends basic_chapter
               }
               return translate("Connect the road here")+" ("+c_dep.tostring()+")."
             }
-          }        
+          }
         }
         break;
       //Construye un deposito de carreteras
