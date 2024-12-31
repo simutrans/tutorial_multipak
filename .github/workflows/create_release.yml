@@ -1,0 +1,168 @@
+name: Simutrans Tutorial
+
+on: 
+  push:
+    tags:
+      - 'Release'
+
+jobs:
+
+  tutorial_pak64:
+    name: Simutrans Tutorial pak64
+    runs-on: windows-2022
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: load translate files
+      run: |
+        Invoke-WebRequest -Uri https://simutrans-germany.com/translator_page/scenarios/scenario_5/download.php
+        Invoke-WebRequest -Uri https://simutrans-germany.com/translator_page/scenarios/scenario_5/data/language_pack-Scenario+Tutorial+multipak.zip -OutFile language_pack.zip
+        dir
+
+    - name: extract translate files
+      run: |
+        cd $Env:GITHUB_WORKSPACE
+        mkdir tutorial
+        mkdir tutorial\class
+        Expand-Archive language_pack.zip tutorial -Force
+      shell: pwsh
+
+    - name: delete ce translate files
+      run: del tutorial\ce.tab
+      shell: pwsh
+
+    - name: copy files
+      run: |
+        cd $Env:GITHUB_WORKSPACE
+        copy class\*.* tutorial\class
+        copy *.nut tutorial
+      shell: pwsh
+
+    - name: zip result
+      run:  Compress-Archive tutorial tutorial_pak64.zip
+      shell: pwsh
+
+    - name: Update binaries of Nightly Release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: tutorial_pak64.zip
+        asset_name: tutorial_pak64.zip
+        tag: Nightly
+        overwrite: true
+
+  tutorial_pak128:
+    name: Simutrans Tutorial pak128
+    runs-on: windows-2022
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: load translate files
+      run: |
+        Invoke-WebRequest -Uri https://simutrans-germany.com/translator_page/scenarios/scenario_5/download.php
+        Invoke-WebRequest -Uri https://simutrans-germany.com/translator_page/scenarios/scenario_5/data/language_pack-Scenario+Tutorial+multipak.zip -OutFile language_pack.zip
+        dir
+
+    - name: extract translate files
+      run: |
+        cd $Env:GITHUB_WORKSPACE
+        mkdir tutorial
+        mkdir tutorial\class
+        Expand-Archive language_pack.zip tutorial -Force
+      shell: pwsh
+
+    - name: delete ce translate files
+      run: del tutorial\ce.tab
+      shell: pwsh
+
+    - name: copy files
+      run: |
+        cd $Env:GITHUB_WORKSPACE
+        copy class\*.* tutorial\class
+        copy *.nut tutorial
+      shell: pwsh
+
+    - name: set data
+      run: |
+        cd tutorial
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  pak_name      <- "pak64"', '//  pak_name      <- "pak64"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  current_pak   <- "pak"', '//  current_pak   <- "pak"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  map.file = "tutorial64.sve"', '//  map.file = "tutorial64.sve"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  pak_name      <- "pak128"', '  pak_name      <- "pak128"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  current_pak   <- "pak128"', '  current_pak   <- "pak128"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  map.file = "tutorial128.sve"', '  map.file = "tutorial128.sve"'} | Set-Content -Path .\set_data.nut
+      shell: pwsh
+
+    - name: zip result
+      run:  Compress-Archive tutorial tutorial_pak128.zip
+      shell: pwsh
+
+    - name: Update binaries of Nightly Release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: tutorial_pak128.zip
+        asset_name: tutorial_pak128.zip
+        tag: Nightly
+        overwrite: true
+
+  tutorial_pak64german:
+    name: Simutrans Tutorial pak64.german
+    runs-on: windows-2022
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: load translate files
+      run: |
+        Invoke-WebRequest -Uri https://simutrans-germany.com/translator_page/scenarios/scenario_5/download.php
+        Invoke-WebRequest -Uri https://simutrans-germany.com/translator_page/scenarios/scenario_5/data/language_pack-Scenario+Tutorial+multipak.zip -OutFile language_pack.zip
+        dir
+
+    - name: extract translate files
+      run: |
+        cd $Env:GITHUB_WORKSPACE
+        mkdir tutorial
+        mkdir tutorial\class
+        Expand-Archive language_pack.zip tutorial -Force
+      shell: pwsh
+
+    - name: delete ce translate files
+      run: del tutorial\ce.tab
+      shell: pwsh
+
+    - name: copy files
+      run: |
+        cd $Env:GITHUB_WORKSPACE
+        copy class\*.* tutorial\class
+        copy *.nut tutorial
+      shell: pwsh
+
+    - name: set data
+      run: |
+        cd tutorial
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  pak_name      <- "pak64"', '//  pak_name      <- "pak64"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  current_pak   <- "pak"', '//  current_pak   <- "pak"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  map.file = "tutorial64.sve"', '//  map.file = "tutorial64.sve"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  pak_name      <- "pak64.germn"', '  pak_name      <- "pak64.german"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  current_pak   <- "pak64.german"', '  current_pak   <- "pak64german"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  map.file = "tutorial64g.sve"', '  map.file = "tutorial64g.sve"'} | Set-Content -Path .\set_data.nut
+      shell: pwsh
+
+    - name: zip result
+      run:  Compress-Archive tutorial tutorial_pak64german.zip
+      shell: pwsh
+
+    - name: Update binaries of Nightly Release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: tutorial_pak64german.zip
+        asset_name: tutorial_pak64german.zip
+        tag: Nightly
+        overwrite: true
