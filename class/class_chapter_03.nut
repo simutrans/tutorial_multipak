@@ -635,6 +635,9 @@ class tutorial.chapter_03 extends basic_chapter
         break
     }
 
+    if ( this.step >= 1 && this.step <= 4 ) {
+      text.step_hinfo = "chapter_03/step_1-4_hinfo.txt"
+    }
     if ( this.step >= 8 && this.step <= 10 ) {
       text.step_hinfo = "chapter_03/step_8-10_hinfo.txt"
     }
