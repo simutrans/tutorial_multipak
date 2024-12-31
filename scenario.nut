@@ -393,7 +393,20 @@ function get_info_text(pl)
   info.list_of_chapters = help
 
   info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
-    return info
+
+  switch (pak_name) {
+    case "pak64":
+      info.pakset_info = ttextfile("info/info_pak64.txt")
+      break
+    case "pak64.german":
+      info.pakset_info = ttextfile("info/info_pak64perman.txt")
+      break
+    case "pak128":
+      info.pakset_info = ttextfile("info/info_pak128.txt")
+      break
+  }
+
+  return info
 }
 
 function get_rule_text(pl)
@@ -638,20 +651,20 @@ function is_work_allowed_here(pl, tool_id, name, pos, tool)
 
 function fail_count_message(result, tool_id, tool)
 {
-	//gui.add_message(result+" ")
-	if(result != "" && !tool.is_drag_tool && tool_id != tool_build_tunnel){
-		//gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)
-		if (fail_count && result != null){
-			fail_count++
-			if (fail_count >= fail_num){
-				fail_count = null
-				return translate("Are you lost ?, see the instructions shown below.")
-			}
-		}
-		else if (result == null)
-			fail_count = 1
-	}
-	return result
+  //gui.add_message(result+" ")
+  if(result != "" && !tool.is_drag_tool && tool_id != tool_build_tunnel){
+    //gui.add_message("fail_count: "+fail_count + "Tool: "+tool_id)
+    if (fail_count && result != null){
+      fail_count++
+      if (fail_count >= fail_num){
+        fail_count = null
+        return translate("Are you lost ?, see the instructions shown below.")
+      }
+    }
+    else if (result == null)
+      fail_count = 1
+  }
+  return result
 }
 
 function is_schedule_allowed(pl, schedule)
