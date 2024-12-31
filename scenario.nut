@@ -13,7 +13,7 @@ translate_objects()                   // add objects to translate list
 const version = 1700
 scenario_name               <- "Tutorial Scenario"
 scenario.short_description  = scenario_name
-scenario.author             = "Yona-TYT"
+scenario.author             = "Yona-TYT & Andarix"
 scenario.version            = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10)
 scenario.translation        <- ttext("Translator")
 
