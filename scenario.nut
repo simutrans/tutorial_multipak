@@ -394,17 +394,7 @@ function get_info_text(pl)
 
   info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
 
-  switch (pak_name) {
-    case "pak64":
-      info.pakset_info = ttextfile("info/info_pak64.txt")
-      break
-    case "pak64.german":
-      info.pakset_info = ttextfile("info/info_pak64perman.txt")
-      break
-    case "pak128":
-      info.pakset_info = ttextfile("info/info_pak128.txt")
-      break
-  }
+  info.pakset_info = get_info_file(info)
 
   return info
 }

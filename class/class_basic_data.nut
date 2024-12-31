@@ -1182,8 +1182,8 @@ function get_info_file(txt_file) {
         case "tunnel":
           return ""
           break
-        case "":
-          return ""
+        case "info":
+          return ttextfile("info/info_pak64.txt")
           break
       }
       break
@@ -1195,8 +1195,8 @@ function get_info_file(txt_file) {
         case "tunnel":
           return ""
           break
-        case "":
-          return ""
+        case "info":
+          return ttextfile("info/info_pak64perman.txt")
           break
       }
       break
@@ -1208,8 +1208,8 @@ function get_info_file(txt_file) {
         case "tunnel":
           return ttextfile("info/build_tunnel_128.txt")
           break
-        case "":
-          return ""
+        case "info":
+          return ttextfile("info/info_pak128.txt")
           break
       }
       break
