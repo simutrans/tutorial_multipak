@@ -149,7 +149,7 @@ jobs:
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  pak_name      <- "pak64"', '//  pak_name      <- "pak64"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  current_pak   <- "pak"', '//  current_pak   <- "pak"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  map.file = "tutorial64.sve"', '//  map.file = "tutorial64.sve"'} | Set-Content -Path .\set_data.nut
-        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  pak_name      <- "pak64.germn"', '  pak_name      <- "pak64.german"'} | Set-Content -Path .\set_data.nut
+        (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  pak_name      <- "pak64.german"', '  pak_name      <- "pak64.german"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  current_pak   <- "pak64.german"', '  current_pak   <- "pak64german"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '//  map.file = "tutorial64g.sve"', '  map.file = "tutorial64g.sve"'} | Set-Content -Path .\set_data.nut
       shell: pwsh
