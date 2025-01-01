@@ -28,10 +28,6 @@ jobs:
         Expand-Archive language_pack.zip tutorial -Force
       shell: pwsh
 
-    - name: delete ce translate files
-      run: del tutorial\ce.tab
-      shell: pwsh
-
     - name: copy files
       run: |
         cd $Env:GITHUB_WORKSPACE
@@ -49,7 +45,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: tutorial_pak64.zip
         asset_name: tutorial_pak64.zip
-        tag: Nightly
+        tag: Release
         overwrite: true
 
   tutorial_pak128:
@@ -71,10 +67,6 @@ jobs:
         mkdir tutorial
         mkdir tutorial\class
         Expand-Archive language_pack.zip tutorial -Force
-      shell: pwsh
-
-    - name: delete ce translate files
-      run: del tutorial\ce.tab
       shell: pwsh
 
     - name: copy files
@@ -105,7 +97,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: tutorial_pak128.zip
         asset_name: tutorial_pak128.zip
-        tag: Nightly
+        tag: Release
         overwrite: true
 
   tutorial_pak64german:
@@ -127,10 +119,6 @@ jobs:
         mkdir tutorial
         mkdir tutorial\class
         Expand-Archive language_pack.zip tutorial -Force
-      shell: pwsh
-
-    - name: delete ce translate files
-      run: del tutorial\ce.tab
       shell: pwsh
 
     - name: copy files
@@ -161,5 +149,5 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: tutorial_pak64german.zip
         asset_name: tutorial_pak64german.zip
-        tag: Nightly
+        tag: Release
         overwrite: true
