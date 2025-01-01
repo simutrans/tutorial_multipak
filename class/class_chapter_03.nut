@@ -183,7 +183,7 @@ class tutorial.chapter_03 extends basic_chapter
             {a = coord(120,271), b = coord(120,324) }, {b = coord(121,324), a = coord(121,271) },
             {a = coord(120,331), b = coord(120,377) }, {b = coord(121,377), a = coord(121,331) }
           ]
-  //Para las señales de paso
+  //Para las seÃ±ales de paso
   sign_list = [ {c = coord3d(94,197,6), ribi = 8}, {c = coord3d(112,198,2), ribi = 2},
           {c = coord3d(121,199,0), ribi = 1}, {c = coord3d(120,263,3), ribi = 4},
           {c = coord3d(121,271,3), ribi = 1}, {c = coord3d(120,324,5), ribi = 4},
@@ -676,13 +676,13 @@ class tutorial.chapter_03 extends basic_chapter
     text.g2_metric =get_good_data(2, 1)
     // prod data
     local g_in = read_prod_data(fac_2.c, 1, "in")
-    text.prod_in   = g_in[0]
+    text.prod_in   = integer_to_string(g_in[0])
     text.g1_factor = g_in[2]
-    text.g1_consum = g_in[1]
+    text.g1_consum = integer_to_string(g_in[1])
     local g_out = read_prod_data(fac_2.c, 2, "out")
-    text.prod_out  = g_out[0]
+    text.prod_out  = integer_to_string(g_out[0])
     text.g2_factor = g_out[2]
-    text.g2_prod   = g_out[1]
+    text.g2_prod   = integer_to_string(g_out[1])
 
     return text
 
@@ -1347,7 +1347,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
         }
-        //Para las señales de paso
+        //Para las seÃ±ales de paso
         else if (pot0==1 && pot1==0){
           chapter_sub_step = 1  // sub step finish
           local sign_nr = 0
@@ -1960,7 +1960,7 @@ class tutorial.chapter_03 extends basic_chapter
           return result
         }
         if (pot0==1 && pot1==0){
-          //Elimina las señales
+          //Elimina las seÃ±ales
           if (tool_id==tool_remover){
             if (sign || roadsign){
               for(local j=0;j<sign_list.len();j++){
@@ -1973,7 +1973,7 @@ class tutorial.chapter_03 extends basic_chapter
             else
               return translate("Only delete signals.")
           }
-          //Construye señales de paso
+          //Construye seÃ±ales de paso
           if (tool_id == 4116){
             if (!sign){
               for(local j=0;j<sign_list.len();j++){
