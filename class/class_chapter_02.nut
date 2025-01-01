@@ -161,7 +161,7 @@ class tutorial.chapter_02 extends basic_chapter
 
     if ( translate_objects_list.rawin("inspec") ) {
       if ( translate_objects_list.inspec != translate("Abfrage") ) {
-        gui.add_message("change language")
+        //gui.add_message("change language")
         translate_objects()
       }
     } else {
