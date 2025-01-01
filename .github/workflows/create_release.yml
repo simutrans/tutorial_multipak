@@ -35,7 +35,14 @@ jobs:
         copy *.nut tutorial
         copy *.sve tutorial
       shell: pwsh
-
+      
+    - name: set data
+      run: |
+        cd tutorial
+        shopt -s extglob
+        rm -rf !(tutorial64.sve|class|*.nut)
+      shell: pwsh
+      
     - name: zip result
       run:  Compress-Archive tutorial tutorial_pak64.zip
       shell: pwsh
@@ -81,6 +88,8 @@ jobs:
     - name: set data
       run: |
         cd tutorial
+        shopt -s extglob
+        rm -rf !(tutorial128.sve|class|*.nut)
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  pak_name      <- "pak64"', '//  pak_name      <- "pak64"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  current_pak   <- "pak"', '//  current_pak   <- "pak"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  map.file = "tutorial64.sve"', '//  map.file = "tutorial64.sve"'} | Set-Content -Path .\set_data.nut
@@ -134,6 +143,8 @@ jobs:
     - name: set data
       run: |
         cd tutorial
+        shopt -s extglob
+        rm -rf !(tutorial64g.sve|class|*.nut)        
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  pak_name      <- "pak64"', '//  pak_name      <- "pak64"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  current_pak   <- "pak"', '//  current_pak   <- "pak"'} | Set-Content -Path .\set_data.nut
         (Get-Content -Path .\set_data.nut) | ForEach-Object {$_ -Replace '  map.file = "tutorial64.sve"', '//  map.file = "tutorial64.sve"'} | Set-Content -Path .\set_data.nut
