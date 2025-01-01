@@ -396,7 +396,7 @@ function get_info_text(pl)
 
   info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
 
-  info.pakset_info = get_info_file(info)
+  info.pakset_info = get_info_file("info")
 
   return info
 }
