@@ -401,36 +401,6 @@ function get_info_text(pl)
 
 function get_rule_text(pl)
 {
-  //-------Debug ====================================
-  /*
-  local tx = ""
-  local j=0
-  for(j;j<cov_save.len();j++){
-    local result = true
-    // cnv - convoy_x instance saved somewhat earlier
-    try {
-       cov_save[j].get_pos() // will fail if cnv is no longer existent
-       // do your checks
-    }
-    catch(ev) {
-      result = false
-    }
-    if (result){
-      if (cov_save[j].is_in_depot()){
-        result = false
-      }
-    }
-
-    if (result) {
-      tx += "<em>["+j+"]</em> "+cov_save[j].id+"::"+cov_save[j].id+" <a href=\"("+cov_save[j].get_pos().tostring()+")\"> ("+cov_save[j].get_pos().tostring()+")</a> "+cov_save[j].get_name()+" :: "+cov_save[j].id+"<br>"
-    }
-    else
-      tx += "<st>["+j+"]</st> "+cov_save[j].id+"::"+cov_save[j]+"<br>"
-  }
-
-  return tx
-  */
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------------
   return chapter.give_title() + chapter.get_rule_text( pl, my_chapter() )
 }
 
