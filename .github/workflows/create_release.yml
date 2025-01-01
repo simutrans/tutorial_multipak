@@ -4,7 +4,8 @@ on:
   push:
     tags:
       - 'Release'
-
+      
+  workflow_dispatch: # Put here!!
 jobs:
 
   tutorial_pak64:
