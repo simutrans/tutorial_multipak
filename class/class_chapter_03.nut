@@ -636,10 +636,27 @@ class tutorial.chapter_03 extends basic_chapter
     }
 
     if ( this.step >= 1 && this.step <= 4 ) {
-      text.step_hinfo = ttextfile("chapter_03/step_1-4_hinfo.txt")
+      local stext = ttextfile("chapter_03/step_1-4_hinfo.txt")
+      stext.good1 = get_good_data(1, 3)
+      stext.good2 = get_good_data(2, 3)
+      stext.f1 = fac_1.c.href(fac_1.name+" ("+fac_1.c.tostring()+")")
+      stext.f2 = fac_2.c.href(fac_2.name+" ("+fac_2.c.tostring()+")")
+      text.step_hinfo = stext
     }
     if ( this.step >= 8 && this.step <= 10 ) {
-      text.step_hinfo = ttextfile("chapter_03/step_8-10_hinfo.txt")
+      local stext = ttextfile("chapter_03/step_8-10_hinfo.txt")
+      stext.cy1=cy1.name
+      stext.cy2=cy2.name
+      stext.cy3=cy3.name
+      stext.cy4=cy4.name
+      stext.cy5=cy5.name
+
+      stext.co1=cy1.c.href("("+cy1.c.tostring()+")")
+      stext.co2=cy2.c.href("("+cy2.c.tostring()+")")
+      stext.co3=cy3.c.href("("+cy3.c.tostring()+")")
+      stext.co4=cy4.c.href("("+cy4.c.tostring()+")")
+      stext.co5=cy5.c.href("("+cy5.c.tostring()+")")
+      text.step_hinfo = stext
     }
 
     text.f1 = fac_1.c.href(fac_1.name+" ("+fac_1.c.tostring()+")")
@@ -670,9 +687,9 @@ class tutorial.chapter_03 extends basic_chapter
     text.tool2 = translate_objects_list.tools_rail
     text.tool3 = translate_objects_list.tools_slope
     // good data
-    text.good1 = translate_objects_list.good_wood
+    text.good1 = get_good_data(1, 3)
     text.g1_metric = get_good_data(1, 1)
-    text.good2 = translate_objects_list.good_plan
+    text.good2 = get_good_data(2, 3)
     text.g2_metric =get_good_data(2, 1)
     // prod data
     local g_in = read_prod_data(fac_2.c, 1, "in")
