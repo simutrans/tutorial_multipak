@@ -33,6 +33,7 @@ jobs:
         cd $Env:GITHUB_WORKSPACE
         copy class\*.* tutorial\class
         copy *.nut tutorial
+        copy *.sve tutorial
       shell: pwsh
 
     - name: zip result
