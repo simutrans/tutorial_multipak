@@ -1131,7 +1131,7 @@ function get_good_data(id, select = null) {
   if ( read == "in" ) {
     foreach(key,value in obj.input) {
       // print raw name of the good
-      gui.add_message("Input slot key: " + key)
+      //gui.add_message("Input slot key: " + key)
       // print current storage
       if ( key == good ) {
         //gui.add_message("get_base_production(): " + value.get_base_production())
@@ -1150,7 +1150,7 @@ function get_good_data(id, select = null) {
   if ( read == "out" ) {
     foreach(key,value in obj.output) {
       // print raw name of the good
-      gui.add_message("Output slot key: " + key)
+      //gui.add_message("Output slot key: " + key)
       // print current storage
       if ( key == good ) {
         //gui.add_message("get_base_production(): " + value.get_base_production())
