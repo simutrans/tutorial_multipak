@@ -1291,7 +1291,6 @@ class tutorial.chapter_02 extends basic_chapter
         if (pot0==0){
           local t = command_x(tool_make_stop_public)
           t.work(player_x(pl), my_tile(pub_st1), "")
-          //t.work(player_x(pl), my_tile(pub_st2), "")
         }
         return null
         break
