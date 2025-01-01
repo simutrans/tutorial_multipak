@@ -286,7 +286,9 @@ function get_integral(tx)
 
 for (local i = 0; i <= chapter_max; i++)    // include amount of chapter classes
   include(nut_path+"class_chapter_"+(i < 10 ? "0"+i:i) )
-chapter            <- tutorial.chapter_02       // must be placed here !!!
+// Marked for deletion ----------------------------------------------------
+chapter            <- tutorial.chapter_02       // must be placed here !!! 
+//-------------------------------------------------------------------------
 
 function script_text()
 {
