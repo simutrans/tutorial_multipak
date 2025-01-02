@@ -10,7 +10,7 @@ include(nut_path+"class_basic_data")  // include class for object data
 translate_objects_list <- {}          // translate list
 translate_objects()                   // add objects to translate list
 
-const version = 1700
+const version = 2000
 scenario_name               <- "Tutorial Scenario"
 scenario.short_description  = scenario_name
 scenario.author             = "Yona-TYT & Andarix"
