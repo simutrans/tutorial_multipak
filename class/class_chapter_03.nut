@@ -724,9 +724,8 @@ class tutorial.chapter_03 extends basic_chapter
         local next_mark = false
         if (pot0==0 || pot1 == 0) {
           local list = fac_2.c_list
-          local m_buil = true
           try {
-            next_mark = delay_mark_tile_list(list, m_buil)
+            next_mark = delay_mark_tile(list)
           }
           catch(ev) {
             return 0
@@ -737,9 +736,8 @@ class tutorial.chapter_03 extends basic_chapter
         }
         else if (pot2==0 || pot3==0) {
           local list = fac_1.c_list
-          local m_buil = true
           try {
-            next_mark = delay_mark_tile_list(list, m_buil)
+            next_mark = delay_mark_tile(list)
           }
           catch(ev) {
             return 0
@@ -921,9 +919,8 @@ class tutorial.chapter_03 extends basic_chapter
           local siz = c_list.len()
 
           local next_mark = true
-          local m_buil = false
           try {
-             next_mark = delay_mark_tile_list(c_list, m_buil)
+             next_mark = delay_mark_tile(c_list)
           }
           catch(ev) {
             return 0
@@ -934,7 +931,7 @@ class tutorial.chapter_03 extends basic_chapter
           else{
             local stop_mark = true
             try {
-               next_mark = delay_mark_tile_list(c_list, m_buil, stop_mark)
+               next_mark = delay_mark_tile(c_list, stop_mark)
             }
             catch(ev) {
               return 0

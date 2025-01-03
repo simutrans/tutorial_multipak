@@ -257,9 +257,8 @@ class tutorial.chapter_04 extends basic_chapter
         local next_mark = false
         if(pot0==0 || pot1 == 0){
           local list = fac_2.c_list
-          local m_buil = true
           try {
-            next_mark = delay_mark_tile_list(list, m_buil)
+            next_mark = delay_mark_tile(list)
           }
           catch(ev) {
             return 0
@@ -270,9 +269,8 @@ class tutorial.chapter_04 extends basic_chapter
         }
         else if (pot2==0 || pot3==0){
           local list = fac_1.c_list
-          local m_buil = true
           try {
-            next_mark = delay_mark_tile_list(list, m_buil)
+            next_mark = delay_mark_tile_list(list)
           }
           catch(ev) {
             return 0

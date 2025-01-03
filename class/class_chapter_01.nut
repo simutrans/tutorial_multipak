@@ -107,19 +107,20 @@ class tutorial.chapter_01 extends basic_chapter
 
       case 3:
         local next_mark = true
-
+        local c_list1 = [my_tile(c_buil1)]
+        local c_list2 = [my_tile(c_buil2)]
+        local stop_mark = true
         if (pot0==0) {
           try {
-             next_mark = delay_mark_tile(c_buil1, c_buil1, 0)
+             next_mark = delay_mark_tile(c_list1)
           }
           catch(ev) {
             return 0
           }
         }
         else if (pot0==1 && pot1==0) {
-          local stop_mark = true
           try {
-             next_mark = delay_mark_tile(c_buil1, c_buil1, stop_mark)
+             next_mark = delay_mark_tile(c_list1, stop_mark)
           }
           catch(ev) {
             return 0
@@ -128,16 +129,15 @@ class tutorial.chapter_01 extends basic_chapter
         }
         if (pot1==1 && pot2==0) {
           try {
-             next_mark = delay_mark_tile(c_buil2, c_buil2, 0)
+             next_mark = delay_mark_tile(c_list2)
           }
           catch(ev) {
             return 0
           }
         }
         else if (pot2==1 && pot3==0) {
-          local stop_mark = true
           try {
-             next_mark = delay_mark_tile(c_buil2, c_buil2, stop_mark)
+             next_mark = delay_mark_tile(c_list2, stop_mark)
           }
           catch(ev) {
             return 0
@@ -153,14 +153,16 @@ class tutorial.chapter_01 extends basic_chapter
       case 4:
         local next_mark = true
         local list = cit_list
-        local m_buil = true
+        local stop_mark = true
+
         try {
-          next_mark = delay_mark_tile_list(list, m_buil)
+           next_mark = delay_mark_tile(list)
         }
         catch(ev) {
           return 0
         }
         if (pot0 == 1 && next_mark) {
+          next_mark = delay_mark_tile(list, stop_mark)
           comm_script = false
           this.next_step()
         }

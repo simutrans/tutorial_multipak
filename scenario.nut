@@ -76,8 +76,6 @@ cov_sw <- true
 correct_cov <- true
 
 //----------------------------------------------------------------
-tile_delay      <- 2       //delay for mark tiles
-tile_delay_list <- 2
 gui_delay       <- true    //delay for open win
 
 fail_num        <- 10       //numr for the count of try

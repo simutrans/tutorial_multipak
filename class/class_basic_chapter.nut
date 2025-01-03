@@ -26,6 +26,9 @@ gl_buil_list <- {}
 // Total de carga recibida
 reached <- 0
 
+tile_delay      <- 0x0000000f & time()       //delay for mark tiles
+gl_tile_i       <- 0
+
 class basic_chapter
 {        // chapter description : this is a placeholder class
 
@@ -2975,128 +2978,104 @@ class basic_chapter
     return null
   }
 
-  function delay_mark_tile_list(list, m_buil, stop = false)
+  function delay_mark_tile_list(list, stop = false)
   {
+
     if (stop){
       foreach(t in list){
-        local buil = m_buil ? t.find_object(mo_building): null
-        buil ? buil.unmark() : t.unmark()
+        t.unmark()
+        foreach(obj in t.get_objects()){
+          obj.unmark()
+        }
       }
       return true
     }
-    if(tile_delay_list>=3){
-      foreach(t in list){
-        //gui.add_message("list: "+t.x)
-        local buil = m_buil ? t.find_object(mo_building): null
-        buil ? buil.mark() : t.mark()
+    local crr_delay = 0x0000000f & time()
+
+    if(crr_delay == tile_delay){
+      for(;gl_tile_i < list.len(); ){
+        local t = list[gl_tile_i]
+        t.mark()
+        foreach(obj in t.get_objects()){
+          obj.mark()
+        }
+
+        gl_tile_i++
+        break
       }
-      tile_delay_list = 0
+      if(gl_tile_i == list.len()){
+        tile_delay = 0x0000000f & (crr_delay+1)
+        gl_tile_i = 0
+      }
       return false
     }
     else {
-      foreach(t in list){
-        local buil = m_buil ? t.find_object(mo_building): null
-        buil ? buil.unmark() : t.unmark()
+      for(;gl_tile_i < list.len(); ){
+        local t = list[gl_tile_i]
+        t.unmark()
+        foreach(obj in t.get_objects()){
+          obj.unmark()
+        }
 
+        gl_tile_i++
+        break
       }
-
-      tile_delay_list++
+      if(gl_tile_i == list.len()){
+        tile_delay = 0x0000000f & (crr_delay+1)
+        gl_tile_i = 0
+      }
       return true
     }
   }
 
-  function delay_mark_tile(coora, coorb, opt, stop = false)
+  function delay_mark_tile(list, stop = false)
   {
     if (stop){
-      for (local j = coora.x ;j<=coorb.x;j++){
-        for (local i = coora.y;i<=coorb.y;i++){
-                    local c = coord(j,i)
-          local t = my_tile(c)
-          t.unmark()
-          foreach(obj in t.get_objects()){
-            local type = obj.get_type()
-            t.find_object(type).unmark()
-          }
+      foreach(t in list){
+        t.unmark()
+        foreach(obj in t.get_objects()){
+          obj.unmark()
         }
       }
       return true
     }
-    if(tile_delay>=3){
-      if (opt == 0){
-        for (local j = coora.x ;j<=coorb.x;j++){
-          for (local i = coora.y;i<=coorb.y;i++){
-                        local c = coord(j,i)
-            local t = my_tile(c)
-            t.mark()
-            foreach(obj in t.get_objects()){
-              local type = obj.get_type()
-              t.find_object(type).mark()
-            }
-          }
+    local crr_delay = 0x0000000f & time()
+    if(crr_delay == tile_delay){
+      foreach(t in list){
+        t.mark()
+        foreach(obj in t.get_objects()){
+          obj.mark()
         }
-        tile_delay = 0
-        return false
       }
-
-      else if (opt == 1){
-        for (local j = coora.x ;j<=coorb.x;j++){
-          for (local i = coora.y;i<=coorb.y;i++){
-                        local c = coord(j,i)
-            local t = my_tile(c)
-            foreach(obj in t.get_objects()){
-              local type = obj.get_type()
-              t.find_object(type).mark()
-            }
-          }
-        }
-        tile_delay = 0
-        return false
-      }
-
-      else if (opt == 2){
-        for (local j = coora.x ;j<=coorb.x;j++){
-          for (local i = coora.y;i<=coorb.y;i++){
-                        local c = coord(j,i)
-            local t = my_tile(c)
-            t.mark()
-          }
-        }
-        tile_delay = 0
-        return false
-      }
-
+      return false
     }
     else{
-      for (local j = coora.x ;j<=coorb.x;j++){
-        for (local i = coora.y;i<=coorb.y;i++){
-                    local c = coord(j,i)
-          local t = my_tile(c)
-          foreach(obj in t.get_objects()){
-            local type = obj.get_type()
-            t.find_object(type).unmark()
-          }
+      tile_delay = 0x0000000f & (crr_delay+1)
+      foreach(t in list){
+        t.unmark()
+        foreach(obj in t.get_objects()){
+          obj.unmark()
         }
       }
-      tile_delay++
       return true
     }
   }
 
-    function lock_tile_list(c_list, siz, del, pl, text = "X")
-    {
-        if (!del) {
-          for (local j = 0 ;j<siz;j++){
-            label_x.create(c_list[j], player_x(pl), text)
-          }
+  function lock_tile_list(c_list, siz, del, pl, text = "X")
+  {
+      if (!del) {
+        for (local j = 0 ;j<siz;j++){
+          label_x.create(c_list[j], player_x(pl), text)
         }
-        else {
-          for (local j = 0 ;j<siz;j++){
-            local tile = tile_x(c_list[j].x,c_list[j].y,0)
-            tile.remove_object(player_x(pl), mo_label)
+      }
+      else {
+        for (local j = 0 ;j<siz;j++){
+          local tile = tile_x(c_list[j].x,c_list[j].y,0)
+          tile.remove_object(player_x(pl), mo_label)
 
-          }
         }
-    }
+      }
+  }
 
   function bus_result_message(nr, name, veh, cov)
   {
