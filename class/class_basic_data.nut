@@ -186,7 +186,7 @@ function get_obj_ch2(id) {
     case "pak64":
       switch (id) {
         case 1:
-          return "asphalt_road"
+          return "mip_cobblestone_road"
           break
         case 2:
           return "tb_classic_road"
@@ -250,10 +250,10 @@ function get_veh_ch3(id) {
     case "pak64":
       switch (id) {
         case 1:
-          return "1Diesellokomotive"
+          return "3Diesellokomotive"
           break
         case 2:
-          return "1Diesellokomotive"
+          return "3Diesellokomotive"
           break
         case 3:
           return "NS1000"
@@ -265,7 +265,7 @@ function get_veh_ch3(id) {
           return "Holzwagen"
           break
         case 6:
-          return "Passagierwagen"
+          return "TPPassagierwagen"
           break
       }
     break
@@ -334,7 +334,7 @@ function get_obj_ch3(id) {
     case "pak64":
       switch (id) {
         case 1:
-          return "concrete_sleeper_track"
+          return "wooden_sleeper_track"
           break
         case 2:
           return "ClassicRail"
@@ -682,7 +682,7 @@ function get_veh_ch6(id) {
     case "pak64":
       switch (id) {
         case 1:
-          return "DC-3"
+          return "Fokker_F27"
           break
         case 2:
           return "BuessingLinie"
