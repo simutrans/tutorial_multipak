@@ -31,6 +31,7 @@ script_test <- true
 persistent.st_nr <- array(30)     //Numero de estaciones/paradas
 
 scr_jump <- false
+pending_call <- false
 
 gl_percentage <- 0
 persistent.gl_percentage <- 0
@@ -298,17 +299,10 @@ function script_text()
   }
   if(persistent.chapter<7){
     if(scr_jump)
+      // already jumping
       return null
-    else
-      scr_jump = true
-
-    //gui.add_message(""+persistent.chapter)
-    local result = null
-    result = chapter.script_text()
-    if(result == 0) gui.add_message(""+translate("Advance not allowed")+"")
-
-    scr_jump = false
-    return result
+    pending_call = true
+    return true
   }
   return null
 }
@@ -331,12 +325,11 @@ function scenario_percentage(percentage)
 
 function load_chapter(number,pl)
 {
-    rules.clear()
-    general_disabled_tools(pl)
+  rules.clear()
+  general_disabled_tools(pl)
   if (!resul_version.pak || !resul_version.st){
     number = 0
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
-
     chapter.chap_nr = number
   }
   else{
@@ -503,6 +496,8 @@ function is_scenario_completed(pl)
   //------------------------------------------------------------------------------------------------------------------------------
   if (pl != 0) return 0     // other player get only 0%
 
+  
+
   if (currt_pos){
     local t = tile_x(currt_pos.x,currt_pos.y,currt_pos.z)
     local build = t.find_object(mo_building)
@@ -550,13 +545,22 @@ function is_scenario_completed(pl)
   if(!correct_cov) {
     if (!resul_version.pak || !resul_version.st)
       chapter.step = 1
-
-    else chapter.step = persistent.step
+    else
+      chapter.step = persistent.step
     chapter.start_chapter()
     return 1
   }
 
   chapter.step = persistent.step
+
+  if (pending_call) {
+    // since we cannot call them in a sync_step
+    pending_call = false
+    scr_jump = true // we are during a jump ...
+    chapter.script_text()
+    scr_jump = false
+  }
+
   local percentage = chapter.is_chapter_completed(pl)
   gl_percentage = percentage
   persistent.gl_percentage = gl_percentage
