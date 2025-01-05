@@ -405,6 +405,12 @@ function get_goal_text(pl)
 
 function get_result_text(pl)
 {
+   // finished ...
+  if(persistent.chapter>7) {
+    local text = ttextfile("finished.txt")
+    return text
+  }
+
   local text = ttextfile("result.txt")
   //local percentage = chapter.is_chapter_completed(pl)
   text.ratio_chapter = gl_percentage
@@ -490,6 +496,11 @@ function labels_text_debug()
 
 function is_scenario_completed(pl)
 {
+  // finished ...
+  if(persistent.chapter>7) {
+    return 100
+  }
+
   //-------Debug ====================================
   //gui.add_message(""+glsw[0]+"")
   //gui.add_message("!!!!!"+persistent.step+" ch a "+st_nr[0]+"  !!!!! "+persistent.status.step+"  -- "+chapter.step+"")
@@ -572,6 +583,14 @@ function is_scenario_completed(pl)
 
     persistent.chapter++
     persistent.status.chapter++
+
+    // finished ...
+    if(persistent.chapter>7) {
+      rules.clear()
+      rules.gui_needs_update()
+      scr_jump = true
+      return 100
+    }
 
     load_chapter(persistent.chapter, pl)
     chapter.chap_nr = persistent.chapter

@@ -227,6 +227,7 @@ class tutorial.chapter_07 extends basic_chapter
 
       case 5:
         //return 90
+        return 100
         break;
     }
     local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
@@ -283,6 +284,9 @@ class tutorial.chapter_07 extends basic_chapter
           return translate("You can only use this tool in the city")+cty4.name.tostring()+" ("+cty4.c.tostring()+")."
       break;
 
+      case 5:
+        return null;
+
     }
     if (tool_id==4096)
       return null
@@ -296,6 +300,9 @@ class tutorial.chapter_07 extends basic_chapter
 
   function is_convoy_allowed(pl, convoy, depot)
   {
+    if(this.step>4) 
+      return null
+
     local result=null // null is equivalent to 'allowed'
     //Check load type
     local good_nr = 0 //Passengers
@@ -322,6 +329,9 @@ class tutorial.chapter_07 extends basic_chapter
   }
 
   function is_tool_allowed(pl, tool_id, wt){
+    if(this.stop>4)
+      return null
+
     local gt_list = [ t_icon.tram, t_icon.rail, t_icon.slope ]
     foreach (id in gt_list){
       if(id == tool_id)
