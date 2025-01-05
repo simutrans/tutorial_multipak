@@ -377,7 +377,7 @@ function get_obj_ch3(id) {
           return "Signals"
           break
         case 7:
-          return "classic_metal_mesh_catenary"
+          return "SlowOverheadpower"
           break
       }
       break
