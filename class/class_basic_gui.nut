@@ -1073,11 +1073,13 @@ function chapter_step_enabled_tools( pl ) {
 
       enabled_tools.extend(_enabled_tools)
 
-      local _pak64_tools = [ 0x8006 ]
-      local _pak64german_tools = [ 0x800e, 0x8002 ]
+      local _pak64_tools = [ 0x8006, 0x8002 ]
+      local _pak64german_tools = [ 0x800e, 0x8002, 0x8001 ]
+      local _pak128_tools = [ 0x8002 ]
 
       enabled_tools_pak64.extend(_pak64_tools)
       enabled_tools_pak64german.extend(_pak64german_tools)
+      enabled_tools_pak128.extend(_pak128_tools)
 
       break
 
