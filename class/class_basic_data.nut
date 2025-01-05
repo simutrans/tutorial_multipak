@@ -1,3 +1,10 @@
+/**
+ *   @file class_basic_data.nut
+ *   @brief sets the pakset specific data
+ *
+ *  all object names correspond to the names in the dat files
+ *
+ */
 
 // placeholder for tools names in simutrans
 tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
