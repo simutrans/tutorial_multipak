@@ -641,7 +641,7 @@ function get_obj_ch5(id) {
           return "Powerline"
           break
         case 4:
-          return "PowerSource"
+          return "Aufspanntransformator" //PowerSource
           break
         case 5:
           return "CarDepot"
