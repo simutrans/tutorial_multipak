@@ -1081,6 +1081,12 @@ function chapter_step_enabled_tools( pl ) {
       enabled_tools_pak64german.extend(_pak64german_tools)
       enabled_tools_pak128.extend(_pak128_tools)
 
+      switch (step_nr) {
+        case 5:
+          rules.clear()
+          break
+      }		    
+
       break
 
   }

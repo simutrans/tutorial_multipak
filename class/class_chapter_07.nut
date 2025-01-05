@@ -329,10 +329,10 @@ class tutorial.chapter_07 extends basic_chapter
   }
 
   function is_tool_allowed(pl, tool_id, wt){
-    if(this.stop>4)
-      return null
+    if(this.step>4)
+      return true
 
-    local gt_list = [ t_icon.tram, t_icon.rail, t_icon.slope ]
+    local gt_list = [ t_icon.tram, t_icon.rail ]
     foreach (id in gt_list){
       if(id == tool_id)
         return false
