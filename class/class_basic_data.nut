@@ -170,7 +170,7 @@ function get_veh_ch2_st4() {
       return "BuessingLinie"
       break
     case "pak64.german":
-      return "BuessingLinie"
+      return "OpelBlitz"
       break
     case "pak128":
       return "S_Kroytor_LiAZ-677"
@@ -705,10 +705,10 @@ function get_veh_ch6(id) {
           return "DC-3"
           break
         case 2:
-          return "BuessingLinie"
+          return "OpelBlitz"
           break
         case 3:
-          return "BuessingLinie"
+          return "OpelBlitz"
           break
       }
       break
