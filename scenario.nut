@@ -333,9 +333,7 @@ function load_chapter(number,pl)
     chapter.chap_nr = number
   }
   else{
-    if (number <= tutorial.len() )    // replace the class
-      chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
-    else    persistent.chapter--
+    chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
     if ( (number == persistent.chapter) && (chapter.startcash > 0) )  // set cash money here
       player_x(0).book_cash( (chapter.startcash - player_x(0).get_cash()[0]) * 100)
 
@@ -497,7 +495,7 @@ function labels_text_debug()
 function is_scenario_completed(pl)
 {
   // finished ...
-  if(persistent.chapter>7) {
+  if(persistent.chapter > chapter_max) {
     return 100
   }
 
@@ -585,7 +583,7 @@ function is_scenario_completed(pl)
     persistent.status.chapter++
 
     // finished ...
-    if(persistent.chapter>7) {
+    if(persistent.chapter > chapter_max) {
       rules.clear()
       rules.gui_needs_update()
       scr_jump = true
@@ -778,6 +776,11 @@ function resume_game()
   }
 
   r_way_list = persistent.r_way_list
+  
+  if(persistent.chapter > chapter_max) {
+    // scenario was finished
+    return;
+  }
 
   load_chapter(persistent.chapter,0)      // load correct chapter for player=0
 
@@ -785,7 +788,7 @@ function resume_game()
 
   select_option_halt = tile_x( 0, 0, select_option.z ).find_object(mo_label)
 
-    chapter.start_chapter()
+  chapter.start_chapter()
 }
 
 function get_line_name(halt)
