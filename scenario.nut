@@ -289,21 +289,25 @@ for (local i = 0; i <= chapter_max; i++)    // include amount of chapter classes
 chapter            <- tutorial.chapter_02       // must be placed here !!! 
 //-------------------------------------------------------------------------
 
+
+/**
+  * This function will be called, whenever a user clicks to jump to the next step
+  * It must not alter the map or call a tool!
+  * Hence we just set a flag and handle all map changes in is_scenario_completed()
+  */
 function script_text()
 {
   local pause = debug.is_paused()
-  if (pause) return gui.add_message(translate("Advance is not allowed with the game paused."))
+  if (pause)
+    return gui.add_message(translate("Advance is not allowed with the game paused."))
   if(!correct_cov){
     gui.add_message(""+translate("Advance not allowed"))
     return null
   }
-  if(persistent.chapter<7){
-    if(scr_jump)
-      // already jumping
-      return null
-    pending_call = true
-    return true
-  }
+  if(scr_jump)
+    // already jumping
+    return null
+  pending_call = true   // indicate that we want to skip to next step
   return null
 }
 
@@ -373,6 +377,11 @@ function set_city_names()
   }
 }
 
+
+/*
+ * test functions generating the GUI strings
+ * These must return fast and must not alter the map!
+ */
 function get_info_text(pl)
 {
   local info = ttextfile("info.txt")
@@ -492,6 +501,13 @@ function labels_text_debug()
   }
 }
 
+
+/**
+  * This function check whether finished or not
+  * Is runs in a step, so it can alter the map
+  * @return 100 or more, the scenario will be "win" and the scenario_info window
+  *                      show the result tab
+  */
 function is_scenario_completed(pl)
 {
   // finished ...
@@ -563,7 +579,7 @@ function is_scenario_completed(pl)
   chapter.step = persistent.step
 
   if (pending_call) {
-    // since we cannot call them in a sync_step
+    // since we cannot alter the map in a sync_step
     pending_call = false
     scr_jump = true // we are during a jump ...
     chapter.script_text()
