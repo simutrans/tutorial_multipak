@@ -409,7 +409,7 @@ function get_obj_ch3(id) {
           return "Signals"
           break
         case 7:
-          return "gray_type_catenary"
+          return "grey_type_catenary"
           break
       }
       break
