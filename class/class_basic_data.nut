@@ -512,7 +512,7 @@ function get_obj_ch4(id) {
     case "pak128":
       switch (id) {
         case 1:
-          return "canal_030"
+          return "canal_020"
           break
         case 2:
           return "Long_Goods_Dock"
