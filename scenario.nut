@@ -280,13 +280,13 @@ function get_integral(tx)
   resul_version = string_analyzer()
   include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
   include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
-  include(nut_path+"class_basic_coords")  // include class for
+
 }
 
 for (local i = 0; i <= chapter_max; i++)    // include amount of chapter classes
   include(nut_path+"class_chapter_"+(i < 10 ? "0"+i:i) )
 // Marked for deletion ----------------------------------------------------
-chapter            <- tutorial.chapter_02       // must be placed here !!!
+chapter            <- tutorial.chapter_02       // must be placed here !!! 
 //-------------------------------------------------------------------------
 
 
@@ -521,7 +521,7 @@ function is_scenario_completed(pl)
   //------------------------------------------------------------------------------------------------------------------------------
   if (pl != 0) return 0     // other player get only 0%
 
-
+  
 
   if (currt_pos){
     local t = tile_x(currt_pos.x,currt_pos.y,currt_pos.z)
@@ -792,7 +792,7 @@ function resume_game()
   }
 
   r_way_list = persistent.r_way_list
-
+  
   if(persistent.chapter > chapter_max) {
     // scenario was finished
     return;

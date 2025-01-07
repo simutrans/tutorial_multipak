@@ -45,7 +45,7 @@ class tutorial.chapter_02 extends basic_chapter
   //Parasdas de autobus
   c_lock = [coord(99,28), coord(98,32), coord(99,32), coord(97,27), coord(97,26)]
   sch_cov_correct = false
-  //sch_list1 = [coord(111,183), coord(116,183),  coord(120,183), coord(126,187), coord(121,189), coord(118,191), coord(113,190)]
+  sch_list1 = [coord(111,183), coord(116,183),  coord(120,183), coord(126,187), coord(121,189), coord(118,191), coord(113,190)]
 
   // Step 4 =====================================================================================
   //Primer autobus
@@ -71,7 +71,7 @@ class tutorial.chapter_02 extends basic_chapter
   dock_lim = {a = coord(128,181), b = coord(135,193)}
   del_lim2 = {a = coord(128,181), b = coord(128,193)}
 
-  //sch_list2 = [coord(132,189), coord(126,187), coord(121,189), coord(126,198), coord(120,196)]
+  sch_list2 = [coord(132,189), coord(126,187), coord(121,189), coord(126,198), coord(120,196)]
   line2_name = "Test 2"
   dep_cnr2 = null //auto started
   cov_nr = 0
@@ -85,7 +85,7 @@ class tutorial.chapter_02 extends basic_chapter
   c_way1 = {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}  //Inicio, Fin de la via y direccion(fullway)
   c_st0 = coord(126,187)
 
-  //sch_list3 = [coord(126,187), coord(121,155), coord(127,155), coord(132,155), coord(135,153)]
+  sch_list3 = [coord(126,187), coord(121,155), coord(127,155), coord(132,155), coord(135,153)]
   line3_name = "Test 3"
   dep_cnr3 = null //auto started
 
@@ -143,17 +143,17 @@ class tutorial.chapter_02 extends basic_chapter
     //Schedule list form current convoy
     if(this.step == 4){
       local c_dep = this.my_tile(c_dep)
-      local c_list = city1_halt_1
+      local c_list = sch_list1
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     else if(this.step == 6){
       local c_dep = this.my_tile(c_dep)
-      local c_list = city1_halt_2
+      local c_list = sch_list2
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     else if(this.step == 7){
       local c_dep = this.my_tile(c_dep)
-      local c_list = city2_halt_1
+      local c_list = sch_list3
       start_sch_tmpsw(pl,c_dep, c_list)
     }
 
@@ -186,7 +186,7 @@ class tutorial.chapter_02 extends basic_chapter
         break
       case 3:
         local list_tx = ""
-        local c_list = city1_halt_1
+        local c_list = sch_list1
         local siz = c_list.len()
         for (local j=0;j<siz;j++){
           local c = coord(c_list[j].x, c_list[j].y)
@@ -207,7 +207,7 @@ class tutorial.chapter_02 extends basic_chapter
         break
       case 4:
         local list_tx = ""
-        local c_list = city1_halt_1
+        local c_list = sch_list1
         local siz = c_list.len()
         for (local j=0;j<siz;j++){
           local c = coord(c_list[j].x, c_list[j].y)
@@ -243,10 +243,10 @@ class tutorial.chapter_02 extends basic_chapter
         veh1_wait = set_waiting_time(2)
 
         local stxt = array(10)
-        local halt = my_tile(city1_halt_2[0]).get_halt()
+        local halt = my_tile(sch_list2[0]).get_halt()
 
-        for (local j=0;j<city1_halt_2.len();j++){
-          local c = coord(city1_halt_2[j].x, city1_halt_2[j].y)
+        for (local j=0;j<sch_list2.len();j++){
+          local c = coord(sch_list2[j].x, sch_list2[j].y)
           local st_halt = my_tile(c).get_halt()
           stxt[j] = c.href(st_halt.get_name()+" ("+c.tostring()+")")
         }
@@ -281,7 +281,7 @@ class tutorial.chapter_02 extends basic_chapter
           text = ttextfile("chapter_02/07_"+a+"-"+b+".txt")
           text.tx = ttext("<em>["+a+"/"+b+"]</em>")
           local list_tx = ""
-          local c_list = city2_halt_1
+          local c_list = sch_list3
           local siz = c_list.len()
           for (local j=0;j<siz;j++){
             local c = coord(c_list[j].x, c_list[j].y)
@@ -312,7 +312,7 @@ class tutorial.chapter_02 extends basic_chapter
           text.tx = ttext("<em>["+a+"/"+b+"]</em>")
 
           local list_tx = ""
-          local c_list = city2_halt_1
+          local c_list = sch_list3
           local siz = c_list.len()
           for (local j=1;j<siz;j++){
             local c = coord(c_list[j].x, c_list[j].y)
@@ -349,7 +349,7 @@ class tutorial.chapter_02 extends basic_chapter
           text.tx = ttext("<em>["+a+"/"+b+"]</em>")
 
           local list_tx = ""
-          local c_list = city2_halt_1
+          local c_list = sch_list3
           local siz = c_list.len()
           for (local j=0;j<siz;j++){
             local c = coord(c_list[j].x, c_list[j].y)
@@ -479,8 +479,8 @@ class tutorial.chapter_02 extends basic_chapter
           lock_tile_list(c_lock, del)
           pot0=1
         }
-        local siz = city1_halt_1.len()
-        local c_list = city1_halt_1
+        local siz = sch_list1.len()
+        local c_list = sch_list1
         local name =  translate("Place Stop here!.")
         local load = good_alias.passa
         local all_stop = is_stop_building(siz, c_list, name, load)
@@ -605,7 +605,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         local id_start = 1
         local id_end = 3
-        cov_nr = get_convoy_number_exp(city1_halt_2[0], c_dep, id_start, id_end)
+        cov_nr = get_convoy_number_exp(sch_list2[0], c_dep, id_start, id_end)
 
         local convoy = convoy_x(gcov_id)
         local all_result = checks_convoy_schedule(convoy, pl)
@@ -635,8 +635,8 @@ class tutorial.chapter_02 extends basic_chapter
         chapter_sub_steps = 3
         if (pot0==0){
 
-          local siz = city2_halt_1.len()
-          local c_list = city2_halt_1
+          local siz = sch_list3.len()
+          local c_list = sch_list3
           local name =  translate("Place Stop here!.")
           local load = good_alias.passa
           local all_stop = is_stop_building(siz, c_list, name, load)
@@ -821,15 +821,15 @@ class tutorial.chapter_02 extends basic_chapter
         if (pos.x>city1_lim.a.x && pos.y>city1_lim.a.y && pos.x<city1_lim.b.x && pos.y<city1_lim.b.y){
           //Permite construir paradas
           if (tool_id==tool_build_station){
-            local nr = city1_halt_1.len()
-            local c_st = city1_halt_1
+            local nr = sch_list1.len()
+            local c_st = sch_list1
             return build_stop(nr, c_st, t, way, slope, ribi, label, pos)
           }
 
           //Permite eliminar paradas
           if (tool_id==tool_remover){
-            local nr = city1_halt_1.len()
-            local c_st = city1_halt_1
+            local nr = sch_list1.len()
+            local c_st = sch_list1
             return delete_stop(nr, c_st, way, pos)
           }
         }
@@ -840,7 +840,7 @@ class tutorial.chapter_02 extends basic_chapter
       //Enrutar el primer autobus
       case 4:
         if (tool_id==tool_build_station)
-          return format(translate("Only %d stops are necessary."),city1_halt_1.len())
+          return format(translate("Only %d stops are necessary."),sch_list1.len())
 
         //Enrutar vehiculo
         if ((pos.x == c_dep.x && pos.y == c_dep.y)){
@@ -850,7 +850,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
         if (tool_id==4108) {
-          local c_list = city1_halt_1   //Lista de todas las paradas de autobus
+          local c_list = sch_list1   //Lista de todas las paradas de autobus
           local c_dep = c_dep //Coordeadas del deposito
           local siz = c_list.len() //Numero de paradas
           result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -880,7 +880,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
           if (tool_id==4108) {
             stop_mark = true
-            local c_list = city1_halt_2    //Lista de todas las paradas de autobus
+            local c_list = sch_list2    //Lista de todas las paradas de autobus
             local c_dep = c_dep    //Coordeadas del deposito
             local siz = c_list.len()     //Numero de paradas
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -894,8 +894,8 @@ class tutorial.chapter_02 extends basic_chapter
           if ((tool_id==tool_build_station)){
             if (pos.x>city2_lim.a.x && pos.y>city2_lim.a.y && pos.x<city2_lim.b.x && pos.y<city2_lim.b.y){
 
-              local nr = city2_halt_1.len()
-              local c_st = city2_halt_1
+              local nr = sch_list3.len()
+              local c_st = sch_list3
               return build_stop(nr, c_st, t, way, slope, ribi, label, pos)
             }
 
@@ -904,10 +904,10 @@ class tutorial.chapter_02 extends basic_chapter
           }
           //Permite eliminar paradas
           if (tool_id==tool_remover){
-            for(local j=0;j<city2_halt_1.len();j++){
-              if (city2_halt_1[j] != null){
-                local stop = my_tile(city2_halt_1[j]).find_object(mo_building)
-                if (pos.x==city2_halt_1[j].x&&pos.y==city2_halt_1[j].y&&stop){
+            for(local j=0;j<sch_list3.len();j++){
+              if (sch_list3[j] != null){
+                local stop = my_tile(sch_list3[j]).find_object(mo_building)
+                if (pos.x==sch_list3[j].x&&pos.y==sch_list3[j].y&&stop){
                   way.mark()
                   return null
                 }
@@ -934,7 +934,7 @@ class tutorial.chapter_02 extends basic_chapter
         else if (pot2==1 && pot3==0){
           if (tool_id==4108){
             //Paradas de la primera ciudad
-            local c_list = city2_halt_1   //Lista de todas las paradas de autobus
+            local c_list = sch_list3   //Lista de todas las paradas de autobus
             local c_dep = c_dep //Coordeadas del deposito
             local siz = c_list.len() //Numero de paradas
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -990,7 +990,7 @@ class tutorial.chapter_02 extends basic_chapter
         local selc = 0
         local load = veh1_load
         local time = veh1_wait
-        local c_list = city1_halt_1
+        local c_list = sch_list1
         local siz = c_list.len()
         local line = true
         result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
@@ -1005,7 +1005,7 @@ class tutorial.chapter_02 extends basic_chapter
         local selc = 0
         local load = veh1_load
         local time = veh1_wait
-        local c_list = city1_halt_2
+        local c_list = sch_list2
         local siz = c_list.len()
         local line = true
         result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
@@ -1018,7 +1018,7 @@ class tutorial.chapter_02 extends basic_chapter
       case 7:
         local load = veh1_load
         local time = veh1_wait
-        local c_list = city2_halt_1
+        local c_list = sch_list3
         local siz = c_list.len()
         local selc = siz-1
         local line = true
@@ -1053,7 +1053,7 @@ class tutorial.chapter_02 extends basic_chapter
           local selc = 0
           local load = veh1_load
           local time = veh1_wait
-          local c_list = city1_halt_1
+          local c_list = sch_list1
           local siz = c_list.len()
           result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
           if(result == null)
@@ -1078,7 +1078,7 @@ class tutorial.chapter_02 extends basic_chapter
           local selc = 0
           local load = veh1_load
           local time = veh1_wait
-          local c_list = city1_halt_2
+          local c_list = sch_list2
           local siz = c_list.len()
           local line = true
           result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line)
@@ -1102,7 +1102,7 @@ class tutorial.chapter_02 extends basic_chapter
 
           local load = veh1_load
           local time = veh1_wait
-          local c_list = city2_halt_1
+          local c_list = sch_list3
           local siz = c_list.len()
           local selc = siz-1
           result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
@@ -1144,8 +1144,8 @@ class tutorial.chapter_02 extends basic_chapter
         break;
       case 3:
 
-        for(local j=0;j<city1_halt_1.len();j++){
-          local t = my_tile(city1_halt_1[j])
+        for(local j=0;j<sch_list1.len();j++){
+          local t = my_tile(sch_list1[j])
           local way = t.find_object(mo_way)
           t.remove_object(pl_unown, mo_label)
           local tool = command_x(tool_build_station)
@@ -1170,7 +1170,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_depot = my_tile(c_dep)
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
-          local c_list = city1_halt_1
+          local c_list = sch_list1
           local sched = schedule_x(gl_wt, [])
           local load = veh1_load
           local wait = veh1_wait
@@ -1220,7 +1220,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         if (current_cov>ch2_cov_lim2.a && current_cov<ch2_cov_lim2.b){
           local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
-          local c_list = city1_halt_2
+          local c_list = sch_list2
           local sch_siz = c_list.len()
           local load = veh1_load
           local time = veh1_wait
@@ -1251,8 +1251,8 @@ class tutorial.chapter_02 extends basic_chapter
 
       case 7:
         if (pot1==0){
-          for(local j=0;j<city2_halt_1.len();j++){
-            local t = my_tile(city2_halt_1[j])
+          for(local j=0;j<sch_list3.len();j++){
+            local t = my_tile(sch_list3[j])
             local way = t.find_object(mo_way)
             t.remove_object(pl_unown, mo_label)
             local tool = command_x(tool_build_station)
@@ -1275,7 +1275,7 @@ class tutorial.chapter_02 extends basic_chapter
           local sched = schedule_x(gl_wt, [])
           local load = veh1_load
           local wait = veh1_wait
-          local c_list = city2_halt_1
+          local c_list = sch_list3
           local sch_siz = c_list.len()
           for(local j=0;j<sch_siz;j++){
             if (j==sch_siz-1)

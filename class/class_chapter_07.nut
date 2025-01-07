@@ -226,7 +226,8 @@ class tutorial.chapter_07 extends basic_chapter
         break;
 
       case 5:
-        // last step no actions
+        //return 90
+        return 100
         break;
     }
     local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
@@ -299,7 +300,7 @@ class tutorial.chapter_07 extends basic_chapter
 
   function is_convoy_allowed(pl, convoy, depot)
   {
-    if(this.step>4)
+    if(this.step>4) 
       return null
 
     local result=null // null is equivalent to 'allowed'
