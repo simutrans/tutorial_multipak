@@ -36,7 +36,7 @@ class tutorial.chapter_02 extends basic_chapter
   dep_lim1 = {a = null, b = null}
   dep_lim2 = {a = null, b = null}
   coorda = coord(115,186)
-  c_dep = coord(115,185) // depot
+  c_dep = city1_road_depot //coord(115,185) // depot
   coordb = coord(116,185)
   cursor_a = false
   cursor_b = false
@@ -416,7 +416,14 @@ class tutorial.chapter_02 extends basic_chapter
     switch (this.step) {
       case 1:
         local next_mark = true
-        local c_list = [my_tile(coordb), my_tile(coorda), my_tile(c_dep)]
+        local c_list = [] //[my_tile(coordb), my_tile(coorda), my_tile(c_dep)]
+        // Checking the tiles nwse from the depot tile on the road
+        local tile = my_tile(city1_road_depot)
+        if ( tile_x(tile.x-1, tile.y, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x-1, tile.y, tile.z)) }
+        if ( tile_x(tile.x+1, tile.y, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x+1, tile.y, tile.z)) }
+        if ( tile_x(tile.x, tile.y-1, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x, tile.y-1, tile.z)) }
+        if ( tile_x(tile.x, tile.y+1, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x, tile.y+1, tile.z)) }
+        c_list.append(tile)
         try {
            next_mark = delay_mark_tile_list(c_list)
         }
@@ -428,12 +435,12 @@ class tutorial.chapter_02 extends basic_chapter
         cursor_b = cursor_control(my_tile(coordb))
 
         //Para la carretera
-        local tile = my_tile(c_dep)
+        //local tile = my_tile(city1_road_depot)
         local way = tile.find_object(mo_way)
         local label = tile.find_object(mo_label)
         if (!way && !label){
           local t1 = command_x(tool_remover)
-          local err1 = t1.work(player_x(pl), my_tile(c_dep), "")
+          local err1 = t1.work(player_x(pl), tile, "")
           label_x.create(c_dep, player_x(pl), translate("Place the Road here!."))
           return 0
         }
@@ -762,6 +769,7 @@ class tutorial.chapter_02 extends basic_chapter
     local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
+
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
     local t = tile_x(pos.x, pos.y, pos.z)
     local ribi = 0
@@ -820,7 +828,7 @@ class tutorial.chapter_02 extends basic_chapter
       case 3:
 
         if (pos.x == c_dep.x && pos.y == c_dep.y )
-          return format(translate("You must build the %d stops first."),7)
+          return format(translate("You must build the %d stops first."),city1_halt_1.len())
         if (pos.x>city1_lim.a.x && pos.y>city1_lim.a.y && pos.x<city1_lim.b.x && pos.y<city1_lim.b.y){
           //Permite construir paradas
           if (tool_id==tool_build_station){
@@ -1127,13 +1135,21 @@ class tutorial.chapter_02 extends basic_chapter
     local pl = 0
     switch (this.step) {
       case 1:
-        local list = [my_tile(c_dep)]
+        local tile = my_tile(city1_road_depot)
+        local list = [tile]
         delay_mark_tile(list, true)
         //Para la carretera
         local t1 = command_x(tool_remover)
-        local err1 = t1.work(player_x(pl), my_tile(c_dep), "")
+        local err1 = t1.work(player_x(pl), tile, "")
+
+        local btile = null
+        if ( tile_x(tile.x-1, tile.y, tile.z).get_way(wt_road) != null ) { btile = tile_x(tile.x-1, tile.y, tile.z) }
+        else if ( tile_x(tile.x+1, tile.y, tile.z).get_way(wt_road) != null ) { btile = tile_x(tile.x+1, tile.y, tile.z) }
+        else if ( tile_x(tile.x, tile.y-1, tile.z).get_way(wt_road) != null ) { btile = tile_x(tile.x, tile.y-1, tile.z) }
+        else if ( tile_x(tile.x, tile.y+1, tile.z).get_way(wt_road) != null ) { btile = tile_x(tile.x, tile.y+1, tile.z) }
+
         local t2 = command_x(tool_build_way)
-        local err2 = t2.work(player_x(pl), my_tile(coorda), my_tile(c_dep), sc_way_name)
+        local err2 = t2.work(player_x(pl), btile, tile, sc_way_name)
         return null
         break;
       case 2:
