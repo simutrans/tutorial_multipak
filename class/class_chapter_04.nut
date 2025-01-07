@@ -251,7 +251,7 @@ class tutorial.chapter_04 extends basic_chapter
     local fac_1 = factory_data.rawget("4")
     local fac_2 = factory_data.rawget("5")
     local fac_3 = factory_data.rawget("6")
-
+	local pl_unown = player_x(15)
     switch (this.step) {
       case 1:
         local next_mark = false
@@ -306,10 +306,10 @@ class tutorial.chapter_04 extends basic_chapter
         local depot = t1.find_object(mo_depot_water)
 
         if (!depot){
-          label_x.create(c_dep1, player_x(pl), translate("Build Shipyard here!."))
+          label_x.create(c_dep1, pl_unown, translate("Build Shipyard here!."))
         }
         else{
-          t1.remove_object(player_x(1), mo_label)
+          t1.remove_object(pl_unown, mo_label)
           pot0=1
         }
         if (pot1==1){
@@ -335,11 +335,11 @@ class tutorial.chapter_04 extends basic_chapter
           local way_start = t_start.find_object(mo_way)
           if (way_start && way_start.get_desc().get_topspeed()==0){
             t_start.mark()
-            label_x.create(c_start, player_x(1), translate("Build Canal here!."))
+            label_x.create(c_start, pl_unown, translate("Build Canal here!."))
           }
           else{
             t_start.unmark()
-            t_start.remove_object(player_x(1), mo_label)
+            t_start.remove_object(pl_unown, mo_label)
           }
 
           //Final del canal
@@ -348,11 +348,11 @@ class tutorial.chapter_04 extends basic_chapter
           local way_end = t_end.find_object(mo_way)
           if (way_end &&  way_end.get_desc().get_topspeed()==0){
             t_end.mark()
-            label_x.create(c_end, player_x(1), translate("Build Canal here!."))
+            label_x.create(c_end, pl_unown, translate("Build Canal here!."))
           }
           else{
             t_end.unmark()
-            t_end.remove_object(player_x(1), mo_label)
+            t_end.remove_object(pl_unown, mo_label)
           }
 
           local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
@@ -375,10 +375,10 @@ class tutorial.chapter_04 extends basic_chapter
         else if (pot0==1 && pot1==0){
           local t = my_tile(sch_list2[1])
           local dock4 = t.find_object(mo_building)
-          public_label(t, translate("Build a Dock here!."))
+          label_x.create(t, pl_unown, translate("Build a Dock here!."))
           if(dock4){
             if(is_station_build(0, sch_list2[1], good_alias.goods)==null){
-              t.remove_object(player_x(1), mo_label)
+              t.remove_object(pl_unown, mo_label)
               pot1=1
             }
           }
@@ -735,6 +735,7 @@ class tutorial.chapter_04 extends basic_chapter
   function script_text()
   {
     local pl = 0
+	local pl_unown = player_x(15)
     switch (this.step) {
       case 1:
         if(pot0==0){
@@ -751,7 +752,7 @@ class tutorial.chapter_04 extends basic_chapter
         local name = sc_dock_name1
         for(local j =0;j<c_list.len();j++){
           local tile = my_tile(c_list[j])
-          tile.remove_object(player_x(1), mo_label)
+          tile.remove_object(pl_unown, mo_label)
           local tool = command_x(tool_build_station)
           local err = tool.work(player_x(pl), tile, name)
         }
@@ -764,7 +765,7 @@ class tutorial.chapter_04 extends basic_chapter
         local label = t1.find_object(mo_label)
 
         if (label){
-          t1.remove_object(player_x(1), mo_label)
+          t1.remove_object(pl_unown, mo_label)
         }
 
         local tool = command_x(tool_build_depot)
@@ -821,10 +822,10 @@ class tutorial.chapter_04 extends basic_chapter
           t1.unmark()
 
           if (is_lab1){
-            t1.remove_object(player_x(1), mo_label)
+            t1.remove_object(pl_unown, mo_label)
           }
           if (is_lab2){
-            t2.remove_object(player_x(1), mo_label)
+            t2.remove_object(pl_unown, mo_label)
           }
           if (way)
             way.unmark()
@@ -847,7 +848,7 @@ class tutorial.chapter_04 extends basic_chapter
           t.unmark()
           local label = t.find_object(mo_label)
           if (label){
-            t.remove_object(player_x(1), mo_label)
+            t.remove_object(pl_unown, mo_label)
           }
           local tool = command_x(tool_build_station)
           local err = tool.work(player_x(pl), t, sc_dock_name2)
@@ -894,7 +895,7 @@ class tutorial.chapter_04 extends basic_chapter
         for(local j =0;j<c_list.len();j++){
           local t = my_tile(c_list[j])
           t.unmark()
-          t.remove_object(player_x(1), mo_label)
+          t.remove_object(pl_unown, mo_label)
           local tool = command_x(tool_build_station)
           tool.work(player_x(pl), t, name)
           glsw[j]=1

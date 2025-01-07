@@ -231,7 +231,7 @@ class tutorial.chapter_06 extends basic_chapter
 
     save_glsw()
     save_pot()
-
+	local pl_unown = player_x(15)
     switch (this.step) {
       case 1:
         if (pot0==0){
@@ -279,7 +279,7 @@ class tutorial.chapter_06 extends basic_chapter
           local way = tile.find_object(mo_way)
           local buil = tile.find_object(mo_building)
           local name = translate("Build here")
-          public_label(tile, name)
+          label_x.create(tile, pl_unown, name)
           if(way && buil){
             tile.remove_object(player_x(1), mo_label)
             pot2 = 1
@@ -291,7 +291,7 @@ class tutorial.chapter_06 extends basic_chapter
           local tile = my_tile(st2_pos)
           local buil = tile.find_object(mo_building)
           local name = translate("Build here")
-          public_label(tile, name)
+          label_x.create(tile, pl_unown, name)
           if(buil){
             tile.remove_object(player_x(1), mo_label)
             pot3 = 1
@@ -304,7 +304,7 @@ class tutorial.chapter_06 extends basic_chapter
           local way = tile.find_object(mo_way)
           local depot = tile.find_object(mo_depot_air)
           local name = translate("Build here")
-          public_label(tile, name)
+          label_x.create(tile, pl_unown, name)
           if(way && depot){
             tile.remove_object(player_x(1), mo_label)
             tile.remove_object(player_x(1), mo_label)
@@ -1054,12 +1054,13 @@ class tutorial.chapter_06 extends basic_chapter
     local tile_start =  tile_x(coora.x, coora.y, coora.z)
     local way_start = tile_start.find_object(mo_way)
     local name = translate("Build here")
+	local pl_unown = player_x(15)
     if(way_start){
       way_start.mark()
-      public_label(tile_start, name)
+      label_x.create(tile_start, pl_unown, name)
       local start_wt = way_start.get_waytype()
       if(start_wt != wt) {
-        public_label(tile_start, name)
+        label_x.create(tile_start, pl_unown, name)
         return {c = coora, result = false}
       }
       local start_name = way_start.get_name()
@@ -1068,7 +1069,7 @@ class tutorial.chapter_06 extends basic_chapter
           break
         }
         if(j == name_list.len()-1) {
-          public_label(tile_start, name)
+          label_x.create(tile_start, pl_unown, name)
           return {c = coora, result = false}
         }
       }
@@ -1127,7 +1128,7 @@ class tutorial.chapter_06 extends basic_chapter
           local current_wt = way.get_waytype()
           if(current_wt != wt){
             way.mark()
-            public_label(tile_start, name)
+            label_x.create(tile_start, pl_unown, name)
             return {c = coora, result = false}
           }
 
@@ -1172,7 +1173,7 @@ class tutorial.chapter_06 extends basic_chapter
           }
           if ((current_dir==1)||(current_dir==2)||(current_dir==4)||(current_dir==8)){
             way.mark()
-            public_label(tile_start, name)
+			label_x.create(tile_start, pl_unown, name)
             return {c = coora, result = false}
           }
           else if(dir_start == 1){ //y--
@@ -1249,13 +1250,13 @@ class tutorial.chapter_06 extends basic_chapter
           }
         }
         else {
-          public_label(tile_start, name)
+          label_x.create(tile_start, pl_unown, name)
           return {c = coora, result = false}
         }
       }
     }
     else {
-      public_label(tile_start, name)
+      label_x.create(tile_start, pl_unown, name)
       return {c = coora, result = false}
     }
   }

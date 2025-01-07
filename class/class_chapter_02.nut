@@ -412,6 +412,7 @@ class tutorial.chapter_02 extends basic_chapter
     local chapter_step = persistent.step
     local chapter_sub_steps = 0 // count all sub steps
     local chapter_sub_step = 0  // actual sub step
+	local pl_unown = player_x(15)
 
     switch (this.step) {
       case 1:
@@ -433,14 +434,14 @@ class tutorial.chapter_02 extends basic_chapter
         local label = tile.find_object(mo_label)
         if (!way && !label){
           local t1 = command_x(tool_remover)
-          local err1 = t1.work(player_x(pl), my_tile(c_dep), "")
-          label_x.create(c_dep, player_x(pl), translate("Place the Road here!."))
+          local err1 = t1.work(player_x(1), my_tile(c_dep), "")
+          label_x.create(c_dep, pl_unown, translate("Place the Road here!."))
           return 0
         }
         else if ((way)&&(way.get_owner().nr==pl)){
           if(next_mark ){
             next_mark = delay_mark_tile_list(c_list, true)
-            tile.remove_object(player_x(1), mo_label)
+            tile.remove_object(pl_unown, mo_label)
             this.next_step()
           }
         }
@@ -461,11 +462,11 @@ class tutorial.chapter_02 extends basic_chapter
         local tile = my_tile(c_dep)
         local waydepo = tile.find_object(mo_way)
         if (!tile.find_object(mo_depot_road)){
-          label_x.create(c_dep, player_x(pl), translate("Build a Depot here!."))
+          label_x.create(c_dep, pl_unown, translate("Build a Depot here!."))
         }
         else if (next_mark){
           next_mark = delay_mark_tile(c_list1, stop_mark)
-          tile.remove_object(player_x(1), mo_label)
+          tile.remove_object(pl_unown, mo_label)
           waydepo.unmark()
           this.next_step()
         }
@@ -475,9 +476,7 @@ class tutorial.chapter_02 extends basic_chapter
         if (pot0==0){
           //Marca tiles para evitar construccion de objetos
           local del = false
-          local pl_nr = 1
-          local text = "X"
-          lock_tile_list(c_lock, c_lock.len(), del, pl_nr, text)
+          lock_tile_list(c_lock, del)
           pot0=1
         }
         local siz = sch_list1.len()
@@ -548,7 +547,7 @@ class tutorial.chapter_02 extends basic_chapter
           //Elimina cuadro label
           label_bord(del_lim1.a, del_lim1.b, opt, true, "X")
           //label_bord(c_lock.a, c_lock.b, opt, true, "X")
-          lock_tile_list(c_lock, c_lock.len(), true, 1)
+          lock_tile_list(c_lock, true)
         }
 
         //return 50
@@ -556,11 +555,10 @@ class tutorial.chapter_02 extends basic_chapter
       case 5:
         local t_label = my_tile(brdg1)
         local label = t_label.find_object(mo_label)
-
         local next_mark = true
         if (pot0 == 0){
           if(!label)
-            label_x.create(brdg1, player_x(pl), translate("Build a Bridge here!."))
+            label_x.create(brdg1, pl_unown, translate("Build a Bridge here!."))
           try {
              next_mark = delay_mark_tile(t_list_brd)
           }
@@ -586,7 +584,7 @@ class tutorial.chapter_02 extends basic_chapter
           local obj = false
           local r_way = get_fullway(coora, coorb, dir, obj)
           if (r_way.r){
-            t_label.remove_object(player_x(1), mo_label)
+            t_label.remove_object(pl_unown, mo_label)
             this.next_step()
             //Crear cuadro label
             local opt = 0
@@ -635,7 +633,6 @@ class tutorial.chapter_02 extends basic_chapter
 
       case 7:
         chapter_sub_steps = 3
-
         if (pot0==0){
 
           local siz = sch_list3.len()
@@ -686,8 +683,8 @@ class tutorial.chapter_02 extends basic_chapter
             waya.unmark()
             wayb.unmark()
 
-            my_tile(c_label1.a).remove_object(player_x(1), mo_label)
-            my_tile(c_label1.b).remove_object(player_x(1), mo_label)
+            my_tile(c_label1.a).remove_object(pl_unown, mo_label)
+            my_tile(c_label1.b).remove_object(pl_unown, mo_label)
 
             //Elimina cuadro label
             local opt = 0
@@ -1125,6 +1122,7 @@ class tutorial.chapter_02 extends basic_chapter
     if (!correct_cov)
       return 0
     local pl = 0
+	local pl_unown = player_x(15)
     switch (this.step) {
       case 1:
         local list = [my_tile(c_dep)]
@@ -1149,7 +1147,7 @@ class tutorial.chapter_02 extends basic_chapter
         for(local j=0;j<sch_list1.len();j++){
           local t = my_tile(sch_list1[j])
           local way = t.find_object(mo_way)
-          t.remove_object(player_x(1), mo_label)
+          t.remove_object(pl_unown, mo_label)
           local tool = command_x(tool_build_station)
           local err = tool.work(player_x(pl), t, sc_station_name)
           t.unmark()
@@ -1206,7 +1204,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
         if (pot0 == 1){
           local tile = my_tile(brdg1)
-          tile.remove_object(player_x(1), mo_label)
+          tile.remove_object(pl_unown, mo_label)
           local t = command_x(tool_build_bridge)
           t.set_flags(2)
           local err = t.work(player_x(pl), my_tile(brdg1), my_tile(brdg2), sc_bridge_name)
@@ -1256,7 +1254,7 @@ class tutorial.chapter_02 extends basic_chapter
           for(local j=0;j<sch_list3.len();j++){
             local t = my_tile(sch_list3[j])
             local way = t.find_object(mo_way)
-            t.remove_object(player_x(1), mo_label)
+            t.remove_object(pl_unown, mo_label)
             local tool = command_x(tool_build_station)
             local err = tool.work(player_x(pl), t, sc_station_name)
             t.unmark()
