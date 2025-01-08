@@ -385,7 +385,7 @@ class tutorial.chapter_02 extends basic_chapter
         text.n2 = cty2.c.href(cty2.name.tostring())
         text.pt1 = c_label1.a.href("("+c_label1.a.tostring()+")")
         text.pt2 = c_label1.b.href("("+c_label1.b.tostring()+")")
-        text.dep = c_dep.href("("+c_dep.tostring()+")")
+        text.dep = city1_road_depot.href("("+city1_road_depot.tostring()+")")
         break
 
       case 8:
@@ -508,7 +508,7 @@ class tutorial.chapter_02 extends basic_chapter
         if(cov_valid){
           pot0 = 1
         }
-        local c_list1 = [my_tile(c_dep)]
+        local c_list1 = [my_tile(city1_road_depot)]
         if (pot0 == 0){
           local next_mark = true
           try {
@@ -531,7 +531,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         if (pot1 == 1 ){
-          local c_dep = this.my_tile(c_dep)
+          local c_dep = this.my_tile(city1_road_depot)
           local line_name = line1_name //"Test 1"
           set_convoy_schedule(pl, c_dep, gl_wt, line_name)
 
@@ -612,7 +612,7 @@ class tutorial.chapter_02 extends basic_chapter
       case 6:
         chapter_sub_steps = 2
 
-        local c_dep = this.my_tile(c_dep)
+        local c_dep = this.my_tile(city1_road_depot)
         local line_name = line2_name //"Test 2"
         set_convoy_schedule(pl,c_dep, gl_wt, line_name)
 
@@ -715,7 +715,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         else if (pot2==1 && pot3==0) {
           chapter_sub_step = 2  // sub step finish
-          local c_dep = this.my_tile(c_dep)
+          local c_dep = this.my_tile(city1_road_depot)
               local line_name = line3_name //"Test 3"
           set_convoy_schedule(pl, c_dep, gl_wt, line_name)
 
@@ -857,18 +857,17 @@ class tutorial.chapter_02 extends basic_chapter
           return format(translate("Only %d stops are necessary."),city1_halt_1.len())
 
         //Enrutar vehiculo
-        if ((pos.x == c_dep.x && pos.y == c_dep.y)){
+        if ((pos.x == city1_road_depot.x && pos.y == city1_road_depot.y)){
           if(tool_id==4096){
             pot0 = 1
             return null
           }
         }
         if (tool_id==4108) {
-          local c_list = city1_halt_1   //Lista de todas las paradas de autobus
-          local c_dep = c_dep //Coordeadas del deposito
+          //local c_list = city1_halt_1   //Lista de todas las paradas de autobus
           local siz = c_list.len() //Numero de paradas
-          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-          return is_stop_allowed(result, siz, c_list, pos)
+          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+city1_road_depot.tostring()+")."
+          return is_stop_allowed(result, siz, city1_halt_1, pos)
         }
 
         break;
@@ -888,16 +887,16 @@ class tutorial.chapter_02 extends basic_chapter
       case 6:
         //Enrutar vehiculo
         if (pot0==0){
-          if ((tool_id==4096)&&(pos.x == c_dep.x && pos.y == c_dep.y)){
+          if ((tool_id==4096)&&(pos.x == city1_road_depot.x && pos.y == city1_road_depot.y)){
             stop_mark = true
             return null
           }
           if (tool_id==4108) {
             stop_mark = true
             local c_list = city1_halt_2    //Lista de todas las paradas de autobus
-            local c_dep = c_dep    //Coordeadas del deposito
+            //local c_dep = c_dep    //Coordeadas del deposito
             local siz = c_list.len()     //Numero de paradas
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
+            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+city1_road_depot.tostring()+")."
             return is_stop_allowed(result, siz, c_list, pos)
           }
         }
@@ -949,9 +948,9 @@ class tutorial.chapter_02 extends basic_chapter
           if (tool_id==4108){
             //Paradas de la primera ciudad
             local c_list = city2_halt_1   //Lista de todas las paradas de autobus
-            local c_dep = c_dep //Coordeadas del deposito
+            //local c_dep = c_dep //Coordeadas del deposito
             local siz = c_list.len() //Numero de paradas
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
+            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+city1_road_depot.tostring()+")."
             return is_stop_allowed(result, siz, c_list, pos)
           }
         }
@@ -1156,11 +1155,11 @@ class tutorial.chapter_02 extends basic_chapter
         return null
         break;
       case 2:
-        local list = [my_tile(c_dep)]
+        local list = [my_tile(city1_road_depot)]
         delay_mark_tile(list, true)
         //Para el deposito
         local t = command_x(tool_build_depot)
-        local err = t.work(player_x(pl), my_tile(c_dep), sc_dep_name)
+        local err = t.work(player_x(pl), my_tile(city1_road_depot), sc_dep_name)
         return null
         break;
       case 3:
@@ -1180,7 +1179,7 @@ class tutorial.chapter_02 extends basic_chapter
         return null
         break
       case 4:
-        local list = [my_tile(c_dep)]
+        local list = [my_tile(city1_road_depot)]
         delay_mark_tile(list, true)
         if (pot0 == 0){
           pot0 = 1
@@ -1188,7 +1187,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         if (current_cov>ch2_cov_lim1.a && current_cov<ch2_cov_lim1.b){
           local player = player_x(pl)
-          local c_depot = my_tile(c_dep)
+          local c_depot = my_tile(city1_road_depot)
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
           local c_list = city1_halt_1
@@ -1236,7 +1235,7 @@ class tutorial.chapter_02 extends basic_chapter
 
       case 6:
         local player = player_x(pl)
-        local c_depot = my_tile(c_dep)
+        local c_depot = my_tile(city1_road_depot)
         comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
         if (current_cov>ch2_cov_lim2.a && current_cov<ch2_cov_lim2.b){
@@ -1290,7 +1289,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
         if (current_cov>ch2_cov_lim3.a && current_cov<ch2_cov_lim3.b){
           local player = player_x(pl)
-          local c_depot = my_tile(c_dep)
+          local c_depot = my_tile(city1_road_depot)
           comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
 
           local sched = schedule_x(gl_wt, [])
