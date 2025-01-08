@@ -164,7 +164,7 @@ class tutorial.chapter_07 extends basic_chapter
         if ( check_halt_merge(st1_c, stop1) ) {
           load = cov_pax(stop1, gl_wt, gl_good) - transfer_pass
         } else {
-          transfer_pass = cov_pax(stop2, gl_wt, gl_good)
+          transfer_pass = cov_pax(stop1, gl_wt, gl_good)
         }
         if(load>goal_lod1){
           load = 0
@@ -198,7 +198,7 @@ class tutorial.chapter_07 extends basic_chapter
         if ( check_halt_merge(st3_c, stop3) ) {
           load = cov_pax(stop3, gl_wt, gl_good) - transfer_pass
         } else {
-          transfer_pass = cov_pax(stop2, gl_wt, gl_good)
+          transfer_pass = cov_pax(stop3, gl_wt, gl_good)
         }
         if(load>goal_lod3){
           load = 0
@@ -215,7 +215,7 @@ class tutorial.chapter_07 extends basic_chapter
         if ( check_halt_merge(st4_c, stop4) ) {
           load = cov_pax(stop4, gl_wt, gl_good) - transfer_pass
         } else {
-          transfer_pass = cov_pax(stop2, gl_wt, gl_good)
+          transfer_pass = cov_pax(stop4, gl_wt, gl_good)
         }
         if(load>goal_lod4){
           load = 0
