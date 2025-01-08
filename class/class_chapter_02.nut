@@ -41,6 +41,8 @@ class tutorial.chapter_02 extends basic_chapter
   cursor_a = false
   cursor_b = false
 
+  c_list = [] // tile list for build
+
   // Step 3 =====================================================================================
   //Parasdas de autobus
   c_lock = [coord(99,28), coord(98,32), coord(99,32), coord(97,27), coord(97,26)]
@@ -136,8 +138,8 @@ class tutorial.chapter_02 extends basic_chapter
     cty1.name = get_city_name(cty1.c)
     cty2.name = get_city_name(cty2.c)
 
-    dep_lim1 = {a = c_dep, b = coorda}
-    dep_lim2 = {a = c_dep, b = coordb}
+    //dep_lim1 = {a = c_dep, b = coorda}
+    //dep_lim2 = {a = c_dep, b = coordb}
 
     local pl = 0
     //Schedule list form current convoy
@@ -416,7 +418,7 @@ class tutorial.chapter_02 extends basic_chapter
     switch (this.step) {
       case 1:
         local next_mark = true
-        local c_list = [] //[my_tile(coordb), my_tile(coorda), my_tile(c_dep)]
+        c_list = [] //[my_tile(coordb), my_tile(coorda), my_tile(c_dep)]
         // Checking the tiles nwse from the depot tile on the road
         local tile = my_tile(city1_road_depot)
         if ( tile_x(tile.x-1, tile.y, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x-1, tile.y, tile.z)) }
@@ -431,8 +433,11 @@ class tutorial.chapter_02 extends basic_chapter
           return 0
         }
 
-        cursor_a = cursor_control(my_tile(coorda))
-        cursor_b = cursor_control(my_tile(coordb))
+        for ( local i = 0; i < c_list.len(); i++ ) {
+          cursor_control(c_list[i])
+        }
+        //cursor_a = cursor_control(my_tile(coorda))
+        //cursor_b = cursor_control(my_tile(coordb))
 
         //Para la carretera
         //local tile = my_tile(city1_road_depot)
@@ -445,7 +450,7 @@ class tutorial.chapter_02 extends basic_chapter
           return 0
         }
         else if ((way)&&(way.get_owner().nr==pl)){
-          if(next_mark ){
+          if(next_mark) {
             next_mark = delay_mark_tile_list(c_list, true)
             tile.remove_object(player_x(1), mo_label)
             this.next_step()
@@ -796,6 +801,14 @@ class tutorial.chapter_02 extends basic_chapter
           local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
           foreach(desc in way_desc){
             if(desc.get_name() == name){
+              for ( local i = 0; i < c_list.len()-1; i++ ) {
+                //if ((pos.x>=c_list[i].x)&&(pos.y>=c_list[i].y)&&(pos.x<=city1_road_depot.x)&&(pos.y<=city1_road_depot.y)){
+                  if(!cursor_control(c_list[i]))
+                  return null
+                //}
+              }
+
+              /*
               if ((pos.x>=dep_lim1.a.x)&&(pos.y>=dep_lim1.a.y)&&(pos.x<=dep_lim1.b.x)&&(pos.y<=dep_lim1.b.y)){
                 if(!cursor_b)
                 return null
@@ -803,8 +816,8 @@ class tutorial.chapter_02 extends basic_chapter
               if ((pos.x>=dep_lim2.a.x)&&(pos.y>=dep_lim2.a.y)&&(pos.x<=dep_lim2.b.x)&&(pos.y<=dep_lim2.b.y)){
                 if(!cursor_a)
                   return null
-              }
-              return translate("Connect the road here")+" ("+c_dep.tostring()+")."
+              }*/
+              return translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
             }
           }
         }
