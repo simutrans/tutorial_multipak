@@ -77,7 +77,9 @@ for ( local i = 0; i < list.len(); i++ ) {
 }
 
 /**
- *  define road depot city 1
+ *  define depot
+ *
+ *  road depot must be located one field next to a road
  */
 city1_road_depot <- coord(124,188) //115,185
 
