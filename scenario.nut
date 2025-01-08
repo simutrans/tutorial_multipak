@@ -282,15 +282,16 @@ function get_integral(tx)
   include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
   switch (pak_name) {
     case "pak64":
-      include(nut_path+"class_basic_coords_p64")  // include class for
+      include(nut_path+"class_basic_coords_p64")  // include coords def pak64
       break
     case "pak64.german":
-      include(nut_path+"class_basic_coords_p64g")  // include class for
+      include(nut_path+"class_basic_coords_p64g")  // include coords def pak64german
       break
     case "pak128":
-      include(nut_path+"class_basic_coords_p128")  // include class for
+      include(nut_path+"class_basic_coords_p128")  // include coords def pak128
       break
   }
+  include(nut_path+"class_messages")     // include def messages texts
 
 }
 

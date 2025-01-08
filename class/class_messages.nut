@@ -1,9 +1,21 @@
-/*
+/**
  *  list messages
  *
  *
  *
  */
+
+/**
+ *  chapter texts
+ *
+*/
+ch1_name        <- "Getting Started"
+coord_chapter_1 <- coord(113,189)
+ch1_text1       <- "This is a town centre"
+ch1_text2       <- "This is a factory"
+ch1_text3       <- "This is a station"
+ch1_text4       <- "This is a link"
+ch1_text5       <- "Town Centre"
 
 /*
  *  single messages
@@ -24,25 +36,25 @@ function get_message(id) {
   local txt_message = ""
 
   switch(id) {
-    case: 1
+    case 1:
       txt_message = translate("You can only delete the stops.")
       break
-    case: 2
+    case 2:
       txt_message = translate("Action not allowed")
       break
-    case: 3
+    case 3:
 
       break
-    case: 4
+    case 4:
 
       break
-    case: 5
+    case 5:
 
       break
-    case: 6
+    case 6:
 
       break
-    case: 7
+    case 7:
 
       break
   }
@@ -70,44 +82,44 @@ function get_message(id) {
  *
  *
  */
-function get_tile_message(id, tile) {
+function get_tile_message(id, tx, ty, tz = null) {
   local txt_tile = ""
-  if ( tile.len() == 2 ) {
+  if ( tz == null ) {
+    local tile = coord(tx, ty)
     txt_tile = coord_to_string(tile)
-  } else if ( tile.len() == 3 ) {
-    txt_tile = coord3d_to_string(tile)
   } else {
-    txt_tile = tile
+    local tile = coord3d(tx, ty, tz)
+    txt_tile = coord3d_to_string(tile)
   }
 
   local txt_message = ""
 
   switch(id) {
-    case: 1
+    case 1:
       txt_message = translate("Action not allowed")+" ("+txt_tile+")."
       break
-    case: 2
+    case 2:
       txt_message = translate("Connect the road here")+" ("+txt_tile+")."
       break
-    case: 3
+    case 3:
       txt_message = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+txt_tile+")."
       break
-    case: 4
+    case 4:
       txt_message = translate("You must build the bridge here")+" ("+txt_tile+")."
       break
-    case: 5
+    case 5:
       txt_message = translate("Indicates the limits for using construction tools")+" ("+txt_tile+")."
       break
-    case: 6
+    case 6:
       txt_message = translate("Text label")+" ("+txt_tile+")."
       break
-    case: 7
+    case 7:
       txt_message = translate("You must first build a stretch of road")+" ("+txt_tile+")."
       break
-    case: 8
+    case 8:
       txt_message = translate("You must build the depot in")+" ("+txt_tile+")."
       break
-    case: 9
+    case 9:
 
       break
   }
@@ -136,25 +148,25 @@ function get_data_message(id, data) {
   local txt_message = ""
 
   switch(id) {
-    case: 1
+    case 1:
       txt_message = format(translate("You must build the %d stops first."), data)
       break
-    case: 2
+    case 2:
       txt_message = format(translate("Only %d stops are necessary."), data)
       break
-    case: 3
+    case 3:
 
       break
-    case: 4
+    case 4:
 
       break
-    case: 5
+    case 5:
 
       break
-    case: 6
+    case 6:
 
       break
-    case: 7
+    case 7:
 
       break
   }
@@ -162,7 +174,6 @@ function get_data_message(id, data) {
   return txt_message
 
 }
-
 
 /*
  *  messages with a string/digit and tile
@@ -194,31 +205,31 @@ function get_tiledata_message(id, data, tile) {
   local txt_message = ""
 
   switch(id) {
-    case: 1
+    case 1:
       txt_message = format(translate("Stops should be built in [%s]"), data)+" ("+txt_tile+")."
       break
-    case: 2
+    case 2:
       txt_message = format(translate("You must build a stop in [%s] first"), data)+" ("+txt_tile+")."
       break
-    case: 3
+    case 3:
       txt_message = format(translate("Select station No.%d"), data)+" ("+txt_tile+")."
       break
-    case: 4
+    case 4:
 
       break
-    case: 5
+    case 5:
 
       break
-    case: 6
+    case 6:
 
       break
-    case: 7
+    case 7:
 
       break
-    case: 8
+    case 8:
 
       break
-    case: 9
+    case 9:
 
       break
   }
@@ -226,15 +237,3 @@ function get_tiledata_message(id, data, tile) {
   return txt_message
 
 }
-
-
-/*
-
-
-
-
-
-
-
-
-*/
