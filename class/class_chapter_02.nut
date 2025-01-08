@@ -814,8 +814,8 @@ class tutorial.chapter_02 extends basic_chapter
         break;
       //Construye un deposito de carreteras
       case 2:
-        if ((pos.x==c_dep.x)&&(pos.y==c_dep.y)){
-          if (my_tile(c_dep).find_object(mo_way)){
+        if ((pos.x==city1_road_depot.x)&&(pos.y==city1_road_depot.y)){
+          if (my_tile(city1_road_depot).find_object(mo_way)){
             if (tool_id==tool_build_depot) return null
           }
           else {
@@ -830,7 +830,7 @@ class tutorial.chapter_02 extends basic_chapter
       //Construye las paradas de autobus
       case 3:
 
-        if (pos.x == c_dep.x && pos.y == c_dep.y )
+        if (pos.x == city1_road_depot.x && pos.y == city1_road_depot.y )
           return format(translate("You must build the %d stops first."),city1_halt_1.len())
         if (pos.x>city1_limit1.a.x && pos.y>city1_limit1.a.y && pos.x<city1_limit1.b.x && pos.y<city1_limit1.b.y){
           //Permite construir paradas
