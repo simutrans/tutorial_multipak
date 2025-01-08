@@ -7,6 +7,13 @@
  */
 
 /**
+ *  set tiles for pos chapter start
+ *
+ *
+ */
+coord_chapter_1 <- coord(113,189)
+
+/**
  *  set limit for build
  *
  *
@@ -26,6 +33,24 @@ city1_cur <- coord(116,188)
 city1_tow <- coord(111,184)
 
 /**
+ *  set tiles for factory
+ *
+ *  coord_fac_1 - ch1, ch4
+ *
+ *
+ */
+coord_fac_1 <- coord(149,200)
+
+/**
+ *  set tiles for stations
+ *
+ *  coord_st_1 - city 1
+ *
+ *
+ */
+coord_st_1 <- coord(117,197)
+
+/**
  *  set halt coords city
  *
  *  city1_halt_1 - used in chapter: 2, 5
@@ -36,7 +61,7 @@ city1_halt_1 <- []
 city1_halt_2 <- []
 city2_halt_1 <- []
 
-local list = [coord(111,183), coord(116,183),  coord(120,183), coord(126,187), coord(121,189), coord(118,191), coord(113,190)]
+local list = [coord(113,183), coord(117,186),  coord(120,183), coord(126,187), coord(121,189), coord(113,190)]
 for ( local i = 0; i < list.len(); i++ ) {
   city1_halt_1.append(list[i])
 }
