@@ -48,7 +48,7 @@ class tutorial.chapter_02 extends basic_chapter
 
   // Step 4 =====================================================================================
   //Primer autobus
-  line1_name = "Test 1"
+  line1_name = ""
   veh1_obj = get_veh_ch2_st4()
   veh1_load = set_loading_capacity(1)
   veh1_wait = set_waiting_time(1)
@@ -134,6 +134,7 @@ class tutorial.chapter_02 extends basic_chapter
 
     cty1.name = get_city_name(cty1.c)
     cty2.name = get_city_name(cty2.c)
+    line1_name = "City " + cty1.name
 
     if(this.step == 1) {
       local tile = my_tile(city1_road_depot)
@@ -865,7 +866,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
         if (tool_id==4108) {
           //local c_list = city1_halt_1   //Lista de todas las paradas de autobus
-          local siz = c_list.len() //Numero de paradas
+          local siz = city1_halt_1.len() //Numero de paradas
           result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+city1_road_depot.tostring()+")."
           return is_stop_allowed(result, siz, city1_halt_1, pos)
         }
