@@ -8,33 +8,24 @@
 
 class tutorial.chapter_01 extends basic_chapter
 {
-  chapter_name  = "Getting Started"
-  chapter_coord = coord(113,189)
+  chapter_name  = ch1_name
+  chapter_coord = coord_chapter_1
   startcash     = 500000          // pl=0 startcash; 0=no reset
 
   comm_script = false
-
-  // Step 1 =====================================================================================
-  c_fac = coord(149,200)
-  c_st  = coord(117,197)
-  tx_cty = "This is a town centre"
-  tx_fac = "This is a factory"
-  tx_st = "This is a station"
-  tx_link = "This is a link"
 
   // Step 2 =====================================================================================
   c_test = coord3d(0,0,1)
 
   // Step 3 =====================================================================================
-  //c_buil1 = coord(113,189)
-  //c_buil2 = coord(113,185)
   buil1_name = "" //auto started
   buil2_name = "" //auto started
   buil2_list = null //auto started
+  c_list_mon = null // tile list mon
+  c_list_cur = null // tile list cur
 
   // Step 4 =====================================================================================
   cit_list = null //auto started
-  //city_lim = {a = coord(109,181), b = coord(128,193)}
   cty1 = {name = ""}
 
   function start_chapter()  //Inicia solo una vez por capitulo
@@ -47,10 +38,12 @@ class tutorial.chapter_01 extends basic_chapter
     t = my_tile(city1_mon)
     buil = t.find_object(mo_building)
     buil1_name = buil ? translate(buil.get_name()):"No existe"
+    c_list_mon = buil.get_tile_list()
 
     t = my_tile(city1_cur)
     buil = t.find_object(mo_building)
     buil2_name = buil ? translate(buil.get_name()):"No existe"
+    c_list_cur = buil.get_tile_list()
 
     return 0
   }
@@ -59,17 +52,17 @@ class tutorial.chapter_01 extends basic_chapter
     switch (this.step) {
       case 1:
         text.pos = city1_tow.href("("+city1_tow.tostring()+")")
-        text.pos1 = city1_tow.href(""+translate(tx_cty)+" ("+city1_tow.tostring()+")")
-        text.pos2 = c_fac.href(""+translate(tx_fac)+" ("+c_fac.tostring()+")")
-        text.pos3 = c_st.href(""+translate(tx_st)+" ("+c_st.tostring()+")")
-        text.link = "<a href='script:script_text()'>"+translate(tx_link)+"  >></a>"
+        text.pos1 = city1_tow.href(""+translate(ch1_text1)+" ("+city1_tow.tostring()+")")
+        text.pos2 = coord_fac_1.href(""+translate(ch1_text2)+" ("+coord_fac_1.tostring()+")")
+        text.pos3 = coord_st_1.href(""+translate(ch1_text3)+" ("+coord_st_1.tostring()+")")
+        text.link = "<a href='script:script_text()'>"+translate(ch1_text4)+"  >></a>"
       break;
       case 3:
         text.pos = "<a href=\"("+city1_mon.x+","+city1_mon.y+")\">"+buil1_name+" ("+city1_mon.tostring()+")</a>"
         text.buld_name = "<a href=\"("+city1_cur.x+","+city1_cur.y+")\">"+buil2_name+" ("+city1_cur.tostring()+")</a>"
       break;
       case 4:
-        text.pos2 = "<a href=\"("+city1_tow.x+","+city1_tow.y+")\">" + translate("Town Centre")+" ("+city1_tow.tostring()+")</a>"
+        text.pos2 = "<a href=\"("+city1_tow.x+","+city1_tow.y+")\">" + translate(ch1_text5)+" ("+city1_tow.tostring()+")</a>"
       break;
 
     }
@@ -112,7 +105,7 @@ class tutorial.chapter_01 extends basic_chapter
         local stop_mark = true
         if (pot0==0) {
           try {
-             next_mark = delay_mark_tile(c_list1)
+             next_mark = delay_mark_tile(c_list_mon)
           }
           catch(ev) {
             return 0
@@ -120,7 +113,7 @@ class tutorial.chapter_01 extends basic_chapter
         }
         else if (pot0==1 && pot1==0) {
           try {
-             next_mark = delay_mark_tile(c_list1, stop_mark)
+             next_mark = delay_mark_tile(c_list_mon, stop_mark)
           }
           catch(ev) {
             return 0
@@ -129,7 +122,7 @@ class tutorial.chapter_01 extends basic_chapter
         }
         if (pot1==1 && pot2==0) {
           try {
-             next_mark = delay_mark_tile(c_list2)
+             next_mark = delay_mark_tile(c_list_cur)
           }
           catch(ev) {
             return 0
@@ -137,7 +130,7 @@ class tutorial.chapter_01 extends basic_chapter
         }
         else if (pot2==1 && pot3==0) {
           try {
-             next_mark = delay_mark_tile(c_list2, stop_mark)
+             next_mark = delay_mark_tile(c_list_cur, stop_mark)
           }
           catch(ev) {
             return 0
@@ -182,7 +175,7 @@ class tutorial.chapter_01 extends basic_chapter
     local label = tile_x(pos.x,pos.y,pos.z).find_object(mo_label)
     local result=null // null is equivalent to 'allowed'
 
-    result = translate("Action not allowed")
+    result = get_message(2)
 
     switch (this.step) {
       case 1:
@@ -219,6 +212,8 @@ class tutorial.chapter_01 extends basic_chapter
     }
     if (tool_id == 4096){
       if (label && label.get_text()=="X")
+        //local message = get_tile_message(5, pos.x, pos.y)
+        //return message
         return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
       else if (label)
         return translate("Text label")+" ("+pos.tostring()+")."
