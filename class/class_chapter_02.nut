@@ -33,15 +33,12 @@ class tutorial.chapter_02 extends basic_chapter
 
   // Step 1 =====================================================================================
   //Carretera para el deposito
-  dep_lim1 = {a = null, b = null}
-  dep_lim2 = {a = null, b = null}
-  coorda = coord(115,186)
-  c_dep = city1_road_depot //coord(115,185) // depot
+  //c_dep = city1_road_depot //coord(115,185) // depot
   coordb = coord(116,185)
-  cursor_a = false
-  cursor_b = false
+  //cursor_a = false
+  //cursor_b = false
 
-  c_list = [] // tile list for build
+  build_list = [] // tile list for build
 
   // Step 3 =====================================================================================
   //Parasdas de autobus
@@ -138,23 +135,29 @@ class tutorial.chapter_02 extends basic_chapter
     cty1.name = get_city_name(cty1.c)
     cty2.name = get_city_name(cty2.c)
 
-    //dep_lim1 = {a = c_dep, b = coorda}
-    //dep_lim2 = {a = c_dep, b = coordb}
+    if(this.step == 1) {
+      local tile = my_tile(city1_road_depot)
+      if ( tile_x(tile.x-1, tile.y, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x-1, tile.y, tile.z)) }
+      if ( tile_x(tile.x+1, tile.y, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x+1, tile.y, tile.z)) }
+      if ( tile_x(tile.x, tile.y-1, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x, tile.y-1, tile.z)) }
+      if ( tile_x(tile.x, tile.y+1, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x, tile.y+1, tile.z)) }
+      build_list.append(tile)
+    }
 
     local pl = 0
     //Schedule list form current convoy
     if(this.step == 4){
-      local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(city1_road_depot)
       local c_list = city1_halt_1
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     else if(this.step == 6){
-      local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(city1_road_depot)
       local c_list = city1_halt_2
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     else if(this.step == 7){
-      local c_dep = this.my_tile(c_dep)
+      local c_dep = this.my_tile(city1_road_depot)
       local c_list = city2_halt_1
       start_sch_tmpsw(pl,c_dep, c_list)
     }
@@ -179,12 +182,14 @@ class tutorial.chapter_02 extends basic_chapter
 
     switch (this.step) {
       case 1:
-        text.t1 = c_dep.href("("+c_dep.tostring()+")")
-        text.t2 = coorda.href("("+coorda.tostring()+")")
-        text.t3 = coordb.href("("+coordb.tostring()+")")
+        text.t1 = city1_road_depot.href("("+city1_road_depot.tostring()+")")
+        // remove from textfile
+        // or used build_list[] - last entry depot tile
+        text.t2 = "" //coorda.href("("+coorda.tostring()+")")
+        text.t3 = "" //coordb.href("("+coordb.tostring()+")")
         break
       case 2:
-        text.pos = c_dep.href("("+c_dep.tostring()+")")
+        text.pos = city1_road_depot.href("("+city1_road_depot.tostring()+")")
         break
       case 3:
         local list_tx = ""
@@ -393,7 +398,7 @@ class tutorial.chapter_02 extends basic_chapter
     }
     text.load = veh1_load
     text.wait = get_wait_time_text(veh1_wait)
-    text.pos = c_dep.href("("+c_dep.tostring()+")")
+    text.pos = city1_road_depot.href("("+city1_road_depot.tostring()+")")
     text.bus1 = translate(veh1_obj)
     text.name = cty1.c.href(cty1.name.tostring())
     text.name2 = cty2.c.href(cty2.name.tostring())
@@ -418,26 +423,20 @@ class tutorial.chapter_02 extends basic_chapter
     switch (this.step) {
       case 1:
         local next_mark = true
-        c_list = [] //[my_tile(coordb), my_tile(coorda), my_tile(c_dep)]
+        //c_list = [] //[my_tile(coordb), my_tile(coorda), my_tile(c_dep)]
         // Checking the tiles nwse from the depot tile on the road
         local tile = my_tile(city1_road_depot)
-        if ( tile_x(tile.x-1, tile.y, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x-1, tile.y, tile.z)) }
-        if ( tile_x(tile.x+1, tile.y, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x+1, tile.y, tile.z)) }
-        if ( tile_x(tile.x, tile.y-1, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x, tile.y-1, tile.z)) }
-        if ( tile_x(tile.x, tile.y+1, tile.z).get_way(wt_road) != null ) { c_list.append(tile_x(tile.x, tile.y+1, tile.z)) }
-        c_list.append(tile)
+        /*if ( tile_x(tile.x-1, tile.y, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x-1, tile.y, tile.z)) }
+        if ( tile_x(tile.x+1, tile.y, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x+1, tile.y, tile.z)) }
+        if ( tile_x(tile.x, tile.y-1, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x, tile.y-1, tile.z)) }
+        if ( tile_x(tile.x, tile.y+1, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x, tile.y+1, tile.z)) }
+        build_list.append(tile)*/
         try {
-           next_mark = delay_mark_tile_list(c_list)
+           next_mark = delay_mark_tile_list(build_list)
         }
         catch(ev) {
           return 0
         }
-
-        for ( local i = 0; i < c_list.len(); i++ ) {
-          cursor_control(c_list[i])
-        }
-        //cursor_a = cursor_control(my_tile(coorda))
-        //cursor_b = cursor_control(my_tile(coordb))
 
         //Para la carretera
         //local tile = my_tile(city1_road_depot)
@@ -446,12 +445,12 @@ class tutorial.chapter_02 extends basic_chapter
         if (!way && !label){
           local t1 = command_x(tool_remover)
           local err1 = t1.work(player_x(pl), tile, "")
-          label_x.create(c_dep, player_x(pl), translate("Place the Road here!."))
+          label_x.create(city1_road_depot, player_x(pl), translate("Place the Road here!."))
           return 0
         }
         else if ((way)&&(way.get_owner().nr==pl)){
           if(next_mark) {
-            next_mark = delay_mark_tile_list(c_list, true)
+            next_mark = delay_mark_tile_list(build_list, true)
             tile.remove_object(player_x(1), mo_label)
             this.next_step()
           }
@@ -461,7 +460,7 @@ class tutorial.chapter_02 extends basic_chapter
         break;
       case 2:
         local next_mark = true
-        local c_list1 = [my_tile(c_dep)]
+        local c_list1 = [my_tile(city1_road_depot)]
         local stop_mark = true
         try {
            next_mark = delay_mark_tile(c_list1)
@@ -470,10 +469,10 @@ class tutorial.chapter_02 extends basic_chapter
           return 0
         }
         //Para el deposito
-        local tile = my_tile(c_dep)
+        local tile = my_tile(city1_road_depot)
         local waydepo = tile.find_object(mo_way)
         if (!tile.find_object(mo_depot_road)){
-          label_x.create(c_dep, player_x(pl), translate("Build a Depot here!."))
+          label_x.create(city1_road_depot, player_x(pl), translate("Build a Depot here!."))
         }
         else if (next_mark){
           next_mark = delay_mark_tile(c_list1, stop_mark)
@@ -801,22 +800,13 @@ class tutorial.chapter_02 extends basic_chapter
           local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
           foreach(desc in way_desc){
             if(desc.get_name() == name){
-              for ( local i = 0; i < c_list.len()-1; i++ ) {
-                //if ((pos.x>=c_list[i].x)&&(pos.y>=c_list[i].y)&&(pos.x<=city1_road_depot.x)&&(pos.y<=city1_road_depot.y)){
-                  if(!cursor_control(c_list[i]))
+              for ( local i = 0; i < build_list.len()-1; i++ ) {
+                if ( ((pos.x==build_list[i].x)&&(pos.y==build_list[i].y)) || ((pos.x==city1_road_depot.x)&&(pos.y==city1_road_depot.y)) ) {
+                  if(!cursor_control(build_list[i]))
                   return null
-                //}
+                }
               }
 
-              /*
-              if ((pos.x>=dep_lim1.a.x)&&(pos.y>=dep_lim1.a.y)&&(pos.x<=dep_lim1.b.x)&&(pos.y<=dep_lim1.b.y)){
-                if(!cursor_b)
-                return null
-              }
-              if ((pos.x>=dep_lim2.a.x)&&(pos.y>=dep_lim2.a.y)&&(pos.x<=dep_lim2.b.x)&&(pos.y<=dep_lim2.b.y)){
-                if(!cursor_a)
-                  return null
-              }*/
               return translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
             }
           }
