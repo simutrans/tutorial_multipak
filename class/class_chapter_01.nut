@@ -26,29 +26,29 @@ class tutorial.chapter_01 extends basic_chapter
   c_test = coord3d(0,0,1)
 
   // Step 3 =====================================================================================
-  c_buil1 = coord(113,189)
-  c_buil2 = coord(113,185)
+  //c_buil1 = coord(113,189)
+  //c_buil2 = coord(113,185)
   buil1_name = "" //auto started
   buil2_name = "" //auto started
   buil2_list = null //auto started
 
   // Step 4 =====================================================================================
   cit_list = null //auto started
-  city_lim = {a = coord(109,181), b = coord(128,193)}
-  cty1 = {c = coord(111,184), name = ""}
+  //city_lim = {a = coord(109,181), b = coord(128,193)}
+  cty1 = {name = ""}
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
-    cty1.name = get_city_name(cty1.c)
-    local t = my_tile(cty1.c)
+    cty1.name = get_city_name(city1_tow)
+    local t = my_tile(city1_tow)
     local buil = t.find_object(mo_building)
     cit_list = buil ? buil.get_tile_list() : null
 
-    t = my_tile(c_buil1)
+    t = my_tile(city1_mon)
     buil = t.find_object(mo_building)
     buil1_name = buil ? translate(buil.get_name()):"No existe"
 
-    t = my_tile(c_buil2)
+    t = my_tile(city1_cur)
     buil = t.find_object(mo_building)
     buil2_name = buil ? translate(buil.get_name()):"No existe"
 
@@ -58,18 +58,18 @@ class tutorial.chapter_01 extends basic_chapter
   function set_goal_text(text){
     switch (this.step) {
       case 1:
-        text.pos = cty1.c.href("("+cty1.c.tostring()+")")
-        text.pos1 = cty1.c.href(""+translate(tx_cty)+" ("+cty1.c.tostring()+")")
+        text.pos = city1_tow.href("("+city1_tow.tostring()+")")
+        text.pos1 = city1_tow.href(""+translate(tx_cty)+" ("+city1_tow.tostring()+")")
         text.pos2 = c_fac.href(""+translate(tx_fac)+" ("+c_fac.tostring()+")")
         text.pos3 = c_st.href(""+translate(tx_st)+" ("+c_st.tostring()+")")
         text.link = "<a href='script:script_text()'>"+translate(tx_link)+"  >></a>"
       break;
       case 3:
-        text.pos = "<a href=\"("+c_buil1.x+","+c_buil1.y+")\">"+buil1_name+" ("+c_buil1.tostring()+")</a>"
-        text.buld_name = "<a href=\"("+c_buil2.x+","+c_buil2.y+")\">"+buil2_name+" ("+c_buil2.tostring()+")</a>"
+        text.pos = "<a href=\"("+city1_mon.x+","+city1_mon.y+")\">"+buil1_name+" ("+city1_mon.tostring()+")</a>"
+        text.buld_name = "<a href=\"("+city1_cur.x+","+city1_cur.y+")\">"+buil2_name+" ("+city1_cur.tostring()+")</a>"
       break;
       case 4:
-        text.pos2 = "<a href=\"("+cty1.c.x+","+cty1.c.y+")\">" + translate("Town Centre")+" ("+cty1.c.tostring()+")</a>"
+        text.pos2 = "<a href=\"("+city1_tow.x+","+city1_tow.y+")\">" + translate("Town Centre")+" ("+city1_tow.tostring()+")</a>"
       break;
 
     }
@@ -99,7 +99,7 @@ class tutorial.chapter_01 extends basic_chapter
           local opt = 0
           local del = false
           local text = "X"
-          label_bord(city_lim.a, city_lim.b, opt, del, text)
+          label_bord(city1_limit1.a, city1_limit1.b, opt, del, text)
           this.next_step()
         }
         //return chapter_percentage(chapter_steps, 2, 0, 0)
@@ -107,8 +107,8 @@ class tutorial.chapter_01 extends basic_chapter
 
       case 3:
         local next_mark = true
-        local c_list1 = [my_tile(c_buil1)]
-        local c_list2 = [my_tile(c_buil2)]
+        local c_list1 = [my_tile(city1_mon)]
+        local c_list2 = [my_tile(city1_cur)]
         local stop_mark = true
         if (pot0==0) {
           try {
@@ -192,13 +192,13 @@ class tutorial.chapter_01 extends basic_chapter
       case 3:
         if(tool_id == 4096) {
           if(pot0==0){
-            if ((pos.x == c_buil1.x)&&(pos.y == c_buil1.y)){
+            if ((pos.x == city1_mon.x)&&(pos.y == city1_mon.y)){
               pot0 = 1
               return null
             }
           }
           else if (pot1==1 && pot2==0){
-            if ((pos.x == c_buil2.x)&&(pos.y == c_buil2.y)){
+            if ((pos.x == city1_cur.x)&&(pos.y == city1_cur.y)){
               pot2 = 1
               return null
             }
@@ -254,7 +254,7 @@ class tutorial.chapter_01 extends basic_chapter
       local opt = 0
       local del = false
       local text = "X"
-      label_bord(city_lim.a, city_lim.b, opt, del, text)
+      label_bord(city1_limit1.a, city1_limit1.b, opt, del, text)
       pot0=1
       pot2=1
     }

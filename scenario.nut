@@ -280,7 +280,18 @@ function get_integral(tx)
   resul_version = string_analyzer()
   include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
   include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
-  include(nut_path+"class_basic_coords")  // include class for
+  switch (pak_name) {
+    case "pak64":
+      include(nut_path+"class_basic_coords_p64")  // include class for
+      break
+    case "pak64.german":
+      include(nut_path+"class_basic_coords_p64g")  // include class for
+      break
+    case "pak128":
+      include(nut_path+"class_basic_coords_p128")  // include class for
+      break
+  }
+
 }
 
 for (local i = 0; i <= chapter_max; i++)    // include amount of chapter classes

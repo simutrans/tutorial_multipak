@@ -27,14 +27,14 @@ class tutorial.chapter_02 extends basic_chapter
   ch2_cov_lim3 = {a = 0, b = 0}
 
   //Limites para las ciudades
-  city1_lim = {a = coord(109,181), b = coord(128,193)}
-  city2_lim = {a = coord(120,150), b = coord(138,159)}
+  //city1_lim = {a = coord(109,181), b = coord(128,193)}
+  //city2_lim = {a = coord(120,150), b = coord(138,159)}
   cty1 = {c = coord(111,184), name = ""}
 
   // Step 1 =====================================================================================
   //Carretera para el deposito
   //c_dep = city1_road_depot //coord(115,185) // depot
-  coordb = coord(116,185)
+  //coordb = coord(116,185)
   //cursor_a = false
   //cursor_b = false
 
@@ -635,7 +635,7 @@ class tutorial.chapter_02 extends basic_chapter
           this.next_step()
           //Elimina cuadro label
           local opt = 0
-          label_bord(city1_lim.a, city1_lim.b, opt, true, "X")
+          label_bord(city1_limit1.a, city1_limit1.b, opt, true, "X")
           label_bord(brdg_lim.a, brdg_lim.b, opt, true, "X")
           label_bord(dock_lim.a, dock_lim.b, opt, true, "X")
           //Creea un cuadro label
@@ -706,7 +706,7 @@ class tutorial.chapter_02 extends basic_chapter
 
             //Creea un cuadro label
             local opt = 0
-            label_bord(city1_lim.a, city1_lim.b, opt, false, "X")
+            label_bord(city1_limit1.a, city1_limit1.b, opt, false, "X")
             label_bord(city2_lim.a, city2_lim.b, opt, false, "X")
 
             pot2=1
@@ -736,7 +736,7 @@ class tutorial.chapter_02 extends basic_chapter
             //Elimina cuadro label
             local opt = 0
             //label_bord(city1_lim.a, city1_lim.b, opt, true, "X")
-            label_bord(city2_lim.a, city2_lim.b, opt, true, "X")
+            label_bord(city2_limit1.a, city2_limit1.b, opt, true, "X")
             this.next_step()
           }
         }
@@ -754,7 +754,7 @@ class tutorial.chapter_02 extends basic_chapter
 
           if (glsw[0]==1 && glsw[1]==1){
             local opt = 0
-            label_bord(city1_lim.a, city1_lim.b, opt, true, "X")
+            label_bord(city1_limit1.a, city1_limit1.b, opt, true, "X")
             label_bord(city2_lim.a, city2_lim.b, opt, true, "X")
             this.next_step()
           }
@@ -832,7 +832,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         if (pos.x == c_dep.x && pos.y == c_dep.y )
           return format(translate("You must build the %d stops first."),city1_halt_1.len())
-        if (pos.x>city1_lim.a.x && pos.y>city1_lim.a.y && pos.x<city1_lim.b.x && pos.y<city1_lim.b.y){
+        if (pos.x>city1_limit1.a.x && pos.y>city1_limit1.a.y && pos.x<city1_limit1.b.x && pos.y<city1_limit1.b.y){
           //Permite construir paradas
           if (tool_id==tool_build_station){
             local nr = city1_halt_1.len()
