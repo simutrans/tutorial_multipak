@@ -2511,7 +2511,7 @@ class basic_chapter
 
   function is_stop_building(siz, c_list, lab_name, good, label_sw = false)
   {
-    local player = player_x(15)
+    local player = player_x(1)
     local count = 0
     for(local j=0;j<siz;j++){
       local c = c_list[j]
@@ -2520,6 +2520,9 @@ class basic_chapter
       local label = t.find_object(mo_label)
       local way = t.find_object(mo_way)
       local halt = t.get_halt()
+      if(t.is_marked())
+        t.remove_object(player, mo_label)
+
       if(buil && halt){
         local desc = buil.get_desc()
         local g_list = get_build_load_type(desc)
@@ -2550,7 +2553,7 @@ class basic_chapter
 
   function is_stop_building_ex(siz, list, lab_name)
   {
-    local player = player_x(15)
+    local player = player_x(1)
     local count = 0
     for(local j=0;j<siz;j++){
       local c = list[j].c
@@ -2590,8 +2593,8 @@ class basic_chapter
         if(way){
           way.mark()
         }
-        if (!label) {
-          label_x.create(c, player, lab_name)
+        else{
+          public_label(t, lab_name)
         }
       }
     }
@@ -2852,7 +2855,6 @@ class basic_chapter
   {
     local c_a = coord(coora.x, coora.y)
     local c_b = coord(coorb.x, coorb.y)
-    local player = player_x(15)
     if (opt==0){
       if (!del){
         for (local j = c_a.x ;j<=c_b.x;j++){
@@ -2861,13 +2863,13 @@ class basic_chapter
           local label1 = tile_x(coor1.x, coor1.y, 0).find_object(mo_label)
           local label2 = tile_x(coor2.x, coor2.y, 0).find_object(mo_label)
           if (!label1){
-            label_x.create(coor1, player, translate(text))
+            label_x.create(coor1, player_x(1), translate(text))
             local label = tile_x(coor1.x,coor1.y,0).find_object(mo_label)
             if (label)
               label.mark()
           }
           if (!label2){
-            label_x.create(coor2, player, translate(text))
+            label_x.create(coor2, player_x(1), translate(text))
             local label = tile_x(coor2.x,coor2.y,0).find_object(mo_label)
             if (label)
               label.mark()
@@ -2878,13 +2880,13 @@ class basic_chapter
             label1 = tile_x(coor1.x, coor1.y, 0).find_object(mo_label)
             label2 = tile_x(coor2.x, coor2.y, 0).find_object(mo_label)
             if (!label1){
-              label_x.create(coor1, player, translate(text))
+              label_x.create(coor1, player_x(1), translate(text))
               local label = tile_x(coor1.x,coor1.y,0).find_object(mo_label)
               if (label)
                 label.mark()
             }
             if (!label2){
-              label_x.create(coor2, player, translate(text))
+              label_x.create(coor2, player_x(1), translate(text))
               local label = tile_x(coor2.x,coor2.y,0).find_object(mo_label)
               if (label)
                 label.mark()
@@ -2905,11 +2907,11 @@ class basic_chapter
 
           local label1 = tile1.find_object(mo_label)
           if (label1 && label1.get_text()==text){
-            tile1.remove_object(player, mo_label)
+            tile1.remove_object(player_x(1), mo_label)
           }
           local label2 = tile2.find_object(mo_label)
           if (label2 && label2.get_text()==text){
-            tile2.remove_object(player, mo_label)
+            tile2.remove_object(player_x(1), mo_label)
           }
           for (local i = c_a.y;i<=c_b.y;i++){
             local coor1 = my_tile(coord(c_b.x, i))
@@ -2920,11 +2922,11 @@ class basic_chapter
 
             local label1 = tile1.find_object(mo_label)
             if (label1 && label1.get_text()==text){
-              tile1.remove_object(player, mo_label)
+              tile1.remove_object(player_x(1), mo_label)
             }
             local label2 = tile2.find_object(mo_label)
             if (label2 && label2.get_text()==text){
-              tile2.remove_object(player, mo_label)
+              tile2.remove_object(player_x(1), mo_label)
             }
           }
         }
@@ -2934,7 +2936,7 @@ class basic_chapter
       if (!del){
         for (local j = c_a.x ;j<=c_b.x;j++){
           for (local i = c_a.y;i<=c_b.y;i++){
-            label_x.create(coord(j, i), player, translate(text))
+            label_x.create(coord(j, i), player_x(1), translate(text))
             local label = tile_x(j,i,0).find_object(mo_label)
             label.mark()
           }
@@ -2946,7 +2948,7 @@ class basic_chapter
             local tile = tile_x(j, i)
             local label = tile.find_object(mo_label)
             if (label && label.get_text()==text)
-              tile.remove_object(player, mo_label)
+              tile.remove_object(player_x(1), mo_label)
           }
         }
       }
@@ -2959,7 +2961,7 @@ class basic_chapter
             local tile = tile_x(c.x, c.y, c.z)
             local way = tile.find_object(mo_way)
             if (way && way.get_waytype()==wt)
-              label_x.create(c, player, translate(text))
+              label_x.create(c, player_x(1), translate(text))
           }
         }
       }
@@ -2972,7 +2974,7 @@ class basic_chapter
             local label = tile.find_object(mo_label)
             if (way && way.get_waytype()==wt && label && label.get_text()==text){
               local c = my_tile(coord(j, i))
-              tile.remove_object(player, mo_label)
+              tile.remove_object(player_x(1), mo_label)
             }
           }
         }
@@ -3064,18 +3066,17 @@ class basic_chapter
     }
   }
 
-  function lock_tile_list(c_list, del, text = "X")
+  function lock_tile_list(c_list, siz, del, pl, text = "X")
   {
-      local player = player_x(15)
       if (!del) {
-        for (local j = 0 ;j<c_list.len();j++){
-          label_x.create(c_list[j], player, text)
+        for (local j = 0 ;j<siz;j++){
+          label_x.create(c_list[j], player_x(pl), text)
         }
       }
       else {
-        for (local j = 0 ;j<c_list.len();j++){
+        for (local j = 0 ;j<siz;j++){
           local tile = tile_x(c_list[j].x,c_list[j].y,0)
-          tile.remove_object(player, mo_label)
+          tile.remove_object(player_x(pl), mo_label)
 
         }
       }
@@ -3160,29 +3161,29 @@ class basic_chapter
   //dir 4 = y--
   function clean_track_segment(t, siz, opt) {
     local tool = command_x(tool_remover)
-    local player = player_x(1)
+
     if (opt==1) {
       for (local j = 0; j<siz;j++){
-        tool.work(player, t, "")
+        tool.work(player_x(1), t, "")
         t.x++
 
       }
     }
     else if (opt==2) {
       for (local j = 0; j<siz;j++){
-        tool.work(player, t, "")
+        tool.work(player_x(1), t, "")
         t.y++
       }
     }
     else if (opt==3) {
       for (local j = 0; j<siz;j++){
-        tool.work(player, t, "")
+        tool.work(player_x(1), t, "")
         t.x--
       }
     }
     else if (opt==4) {
       for (local j = 0; j<siz;j++){
-        tool.work(player, t, "")
+        tool.work(player_x(1), t, "")
         t.y--
       }
     }
@@ -3262,6 +3263,25 @@ class basic_chapter
 
     }
   }
+
+  function public_label(t, name)
+  {
+    if(t.is_marked())
+      t.remove_object(player_x(1), mo_label)
+
+    local label = t.find_object(mo_label)
+    local cursor = t.find_object(mo_pointer)
+
+    if(!label && !t.is_marked() && !cursor){
+      label_x.create(t, player_x(1), name)
+
+      label = t.find_object(mo_label)
+      if(label)
+        label.mark()
+    }
+    return null
+  }
+
 }
 
 // END OF FILE
