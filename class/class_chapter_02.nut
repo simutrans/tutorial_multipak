@@ -90,6 +90,8 @@ class tutorial.chapter_02 extends basic_chapter
     cty1.name = get_city_name(city1_tow)
     cty2.name = get_city_name(city2_tow)
     line1_name = "City " + cty1.name
+    line2_name = line1_name + " dock/station"
+    line3_name = cty1.name + " " + cty2.name
 
     if(this.step == 1) {
       local tile = my_tile(city1_road_depot)
@@ -433,8 +435,13 @@ class tutorial.chapter_02 extends basic_chapter
         }
         if (pot1==1) {
           //Comprueba la conexion de la via
+          local tx = 0
+          local ty = 1
+          local tile = square_x(bridge1_coords.b.x+tx, bridge1_coords.b.y+ty).get_ground_tile()
+          // todo check bridge direction
+
           local coora = coord3d(bridge1_coords.a.x, bridge1_coords.a.y, bridge1_coords.a.z)
-          local coorb = coord3d(bridge1_coords.b.x, bridge1_coords.b.y, bridge1_coords.b.z)
+          local coorb = coord3d(tile.x, tile.y, tile.z)
           local dir = bridge1_coords.dir
           local obj = false
           local r_way = get_fullway(coora, coorb, dir, obj)
