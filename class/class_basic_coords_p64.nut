@@ -96,7 +96,7 @@ city1_road_depot <- coord(115,185)
  *
  *
  */
-bridge1_coords <- {a = coord(126,193), b = coord(126,195)}
+bridge1_coords <- {a = coord3d(126,193,0), b = coord3d(126,195,0), dir = 3}
 
 /**
  *  define ways

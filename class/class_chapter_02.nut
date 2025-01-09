@@ -696,7 +696,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
         else if (tool_id==tool_build_station)
-          return result = format(translate("Stops should be built in [%s]"), cty1.name)+" ("+cty1.c.tostring()+")."
+          return result = format(translate("Stops should be built in [%s]"), cty1.name)+" ("+city1_tow.tostring()+")."
 
         break;
       //Enrutar el primer autobus
