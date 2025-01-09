@@ -280,6 +280,7 @@ function get_integral(tx)
   resul_version = string_analyzer()
   include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
   include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
+  include(nut_path+"class_messages")    // include def messages texts
   switch (pak_name) {
     case "pak64":
       include(nut_path+"class_basic_coords_p64")  // include coords def pak64
@@ -291,7 +292,6 @@ function get_integral(tx)
       include(nut_path+"class_basic_coords_p128")  // include coords def pak128
       break
   }
-  include(nut_path+"class_messages")     // include def messages texts
 
 }
 

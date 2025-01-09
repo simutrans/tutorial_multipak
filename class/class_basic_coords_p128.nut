@@ -7,12 +7,27 @@
  */
 
 /**
+ *  set tiles for pos chapter start
+ *
+ *
+ */
+coord_chapter_1 <- coord(113,189)
+coord_chapter_2 <- coord(115,185)
+
+/**
  *  set limit for build
  *
  *
  */
-city1_limit1 <- {a = coord(109,181), b = coord(128,193)}
-city2_limit1 <- {a = coord(120,150), b = coord(138,159)}
+city1_limit1          <- {a = coord(109,181), b = coord(128,193)}
+city2_limit1          <- {a = coord(120,150), b = coord(138,159)}
+
+bridge1_limit         <- {a = coord(119,193), b = coord(128,201)}
+c_bridge1_limit1      <- {a = coord(126,191), b = coord(126,192)}
+change1_city1_limit1  <- {a = coord(120,193), b = coord(127,193)}
+
+c_dock1_limit         <- {a = coord(128,181), b = coord(135,193)}
+change2_city1_limit1  <- {a = coord(128,182), b = coord(128,192)}
 
 /**
  *  set tiles for buildings
@@ -23,7 +38,27 @@ city2_limit1 <- {a = coord(120,150), b = coord(138,159)}
  */
 city1_mon <- coord(113,189)
 city1_cur <- coord(113,185)
+
 city1_tow <- coord(111,184)
+city2_tow <- coord(129,154)
+
+/**
+ *  set tiles for factory
+ *
+ *  coord_fac_1 - ch1, ch4
+ *
+ *
+ */
+coord_fac_1 <- coord(149,200)
+
+/**
+ *  set tiles for stations
+ *
+ *  coord_st_1 - city 1
+ *
+ *
+ */
+coord_st_1 <- coord(117,197)
 
 /**
  *  set halt coords city
@@ -55,6 +90,13 @@ for ( local i = 0; i < list.len(); i++ ) {
  *  define road depot city 1
  */
 city1_road_depot <- coord(115,185)
+
+/**
+ *  define bridges
+ *
+ *
+ */
+bridge1_coords <- {a = coord(126,192), b = coord(126,194)}
 
 
 /**

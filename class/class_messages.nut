@@ -17,6 +17,8 @@ ch1_text3       <- "This is a station"
 ch1_text4       <- "This is a link"
 ch1_text5       <- "Town Centre"
 
+ch2_name        <- "Ruling the Roads"
+
 /*
  *  single messages
  *
