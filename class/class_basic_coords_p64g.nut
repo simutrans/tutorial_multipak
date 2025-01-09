@@ -75,7 +75,7 @@ city1_halt_1 <- []
 city1_halt_2 <- []
 city2_halt_1 <- []
 
-line_connect_halt = coord(126,187)
+line_connect_halt <- coord(126,187)
 
 local list = [coord(113,183), coord(117,186),  coord(120,183), line_connect_halt, coord(121,189), coord(113,190)]
 for ( local i = 0; i < list.len(); i++ ) {
