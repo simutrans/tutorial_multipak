@@ -10,7 +10,6 @@
  *
 */
 ch1_name        <- "Getting Started"
-coord_chapter_1 <- coord(113,189)
 ch1_text1       <- "This is a town centre"
 ch1_text2       <- "This is a factory"
 ch1_text3       <- "This is a station"

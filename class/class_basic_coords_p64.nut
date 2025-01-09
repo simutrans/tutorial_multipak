@@ -98,6 +98,13 @@ city1_road_depot <- coord(115,185)
  */
 bridge1_coords <- {a = coord(126,193), b = coord(126,195)}
 
+/**
+ *  define ways
+ *
+ *
+ */
+way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
+
 
 /**
  *  chapter 5

@@ -126,11 +126,6 @@ class basic_chapter
       percentage -= percentage_step
     }
 
-    // tutorial finish
-    if ( tutorial.len() == persistent.chapter && ch_steps == ch_step && sub_steps == sub_step ) {
-      percentage = 101
-    }
-
     //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
 
     return percentage
@@ -3287,6 +3282,48 @@ class basic_chapter
     return null
   }
 
+}
+
+function create_halt_list(cord_list) {
+  local list_tx = ""
+  local c_list = cord_list
+  for (local j=0;j<c_list.len();j++){
+    local c = coord(c_list[j].x, c_list[j].y)
+    local tile = my_tile(c)
+    local st_halt = tile.get_halt()
+    local build = tile.find_object(mo_building)
+    if (build){
+      local link =  c.href(st_halt.get_name()+" ("+c.tostring()+")")
+      list_tx += format("<em>%s %d:</em> %s<br>", translate("Stop"), j+1, link)
+    }
+    else{
+      local link = c.href(" ("+c.tostring()+")")
+      local stop_tx = translate("Build Stop here:")
+      list_tx += format("<st>%s %d:</st></em> %s %s<br>", translate("Stop"), j+1, stop_tx, link)
+    }
+  }
+  return list_tx
+}
+
+function create_schedule_list(coord_list) {
+  local list_tx = ""
+  local c_list = coord_list
+  for (local j = 0; j < coord_list.len(); j++) {
+    local c = coord(c_list[j].x, c_list[j].y)
+    local tile = my_tile(c)
+    local st_halt = tile.get_halt()
+    if(sch_cov_correct){
+      list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+      continue
+    }
+    if(tmpsw[j]==0){
+      list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
+    }
+    else{
+      list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+    }
+  }
+  return list_tx
 }
 
 // END OF FILE
