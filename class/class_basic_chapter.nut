@@ -1921,7 +1921,6 @@ class basic_chapter
     else
       return cursor_sw = false
 
-
     return null
   }
 

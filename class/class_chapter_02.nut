@@ -641,15 +641,20 @@ class tutorial.chapter_02 extends basic_chapter
       case 1:
         if (tool_id==tool_build_way){
           local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
+          local str_c = tool.start_pos
+          local str_way = world.is_coord_valid(str_c)? tile_x(str_c.x, str_c.y, str_c.z).find_object(mo_way) : null
           foreach(desc in way_desc){
             if(desc.get_name() == name){
               for ( local i = 0; i < build_list.len()-1; i++ ) {
                 if ( ((pos.x==build_list[i].x)&&(pos.y==build_list[i].y)) || ((pos.x==city1_road_depot.x)&&(pos.y==city1_road_depot.y)) ) {
-                  if(!cursor_control(build_list[i]))
-                  return null
+                  if(cursor_control(build_list[i])){
+                  	return null
+                  }
+                  if(!str_way){
+                    return null
+                  }
                 }
               }
-
               return translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
             }
           }
