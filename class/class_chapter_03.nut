@@ -249,6 +249,14 @@ class tutorial.chapter_03 extends basic_chapter
   sc_wag3_nr = set_train_lenght(3)
   //------------------------------------------------------------------------------------
 
+  fab_list = [
+          factory_data.rawget("1"),
+          factory_data.rawget("2"),
+          factory_data.rawget("3")
+        ]
+  line2_name = "Test 5"
+  line3_name = "Test 6"
+
   function start_chapter(){  //Inicia solo una vez por capitulo
 
     if ( pak_name == "pak128" ) {
@@ -298,6 +306,10 @@ class tutorial.chapter_03 extends basic_chapter
     cy4.name = get_city_name(cy4.c)
     cy5.name = get_city_name(cy5.c)
 
+    line1_name = get_good_data(1, 3) + " " + fab_list[0].name + " - " + fab_list[1].name
+    line2_name = get_good_data(2, 3) + " " + fab_list[1].name + " - " + fab_list[2].name
+    line3_name = "Passanger Train"
+
     local pl = 0
     if(this.step == 11){
       local c_dep = this.my_tile(c_dep3)
@@ -307,10 +319,6 @@ class tutorial.chapter_03 extends basic_chapter
   }
 
   function set_goal_text(text){
-
-    local fac_1 = factory_data.rawget("1")
-    local fac_2 = factory_data.rawget("2")
-    local fac_3 = factory_data.rawget("3")
 
     if ( translate_objects_list.rawin("inspec") ) {
       if ( translate_objects_list.inspec != translate("Abfrage") ) {
@@ -638,8 +646,8 @@ class tutorial.chapter_03 extends basic_chapter
       local stext = ttextfile("chapter_03/step_1-4_hinfo.txt")
       stext.good1 = get_good_data(1, 3)
       stext.good2 = get_good_data(2, 3)
-      stext.f1 = fac_1.c.href(fac_1.name+" ("+fac_1.c.tostring()+")")
-      stext.f2 = fac_2.c.href(fac_2.name+" ("+fac_2.c.tostring()+")")
+      stext.f1 = fab_list[0].c.href(fab_list[0].name+" ("+fab_list[0].c.tostring()+")")
+      stext.f2 = fab_list[1].c.href(fab_list[1].name+" ("+fab_list[1].c.tostring()+")")
       text.step_hinfo = stext
     }
     if ( this.step >= 8 && this.step <= 10 ) {
@@ -658,9 +666,9 @@ class tutorial.chapter_03 extends basic_chapter
       text.step_hinfo = stext
     }
 
-    text.f1 = fac_1.c.href(fac_1.name+" ("+fac_1.c.tostring()+")")
-    text.f2 = fac_2.c.href(fac_2.name+" ("+fac_2.c.tostring()+")")
-    text.f3 = fac_3.c.href(fac_3.name+" ("+fac_3.c.tostring()+")")
+    text.f1 = fab_list[0].c.href(fab_list[0].name+" ("+fab_list[0].c.tostring()+")")
+    text.f2 = fab_list[1].c.href(fab_list[1].name+" ("+fab_list[1].c.tostring()+")")
+    text.f3 = fab_list[2].c.href(fab_list[2].name+" ("+fab_list[2].c.tostring()+")")
 
     text.cdep=c_dep1.href("("+c_dep1.tostring()+")")
     text.way1=c_dep2.href("("+c_dep2.tostring()+")")
@@ -691,11 +699,11 @@ class tutorial.chapter_03 extends basic_chapter
     text.good2 = get_good_data(2, 3)
     text.g2_metric =get_good_data(2, 1)
     // prod data
-    local g_in = read_prod_data(fac_2.c, 1, "in")
+    local g_in = read_prod_data(fab_list[1].c, 1, "in")
     text.prod_in   = integer_to_string(g_in[0])
     text.g1_factor = g_in[2]
     text.g1_consum = integer_to_string(g_in[1])
-    local g_out = read_prod_data(fac_2.c, 2, "out")
+    local g_out = read_prod_data(fab_list[1].c, 2, "out")
     text.prod_out  = integer_to_string(g_out[0])
     text.g2_factor = g_out[2]
     text.g2_prod   = integer_to_string(g_out[1])
@@ -712,17 +720,17 @@ class tutorial.chapter_03 extends basic_chapter
     local chapter_step = persistent.step
     local chapter_sub_steps = 0 // count all sub steps
     local chapter_sub_step = 0  // actual sub step
-
+/*
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
     local fac_3 =  factory_data.rawget("3")
-
+*/
     switch (this.step) {
       case 1:
         chapter_sub_steps = 2
         local next_mark = false
         if (pot0==0 || pot1 == 0) {
-          local list = fac_2.c_list
+          local list = fab_list[1].c_list
           try {
             next_mark = delay_mark_tile(list)
           }
@@ -734,7 +742,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         else if (pot2==0 || pot3==0) {
-          local list = fac_1.c_list
+          local list = fab_list[0].c_list
           try {
             next_mark = delay_mark_tile(list)
           }
@@ -967,7 +975,7 @@ class tutorial.chapter_03 extends basic_chapter
         local wt = wt_rail
 
         if (current_cov == ch3_cov_lim1.b){
-          reached = get_reached_target(fac_2.c, good_alias.wood )
+          reached = get_reached_target(fab_list[1].c, good_alias.wood )
           if (reached>= f1_reached){
             pot1=1
           }
@@ -1181,7 +1189,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
 
         else if(current_cov == ch3_cov_lim2.b){
-          reached = get_reached_target(fac_3.c, good_alias.plan)
+          reached = get_reached_target(fab_list[2].c, good_alias.plan)
           if (reached>=f3_reached){
             pot3=1
           }
@@ -1474,18 +1482,18 @@ class tutorial.chapter_03 extends basic_chapter
       if (!t.has_way(wt_rail))
         ribi = 0
     }
-
+/*
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
     local fac_3 =  factory_data.rawget("3")
-
+*/
     local result = translate("Action not allowed")    // null is equivalent to 'allowed'
 
     switch (this.step) {
       case 1:
         if (tool_id == 4096){
           if (pot0==0){
-            local list = fac_2.c_list
+            local list = fab_list[1].c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
                 pot0 = 1
@@ -1494,7 +1502,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
           else if (pot1==1){
-            local list = fac_1.c_list
+            local list = fab_list[0].c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
                 pot2 = 1
@@ -2079,11 +2087,11 @@ class tutorial.chapter_03 extends basic_chapter
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
     local nr =  schedule.entries.len()
-
+/*
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
     local fac_3 =  factory_data.rawget("3")
-
+*/
     switch (this.step) {
       case 5:
         local selc = 0
@@ -2367,7 +2375,7 @@ class tutorial.chapter_03 extends basic_chapter
           local sched = schedule_x(wt, [])
           sched.entries.append(schedule_entry_x(my_tile(st1_list[0]), loc1_load, loc1_wait))
           sched.entries.append(schedule_entry_x(my_tile(st2_list[0]), 0, 0))
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line1_name)
 
           local good_nr = 0 //Passengers
           local name = loc1_name_obj
@@ -2519,7 +2527,7 @@ class tutorial.chapter_03 extends basic_chapter
             local sched = schedule_x(wt, [])
             sched.entries.append(schedule_entry_x(my_tile(st3_list[0]), loc2_load, loc2_wait))
             sched.entries.append(schedule_entry_x(my_tile(st4_list[0]), 0, 0))
-            local c_line = comm_get_line(player, gl_wt, sched)
+            local c_line = comm_get_line(player, gl_wt, sched, line2_name)
 
             local name = loc2_name_obj
             local wag_name = sc_veh2_name
@@ -2736,7 +2744,7 @@ class tutorial.chapter_03 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
           }
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line3_name)
 
           // Set and run convoys
           local good_nr = 0 //Passengers

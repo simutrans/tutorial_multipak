@@ -24,7 +24,7 @@ ch2_name        <- "Ruling the Roads"
  *  id - message id
  *   1 = You can only delete the stops.
  *   2 = Action not allowed
- *
+ *   3 = Only road schedules allowed
  *
  *
  *
@@ -44,7 +44,7 @@ function get_message(id) {
       txt_message = translate("Action not allowed")
       break
     case 3:
-
+      txt_message = translate("Only road schedules allowed")
       break
     case 4:
 
@@ -231,6 +231,70 @@ function get_tiledata_message(id, data, tile) {
 
       break
     case 9:
+
+      break
+  }
+
+  return txt_message
+
+}
+
+  function bus_result_message(nr, name, veh, cov)
+  {
+    switch (nr) {
+      case 0:
+        return format(translate("Select the Bus [%s]."),name)
+        break
+
+      case 1:
+        return format(translate("The number of bus must be [%d]."),cov)
+        break
+
+      case 2:
+        return format(translate("The number of convoys must be [%d], press the [Sell] button."),cov)
+
+      case 3:
+        return translate("The bus must be [Passengers].")
+        break
+
+      case 4:
+        return format(translate("Must not use trailers [%d]."),veh-1)
+        break
+
+      default:
+        return translate("The convoy is not correct.")
+        break
+    }
+  }
+
+/**
+ *  label messages
+ *
+ *
+ */
+function get_label_text(id) {
+  local txt_message = ""
+
+  switch(id) {
+    case 1:
+      txt_message = translate("Place Stop here!.")
+      break
+    case 2:
+      txt_message = translate("Build a Bridge here!.")
+      break
+    case 3:
+
+      break
+    case 4:
+
+      break
+    case 5:
+
+      break
+    case 6:
+
+      break
+    case 7:
 
       break
   }

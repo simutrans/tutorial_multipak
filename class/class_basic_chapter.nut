@@ -209,7 +209,7 @@ class basic_chapter
     return null
   }
 
-  function comm_get_line(player, wt, sched)
+  function comm_get_line(player, wt, sched, line_name)
   {
     player.create_line(wt)
     // find the line - it is a line without schedule and convoys
@@ -218,6 +218,7 @@ class basic_chapter
     foreach(line in list) {
       if (line.get_waytype() == wt  &&  line.get_schedule().entries.len()==0) {
         // right type, no schedule -> take this.
+        line.set_name(line_name)
         c_line = line
         break
       }
@@ -869,7 +870,7 @@ class basic_chapter
 
     for(local j=0;j<siz;j++){
       if (j==selc){
-        result = is_waystop_correct(pl, schedule, j, load, time, c_list[j]), line
+        result = is_waystop_correct(pl, schedule, j, load, time, c_list[j], line)
       }
 
       else if (result==null){
@@ -2252,53 +2253,52 @@ class basic_chapter
       for(local j = 0; j < siz; j++) {
         local c = tmpcoor[j]
         if (tmpsw[j] == 1){
-          //gui.add_message("("+tmpcoor[j].x+","+tmpcoor[j].y+")")
           sched.entries.append(schedule_entry_x(c, 0, 0))
         }
         else {
           break
         }
       }
-        local entrie
+      local entrie = null
 
-        try {
-           entrie = sched.entries[1]
-        }
-        catch(ev) {
-          return null
-        }
-            if (!cov_line)
-                play.create_line(wt)
+      try {
+        entrie = sched.entries[1]
+      }
+      catch(ev) {
+        return null
+      }
+      if (!cov_line)
+        play.create_line(wt)
 
-            else if (cov_line.get_name() == line_name && cov_line.get_waytype() == wt){
-                cov_line.change_schedule(play, sched)
-            return null
-            }
-        // find the line - it is a line without schedule and convoys
-        local list = play.get_line_list()
-        local c_line = null
-        foreach(line in list) {
-                if (line.get_name() == line_name && line.get_waytype() == wt){
-                    c_line = line
-                    break
-                }
-                else {
-                if (line.get_waytype() == wt  &&  line.get_schedule().entries.len()==0) {
-                  // right type, no schedule -> take this.
-                  line.set_name(line_name)
-                  c_line = line
-                  break
-                }
-                }
+      else if (cov_line.get_name() == line_name && cov_line.get_waytype() == wt){
+        cov_line.change_schedule(play, sched)
+        return null
+      }
+      // find the line - it is a line without schedule and convoys
+      local list = play.get_line_list()
+      local c_line = null
+      foreach(line in list) {
+        if (line.get_name() == line_name && line.get_waytype() == wt){
+          c_line = line
+          break
         }
+        else {
+          if (line.get_waytype() == wt  &&  line.get_schedule().entries.len()==0) {
+            // right type, no schedule -> take this.
+            line.set_name(line_name)
+            c_line = line
+            break
+          }
+        }
+      }
       if(c_line){
         c_line.change_schedule(play, sched)
         cov_list[0].set_line(play, c_line)
       }
 
-        return null
-        }
-        return null
+      return null
+    }
+    return null
   }
 
     function update_convoy_schedule(pl, wt, name, schedule)
@@ -3063,34 +3063,6 @@ class basic_chapter
         }
       }
       return true
-    }
-  }
-
-  function bus_result_message(nr, name, veh, cov)
-  {
-    switch (nr) {
-      case 0:
-        return format(translate("Select the Bus [%s]."),name)
-        break
-
-      case 1:
-        return format(translate("The number of bus must be [%d]."),cov)
-        break
-
-      case 2:
-        return format(translate("The number of convoys must be [%d], press the [Sell] button."),cov)
-
-      case 3:
-        return translate("The bus must be [Passengers].")
-        break
-
-      case 4:
-        return format(translate("Must not use trailers [%d]."),veh-1)
-        break
-
-      default:
-        return translate("The convoy is not correct.")
-        break
     }
   }
 

@@ -70,6 +70,9 @@ coord_st_1 <- coord(117,197)
  *    city1_halt_2 - halts connect city 1 dock and station
  *    city2_halt_1 - halts connect city 2 to city 1
  *    line_connect_halt - halt in all halt lists
+ *
+ *  used chapter 5
+ *    city1_post_halts - halts for post
  */
 city1_halt_1 <- []
 city1_halt_2 <- []
@@ -82,6 +85,7 @@ for ( local i = 0; i < list.len(); i++ ) {
   city1_halt_1.append(list[i])
 }
 list.clear()
+// first coord add city1_post_halts
 list = [coord(132,189), line_connect_halt, coord(126,198), coord(120,196)]
 for ( local i = 0; i < list.len(); i++ ) {
   city1_halt_2.append(list[i])
@@ -91,6 +95,9 @@ list = [line_connect_halt, coord(121,155), coord(127,155), coord(132,155), coord
 for ( local i = 0; i < list.len(); i++ ) {
   city2_halt_1.append(list[i])
 }
+
+city1_post_halts <- city1_halt_1
+city1_post_halts.insert(4, city1_halt_2[0])
 
 /**
  *  define depot

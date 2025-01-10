@@ -61,7 +61,7 @@ class tutorial.chapter_06 extends basic_chapter
   sch_list1 = [coord(114,176), coord(168,489)]
 
   // Step 3 =====================================================================================
-  line1_name = "Test 7"
+  line1_name = "Test 13"
   c_dep2 = coord(115,185)
   d2_cnr = null //auto started
   sch_list2 = [coord(114,177) coord(121,189), coord(126,187)]
@@ -70,7 +70,7 @@ class tutorial.chapter_06 extends basic_chapter
   veh1_wait = 10571
 
   // Step 4 =====================================================================================
-  line2_name = "Test 8"
+  line2_name = "Test 14"
   c_dep3 = coord(167,497)
   d3_cnr = null //auto started
 
@@ -88,6 +88,7 @@ class tutorial.chapter_06 extends basic_chapter
   sc_dep1 = get_obj_ch6(5)
   sc_dep2 = get_obj_ch6(6)
 
+  line3_name = "Test 15"
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
@@ -881,7 +882,7 @@ class tutorial.chapter_06 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
           }
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line1_name)
 
           local depot = c_depot.find_object(mo_depot_air)
           local name = plane1_obj
@@ -911,7 +912,7 @@ class tutorial.chapter_06 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[i]), 0, 0))
           }
-          local c_line = comm_get_line(player, wt_road, sched)
+          local c_line = comm_get_line(player, wt_road, sched, line2_name)
 
           local good_nr = 0 //Passengers
           local name = veh1_obj
@@ -953,7 +954,7 @@ class tutorial.chapter_06 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[i]), 0, 0))
           }
-          local c_line = comm_get_line(player, wt_road, sched)
+          local c_line = comm_get_line(player, wt_road, sched, line3_name)
 
           local good_nr = 0 //Passengers
           local name = veh1_obj

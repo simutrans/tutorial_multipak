@@ -67,18 +67,22 @@ class tutorial.chapter_05 extends basic_chapter
           {c = coord(132,190), name = get_obj_ch5(6), good = good_alias.mail}
         ]
 
-  sch_list2 = [
+  sch_list2 = city1_post_halts
+        /*[
           coord(111,183), coord(116,183),  coord(120,183), coord(126,187),
           coord(132,189), coord(121,189), coord(118,191), coord(113,190)
-        ]
+        ]*/
 
   //Para el Camion
   veh2_obj = get_veh_ch5(3)
   c_dep2 = coord(115,185) // depot
-  line1_name = "Test 6"
+  line1_name = "Test 10"
   veh2_load = 100
   veh2_wait = 10571
   d2_cnr = null //auto started
+
+  line2_name = "Test 11"
+  line3_name = "Test 12"
 
   //Para el barco
   sch_list3 = [coord(133,189), coord(168,189)]
@@ -98,6 +102,13 @@ class tutorial.chapter_05 extends basic_chapter
   sc_power_name = get_obj_ch5(3)
   sc_transf_name = get_obj_ch5(4)
 
+  fab_list = [
+          factory_data.rawget("5"),
+          factory_data.rawget("3"),
+          factory_data.rawget("7"),
+          factory_data.rawget("8")
+        ]
+
   function start_chapter()  //Inicia solo una vez por capitulo
   {
 
@@ -113,6 +124,8 @@ class tutorial.chapter_05 extends basic_chapter
       tile_x(134,235,0).remove_object(player_x(1), mo_label)
     }
 
+    //sch_list2.extend(city1_post_halts)
+
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch5_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
     ch5_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
@@ -121,6 +134,15 @@ class tutorial.chapter_05 extends basic_chapter
     d1_cnr = get_dep_cov_nr(ch5_cov_lim1.a,ch5_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch5_cov_lim2.a,ch5_cov_lim2.b)
     d3_cnr = get_dep_cov_nr(ch5_cov_lim3.a,ch5_cov_lim3.b)
+
+    /*fab_list =  [
+          factory_data.rawget("5"),
+          factory_data.rawget("3"),
+          factory_data.rawget("7"),
+          factory_data.rawget("8")
+        ]*/
+    line1_name = get_good_data(5, 3) + " " + fab_list[2].name + " - " + fab_list[3].name
+    //line3_name = get_good_data(4, 3) + " " + fac_2.name + " - " + fac_3.name
 
     local pl = 0
     if(this.step == 4){
@@ -143,12 +165,6 @@ class tutorial.chapter_05 extends basic_chapter
     local trf_name = translate("Build drain")           // Aufspanntransformator
     local toolbar = translate_objects_list.tools_power  // toolbar with powerline tools
 
-    local fab_list =  [
-          factory_data.rawget("5"),
-          factory_data.rawget("3"),
-          factory_data.rawget("7"),
-          factory_data.rawget("8")
-        ]
 
     switch (this.step) {
       case 1:
@@ -330,12 +346,12 @@ class tutorial.chapter_05 extends basic_chapter
     save_glsw()
     save_pot()
 
-    local fab_list =  [
+    /*local fab_list =  [
           factory_data.rawget("5"),
           factory_data.rawget("3"),
           factory_data.rawget("7"),
           factory_data.rawget("8")
-        ]
+        ]*/
 
     switch (this.step) {
       case 1:
@@ -589,13 +605,13 @@ class tutorial.chapter_05 extends basic_chapter
         ribi = way.get_dirs()
       if (!t.has_way(gl_wt))
         ribi = 0
-    }*/
+    }
     local fab_list =  [
           factory_data.rawget("5"),
           factory_data.rawget("3"),
           factory_data.rawget("7"),
           factory_data.rawget("8")
-        ]
+        ]*/
 
     local result = translate("Action not allowed")    // null is equivalent to 'allowed'
     switch (this.step) {
@@ -667,7 +683,7 @@ class tutorial.chapter_05 extends basic_chapter
                                 if (glsw[j]==0){
                                    return null
                                 }
-                                else 
+                                else
                                   return  translate("There is already a transformer here!")+" ("+pos.tostring()+")."
                             }
                             else if (glsw[j]==0)
@@ -951,7 +967,7 @@ class tutorial.chapter_05 extends basic_chapter
           local sched = schedule_x(wt, [])
           sched.entries.append(schedule_entry_x(my_tile(sch_list1[0]), veh1_load, veh1_wait))
           sched.entries.append(schedule_entry_x(my_tile(sch_list1[1]), 0, 0))
-          local c_line = comm_get_line(player, wt, sched)
+          local c_line = comm_get_line(player, wt, sched, line1_name)
 
           local name = veh1_obj
           local cov_nr = d1_cnr  //Max convoys nr in depot
@@ -1058,7 +1074,7 @@ class tutorial.chapter_05 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
           }
-          local c_line = comm_get_line(player, wt, sched)
+          local c_line = comm_get_line(player, wt, sched, line2_name)
 
           local name = veh2_obj
           local cov_nr = d2_cnr  //Max convoys nr in depot
@@ -1090,7 +1106,7 @@ class tutorial.chapter_05 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
           }
-          local c_line = comm_get_line(player, wt, sched)
+          local c_line = comm_get_line(player, wt, sched, line3_name)
 
           local name = veh3_obj
           local cov_nr = d3_cnr  //Max convoys nr in depot

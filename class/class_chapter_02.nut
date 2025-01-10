@@ -90,7 +90,7 @@ class tutorial.chapter_02 extends basic_chapter
     cty2.name = get_city_name(city2_tow)
     line1_name = "City " + cty1.name
     line2_name = line1_name + " dock/station"
-    line3_name = cty1.name + " " + cty2.name
+    line3_name = cty1.name + " - " + cty2.name
 
     if(this.step == 1) {
       local tile = my_tile(city1_road_depot)
@@ -410,7 +410,7 @@ class tutorial.chapter_02 extends basic_chapter
         local next_mark = true
         if (pot0 == 0){
           if(!label)
-            label_x.create(bridge1_coords.a, player_x(pl), translate("Build a Bridge here!."))
+            label_x.create(bridge1_coords.a, player_x(pl), get_label_text(2))
             label_x.create(bridge1_coords.b, player_x(pl), "")
           try {
              next_mark = delay_mark_tile(t_list_brd)
@@ -498,7 +498,7 @@ class tutorial.chapter_02 extends basic_chapter
 
           local siz = city2_halt_1.len()
           local c_list = city2_halt_1
-          local name =  translate("Place Stop here!.")
+          local name = get_label_text(1)
           local load = good_alias.passa
           local all_stop = is_stop_building(siz, c_list, name, load)
 
@@ -658,7 +658,7 @@ class tutorial.chapter_02 extends basic_chapter
                   }
                 }
               }
-              return translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
+              return get_tile_message(2, city1_road_depot.x, city1_road_depot.y)//translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
             }
           }
         }
@@ -675,7 +675,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
         else if (tool_id==tool_build_depot)
-          return result=translate("You must build the depot in")+" ("+c_dep.tostring()+")."
+          return result=translate("You must build the depot in")+" ("+city1_road_depot.tostring()+")."
 
         break;
       //Construye las paradas de autobus
@@ -705,7 +705,7 @@ class tutorial.chapter_02 extends basic_chapter
       //Enrutar el primer autobus
       case 4:
         if (tool_id==tool_build_station)
-          return format(translate("Only %d stops are necessary."), city1_halt_1.len())
+          return get_data_message(2, city1_halt_1.len()) //format(translate("Only %d stops are necessary."), city1_halt_1.len())
 
         //Enrutar vehiculo
         if ((pos.x == city1_road_depot.x && pos.y == city1_road_depot.y)){
@@ -838,7 +838,7 @@ class tutorial.chapter_02 extends basic_chapter
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
     if ( (pl == 0) && (schedule.waytype != gl_wt) )
-      result = translate("Only road schedules allowed")
+      result = get_message(3)
     local nr = schedule.entries.len()
     switch (this.step) {
       case 4:
@@ -1043,7 +1043,7 @@ class tutorial.chapter_02 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
           }
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line1_name)
 
           local good_nr = 0 //Passengers
           local name = veh1_obj
@@ -1095,7 +1095,7 @@ class tutorial.chapter_02 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[i]), 0, 0))
           }
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line2_name)
 
           local good_nr = 0 //Passengers
           local name = veh1_obj
@@ -1147,7 +1147,7 @@ class tutorial.chapter_02 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
           }
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line3_name)
 
           local good_nr = 0 //Passengers
           local name = veh1_obj

@@ -70,7 +70,12 @@ class tutorial.chapter_04 extends basic_chapter
   ship2_name_obj = get_veh_ch4(2)
   ship2_load = 100
   ship2_wait = 42282
-  line1_name = "Test 5"
+  line1_name = "Test 7"
+  line2_name = "Test 8"
+  line3_name = "Test 9"
+  fac_1 = null
+  fac_2 = null
+  fac_3 = null
 
   //Script
   //----------------------------------------------------------------------------------
@@ -82,6 +87,14 @@ class tutorial.chapter_04 extends basic_chapter
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
+
+    fac_1 = factory_data.rawget("4")
+    fac_2 = factory_data.rawget("5")
+    fac_3 = factory_data.rawget("6")
+    line1_name = get_good_data(3, 3) + " " + fac_1.name + " - " + fac_2.name
+    line2_name = get_good_data(4, 3) + " " + fac_2.name + " - " + fac_3.name
+    line3_name = "Passanger Ship"
+
 
     if ( pak_name == "pak128" ) {
       c1_way_lim.a = coord(114, 193)
@@ -791,7 +804,7 @@ class tutorial.chapter_04 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(t_list[j], 0, 0))
           }
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line1_name)
 
           local good_nr = good_desc_x(good_alias.oel).get_catg_index()  //Fuels
           local name = ship1_name_obj
@@ -862,7 +875,7 @@ class tutorial.chapter_04 extends basic_chapter
           local sched = schedule_x(gl_wt, [])
           sched.entries.append(schedule_entry_x(t_list[0], ship1_load, ship1_wait))
           sched.entries.append(schedule_entry_x(t_list[1], 0, 0))
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line2_name)
 
           local good_nr = good_desc_x(good_alias.gas).get_catg_index()  //Fuels
           local name = ship1_name_obj
@@ -917,7 +930,7 @@ class tutorial.chapter_04 extends basic_chapter
             else
               sched.entries.append(schedule_entry_x(t_list[j], 0, 0))
           }
-          local c_line = comm_get_line(player, gl_wt, sched)
+          local c_line = comm_get_line(player, gl_wt, sched, line3_name)
 
           local good_nr = good_desc_x(good_alias.passa).get_catg_index() //Passengers
           local name = ship2_name_obj
