@@ -35,7 +35,6 @@ class tutorial.chapter_02 extends basic_chapter
 
   // Step 3 =====================================================================================
   //Parasdas de autobus
-  c_lock = [coord(99,28), coord(98,32), coord(99,32), coord(97,27), coord(97,26)]
   sch_cov_correct = false
 
   // Step 4 =====================================================================================
@@ -331,7 +330,6 @@ class tutorial.chapter_02 extends basic_chapter
           local del = false
           local pl_nr = 1
           local text = "X"
-          lock_tile_list(c_lock, c_lock.len(), del, pl_nr, text)
           pot0=1
         }
         local siz = city1_halt_1.len()
@@ -401,8 +399,6 @@ class tutorial.chapter_02 extends basic_chapter
           label_bord(bridge1_limit.a, bridge1_limit.b, opt, false, "X")
           //Elimina cuadro label
           label_bord(change1_city1_limit1.a, change1_city1_limit1.b, opt, true, "X")
-          //label_bord(c_lock.a, c_lock.b, opt, true, "X")
-          lock_tile_list(c_lock, c_lock.len(), true, 1)
         }
 
         //return 50
@@ -655,7 +651,7 @@ class tutorial.chapter_02 extends basic_chapter
               for ( local i = 0; i < build_list.len()-1; i++ ) {
                 if ( ((pos.x==build_list[i].x)&&(pos.y==build_list[i].y)) || ((pos.x==city1_road_depot.x)&&(pos.y==city1_road_depot.y)) ) {
                   if(cursor_control(build_list[i])){
-                  	return null
+                    return null
                   }
                   if(!str_way){
                     return null

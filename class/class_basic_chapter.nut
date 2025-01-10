@@ -1921,6 +1921,7 @@ class basic_chapter
     else
       return cursor_sw = false
 
+
     return null
   }
 
@@ -2236,28 +2237,28 @@ class basic_chapter
     }
   }
 
-    function set_convoy_schedule(pl, coord, wt, line_name)
-    {
+  function set_convoy_schedule(pl, coord, wt, line_name)
+  {
     local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
     local cov_list = depot.get_convoy_list() // Lista de vehiculos en el deposito
     local d_nr = cov_list.len()   //Numero de vehiculos en el deposito
-        if (d_nr == 0) reset_tmpsw()
+    if (d_nr == 0) reset_tmpsw()
     if (d_nr == 1 && active_sch_check){
-            active_sch_check = false
-            local cov_line = cov_list[0].get_line()
-            local play =  player_x(pl)
-            local sched = schedule_x(wt, [])
+      active_sch_check = false
+      local cov_line = cov_list[0].get_line()
+      local play =  player_x(pl)
+      local sched = schedule_x(wt, [])
       local siz = tmpcoor.len()
       for(local j = 0; j < siz; j++) {
         local c = tmpcoor[j]
-            if (tmpsw[j] == 1){
+        if (tmpsw[j] == 1){
           //gui.add_message("("+tmpcoor[j].x+","+tmpcoor[j].y+")")
-              sched.entries.append(schedule_entry_x(c, 0, 0))
+          sched.entries.append(schedule_entry_x(c, 0, 0))
         }
         else {
           break
         }
-          }
+      }
         local entrie
 
         try {
@@ -2284,7 +2285,7 @@ class basic_chapter
                 else {
                 if (line.get_waytype() == wt  &&  line.get_schedule().entries.len()==0) {
                   // right type, no schedule -> take this.
-                        line.set_name(line_name)
+                  line.set_name(line_name)
                   c_line = line
                   break
                 }
@@ -2298,7 +2299,7 @@ class basic_chapter
         return null
         }
         return null
-    }
+  }
 
     function update_convoy_schedule(pl, wt, name, schedule)
     {     //gui.add_message("noooo")
@@ -3063,22 +3064,6 @@ class basic_chapter
       }
       return true
     }
-  }
-
-  function lock_tile_list(c_list, siz, del, pl, text = "X")
-  {
-      if (!del) {
-        for (local j = 0 ;j<siz;j++){
-          label_x.create(c_list[j], player_x(pl), text)
-        }
-      }
-      else {
-        for (local j = 0 ;j<siz;j++){
-          local tile = tile_x(c_list[j].x,c_list[j].y,0)
-          tile.remove_object(player_x(pl), mo_label)
-
-        }
-      }
   }
 
   function bus_result_message(nr, name, veh, cov)
