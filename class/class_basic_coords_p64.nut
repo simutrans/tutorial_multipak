@@ -29,6 +29,8 @@ change1_city1_limit1  <- {a = coord(120,193), b = coord(127,193)}
 c_dock1_limit         <- {a = coord(128,181), b = coord(135,193)}
 change2_city1_limit1  <- {a = coord(128,182), b = coord(128,192)}
 
+c_way_limit1          <- {a = coord(127,159), b = coord(133,187)}
+
 /**
  *  set tiles for buildings
  *
