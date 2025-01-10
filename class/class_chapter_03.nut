@@ -89,7 +89,6 @@ class tutorial.chapter_03 extends basic_chapter
   f1_reached = set_transportet_goods(1)
 
   //Step 6 =====================================================================================
-  c_lock = [coord(60,10), coord(77,25)]  //Futuros transformadores
 
   //Primer tramo de rieles
   //--------------------------------------------------------------------------------------------
@@ -975,13 +974,6 @@ class tutorial.chapter_03 extends basic_chapter
         }
 
         if (pot1==1 && pot0==0){
-          //Marca tiles para evitar construccion de objetos
-          local c_list = c_lock
-          local siz = c_lock.len()
-          local del = false
-          local pl_nr = 1
-          local text = "X"
-                    lock_tile_list(c_list, siz, del, pl_nr, text)
 
           this.next_step()
           reset_stop_flag()
@@ -1156,13 +1148,6 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         else if (pot4==1 && pot5==0){
-          //Elimina las Marcas de tiles
-          local c_list = c_lock
-          local siz = c_lock.len()
-          local del = true
-          local pl_nr = 1
-          local text = "X"
-          lock_tile_list(c_list, siz, del, pl_nr, text)
 
           this.next_step()
         }
