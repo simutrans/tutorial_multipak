@@ -2511,7 +2511,7 @@ class basic_chapter
 
   function is_stop_building(siz, c_list, lab_name, good, label_sw = false)
   {
-    local player = player_x(1)
+    local pl_unown = player_x(15)
     local count = 0
     for(local j=0;j<siz;j++){
       local c = c_list[j]
@@ -2520,8 +2520,6 @@ class basic_chapter
       local label = t.find_object(mo_label)
       local way = t.find_object(mo_way)
       local halt = t.get_halt()
-      if(t.is_marked())
-        t.remove_object(player, mo_label)
 
       if(buil && halt){
         local desc = buil.get_desc()
@@ -2544,7 +2542,7 @@ class basic_chapter
           way.mark()
         }
         if (!label && !t.is_marked()) {
-          label_x.create(c, player, lab_name)
+          label_x.create(c, pl_unown, lab_name)
         }
       }
     }
@@ -2553,7 +2551,6 @@ class basic_chapter
 
   function is_stop_building_ex(siz, list, lab_name)
   {
-    local player = player_x(1)
     local count = 0
     for(local j=0;j<siz;j++){
       local c = list[j].c
@@ -3222,14 +3219,12 @@ class basic_chapter
 
   function public_label(t, name)
   {
-    if(t.is_marked())
-      t.remove_object(player_x(1), mo_label)
-
+    local pl_unown = player_x(15)
     local label = t.find_object(mo_label)
     local cursor = t.find_object(mo_pointer)
 
     if(!label && !t.is_marked() && !cursor){
-      label_x.create(t, player_x(1), name)
+      label_x.create(t, pl_unown, name)
 
       label = t.find_object(mo_label)
       if(label)
