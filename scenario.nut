@@ -425,7 +425,7 @@ function get_goal_text(pl)
 function get_result_text(pl)
 {
    // finished ...
-  if(persistent.chapter>7) {
+  if(persistent.chapter>tutorial.len()) {
     local text = ttextfile("finished.txt")
     return text
   }

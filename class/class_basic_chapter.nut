@@ -128,6 +128,11 @@ class basic_chapter
 
     //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
 
+    // tutorial finish
+    if ( tutorial.len() == persistent.chapter && ch_steps == ch_step && sub_steps == sub_step ) {
+      percentage = 100
+    }
+
     return percentage
   }
 
