@@ -43,6 +43,11 @@ city1_cur <- coord(113,185)
 
 city1_tow <- coord(111,184)
 city2_tow <- coord(129,154)
+city3_tow <- coord(52,194)
+city4_tow <- coord(115,268)
+city5_tow <- coord(124,326)
+city6_tow <- coord(125,378)
+city7_tow <- coord(163,498)
 
 /**
  *  set tiles for factory

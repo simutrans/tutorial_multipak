@@ -43,6 +43,11 @@ city1_cur <- coord(116,188)
 
 city1_tow <- coord(111,184)
 city2_tow <- coord(129,154)
+city3_tow <- coord(52,194)
+city4_tow <- coord(115,268)
+city5_tow <- coord(124,326)
+city6_tow <- coord(125,378)
+city7_tow <- coord(163,498)
 
 /**
  *  set tiles for factory
@@ -80,7 +85,8 @@ city2_halt_1 <- []
 
 line_connect_halt <- coord(126,187)
 
-local list = [coord(113,183), coord(117,186),  coord(120,183), line_connect_halt, coord(121,189), coord(113,190)]
+//local list = [coord(113,183), coord(117,186),  coord(120,183), line_connect_halt, coord(121,189), coord(113,190)]
+local list = [coord(111,183), coord(116,183),  coord(120,183), line_connect_halt, coord(121,189), coord(118,191), coord(113,190)]
 for ( local i = 0; i < list.len(); i++ ) {
   city1_halt_1.append(list[i])
 }
@@ -96,8 +102,13 @@ for ( local i = 0; i < list.len(); i++ ) {
   city2_halt_1.append(list[i])
 }
 
-city1_post_halts <- city1_halt_1
-city1_post_halts.insert(4, city1_halt_2[0])
+city1_post_halts <- []
+for ( local i = 0; i < city1_halt_1.len(); i++ ) {
+  city1_post_halts.append(city1_halt_1[i])
+  if ( i == 3 ) {
+    city1_post_halts.append(city1_halt_2[0])
+  }
+}
 
 /**
  *  define depot

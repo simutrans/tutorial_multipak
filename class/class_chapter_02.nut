@@ -39,7 +39,7 @@ class tutorial.chapter_02 extends basic_chapter
 
   // Step 4 =====================================================================================
   //Primer autobus
-  line1_name = "Test 1"
+  line1_name = "ch2_l1"
   veh1_obj = get_veh_ch2_st4()
   veh1_load = set_loading_capacity(1)
   veh1_wait = set_waiting_time(1)
@@ -52,7 +52,7 @@ class tutorial.chapter_02 extends basic_chapter
   // Step 6 =====================================================================================
   // Conectando el muelle
 
-  line2_name = "Test 2"
+  line2_name = "ch2_l2"
   dep_cnr2 = null //auto started
   cov_nr = 0
 
@@ -61,7 +61,7 @@ class tutorial.chapter_02 extends basic_chapter
 
   cty2 = {name = ""}
 
-  line3_name = "Test 3"
+  line3_name = "ch2_l3"
   dep_cnr3 = null //auto started
 
 

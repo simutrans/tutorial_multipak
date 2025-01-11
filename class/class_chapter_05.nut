@@ -67,7 +67,7 @@ class tutorial.chapter_05 extends basic_chapter
           {c = coord(132,190), name = get_obj_ch5(6), good = good_alias.mail}
         ]
 
-  sch_list2 = city1_post_halts
+  //sch_list2 = city1_post_halts
         /*[
           coord(111,183), coord(116,183),  coord(120,183), coord(126,187),
           coord(132,189), coord(121,189), coord(118,191), coord(113,190)
@@ -75,14 +75,14 @@ class tutorial.chapter_05 extends basic_chapter
 
   //Para el Camion
   veh2_obj = get_veh_ch5(3)
-  c_dep2 = coord(115,185) // depot
-  line1_name = "Test 10"
+  //c_dep2 = coord(115,185) // depot
   veh2_load = 100
   veh2_wait = 10571
   d2_cnr = null //auto started
 
-  line2_name = "Test 11"
-  line3_name = "Test 12"
+  line1_name = "ch5_l1"
+  line2_name = "ch5_l2"
+  line3_name = "ch5_l3"
 
   //Para el barco
   sch_list3 = [coord(133,189), coord(168,189)]
@@ -102,15 +102,21 @@ class tutorial.chapter_05 extends basic_chapter
   sc_power_name = get_obj_ch5(3)
   sc_transf_name = get_obj_ch5(4)
 
-  fab_list = [
+  function start_chapter()  //Inicia solo una vez por capitulo
+  {
+
+    local fab_list = [
           factory_data.rawget("5"),
           factory_data.rawget("3"),
           factory_data.rawget("7"),
           factory_data.rawget("8")
         ]
 
-  function start_chapter()  //Inicia solo una vez por capitulo
-  {
+    line1_name = get_good_data(5, 3) + " " + fab_list[2].name + " - " + fab_list[3].name
+    line2_name = translate("Post") + " City " +  get_city_name(city1_tow)
+    local ta = this.my_tile(sch_list3[0])
+    local tb = this.my_tile(sch_list3[0])
+    line3_name = translate("Post") + " " + ta.get_halt().get_name() + " - " + tb.get_halt().get_name()
 
     if ( pak_name == "pak128" ) {
       c_way_lim1.a = coord(127,211)
@@ -141,14 +147,13 @@ class tutorial.chapter_05 extends basic_chapter
           factory_data.rawget("7"),
           factory_data.rawget("8")
         ]*/
-    line1_name = get_good_data(5, 3) + " " + fab_list[2].name + " - " + fab_list[3].name
     //line3_name = get_good_data(4, 3) + " " + fac_2.name + " - " + fac_3.name
 
     local pl = 0
     if(this.step == 4){
       //Camion de correo
-      local c_dep = this.my_tile(c_dep2)
-      local c_list = sch_list2
+      local c_dep = this.my_tile(city1_road_depot)
+      local c_list = city1_post_halts
       start_sch_tmpsw(pl,c_dep, c_list)
 
       //Barco de Correo/Pasajeros
@@ -165,6 +170,12 @@ class tutorial.chapter_05 extends basic_chapter
     local trf_name = translate("Build drain")           // Aufspanntransformator
     local toolbar = translate_objects_list.tools_power  // toolbar with powerline tools
 
+    local fab_list = [
+          factory_data.rawget("5"),
+          factory_data.rawget("3"),
+          factory_data.rawget("7"),
+          factory_data.rawget("8")
+        ]
 
     switch (this.step) {
       case 1:
@@ -250,7 +261,7 @@ class tutorial.chapter_05 extends basic_chapter
         text = ttextfile("chapter_05/04_2-3.txt")
         text.tx = "<em>[2/3]</em>"
         local list_tx = ""
-        local c_list = sch_list2
+        local c_list = city1_post_halts
         local siz = c_list.len()
         for (local j=0;j<siz;j++){
           local c = coord(c_list[j].x, c_list[j].y)
@@ -272,7 +283,7 @@ class tutorial.chapter_05 extends basic_chapter
         text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
 
         text.list = list_tx
-        text.dep = c_dep2.href("("+c_dep2.tostring()+")")
+        text.dep = city1_road_depot.href("("+city1_road_depot.tostring()+")")
         text.veh = translate(veh2_obj)
         text.all_cov = d2_cnr
         text.cir = cov_cir
@@ -346,12 +357,12 @@ class tutorial.chapter_05 extends basic_chapter
     save_glsw()
     save_pot()
 
-    /*local fab_list =  [
+    local fab_list =  [
           factory_data.rawget("5"),
           factory_data.rawget("3"),
           factory_data.rawget("7"),
           factory_data.rawget("8")
-        ]*/
+        ]
 
     switch (this.step) {
       case 1:
@@ -537,7 +548,7 @@ class tutorial.chapter_05 extends basic_chapter
           }
                 }
         if (pot1==1 && pot2==0){
-          local c_dep = this.my_tile(c_dep2)
+          local c_dep = this.my_tile(city1_road_depot)
           local line_name = line1_name
           set_convoy_schedule(pl, c_dep, wt_road, line_name)
 
@@ -605,13 +616,13 @@ class tutorial.chapter_05 extends basic_chapter
         ribi = way.get_dirs()
       if (!t.has_way(gl_wt))
         ribi = 0
-    }
+    }*/
     local fab_list =  [
           factory_data.rawget("5"),
           factory_data.rawget("3"),
           factory_data.rawget("7"),
           factory_data.rawget("8")
-        ]*/
+        ]
 
     local result = translate("Action not allowed")    // null is equivalent to 'allowed'
     switch (this.step) {
@@ -742,8 +753,8 @@ class tutorial.chapter_05 extends basic_chapter
                 }
                 if (pot1==1 && pot2==0){
           if (tool_id==4108) {
-            local c_list = sch_list2    //Lista de todas las paradas de autobus
-            local c_dep = c_dep2    //Coordeadas del deposito
+            local c_list = city1_post_halts    //Lista de todas las paradas de autobus
+            local c_dep = city1_road_depot    //Coordeadas del deposito
             local nr = c_list.len()   //Numero de paradas
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
             return is_stop_allowed(result, nr, c_list, pos)
@@ -800,7 +811,7 @@ class tutorial.chapter_05 extends basic_chapter
           local selc = 0
           local load = veh2_load
           local time = veh2_wait
-          local c_list = sch_list2
+          local c_list = city1_post_halts
           local siz = c_list.len()
           local line = true
           result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
@@ -868,7 +879,7 @@ class tutorial.chapter_05 extends basic_chapter
           //Para arracar varios vehiculos
           local id_start = ch5_cov_lim2.a
           local id_end = ch5_cov_lim2.b
-          local c_sch = sch_list2[0]
+          local c_sch = city1_post_halts[0]
           local cir_nr = get_convoy_number_exp(c_sch, depot, id_start, id_end)
           cov -= cir_nr
 
@@ -881,7 +892,7 @@ class tutorial.chapter_05 extends basic_chapter
           local selc = 0
           local load = veh2_load
           local time = veh2_wait
-          local c_list = sch_list2
+          local c_list = city1_post_halts
           local siz = c_list.len()
           return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
@@ -1062,11 +1073,11 @@ class tutorial.chapter_05 extends basic_chapter
         local ok = false
         if (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b){
           local wt = wt_road
-          local c_depot = my_tile(c_dep2)
+          local c_depot = my_tile(city1_road_depot)
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
           local sched = schedule_x(wt, [])
-          local c_list = sch_list2
+          local c_list = city1_post_halts
           local siz = c_list.len()
           for(local j = 0;j<siz;j++){
             if(j==0)

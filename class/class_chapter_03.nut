@@ -89,6 +89,7 @@ class tutorial.chapter_03 extends basic_chapter
   f1_reached = set_transportet_goods(1)
 
   //Step 6 =====================================================================================
+  //c_lock = [coord(60,10), coord(77,25)]  //Futuros transformadores
 
   //Primer tramo de rieles
   //--------------------------------------------------------------------------------------------
@@ -218,7 +219,7 @@ class tutorial.chapter_03 extends basic_chapter
   loc3_load = 100
   loc3_wait = 25369
 
-  line1_name = "Test 4"
+  line1_name = "ch3_l1"
   st_lim_a =  [ {a = coord(55,197), b = coord(58,197)}, {a = coord(116,198), b = coord(119,198)},
           {a = coord(120,266), b= coord(120,269)}, {a = coord(120,326), b= coord(120,329)},
           {a = coord(120,380), b= coord(120,383)}, {a = coord(121,326), b= coord(121,329)},
@@ -249,13 +250,9 @@ class tutorial.chapter_03 extends basic_chapter
   sc_wag3_nr = set_train_lenght(3)
   //------------------------------------------------------------------------------------
 
-  fab_list = [
-          factory_data.rawget("1"),
-          factory_data.rawget("2"),
-          factory_data.rawget("3")
-        ]
-  line2_name = "Test 5"
-  line3_name = "Test 6"
+  //fab_list = null
+  line2_name = "ch3_l2"
+  line3_name = "ch3_l3"
 
   function start_chapter(){  //Inicia solo una vez por capitulo
 
@@ -300,11 +297,17 @@ class tutorial.chapter_03 extends basic_chapter
     start_lvl_z = c_tunn2.a.z
     end_lvl_z = c_tunn2.b.z
 
-    cy1.name = get_city_name(cy1.c)
-    cy2.name = get_city_name(cy2.c)
-    cy3.name = get_city_name(cy3.c)
-    cy4.name = get_city_name(cy4.c)
-    cy5.name = get_city_name(cy5.c)
+    cy1.name = get_city_name(city1_tow)
+    cy2.name = get_city_name(city3_tow)
+    cy3.name = get_city_name(city4_tow)
+    cy4.name = get_city_name(city5_tow)
+    cy5.name = get_city_name(city6_tow)
+
+    local fab_list = [
+          factory_data.rawget("1"),
+          factory_data.rawget("2"),
+          factory_data.rawget("3")
+        ]
 
     line1_name = get_good_data(1, 3) + " " + fab_list[0].name + " - " + fab_list[1].name
     line2_name = get_good_data(2, 3) + " " + fab_list[1].name + " - " + fab_list[2].name
@@ -319,6 +322,10 @@ class tutorial.chapter_03 extends basic_chapter
   }
 
   function set_goal_text(text){
+
+    local fac_1 = factory_data.rawget("1")
+    local fac_2 = factory_data.rawget("2")
+    local fac_3 = factory_data.rawget("3")
 
     if ( translate_objects_list.rawin("inspec") ) {
       if ( translate_objects_list.inspec != translate("Abfrage") ) {
@@ -646,8 +653,8 @@ class tutorial.chapter_03 extends basic_chapter
       local stext = ttextfile("chapter_03/step_1-4_hinfo.txt")
       stext.good1 = get_good_data(1, 3)
       stext.good2 = get_good_data(2, 3)
-      stext.f1 = fab_list[0].c.href(fab_list[0].name+" ("+fab_list[0].c.tostring()+")")
-      stext.f2 = fab_list[1].c.href(fab_list[1].name+" ("+fab_list[1].c.tostring()+")")
+      stext.f1 = fac_1.c.href(fac_1.name+" ("+fac_1.c.tostring()+")")
+      stext.f2 = fac_2.c.href(fac_2.name+" ("+fac_2.c.tostring()+")")
       text.step_hinfo = stext
     }
     if ( this.step >= 8 && this.step <= 10 ) {
@@ -666,9 +673,9 @@ class tutorial.chapter_03 extends basic_chapter
       text.step_hinfo = stext
     }
 
-    text.f1 = fab_list[0].c.href(fab_list[0].name+" ("+fab_list[0].c.tostring()+")")
-    text.f2 = fab_list[1].c.href(fab_list[1].name+" ("+fab_list[1].c.tostring()+")")
-    text.f3 = fab_list[2].c.href(fab_list[2].name+" ("+fab_list[2].c.tostring()+")")
+    text.f1 = fac_1.c.href(fac_1.name+" ("+fac_1.c.tostring()+")")
+    text.f2 = fac_2.c.href(fac_2.name+" ("+fac_2.c.tostring()+")")
+    text.f3 = fac_3.c.href(fac_3.name+" ("+fac_3.c.tostring()+")")
 
     text.cdep=c_dep1.href("("+c_dep1.tostring()+")")
     text.way1=c_dep2.href("("+c_dep2.tostring()+")")
@@ -699,11 +706,11 @@ class tutorial.chapter_03 extends basic_chapter
     text.good2 = get_good_data(2, 3)
     text.g2_metric =get_good_data(2, 1)
     // prod data
-    local g_in = read_prod_data(fab_list[1].c, 1, "in")
+    local g_in = read_prod_data(fac_2.c, 1, "in")
     text.prod_in   = integer_to_string(g_in[0])
     text.g1_factor = g_in[2]
     text.g1_consum = integer_to_string(g_in[1])
-    local g_out = read_prod_data(fab_list[1].c, 2, "out")
+    local g_out = read_prod_data(fac_2.c, 2, "out")
     text.prod_out  = integer_to_string(g_out[0])
     text.g2_factor = g_out[2]
     text.g2_prod   = integer_to_string(g_out[1])
@@ -720,17 +727,17 @@ class tutorial.chapter_03 extends basic_chapter
     local chapter_step = persistent.step
     local chapter_sub_steps = 0 // count all sub steps
     local chapter_sub_step = 0  // actual sub step
-/*
+
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
     local fac_3 =  factory_data.rawget("3")
-*/
+
     switch (this.step) {
       case 1:
         chapter_sub_steps = 2
         local next_mark = false
         if (pot0==0 || pot1 == 0) {
-          local list = fab_list[1].c_list
+          local list = fac_2.c_list
           try {
             next_mark = delay_mark_tile(list)
           }
@@ -742,7 +749,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         else if (pot2==0 || pot3==0) {
-          local list = fab_list[0].c_list
+          local list = fac_1.c_list
           try {
             next_mark = delay_mark_tile(list)
           }
@@ -975,13 +982,20 @@ class tutorial.chapter_03 extends basic_chapter
         local wt = wt_rail
 
         if (current_cov == ch3_cov_lim1.b){
-          reached = get_reached_target(fab_list[1].c, good_alias.wood )
+          reached = get_reached_target(fac_2.c, good_alias.wood )
           if (reached>= f1_reached){
             pot1=1
           }
         }
 
         if (pot1==1 && pot0==0){
+          //Marca tiles para evitar construccion de objetos
+          /*local c_list = c_lock
+          local siz = c_lock.len()
+          local del = false
+          local pl_nr = 1
+          local text = "X"
+                    lock_tile_list(c_list, siz, del, pl_nr, text)*/
 
           this.next_step()
           reset_stop_flag()
@@ -1156,6 +1170,13 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         else if (pot4==1 && pot5==0){
+          //Elimina las Marcas de tiles
+          /*local c_list = c_lock
+          local siz = c_lock.len()
+          local del = true
+          local pl_nr = 1
+          local text = "X"
+          lock_tile_list(c_list, siz, del, pl_nr, text)*/
 
           this.next_step()
         }
@@ -1189,7 +1210,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
 
         else if(current_cov == ch3_cov_lim2.b){
-          reached = get_reached_target(fab_list[2].c, good_alias.plan)
+          reached = get_reached_target(fac_3.c, good_alias.plan)
           if (reached>=f3_reached){
             pot3=1
           }
@@ -1482,18 +1503,18 @@ class tutorial.chapter_03 extends basic_chapter
       if (!t.has_way(wt_rail))
         ribi = 0
     }
-/*
+
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
     local fac_3 =  factory_data.rawget("3")
-*/
+
     local result = translate("Action not allowed")    // null is equivalent to 'allowed'
 
     switch (this.step) {
       case 1:
         if (tool_id == 4096){
           if (pot0==0){
-            local list = fab_list[1].c_list
+            local list = fac_2.c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
                 pot0 = 1
@@ -1502,7 +1523,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
           else if (pot1==1){
-            local list = fab_list[0].c_list
+            local list = fac_1.c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
                 pot2 = 1
@@ -2087,11 +2108,11 @@ class tutorial.chapter_03 extends basic_chapter
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
     local nr =  schedule.entries.len()
-/*
+
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
     local fac_3 =  factory_data.rawget("3")
-*/
+
     switch (this.step) {
       case 5:
         local selc = 0

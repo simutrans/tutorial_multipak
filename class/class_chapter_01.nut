@@ -45,6 +45,8 @@ class tutorial.chapter_01 extends basic_chapter
     buil2_name = buil ? translate(buil.get_name()):"No existe"
     c_list_cur = buil.get_tile_list()
 
+    //gui.add_message("city1_post_halts " + city1_post_halts.len())
+
     return 0
   }
 

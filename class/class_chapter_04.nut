@@ -70,13 +70,10 @@ class tutorial.chapter_04 extends basic_chapter
   ship2_name_obj = get_veh_ch4(2)
   ship2_load = 100
   ship2_wait = 42282
-  line1_name = "Test 7"
-  line2_name = "Test 8"
-  line3_name = "Test 9"
-  fac_1 = null
-  fac_2 = null
-  fac_3 = null
 
+  line1_name = "ch4_l1"
+  line2_name = "ch4_l2"
+  line3_name = "ch4_l3"
   //Script
   //----------------------------------------------------------------------------------
   sc_way_name = get_obj_ch4(1)
@@ -88,12 +85,14 @@ class tutorial.chapter_04 extends basic_chapter
   function start_chapter()  //Inicia solo una vez por capitulo
   {
 
-    fac_1 = factory_data.rawget("4")
-    fac_2 = factory_data.rawget("5")
-    fac_3 = factory_data.rawget("6")
+    local fac_1 = factory_data.rawget("4")
+    local fac_2 = factory_data.rawget("5")
+    local fac_3 = factory_data.rawget("6")
+
     line1_name = get_good_data(3, 3) + " " + fac_1.name + " - " + fac_2.name
     line2_name = get_good_data(4, 3) + " " + fac_2.name + " - " + fac_3.name
     line3_name = "Passanger Ship"
+
 
 
     if ( pak_name == "pak128" ) {

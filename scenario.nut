@@ -86,7 +86,7 @@ fail_count      <- 1       //if tool fail more of fail_num try
 //Schedule activate
 active_sch_check <- false
 
-  simu_version  <- "124.2.3"
+  simu_version  <- "124.3"
   current_st    <- "0"
 
 include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
@@ -425,7 +425,7 @@ function get_goal_text(pl)
 function get_result_text(pl)
 {
    // finished ...
-  if(persistent.chapter>tutorial.len()) {
+  if(persistent.chapter>7) {
     local text = ttextfile("finished.txt")
     return text
   }
@@ -584,6 +584,7 @@ function is_scenario_completed(pl)
       chapter.step = 1
     else
       chapter.step = persistent.step
+
     chapter.start_chapter()
     return 1
   }
