@@ -8,7 +8,7 @@
 class tutorial.chapter_06 extends basic_chapter
 {
   chapter_name  = "The forgotten Air transport"
-  chapter_coord = coord(112,174)
+  chapter_coord = city1_tow
   startcash     = 500000            // pl=0 startcash; 0=no reset
 
   gl_wt = wt_air
@@ -107,38 +107,8 @@ class tutorial.chapter_06 extends basic_chapter
 
     line1_name = "Air " + cty1.name + " - " + cty2.name
     line2_name = "City " + cty1.name + " - Airport"
-    line3_name = "City " + cty2.name
+    line3_name = "City " + cty2.name + " - Airport"
 
-
-    local pl = 0
-    //Schedule list form current convoy
-    if(this.step == 3){
-      local c_dep = this.my_tile(city1_road_depot)
-      local depot = depot_x(c_dep.x, c_dep.y, c_dep.z)
-      local cov_list = depot.get_convoy_list()    //Lista de vehiculos en el deposito
-      local convoy = convoy_x(gcov_id)
-      if (cov_list.len()>=1){
-        convoy = cov_list[0]
-      }
-      local all_result = checks_convoy_schedule(convoy, pl)
-      sch_cov_correct = all_result.res == null ? true : false
-    }
-
-    local pl = 0
-    //Schedule list form current convoy
-    if(this.step == 3){
-      gui.add_message("ch6 step 3")
-      local c_dep = this.my_tile(city1_road_depot)
-      local c_list = sch_list2
-      start_sch_tmpsw(pl,c_dep, c_list)
-    }
-    else if(this.step == 4){
-      gui.add_message("ch6 step 4")
-      local c_dep = this.my_tile(c_dep3)
-      local c_list = sch_list3
-      start_sch_tmpsw(pl,c_dep, c_list)
-    }
-    return 0
   }
 
   function set_goal_text(text){
@@ -611,6 +581,10 @@ class tutorial.chapter_06 extends basic_chapter
         local c_list = sch_list1
         local siz = c_list.len()
         return set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+        if(result == null){
+          local line_name = line1_name
+          update_convoy_schedule(pl, wt_road, line_name, schedule)
+        }
       break
       case 3:
         if ( schedule.waytype != wt_road )
@@ -623,7 +597,7 @@ class tutorial.chapter_06 extends basic_chapter
         local line = true
         result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
         if(result == null){
-          local line_name = line1_name
+          local line_name = line2_name
           update_convoy_schedule(pl, wt_road, line_name, schedule)
         }
         return result
@@ -639,7 +613,7 @@ class tutorial.chapter_06 extends basic_chapter
         local line = true
         result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
         if(result == null){
-          local line_name = line2_name
+          local line_name = line3_name
           update_convoy_schedule(pl, wt_road, line_name, schedule)
         }
         return result
