@@ -317,7 +317,7 @@ class basic_chapter
     return result
   }
 
-  /*
+  /**
    *  check is tile halt2 in tilelist halt1
    *
    *  halt1 = tile_x
@@ -336,6 +336,22 @@ class basic_chapter
     }
 
     return false
+  }
+
+  /**
+   *  check station add tile wt_road (chapter 7)
+   *
+   *  halt = tile_x
+   */
+  function check_halt_public(halt) {
+    local tiles = halt.get_halt().get_tile_list()
+    for ( local i = 0; i < tiles.len(); i++ ) {
+      local k = tiles[i].find_object(mo_building).get_desc().get_waytype()
+      if ( k == wt_road ) {
+        return tiles[i]
+      }
+    }
+    return null
   }
 
   function cov_pax(c, wt, good){

@@ -80,7 +80,13 @@ coord_st_1 <- coord(117,197)
  *
  *  used chapter 6
  *    city1_city7_air
- *    city1_halt_airport -
+ *    city1_halt_airport
+ *    city7_halt
+ *
+ *  used chapter 7
+ *    ch7_rail_stations
+ *
+ *
  */
 city1_halt_1 <- []
 city1_halt_2 <- []
@@ -117,6 +123,8 @@ for ( local i = 0; i < city1_halt_1.len(); i++ ) {
 city1_city7_air <- [coord(114,176), coord(168,489)]
 city7_halt <- [ coord(168,490), coord(160,493), coord(155,493), coord(150,494), coord(154,500), coord(159,499),
           coord(164,498), coord(166,503), coord(171,501), coord(176,501), coord(173,493)]
+
+ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), tile_x(120,381,9)]
 
 /**
  *  define depots
