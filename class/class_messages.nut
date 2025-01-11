@@ -17,6 +17,11 @@ ch1_text4       <- "This is a link"
 ch1_text5       <- "Town Centre"
 
 ch2_name        <- "Ruling the Roads"
+ch3_name        <- "Riding the Rails"
+ch4_name        <- "Setting Sail"
+ch5_name        <- "Industrial Efficiency"
+ch6_name        <- "The forgotten Air transport"
+ch7_name        <- "Bus networks"
 
 /*
  *  single messages

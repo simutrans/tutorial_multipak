@@ -8,8 +8,8 @@
 
 class tutorial.chapter_03 extends basic_chapter
 {
-  chapter_name  = "Riding the Rails"
-  chapter_coord = coord(93,153)
+  chapter_name  = ch3_name
+  chapter_coord = coord_chapter_3
   startcash     = 50000000
 
   gl_wt = wt_rail

@@ -6,6 +6,17 @@
  */
 const nut_path = "class/"             // path to folder with *.nut files
 include("set_data")                   // include set data
+  switch (pak_name) {
+    case "pak64":
+      include(nut_path+"class_basic_coords_p64")  // include coords def pak64
+      break
+    case "pak64.german":
+      include(nut_path+"class_basic_coords_p64g")  // include coords def pak64german
+      break
+    case "pak128":
+      include(nut_path+"class_basic_coords_p128")  // include coords def pak128
+      break
+  }
 include(nut_path+"class_basic_data")  // include class for object data
 translate_objects_list <- {}          // translate list
 translate_objects()                   // add objects to translate list
@@ -281,17 +292,6 @@ function get_integral(tx)
   include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
   include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
   include(nut_path+"class_messages")    // include def messages texts
-  switch (pak_name) {
-    case "pak64":
-      include(nut_path+"class_basic_coords_p64")  // include coords def pak64
-      break
-    case "pak64.german":
-      include(nut_path+"class_basic_coords_p64g")  // include coords def pak64german
-      break
-    case "pak128":
-      include(nut_path+"class_basic_coords_p128")  // include coords def pak128
-      break
-  }
 
 }
 
@@ -342,7 +342,12 @@ function scenario_percentage(percentage)
 function load_chapter(number,pl)
 {
   rules.clear()
-  general_disabled_tools(pl)
+  // chapter 7 no tool rules
+  if ( number < 7 ) {
+    general_disabled_tools(pl)
+  } else {
+    rules.gui_needs_update()
+  }
   if (!resul_version.pak || !resul_version.st){
     number = 0
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
@@ -356,6 +361,7 @@ function load_chapter(number,pl)
     chapter.chap_nr = persistent.chapter
     //persistent.step = persistent.status.step
   }
+
 }
 
 function load_conv_ch(number, step, pl)

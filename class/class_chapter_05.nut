@@ -7,8 +7,8 @@
 
 class tutorial.chapter_05 extends basic_chapter
 {
-  chapter_name  = "Industrial Efficiency"
-  chapter_coord = coord(130,220)
+  chapter_name  = ch5_name
+  chapter_coord = coord_chapter_5
   startcash     = 500000            // pl=0 startcash; 0=no reset
 
   //Step 2 =====================================================================================
@@ -32,7 +32,6 @@ class tutorial.chapter_05 extends basic_chapter
   //Limites del deposito y carretera
   //--------------------------------------------------------------------------------------------
   c_dep1_lim = {a = coord(131,232), b = coord(132,232)}
-  c_dep1 = coord(131,232)
 
   //Para el Camion
   sch_list1 = [coord(132,233), coord(131,209)]
@@ -187,7 +186,7 @@ class tutorial.chapter_05 extends basic_chapter
         text.w1 = c_w1.href("("+c_w1.tostring()+")")
         text.w2 = c_w2.href("("+c_w2.tostring()+")")
 
-        text.dep = c_dep1.href("("+c_dep1.tostring()+")")
+        text.dep = road_depot_ch5.href("("+road_depot_ch5.tostring()+")")
         text.veh = translate(veh1_obj)
 
         text.good     = get_good_data(5, 3) //translate_objects_list.good_coal
@@ -676,7 +675,7 @@ class tutorial.chapter_05 extends basic_chapter
         else if(pot2==1 && pot3==0){
           if (tool_id==4108) {
             local c_list = sch_list1  //Lista de todas las paradas
-            local c_dep = c_dep1    //Coordeadas del deposito
+            local c_dep = road_depot_ch5    //Coordeadas del deposito
             local nr = c_list.len()   //Numero de paradas
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
             return is_stop_allowed(result, nr, c_list, pos)
@@ -964,7 +963,7 @@ class tutorial.chapter_05 extends basic_chapter
 
         if (current_cov> ch5_cov_lim1.a && current_cov< ch5_cov_lim1.b){
           local wt = wt_road
-          local c_depot = my_tile(c_dep1)
+          local c_depot = my_tile(road_depot_ch5)
 
           try {
             comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito

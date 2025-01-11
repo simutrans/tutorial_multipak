@@ -8,8 +8,8 @@
 
 class tutorial.chapter_07 extends basic_chapter
 {
-  chapter_name  = "Bus networks"
-  chapter_coord = coord(50,195)
+  chapter_name  = ch7_name
+  chapter_coord = coord_chapter_7
   startcash     = 500000            // pl=0 startcash; 0=no reset
   load = 0
 
