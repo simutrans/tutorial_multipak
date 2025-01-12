@@ -1335,7 +1335,31 @@ class basic_chapter
     }
     return result
   }
+
   //Comprueba conexion entre vias
+  /**
+   *  tile_a - tile_x
+   *  tile_b - tile_x
+   */
+  function get_fullway_dir(tile_a, tile_b) {
+    local result = 0
+
+    if ( tile_a.y == tile_b.y ) {
+      if ( tile_a.x < tile_b.x ) {
+        result = 5
+      } else if ( tile_a.x > tile_b.x ) {
+        result = 6
+      }
+    } else if ( tile_a.x == tile_b.x ) {
+      if ( tile_a.y <tile_b.y ) {
+        result = 3
+      } else if ( tile_a.y > tile_b.y ) {
+        result = 2
+      }
+    }
+
+    return result
+  }
   //dir 0 = auto
   //dir 2 = coorda.y--
   //dir 3 = coorda.y++
@@ -3298,4 +3322,61 @@ function create_schedule_list(coord_list) {
   return list_tx
 }
 
+/**
+ *  calculate station lenght
+ *
+ *  veh1  = loco
+ *  veh2  = wg
+ *  veh2c = wg count
+ *
+ */
+function calc_station_lenght(veh1, veh2, veh2c) {
+    local list = vehicle_desc_x.get_available_vehicles(wt_rail)
+    local cnv_lenght = 0
+    foreach(veh in list) {
+      if ( veh.get_name() == veh1 ) {
+        cnv_lenght += veh.get_length()
+      }
+      if ( veh.get_name() == veh2 ) {
+        cnv_lenght += (veh.get_length() * veh2c)
+      }
+    }
+    local st_count = 0
+    do {
+      cnv_lenght -= 16
+      st_count += 1
+    } while(cnv_lenght > 0)
+  return st_count
+}
+
+/**
+ *  create array stations tiles
+ *
+ *  tile_a = tile_x
+ *  tile_b = tile_x
+ *  count
+ *
+ */
+function station_tiles(tile_a, tile_b, count) {
+  local st_tiles = []
+  st_tiles.append(tile_x(tile_a.x, tile_a.y, tile_a.z))
+
+  for ( local i = 1; i < count; i++ ) {
+    if ( tile_a.x > tile_b.x ) {
+      st_tiles.append(tile_x(tile_a.x-i, tile_a.y, tile_a.z))
+    }
+    if ( tile_a.x < tile_b.x ) {
+      st_tiles.append(tile_x(tile_a.x+i, tile_a.y, tile_a.z))
+    }
+    if ( tile_a.y > tile_b.y ) {
+      st_tiles.append(tile_x(tile_a.x, tile_a.y-i, tile_a.z))
+    }
+    if ( tile_a.y < tile_b.y ) {
+      st_tiles.append(tile_x(tile_a.x, tile_a.y+i, tile_a.z))
+    }
+    //gui.add_message("st_tiles "+st_tiles[i]+" - "+ i)
+  }
+
+  return st_tiles
+}
 // END OF FILE

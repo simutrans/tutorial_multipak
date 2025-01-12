@@ -134,17 +134,27 @@ road_depot_ch5    <- coord(131,232)
 /**
  *  define bridges
  *
+ *  bridge1_coords  = road bridge city 1
+ *  bridge2_coors   = rail bridge fac_1 -> fac_2
+ *  bridge3_coors   = rail bridge city 1 -> city 3
  *
  */
 bridge1_coords <- {a = coord3d(126,192,-1), b = coord3d(126,194,-1), dir = 3}
+bridge2_coords <- {a = coord3d(106,158,-1), b = coord3d(100,158,-1)}
+bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
 
 /**
  *  define ways
  *
+ *  way1_coords = road city 1 -> city 2
+ *
+ *  way2_fac1_fac2  = rail factory 1 -> factory 2
  *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
 
+// start - 5 tiles after start - bridge tile - bridge tile - 5 tiles before the end - end
+way2_fac1_fac2 <- [coord3d(125,163,0), coord3d(120,163,0), coord3d(107,158,1), coord3d(99,158,1), coord3d(96,155,1), coord3d(96,151,1)]
 
 /**
  *  chapter 5

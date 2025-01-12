@@ -131,25 +131,40 @@ ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), t
  *
  *  road depot must be located one field next to a road
  */
-city1_road_depot <- coord(124,188) //115,185
+city1_road_depot  <- coord(124,188) //115,185
 ship_depot        <- coord(150, 190)
 road_depot_ch5    <- coord(131,232)
 
 /**
+ *  rail_depot{depot_tile, way_tile}
+ */
+ch3_rail_depot1 <- {b = coord(121,164), a = coord(121,163)}
+
+/**
  *  define bridges
  *
+ *  bridge1_coords  = road bridge city 1
+ *  bridge2_coors   = rail bridge fac_1 -> fac_2
+ *  bridge3_coors   = rail bridge city 1 -> city 3
  *
  */
 bridge1_coords <- {a = coord3d(126,193,-1), b = coord3d(126,195,-1), dir = 3}
+bridge2_coords <- {a = coord3d(106,158,-1), b = coord3d(103,158,-1)}
+bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
 
 /**
  *  define ways
+ *
+ *  way1_coords = road city 1 -> city 2
+ *
+ *  way2_fac1_fac2  = rail factory 1 -> factory 2
  *
  *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
 
-
+// start - 5 tiles after start - bridge tile - bridge tile - 5 tiles before the end - end
+way2_fac1_fac2 <- [coord3d(125,163,0), coord3d(120,163,0), coord3d(107,158,0), coord3d(102,158,0), coord3d(96,155,1), coord3d(96,151,1)]
 
 /**
  *  chapter 5

@@ -366,8 +366,12 @@ function load_chapter(number,pl)
 
 function load_conv_ch(number, step, pl)
 {
-    rules.clear()
+  rules.clear()
+  if ( number < 7 ) {
     general_disabled_tools(pl)
+  } else {
+    rules.gui_needs_update()
+  }
   if (!resul_version.pak || !resul_version.st){
     number = 0
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)

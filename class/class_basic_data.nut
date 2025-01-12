@@ -258,7 +258,7 @@ function get_obj_ch2(id) {
  *  id 1 = step 5 loco
  *  id 2 = step 7 loco
  *  id 3 = step 11 loco
- *  id 4 = step 4 wag
+ *  id 4 = step 5 wag
  *  id 5 = step 7 wag
  *  id 6 = step 11 wag
  *
