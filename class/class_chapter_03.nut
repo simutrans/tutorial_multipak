@@ -1604,7 +1604,7 @@ class tutorial.chapter_03 extends basic_chapter
               return null
             }
             else
-              return translate("Select the other station")+" ("+coord(st2_list[0].x, st2_list[0].y).tostring()+".)"
+              return translate("Select the other station")+" ("+coord(way2_fac1_fac2[5].x, way2_fac1_fac2[5].y).tostring()+".)"
           }
         }
         else if (tool_id==4108){
@@ -1619,17 +1619,17 @@ class tutorial.chapter_03 extends basic_chapter
               return null
             }
             if (stop_flag[0]==0)
-              return translate("Select the other station first")+" ("+coord(st1_list[0].x, st1_list[0].y).tostring()+".)"
+              return translate("Select the other station first")+" ("+coord(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y).tostring()+".)"
             else if (stop_flag[0]==1 && stop_flag[1]==1)
               return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
           }
         }
         else if (tool_id==4108){
           if (stop_flag[0]==0)
-            return translate("Select the other station first")+" ("+coord(st1_list[0].x, st1_list[0].y).tostring()+".)"
+            return translate("Select the other station first")+" ("+coord(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y).tostring()+".)"
 
           else if (stop_flag[0]==1 && stop_flag[1]==0)
-            return format(translate("Select station No.%d"),2)+" ("+coord(st2_list[0].x, st2_list[0].y).tostring()+".)"
+            return format(translate("Select station No.%d"),2)+" ("+coord(way2_fac1_fac2[5].x, way2_fac1_fac2[5].y).tostring()+".)"
 
           else if (stop_flag[0]==1 && stop_flag[1]==1)
             return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
@@ -2891,8 +2891,8 @@ class tutorial.chapter_03 extends basic_chapter
         glsw[j] = 0
         tile.mark()
         way.mark()
-        if(j!=0)
-          label_x.create(c_list[j], player_x(pl), format(translate("Build station No.%d here!."),j+1))
+        //if(j!=0 )
+          label_x.create(c_list[j], player_x(0), format(translate("Build station No.%d here!."),j+1))
         sw = false
       }
       else {
