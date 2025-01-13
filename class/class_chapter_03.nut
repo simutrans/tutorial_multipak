@@ -2118,8 +2118,8 @@ class tutorial.chapter_03 extends basic_chapter
     switch (this.step) {
       case 5:
         local wt = gl_wt
-        if ((depot.x != ch3_rail_depot1.a.x)||(depot.y != ch3_rail_depot1.a.y))
-          return 0
+        if ((depot.x != ch3_rail_depot1.b.x)||(depot.y != ch3_rail_depot1.b.y))
+          return "Depot coordinate is incorrect ("+coord3d_to_string(depot)+")."
         local cov = 1
         local veh = 6
         local good_list = [good_desc_x(good_alias.wood).get_catg_index()] //Wood

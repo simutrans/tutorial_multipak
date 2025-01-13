@@ -133,6 +133,11 @@ ship_depot        <- coord(150, 190)
 road_depot_ch5    <- coord(131,232)
 
 /**
+ *  rail_depot{depot_tile, way_tile}
+ */
+ch3_rail_depot1 <- {b = coord(121,164), a = coord(121,163)}
+
+/**
  *  define bridges
  *
  *  bridge1_coords  = road bridge city 1
