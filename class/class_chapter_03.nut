@@ -2348,7 +2348,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 5:
         local wt = wt_rail
         if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
-          local c_depot = my_tile(ch3_rail_depot1.a)
+          local c_depot = my_tile(ch3_rail_depot1.b)
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
           local sched = schedule_x(wt, [])
