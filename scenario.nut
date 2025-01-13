@@ -292,6 +292,7 @@ function get_integral(tx)
   include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
   include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
   include(nut_path+"class_messages")    // include def messages texts
+  include(nut_path+"astar")  // .. route search for way building etc
 
 }
 

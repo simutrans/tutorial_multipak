@@ -38,7 +38,7 @@ class tutorial.chapter_03 extends basic_chapter
   //Primer tramo de rieles
   //--------------------------------------------------------------------------------------------
   //st1_way_lim = {a = coord(120,163), b = coord(125,163)}    //Limites de la via para la estacion
-  bord1_lim = {a = coord(106,154), b = coord(120,167)}    //Marca area con "X"
+  bord1_lim = {a = coord(105,153), b = coord(121,167)}    //Marca area con "X"
   bord2_lim = {a = coord(95,155), b = coord(103,160)}     //Marca area con "X"
 
   //Step 5 =====================================================================================
@@ -736,23 +736,32 @@ class tutorial.chapter_03 extends basic_chapter
             label_x.create(limi, player_x(pl), translate("Build Rails form here"))
 
             //elimina el cuadro label
-            local opt = 0
+            /*local opt = 0
             local del = true
             local text = "X"
-            label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)
+            label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)*/
           }
 
-          if (tile2.find_object(mo_label) && r_way.c.x<=limi.x){
-            if (!tile_x(wayend.x, wayend.y, wayend.z).find_object(mo_way))
+
+          if (tile2.find_object(mo_label) && r_way.c.x<=limi.x) {
+            if (!tile_x(wayend.x, wayend.y, wayend.z).find_object(mo_way)) {
               label_x.create(wayend, player_x(pl), translate("Build Rails form here"))
-            //Creea un cuadro label
-            local opt = 0
-            local del = false
-            local text = "X"
-            label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)
 
-            tile2.remove_object(player_x(1), mo_label)
+            }
+            //Creea un cuadro label
+
+            local test_way = test_select_way(tile1, tile2, wt_rail)
+            if (test_way) {
+              local opt = 0
+              local del = false
+              local text = "X"
+              label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)
+
+              tile2.remove_object(player_x(1), mo_label)
+
+            }
           }
+
 
           local opt = 0
           local coora = tile_x(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y, way2_fac1_fac2[0].z)
