@@ -723,31 +723,27 @@ class tutorial.chapter_03 extends basic_chapter
         chapter_sub_steps = 3
         //Primer tramo de rieles
         if (pot0==0){
-          local limi = my_tile(way2_fac1_fac2[1])
+          //local limi = my_tile(way2_fac1_fac2[1])
           local tile1 = my_tile(way2_fac1_fac2[0])
           if (!tile1.find_object(mo_way)){
             label_x.create(way2_fac1_fac2[0], player_x(pl), translate("Build Rails form here"))
           }
-          else
-            tile1.remove_object(player_x(1), mo_label)
+          //else
+            //tile1.remove_object(player_x(1), mo_label)
 
-          local tile2 = my_tile(limi)
+          local tile2 = my_tile(way2_fac1_fac2[1])
           if (!tile2.find_object(mo_way)){
-            label_x.create(limi, player_x(pl), translate("Build Rails form here"))
+            label_x.create(tile2, player_x(pl), translate("Build Rails form here"))
 
-            //elimina el cuadro label
-            /*local opt = 0
-            local del = true
-            local text = "X"
-            label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)*/
           }
 
+          local tile3 = my_tile(way2_fac1_fac2[2])
 
-          if (tile2.find_object(mo_label) && r_way.c.x<=limi.x) {
+          /*if (tile2.find_object(mo_label) && r_way.c.x<=limi.x) {
             if (!tile_x(wayend.x, wayend.y, wayend.z).find_object(mo_way)) {
               label_x.create(wayend, player_x(pl), translate("Build Rails form here"))
 
-            }
+            }*/
             //Creea un cuadro label
 
             local test_way = test_select_way(tile1, tile2, wt_rail)
@@ -757,26 +753,34 @@ class tutorial.chapter_03 extends basic_chapter
               local text = "X"
               label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)
 
-              tile2.remove_object(player_x(1), mo_label)
+              label_x.create(tile3, player_x(pl), translate("Build Rails form here"))
+              //label_x.create(limi, player_x(pl), translate("Build Rails form here"))
+
+              //tile2.remove_object(player_x(1), mo_label)
+              tile1.remove_object(player_x(1), mo_label)
+
+              r_way.c =  way2_fac1_fac2[1]
 
             }
-          }
+          //}
 
 
-          local opt = 0
-          local coora = tile_x(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y, way2_fac1_fac2[0].z)
-          local coorb = tile_x(way2_fac1_fac2[2].x, way2_fac1_fac2[2].y, way2_fac1_fac2[2].z)
+          //local opt = 0
+          //local coora = tile_x(way2_fac1_fac2[1].x, way2_fac1_fac2[1].y, way2_fac1_fac2[1].z)
+          //local coorb = tile_x(way2_fac1_fac2[2].x, way2_fac1_fac2[2].y, way2_fac1_fac2[2].z)
           //gui.add_message("get_fullway_dir "+get_fullway_dir(way2_fac1_fac2[0], way2_fac1_fac2[1]))
-          local dir = get_fullway_dir(way2_fac1_fac2[0], way2_fac1_fac2[1])
-          local obj = false
-          local wt = wt_rail
+          //local dir = get_fullway_dir(way2_fac1_fac2[0], way2_fac1_fac2[1])
+          //local obj = false
+          //local wt = wt_rail
 
-          wayend = coorb
-          r_way = get_fullway(coora, coorb, dir, obj)
-          if (r_way.r) {
-            tile_x(coora.x, coora.y, coora.z).find_object(mo_way).unmark()
-            tile_x(coorb.x, coorb.y, coorb.z).remove_object(player_x(1), mo_label)
-            tile1.remove_object(player_x(1), mo_label)
+          wayend = tile2
+          //r_way = get_fullway(coora, coorb, dir, obj)
+          //if (r_way.r) {
+          local test_way = test_select_way(tile2, tile3, wt_rail)
+          if (test_way) {
+            //tile_x(coora.x, coora.y, coora.z).find_object(mo_way).unmark()
+            //tile_x(coorb.x, coorb.y, coorb.z).remove_object(player_x(1), mo_label)
+            //tile1.remove_object(player_x(1), mo_label)
 
             //elimina el cuadro label
             local opt = 0
@@ -1526,14 +1530,14 @@ class tutorial.chapter_03 extends basic_chapter
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return ""//all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
         }
         //Construye un puente
         if (pot0==1 && pot1==0){
-          if (pos.x>=way2_fac1_fac2[3].x && pos.y>=way2_fac1_fac2[3].y && pos.x<=way2_fac1_fac2[2].x && pos.y<=way2_fac1_fac2[2].y){
+          if (pos.x>=bord1_lim.a.x && pos.y>=bord1_lim.a.y && pos.x<=bord1_lim.b.x && pos.y<=bord1_lim.b.y){
             if(tool_id==tool_build_way)
               return null
             if(tool_id==tool_build_bridge){
