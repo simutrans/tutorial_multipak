@@ -777,6 +777,7 @@ class tutorial.chapter_03 extends basic_chapter
           //r_way = get_fullway(coora, coorb, dir, obj)
           //if (r_way.r) {
           local test_way = test_select_way(tile2, tile3, wt_rail)
+          gui.add_message(""+test_way)
           if (test_way) {
             //tile_x(coora.x, coora.y, coora.z).find_object(mo_way).unmark()
             //tile_x(coorb.x, coorb.y, coorb.z).remove_object(player_x(1), mo_label)
@@ -1514,7 +1515,7 @@ class tutorial.chapter_03 extends basic_chapter
           local lab = lab_t.find_object(mo_label)
           if(pos.x < lab_t.x && lab && lab.get_owner().nr == 0){
             if(tool_id==tool_build_way)
-              return ""
+              return null
           }
           if (pos.x>=way2_fac1_fac2[1].x && pos.y>=way2_fac1_fac2[1].y && pos.x<=way2_fac1_fac2[0].x && pos.y<=way2_fac1_fac2[0].y){
             if(tool_id==tool_build_way || tool_id==tool_remove_way || tool_id==tool_remover){
@@ -1530,7 +1531,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
             }
-            return ""//all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return null//all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
