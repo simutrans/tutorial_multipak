@@ -38,8 +38,8 @@ class tutorial.chapter_03 extends basic_chapter
   //Primer tramo de rieles
   //--------------------------------------------------------------------------------------------
   //st1_way_lim = {a = coord(120,163), b = coord(125,163)}    //Limites de la via para la estacion
-  bord1_lim = {a = coord(105,153), b = coord(121,167)}    //Marca area con "X"
-  bord2_lim = {a = coord(95,155), b = coord(103,160)}     //Marca area con "X"
+  //bord1_lim = {a = coord(105,153), b = coord(121,167)}    //Marca area con "X"
+  //bord2_lim = {a = coord(95,155), b = coord(103,160)}     //Marca area con "X"
 
   //Step 5 =====================================================================================
   loc1_name_obj = get_veh_ch3(1)
@@ -755,7 +755,7 @@ class tutorial.chapter_03 extends basic_chapter
               local opt = 0
               local del = false
               local text = "X"
-              label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)
+              label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, opt, del, text)
 
               tile2.remove_object(player_x(1), mo_label)
 
@@ -782,7 +782,7 @@ class tutorial.chapter_03 extends basic_chapter
             local opt = 0
             local del = true
             local text = "X"
-            label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)
+            label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, opt, del, text)
 
             pot0=1
             wayend=0
@@ -817,7 +817,7 @@ class tutorial.chapter_03 extends basic_chapter
             local opt = 0
             local del = false
             local text = "X"
-            label_bord(bord2_lim.a, bord2_lim.b, opt, del, text)
+            label_bord(limit_ch3_rail_line_1b.a, limit_ch3_rail_line_1b.b, opt, del, text)
           }
           else {
             tile1.remove_object(player_x(1), mo_label)
@@ -825,7 +825,7 @@ class tutorial.chapter_03 extends basic_chapter
             local opt = 0
             local del = true
             local text = "X"
-            label_bord(bord2_lim.a, bord2_lim.b, opt, del, text)
+            label_bord(limit_ch3_rail_line_1b.a, limit_ch3_rail_line_1b.b, opt, del, text)
             if (!tile1.find_object(mo_label))
               label_x.create(way2_fac1_fac2[5], player_x(pl), translate("Build Rails form here"))
           }
@@ -844,7 +844,7 @@ class tutorial.chapter_03 extends basic_chapter
             local opt = 0
             local del = true
             local text = "X"
-            label_bord(bord2_lim.a, bord2_lim.b, opt, del, text)
+            label_bord(limit_ch3_rail_line_1b.a, limit_ch3_rail_line_1b.b, opt, del, text)
 
             tile_x(coorb.x, coorb.y, coorb.z).remove_object(player_x(1), mo_label)
             tile1.remove_object(player_x(1), mo_label)
@@ -1522,7 +1522,7 @@ class tutorial.chapter_03 extends basic_chapter
               }
             }
           }
-          if (pos.x>=bord1_lim.a.x && pos.y>=bord1_lim.a.y && pos.x<=bord1_lim.b.x && pos.y<=bord1_lim.b.y){
+          if (pos.x>=limit_ch3_rail_line_1a.a.x && pos.y>=limit_ch3_rail_line_1a.a.y && pos.x<=limit_ch3_rail_line_1a.b.x && pos.y<=limit_ch3_rail_line_1a.b.y){
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
             }
@@ -1551,7 +1551,7 @@ class tutorial.chapter_03 extends basic_chapter
               return result
             return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
           }
-          if (pos.x>=bord2_lim.a.x && pos.y>=bord2_lim.a.y && pos.x<=bord2_lim.b.x && pos.y<=bord2_lim.b.y){
+          if (pos.x>=limit_ch3_rail_line_1b.a.x && pos.y>=limit_ch3_rail_line_1b.a.y && pos.x<=limit_ch3_rail_line_1b.b.x && pos.y<=limit_ch3_rail_line_1b.b.y){
             if (!way && label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
@@ -2260,7 +2260,7 @@ class tutorial.chapter_03 extends basic_chapter
           local opt = 0
           local del = true
           local text = "X"
-          label_bord(bord1_lim.a, bord1_lim.b, opt, del, text)
+          label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, opt, del, text)
         }
         //Para el puente
         if (pot1==0){

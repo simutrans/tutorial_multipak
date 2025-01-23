@@ -155,6 +155,8 @@ way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
 
 // start - 5 tiles after start - bridge tile - bridge tile - 5 tiles before the end - end
 way2_fac1_fac2 <- [coord3d(125,163,0), coord3d(120,163,0), coord3d(107,158,1), coord3d(99,158,1), coord3d(96,155,1), coord3d(96,151,1)]
+limit_ch3_rail_line_1a  <- {a = coord(105, 153), b = coord(122, 166)}
+limit_ch3_rail_line_1b  <- {a = coord(95, 154), b = coord(103, 160)}
 
 /**
  *  chapter 5
