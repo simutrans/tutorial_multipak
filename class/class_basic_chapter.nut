@@ -1351,7 +1351,7 @@ class basic_chapter
         result = 6
       }
     } else if ( tile_a.x == tile_b.x ) {
-      if ( tile_a.y <tile_b.y ) {
+      if ( tile_a.y < tile_b.y ) {
         result = 3
       } else if ( tile_a.y > tile_b.y ) {
         result = 2
@@ -1909,9 +1909,9 @@ class basic_chapter
     else if ((pos.x == t.x && pos.y == t.y && pos.z == t.z)||(cursor_sw)){
       if (tool_id==tool_build_way || tool_id==tool_build_tunnel){
         if ((ribi==0) || (ribi==1) || (ribi==2) || (ribi==4) || (ribi==8)){
-    if(t.find_object(mo_tunnel)){
-      return null
-    }
+          if(t.find_object(mo_tunnel)){
+            return null
+          }
           foreach(d in desc){
             //gui.add_message(d.get_name()+" :: "+name)
             if(d.get_name() == name){
