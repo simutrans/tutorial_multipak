@@ -23,6 +23,10 @@ change2_city1_limit1  <- {a = coord(128,182), b = coord(128,192)}
 
 c_way_limit1          <- {a = coord(127,159), b = coord(133,187)}
 
+c_way3_lim            <- {a = coord(93,198), b = coord(114,198)}
+c_bridge3_limit       <- {a = coord(90,198), b = coord(94,198)}
+c_way3_tun_limit      <- {b = coord(92,194), a = coord(63,202)}
+
 /**
  *  set tiles for buildings
  *
@@ -157,6 +161,8 @@ bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
  *
  *  way2_fac1_fac2  = rail factory 1 -> factory 2
  *
+ *  way3_cy1_cy3   = city 1 -> city 3
+ *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
 
@@ -169,6 +175,13 @@ limit_ch3_rail_line_1b  <- {a = coord(95, 154), b = coord(103, 160)}
 way2_fac2_fac3 <- [coord3d(94,155,2), coord3d(94,160,2), coord3d(96,172,3), coord3d(104,172,3), coord3d(109,184,2), coord3d(109,189,2)]
 limit_ch3_rail_line_2a  <- {a = coord(91,159), b = coord(97,174)}
 limit_ch3_rail_line_2b  <- {a = coord(102, 171), b = coord(110, 187)}
+
+// connect city 1 -> city 3
+way3_cy1_cy3   <- {a = coord3d(114,198,0), b = coord3d(93,198,5)}//, dir = 123
+// tunnel build
+way3_tun_list  <- [coord3d(88,198,6), coord3d(87,198,7), coord3d(86,198,8)]
+// portal - first tile - end tile - portal
+way3_tun_coord <- [coord3d(90,198,6), coord3d(89,198,6), coord3d(63,198,8), coord3d(60,198,11)]//, dir = null
 
 /**
  *  chapter 5
