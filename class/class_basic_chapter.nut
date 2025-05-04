@@ -3380,5 +3380,46 @@ function station_tiles(tile_a, tile_b, count) {
   return st_tiles
 }
 
+/**
+ *  check rail platform
+ *
+ *  tile  = tile_x halt pos
+ *  rtype = 0 - check pos in platform
+ *          1 - return array platform
+ *  pos   = tile to click
+ *
+ *
+ */
+function check_rail_station(tile, rtype, pos = null) {
+  local halt_tiles = tile.get_halt().get_tile_list()
+  local d = tile.get_way_dirs(wt_rail)
+
+  local check_x = null
+  local check_y = null
+
+  local pl_tiles  = []
+
+  if ( d == 1 || d == 4 || d == 5 ) {
+    // NS
+    check_x = tile.x
+  } else if ( d == 2 || d == 8 || d == 10 ) {
+    // EW
+    check_y = tile.y
+  }
+
+  for ( local i = 0; i < halt_tiles.len(); i++ ) {
+    if ( ( halt_tiles[i].x == check_x || halt_tiles[i].y == check_y ) ) {
+      pl_tiles.append(halt_tiles[i])
+      if ( rtype == 0 && halt_tiles[i].x == pos.x && halt_tiles[i].y == pos.y ) {
+        return true
+      }
+    }
+  }
+
+  if ( pl_tiles.len() > 0 && rtype == 1 ) {
+    return pl_tiles
+  }
+
+}
 
 // END OF FILE

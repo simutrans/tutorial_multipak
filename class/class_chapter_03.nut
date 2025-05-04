@@ -41,103 +41,22 @@ class tutorial.chapter_03 extends basic_chapter
 
   //Step 7 =====================================================================================
   loc2_name_obj = get_veh_ch3(2)
-  loc2_tile = calc_station_lenght(get_veh_ch3(2), get_veh_ch3(2), set_train_lenght(2))
+  loc2_tile = calc_station_lenght(get_veh_ch3(2), get_veh_ch3(5), set_train_lenght(2))
   loc2_load = 100
   loc2_wait = 0
   f3_reached = set_transportet_goods(2)
 
-  //Step 8 =====================================================================================
-  //Tramo de via para el tunel
-  //c_way6_lim = {a = coord(93,198), b = coord(114,198)}
-  //c_way6 = {a = coord3d(114,198,0), b = coord3d(93,198,5), dir = 123}   //Inicio, Fin de la via y direccion(fullway)
-  //------------------------------------------------------------------------------------------
-
-  //Para el puente
-  //------------------------------------------------------------------------------------------
-  //c_bway_lim3 = {a = coord(90,198), b =  coord(94,198)}
-  //c_brge3 = {a = coord(93,198), b = coord(91,198)}
-  //brge3_z = 5
-  //-------------------------------------------------------------------------------------------
-
-  //Para la entrada del tunel
-  //------------------------------------------------------------------------------------------
-  //start_tunn = coord(90,198)
-  //end_tunn = coord(89,198)
-  //c_tun_lock = coord(88,198)
-  //------------------------------------------------------------------------------------------
-
-  //Subterraneo
-  //------------------------------------------------------------------------------------------
-  //c_tunn2_lim = {b = coord(92,194), a = coord(63,202)}
-  //c_tunn2 = {a = coord3d(90,198,6), b = coord3d(63,198,8), dir = null}    //Inicio, Fin de la via y direccion(fullway)
-
-  //c_end_tunn = coord3d(60,198,11)
 
   dir_1 = {s = 28, r = 2 }    //Direccion de la slope y Way ribi
-  //layer_list = [6,7,8]
-  //layer_lvl = 6
-  //start_lvl_z = 0
- // end_lvl_z = 0
-
-  //c_tun_list = [coord3d(88,198,6), coord3d(87,198,7), coord3d(86,198,8)]
-  //------------------------------------------------------------------------------------------
-
-  //Step 9 =====================================================================================
-  //Para las vias y limites
-  c_way_list1 =   [ {a = coord3d(120,199,0), b = coord3d(120,264,3) }, {a = coord3d(121,264,3), b = coord3d(121,199,0) },
-            {a = coord3d(120,271,3), b = coord3d(120,324,5) }, {a = coord3d(121,324,5), b = coord3d(121,271,3) },
-            {a = coord3d(120,331,5), b = coord3d(120,377,9) }, {a = coord3d(121,377,9), b = coord3d(121,331,5) }
-          ]
-
-  c_way_lim1 =  [ {a = coord(120,199), b = coord(120,264) }, {b = coord(121,264), a = coord(121,199) },
-            {a = coord(120,271), b = coord(120,324) }, {b = coord(121,324), a = coord(121,271) },
-            {a = coord(120,331), b = coord(120,377) }, {b = coord(121,377), a = coord(121,331) }
-          ]
-  //Para las señales de paso
-  sign_list = [ {c = coord3d(94,197,6), ribi = 8}, {c = coord3d(112,198,2), ribi = 2},
-          {c = coord3d(121,199,0), ribi = 1}, {c = coord3d(120,263,3), ribi = 4},
-          {c = coord3d(121,271,3), ribi = 1}, {c = coord3d(120,324,5), ribi = 4},
-          {c = coord3d(121,331,5), ribi = 1}, {c = coord3d(120,377,9), ribi = 4},
-        ]
-
-  //Step 10 =====================================================================================
-  //Para las catenary y limites
-  c_cate_list1 =  [ {a = coord3d(55,198,11), b = coord3d(90,198,6), dir = 0, tunn = true},
-            {a = coord3d(90,198,6), b = coord3d(120,198,0), dir = 0, tunn = false},
-            {a = coord3d(120,198,0), b = coord3d(120,383,9), dir = 5, tunn = false},
-            {a = coord3d(121,383,9), b = coord3d(121,197,0), dir = 2, tunn = false},
-            {a = coord3d(120,197,0), b = coord3d(90,197,6), dir = 6, tunn = false},
-            {a = coord3d(90,197,6), b = coord3d(55,197,11), dir = 6, tunn = true}
-          ]
-  c_cate_lim1 = [ {a = coord3d(55,198,11), b = coord3d(90,198,6) },
-            {a = coord3d(90,198,6), b = coord3d(120,198,0) },
-            {a = coord3d(120,198,0), b = coord3d(120,383,9) },
-            {b = coord3d(121,383,9), a = coord3d(121,197,0)},
-            {b = coord3d(120,197,0), a = coord3d(91,197,6)},
-            {b = coord3d(91,197,6), a = coord3d(55,197,11)}
-          ]
-
-  //Limites del deposito y rieles
-  //--------------------------------------------------------------------------------------------
-  c_dep3 = coord(108,196)
-  c_dep3_lim = {a = coord(108,196), b = coord(108,197)}
-  //--------------------------------------------------------------------------------------------
 
   //Step 11 =====================================================================================
   loc3_name_obj = get_veh_ch3(3)
-  loc3_tile = 4
-  loc3_load = 100
-  loc3_wait = 25369
+  loc3_tile = calc_station_lenght(get_veh_ch3(3), get_veh_ch3(6), set_train_lenght(3))
+  loc3_load = set_loading_capacity(4)
+  loc3_wait = set_waiting_time(4)
 
   line1_name = "ch3_l1"
-  st_lim_a =  [ {a = coord(55,197), b = coord(58,197)}, {a = coord(116,198), b = coord(119,198)},
-          {a = coord(120,266), b= coord(120,269)}, {a = coord(120,326), b= coord(120,329)},
-          {a = coord(120,380), b= coord(120,383)}, {a = coord(121,326), b= coord(121,329)},
-          {a = coord(121,266), b= coord(121,269)}, {a = coord(116,197), b = coord(119,197)}
-        ]
-  sch_list =  [ coord(55,197), coord(116,198), coord(120,266), coord(120,326),
-          coord(120,380), coord(121,326), coord(121,266), coord(116,197)
-        ]
+
   dep_cnr3 = null //auto started
 
   //Script
@@ -167,33 +86,6 @@ class tutorial.chapter_03 extends basic_chapter
   function start_chapter(){  //Inicia solo una vez por capitulo
 
     if ( pak_name == "pak128" ) {
-      //c_brge1.a = coord(100,158)
-      //c_way1.b = coord3d(107,158,1)
-      //c_way3.a = coord3d(99,158,1)
-      //bord3_lim.b = coord(96,172)
-      //c_tway_lim2.a = coord(95,172)
-      //way2_fac2_fac3[2] = coord3d(95,172,3)
-      //c_bway_lim1.a = coord(99,158)
-      //c_way6_lim.a = coord(94,198)
-      //c_way6.b = coord3d(94,198,6)
-      //c_bway_lim3.b =  coord(94,198)
-      //c_tunn2.a = coord3d(90,198,7)
-      //end_tunn = coord(91,198)
-      //layer_list = [7,8]
-      //layer_lvl = 7
-      //start_lvl_z = 7
-      //end_lvl_z = 8
-      //c_tun_list = [coord3d(88,198,7), coord3d(87,198,8)]
-
-      c_cate_list1[0].b = way3_tun_coord[0]
-      c_cate_list1[1].a = way3_tun_coord[0]
-      c_cate_list1[4].b = coord3d(90,197,7)
-      c_cate_list1[5].a = coord3d(90,197,7)
-      c_cate_lim1[0].b = way3_tun_coord[0]
-      c_cate_lim1[1].a = way3_tun_coord[0]
-      c_cate_lim1[4].a = coord3d(91,197,5)
-      c_cate_lim1[5].b = coord3d(91,197,5)
-
       dir_1.s = 56
     }
 
@@ -203,9 +95,6 @@ class tutorial.chapter_03 extends basic_chapter
     ch3_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
 
     dep_cnr3 = get_dep_cov_nr(ch3_cov_lim3.a,ch3_cov_lim3.b)
-
-    //start_lvl_z = way3_tun_coord[0].z
-    //end_lvl_z = way3_tun_coord[2].z
 
     cy1.name = get_city_name(city1_tow)
     cy2.name = get_city_name(city3_tow)
@@ -454,9 +343,9 @@ class tutorial.chapter_03 extends basic_chapter
           text = ttextfile("chapter_03/09_1-2.txt")
           text.tx = ttext("<em>[1/2]</em>")
           local w_nr = 0
-          for(local j=0;j<c_way_list1.len();j++){
-            local c_a = c_way_list1[j].a
-            local c_b = c_way_list1[j].b
+          for(local j=0;j<way3_cy1_cy6.len();j++){
+            local c_a = way3_cy1_cy6[j].a
+            local c_b = way3_cy1_cy6[j].b
             if (glsw[j]==0){
               local link1 = c_a.href("("+c_a.tostring()+")")
               local link2 = " --> "+c_b.href("("+c_b.tostring()+")")
@@ -471,15 +360,15 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
           text.list = way_list
-          text.w2 = c_way_list1[w_nr].a.href("("+c_way_list1[w_nr].a.tostring()+")")
-          text.w1 = c_way_list1[w_nr].b.href("("+c_way_list1[w_nr].b.tostring()+")")
+          text.w2 = way3_cy1_cy6[w_nr].a.href("("+way3_cy1_cy6[w_nr].a.tostring()+")")
+          text.w1 = way3_cy1_cy6[w_nr].b.href("("+way3_cy1_cy6[w_nr].b.tostring()+")")
         }
 
         else if (pot1==0){
           text = ttextfile("chapter_03/09_2-2.txt")
           text.tx = ttext("<em>[2/2]</em>")
           local sigtxt = ""
-          local list = sign_list
+          local list = way3_sign_list
           for(local j=0;j<list.len();j++){
             local c = list[j].c
             if (glsw[j]==0){
@@ -518,31 +407,40 @@ class tutorial.chapter_03 extends basic_chapter
           text.tx = ttext("<em>[4/4]</em>")
         }
 
-        text.dep = c_dep3.href("("+c_dep3.tostring()+")")
+        text.dep = ch3_rail_depot3.b.href("("+ch3_rail_depot3.b.tostring()+")")
 
         break
 
       case 11:
 
         local tx_list = ""
-        local nr = sch_list.len()
-        local list = sch_list
+        local nr = ch3_rail_stations.len()
+        local list = ch3_rail_stations
+
+        local mark_st = 0
         for (local j=0;j<nr;j++){
           local c = coord(list[j].x, list[j].y)
           local tile = my_tile(c)
           local st_halt = tile.get_halt()
+
+          local st_list = check_rail_station(list[mark_st], 1)
+          if ( j == mark_st ) {
+            delay_mark_tile(st_list)
+          }
 
           if(tmpsw[j]==0 ){
             tx_list += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
           }
           else{
             tx_list += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
+            delay_mark_tile(st_list, true)
+            mark_st++
           }
         }
         local c = coord(list[0].x, list[0].y)
         text.stnam = "1) "+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
         text.list = tx_list
-        text.dep = c_dep3.href("("+c_dep3.tostring()+")")
+        text.dep = ch3_rail_depot3.b.href("("+ch3_rail_depot3.b.tostring()+")")
         text.loc3 = translate(loc3_name_obj)
         text.load = loc3_load
         text.wait = get_wait_time_text(loc3_wait)
@@ -1279,19 +1177,19 @@ class tutorial.chapter_03 extends basic_chapter
         chapter_sub_steps = 2
         //Para las vias
         if (pot0==0){
-          for(local j=0;j<c_way_list1.len();j++){
+          for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
-              local tile_a = my_tile(c_way_lim1[j].a)
-              local tile_b = my_tile(c_way_lim1[j].b)
+              local tile_a = my_tile(way3_cy1_cy6[j].a)
+              local tile_b = my_tile(way3_cy1_cy6[j].b)
 
               if (!tile_a.find_object(mo_label))
-                label_x.create(c_way_lim1[j].a, player_x(1), translate("Build Rails form here"))
+                label_x.create(way3_cy1_cy6[j].a, player_x(1), translate("Build Rails form here"))
 
               if (!tile_b.find_object(mo_label))
-                label_x.create(c_way_lim1[j].b, player_x(1), translate("Build Rails form here"))
+                label_x.create(way3_cy1_cy6[j].b, player_x(1), translate("Build Rails form here"))
 
-              local coora = coord3d(c_way_list1[j].a.x, c_way_list1[j].a.y, c_way_list1[j].a.z)
-              local coorb = coord3d(c_way_list1[j].b.x, c_way_list1[j].b.y, c_way_list1[j].b.z)
+              local coora = coord3d(way3_cy1_cy6[j].a.x, way3_cy1_cy6[j].a.y, way3_cy1_cy6[j].a.z)
+              local coorb = coord3d(way3_cy1_cy6[j].b.x, way3_cy1_cy6[j].b.y, way3_cy1_cy6[j].b.z)
               local obj = false
               local dir = get_dir_start(coora)
               r_way = get_fullway(coora, coorb, dir, obj)
@@ -1299,7 +1197,7 @@ class tutorial.chapter_03 extends basic_chapter
                 tile_a.remove_object(player_x(1), mo_label)
                 tile_b.remove_object(player_x(1), mo_label)
                 glsw[j]=1
-                if(j == c_way_lim1.len()-1){
+                if(j == way3_cy1_cy6.len()-1){
                   pot0 = 1
                   reset_glsw()
                   r_way.c = 0
@@ -1314,23 +1212,23 @@ class tutorial.chapter_03 extends basic_chapter
         else if (pot0==1 && pot1==0){
           chapter_sub_step = 1  // sub step finish
           local sign_nr = 0
-          for(local j=0;j<sign_list.len();j++){
-            local t = tile_x(sign_list[j].c.x, sign_list[j].c.y, sign_list[j].c.z)
+          for(local j=0;j<way3_sign_list.len();j++){
+            local t = tile_x(way3_sign_list[j].c.x, way3_sign_list[j].c.y, way3_sign_list[j].c.z)
             if(sigcoord){
               t.find_object(mo_way).mark()
             }
             if ((!t.find_object(mo_signal) && !t.find_object(mo_roadsign) )){
-              label_x.create(sign_list[j].c, player_x(1), translate("Place Singnal here!."))
+              label_x.create(way3_sign_list[j].c, player_x(1), translate("Place Singnal here!."))
               t.find_object(mo_way).mark()
             }
             else{
-              local ribi = way_x(sign_list[j].c.x, sign_list[j].c.y, sign_list[j].c.z).get_dirs_masked()
+              local ribi = way_x(way3_sign_list[j].c.x, way3_sign_list[j].c.y, way3_sign_list[j].c.z).get_dirs_masked()
               t.remove_object(player_x(1), mo_label)
-              if (ribi == sign_list[j].ribi){
+              if (ribi == way3_sign_list[j].ribi){
                 t.find_object(mo_way).unmark()
                 sign_nr++
                 glsw[j] = 1
-                if (sign_nr == sign_list.len()){
+                if (sign_nr == way3_sign_list.len()){
                   this.next_step()
                 }
               }
@@ -1346,18 +1244,18 @@ class tutorial.chapter_03 extends basic_chapter
           return 0
 
         if (pot0==0){
-          for(local j=0;j<c_cate_list1.len();j++){
+          for(local j=0;j<way3_cate_list1.len();j++){
             if(glsw[j] == 0){
-              local coora = coord3d(c_cate_list1[j].a.x, c_cate_list1[j].a.y, c_cate_list1[j].a.z)
-              local coorb = coord3d(c_cate_list1[j].b.x, c_cate_list1[j].b.y, c_cate_list1[j].b.z)
+              local coora = coord3d(way3_cate_list1[j].a.x, way3_cate_list1[j].a.y, way3_cate_list1[j].a.z)
+              local coorb = coord3d(way3_cate_list1[j].b.x, way3_cate_list1[j].b.y, way3_cate_list1[j].b.z)
               local elect = mo_wayobj
-              local dir = c_cate_list1[j].dir
-              local tunn = c_cate_list1[j].tunn
+              local dir = way3_cate_list1[j].dir
+              local tunn = way3_cate_list1[j].tunn
 
               r_way = get_fullway(coora, coorb, dir, elect, tunn)
               if (r_way.r){
                 glsw[j]=1
-                if(j == c_cate_list1.len()-1){
+                if(j == way3_cate_list1.len()-1){
                   pot0 = 1
                   reset_glsw()
                   break
@@ -1369,7 +1267,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
         if (pot0==1 && pot1==0){
           chapter_sub_step = 1  // sub step finish
-          local way = my_tile(c_dep3).find_object(mo_way)
+          local way = my_tile(ch3_rail_depot3.b).find_object(mo_way)
           if (way.is_electrified()){
             way.unmark()
             pot1= 1
@@ -1379,9 +1277,9 @@ class tutorial.chapter_03 extends basic_chapter
         }
         if (pot1==1 && pot2==0){
           chapter_sub_step = 2  // sub step finish
-          local tile = my_tile(c_dep3)
+          local tile = my_tile(ch3_rail_depot3.b)
           if (!tile.find_object(mo_depot_rail))
-            label_x.create(c_dep3, player_x(pl), translate("Build Train Depot here!."))
+            label_x.create(ch3_rail_depot3.b, player_x(pl), translate("Build Train Depot here!."))
           else{
             tile.remove_object(player_x(1), mo_label)
             pot2=1
@@ -1394,8 +1292,8 @@ class tutorial.chapter_03 extends basic_chapter
         break
 
       case 11:
-        local c_dep = this.my_tile(c_dep3)
-        set_convoy_schedule(pl,c_dep, gl_wt, line1_name)
+        local c_dep = this.my_tile(ch3_rail_depot3.b)
+        set_convoy_schedule(pl, c_dep, gl_wt, line1_name)
 
         if (current_cov == ch3_cov_lim3.b){
           this.next_step()
@@ -1906,15 +1804,24 @@ class tutorial.chapter_03 extends basic_chapter
       case 9:
         if (pot0==0){
           result = r_way.c != 0? translate("Connect the Track here")+" ("+r_way.c.tostring()+").":result
-          for(local j=0;j<c_way_lim1.len();j++){
+          for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
-              if(pos.x>=c_way_lim1[j].a.x && pos.y>=c_way_lim1[j].a.y && pos.x<=c_way_lim1[j].b.x && pos.y<=c_way_lim1[j].b.y){
+              local limit_t = []
+              if ( way3_cy1_cy6[j].a.x > way3_cy1_cy6[j].b.x || way3_cy1_cy6[j].a.y > way3_cy1_cy6[j].b.y ) {
+                limit_t.append(way3_cy1_cy6[j].b)
+                limit_t.append(way3_cy1_cy6[j].a)
+              } else {
+                limit_t.append(way3_cy1_cy6[j].a)
+                limit_t.append(way3_cy1_cy6[j].b)
+              }
+
+              if(pos.x>=limit_t[0].x && pos.y>=limit_t[0].y && pos.x<=limit_t[1].x && pos.y<=limit_t[1].y) {
 
                 if(tool_id == tool_build_way){
                    return null
                 }
               }
-              else if (j== c_way_lim1.len()-1){
+              else if (j == way3_cy1_cy6.len()-1){
                 result = translate("You are outside the allowed limits!")+" ("+pos.tostring()+")."
               }
               break
@@ -1926,8 +1833,8 @@ class tutorial.chapter_03 extends basic_chapter
           //Elimina las señales
           if (tool_id==tool_remover){
             if (sign || roadsign){
-              for(local j=0;j<sign_list.len();j++){
-                if (pos.x == sign_list[j].c.x && pos.y==sign_list[j].c.y){
+              for(local j=0;j<way3_sign_list.len();j++){
+                if (pos.x == way3_sign_list[j].c.x && pos.y==way3_sign_list[j].c.y){
                   backward_glsw(j)
                   return null
                 }
@@ -1939,27 +1846,27 @@ class tutorial.chapter_03 extends basic_chapter
           //Construye señales de paso
           if (tool_id == 4116){
             if (!sign){
-              for(local j=0;j<sign_list.len();j++){
-                local tile = tile_x(sign_list[j].c.x, sign_list[j].c.y, sign_list[j].c.z)
+              for(local j=0;j<way3_sign_list.len();j++){
+                local tile = tile_x(way3_sign_list[j].c.x, way3_sign_list[j].c.y, way3_sign_list[j].c.z)
                 local r
                 if (tile.find_object(mo_signal)){
-                  r = get_signa(tile, j, sign_list[j].ribi)
+                  r = get_signa(tile, j, way3_sign_list[j].ribi)
                   if (r == null)
-                    return translate("The signal does not point in the correct direction")+" ("+sign_list[j].c.tostring()+")."
+                    return translate("The signal does not point in the correct direction")+" ("+way3_sign_list[j].c.tostring()+")."
                 }
                 else
-                  result = translate("Place a block signal here")+" ("+sign_list[j].c.tostring()+")."
+                  result = translate("Place a block signal here")+" ("+way3_sign_list[j].c.tostring()+")."
 
                 if (tile.find_object(mo_roadsign))
-                  return translate("It must be a block signal!")+" ("+sign_list[j].c.tostring()+")."
+                  return translate("It must be a block signal!")+" ("+way3_sign_list[j].c.tostring()+")."
               }
             }
-            for(local j=0;j<sign_list.len();j++){
-              local tile = tile_x(sign_list[j].c.x, sign_list[j].c.y, sign_list[j].c.z)
+            for(local j=0;j<way3_sign_list.len();j++){
+              local tile = tile_x(way3_sign_list[j].c.x, way3_sign_list[j].c.y, way3_sign_list[j].c.z)
               if (tile.find_object(mo_roadsign))
-                return translate("It must be a block signal!")+" ("+sign_list[j].c.tostring()+")."
-              if ((pos.x == sign_list[j].c.x) && (pos.y == sign_list[j].c.y)){
-                return get_signa(t, j, sign_list[j].ribi)
+                return translate("It must be a block signal!")+" ("+way3_sign_list[j].c.tostring()+")."
+              if ((pos.x == way3_sign_list[j].c.x) && (pos.y == way3_sign_list[j].c.y)){
+                return get_signa(t, j, way3_sign_list[j].ribi)
               }
             }
             return result
@@ -1970,35 +1877,52 @@ class tutorial.chapter_03 extends basic_chapter
                 //return square_x(pos.x, pos.y).get_climate()
 
         if (pot0==0){
-                for(local j=0;j<c_cate_lim1.len();j++){
-                   if(pos.x>=c_cate_lim1[j].a.x && pos.y>=c_cate_lim1[j].a.y && pos.x<=c_cate_lim1[j].b.x && pos.y<=c_cate_lim1[j].b.y){
+          for(local j=0;j<way3_cate_list1.len();j++){
+            local limit_t = []
+            if ( way3_cate_list1[j].a.x > way3_cate_list1[j].b.x || way3_cate_list1[j].a.y > way3_cate_list1[j].b.y ) {
+              limit_t.append(way3_cate_list1[j].b)
+              limit_t.append(way3_cate_list1[j].a)
+            } else {
+              limit_t.append(way3_cate_list1[j].a)
+              limit_t.append(way3_cate_list1[j].b)
+            }
 
-                        if(tool_id == 4114){
+            if(pos.x>=limit_t[0].x && pos.y>=limit_t[0].y && pos.x<=limit_t[1].x && pos.y<=limit_t[1].y) {
+              if(tool_id == 4114){
                 return null
-                        }
-                   }
-                   else if (j== c_cate_lim1.len()-1){
-                        result = translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
-                   }
-                }
-          if ((tool_id == 4114)&&(pos.x==c_dep3.x)&&(pos.y==c_dep3.y)) return null
+              }
+            }
+            else if (j== way3_cate_list1.len()-1){
+              result = translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
+            }
+          }
+          if ((tool_id == 4114)&&(pos.x==ch3_rail_depot3.b.x)&&(pos.y==ch3_rail_depot3.b.y)) return null
         }
         else if (pot0==1 && pot1==0){
-          if (pos.x>=c_dep3_lim.a.x && pos.y>=c_dep3_lim.a.y && pos.x<=c_dep3_lim.b.x && pos.y<=c_dep3_lim.b.y){
+          local limit_t = []
+          if ( ch3_rail_depot3.a.x > ch3_rail_depot3.b.x || ch3_rail_depot3.a.y > ch3_rail_depot3.b.y ) {
+            limit_t.append(ch3_rail_depot3.b)
+            limit_t.append(ch3_rail_depot3.a)
+          } else {
+            limit_t.append(ch3_rail_depot3.a)
+            limit_t.append(ch3_rail_depot3.b)
+          }
+
+          if(pos.x>=limit_t[0].x && pos.y>=limit_t[0].y && pos.x<=limit_t[1].x && pos.y<=limit_t[1].y) {
             if (tool_id==4114){
               return null
             }
 
           }
-                result = translate("Connect the Track here")+" ("+c_dep3.tostring()+")."
+          result = translate("Connect the Track here")+" ("+ch3_rail_depot3.a.tostring()+")."
         }
         else if (pot1==1 && pot2==0){
-          if ((pos.x==c_dep3.x)&&(pos.y==c_dep3.y)){
+          if ((pos.x==ch3_rail_depot3.b.x)&&(pos.y==ch3_rail_depot3.b.y)){
             if (tool_id==tool_build_depot){
               return null
             }
           }
-          result = translate("You must build the train depot in")+" ("+c_dep3.tostring()+")."
+          result = translate("You must build the train depot in")+" ("+ch3_rail_depot3.b.tostring()+")."
         }
         break
 
@@ -2006,20 +1930,22 @@ class tutorial.chapter_03 extends basic_chapter
 
         if (tool_id==4108){
           //gui.add_message(""+st_lim_a.len()+"")
-          for(local j=0;j<st_lim_a.len();j++){
-            result = format(translate("Select station No.%d"),j+1)+" ("+st_lim_a[j].a.tostring()+".)"
+
+          for(local j=0;j<ch3_rail_stations.len();j++){
+            result = format(translate("Select station No.%d"),j+1)+" ("+ch3_rail_stations[j].tostring()+".)"
             if(tmpsw[j]==0){
-                        if((pos.x>=st_lim_a[j].a.x)&&(pos.y>=st_lim_a[j].a.y)&&(pos.x<=st_lim_a[j].b.x)&&(pos.y<=st_lim_a[j].b.y)){
-                local c_list = sch_list   //Lista de todas las estaciones
-                local c_dep = c_dep3    //Coordeadas del deposito
-                local siz = c_list.len()  //Numero de paradas
-                result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
+              local check = check_rail_station(ch3_rail_stations[j], 0, pos)
+              if( check ){
+                local c_list = ch3_rail_stations   //Lista de todas las estaciones
+                local c_dep = ch3_rail_depot3.b    //Coordeadas del deposito
+                local siz = ch3_rail_stations.len()  //Numero de paradas
+                result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot3.b.tostring()+")."
                 return is_stop_allowed_ex(result, siz, c_list, pos, gl_wt)
               }
               else
                 return result
             }
-            if ((j+1) == st_lim_a.len())
+            if ((j+1) == ch3_rail_stations.len())
               return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep3.tostring()+")."
           }
           return result
@@ -2077,7 +2003,7 @@ class tutorial.chapter_03 extends basic_chapter
         local selc = 0
         local load = loc3_load
         local time = loc3_wait
-        local c_list = sch_list
+        local c_list = ch3_rail_stations
         local siz = c_list.len()
         local line = true
         result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
@@ -2151,8 +2077,8 @@ class tutorial.chapter_03 extends basic_chapter
 
       case 11:
       if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
-        if ((depot.x != c_dep3.x)||(depot.y != c_dep3.y))
-          return translate("You must select the deposit located in")+" ("+c_dep3.tostring()+")."
+        if ((depot.x != ch3_rail_depot3.b.x)||(depot.y != ch3_rail_depot3.b.y))
+          return translate("You must select the deposit located in")+" ("+ch3_rail_depot3.b.tostring()+")."
         local cov = dep_cnr3
         local veh = set_train_lenght(3) + 1
         local good_list = [good_desc_x (good_alias.passa).get_catg_index()]    //Passengers
@@ -2163,7 +2089,7 @@ class tutorial.chapter_03 extends basic_chapter
         //Para arracar varios vehiculos
         local id_start = ch3_cov_lim3.a
         local id_end = ch3_cov_lim3.b
-        local c_list = sch_list
+        local c_list = ch3_rail_stations
         local cir_nr = get_convoy_number_exp(c_list[0], depot, id_start, id_end)
         local cov_list = depot.get_convoy_list()
         cov -= cir_nr
@@ -2630,10 +2556,10 @@ class tutorial.chapter_03 extends basic_chapter
 
       case 9:
         if (pot0==0){
-                for(local j=0;j<c_way_lim1.len();j++){
+                for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
-              local tile_a = my_tile(c_way_lim1[j].a)
-              local tile_b = my_tile(c_way_lim1[j].b)
+              local tile_a = my_tile(way3_cy1_cy6[j].a)
+              local tile_b = my_tile(way3_cy1_cy6[j].b)
 
               tile_a.find_object(mo_way).unmark()
               tile_b.find_object(mo_way).unmark()
@@ -2641,13 +2567,13 @@ class tutorial.chapter_03 extends basic_chapter
               tile_a.remove_object(player_x(1), mo_label)
               tile_b.remove_object(player_x(1), mo_label)
 
-              local coora = coord3d(c_way_list1[j].a.x, c_way_list1[j].a.y, c_way_list1[j].a.z)
-              local coorb = coord3d(c_way_list1[j].b.x, c_way_list1[j].b.y, c_way_list1[j].b.z)
+              local coora = coord3d(way3_cy1_cy6[j].a.x, way3_cy1_cy6[j].a.y, way3_cy1_cy6[j].a.z)
+              local coorb = coord3d(way3_cy1_cy6[j].b.x, way3_cy1_cy6[j].b.y, way3_cy1_cy6[j].b.z)
               local t = command_x(tool_build_way)
               t.set_flags(2)
               local err = t.work(player, coora, coorb, sc_way_name)
 
-              if(j == c_way_lim1.len()-1){
+              if(j == way3_cy1_cy6.len()-1){
                 pot0 = 1
                 reset_glsw()
                 break
@@ -2656,8 +2582,8 @@ class tutorial.chapter_03 extends basic_chapter
                 }
         }
         if (pot0==1 && pot1==0){
-          for(local j=0;j<sign_list.len();j++){
-            local tile = tile_x(sign_list[j].c.x, sign_list[j].c.y, sign_list[j].c.z)
+          for(local j=0;j<way3_sign_list.len();j++){
+            local tile = tile_x(way3_sign_list[j].c.x, way3_sign_list[j].c.y, way3_sign_list[j].c.z)
             local way = tile.find_object(mo_way)
             local rsign = tile.find_object(mo_roadsign)
             local sign = tile.find_object(mo_signal)
@@ -2670,9 +2596,9 @@ class tutorial.chapter_03 extends basic_chapter
 
             local t = command_x(tool_build_roadsign)
             while(true){
-              local err = t.work(player, my_tile(coord(sign_list[j].c.x, sign_list[j].c.y)), sc_sign_name)
+              local err = t.work(player, my_tile(coord(way3_sign_list[j].c.x, way3_sign_list[j].c.y)), sc_sign_name)
               local ribi = way.get_dirs_masked()
-              if (ribi == sign_list[j].ribi)
+              if (ribi == way3_sign_list[j].ribi)
                 break
             }
           }
@@ -2690,24 +2616,24 @@ class tutorial.chapter_03 extends basic_chapter
           tile.remove_object(player_x(1), mo_label)
         }
         if (pot0==0){
-                for(local j=0;j<c_cate_list1.len();j++){
+                for(local j=0;j<way3_cate_list1.len();j++){
             if(glsw[j] == 0){
-              local coora = c_cate_list1[j].a
-              local coorb = c_cate_list1[j].b
+              local coora = way3_cate_list1[j].a
+              local coorb = way3_cate_list1[j].b
               local t = command_x(tool_build_wayobj)
               local err = t.work(player, coora, coorb, sc_caten_name)
             }
                 }
         }
         if (pot1==0){
-          local way = my_tile(c_dep3).find_object(mo_way)
+          local way = my_tile(ch3_rail_depot3.a).find_object(mo_way)
           way.unmark()
           local t = command_x(tool_build_wayobj)
-          local err = t.work(player, my_tile(c_dep3), my_tile(c_dep3), sc_caten_name)
+          local err = t.work(player, my_tile(ch3_rail_depot3.a), my_tile(ch3_rail_depot3.b), sc_caten_name)
 
         }
         if (pot2==0){
-          local tile = my_tile(c_dep3)
+          local tile = my_tile(ch3_rail_depot3.b)
           tile.remove_object(player_x(1), mo_label) //Elimina texto label
           local t = command_x(tool_build_depot)
           local err = t.work(player, tile, sc_dep_name)
@@ -2717,7 +2643,7 @@ class tutorial.chapter_03 extends basic_chapter
 
       case 11:
         local wt = wt_rail
-        local c_depot = my_tile(c_dep3)
+        local c_depot = my_tile(ch3_rail_depot3.b)
         comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
         local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
@@ -2725,7 +2651,7 @@ class tutorial.chapter_03 extends basic_chapter
         if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
           //Set Schedule
           local sched = schedule_x(gl_wt, [])
-          local c_list = sch_list
+          local c_list = ch3_rail_stations
           local sch_siz = c_list.len()
           local load = loc3_load
           local time = loc3_wait

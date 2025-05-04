@@ -177,10 +177,35 @@ limit_ch3_rail_line_2b  <- {a = coord(102, 171), b = coord(110, 187)}
 
 // connect city 1 -> city 3
 way3_cy1_cy3 <- {a = coord3d(114,198,0), b = coord3d(94,198,6), dir = 123}
+/* connect [0] - [1] -> city 1 - city 4
+ * connect [2] - [3] -> city 4 - city 5
+ * connect [4] - [5] -> city 5 - city 6
+ */
+way3_cy1_cy6   <- [ {a = coord3d(120,199,0), b = coord3d(120,264,3) }, {a = coord3d(121,264,3), b = coord3d(121,199,0) },
+                    {a = coord3d(120,271,3), b = coord3d(120,324,5) }, {a = coord3d(121,324,5), b = coord3d(121,271,3) },
+                    {a = coord3d(120,331,5), b = coord3d(120,377,9) }, {a = coord3d(121,377,9), b = coord3d(121,331,5) }
+                  ]
 // tunnel build
 way3_tun_list <- [coord3d(88,198,7), coord3d(87,198,8)]
 // portal - first tile - end tile - portal
 way3_tun_coord <- [coord3d(90,198,7), coord3d(89,198,8), coord3d(63,198,8), coord3d(60,198,11)]//, dir = null
+
+/**
+ *  define signals and catenary for rail line city 3 -> city 6
+ *
+ */
+way3_sign_list <- [ {c = coord3d(94,197,6), ribi = 8}, {c = coord3d(112,198,2), ribi = 2},
+                    {c = coord3d(121,199,0), ribi = 1}, {c = coord3d(120,263,3), ribi = 4},
+                    {c = coord3d(121,271,3), ribi = 1}, {c = coord3d(120,324,5), ribi = 4},
+                    {c = coord3d(121,331,5), ribi = 1}, {c = coord3d(120,377,9), ribi = 4},
+                  ]
+way3_cate_list1 <- [ {a = coord3d(55,198,11), b = way3_tun_coord[0], dir = 0, tunn = true},
+                     {a = way3_tun_coord[0], b = coord3d(120,198,0), dir = 0, tunn = false},
+                     {a = coord3d(120,198,0), b = coord3d(120,383,9), dir = 5, tunn = false},
+                     {a = coord3d(121,383,9), b = coord3d(121,197,0), dir = 2, tunn = false},
+                     {a = coord3d(120,197,0), b = coord3d(90,197,7), dir = 6, tunn = false},
+                     {a = coord3d(90,197,7), b = coord3d(55,197,11), dir = 6, tunn = true}
+                   ]
 
 /**
  *  chapter 5

@@ -962,9 +962,10 @@ function set_transportet_goods(id) {
 /*
  *  set loading capacity
  *
- *  id 1 - chapter 2 step 4 : bus city Pollingwick
- *  id 2 - chapter 2 step 6 : bus Pollingwick - Dock
- *  id 3 - chapter 2 step 7 : bus Pollingwick - Malliby
+ *  id 1 - chapter 2 step 4  : bus city Pollingwick
+ *  id 2 - chapter 2 step 6  : bus Pollingwick - Dock
+ *  id 3 - chapter 2 step 7  : bus Pollingwick - Malliby
+ *  id 4 - chapter 3 step 11 : city train
  *
  */
 function set_loading_capacity(id) {
@@ -981,6 +982,9 @@ function set_loading_capacity(id) {
         case 3:
           return 100
           break
+        case 4:
+          return 100
+          break
       }
       break
     case "pak64.german":
@@ -993,6 +997,9 @@ function set_loading_capacity(id) {
           break
         case 3:
           return 60
+          break
+        case 4:
+          return 80
           break
       }
       break
@@ -1007,6 +1014,9 @@ function set_loading_capacity(id) {
         case 3:
           return 100
           break
+        case 4:
+          return 100
+          break
       }
       break
   }
@@ -1016,10 +1026,10 @@ function set_loading_capacity(id) {
 /*
  *  set waiting time
  *
- *  id 1 - chapter 2 step 4 : bus city Pollingwick
- *  id 2 - chapter 2 step 6 : bus Pollingwick - Dock
- *  id 3 - chapter 2 step 7 : bus Pollingwick - Malliby
- *
+ *  id 1 - chapter 2 step 4  : bus city Pollingwick
+ *  id 2 - chapter 2 step 6  : bus Pollingwick - Dock
+ *  id 3 - chapter 2 step 7  : bus Pollingwick - Malliby
+ *  id 4 - chapter 3 step 11 : city train
  *
  *  1 day   = 2115
  *  1 hour  = 88
@@ -1038,6 +1048,9 @@ function set_waiting_time(id) {
         case 3:
           return 10571
           break
+        case 4:
+          return 25369
+          break
       }
       break
     case "pak64.german":
@@ -1051,6 +1064,9 @@ function set_waiting_time(id) {
         case 3:
           return 2555
           break
+        case 4:
+          return 2115
+          break
       }
       break
     case "pak128":
@@ -1063,6 +1079,9 @@ function set_waiting_time(id) {
           break
         case 3:
           return 10571
+          break
+        case 4:
+          return 25369
           break
       }
       break
