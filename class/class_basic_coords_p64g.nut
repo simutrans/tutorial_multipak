@@ -23,6 +23,10 @@ change2_city1_limit1  <- {a = coord(128,182), b = coord(128,192)}
 
 c_way_limit1          <- {a = coord(127,159), b = coord(133,187)}
 
+c_way3_lim            <- {a = coord(93,198), b = coord(114,198)}
+c_bridge3_limit       <- {a = coord(90,198), b = coord(94,198)}
+c_way3_tun_limit      <- {b = coord(92,194), a = coord(63,202)}
+
 /**
  *  set tiles for buildings
  *
@@ -95,7 +99,6 @@ city2_halt_1 <- []
 line_connect_halt <- coord(126,187)
 
 city1_halt_airport <- [coord(114,177), coord(121,189), line_connect_halt]
-//local list = [coord(113,183), coord(117,186),  coord(120,183), line_connect_halt, coord(121,189), coord(113,190)]
 local list = [coord(111,183), coord(116,183),  coord(120,183), line_connect_halt, coord(121,189), coord(118,191), coord(113,190)]
 for ( local i = 0; i < list.len(); i++ ) {
   city1_halt_1.append(list[i])
@@ -124,6 +127,10 @@ city1_city7_air <- [coord(114,176), coord(168,489)]
 city7_halt <- [ coord(168,490), coord(160,493), coord(155,493), coord(150,494), coord(154,500), coord(159,499),
           coord(164,498), coord(166,503), coord(171,501), coord(176,501), coord(173,493)]
 
+ch3_rail_stations <- [ tile_x(55,197,11), tile_x(116,198,0), tile_x(120,266,3), tile_x(120,326,5),
+                       tile_x(120,380,9), tile_x(121,326,5), tile_x(121,266,3), tile_x(116,197,0)
+                     ]
+
 ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), tile_x(120,381,9)]
 
 /**
@@ -140,6 +147,7 @@ road_depot_ch5    <- coord(131,232)
  */
 ch3_rail_depot1 <- {b = coord(121,164), a = coord(121,163)}
 ch3_rail_depot2 <- {b = coord(94,160), a = coord(93,160)}
+ch3_rail_depot3 <- {b = coord(108,196), a = coord(108,197)}
 
 /**
  *  define bridges
@@ -161,7 +169,9 @@ bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
  *  way2_fac1_fac2  = rail factory 1 -> factory 2
  *
  *  way2_fac2_fac3  = rail factory 2 -> factory 3
+ *  way3_cy1_cy6    = city 1 -> city 4 -> city 5 -> city 6
  *
+ *  way3_tun_list, way3_tun_coord = build tunnel city 1 -> city 3
  *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
@@ -175,6 +185,38 @@ limit_ch3_rail_line_1b  <- {a = coord(95, 154), b = coord(103, 160)}
 way2_fac2_fac3 <- [coord3d(94,155,2), coord3d(94,160,2), coord3d(96,172,3), coord3d(104,172,3), coord3d(109,184,2), coord3d(109,189,2)]
 limit_ch3_rail_line_2a  <- {a = coord(91,159), b = coord(97,174)}
 limit_ch3_rail_line_2b  <- {a = coord(102, 171), b = coord(110, 187)}
+
+// connect city 1 -> city 3
+way3_cy1_cy3   <- {a = coord3d(114,198,0), b = coord3d(93,198,5)}//, dir = 123
+/* connect [0] - [1] -> city 1 - city 4
+ * connect [2] - [3] -> city 4 - city 5
+ * connect [4] - [5] -> city 5 - city 6
+ */
+way3_cy1_cy6   <- [ {a = coord3d(120,199,0), b = coord3d(120,264,3) }, {a = coord3d(121,264,3), b = coord3d(121,199,0) },
+                    {a = coord3d(120,271,3), b = coord3d(120,324,5) }, {a = coord3d(121,324,5), b = coord3d(121,271,3) },
+                    {a = coord3d(120,331,5), b = coord3d(120,377,9) }, {a = coord3d(121,377,9), b = coord3d(121,331,5) }
+                  ]
+// tunnel build
+way3_tun_list  <- [coord3d(88,198,6), coord3d(87,198,7), coord3d(86,198,8)]
+// portal - first tile underground - end tile underground - portal
+way3_tun_coord <- [coord3d(90,198,6), coord3d(89,198,6), coord3d(63,198,8), coord3d(60,198,11)]//, dir = null
+
+/**
+ *  define signals and catenary for rail line city 3 -> city 6
+ *
+ */
+way3_sign_list <- [ {c = coord3d(94,197,6), ribi = 8}, {c = coord3d(112,198,2), ribi = 2},
+                    {c = coord3d(121,199,0), ribi = 1}, {c = coord3d(120,263,3), ribi = 4},
+                    {c = coord3d(121,271,3), ribi = 1}, {c = coord3d(120,324,5), ribi = 4},
+                    {c = coord3d(121,331,5), ribi = 1}, {c = coord3d(120,377,9), ribi = 4},
+                  ]
+way3_cate_list1 <- [ {a = coord3d(55,198,11), b = coord3d(90,198,6), dir = 0, tunn = true},
+                     {a = coord3d(90,198,6), b = coord3d(120,198,0), dir = 0, tunn = false},
+                     {a = coord3d(120,198,0), b = coord3d(120,383,9), dir = 5, tunn = false},
+                     {a = coord3d(121,383,9), b = coord3d(121,197,0), dir = 2, tunn = false},
+                     {a = coord3d(120,197,0), b = coord3d(90,197,6), dir = 6, tunn = false},
+                     {a = coord3d(90,197,6), b = coord3d(55,197,11), dir = 6, tunn = true}
+                   ]
 
 /**
  *  chapter 5

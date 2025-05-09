@@ -90,6 +90,7 @@ coord_st_1 <- coord(117,197)
  *  used chapter 7
  *    ch7_rail_stations
  *
+ *
  */
 city1_halt_1 <- []
 city1_halt_2 <- []
@@ -126,10 +127,14 @@ city1_city7_air <- [coord(114,176), coord(168,489)]
 city7_halt <- [ coord(168,490), coord(160,493), coord(155,493), coord(150,494), coord(154,500), coord(159,499),
           coord(164,498), coord(166,503), coord(171,501), coord(176,501), coord(173,493)]
 
+ch3_rail_stations <- [ tile_x(55,197,11), tile_x(116,198,0), tile_x(120,266,3), tile_x(120,326,5),
+                       tile_x(120,380,9), tile_x(121,326,5), tile_x(121,266,3), tile_x(116,197,0)
+                     ]
+
 ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), tile_x(120,381,9)]
 
 /**
- *  define road depot city 1
+ *  define depots
  */
 city1_road_depot <- coord(115,185)
 ship_depot        <- coord(150, 190)
@@ -137,9 +142,12 @@ road_depot_ch5    <- coord(131,232)
 
 /**
  *  rail_depot{depot_tile, way_tile}
+ *
+ *  road depot must be located one field next to a road
  */
 ch3_rail_depot1 <- {b = coord(121,164), a = coord(121,163)}
 ch3_rail_depot2 <- {b = coord(94,160), a = coord(93,160)}
+ch3_rail_depot3 <- {b = coord(108,196), a = coord(108,197)}
 
 /**
  *  define bridges
@@ -161,6 +169,9 @@ bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
  *  way2_fac1_fac2  = rail factory 1 -> factory 2
  *
  *  way3_cy1_cy3   = city 1 -> city 3
+ *  way3_cy1_cy6    = city 1 -> city 4 -> city 5 -> city 6
+ *
+ *  way3_tun_list, way3_tun_coord = build tunnel city 1 -> city 3
  *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}

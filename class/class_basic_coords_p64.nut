@@ -133,10 +133,10 @@ ch3_rail_stations <- [ tile_x(55,197,11), tile_x(116,198,0), tile_x(120,266,3), 
 
 ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), tile_x(120,381,9)]
 
-
-
 /**
  *  define depots
+ *
+ *  road depot must be located one field next to a road
  */
 city1_road_depot  <- coord(115,185)
 ship_depot        <- coord(150, 190)
