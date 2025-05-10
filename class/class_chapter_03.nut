@@ -754,7 +754,7 @@ class tutorial.chapter_03 extends basic_chapter
             return 0
           }
           if(!tile.find_object(mo_way)){
-            label_x.create(ch3_rail_depot1.b, player_x(pl), translate("Build Rails form here"))
+            label_x.create(tile, player_x(pl), translate("Build Rails form here"))
           }
           else{
             local stop_mark = true
@@ -1015,7 +1015,7 @@ class tutorial.chapter_03 extends basic_chapter
             return 0
           }
           if(!tile.find_object(mo_way)){
-            label_x.create(ch3_rail_depot2.a, player_x(pl), translate("Build Rails form here"))
+            label_x.create(tile, player_x(pl), translate("Build Rails form here"))
           }
           else{
             local stop_mark = true
@@ -1459,18 +1459,20 @@ class tutorial.chapter_03 extends basic_chapter
           else return translate("You must build the train depot in")+" ("+ch3_rail_depot1.b.tostring()+")."
         }
         else if (pot1==1 && pot2==0){
-          if ((pos.x==ch3_rail_depot1.a.x)&&(pos.y==ch3_rail_depot1.a.y)){
+          if ((pos.x==ch3_rail_depot1.b.x)&&(pos.y==ch3_rail_depot1.b.y)){
             if (tool_id==4096){
               pot2=1
               return null
             }
-            else return translate("You must use the inspection tool")+" ("+ch3_rail_depot1.a.tostring()+")."
+            else return translate("You must use the inspection tool")+" ("+ch3_rail_depot1.b.tostring()+")."
           }
         }
         break
       case 5:
         //Enrutar vehiculos (estacion nr1)
-        if (building && pos.x>=way2_fac1_fac2[1].x && pos.y>=way2_fac1_fac2[1].y && pos.x<=way2_fac1_fac2[0].x && pos.y<=way2_fac1_fac2[0].y){
+        local st_check = check_rail_station(my_tile(way2_fac1_fac2[0]), 0, pos)
+        if (building && st_check){
+        //if (building && pos.x>=way2_fac1_fac2[1].x && pos.y>=way2_fac1_fac2[1].y && pos.x<=way2_fac1_fac2[0].x && pos.y<=way2_fac1_fac2[0].y){
           if (tool_id==4108){
             if (stop_flag[0]==0){
               stop_flag[0] = 1
@@ -1485,7 +1487,9 @@ class tutorial.chapter_03 extends basic_chapter
             return format(translate("Select station No.%d"),1)+" ("+coord(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y).tostring()+".)"
         }
         //Enrutar vehiculos (estacion nr2)
-        if (building && pos.x>=st2_way_lim.a.x && pos.y>=st2_way_lim.a.y && pos.x<=st2_way_lim.b.x && pos.y<=st2_way_lim.b.y){
+        local st_check = check_rail_station(my_tile(way2_fac1_fac2[way2_fac1_fac2.len()-1]), 0, pos)
+        if (building && st_check){
+        //if (building && pos.x>=way2_fac1_fac2[way2_fac1_fac2.len()-1].x && pos.y>=way2_fac1_fac2[way2_fac1_fac2.len()-1].y && pos.x<=way2_fac1_fac2[way2_fac1_fac2.len()-2].x && pos.y<=way2_fac1_fac2[way2_fac1_fac2.len()-2].y){
           if (tool_id==4108){
             if (stop_flag[0]==1 && stop_flag[1]==0){
               stop_flag[1] = 1
