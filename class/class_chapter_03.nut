@@ -1402,15 +1402,11 @@ class tutorial.chapter_03 extends basic_chapter
         //Construye un puente
         if (pot0==1 && pot1==0){
           if (pos.x>=bridge2_coords.b.x-1 && pos.y>=bridge2_coords.b.y-1 && pos.x<=bridge2_coords.a.x+1 && pos.y<=bridge2_coords.a.y+1){
-            if(tool_id==tool_build_way)
+            if(tool_id==tool_build_way || tool_id==tool_build_bridge)
               return null
-            if(tool_id==tool_build_bridge){
-              if(pos.z==bridge2_coords.a.z || pos.z==bridge2_coords.b.z)
-                return null
-              else
-                return translate("You must build the bridge here")+" ("+bridge2_coords.b.tostring()+")."
-            }
           }
+          else
+            return translate("You must build the bridge here")+" ("+bridge2_coords.a.tostring()+")."
         }
         //Segundo tramo de rieles
         if (pot1==1&&pot2==0){
@@ -1664,15 +1660,12 @@ class tutorial.chapter_03 extends basic_chapter
         //Construye un puente
         else if (pot0==1 && pot1==0){
           if (pos.x>=c_bridge3_limit.a.x && pos.y>=c_bridge3_limit.a.y && pos.x<=c_bridge3_limit.b.x && pos.y<=c_bridge3_limit.b.y){
-            if(tool_id==tool_build_way)
+            if(tool_id==tool_build_way || tool_id==tool_build_bridge){
               return null
-            if(tool_id==tool_build_bridge){
-              if(pos.z==bridge3_coords.a.z || pos.z==bridge3_coords.b.z)
-                return null
-              else
-                return translate("You must build the bridge here")+" ("+bridge3_coords.a.tostring()+")."
             }
           }
+          else
+            return translate("You must build the bridge here")+" ("+bridge3_coords.a.tostring()+")."
         }
         //Construye Entrada del tunel
         else if (pot1==1 && pot2==0){
