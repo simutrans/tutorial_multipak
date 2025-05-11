@@ -2093,7 +2093,6 @@ class tutorial.chapter_03 extends basic_chapter
 
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
-    local nr =  schedule.entries.len()
 
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
@@ -2105,8 +2104,7 @@ class tutorial.chapter_03 extends basic_chapter
         local load = loc1_load
         local time = loc1_wait
         local c_list = [st1_list[0], st2_list[0]]
-        local siz = c_list.len()
-        result =  set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+        result =  compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result != null)
           reset_stop_flag()
         return result
@@ -2117,8 +2115,7 @@ class tutorial.chapter_03 extends basic_chapter
         local load = loc2_load
         local time = loc2_wait
         local c_list = [st3_list[0], st4_list[0]]
-        local siz = c_list.len()
-        result =  set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+        result =  compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
         if(result != null)
           reset_stop_flag()
         return result
@@ -2129,9 +2126,7 @@ class tutorial.chapter_03 extends basic_chapter
         local load = loc3_load
         local time = loc3_wait
         local c_list = sch_list
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line1_name
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -2170,7 +2165,7 @@ class tutorial.chapter_03 extends basic_chapter
           local time = loc1_wait
           local c_list = [st1_list[0], st2_list[0]]
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
       break
 
@@ -2196,7 +2191,7 @@ class tutorial.chapter_03 extends basic_chapter
           local time = loc2_wait
           local c_list = [st3_list[0], st4_list[0]]
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
       break
 
@@ -2231,7 +2226,7 @@ class tutorial.chapter_03 extends basic_chapter
         local time = loc3_wait
         local siz = c_list.len()
 
-        result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+        result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         if(result == null)
           reset_tmpsw()
         return result

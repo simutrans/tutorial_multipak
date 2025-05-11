@@ -531,15 +531,15 @@ class tutorial.chapter_02 extends basic_chapter
             convoy = cov_list[0]
           }
           local all_result = checks_convoy_schedule(convoy, pl)
-
           sch_cov_correct = all_result.res == null ? true : false
-
         }
+
         if (cov_valid && current_cov == ch2_cov_lim1.b){
           if (conv.is_followed()) {
             pot2=1
           }
         }
+
         if (pot2 == 1 ){
           this.next_step()
           //Crear cuadro label
@@ -987,16 +987,13 @@ class tutorial.chapter_02 extends basic_chapter
     local result=null // null is equivalent to 'allowed'
     if ( (pl == 0) && (schedule.waytype != gl_wt) )
       result = translate("Only road schedules allowed")
-    local nr = schedule.entries.len()
     switch (this.step) {
       case 4:
         local selc = 0
         local load = veh1_load
         local time = veh1_wait
         local c_list = sch_list1
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line1_name //"Test 1"
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -1009,9 +1006,7 @@ class tutorial.chapter_02 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = sch_list2
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line2_name //"Test 2"
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -1022,10 +1017,8 @@ class tutorial.chapter_02 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = sch_list3
-        local siz = c_list.len()
-        local selc = siz-1
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        local selc = c_list.len()-1
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line3_name //"Test 3"
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -1058,7 +1051,7 @@ class tutorial.chapter_02 extends basic_chapter
           local time = veh1_wait
           local c_list = sch_list1
           local siz = c_list.len()
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
           if(result == null)
             reset_tmpsw()
           return result
@@ -1084,7 +1077,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_list = sch_list2
           local siz = c_list.len()
           local line = true
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line)
           if(result == null)
             reset_tmpsw()
           return result
@@ -1108,7 +1101,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_list = sch_list3
           local siz = c_list.len()
           local selc = siz-1
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
           if(result == null)
             reset_tmpsw()
           return result

@@ -598,7 +598,6 @@ class basic_chapter
 
   function is_waystop_correct(player,schedule,nr,load,wait,coord, line = false)
   {
-    local result = 0
     // coord = x,y,z place to compare the waystop
     // nr = number of schedule.entrie to compare
     local nr2 = schedule.entries.len()-1
@@ -629,9 +628,13 @@ class basic_chapter
     if(!target)
       return gui.add_message("Error aqui, not station here!. "+ coord)
 
-    local target_list = square_x(coord.x,coord.y).get_halt_list()
+    // no waypoints so far ...
+    if (!halt)
+      return translate("The schedule is not correct.")
 
-    if (!halt) return translate("The schedule is not correct.")
+    // find out if the stop contains the coordinates
+    local result = 1
+    local target_list = square_x(coord.x,coord.y).get_halt_list()
     local t_list = halt.get_tile_list()
     local t2_list = targ_t.is_water() ? get_tiles_near_stations(t_list) : target.get_tile_list()
     local c_buld1 = targ_t.is_water() ? coord : t2_list[0].find_object(mo_building).get_pos()
@@ -647,14 +650,12 @@ class basic_chapter
     else if((c_buld1.x == c_buld2.x) && (c_buld1.y == c_buld2.y)) {
       result = null
     }
-
     if (result!=null){
       local text = ttext("The waystop {nr} '{name}' isn't on place {pos}")
       text.name = target_list[0].get_name()
       text.pos = pos_to_text(coord)
       text.nr = (nr_st+1)
-      result = text.tostring()
-      return result
+      return text.tostring()
     }
 
     if (entrie.load != load) {
@@ -668,16 +669,18 @@ class basic_chapter
 
     //gui.add_message(""+entrie.wait+" "+wait +" "+nr)
     if (abs(entrie.wait-wait)>7) {
-
-      local text = ttext("The waittime in waystop {nr} '{name}' isn't {wait} {pos}")
       local txwait = get_wait_time_text(wait)
-      text.name = target_list[0].get_name()
-      text.pos = pos_to_text(coord)
-      text.wait = txwait
-      text.nr = (nr+1)
-      return text.tostring()
+      local iswait = get_wait_time_text(entrie.wait)
+      if(txwait!=iswait){
+        local text = ttext("The waittime in waystop {nr} '{name}' isn't {wait} {pos}")
+        text.name = target_list[0].get_name()
+        text.pos = pos_to_text(coord)
+        text.wait = txwait
+        text.nr = (nr+1)
+        return text.tostring()
+      }
     }
-    return result
+    return null
   }
 
   function get_wait_time_text(wait)
@@ -828,136 +831,51 @@ class basic_chapter
     return res
   }
 
-  function is_conv_schedule_correct(pl,all,nr,load,wait,cov,convoy,coord,line=false)
+  /// returns null or error string when not matching
+  function compare_schedule(result, pl, schedule, selc, load, time, c_list, line)
   {
-    //Check if schedule is correct
-    local conv_sch = convoy.get_schedule()
-    local entries = null
+    local nr = schedule.entries.len()
+    local size = c_list.len()
+    if (nr > size)
+      return format(translate("The schedule needs to have %d waystops, but there are %d ."),size, nr)
 
-    if (conv_sch)
-      entries = conv_sch.entries
-    else
-      return 0
-    local sch_nr = entries.len()
-    if (sch_nr!=all)
-      return 1
-    if (entries[nr].load!=load)
-      return 2
-    if (entries[nr].wait!=wait)
-      return 3
+    for(local j=0;j<size;j++){
+      if(result==null) {
+        if (j==selc){
+          result = is_waystop_correct(pl, schedule, j, load, time, c_list[j]), line
+        }
+        else {
+          result = is_waystop_correct(pl, schedule, j, 0, 0, c_list[j], line)
+        }
+      }
+      else {
+        return result
+      }
+    }
+    return result
+  }
 
+  /// returns null or error string when not matching
+  function compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line = false)
+  {
     if (line){
       local cov_line = convoy.get_line()
       if (cov_line){
-        if (!cov_line.is_valid())
-          return 4
-      }
-      else
-        return 5
-    }
-    local t_list = entries[nr].get_halt(player_x(pl)).get_tile_list()
-    if (tile_list(t_list, coord))
-      return null
-
-    return 6
-  }
-
-  function set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line = false)
-  {
-    if (nr > siz)
-      return format(translate("The schedule needs to have %d waystops, but there are %d ."),siz, nr)
-
-    for(local j=0;j<siz;j++){
-      if (j==selc){
-        result = is_waystop_correct(pl, schedule, j, load, time, c_list[j]), line
-      }
-
-      else if (result==null){
-        result = is_waystop_correct(pl, schedule, j, 0, 0, c_list[j], line)
-
+        if (!cov_line.is_valid()) {
+          result = 4;
+          return translate("The line is not correct.")
         }
-      else
-        return result
-    }
-    return result
-  }
-
-  function set_schedule_convoy_back(result, pl, cov, convoy, selc, load, time, c_list, siz, line, back)
-  {
-    local all = back? siz+siz-2 : siz
-    for(local j=0;j<siz;j++){
-      if (j==selc)
-        result = is_conv_schedule_correct(pl, all, j, load, time, cov, convoy, c_list[j], line)
-      else if (result==null)
-        result = is_conv_schedule_correct(pl, all, j, 0, 0, cov, convoy, c_list[j], line)
-
-      else break
-    }
-
-    if(back){
-      local nr = siz
-      for(local j=siz-2;j>0;j--){
-        if (result==null)
-          result = is_conv_schedule_correct(pl, all, nr, 0, 0, cov, convoy, c_list[j], line)
-        else
-          break
-        nr++
+      }
+      else {
+        result = 5
+        return translate("The line is not correct.")
       }
     }
 
-    if (result!=null){
-      switch (result) {
-        case 4:
-          return translate("The line is not correct.")
-        break
-
-        case 5:
-          return translate("First create a line for the vehicle.")
-        break
-
-        default :
-          return translate("The schedule is not correct.")
-        break
-      }
-    }
-
+    local conv_sch = convoy.get_schedule()
+    result = compare_schedule(result, pl, conv_sch, selc, load, time, c_list, false)
     if (result == null){
       update_convoy_removed(convoy, pl)
-
-    }
-    return result
-  }
-
-  function set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line = false)
-  {
-    for(local j=0;j<siz;j++){
-      if (j==selc)
-        result = is_conv_schedule_correct(pl, siz, j, load, time, cov, convoy, c_list[j], line)
-      else if (result==null)
-        result = is_conv_schedule_correct(pl, siz, j, 0, 0, cov, convoy, c_list[j], line)
-
-      else break
-    }
-    //gui.add_message(""+result)
-    if (result!=null){
-      switch (result) {
-        case 4:
-          return translate("The line is not correct.")
-        break
-
-        case 5:
-          return translate("First create a line for the vehicle.")
-        break
-
-        default :
-          return translate("The schedule is not correct.")
-        break
-      }
-    }
-
-    if (result == null){
-      update_convoy_removed(convoy, pl)
-
     }
     return result
   }
@@ -1863,9 +1781,9 @@ class basic_chapter
     else if ((pos.x == t.x && pos.y == t.y && pos.z == t.z)||(cursor_sw)){
       if (tool_id==tool_build_way || tool_id==tool_build_tunnel){
         if ((ribi==0) || (ribi==1) || (ribi==2) || (ribi==4) || (ribi==8)){
-		if(t.find_object(mo_tunnel)){
-			return null
-		}
+        if(t.find_object(mo_tunnel)){
+            return null
+        }
           foreach(d in desc){
             //gui.add_message(d.get_name()+" :: "+name)
             if(d.get_name() == name){
