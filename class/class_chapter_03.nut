@@ -1094,7 +1094,7 @@ class tutorial.chapter_03 extends basic_chapter
           local t_tunn = my_tile(way3_tun_coord[0])
 
           if (!t_tunn.find_object(mo_tunnel)){
-            local label_t =  my_tile(start_tunn)
+            local label_t =  my_tile(way3_tun_coord[0])
             local lab = label_t.find_object(mo_label)
             if(lab){
               if(label_t.is_marked()){
@@ -1107,7 +1107,7 @@ class tutorial.chapter_03 extends basic_chapter
               }
               else{
                 gl_tool = 0
-                lab.set_text("Place a Tunnel here!.")
+                lab.set_text(translate("Place a Tunnel here!."))
               }
             }
             else{
@@ -1988,7 +1988,7 @@ class tutorial.chapter_03 extends basic_chapter
         local selc = 0
         local load = loc2_load
         local time = loc2_wait
-        local c_list = [st3_list[0], st4_list[0]]
+        local c_list = [way2_fac2_fac3[0], way2_fac2_fac3[way2_fac2_fac3.len()-1]]
         local siz = c_list.len()
         result =  set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
         if(result != null)
