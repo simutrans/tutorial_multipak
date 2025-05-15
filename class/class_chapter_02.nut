@@ -195,8 +195,8 @@ class tutorial.chapter_02 extends basic_chapter
         veh1_wait = set_waiting_time(3)
 
         if (!cov_sw){
-          text = ttextfile("chapter_02/07_3-3.txt")
-          text.tx = ttext("<em>[3/3]</em>")
+          text = ttextfile("chapter_02/07_3-4.txt")
+          text.tx = ttext("<em>[3/4]</em>")
 
           local tile = my_tile(city2_halt_1[city2_halt_1.len()-1])
           text.stnam = ""+city2_halt_1.len()+") "+tile.get_halt().get_name()+" ("+coord_to_string(tile)+")"
@@ -205,14 +205,14 @@ class tutorial.chapter_02 extends basic_chapter
           text.nr = siz
         }
         else if (pot0==0){
-          text = ttextfile("chapter_02/07_1-3.txt")
-          text.tx = ttext("<em>[1/3]</em>")
+          text = ttextfile("chapter_02/07_1-4.txt")
+          text.tx = ttext("<em>[1/4]</em>")
 
           text.list = create_halt_list(city2_halt_1.slice(1))
         }
         else if (pot2==0){
-          text = ttextfile("chapter_02/07_2-3.txt")
-          text.tx = ttext("<em>[2/3]</em>")
+          text = ttextfile("chapter_02/07_2-4.txt")
+          text.tx = ttext("<em>[2/4]</em>")
 
           if (r_way.r)
             text.cbor = "<em>"+translate("Ok")+"</em>"
@@ -220,14 +220,27 @@ class tutorial.chapter_02 extends basic_chapter
             text.cbor = coord(r_way.c.x, r_way.c.y).href("("+r_way.c.tostring()+")")
         }
         else if (pot3==0){
-          text = ttextfile("chapter_02/07_3-3.txt")
-          text.tx = ttext("<em>[3/3]</em>")
+          text = ttextfile("chapter_02/07_3-4.txt")
+          text.tx = ttext("<em>[3/4]</em>")
 
           local tile = my_tile(city2_halt_1[city2_halt_1.len()-1])
           text.stnam = ""+city2_halt_1.len()+") "+tile.get_halt().get_name()+" ("+coord_to_string(tile)+")"
 
           text.list = create_schedule_list(city2_halt_1)
           text.nr = city1_halt_2.len()
+        }
+        else if (pot4==0){
+          text = ttextfile("chapter_02/07_4-4.txt")
+          text.tx = ttext("<em>[4/4]</em>")
+
+          local conv = cov_save[current_cov-1]
+          if(is_cov_valid(conv)){
+            local pos = conv.get_pos()
+            text.covpos =   pos.href(conv.get_name()+" ("+pos.tostring()+")")
+          }
+          else{
+            text.covpos = "null"
+          }
         }
 
         text.n1 = city1_tow.href(cty1.name.tostring())
@@ -344,8 +357,6 @@ class tutorial.chapter_02 extends basic_chapter
         //return 10+percentage
         break
       case 4:
-        local conv = cov_save[0]
-        local cov_valid = is_cov_valid(conv)
         if(cov_valid){
           pot0 = 1
         }
@@ -388,9 +399,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         }
         if (cov_valid && current_cov == ch2_cov_lim1.b){
-          if (conv.is_followed()) {
-            pot2=1
-          }
+          pot2=1     
         }
         if (pot2 == 1 ){
           this.next_step()
@@ -559,7 +568,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
 
-        else if (pot2==1 && pot3==0) {
+        else if (pot2==1) {
           chapter_sub_step = 2  // sub step finish
           local c_dep = this.my_tile(city1_road_depot)
           local line_name = line3_name //"Test 3"
@@ -574,19 +583,37 @@ class tutorial.chapter_02 extends basic_chapter
           local all_result = checks_convoy_schedule(convoy, pl)
           sch_cov_correct = all_result.res == null ? true : false
 
-          if (current_cov == ch2_cov_lim3.b) {
-            //Desmarca la via en la parada
-            local way_mark = my_tile(line_connect_halt).find_object(mo_way)
-            way_mark.unmark()
 
-            //Elimina cuadro label
-            local opt = 0
-            label_bord(city1_limit1.a, city1_limit1.b, opt, true, "X")
-            label_bord(city2_limit1.a, city2_limit1.b, opt, true, "X")
-
-            label_bord(bridge1_limit.a, bridge1_limit.b, opt, false, "X")
-            this.next_step()
+          if (current_cov == ch2_cov_lim3.b){
+              pot3=1
+              break
           }
+
+          if (pot3==1 && pot4==0) {
+            local conv = cov_save[current_cov-1]
+            local cov_valid = is_cov_valid(conv)
+            gui.add_message("("+conv.get_pos().tostring()+")")
+
+            if (current_cov == ch2_cov_lim3.b){
+              if (conv.is_followed()) {
+                //Desmarca la via en la parada
+                local way_mark = my_tile(line_connect_halt).find_object(mo_way)
+                way_mark.unmark()
+
+                //Elimina cuadro label
+                local opt = 0
+                label_bord(city1_limit1.a, city1_limit1.b, opt, true, "X")
+                label_bord(city2_limit1.a, city2_limit1.b, opt, true, "X")
+
+                label_bord(bridge1_limit.a, bridge1_limit.b, opt, false, "X")
+                this.next_step()
+              }
+            }
+            else{
+              backward_pot(3)
+              break
+            }
+          } 
         }
         //return 95
         break
