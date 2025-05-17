@@ -194,7 +194,7 @@ class tutorial.chapter_02 extends basic_chapter
         veh1_load = set_loading_capacity(3)
         veh1_wait = set_waiting_time(3)
 
-        if (!cov_sw){
+        if (!correct_cov){
           text = ttextfile("chapter_02/07_3-4.txt")
           text.tx = ttext("<em>[3/4]</em>")
 
@@ -202,7 +202,7 @@ class tutorial.chapter_02 extends basic_chapter
           text.stnam = ""+city2_halt_1.len()+") "+tile.get_halt().get_name()+" ("+coord_to_string(tile)+")"
 
           text.list = create_halt_list(city2_halt_1)
-          text.nr = siz
+          text.nr = city2_halt_1.len()
         }
         else if (pot0==0){
           text = ttextfile("chapter_02/07_1-4.txt")

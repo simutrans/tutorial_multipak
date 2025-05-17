@@ -84,7 +84,6 @@ persistent.gall_cov <- 0
 gall_cov <-0
 persistent.current_cov <- 0
 current_cov <- 0
-cov_sw <- true
 correct_cov <- true
 
 //----------------------------------------------------------------

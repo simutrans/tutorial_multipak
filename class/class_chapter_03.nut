@@ -790,7 +790,7 @@ class tutorial.chapter_03 extends basic_chapter
         //return 16
         break
       case 5:
-        if (!cov_sw)
+        if (!correct_cov)
           return 0
 
         local wt = wt_rail
@@ -997,7 +997,7 @@ class tutorial.chapter_03 extends basic_chapter
         //return 35
         break
       case 7:
-        if (!cov_sw)
+        if (!correct_cov)
           return 0
 
         local opt = 2
@@ -1240,7 +1240,7 @@ class tutorial.chapter_03 extends basic_chapter
 
       case 10:
         chapter_sub_steps = 4
-        if (!cov_sw)
+        if (!correct_cov)
           return 0
 
         if (pot0==0){
@@ -2604,7 +2604,7 @@ class tutorial.chapter_03 extends basic_chapter
         break
 
       case 10:
-        if (!cov_sw)
+        if (!correct_cov)
           return 0
         if (r_way.c != 0){
           local tile = tile_x(r_way.c.x, r_way.c.y, r_way.c.z)
