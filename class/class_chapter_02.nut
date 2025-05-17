@@ -586,7 +586,6 @@ class tutorial.chapter_02 extends basic_chapter
 
           if (current_cov == ch2_cov_lim3.b){
               pot3=1
-              break
           }
 
           if (pot3==1 && pot4==0) {
