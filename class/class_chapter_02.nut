@@ -591,7 +591,6 @@ class tutorial.chapter_02 extends basic_chapter
           if (pot3==1 && pot4==0) {
             local conv = cov_save[current_cov-1]
             local cov_valid = is_cov_valid(conv)
-            gui.add_message("("+conv.get_pos().tostring()+")")
 
             if (current_cov == ch2_cov_lim3.b){
               if (conv.is_followed()) {
