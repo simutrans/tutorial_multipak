@@ -564,7 +564,6 @@ class tutorial.chapter_06 extends basic_chapter
 
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
-    local nr = schedule.entries.len()
     switch (this.step) {
       case 2:
         reset_glsw()
@@ -573,8 +572,7 @@ class tutorial.chapter_06 extends basic_chapter
         local load = plane1_load
         local time = plane1_wait
         local c_list = city1_city7_air
-        local siz = c_list.len()
-        return set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
         if(result == null){
           local line_name = line1_name
           update_convoy_schedule(pl, wt_road, line_name, schedule)
@@ -587,9 +585,7 @@ class tutorial.chapter_06 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = city1_halt_airport
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line2_name
           update_convoy_schedule(pl, wt_road, line_name, schedule)
@@ -603,9 +599,7 @@ class tutorial.chapter_06 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = city7_halt
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line3_name
           update_convoy_schedule(pl, wt_road, line_name, schedule)
@@ -659,7 +653,7 @@ class tutorial.chapter_06 extends basic_chapter
           local time = plane1_wait
           local c_list = city1_city7_air
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
       break
       case 3:
@@ -691,7 +685,7 @@ class tutorial.chapter_06 extends basic_chapter
           local wait = veh1_wait
           local siz = c_list.len()
           local line = false
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)
           if(result == null)
             reset_tmpsw()
           return result
@@ -726,7 +720,7 @@ class tutorial.chapter_06 extends basic_chapter
           local wait = veh1_wait
           local siz = c_list.len()
           local line = false
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, wait, c_list, siz, line)
           if(result == null)
             reset_tmpsw()
           return result

@@ -611,32 +611,27 @@ class tutorial.chapter_04 extends basic_chapter
 
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
-    local nr =  schedule.entries.len()
     switch (this.step) {
       case 4:
         local selc = 0
         local load = ship1_load
         local time = ship1_wait
         local c_list = sch_list1 //[sch_list1[1], sch_list1[0]]
-        local siz = c_list.len()
-        return set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+        return compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
       break
       case 5:
         local selc = 0
         local load = ship1_load
         local time = ship1_wait
         local c_list = sch_list2
-        local siz = c_list.len()
-        return set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+        return compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
       break
       case 7:
         local selc = 0
         local load = ship2_load
         local time = ship2_wait
         local c_list = sch_list3
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        return compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line1_name
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -681,7 +676,7 @@ class tutorial.chapter_04 extends basic_chapter
           local time = ship1_wait
           local c_list = sch_list1
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
 
       break
@@ -712,7 +707,7 @@ class tutorial.chapter_04 extends basic_chapter
           local time = ship1_wait
           local c_list = sch_list2
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
       break
       case 7:
@@ -736,7 +731,7 @@ class tutorial.chapter_04 extends basic_chapter
           local time = ship2_wait
           local c_list = sch_list3
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
       break
     }

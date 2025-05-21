@@ -357,6 +357,8 @@ class tutorial.chapter_02 extends basic_chapter
         //return 10+percentage
         break
       case 4:
+        local conv = current_cov > 0 ? cov_save[current_cov-1] :  null
+        local cov_valid = is_cov_valid(conv)
         if(cov_valid){
           pot0 = 1
         }
@@ -394,13 +396,13 @@ class tutorial.chapter_02 extends basic_chapter
             convoy = cov_list[0]
           }
           local all_result = checks_convoy_schedule(convoy, pl)
-
           sch_cov_correct = all_result.res == null ? true : false
-
         }
+
         if (cov_valid && current_cov == ch2_cov_lim1.b){
           pot2=1     
         }
+
         if (pot2 == 1 ){
           this.next_step()
           //Crear cuadro label
@@ -583,7 +585,6 @@ class tutorial.chapter_02 extends basic_chapter
           local all_result = checks_convoy_schedule(convoy, pl)
           sch_cov_correct = all_result.res == null ? true : false
 
-
           if (current_cov == ch2_cov_lim3.b){
               pot3=1
           }
@@ -594,17 +595,7 @@ class tutorial.chapter_02 extends basic_chapter
 
             if (current_cov == ch2_cov_lim3.b){
               if (conv.is_followed()) {
-                //Desmarca la via en la parada
-                local way_mark = my_tile(line_connect_halt).find_object(mo_way)
-                way_mark.unmark()
-
-                //Elimina cuadro label
-                local opt = 0
-                label_bord(city1_limit1.a, city1_limit1.b, opt, true, "X")
-                label_bord(city2_limit1.a, city2_limit1.b, opt, true, "X")
-
-                label_bord(bridge1_limit.a, bridge1_limit.b, opt, false, "X")
-                this.next_step()
+                pot4 = 1
               }
             }
             else{
@@ -612,6 +603,19 @@ class tutorial.chapter_02 extends basic_chapter
               break
             }
           } 
+          else if (pot4==1 && pot5==0){
+              //Desmarca la via en la parada
+              local way_mark = my_tile(line_connect_halt).find_object(mo_way)
+              way_mark.unmark()
+
+              //Elimina cuadro label
+              local opt = 0
+              label_bord(city1_limit1.a, city1_limit1.b, opt, true, "X")
+              label_bord(city2_limit1.a, city2_limit1.b, opt, true, "X")
+
+              label_bord(bridge1_limit.a, bridge1_limit.b, opt, false, "X")
+              this.next_step()
+          }
         }
         //return 95
         break
@@ -871,9 +875,7 @@ class tutorial.chapter_02 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = city1_halt_1
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line1_name //"Test 1"
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -886,9 +888,7 @@ class tutorial.chapter_02 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = city1_halt_2
-        local siz = c_list.len()
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line2_name //"Test 2"
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -899,10 +899,8 @@ class tutorial.chapter_02 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = city2_halt_1
-        local siz = c_list.len()
-        local selc = siz-1
-        local line = true
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+        local selc = c_list.len()-1
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line3_name //"Test 3"
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
@@ -935,7 +933,7 @@ class tutorial.chapter_02 extends basic_chapter
           local time = veh1_wait
           local c_list = city1_halt_1
           local siz = c_list.len()
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
           if(result == null)
             reset_tmpsw()
           return result
@@ -961,7 +959,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_list = city1_halt_2
           local siz = c_list.len()
           local line = true
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz, line)
           if(result == null)
             reset_tmpsw()
           return result
@@ -985,7 +983,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_list = city2_halt_1
           local siz = c_list.len()
           local selc = siz-1
-          result = set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
           if(result == null)
             reset_tmpsw()
           return result
@@ -1080,8 +1078,6 @@ class tutorial.chapter_02 extends basic_chapter
           local conv = depot.get_convoy_list()
           conv[0].set_line(player, c_line)
           comm_start_convoy(player, conv[0], depot)
-          pot2=1
-
         }
         return null
         break
@@ -1184,6 +1180,8 @@ class tutorial.chapter_02 extends basic_chapter
           local conv = depot.get_convoy_list()
           conv[0].set_line(player, c_line)
           comm_start_convoy(player, conv[0], depot)
+
+          pot4 = 1
         }
         return null
         break

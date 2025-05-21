@@ -800,8 +800,7 @@ class tutorial.chapter_05 extends basic_chapter
         local load = veh1_load
         local time = veh1_wait
         local c_list = sch_list1
-        local siz = c_list.len()
-        result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+        result = compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
         if(result != null) reset_tmpsw()
         return result
       break
@@ -811,9 +810,7 @@ class tutorial.chapter_05 extends basic_chapter
           local load = veh2_load
           local time = veh2_wait
           local c_list = city1_post_halts
-          local siz = c_list.len()
-          local line = true
-          result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz, line)
+          result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
           if(result == null){
             local line_name = line1_name
             update_convoy_schedule(pl, wt_road, line_name, schedule)
@@ -824,8 +821,7 @@ class tutorial.chapter_05 extends basic_chapter
           local load = veh3_load
           local time = veh3_wait
           local c_list = sch_list3
-          local siz = c_list.len()
-          result = set_schedule_list(result, pl, schedule, nr, selc, load, time, c_list, siz)
+          result = compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
         }
         return result
       break
@@ -864,7 +860,7 @@ class tutorial.chapter_05 extends basic_chapter
           local time = veh1_wait
           local c_list = sch_list1
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
       break
       case 4:
@@ -893,7 +889,7 @@ class tutorial.chapter_05 extends basic_chapter
           local time = veh2_wait
           local c_list = city1_post_halts
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
 
         else if (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b){
@@ -913,7 +909,7 @@ class tutorial.chapter_05 extends basic_chapter
           local time = veh3_wait
           local c_list = sch_list3
           local siz = c_list.len()
-          return set_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
       break
     }
