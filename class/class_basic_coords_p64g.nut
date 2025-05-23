@@ -79,6 +79,14 @@ coord_st_1 <- coord(117,197)
  *    city2_halt_1 - halts connect city 2 to city 1
  *    line_connect_halt - halt in all halt lists
  *
+ *  used chapter 3
+ *    ch3_rail_stations - city line
+ *
+ *  used chapter 4
+ *    ch4_ship1_halts - dock raffinerie - (coord_fac4)
+ *    ch4_ship2_halts - dock raffinerie - canal stop gas station
+ *    ch4_ship3_halts - passenger ship
+ *
  *  used chapter 5
  *    city1_post_halts - halts for post
  *
@@ -131,6 +139,10 @@ ch3_rail_stations <- [ tile_x(55,197,11), tile_x(116,198,0), tile_x(120,266,3), 
                        tile_x(120,380,9), tile_x(121,326,5), tile_x(121,266,3), tile_x(116,197,0)
                      ]
 
+ch4_ship1_halts <- [coord3d(151, 198, -3)]
+ch4_ship2_halts <- [ch4_ship1_halts[0], coord3d(114, 194, 1)]
+ch4_ship3_halts <- [coord3d(133, 189, -3), coord3d(188, 141, -3), coord3d(179, 135, -3)]
+
 ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), tile_x(120,381,9)]
 
 /**
@@ -172,6 +184,8 @@ bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
  *  way3_cy1_cy6    = city 1 -> city 4 -> city 5 -> city 6
  *
  *  way3_tun_list, way3_tun_coord = build tunnel city 1 -> city 3
+ *
+ *  way4_cannal     = cannel to gas station
  *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
@@ -218,6 +232,10 @@ way3_cate_list1 <- [ {a = coord3d(55,198,11), b = coord3d(90,198,6), dir = 0, tu
                      {a = coord3d(90,197,6), b = coord3d(55,197,11), dir = 6, tunn = true}
                    ]
 
+// dock raffenery - cannal stop - cannel way build
+way4_cannal   <- [coord3d(140,194,-3), ch4_ship2_halts[1], coord3d(127,194,-1)]
+c_cannel_lim  <- {a = coord(114, 194), b = coord(140, 194)}
+
 /**
  *  chapter 5
  *
@@ -239,3 +257,9 @@ coord_chapter_4 <- ship_depot             // ship_depot
 coord_chapter_5 <- coord_fac_8            // Coal power station
 coord_chapter_6 <- city1_halt_airport[0]  // airport road stop
 coord_chapter_7 <- city3_tow              // city 3 townhall
+
+/**
+ *  coord to arrea
+ *
+ */
+ch4_curiosity = coord(185,135)

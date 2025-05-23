@@ -25,20 +25,6 @@ class tutorial.chapter_04 extends basic_chapter
   c_way =  coord3d(0, 0, 0)
   cov_cir = 0
 
-  //Step 1 =====================================================================================
-  //Productor
-  //fac_1 = {c = coord(168,189), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.oel}
-  //fac_1 = factory_data.rawget("4")
-  //f1_lim = {a = coord(168,189), b = coord(169,190)}
-
-  //Fabrica
-  //fac_2 = {c = coord(149,200), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
-  //f2_lim = {a = coord(149,200), b = coord(150,201)}
-
-  //Step 2 =====================================================================================
-  //Para los muelles
-  dock_list1 = [coord(151, 198)]
-
   //Step 3 =====================================================================================
   d1_cnr = null //auto started
 
@@ -47,28 +33,16 @@ class tutorial.chapter_04 extends basic_chapter
   ship1_load = 100
   ship1_wait = 0
 
-  sch_list1 = [coord(168, 189), coord(151, 198)]
-
   //Step 5 =====================================================================================
   //Para el canal acuatico
-  c1_way = {a = coord3d(140,194,-3), b = coord3d(114,194,1), c = coord3d(127,194,-1)}
-  c1_way_lim = {a = coord(114, 194), b = coord(140, 194)}
-
-  //Consumidor Final
-  //fac_3 = {c = coord(112,192), c_list = null /*auto started*/, name = "" /*auto started*/, good = good_alias.gas}
+  //c1_way_lim = {a = coord(114, 194), b = coord(140, 194)}
 
   d2_cnr = null //auto started
-  sch_list2 = [coord(151, 198), coord(114, 194)]
-
-  //Step 6 =====================================================================================
-  sch_list3 = [coord(134,189), coord(187,141), coord(178,135)]
-  dock_list2 = [coord(133,189), coord(188,141), coord(179,135)]
 
   //Step 7 =====================================================================================
-  tur = coord(185,135)
   ship2_name_obj = get_veh_ch4(2)
   ship2_load = 100
-  ship2_wait = 42282
+  ship2_wait = set_waiting_time(5)
 
   line1_name = "ch4_l1"
   line2_name = "ch4_l2"
@@ -92,14 +66,6 @@ class tutorial.chapter_04 extends basic_chapter
     line2_name = get_good_data(4, 3) + " " + fac_2.name + " - " + fac_3.name
     line3_name = "Passanger Ship"
 
-
-
-    if ( pak_name == "pak128" ) {
-      c1_way_lim.a = coord(114, 193)
-      c1_way.c = coord3d(127,193,-1)
-
-    }
-
     local lim_idx = cv_list[(persistent.chapter - 2)].idx
     ch4_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
     ch4_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
@@ -110,8 +76,8 @@ class tutorial.chapter_04 extends basic_chapter
 
     local pl = 0
     if(this.step == 7){
-            local c_dep = this.my_tile(ship_depot)
-      local c_list = sch_list3
+      local c_dep = this.my_tile(ship_depot)
+      local c_list = ch4_ship3_halts //sch_list3
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     return 0
@@ -136,7 +102,7 @@ class tutorial.chapter_04 extends basic_chapter
       }
       break
     case 2:
-      local c_list = dock_list1
+      local c_list = ch4_ship1_halts
       local txdoc = ""
             local dock_name = translate("Dock")
             local ok_tex = translate("OK")
@@ -159,8 +125,8 @@ class tutorial.chapter_04 extends basic_chapter
       break
 
     case 5:
-      local c1 = coord(c1_way.a.x, c1_way.a.y)
-      local c2 = coord(c1_way.b.x, c1_way.b.y)
+      local c1 = coord(way4_cannal[0].x, way4_cannal[0].y)
+      local c2 = coord(way4_cannal[1].x, way4_cannal[1].y)
       if(!correct_cov){
         local a = 3
         local b = 3
@@ -187,7 +153,7 @@ class tutorial.chapter_04 extends basic_chapter
       }
       text.w1 = c1.href(" ("+c1.tostring()+")")+""
       text.w2 = c2.href(" ("+c2.tostring()+")")+""
-      text.dock = sch_list2[1].href("("+sch_list2[1].tostring()+")")+""
+      text.dock = ch4_ship2_halts[1].href("("+ch4_ship2_halts[1].tostring()+")")+"" //sch_list2
       text.all_cov = d2_cnr
       text.load = ship1_load
       text.wait = get_wait_time_text(ship1_wait)
@@ -195,10 +161,10 @@ class tutorial.chapter_04 extends basic_chapter
       break
 
     case 6:
-      local list = dock_list2
+      local list = ch4_ship3_halts
       local txdoc = ""
-            local dock_name = translate("Dock")
-            local ok_tex = translate("OK")
+      local dock_name = translate("Dock")
+      local ok_tex = translate("OK")
       for(local j=0;j<list.len();j++){
         local c = coord(list[j].x, list[j].y)
         if (glsw[j]==0)
@@ -212,8 +178,8 @@ class tutorial.chapter_04 extends basic_chapter
 
     case 7:
       local tx_list = ""
-      local nr = sch_list3.len()
-      local list = sch_list3
+      local nr = ch4_ship3_halts.len() //sch_list3
+      local list = ch4_ship3_halts //sch_list3
       for (local j=0;j<nr;j++){
         local c = coord(list[j].x, list[j].y)
         local tile = my_tile(c)
@@ -245,7 +211,7 @@ class tutorial.chapter_04 extends basic_chapter
     text.f1 = fac_1.c.href(""+fac_1.name+" ("+fac_1.c.tostring()+")")+""
     text.f3 = fac_2.c.href(""+fac_2.name+" ("+fac_2.c.tostring()+")")+""
     text.f4 = fac_3.c.href(""+fac_3.name+" ("+fac_3.c.tostring()+")")+""
-    text.tur = tur.href(" ("+tur.tostring()+")")+""
+    text.tur = ch4_curiosity.href(" ("+ch4_curiosity.tostring()+")")+""
 
     text.good1     = get_good_data(3, 3) //translate_objects_list.good_oil
     //text.g1_metric = get_good_data(3, 1)
@@ -298,8 +264,8 @@ class tutorial.chapter_04 extends basic_chapter
         break;
       case 2:
         //Para los Muelles
-        local siz = dock_list1.len()
-        local c_list = dock_list1
+        local siz = ch4_ship1_halts.len()
+        local c_list = ch4_ship1_halts
         local name = translate("Build a Dock here!.")
         local good = good_alias.goods
         local label = true
@@ -341,7 +307,7 @@ class tutorial.chapter_04 extends basic_chapter
         //Para el canal acuatico
         if (pot0==0){
           //Inicio del canal
-          local c_start = coord(c1_way.a.x, c1_way.a.y)
+          local c_start = coord(way4_cannal[0].x, way4_cannal[0].y)
           local t_start = my_tile(c_start)
           local way_start = t_start.find_object(mo_way)
           if (way_start && way_start.get_desc().get_topspeed()==0){
@@ -354,7 +320,7 @@ class tutorial.chapter_04 extends basic_chapter
           }
 
           //Final del canal
-          local c_end = coord(c1_way.b.x, c1_way.b.y)
+          local c_end = coord(way4_cannal[1].x, way4_cannal[1].y)
           local t_end = my_tile(c_end)
           local way_end = t_end.find_object(mo_way)
           if (way_end &&  way_end.get_desc().get_topspeed()==0){
@@ -366,8 +332,8 @@ class tutorial.chapter_04 extends basic_chapter
             t_end.remove_object(player_x(1), mo_label)
           }
 
-          local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
-          local coorb = {x = c1_way.b.x, y = c1_way.b.y, z = c1_way.b.z }
+          local coora = {x = way4_cannal[0].x, y = way4_cannal[0].y, z = way4_cannal[0].z }
+          local coorb = {x = way4_cannal[1].x, y = way4_cannal[1].y, z = way4_cannal[1].z }
 
           local obj = false
           local dir = 6
@@ -384,11 +350,11 @@ class tutorial.chapter_04 extends basic_chapter
         }
         //Para el cuarto muelle
         else if (pot0==1 && pot1==0){
-          local t = my_tile(sch_list2[1])
+          local t = my_tile(ch4_ship2_halts[1]) //sch_list2
           local dock4 = t.find_object(mo_building)
           public_label(t, translate("Build a Dock here!."))
           if(dock4){
-            if(is_station_build(0, sch_list2[1], good_alias.goods)==null){
+            if(is_station_build(0, ch4_ship2_halts[1], good_alias.goods)==null){ //sch_list2
               t.remove_object(player_x(1), mo_label)
               pot1=1
             }
@@ -409,8 +375,8 @@ class tutorial.chapter_04 extends basic_chapter
         break
       case 6:
         //Para los Muelles
-        local siz = dock_list2.len()
-        local c_list = dock_list2
+        local siz = ch4_ship3_halts.len()
+        local c_list = ch4_ship3_halts
         local name = translate("Build a Dock here!.")
         local good = good_alias.passa
         local label = true
@@ -424,9 +390,9 @@ class tutorial.chapter_04 extends basic_chapter
         break
 
       case 7:
-                local c_dep = this.my_tile(ship_depot)
-                local line_name = line1_name
-                set_convoy_schedule(pl,c_dep, gl_wt, line_name)
+        local c_dep = this.my_tile(ship_depot)
+        local line_name = line1_name
+        set_convoy_schedule(pl,c_dep, gl_wt, line_name)
         if(current_cov == ch4_cov_lim3.b){
           this.next_step()
         }
@@ -506,7 +472,7 @@ class tutorial.chapter_04 extends basic_chapter
         break;
       //Construyendo los Muelles
       case 2:
-        local c_list = dock_list1
+        local c_list = ch4_ship1_halts
         local good = good_alias.goods
         if((tool_id != 4096))
           return is_dock_build(pos, tool_id, c_list, good)
@@ -533,7 +499,8 @@ class tutorial.chapter_04 extends basic_chapter
         //Enrutar barcos
       case 4:
         if (tool_id==4108){
-          local c_list = sch_list1 //[sch_list1[1], sch_list1[0]]   //Lista de todas las paradas de autobus
+          local c_list = [coord_fac_4] //Lista de todas las paradas de autobus
+          c_list.append(ch4_ship1_halts[0])
           local c_dep = ship_depot //Coordeadas del deposito
           local siz = c_list.len() //Numero de paradas
           result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -542,24 +509,24 @@ class tutorial.chapter_04 extends basic_chapter
         break
       case 5:
         if (pot0==0){
-                    if(pos.x==c1_way.a.x && pos.y==c1_way.a.y){
-                        if(tool_id==tool_remove_way || tool_id==4097)
+          if(pos.x==way4_cannal[0].x && pos.y==way4_cannal[0].y){
+            if(tool_id==tool_remove_way || tool_id==4097)
               return result
-                    }
-          if (pos.x>=c1_way_lim.a.x && pos.y>=c1_way_lim.a.y && pos.x<=c1_way_lim.b.x && pos.y<=c1_way_lim.b.y){
+          }
+          if (pos.x>=c_cannel_lim.a.x && pos.y>=c_cannel_lim.a.y && pos.x<=c_cannel_lim.b.x && pos.y<=c_cannel_lim.b.y){
             if (tool_id == tool_build_way && way && wt == wt_water)
               return null
           }
         }
         //Cuarto muelle
         else if(pot0==1 && pot1==0){
-          if(my_tile(sch_list2[1]).find_object(mo_building)){
+          if(my_tile(ch4_ship2_halts[1]).find_object(mo_building)){
             if (tool_id==4097)
               return null
-            if (is_station_build(0, sch_list2[1], good_alias.goods)!=null)
-              return format(translate("Dock No.%d must accept goods"),4)+" ("+sch_list2[1].tostring()+")."
+            if (is_station_build(0, ch4_ship2_halts[1], good_alias.goods)!=null)
+              return format(translate("Dock No.%d must accept goods"),4)+" ("+ch4_ship2_halts[1].tostring()+")."
           }
-          if(pos.x==sch_list2[1].x && pos.y==sch_list2[1].y){
+          if(pos.x==ch4_ship2_halts[1].x && pos.y==ch4_ship2_halts[1].y){
             if(tool_id==tool_build_station){
               return null
             }
@@ -568,7 +535,7 @@ class tutorial.chapter_04 extends basic_chapter
         //Enrutar Barcos
         else if (pot1==1 && pot2==0){
           if (tool_id==4108){
-            local c_list = sch_list2   //Lista de todas las paradas de autobus
+            local c_list = ch4_ship2_halts   //Lista de todas las paradas de autobus
             local c_dep = ship_depot //Coordeadas del deposito
             local siz = c_list.len() //Numero de paradas
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -579,7 +546,7 @@ class tutorial.chapter_04 extends basic_chapter
 
       case 6:
 
-        local c_list = dock_list2
+        local c_list = ch4_ship3_halts
         local good = good_alias.passa
         if((tool_id != 4096))
           return is_dock_build(pos, tool_id, c_list, good)
@@ -588,7 +555,7 @@ class tutorial.chapter_04 extends basic_chapter
 
       case 7:
         if (tool_id==4108){
-          local c_list = sch_list3 //Lista de todas las paradas de autobus
+          local c_list = ch4_ship3_halts //Lista de todas las paradas de autobus
           local c_dep = ship_depot //Coordeadas del deposito
           local siz = c_list.len()//Numero de paradas
           result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -616,21 +583,22 @@ class tutorial.chapter_04 extends basic_chapter
         local selc = 0
         local load = ship1_load
         local time = ship1_wait
-        local c_list = sch_list1 //[sch_list1[1], sch_list1[0]]
+        local c_list = [coord_fac_4]
+        c_list.append(ch4_ship1_halts[0])
         return compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
       break
       case 5:
         local selc = 0
         local load = ship1_load
         local time = ship1_wait
-        local c_list = sch_list2
+        local c_list = ch4_ship2_halts //sch_list2
         return compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
       break
       case 7:
         local selc = 0
         local load = ship2_load
         local time = ship2_wait
-        local c_list = sch_list3
+        local c_list = ch4_ship3_halts //sch_list3
         return compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line1_name
@@ -660,7 +628,7 @@ class tutorial.chapter_04 extends basic_chapter
         //Para arracar varios vehiculos
         local id_start = ch4_cov_lim1.a
         local id_end = ch4_cov_lim1.b
-        local cir_nr = get_convoy_number_exp(sch_list1[1], depot, id_start, id_end)
+        local cir_nr = get_convoy_number_exp(ch4_ship1_halts[0], depot, id_start, id_end)
         cov -= cir_nr
 
         result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
@@ -674,7 +642,8 @@ class tutorial.chapter_04 extends basic_chapter
           local selc = 0
           local load = ship1_load
           local time = ship1_wait
-          local c_list = sch_list1
+          local c_list = [coord_fac_4]
+          c_list.append(ch4_ship1_halts[0])
           local siz = c_list.len()
           return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
@@ -693,7 +662,7 @@ class tutorial.chapter_04 extends basic_chapter
         //Para arracar varios vehiculos
         local id_start = ch4_cov_lim2.a
         local id_end = ch4_cov_lim2.b
-        local cir_nr = get_convoy_number_exp(sch_list2[1], depot, id_start, id_end)
+        local cir_nr = get_convoy_number_exp(ch4_ship2_halts[1], depot, id_start, id_end)
         cov -= cir_nr
 
         result = is_convoy_correct(depot,cov,veh,good_list,name,st_tile)
@@ -705,7 +674,7 @@ class tutorial.chapter_04 extends basic_chapter
           local selc = 0
           local load = ship1_load
           local time = ship1_wait
-          local c_list = sch_list2
+          local c_list = ch4_ship2_halts
           local siz = c_list.len()
           return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
@@ -729,7 +698,7 @@ class tutorial.chapter_04 extends basic_chapter
           local selc = 0
           local load = ship2_load
           local time = ship2_wait
-          local c_list = sch_list3
+          local c_list = ch4_ship3_halts
           local siz = c_list.len()
           return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
@@ -753,7 +722,7 @@ class tutorial.chapter_04 extends basic_chapter
         break;
       case 2:
         //Para los muelles mrcancias
-        local c_list = dock_list1
+        local c_list = ch4_ship1_halts
         local name = sc_dock_name1
         for(local j =0;j<c_list.len();j++){
           local tile = my_tile(c_list[j])
@@ -790,7 +759,10 @@ class tutorial.chapter_04 extends basic_chapter
 
         if (current_cov> ch4_cov_lim1.a && current_cov< ch4_cov_lim1.b){
           local sched = schedule_x(gl_wt, [])
-          local t_list = is_water_entry(sch_list1)
+          local c_list = [coord_fac_4] //Lista de todas las paradas de autobus
+          c_list.append(ch4_ship1_halts[0])
+
+          local t_list = is_water_entry(c_list)
           for(local j =0;j<t_list.len();j++){
             if(j == 0)
               sched.entries.append(schedule_entry_x(t_list[j], ship1_load, ship1_wait))
@@ -818,8 +790,8 @@ class tutorial.chapter_04 extends basic_chapter
       case 5:
         //Para el canal acuatico
         if (pot0==0){
-          local t1 = my_tile(coord(c1_way.a.x, c1_way.a.y))
-          local t2 = my_tile(sch_list2[1])
+          local t1 = my_tile(coord(way4_cannal[0].x, way4_cannal[0].y))
+          local t2 = my_tile(ch4_ship3_halts[1])
           local way = t1.find_object(mo_way)
           local is_lab1 = t1.find_object(mo_label)
           local is_lab2 = t2.find_object(mo_label)
@@ -835,9 +807,9 @@ class tutorial.chapter_04 extends basic_chapter
           if (way)
             way.unmark()
 
-          local coora = {x = c1_way.a.x, y = c1_way.a.y, z = c1_way.a.z }
-          local coorb = {x = c1_way.b.x, y = c1_way.b.y, z = c1_way.b.z }
-          local coorc = {x = c1_way.c.x, y = c1_way.c.y, z = c1_way.c.z }
+          local coora = {x = way4_cannal[0].x, y = way4_cannal[0].y, z = way4_cannal[0].z }
+          local coorb = {x = way4_cannal[1].x, y = way4_cannal[1].y, z = way4_cannal[1].z }
+          local coorc = {x = way4_cannal[2].x, y = way4_cannal[2].y, z = way4_cannal[2].z }
 
           local t = command_x(tool_build_way)
           t.set_flags(1)
@@ -849,7 +821,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
         //Para el cuarto muelle
         if (pot1==0){
-          local t = my_tile(sch_list2[1])
+          local t = my_tile(ch4_ship2_halts[1])
           t.unmark()
           local label = t.find_object(mo_label)
           if (label){
@@ -864,7 +836,7 @@ class tutorial.chapter_04 extends basic_chapter
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
           local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
-          local t_list = is_water_entry(sch_list2)
+          local t_list = is_water_entry(ch4_ship2_halts)
           local sched = schedule_x(gl_wt, [])
           sched.entries.append(schedule_entry_x(t_list[0], ship1_load, ship1_wait))
           sched.entries.append(schedule_entry_x(t_list[1], 0, 0))
@@ -895,7 +867,7 @@ class tutorial.chapter_04 extends basic_chapter
           local err = t.work(player_x(pl), t_dep, sc_dep_name)
         }
         //Para los muelles Pasajeros
-        local c_list = dock_list2
+        local c_list = ch4_ship3_halts
         local name = sc_dock_name3
         for(local j =0;j<c_list.len();j++){
           local t = my_tile(c_list[j])
@@ -916,7 +888,7 @@ class tutorial.chapter_04 extends basic_chapter
           local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
           local sched = schedule_x(gl_wt, [])
-          local t_list = is_water_entry(sch_list3)
+          local t_list = is_water_entry(ch4_ship3_halts)
           for(local j =0;j<t_list.len();j++){
             if(j == 0)
               sched.entries.append(schedule_entry_x(t_list[j], ship2_load, ship2_wait))

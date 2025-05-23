@@ -992,6 +992,7 @@ class basic_chapter
   function get_convoy_number_exp(coord, c_dep, id_start, id_end, in_dep = false)  //Permite contar los vehiculos en las estaciones /paradas
   {
     local halt = this.my_tile(coord).get_halt()
+    gui.add_message("("+halt+" .. "+coord.tostring()+") .. ??")
     local cov_list = halt.get_convoy_list()
     local cov_nr = 0
     foreach(cov in cov_list) {
@@ -3052,14 +3053,14 @@ class basic_chapter
     local nw_list = []
     local c2d = "coord"
     for (local j = 0; j<siz; j++){
-      local c = list[j]
+      /*local c = list[j]
       local type = typeof(c)
       if(type != c2d) {
         local t = tile_x(c.x, c.y, c.z)
         nw_list.push(t)
         continue
-      }
-      local tile = my_tile(c)
+      }*/
+      local tile = my_tile(list[j])
       local buil = tile.find_object(mo_building)
       local way = tile.find_object(mo_way)
 
