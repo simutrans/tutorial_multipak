@@ -992,7 +992,7 @@ class basic_chapter
   function get_convoy_number_exp(coord, c_dep, id_start, id_end, in_dep = false)  //Permite contar los vehiculos en las estaciones /paradas
   {
     local halt = this.my_tile(coord).get_halt()
-    gui.add_message("("+halt+" .. "+coord.tostring()+") .. ??")
+    //gui.add_message("("+halt+" .. "+coord.tostring()+") .. ??")
     local cov_list = halt.get_convoy_list()
     local cov_nr = 0
     foreach(cov in cov_list) {
@@ -2537,9 +2537,9 @@ class basic_chapter
   {
     local count = 0
     for(local j=0;j<siz;j++){
-      local c = list[j].c
-      local name = list[j].name
-      local good = list[j].good
+      local c = list[j]
+      local name = get_obj_ch5(6)
+      local good = get_good_data(6, 2)
       local t = my_tile(c)
       local label = t.find_object(mo_label)
       local way = t.find_object(mo_way)
@@ -2547,6 +2547,19 @@ class basic_chapter
       local halt = t.get_halt()
 
       //gui.add_message("b"+glsw[j]+" "+j)
+
+      local accept_post = null
+      if ( halt != null ) {
+        accept_post = halt.accepts_good(good_desc_x(good))
+        //gui.add_message(coord3d_to_string(t) + " accept_post " + accept_post)
+        if ( accept_post ) {
+          glsw[j]=1
+          count++
+          if (count==siz) {
+            return true
+          }
+        }
+      }
 
       if(buil && halt){
         local desc = buil.get_desc()
@@ -2625,6 +2638,7 @@ class basic_chapter
     return result
 
   }
+
   function get_build_load_type(desc)
   {
     local list = []
@@ -2664,6 +2678,7 @@ class basic_chapter
     }
     return is_good
   }
+
   function get_good_text(good)
   {
     local tx = ""
@@ -2709,13 +2724,20 @@ class basic_chapter
   {
     local result = 0
     for(local j=0; j<nr; j++){
-      local good = list[j].good
-      local name = list[j].name
-      local c = list[j].c
+      local name = get_obj_ch5(6)
+      local good = get_good_data(6, 2)
+      local c = list[j]
       //gui.add_message(""+glsw[j]+" "+j+" "+nr+" "+c)
       local tile = my_tile(c)
       local buil = tile.find_object(mo_building)
-            local halt = tile.get_halt()
+      local halt = tile.get_halt()
+
+      local accept_post = null
+      if ( halt != null ) {
+        accept_post = halt.accepts_good(good_desc_x(good))
+        //gui.add_message(coord3d_to_string(tile) + " accept_post " + accept_post)
+      }
+
       if(buil){
         local desc = buil.get_desc()
         local halt_name = halt.get_name()
@@ -2727,16 +2749,18 @@ class basic_chapter
           return format(translate(tx), halt_name, tx_good)+" ("+c.tostring()+")."
         }
 
-                local build_name = buil.get_desc().get_name()
-                local st_name = translate(""+name+"")
-                if (name != "" && build_name != name){
+        local build_name = buil.get_desc().get_name()
+        local st_name = translate(""+name+"")
+        if (name != "" && build_name != name){
           local tx = "The extension building for station [%s] must be a [%s], use the 'Remove' tool"
-                    return format(translate(tx), halt_name, st_name )+" ("+c.tostring()+")."
+          return format(translate(tx), halt_name, st_name )+" ("+c.tostring()+")."
         }
+      } else if ( accept_post ) {
+
       }
     }
     for(local j=0; j<nr; j++){
-      local c = list[j].c
+      local c = list[j]
       //gui.add_message("a"+glsw[j])
       if ((tile.x == c.x) && (tile.y == c.y)){
         if (glsw[j]==0){

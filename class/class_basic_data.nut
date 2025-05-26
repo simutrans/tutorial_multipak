@@ -1030,6 +1030,7 @@ function set_loading_capacity(id) {
  *  id 2 - chapter 2 step 6  : bus Pollingwick - Dock
  *  id 3 - chapter 2 step 7  : bus Pollingwick - Malliby
  *  id 4 - chapter 3 step 11 : city train
+ *  id 5 - chapter 4 step 7  : good ship produser -> consumer
  *
  *  1 day   = 2115
  *  1 hour  = 88
@@ -1051,6 +1052,9 @@ function set_waiting_time(id) {
         case 4:
           return 25369
           break
+        case 5:
+          return 42282
+          break
       }
       break
     case "pak64.german":
@@ -1067,6 +1071,9 @@ function set_waiting_time(id) {
         case 4:
           return 2115
           break
+        case 5:
+          return 42282
+          break
       }
       break
     case "pak128":
@@ -1082,6 +1089,9 @@ function set_waiting_time(id) {
           break
         case 4:
           return 25369
+          break
+        case 5:
+          return 42282
           break
       }
       break
@@ -1118,6 +1128,9 @@ function get_good_data(id, select = null) {
           break
         case 5:
           good_n = "Kohle"
+          break
+        case 6:
+          good_n = "Post"
           break
       }
 
