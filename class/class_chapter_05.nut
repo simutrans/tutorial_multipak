@@ -45,6 +45,7 @@ class tutorial.chapter_05 extends basic_chapter
   //transf_list = [coord(148,201), coord(110,192), coord(134,235), coord(130,206)]
   f_power = 0
   f_pow_list = [0,0,0,0]
+  way5_power = [] // coords transformer
 
   /*pow_lim = [ {a = coord(127,196), b = coord(151,204)}, {a = coord(106,189), b = coord(112,201)},
         {a = coord(106,201), b = coord(127,210)}, {a = coord(127,204), b = coord(140,238)}
@@ -54,7 +55,7 @@ class tutorial.chapter_05 extends basic_chapter
 
   //Step 4 =====================================================================================
   st_name = get_obj_ch5(6)
-  obj_list1 = [
+  /*obj_list1 = [
 
           {c = coord(111,182), name = get_obj_ch5(6), good = good_alias.mail},
           {c = coord(113,191), name = get_obj_ch5(6), good = good_alias.mail},
@@ -64,7 +65,7 @@ class tutorial.chapter_05 extends basic_chapter
           {c = coord(121,190), name = get_obj_ch5(6), good = good_alias.mail},
           {c = coord(127,187), name = get_obj_ch5(6), good = good_alias.mail},
           {c = coord(132,190), name = get_obj_ch5(6), good = good_alias.mail}
-        ]
+        ]*/
 
   //sch_list2 = city1_post_halts
         /*[
@@ -116,6 +117,15 @@ class tutorial.chapter_05 extends basic_chapter
     local ta = this.my_tile(sch_list3[0])
     local tb = this.my_tile(sch_list3[0])
     line3_name = translate("Post") + " " + ta.get_halt().get_name() + " - " + tb.get_halt().get_name()
+
+    // search free tile for transformer
+    for ( local i = 0; i < fab_list.len(); i++ ) {
+      local fac_tiles = fab_list[i].c_list
+      //local size = fab_list[i].get_desc().get_building_desc ().get_size(), size
+      local t = search_free_tile(fac_tiles, i+1)
+      way5_power.append(t)
+    }
+
 
     if ( pak_name == "pak128" ) {
       //c_way_lim1.a = coord(127,211)
@@ -207,10 +217,10 @@ class tutorial.chapter_05 extends basic_chapter
           local tran_tx = ""
           for(local j=0;j<way5_power.len();j++){
                 if (glsw[j]==0){
-                    tran_tx +=format("<st>%s %d</st> ", trf_name, j+1) + way5_power[j].href("("+way5_power[j].tostring()+")") + "<br/>"
+                    tran_tx +=format("<st>%s %d</st> ", trf_name, j+1) + way5_power[j].href("("+coord3d_to_string(way5_power[j])+")") + "<br/>"
                 }
                 else {
-                    tran_tx +=format("<em>%s %d</em> ",trf_name ,j+1)+"("+way5_power[j].tostring()+") <em>"+ok_tx+"</em><br/>"
+                    tran_tx +=format("<em>%s %d</em> ",trf_name ,j+1)+"("+coord3d_to_string(way5_power[j])+") <em>"+ok_tx+"</em><br/>"
                 }
             }
           text.tran = tran_tx
@@ -1362,5 +1372,55 @@ class tutorial.chapter_05 extends basic_chapter
     }
   }
 }        // END of class
+
+
+/**
+ *  search free tile for transformer on factory
+ *
+ *  tile_list = factory tile list
+ *  r         = start search direction (1 = west, 2 = south, 3 = east, 4 = north)
+ *
+ *  return tile_x
+ *
+ */
+function search_free_tile(tile_list, r) {
+
+  local xl = tile_list[tile_list.len()-1].x - tile_list[0].x
+  local yl = tile_list[tile_list.len()-1].y - tile_list[0].y
+
+  local tile = null
+
+  gui.add_message("tile search  - " + coord3d_to_string(tile_list[0]))
+
+    switch (r) {
+      case 1:
+        tile = tile_x(tile_list[0].x-1, tile_list[0].y, tile_list[0].z)
+        break
+
+      case 2:
+        tile = tile_x(tile_list[0].x, tile_list[0].y+yl+1, tile_list[tile_list.len()-1].z)
+        break
+
+      case 3:
+        tile = tile_x(tile_list[0].x+xl+1, tile_list[0].y, tile_list[0].z)
+        break
+
+      case 4:
+        tile = tile_x(tile_list[0].x, tile_list[0].y-1, tile_list[0].z)
+        break
+
+      default :
+
+        break
+    }
+
+    if ( test_tile_is_empty(tile) && tile.get_slope() == 0 ) {
+      gui.add_message("tile found  - " + coord3d_to_string(tile))
+      return tile
+    }
+
+
+}
+
 
 // END OF FILE

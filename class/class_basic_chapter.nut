@@ -3385,4 +3385,30 @@ function check_rail_station(tile, rtype, pos = null) {
 
 }
 
+/**
+ * test tile is empty
+ * removed objects for empty tiles: tree, ground_object, moving_object
+ *
+ */
+function test_tile_is_empty(t_tile) {
+  local tile = tile_x(t_tile.x, t_tile.y, t_tile.z)
+
+  local tile_tree = tile.find_object(mo_tree)
+  local tile_groundobj = tile.find_object(mo_groundobj)
+  local tile_moving_object = tile.find_object(mo_moving_object)
+
+  //gui.add_message(" ---=> test_tile " + coord3d_to_string(tile) + " | is_empty " + tile.is_empty() + " | tile_tree " + tile_tree + " | tile_groundobj " + tile_groundobj + " | tile_moving_object " + tile_moving_object)
+
+  if ( tile_tree != null || tile_groundobj != null || tile_moving_object != null ) {
+    local tool = command_x(tool_remover)
+    tool.work(player_x(1), tile, "")
+
+    return true
+  } else if ( tile.is_empty() ) {
+    return true
+  }
+
+  return false
+}
+
 // END OF FILE

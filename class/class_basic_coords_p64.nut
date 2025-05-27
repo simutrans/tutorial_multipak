@@ -249,7 +249,7 @@ way4_cannal   <- [coord3d(140,194,-3), ch4_ship2_halts[1], coord3d(127,194,-1)]
 c_cannel_lim  <- {a = coord(114,194), b = coord(140,194)}
 
 way5_fac7_fac8 <- [coord3d(132,233,0), coord3d(131,209,-1)]//{, dir = 2}
-way5_power     <- [coord(148,201), coord(110,192), coord(134,235), coord(130,206)]
+//way5_power     <- [coord(148,201), coord(110,192), coord(134,235), coord(130,206)]
 
 /**
  *  chapter 5
