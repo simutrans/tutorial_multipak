@@ -199,10 +199,14 @@ class tutorial.chapter_06 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    local percentage=0
 
     save_glsw()
     save_pot()
+
+    local chapter_steps = 4
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
@@ -223,7 +227,7 @@ class tutorial.chapter_06 extends basic_chapter
           else
             c_way = fullway.c
 
-          return 5
+          //return 5
         }
 
         else if (pot0==1 && pot1==0){
@@ -243,7 +247,7 @@ class tutorial.chapter_06 extends basic_chapter
           else
             c_way = fullway.c
 
-          return 10
+          //return 10
         }
 
         else if (pot1==1 && pot2==0){
@@ -256,7 +260,7 @@ class tutorial.chapter_06 extends basic_chapter
             tile.remove_object(player_x(1), mo_label)
             pot2 = 1
           }
-          return 15
+          //return 15
         }
 
         else if (pot2==1 && pot3==0){
@@ -268,7 +272,7 @@ class tutorial.chapter_06 extends basic_chapter
             tile.remove_object(player_x(1), mo_label)
             pot3 = 1
           }
-          return 20
+          //return 20
         }
 
         else if (pot3==1 && pot4==0){
@@ -282,7 +286,7 @@ class tutorial.chapter_06 extends basic_chapter
             tile.remove_object(player_x(1), mo_label)
             pot4 = 1
           }
-          return 25
+          //return 25
         }
         else if (pot4==1 && pot5==0){
           local tile = my_tile(st1_pos)
@@ -290,7 +294,7 @@ class tutorial.chapter_06 extends basic_chapter
           if(buil && buil.get_owner().nr == 1){
             pot5 = 1
           }
-          return 30
+          //return 30
         }
         else if (pot5==1 && pot6==0){
           this.next_step()
@@ -304,7 +308,7 @@ class tutorial.chapter_06 extends basic_chapter
           this.next_step()
         }
 
-        return 50
+        //return 50
         break;
 
       case 3:
@@ -325,7 +329,7 @@ class tutorial.chapter_06 extends basic_chapter
           sch_cov_correct = false
             this.next_step()
         }
-            return 65
+        //return 65
         break;
 
       case 4:
@@ -336,7 +340,7 @@ class tutorial.chapter_06 extends basic_chapter
           if(way && depot){
             pot0 = 1
           }
-          return 25
+          //return 25
         }
         else if (pot0==1 && pot1==0){
           local c_dep = my_tile(c_dep3)
@@ -357,18 +361,18 @@ class tutorial.chapter_06 extends basic_chapter
             this.next_step()
           }
         }
-            return 80
+        //return 80
         break;
 
       case 5:
         this.step=1
         persistent.step=1
         persistent.status.step = 1
-            return 100
+        //return 100
         break;
-      }
-      percentage=(this.step-1)+1
-      return percentage
+    }
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
+    return percentage
   }
 
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {

@@ -221,7 +221,6 @@ class tutorial.chapter_04 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    local percentage=0
     save_pot()
     save_glsw()
 
@@ -229,8 +228,14 @@ class tutorial.chapter_04 extends basic_chapter
     local fac_2 = factory_data.rawget("5")
     local fac_3 = factory_data.rawget("6")
 
+    local chapter_steps = 8
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
+
     switch (this.step) {
       case 1:
+        chapter_sub_steps = 2
         local next_mark = false
         local stop_mark = true
         if(pot0==0 || pot1 == 0){
@@ -246,6 +251,7 @@ class tutorial.chapter_04 extends basic_chapter
           }
         }
         else if (pot2==0 || pot3==0){
+          chapter_sub_steps = 1
           local list = fac_1.c_list
           try {
             next_mark = delay_mark_tile(list)
@@ -260,7 +266,7 @@ class tutorial.chapter_04 extends basic_chapter
         else if (pot3==1 && pot4==0){
           this.next_step()
         }
-        return 5
+        //return 5
         break;
       case 2:
         //Para los Muelles
@@ -275,7 +281,7 @@ class tutorial.chapter_04 extends basic_chapter
           this.next_step()
         }
 
-        return 5
+        //return 5
         break;
       case 3:
         //Para Astillero
@@ -292,7 +298,7 @@ class tutorial.chapter_04 extends basic_chapter
         if (pot1==1){
           this.next_step()
         }
-        return 10+percentage
+        //return 10+percentage
         break
       case 4:
         cov_cir = get_convoy_nr((ch4_cov_lim1.a), d1_cnr)
@@ -301,9 +307,11 @@ class tutorial.chapter_04 extends basic_chapter
           reset_stop_flag()
           this.next_step()
         }
-        return 50
+        //return 50
         break
       case 5:
+        chapter_sub_steps = 3
+
         //Para el canal acuatico
         if (pot0==0){
           //Inicio del canal
@@ -350,6 +358,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
         //Para el cuarto muelle
         else if (pot0==1 && pot1==0){
+          chapter_sub_steps = 2
           local t = my_tile(ch4_ship2_halts[1]) //sch_list2
           local dock4 = t.find_object(mo_building)
           public_label(t, translate("Build a Dock here!."))
@@ -362,6 +371,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
         //Vehiculos en circulacion
         else if (pot1==1 && pot2==0){
+          chapter_sub_steps = 1
           cov_cir = get_convoy_nr((ch4_cov_lim2.a ), d2_cnr)
 
           if (cov_cir==d2_cnr)
@@ -371,7 +381,7 @@ class tutorial.chapter_04 extends basic_chapter
           reset_stop_flag()
           this.next_step()
         }
-        return 65
+        //return 65
         break
       case 6:
         //Para los Muelles
@@ -386,7 +396,7 @@ class tutorial.chapter_04 extends basic_chapter
           this.next_step()
         }
 
-        return 0
+        //return 0
         break
 
       case 7:
@@ -396,23 +406,23 @@ class tutorial.chapter_04 extends basic_chapter
         if(current_cov == ch4_cov_lim3.b){
           this.next_step()
         }
-        return 0
+        //return 0
         break
 
       case 8:
         reset_stop_flag()
         this.next_step()
-        return 0
+        //return 0
         break
 
       case 9:
         this.step=1
         persistent.step=1
         persistent.status.step = 1
-        return 100
+        //return 100
         break
     }
-    percentage=(this.step-1)+1
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
 

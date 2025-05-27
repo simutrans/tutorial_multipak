@@ -39,7 +39,7 @@ class tutorial.chapter_05 extends basic_chapter
   //Para el Camion
   veh2_obj = get_veh_ch5(3)
   veh2_load = 100
-  veh2_wait = 10571
+  veh2_wait = set_waiting_time(6)
   d2_cnr = null //auto started
 
   line1_name = "ch5_l1"
@@ -50,8 +50,8 @@ class tutorial.chapter_05 extends basic_chapter
   sch_list3 = [coord(133,189), coord(168,189)]
   veh3_obj = get_veh_ch5(4)
   veh3_load = 100
-  veh3_wait = 42282
-  c_dep3 = coord(150,190) // depot
+  veh3_wait = set_waiting_time(7)
+  //c_dep3 = coord(150,190) // depot
   d3_cnr = null //auto started
 
   //Script
@@ -271,7 +271,7 @@ class tutorial.chapter_05 extends basic_chapter
         text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
 
         text.list = list_tx
-        text.dep = c_dep3.href("("+c_dep3.tostring()+")")
+        text.dep = ship_depot.href("("+ship_depot.tostring()+")")
         text.ship = translate(veh3_obj)
         text.load = veh3_load
         text.wait = get_wait_time_text(veh3_wait)
@@ -307,7 +307,6 @@ class tutorial.chapter_05 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    local percentage=0
     save_glsw()
     save_pot()
 
@@ -317,6 +316,11 @@ class tutorial.chapter_05 extends basic_chapter
           factory_data.rawget("7"),
           factory_data.rawget("8")
         ]
+
+    local chapter_steps = 4
+    local chapter_step = persistent.step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
@@ -329,8 +333,8 @@ class tutorial.chapter_05 extends basic_chapter
 
           this.next_step()
         }
-        return 0
-      break;
+        //return 0
+        break;
       case 2:
         if (pot0==0){
           local coora = coord3d(way5_fac7_fac8[0].x,way5_fac7_fac8[0].y,way5_fac7_fac8[0].z)
@@ -370,7 +374,7 @@ class tutorial.chapter_05 extends basic_chapter
             label_bord(way5_fac7_fac8_lim.a, way5_fac7_fac8_lim.b, opt, del, text)
 
             pot0=1
-            return 10
+            //return 10
           }
         }
         else if (pot0==1 && pot1==0){
@@ -408,9 +412,10 @@ class tutorial.chapter_05 extends basic_chapter
             this.next_step()
           }
         }
-        return 0
-      break;
+        //return 0
+        break;
       case 3:
+        chapter_sub_steps = 2
         if (pot0==0){
           for(local j=0;j<way5_power.len();j++){
             local tile = my_tile(way5_power[j])
@@ -439,10 +444,11 @@ class tutorial.chapter_05 extends basic_chapter
             for(local j = 0;j<way5_power_lim_del.len();j++){
               label_bord(way5_power_lim_del[j].a, way5_power_lim_del[j].b, opt, del, "X")
             }
-            return 20
+            //return 20
           }
         }
         else if (pot0==1 && pot1 == 0){
+          chapter_sub_step = 1
           local f_list = fab_list
           local pow_list = [0,0,0,0]
           local f_tile_t = my_tile(way5_power[3])
@@ -475,12 +481,13 @@ class tutorial.chapter_05 extends basic_chapter
             }
 
             this.next_step()
-            return 30
+            //return 30
           }
         }
-        return 0
-      break;
+        //return 0
+        break;
       case 4:
+        chapter_sub_steps = 3
         if (pot0==0){
           local player = player_x(1)
           local list = extensions_tiles
@@ -500,8 +507,9 @@ class tutorial.chapter_05 extends basic_chapter
             pot1=1
             reset_glsw()
           }
-                }
+        }
         if (pot1==1 && pot2==0){
+          chapter_sub_step = 2
           local c_dep = this.my_tile(city1_road_depot)
           local line_name = line1_name
           set_convoy_schedule(pl, c_dep, wt_road, line_name)
@@ -520,9 +528,10 @@ class tutorial.chapter_05 extends basic_chapter
             sch_cov_correct = false
             pot2=1
           }
-                }
+        }
         if (pot2==1 && pot3==0){
-          local c_dep = this.my_tile(c_dep3)
+          chapter_sub_step = 1
+          local c_dep = this.my_tile(ship_depot)
           local depot = depot_x(c_dep.x, c_dep.y, c_dep.z)
           local cov_list = depot.get_convoy_list()    //Lista de vehiculos en el deposito
           local convoy = convoy_x(gcov_id)
@@ -537,16 +546,16 @@ class tutorial.chapter_05 extends basic_chapter
             this.next_step()
           }
         }
-        return 80
+        //return 80
         break
       case 5:
         this.step=1
         persistent.step =1
         persistent.status.step = 1
-        return 100
+        //return 100
         break
     }
-    percentage=(this.step-1)+1
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
 
@@ -717,7 +726,7 @@ class tutorial.chapter_05 extends basic_chapter
         if (pot2==1 && pot3==0){
           if (tool_id==4108) {
             local c_list = sch_list3   //Lista de todas las paradas de autobus
-            local c_dep = c_dep3     //Coordeadas del deposito
+            local c_dep = ship_depot     //Coordeadas del deposito
             local siz = c_list.len()   //Numero de paradas
             local wt = wt_water
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -1055,7 +1064,7 @@ class tutorial.chapter_05 extends basic_chapter
 
         if (ok || (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b)){
           local wt = wt_water
-          local c_depot = my_tile(c_dep3)
+          local c_depot = my_tile(ship_depot)
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
           local sched = schedule_x(wt, [])
