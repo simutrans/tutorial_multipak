@@ -27,6 +27,12 @@ c_way3_lim            <- {a = coord(93,198), b = coord(114,198)}
 c_bridge3_limit       <- {a = coord(90,198), b = coord(94,198)}
 c_way3_tun_limit      <- {b = coord(92,194), a = coord(63,202)}
 
+way5_fac7_fac8_lim    <- {a = coord(127,209), b = coord(136,233)}
+way5_power_lim        <- [{a = coord(127,196), b = coord(151,204)}, {a = coord(106,189), b = coord(112,201)},
+                          {a = coord(106,201), b = coord(127,210)}, {a = coord(127,204), b = coord(140,238)}
+                          ]
+way5_power_lim_del    <- [{a = coord(107,201), b = coord(111,201)}, {a = coord(127,202), b = coord(127,209)}, {a = coord(128,204), b = coord(139,204)}]
+
 /**
  *  set tiles for buildings
  *
@@ -147,19 +153,19 @@ ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), t
 
 /**
  *  define depots
- *
- *  road depot must be located one field next to a road
  */
 city1_road_depot  <- coord(124,188) //115,185
 ship_depot        <- coord(150, 190)
-road_depot_ch5    <- coord(131,232)
 
 /**
  *  rail_depot{depot_tile, way_tile}
+ *
+ *  road depot must be located one field next to a road
  */
 ch3_rail_depot1 <- {b = coord(121,164), a = coord(121,163)}
 ch3_rail_depot2 <- {b = coord(94,160), a = coord(93,160)}
 ch3_rail_depot3 <- {b = coord(108,196), a = coord(108,197)}
+ch5_road_depot  <- {a = coord(131,232), b = coord(132,232)}
 
 /**
  *  define bridges
@@ -186,6 +192,9 @@ bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
  *  way3_tun_list, way3_tun_coord = build tunnel city 1 -> city 3
  *
  *  way4_cannal     = cannel to gas station
+ *
+ *  way5_fac7_fac8  = road coal to power plant
+ *  way5_power1     = powerline fac8 to fac
  *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
@@ -236,14 +245,17 @@ way3_cate_list1 <- [ {a = coord3d(55,198,11), b = coord3d(90,198,6), dir = 0, tu
 way4_cannal   <- [coord3d(140,194,-3), ch4_ship2_halts[1], coord3d(127,194,-1)]
 c_cannel_lim  <- {a = coord(114, 194), b = coord(140, 194)}
 
+way5_fac7_fac8 <- [coord3d(132,233,0), coord3d(131,209,-1)]//{, dir = 2}
+
 /**
  *  chapter 5
  *
- *  id    = step
- *  sid   = sub step
- *  hlist = halt list
+ *  extensions_tiles - tiles for post building
  *
  */
+
+extensions_tiles <- [coord(111,182), coord(116,182), coord(121,183), coord(127,187),
+                      coord(132,190), coord(121,190), coord(118,192), coord(113,191)]
 
 /**
  *  set tiles for pos chapter start
@@ -262,4 +274,4 @@ coord_chapter_7 <- city3_tow              // city 3 townhall
  *  coord to arrea
  *
  */
-ch4_curiosity = coord(185,135)
+ch4_curiosity <- coord(185,135)

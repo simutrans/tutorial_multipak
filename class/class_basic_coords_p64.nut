@@ -153,15 +153,14 @@ ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), t
 
 /**
  *  define depots
- *
- *  road depot must be located one field next to a road
  */
 city1_road_depot  <- coord(115,185)
 ship_depot        <- coord(150, 190)
-road_depot_ch5    <- coord(131,232)
 
 /**
  *  rail_depot{depot_tile, way_tile}
+ *
+ *  road depot must be located one field next to a road
  */
 ch3_rail_depot1 <- {b = coord(121,164), a = coord(121,163)}
 ch3_rail_depot2 <- {b = coord(94,160), a = coord(93,160)}
@@ -196,8 +195,6 @@ bridge3_coords <- {a = coord3d(93,198,5), b = coord3d(91,198,5)}
  *
  *  way5_fac7_fac8  = road coal to power plant
  *  way5_power1     = powerline fac8 to fac
- *
- *
  *
  */
 way1_coords <- {a = coord3d(130,160,0), b = coord3d(130,185,0), dir = 3}
@@ -249,7 +246,6 @@ way4_cannal   <- [coord3d(140,194,-3), ch4_ship2_halts[1], coord3d(127,194,-1)]
 c_cannel_lim  <- {a = coord(114,194), b = coord(140,194)}
 
 way5_fac7_fac8 <- [coord3d(132,233,0), coord3d(131,209,-1)]//{, dir = 2}
-//way5_power     <- [coord(148,201), coord(110,192), coord(134,235), coord(130,206)]
 
 /**
  *  chapter 5
