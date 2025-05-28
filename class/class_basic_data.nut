@@ -1026,11 +1026,13 @@ function set_loading_capacity(id) {
 /*
  *  set waiting time
  *
- *  id 1 - chapter 2 step 4  : bus city Pollingwick
- *  id 2 - chapter 2 step 6  : bus Pollingwick - Dock
- *  id 3 - chapter 2 step 7  : bus Pollingwick - Malliby
+ *  id 1 - chapter 2 step  4 : bus city Pollingwick
+ *  id 2 - chapter 2 step  6 : bus Pollingwick - Dock
+ *  id 3 - chapter 2 step  7 : bus Pollingwick - Malliby
  *  id 4 - chapter 3 step 11 : city train
- *  id 5 - chapter 4 step 7  : good ship produser -> consumer
+ *  id 5 - chapter 4 step  7 : good ship produser -> consumer
+ *  id 6 - chapter 5 step  4 : road mail
+ *  id 7 - chapter 5 step  4 : ship oil rig
  *
  *  1 day   = 2115
  *  1 hour  = 88
@@ -1055,6 +1057,12 @@ function set_waiting_time(id) {
         case 5:
           return 42282
           break
+        case 6:
+          return 10571
+          break
+        case 7:
+          return 42282
+          break
       }
       break
     case "pak64.german":
@@ -1074,6 +1082,12 @@ function set_waiting_time(id) {
         case 5:
           return 42282
           break
+        case 6:
+          return 10571
+          break
+        case 7:
+          return 42282
+          break
       }
       break
     case "pak128":
@@ -1091,6 +1105,12 @@ function set_waiting_time(id) {
           return 25369
           break
         case 5:
+          return 42282
+          break
+        case 6:
+          return 10571
+          break
+        case 7:
           return 42282
           break
       }
