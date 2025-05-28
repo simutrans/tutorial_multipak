@@ -1,1 +1,1 @@
-<p>{tx} Im Menü <em>{toolbar}</em> wählen Sie <em>Erweiterungsgebäude</em> für die Post aus und platzieren Sie eines an jedem der folgenden Halte:<br>{st}</p><p><st>Um zum nächsten Schritt zu gelangen</st>, bauen Sie alle Gebäude.</p>
+<p>{tx} Im Menü <em>{toolbar}</em> wählen Sie <em>Erweiterungsgebäude</em> für die Post aus und platzieren Sie eines an jedem der folgenden roten Halte:<br>{st}</p><p><st>Um zum nächsten Schritt zu gelangen</st>, müssen alle Halte Post akzeptieren.</p>
