@@ -224,10 +224,10 @@ class tutorial.chapter_02 extends basic_chapter
           text.tx = ttext("<em>[3/4]</em>")
 
           local tile = my_tile(city2_halt_1[city2_halt_1.len()-1])
-          text.stnam = ""+city2_halt_1.len()+") "+tile.get_halt().get_name()+" ("+coord_to_string(tile)+")"
+          text.stnam = ""+tile.get_halt().get_name()+" ("+coord_to_string(tile)+")"
 
           text.list = create_schedule_list(city2_halt_1)
-          text.nr = city1_halt_2.len()
+          text.nr = city2_halt_1.len()
         }
         else if (pot4==0){
           text = ttextfile("chapter_02/07_4-4.txt")

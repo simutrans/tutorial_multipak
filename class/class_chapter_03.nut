@@ -210,7 +210,7 @@ class tutorial.chapter_03 extends basic_chapter
         break
       case 5:
         text.reached = reached
-        text.t_reach = f1_reached
+        text.t_reach = f1_reached + " " + get_good_data(1, 1)
         text.loc1 = translate(loc1_name_obj)
         text.wag = sc_wag1_nr
         text.tile = loc1_tile
