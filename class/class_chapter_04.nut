@@ -128,28 +128,21 @@ class tutorial.chapter_04 extends basic_chapter
       local c1 = coord(way4_cannal[0].x, way4_cannal[0].y)
       local c2 = coord(way4_cannal[1].x, way4_cannal[1].y)
       if(!correct_cov){
-        local a = 3
-        local b = 3
-        text = ttextfile("chapter_04/05_"+a+"-"+b+".txt")
-        text.tx=ttext("<em>["+a+"/"+b+"]</em>")
+        text = ttextfile("chapter_04/05_3-3.txt")
+        text.tx=ttext("<em>[3/3]</em>")
       }
       else if (pot0==0){
-        local a = 1
-        local b = 3
-        text = ttextfile("chapter_04/05_"+a+"-"+b+".txt")
-        text.tx=ttext("<em>["+a+"/"+b+"]</em>")
+        text = ttextfile("chapter_04/05_1-3.txt")
+        text.tx=ttext("<em>[1/3]</em>")
       }
       else if (pot1==0){
-        local a = 2
-        local b = 3
-        text = ttextfile("chapter_04/05_"+a+"-"+b+".txt")
-        text.tx=ttext("<em>["+a+"/"+b+"]</em>")
+        text = ttextfile("chapter_04/05_2-3.txt")
+        text.tx=ttext("<em>[2/3]</em>")
+        text.cdock = translate(get_obj_ch4(3))
       }
       else if (pot2==0){
-        local a = 3
-        local b = 3
-        text = ttextfile("chapter_04/05_"+a+"-"+b+".txt")
-        text.tx=ttext("<em>["+a+"/"+b+"]</em>")
+        text = ttextfile("chapter_04/05_3-3.txt")
+        text.tx=ttext("<em>[3/3]</em>")
       }
       text.w1 = c1.href(" ("+c1.tostring()+")")+""
       text.w2 = c2.href(" ("+c2.tostring()+")")+""
@@ -193,7 +186,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
       }
       local c = coord(list[0].x, list[0].y)
-      text.stnam = "1) "+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+      text.stnam = ""+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
       text.list = tx_list
       text.ship = translate(ship2_name_obj)
       text.load = ship2_load
