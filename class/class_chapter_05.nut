@@ -192,7 +192,7 @@ class tutorial.chapter_05 extends basic_chapter
       if (pot0==1 && pot1==0){
         text = ttextfile("chapter_05/04_1-3.txt")
         text.tx="<em>[1/3]</em>"
-        text.toolbar = toolbar
+        text.toolbar = translate_objects_list.tools_mail_extension
         local st_tx = ""
         local list = city1_post_halts //extensions_tiles  //Lista de build
         local siz = list.len()
@@ -490,7 +490,21 @@ class tutorial.chapter_05 extends basic_chapter
         chapter_sub_steps = 3
         if (pot0==0){
           local player = player_x(1)
-          local list = extensions_tiles
+          local list = [] //extensions_tiles
+          for ( local i = 0; i < city1_post_halts.len(); i++ ) {
+            // check halts accept mail
+            local good = get_good_data(6, 2)
+            local t = my_tile(city1_post_halts[i])
+            local halt = t.get_halt()
+            if ( halt != null ) {
+              local accept_post = halt.accepts_good(good_desc_x(good))
+              //gui.add_message(coord3d_to_string(t) + " accept_post " + accept_post)
+              if ( !accept_post ) {
+                list.append(extensions_tiles[i])
+              }
+            }
+          }
+
           local obj = mo_building
           local station = false
           local lab_name = translate("Mail Extension Here!.")
@@ -1340,7 +1354,7 @@ function search_free_tile(tile_list, r) {
 
   local tile = null
 
-  gui.add_message("tile search  - " + coord3d_to_string(tile_list[0]))
+  //gui.add_message("tile search  - " + coord3d_to_string(tile_list[0]))
 
     switch (r) {
       case 1:
@@ -1365,7 +1379,7 @@ function search_free_tile(tile_list, r) {
     }
 
     if ( test_tile_is_empty(tile) && tile.get_slope() == 0 ) {
-      gui.add_message("tile found  - " + coord3d_to_string(tile))
+      //gui.add_message("tile found  - " + coord3d_to_string(tile))
       return tile
     }
 

@@ -163,8 +163,10 @@ function translate_objects() {
   // set toolbar with powerline tools
   if ( pak_name == "pak64.german" ) {
     translate_objects_list.rawset("tools_power", translate("POWERLINE"))
+    translate_objects_list.rawset("tools_mail_extension", translate("EXTENSIONS"))
   } else {
     translate_objects_list.rawset("tools_power", translate("SPECIALTOOLS"))
+    translate_objects_list.rawset("tools_mail_extension", translate("SPECIALTOOLS"))
   }
   //gui.add_message("Current: "+translate_objects_list.inspec)
 
