@@ -758,9 +758,9 @@ class astar_builder extends astar
  *
  *
  */
-function test_select_way(start, end, wt) {
+function test_select_way(start, end, wt = wt_rail) {
   //gui.add_message_at("start " + coord3d_to_string(start) + " end " + coord3d_to_string(end) + " t_end " + coord3d_to_string(t_end), start)
-  local asf = astar_route_finder(wt_rail)
+  local asf = astar_route_finder(wt)
   local wayline = asf.search_route([start], [end])
   if ( "err" in wayline ) {
     //gui.add_message_at("no route from " + coord3d_to_string(start) + " to " + coord3d_to_string(end) , start)
