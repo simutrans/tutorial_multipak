@@ -438,7 +438,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         local c = coord(list[0].x, list[0].y)
-        text.stnam = "1) "+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+        text.stnam = ""+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
         text.list = tx_list
         text.dep = ch3_rail_depot3.b.href("("+ch3_rail_depot3.b.tostring()+")")
         text.loc3 = translate(loc3_name_obj)
