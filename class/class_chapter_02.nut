@@ -181,7 +181,7 @@ class tutorial.chapter_02 extends basic_chapter
         text.list = create_schedule_list(city1_halt_2)
 
         local tile = my_tile(city1_halt_2[0])
-        text.stnam = "1) "+tile.get_halt().get_name()+" ("+city1_halt_2[0].tostring()+")"
+        text.stnam = ""+tile.get_halt().get_name()+" ("+city1_halt_2[0].tostring()+")"
 
         local halt = my_tile(city1_halt_2[0]).get_halt()
         text.line = get_line_name(halt)
@@ -400,7 +400,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         if (cov_valid && current_cov == ch2_cov_lim1.b){
-          pot2=1     
+          pot2=1
         }
 
         if (pot2 == 1 ){
@@ -602,7 +602,7 @@ class tutorial.chapter_02 extends basic_chapter
               backward_pot(3)
               break
             }
-          } 
+          }
           else if (pot4==1 && pot5==0){
               //Desmarca la via en la parada
               local way_mark = my_tile(line_connect_halt).find_object(mo_way)
