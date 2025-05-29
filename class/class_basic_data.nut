@@ -183,7 +183,7 @@ function get_veh_ch2_st4() {
       return "BuessingLinie"
       break
     case "pak64.german":
-      return "OpelBlitz"
+      return "BuessingLinie"
       break
     case "pak128":
       return "S_Kroytor_LiAZ-677"
