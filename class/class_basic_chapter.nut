@@ -2772,10 +2772,10 @@ class basic_chapter
           return null
         }
         else
-          return translate("There is already a extension building here")+" ("+c.tostring()+")."
+          return translate("This stop already accepts mail.")+" ("+c.tostring()+")"
       }
       else if (glsw[j]==0)
-        result = translate("Place the extension building at the marked points")+" ("+c.tostring()+")."
+        result = translate("Place the extension building at the marked point")+" ("+c.tostring()+")."
     }
     return result
 
