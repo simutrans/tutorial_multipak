@@ -38,3 +38,7 @@ The waittime in waystop {nr} '{name}' isn't {wait} {pos}
 Depart after in waystop {name} isn't {wait} {pos}
 Translator
 HWRead
+#_________________________________error message_________________________________
+#_________________________________error message_________________________________
+Place the extension building at the marked point
+Place the extension building at the marked points
