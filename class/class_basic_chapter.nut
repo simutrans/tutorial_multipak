@@ -2724,6 +2724,11 @@ class basic_chapter
   {
     local result = 0
     for(local j=0; j<nr; j++){
+
+      if ( glsw[j]==1 ) {
+        continue
+      }
+
       local name = get_obj_ch5(6)
       local good = get_good_data(6, 2)
       local c = list[j]
@@ -2767,10 +2772,10 @@ class basic_chapter
           return null
         }
         else
-          return translate("There is already a stop here")+" ("+c.tostring()+")."
+          return translate("There is already a extension building here")+" ("+c.tostring()+")."
       }
       else if (glsw[j]==0)
-        result = translate("Place the stops at the marked points")+" ("+c.tostring()+")."
+        result = translate("Place the extension building at the marked points")+" ("+c.tostring()+")."
     }
     return result
 
