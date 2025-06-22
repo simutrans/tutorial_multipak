@@ -68,6 +68,8 @@ class basic_chapter
 
   map_siz = world.get_size()
 
+  pl_unown = player_x(15)
+
   constructor(pl)
   {
     scenario.short_description = scenario_name + " - " + translate(this.chapter_name)
@@ -1319,7 +1321,7 @@ class basic_chapter
         if(!way.is_electrified()){
           way.mark()
           if (!tun)
-            label_x.create(coora, player_x(1), translate("Here"))
+            label_x.create(coora, pl_unown, translate("Here"))
           return res
         }
         else{
@@ -1506,7 +1508,7 @@ class basic_chapter
           if(!way.is_electrified()){
             way.mark()
             if (!tun)
-              label_x.create(coora, player_x(1), translate("Here"))
+              label_x.create(coora, pl_unown, translate("Here"))
 
             return res
           }
@@ -2138,7 +2140,7 @@ class basic_chapter
 
             local ribi = way.get_dirs()
             if ((ribi==1)||(ribi==2)||(ribi==4)||(ribi==8)||(ribi==10)||(ribi==5)){
-              label_x.create(c_label, player_x(1), translate(text))
+              label_x.create(c_label, pl_unown, translate(text))
               way.mark()
               local c_sa = coord(c_label.x, c_label.y)
               result.coord[stnr] = {x = c_sa.x, y = c_sa.y}
@@ -2495,7 +2497,6 @@ class basic_chapter
 
   function is_stop_building(siz, c_list, lab_name, good, label_sw = false)
   {
-    local pl_unown = player_x(15)
     local count = 0
     for(local j=0;j<siz;j++){
       local c = c_list[j]
@@ -2873,13 +2874,13 @@ class basic_chapter
           local label1 = tile_x(coor1.x, coor1.y, 0).find_object(mo_label)
           local label2 = tile_x(coor2.x, coor2.y, 0).find_object(mo_label)
           if (!label1){
-            label_x.create(coor1, player_x(1), translate(text))
+            label_x.create(coor1, pl_unown, translate(text))
             local label = tile_x(coor1.x,coor1.y,0).find_object(mo_label)
             if (label)
               label.mark()
           }
           if (!label2){
-            label_x.create(coor2, player_x(1), translate(text))
+            label_x.create(coor2, pl_unown, translate(text))
             local label = tile_x(coor2.x,coor2.y,0).find_object(mo_label)
             if (label)
               label.mark()
@@ -2896,7 +2897,7 @@ class basic_chapter
                 label.mark()
             }
             if (!label2){
-              label_x.create(coor2, player_x(1), translate(text))
+              label_x.create(coor2, pl_unown, translate(text))
               local label = tile_x(coor2.x,coor2.y,0).find_object(mo_label)
               if (label)
                 label.mark()
@@ -2946,7 +2947,7 @@ class basic_chapter
       if (!del){
         for (local j = c_a.x ;j<=c_b.x;j++){
           for (local i = c_a.y;i<=c_b.y;i++){
-            label_x.create(coord(j, i), player_x(1), translate(text))
+            label_x.create(coord(j, i), pl_unown, translate(text))
             local label = tile_x(j,i,0).find_object(mo_label)
             label.mark()
           }
@@ -2971,7 +2972,7 @@ class basic_chapter
             local tile = tile_x(c.x, c.y, c.z)
             local way = tile.find_object(mo_way)
             if (way && way.get_waytype()==wt)
-              label_x.create(c, player_x(1), translate(text))
+              label_x.create(c, pl_unown, translate(text))
           }
         }
       }
@@ -3232,7 +3233,7 @@ class basic_chapter
 
   function public_label(t, name)
   {
-    local pl_unown = player_x(15)
+
     local label = t.find_object(mo_label)
     local cursor = t.find_object(mo_pointer)
 
