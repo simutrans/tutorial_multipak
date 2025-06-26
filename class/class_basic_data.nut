@@ -115,9 +115,9 @@ function rename_factory_names() {
                 factory_data.rawin("7"),
                 factory_data.rawin("8")
     ]*/
-
+/*
       gui.add_message(player_x(1), "factory_data len: "+factory_data.len())
-    /*
+
       gui.add_message(player_x(1), "factory_data rawin 1: "+factory_data.rawin("1"))
       gui.add_message(player_x(1), "factory_data rawin 2: "+factory_data.rawin("2"))
       gui.add_message(player_x(1), "factory_data rawin 3: "+factory_data.rawin("3"))
@@ -126,9 +126,9 @@ function rename_factory_names() {
       gui.add_message(player_x(1), "factory_data rawin 6: "+factory_data.rawin("6"))
       gui.add_message(player_x(1), "factory_data rawin 7: "+factory_data.rawin("7"))
       gui.add_message(player_x(1), "factory_data rawin 8: "+factory_data.rawin("8"))
-    */
-      gui.add_message(player_x(1), "coord_fac_1: "+coord_to_string(coord_fac_1))
 
+      gui.add_message(player_x(1), "coord_fac_1: "+coord_to_string(coord_fac_1))
+*/
 }
 
 /**
