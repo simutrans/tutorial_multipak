@@ -2891,7 +2891,7 @@ class basic_chapter
             label1 = tile_x(coor1.x, coor1.y, 0).find_object(mo_label)
             label2 = tile_x(coor2.x, coor2.y, 0).find_object(mo_label)
             if (!label1){
-              label_x.create(coor1, player_x(1), translate(text))
+              label_x.create(coor1, pl_unown, translate(text))
               local label = tile_x(coor1.x,coor1.y,0).find_object(mo_label)
               if (label)
                 label.mark()

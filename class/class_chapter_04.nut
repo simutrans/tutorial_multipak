@@ -282,7 +282,7 @@ class tutorial.chapter_04 extends basic_chapter
         local depot = t1.find_object(mo_depot_water)
 
         if (!depot){
-          label_x.create(ship_depot, player_x(pl), translate("Build Shipyard here!."))
+          label_x.create(ship_depot, pl_unown, translate("Build Shipyard here!."))
         }
         else{
           t1.remove_object(player_x(1), mo_label)
@@ -313,7 +313,7 @@ class tutorial.chapter_04 extends basic_chapter
           local way_start = t_start.find_object(mo_way)
           if (way_start && way_start.get_desc().get_topspeed()==0){
             t_start.mark()
-            label_x.create(c_start, player_x(1), translate("Build Canal here!."))
+            label_x.create(c_start, pl_unown, translate("Build Canal here!."))
           }
           else{
             t_start.unmark()
@@ -326,7 +326,7 @@ class tutorial.chapter_04 extends basic_chapter
           local way_end = t_end.find_object(mo_way)
           if (way_end &&  way_end.get_desc().get_topspeed()==0){
             t_end.mark()
-            label_x.create(c_end, player_x(1), translate("Build Canal here!."))
+            label_x.create(c_end, pl_unown, translate("Build Canal here!."))
           }
           else{
             t_end.unmark()

@@ -575,14 +575,14 @@ class tutorial.chapter_03 extends basic_chapter
           local limi = my_tile(way2_fac1_fac2[1])
           local tile1 = my_tile(way2_fac1_fac2[0])
           if (!tile1.find_object(mo_way)){
-            label_x.create(way2_fac1_fac2[0], player_x(pl), translate("Build Rails form here"))
+            label_x.create(way2_fac1_fac2[0], pl_unown, translate("Build Rails form here"))
           }
           else
             tile1.remove_object(player_x(1), mo_label)
 
           local tile2 = my_tile(limi)
           if (!tile2.find_object(mo_way)){
-            label_x.create(limi, player_x(pl), translate("Build Rails form here"))
+            label_x.create(limi, pl_unown, translate("Build Rails form here"))
 
             //elimina el cuadro label
             /*local opt = 0
@@ -594,7 +594,7 @@ class tutorial.chapter_03 extends basic_chapter
 
           if (tile2.find_object(mo_label) && r_way.c.x<=limi.x) {
             if (!tile_x(wayend.x, wayend.y, wayend.z).find_object(mo_way)) {
-              label_x.create(wayend, player_x(pl), translate("Build Rails form here"))
+              label_x.create(wayend, pl_unown, translate("Build Rails form here"))
 
             }
             //Creea un cuadro label
@@ -642,8 +642,8 @@ class tutorial.chapter_03 extends basic_chapter
           chapter_sub_step = 1  // sub step finish
           local tile = my_tile(bridge2_coords.a)
           if ((!tile.find_object(mo_bridge))){
-            label_x.create(tile, player_x(pl), translate("Build a Bridge here!."))
-            label_x.create(my_tile(bridge2_coords.b), player_x(pl), translate("Build a Bridge here!."))
+            label_x.create(tile, pl_unown, translate("Build a Bridge here!."))
+            label_x.create(my_tile(bridge2_coords.b), pl_unown, translate("Build a Bridge here!."))
             r_way.c =   coord3d(tile.x, tile.y, tile.z)
           }
           else {
@@ -661,7 +661,7 @@ class tutorial.chapter_03 extends basic_chapter
           local limi = my_tile(coord(way2_fac1_fac2[4].x, way2_fac1_fac2[4].y))
           local tile1 = limi
           if (r_way.c.y > limi.y){
-            label_x.create(limi, player_x(pl), translate("Build Rails form here"))
+            label_x.create(limi, pl_unown, translate("Build Rails form here"))
             //Creea un cuadro label
             local opt = 0
             local del = false
@@ -676,7 +676,7 @@ class tutorial.chapter_03 extends basic_chapter
             local text = "X"
             label_bord(limit_ch3_rail_line_1b.a, limit_ch3_rail_line_1b.b, opt, del, text)
             if (!tile1.find_object(mo_label))
-              label_x.create(way2_fac1_fac2[5], player_x(pl), translate("Build Rails form here"))
+              label_x.create(way2_fac1_fac2[5], pl_unown, translate("Build Rails form here"))
           }
 
           local opt = 0
@@ -754,7 +754,7 @@ class tutorial.chapter_03 extends basic_chapter
             return 0
           }
           if(!tile.find_object(mo_way)){
-            label_x.create(tile, player_x(pl), translate("Build Rails form here"))
+            label_x.create(tile, pl_unown, translate("Build Rails form here"))
           }
           else{
             local stop_mark = true
@@ -825,14 +825,14 @@ class tutorial.chapter_03 extends basic_chapter
           local limi = way2_fac2_fac3[1]
           local tile1 = my_tile(way2_fac2_fac3[0])
           if (!tile1.find_object(mo_way)){
-            label_x.create(way2_fac2_fac3[0], player_x(pl), translate("Build Rails form here"))
+            label_x.create(way2_fac2_fac3[0], pl_unown, translate("Build Rails form here"))
           }
           else
             tile1.remove_object(player_x(1), mo_label)
 
           local tile2 = my_tile(limi)
           if (!tile2.find_object(mo_way)){
-            label_x.create(limi, player_x(pl), translate("Build Rails form here"))
+            label_x.create(limi, pl_unown, translate("Build Rails form here"))
 
             //elimina el cuadro label
             local opt = 0
@@ -844,7 +844,7 @@ class tutorial.chapter_03 extends basic_chapter
 
             tile2.remove_object(player_x(1), mo_label)
             if (!tile_x(wayend.x, wayend.y, wayend.z).find_object(mo_way))
-              label_x.create(wayend, player_x(pl), translate("Build Rails form here"))
+              label_x.create(wayend, pl_unown, translate("Build Rails form here"))
             //Creea un cuadro label
             local opt = 0
             local del = false
@@ -880,7 +880,7 @@ class tutorial.chapter_03 extends basic_chapter
           chapter_sub_step = 1  // sub step finish
           local tile = my_tile(way2_fac2_fac3[2])
           if ((!tile.find_object(mo_tunnel))){
-            label_x.create(way2_fac2_fac3[2], player_x(pl), translate("Place a Tunnel here!."))
+            label_x.create(way2_fac2_fac3[2], pl_unown, translate("Place a Tunnel here!."))
             r_way.c =   coord3d(tile.x, tile.y, tile.z)
           }
           else {
@@ -909,7 +909,7 @@ class tutorial.chapter_03 extends basic_chapter
           local tile1 = my_tile(limi)
           local tile2 = my_tile(way2_fac2_fac3[5])
           if (r_way.c.y < limi.y){
-            label_x.create(limi, player_x(pl), translate("Build Rails form here"))
+            label_x.create(limi, pl_unown, translate("Build Rails form here"))
             //Creea un cuadro label
             local opt = 0
             local del = false
@@ -925,7 +925,7 @@ class tutorial.chapter_03 extends basic_chapter
             label_bord(limit_ch3_rail_line_2b.a, limit_ch3_rail_line_2b.b, opt, del, text)
 
             if (!tile2.find_object(mo_way))
-              label_x.create(way2_fac2_fac3[5], player_x(pl), translate("Build Rails form here"))
+              label_x.create(way2_fac2_fac3[5], pl_unown, translate("Build Rails form here"))
           }
           local opt = 0
           local coora = coord3d(way2_fac2_fac3[3].x, way2_fac2_fac3[3].y, way2_fac2_fac3[3].z)
@@ -1015,7 +1015,7 @@ class tutorial.chapter_03 extends basic_chapter
             return 0
           }
           if(!tile.find_object(mo_way)){
-            label_x.create(tile, player_x(pl), translate("Build Rails form here"))
+            label_x.create(tile, pl_unown, translate("Build Rails form here"))
           }
           else{
             local stop_mark = true
@@ -1075,8 +1075,8 @@ class tutorial.chapter_03 extends basic_chapter
           chapter_sub_step = 1  // sub step finish
           local tile = my_tile(bridge3_coords.a)
           if ((!tile.find_object(mo_bridge))){
-            label_x.create(bridge3_coords.a, player_x(pl), translate("Build a Bridge here!."))
-            label_x.create(my_tile(bridge3_coords.b), player_x(pl), translate("Build a Bridge here!."))
+            label_x.create(bridge3_coords.a, pl_unown, translate("Build a Bridge here!."))
+            label_x.create(my_tile(bridge3_coords.b), pl_unown, translate("Build a Bridge here!."))
             r_way.c =   coord3d(tile.x, tile.y, tile.z)
           }
           else {
@@ -1111,7 +1111,7 @@ class tutorial.chapter_03 extends basic_chapter
               }
             }
             else{
-              label_x.create(way3_tun_coord[0], player_x(pl), translate("Place a Tunnel here!."))
+              label_x.create(way3_tun_coord[0], pl_unown, translate("Place a Tunnel here!."))
             }
           }
           else{
@@ -1183,10 +1183,10 @@ class tutorial.chapter_03 extends basic_chapter
               local tile_b = my_tile(way3_cy1_cy6[j].b)
 
               if (!tile_a.find_object(mo_label))
-                label_x.create(way3_cy1_cy6[j].a, player_x(1), translate("Build Rails form here"))
+                label_x.create(way3_cy1_cy6[j].a, pl_unown, translate("Build Rails form here"))
 
               if (!tile_b.find_object(mo_label))
-                label_x.create(way3_cy1_cy6[j].b, player_x(1), translate("Build Rails form here"))
+                label_x.create(way3_cy1_cy6[j].b, pl_unown, translate("Build Rails form here"))
 
               local coora = coord3d(way3_cy1_cy6[j].a.x, way3_cy1_cy6[j].a.y, way3_cy1_cy6[j].a.z)
               local coorb = coord3d(way3_cy1_cy6[j].b.x, way3_cy1_cy6[j].b.y, way3_cy1_cy6[j].b.z)
@@ -1218,7 +1218,7 @@ class tutorial.chapter_03 extends basic_chapter
               t.find_object(mo_way).mark()
             }
             if ((!t.find_object(mo_signal) && !t.find_object(mo_roadsign) )){
-              label_x.create(way3_sign_list[j].c, player_x(1), translate("Place Singnal here!."))
+              label_x.create(way3_sign_list[j].c, pl_unown, translate("Place Singnal here!."))
               t.find_object(mo_way).mark()
             }
             else{
@@ -1279,7 +1279,7 @@ class tutorial.chapter_03 extends basic_chapter
           chapter_sub_step = 2  // sub step finish
           local tile = my_tile(ch3_rail_depot3.b)
           if (!tile.find_object(mo_depot_rail))
-            label_x.create(ch3_rail_depot3.b, player_x(pl), translate("Build Train Depot here!."))
+            label_x.create(ch3_rail_depot3.b, pl_unown, translate("Build Train Depot here!."))
           else{
             tile.remove_object(player_x(1), mo_label)
             pot2=1
@@ -1943,7 +1943,7 @@ class tutorial.chapter_03 extends basic_chapter
                 return result
             }
             if ((j+1) == ch3_rail_stations.len())
-              return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep3.tostring()+")."
+              return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot3.b.tostring()+")."
           }
           return result
         }
@@ -2821,7 +2821,7 @@ class tutorial.chapter_03 extends basic_chapter
         tile.mark()
         way.mark()
         //if(j!=0 )
-          label_x.create(c_list[j], player_x(0), format(translate("Build station No.%d here!."),j+1))
+          label_x.create(c_list[j], pl_unown, format(translate("Build station No.%d here!."),j+1))
         sw = false
       }
       else {

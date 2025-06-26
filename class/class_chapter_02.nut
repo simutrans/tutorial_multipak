@@ -300,7 +300,7 @@ class tutorial.chapter_02 extends basic_chapter
         if (!way && !label){
           local t1 = command_x(tool_remover)
           local err1 = t1.work(player_x(pl), tile, "")
-          label_x.create(city1_road_depot, player_x(pl), translate("Place the Road here!."))
+          label_x.create(city1_road_depot, pl_unown, translate("Place the Road here!."))
           return 0
         }
         else if ((way)&&(way.get_owner().nr==pl)){
@@ -327,7 +327,7 @@ class tutorial.chapter_02 extends basic_chapter
         local tile = my_tile(city1_road_depot)
         local waydepo = tile.find_object(mo_way)
         if (!tile.find_object(mo_depot_road)){
-          label_x.create(city1_road_depot, player_x(pl), translate("Build a Depot here!."))
+          label_x.create(city1_road_depot, pl_unown, translate("Build a Depot here!."))
         }
         else if (next_mark){
           next_mark = delay_mark_tile(c_list1, stop_mark)
@@ -421,8 +421,8 @@ class tutorial.chapter_02 extends basic_chapter
         local next_mark = true
         if (pot0 == 0){
           if(!label)
-            label_x.create(bridge1_coords.a, player_x(pl), get_label_text(2))
-            label_x.create(bridge1_coords.b, player_x(pl), "")
+            label_x.create(bridge1_coords.a, pl_unown, get_label_text(2))
+            label_x.create(bridge1_coords.b, pl_unown, "")
           try {
              next_mark = delay_mark_tile(t_list_brd)
           }

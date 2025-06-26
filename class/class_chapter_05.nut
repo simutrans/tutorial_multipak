@@ -348,7 +348,7 @@ class tutorial.chapter_05 extends basic_chapter
             if(label.get_text()== "X")
               t_start.remove_object(player_x(1), mo_label)
 
-            label_x.create(t_start, player_x(pl), translate("Place the Road here!."))
+            label_x.create(t_start, pl_unown, translate("Place the Road here!."))
           }
           else t_start.remove_object(player_x(1), mo_label)
 
@@ -357,7 +357,7 @@ class tutorial.chapter_05 extends basic_chapter
             if(label.get_text()== "X")
               t_end.remove_object(player_x(1), mo_label)
 
-            label_x.create(t_end, player_x(pl), translate("Place the Road here!."))
+            label_x.create(t_end, pl_unown, translate("Place the Road here!."))
           }
           else t_end.remove_object(player_x(1), mo_label)
 
@@ -392,7 +392,7 @@ class tutorial.chapter_05 extends basic_chapter
         else if (pot1==1 && pot2==0){
           local tile = my_tile(ch5_road_depot.a)
           if(!tile.find_object(mo_way)){
-            label_x.create(ch5_road_depot.a, player_x(pl), translate("Place the Road here!."))
+            label_x.create(ch5_road_depot.a, pl_unown, translate("Place the Road here!."))
           }
           else {
             if (!tile.find_object(mo_depot_road)){
@@ -426,7 +426,7 @@ class tutorial.chapter_05 extends basic_chapter
               glsw[j]=1
             }
             else
-              label_x.create(way5_power[j], player_x(pl), translate("Transformer Here!."))
+              label_x.create(way5_power[j], pl_unown, translate("Transformer Here!."))
           }
 
           if( glsw[0]==1 && glsw[1]==1 && glsw[2]==1 && glsw[3]==1){
