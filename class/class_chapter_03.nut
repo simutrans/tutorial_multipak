@@ -1267,13 +1267,17 @@ class tutorial.chapter_03 extends basic_chapter
         }
         if (pot0==1 && pot1==0){
           chapter_sub_step = 1  // sub step finish
-          local way = my_tile(ch3_rail_depot3.b).find_object(mo_way)
+          local tile = my_tile(ch3_rail_depot3.b)
+          local way = tile.find_object(mo_way)
           if (way.is_electrified()){
+            tile.remove_object(player_x(1), mo_label)
             way.unmark()
             pot1= 1
           }
-          else
+          else{
+            label_x.create(ch3_rail_depot3.b, pl_unown, translate("Here"))
             way.mark()
+          }
         }
         if (pot1==1 && pot2==0){
           chapter_sub_step = 2  // sub step finish

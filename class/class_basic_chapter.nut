@@ -1317,10 +1317,13 @@ class basic_chapter
     if (!way)
       return res
     if (obj){
+
       if (obj == mo_wayobj){
+
         if(!way.is_electrified()){
           way.mark()
-          if (!tun)
+
+          if (coora.z >=  square_x(coora.x,coora.y).get_ground_tile().z)
             label_x.create(coora, pl_unown, translate("Here"))
           return res
         }
@@ -1507,7 +1510,7 @@ class basic_chapter
         if (obj == mo_wayobj){
           if(!way.is_electrified()){
             way.mark()
-            if (!tun)
+            if (coora.z >=  square_x(coora.x,coora.y).get_ground_tile().z)
               label_x.create(coora, pl_unown, translate("Here"))
 
             return res
