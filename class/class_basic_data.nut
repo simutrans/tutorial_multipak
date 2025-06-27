@@ -48,7 +48,7 @@ function rename_factory_names() {
 
     factory_x(f_tile[0].x, f_tile[0].y).set_name(translate(f_name))
 
-    if ( search_factory_corner(f_tile, coord_fac_1) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_1) ) {
       // Timber plantation
       //translate_objects_list.rawset("fac_1_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
@@ -61,43 +61,43 @@ function rename_factory_names() {
       gui.add_message("factory_data d.rawin: "+d.rawget("c_list"))
       //factory_data.1.rawset(")*/
     }
-    if ( search_factory_corner(f_tile, coord_fac_2) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_2) ) {
       // Saw mill
       translate_objects_list.rawset("fac_2_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
       factory_data.rawset("2", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
-    if ( search_factory_corner(f_tile, coord_fac_3) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_3) ) {
       // Construction Wholesaler
       translate_objects_list.rawset("fac_3_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
       factory_data.rawset("3", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
-    if ( search_factory_corner(f_tile, coord_fac_4) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_4) ) {
       // Oil rig
       translate_objects_list.rawset("fac_4_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
       factory_data.rawset("4", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
-    if ( search_factory_corner(f_tile, coord_fac_5) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_5) ) {
       // Oil refinery
       translate_objects_list.rawset("fac_5_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
       factory_data.rawset("5", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
-    if ( search_factory_corner(f_tile, coord_fac_6) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_6) ) {
       // Gas station
       translate_objects_list.rawset("fac_6_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
       factory_data.rawset("6", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
-    if ( search_factory_corner(f_tile, coord_fac_7) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_7) ) {
       // Coal mine
       translate_objects_list.rawset("fac_7_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
       factory_data.rawset("7", {name = translate(f_name), c_list = t, c = coord(f_tile[0].x, f_tile[0].y)})
     }
-    if ( search_factory_corner(f_tile, coord_fac_8) ) {
+    if ( search_tile_in_tiles(f_tile, coord_fac_8) ) {
       // Coal power station
       translate_objects_list.rawset("fac_8_name", translate(f_name))
       local t = factory_x(f_tile[0].x, f_tile[0].y).get_tile_list()
@@ -132,13 +132,16 @@ function rename_factory_names() {
 }
 
 /**
- *  search corner from factory/building
+ *  check tile in tile array
+ *
+ *  tiles = tile array
+ *  coord = tile as coord
  *
  */
-function search_factory_corner(tiles, fac_coord) {
+function search_tile_in_tiles(tiles, coord) {
 
   for ( local i = 0; i < tiles.len(); i++ ) {
-    if ( tiles[i].x == fac_coord.x && tiles[i].y == fac_coord.y ) {
+    if ( tiles[i].x == coord.x && tiles[i].y == coord.y ) {
       return true
     }
   }
