@@ -131,24 +131,6 @@ function rename_factory_names() {
 */
 }
 
-/**
- *  check tile in tile array
- *
- *  tiles = tile array
- *  coord = tile as coord
- *
- */
-function search_tile_in_tiles(tiles, coord) {
-
-  for ( local i = 0; i < tiles.len(); i++ ) {
-    if ( tiles[i].x == coord.x && tiles[i].y == coord.y ) {
-      return true
-    }
-  }
-
-  return false
-}
-
 /*
  *  translate objects
  *
