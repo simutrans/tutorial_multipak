@@ -1624,7 +1624,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           else if (tool_id==4108){
             if (stop_flag[0]==0)
-              return format(translate("Select station No.%d"),1)+" ("+coord(st3_list[0].x, st3_list[0].y).tostring()+".)"
+              return format(translate("Select station No.%d"),1)+" ("+coord(way2_fac2_fac3[0].x, way2_fac2_fac3[0].y).tostring()+".)"
           }
           //Enrutar vehiculos (estacion nr2)
           if (building && pos.x>=way2_fac2_fac3[4].x && pos.y>=way2_fac2_fac3[4].y && pos.x<=way2_fac2_fac3[5].x && pos.y<=way2_fac2_fac3[5].y){
@@ -1634,17 +1634,17 @@ class tutorial.chapter_03 extends basic_chapter
                 return null
               }
               if (stop_flag[0]==0)
-                return translate("Select the other station first")+" ("+coord(st3_list[0].x, st3_list[0].y).tostring()+".)"
+                return translate("Select the other station first")+" ("+coord(way2_fac2_fac3[0].x, way2_fac2_fac3[0].y).tostring()+".)"
               else if (stop_flag[0]==1 && stop_flag[1]==1)
                 return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
             }
           }
           else if (tool_id==4108){
             if (stop_flag[0]==0)
-              return translate("Select the other station first")+" ("+coord(st3_list[0].x, st3_list[0].y).tostring()+".)"
+              return translate("Select the other station first")+" ("+coord(way2_fac2_fac3[0].x, way2_fac2_fac3[0].y).tostring()+".)"
 
             else if (stop_flag[0]==1 && stop_flag[1]==0)
-              return format(translate("Select station No.%d"),2)+" ("+coord(st4_list[0].x, st4_list[0].y).tostring()+".)"
+              return format(translate("Select station No.%d"),2)+" ("+coord(way2_fac2_fac3[5].x, way2_fac2_fac3[5].y).tostring()+".)"
 
             else if (stop_flag[0]==1 && stop_flag[1]==1)
               return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
