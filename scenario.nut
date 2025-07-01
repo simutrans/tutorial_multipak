@@ -5,6 +5,13 @@
  *  Can NOT be used in network game !
  */
 const nut_path = "class/"             // path to folder with *.nut files
+const version = 2001
+scenario_name               <- "Tutorial Scenario"
+scenario.short_description  = scenario_name
+scenario.author             = "Yona-TYT & Andarix"
+scenario.version            = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10)
+scenario.translation        <- ttext("Translator")
+
 include("set_data")                   // include set data
   switch (pak_name) {
     case "pak64":
@@ -17,23 +24,25 @@ include("set_data")                   // include set data
       include(nut_path+"class_basic_coords_p128")  // include coords def pak128
       break
   }
-include(nut_path+"class_basic_data")  // include class for object data
-translate_objects_list <- {}          // translate list
-translate_objects()                   // add objects to translate list
 
-const version = 2001
-scenario_name               <- "Tutorial Scenario"
-scenario.short_description  = scenario_name
-scenario.author             = "Yona-TYT & Andarix"
-scenario.version            = (version / 1000) + "." + ((version % 1000) / 100) + "." + ((version % 100) / 10) + (version % 10)
-scenario.translation        <- ttext("Translator")
-
-resul_version <- {pak= false , st = false}
+chapter            <- null                    // used later for class
+chapter_max        <- 7                       // amount of chapter
+select_option      <- { x = 0, y = 0, z = 1 } // place of station to control name
+select_option_halt <- null                    // placeholder for halt_x
+tutorial           <- {}                      // placeholder for all chapter CLASS
 
 persistent.version  <- version  // stores version of script
 persistent.select   <- null     // stores user selection
 persistent.chapter  <- 1        // stores chapter number
 persistent.step     <- 1        // stores step number of chapter
+
+include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
+include(nut_path+"class_basic_data")  // include class for object data
+include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
+translate_objects_list <- {}          // translate list
+translate_objects()                   // add objects to translate list
+
+resul_version <- {pak= false , st = false}
 
 persistent.status <- {chapter=1, step=1} // save step y chapter
 
@@ -92,27 +101,17 @@ gui_delay       <- true    //delay for open win
 fail_num        <- 10       //numr for the count of try
 fail_count      <- 1       //if tool fail more of fail_num try
 
-
 //Schedule activate
 active_sch_check <- false
 
-  simu_version  <- "124.3"
-  current_st    <- "0"
-
-include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
+simu_version  <- "124.3"
+current_st    <- "0"
 
 // table containing all system_types
 all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
 
 // Complemento para obtener tiempo de espera
 tick_wait <- 16
-
-chapter            <- null                    // used later for class
-chapter_max        <- 7                       // amount of chapter
-select_option      <- { x = 0, y = 0, z = 1 } // place of station to control name
-select_option_halt <- null                    // placeholder for halt_x
-tutorial           <- {}                      // placeholder for all chapter CLASS
-
 
 //returns pakset name (lower case)
 function get_set_name(name)
@@ -289,7 +288,6 @@ function get_integral(tx)
   //Check version and pakset name
   resul_version = string_analyzer()
   include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
-  include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
   include(nut_path+"class_messages")    // include def messages texts
   include(nut_path+"astar")  // .. route search for way building etc
 
