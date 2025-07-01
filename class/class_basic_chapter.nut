@@ -2802,7 +2802,7 @@ class basic_chapter
   function delete_stop_ex(nr, list, pos)
   {
     for(local j=0;j<nr;j++){
-      local c = list[j].c
+      local c = list[j]
       if (c != null){
         local stop = my_tile(c).find_object(mo_building)
         if ((pos.x == c.x)&&(pos.y == c.y)&&(stop)){

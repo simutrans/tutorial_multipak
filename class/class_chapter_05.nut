@@ -1001,13 +1001,13 @@ class tutorial.chapter_05 extends basic_chapter
         break;
       case 4:
         if (pot0==0){
-                    local pl = 0
-                    local list = extensions_tiles
-                    local obj = mo_building
-                    local station = false
+          local pl = 0
+          local list = extensions_tiles
+          local obj = mo_building
+          local station = false
 
           for(local j=0;j<list.len();j++){
-            local tile = my_tile(list[j].c)
+            local tile = my_tile(list[j])
             local is_obj = tile.find_object(obj)
             local halt = tile.get_halt()
             if (is_obj){
