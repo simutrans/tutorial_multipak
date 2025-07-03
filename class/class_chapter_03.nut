@@ -1619,7 +1619,7 @@ class tutorial.chapter_03 extends basic_chapter
                 return null
               }
               else
-                return translate("Select the other station")+" ("+coord(st4_list[0].x, st4_list[0].y).tostring()+".)"
+                return translate("Select the other station")+" ("+coord(way2_fac2_fac3[5].x, way2_fac2_fac3[5].y).tostring()+".)"
             }
           }
           else if (tool_id==4108){
