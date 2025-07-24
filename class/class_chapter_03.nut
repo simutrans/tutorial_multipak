@@ -304,7 +304,7 @@ class tutorial.chapter_03 extends basic_chapter
               if (glsw[j]==0){
                 c = coord3d(c.x, c.y, c_z)
                 local link = c.href("("+c.tostring()+")")
-                local layer = translate("Layer level")+" = <st>"+(way3_tun_list[0].z)+"</st>"
+                local layer = translate("Layer level")+" = <st>"+(way3_tun_list[j].z)+"</st>"
                 tx_list += ttext("--> <st>" + format("[%d]</st> %s %s<br>", j+1, link, layer))
                 text.lev = way3_tun_list[0].z
                 text.tunn = link
@@ -315,7 +315,7 @@ class tutorial.chapter_03 extends basic_chapter
                 local link = c.href("("+c.tostring()+")")
                 local tx_ok = translate("OK")
                 local tx_coord = "("+coord(way3_tun_list[j].x, way3_tun_list[j].y).tostring()+","+c_z+")"
-                local layer = translate("Layer level")+" = "+(way3_tun_list[0].z)+""
+                local layer = translate("Layer level")+" = "+(way3_tun_list[j].z)+""
                 tx_list += ttext("<em>"+format("<em>[%d]</em> %s", j+1, tx_coord+" "+layer+" <em>"+tx_ok+"</em><br>"))
                 text.lev = way3_tun_list[0].z
                 text.tunn = link
