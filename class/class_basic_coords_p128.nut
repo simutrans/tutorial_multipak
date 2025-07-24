@@ -243,10 +243,10 @@ way3_cate_list1 <- [ {a = coord3d(55,198,11), b = way3_tun_coord[0], dir = 0, tu
                    ]
 
 // dock raffenery - cannal stop - cannel way build
-way4_cannal <- [coord3d(140,194,-3), coord3d(114,194,1), coord3d(127,193,-1)}
+way4_cannal <- [coord3d(140,194,-3), coord3d(114,194,1), coord3d(127,193,-1)]
 c_cannel_lim  <- {a = coord(114, 193), b = coord(140, 194)}
 
-way5_fac7_fac8 <- [coord3d(132,233,0), coord3d(132,211,0))]//{, dir = 2}
+way5_fac7_fac8 <- [coord3d(132,233,0), coord3d(132,211,0)]//{, dir = 2}
 
 /**
  *  chapter 5
