@@ -206,7 +206,7 @@ limit_ch3_rail_line_1a  <- {a = coord(105, 153), b = coord(122, 166)}
 limit_ch3_rail_line_1b  <- {a = coord(95, 154), b = coord(103, 160)}
 
 // start - 5 tiles after start - tunnel tile - tunnel tile - 5 tiles before the end - end
-way2_fac2_fac3 <- [coord3d(94,155,2), coord3d(94,160,2), coord3d(95,172,3), coord3d(104,172,3), coord3d(109,184,2), coord3d(109,189,2)]
+way2_fac2_fac3 <- [coord3d(94,155,2), coord3d(94,160,2), coord3d(96,172,3), coord3d(104,172,3), coord3d(109,184,2), coord3d(109,189,2)]
 limit_ch3_rail_line_2a  <- {a = coord(91,159), b = coord(97,174)}
 limit_ch3_rail_line_2b  <- {a = coord(102, 171), b = coord(110, 187)}
 
