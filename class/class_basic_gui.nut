@@ -45,12 +45,18 @@ function general_disabled_tools( pl ) {
                           tool_increase_industry,
                           tool_merge_stop,
                           dialog_enlarge_map,
-                          tool_raise_land,
-                          tool_lower_land,
-                          tool_restoreslope,
-                          4143, //generate script            
+                          4143, //generate script
                           4144  //pipette
   ]
+
+  // chapter 7 all slope tools allowed
+  if ( persistent.chapter < 7 ) {
+    local slope_tools = [ tool_raise_land,
+                          tool_lower_land,
+                          tool_restoreslope
+                          ]
+    unused_tools.extend(slope_tools)
+  }
 
   local pak64_tools = [ 0x8004, 0x8005, 0x4022, tool_set_climate ]
   local pak64german_tools = [ 0x800b, 0x800c, 0x800d, 0x8013, 0x8014, 0x8015, 0x8023, 0x8025, 0x8027, 0x8007, 0x8006 ]
@@ -1088,7 +1094,7 @@ function chapter_step_enabled_tools( pl ) {
         case 5:
           rules.clear()
           break
-      }		    
+      }
 
       break
 
