@@ -472,7 +472,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         local c_dep = this.my_tile(city1_road_depot)
         local line_name = line2_name //"Test 2"
-        set_convoy_schedule(pl,c_dep, gl_wt, line_name)
+        //set_convoy_schedule(pl,c_dep, gl_wt, line_name)
 
         local id_start = 1
         local id_end = 3
