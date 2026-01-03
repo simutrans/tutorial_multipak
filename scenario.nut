@@ -35,6 +35,10 @@ persistent.version  <- version  // stores version of script
 persistent.select   <- null     // stores user selection
 persistent.chapter  <- 1        // stores chapter number
 persistent.step     <- 1        // stores step number of chapter
+// set for check automatic jump steps
+persistent.ch_max_steps      <- 1  // stores chapter max steps
+persistent.ch_max_sub_steps  <- 0  // stores chapter max sub steps
+persistent.ch_sub_step       <- 0  // stores actual chapter sub steps
 
 include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
 include(nut_path+"class_basic_data")  // include class for object data
@@ -317,6 +321,7 @@ function script_text()
   if(scr_jump)
     // already jumping
     return null
+
   pending_call = true   // indicate that we want to skip to next step
   return null
 }
@@ -522,6 +527,45 @@ function labels_text_debug()
 }
 
 
+  /*
+   *  calculate percentage chapter complete
+   *
+   *  ch_steps  = count chapter steps
+   *  step      = actual chapter step
+   *  sup_steps = count sub steps in a chapter step
+   *  sub_step  = actual sub step in a chapter step
+   *
+   *  no sub steps in chapter step, then set sub_steps and sub_step to 0
+   *
+   * This function is called during a step() and can alter the map
+   *
+   */
+  function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
+  {
+    local percentage_step = 100 / ch_steps
+
+    local percentage = percentage_step * ch_step
+
+    local percentage_sub_step = 0
+    if ( sub_steps > 0 && sub_step > 0) {
+      percentage_sub_step = (percentage_step / sub_steps ) * sub_step
+      percentage += percentage_sub_step
+    }
+
+    if ( ch_step <= ch_steps ) {
+      percentage -= percentage_step
+    }
+
+    //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
+
+    // tutorial finish
+    if ( tutorial.len() == persistent.chapter && ch_steps == ch_step && sub_steps == sub_step ) {
+      percentage = 100
+    }
+
+    return percentage
+  }
+
 /**
   * This function check whether finished or not
   * Is runs in a step, so it can alter the map
@@ -599,15 +643,40 @@ function is_scenario_completed(pl)
 
   chapter.step = persistent.step
 
-  if (pending_call) {
-    // since we cannot alter the map in a sync_step
-    pending_call = false
-    scr_jump = true // we are during a jump ...
-    chapter.script_text()
-    scr_jump = false
+  local percentage = chapter.is_chapter_completed(pl)
+
+  // check for automatic step
+  if ( pending_call ) {
+    //gui.add_message("check automaric jump : percentage " + percentage)
+    //gui.add_message(" : chapter.step " + chapter.step)
+    //gui.add_message(" : persistent.ch_max_sub_steps " + persistent.ch_max_sub_steps)
+    //gui.add_message(" : persistent.ch_sub_step " + persistent.ch_sub_step)
+
+    local percentage_step = chapter_percentage(persistent.ch_max_steps, chapter.step, persistent.ch_max_sub_steps, persistent.ch_sub_step)
+    //gui.add_message(" : percentage_step " + percentage_step)
+
+    local jump_step = false
+    if ( chapter.step == 1 && percentage >= 0 ) {
+      jump_step = true
+    } else if ( percentage >= 100 ) {
+      jump_step = true
+    } else if ( percentage == percentage_step ) {
+      jump_step = true
+    }
+
+    if ( jump_step ){
+
+      // since we cannot alter the map in a sync_step
+      pending_call = false
+      scr_jump = true // we are during a jump ...
+      chapter.script_text()
+      scr_jump = false
+
+    }
+
+
   }
 
-  local percentage = chapter.is_chapter_completed(pl)
   gl_percentage = percentage
   persistent.gl_percentage = gl_percentage
 

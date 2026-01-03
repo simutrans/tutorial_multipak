@@ -317,10 +317,10 @@ class tutorial.chapter_05 extends basic_chapter
           factory_data.rawget("8")
         ]
 
-    local chapter_steps = 4
+    persistent.ch_max_steps = 4
     local chapter_step = persistent.step
-    local chapter_sub_steps = 0 // count all sub steps
-    local chapter_sub_step = 0  // actual sub step
+    persistent.ch_max_sub_steps = 0 // count all sub steps
+    persistent.ch_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
@@ -415,7 +415,7 @@ class tutorial.chapter_05 extends basic_chapter
         //return 0
         break;
       case 3:
-        chapter_sub_steps = 2
+        persistent.ch_max_sub_steps = 2
         if (pot0==0){
           for(local j=0;j<way5_power.len();j++){
             local tile = my_tile(way5_power[j])
@@ -448,7 +448,7 @@ class tutorial.chapter_05 extends basic_chapter
           }
         }
         else if (pot0==1 && pot1 == 0){
-          chapter_sub_step = 1
+          persistent.ch_sub_step = 1
           local f_list = fab_list
           local pow_list = [0,0,0,0]
           local f_tile_t = my_tile(way5_power[3])
@@ -487,7 +487,7 @@ class tutorial.chapter_05 extends basic_chapter
         //return 0
         break;
       case 4:
-        chapter_sub_steps = 3
+        persistent.ch_max_sub_steps = 3
         if (pot0==0){
           local player = player_x(1)
           local list = [] //extensions_tiles
@@ -523,7 +523,7 @@ class tutorial.chapter_05 extends basic_chapter
           }
         }
         if (pot1==1 && pot2==0){
-          chapter_sub_step = 2
+          persistent.ch_sub_step = 2
           local c_dep = this.my_tile(city1_road_depot)
           local line_name = line1_name
           set_convoy_schedule(pl, c_dep, wt_road, line_name)
@@ -544,7 +544,7 @@ class tutorial.chapter_05 extends basic_chapter
           }
         }
         if (pot2==1 && pot3==0){
-          chapter_sub_step = 1
+          persistent.ch_sub_step = 1
           local c_dep = this.my_tile(ship_depot)
           local depot = depot_x(c_dep.x, c_dep.y, c_dep.z)
           local cov_list = depot.get_convoy_list()    //Lista de vehiculos en el deposito
@@ -569,7 +569,7 @@ class tutorial.chapter_05 extends basic_chapter
         //return 100
         break
     }
-    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
+    local percentage = chapter_percentage(persistent.ch_max_steps, chapter_step, persistent.ch_max_sub_steps, persistent.ch_sub_step)
     return percentage
   }
 

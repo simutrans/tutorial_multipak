@@ -99,45 +99,6 @@ class basic_chapter
     return text.tostring()
   }
 
-  /*
-   *  calculate percentage chapter complete
-   *
-   *  ch_steps  = count chapter steps
-   *  step      = actual chapter step
-   *  sup_steps = count sub steps in a chapter step
-   *  sub_step  = actual sub step in a chapter step
-   *
-   *  no sub steps in chapter step, then set sub_steps and sub_step to 0
-   *
-   * This function is called during a step() and can alter the map
-   *
-   */
-  function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
-  {
-    local percentage_step = 100 / ch_steps
-
-    local percentage = percentage_step * ch_step
-
-    local percentage_sub_step = 0
-    if ( sub_steps > 0 && sub_step > 0) {
-      percentage_sub_step = (percentage_step / sub_steps ) * sub_step
-      percentage += percentage_sub_step
-    }
-
-    if ( ch_step <= ch_steps ) {
-      percentage -= percentage_step
-    }
-
-    //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
-
-    // tutorial finish
-    if ( tutorial.len() == persistent.chapter && ch_steps == ch_step && sub_steps == sub_step ) {
-      percentage = 100
-    }
-
-    return percentage
-  }
-
   function is_chapter_completed(pl)
   {
     local percentage = 0
@@ -517,7 +478,7 @@ class basic_chapter
 
   function give_ttext(text,coord)   // coord=coord3d or cube={ne,se}  ttext with {pos} or {cube}
   {
-        local result = ttext(text)
+    local result = ttext(text)
     local modus = true
     try { coord.x } catch(coord) { modus = false }
     if (modus)
@@ -557,13 +518,13 @@ class basic_chapter
   function cube_to_text(cube)
   {
     return "("+cube.nw.x+","+cube.nw.y+","+cube.nw.z+" - "+cube.se.x+","+cube.se.y+","+cube.se.z+")"
-    }
+  }
 
   function pos_to_text(pos)
   {
     local cd = coord(pos.x,pos.y)
     return "("+cd.tostring()+")"
-    }
+  }
 
 
   function my_tile(coord)

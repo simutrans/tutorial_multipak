@@ -221,14 +221,14 @@ class tutorial.chapter_04 extends basic_chapter
     local fac_2 = factory_data.rawget("5")
     local fac_3 = factory_data.rawget("6")
 
-    local chapter_steps = 8
+    persistent.ch_max_steps = 8
     local chapter_step = persistent.step
-    local chapter_sub_steps = 0 // count all sub steps
-    local chapter_sub_step = 0  // actual sub step
+    persistent.ch_max_sub_steps = 0 // count all sub steps
+    persistent.ch_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
-        chapter_sub_steps = 2
+        persistent.ch_max_sub_steps = 2
         local next_mark = false
         local stop_mark = true
         if(pot0==0 || pot1 == 0){
@@ -244,7 +244,7 @@ class tutorial.chapter_04 extends basic_chapter
           }
         }
         else if (pot2==0 || pot3==0){
-          chapter_sub_steps = 1
+          persistent.ch_sub_step = 1
           local list = fac_1.c_list
           try {
             next_mark = delay_mark_tile(list)
@@ -262,6 +262,7 @@ class tutorial.chapter_04 extends basic_chapter
         //return 5
         break;
       case 2:
+        persistent.ch_max_sub_steps = 0
         //Para los Muelles
         local siz = ch4_ship1_halts.len()
         local c_list = ch4_ship1_halts
@@ -303,7 +304,8 @@ class tutorial.chapter_04 extends basic_chapter
         //return 50
         break
       case 5:
-        chapter_sub_steps = 3
+        persistent.ch_max_sub_steps = 3
+        persistent.ch_sub_step = 0
 
         //Para el canal acuatico
         if (pot0==0){
@@ -351,7 +353,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
         //Para el cuarto muelle
         else if (pot0==1 && pot1==0){
-          chapter_sub_steps = 2
+          persistent.ch_sub_step = 2
           local t = my_tile(ch4_ship2_halts[1]) //sch_list2
           local dock4 = t.find_object(mo_building)
           public_label(t, translate("Build a Dock here!."))
@@ -364,7 +366,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
         //Vehiculos en circulacion
         else if (pot1==1 && pot2==0){
-          chapter_sub_steps = 1
+          persistent.ch_sub_step = 1
           cov_cir = get_convoy_nr((ch4_cov_lim2.a ), d2_cnr)
 
           if (cov_cir==d2_cnr)
@@ -415,7 +417,7 @@ class tutorial.chapter_04 extends basic_chapter
         //return 100
         break
     }
-    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
+    local percentage = chapter_percentage(persistent.ch_max_steps, chapter_step, persistent.ch_max_sub_steps, persistent.ch_sub_step)
     return percentage
   }
 

@@ -277,10 +277,10 @@ class tutorial.chapter_02 extends basic_chapter
     save_glsw()
     save_pot()
 
-    local chapter_steps = 8
+    persistent.ch_max_steps = 8
     local chapter_step = persistent.step
-    local chapter_sub_steps = 0 // count all sub steps
-    local chapter_sub_step = 0  // actual sub step
+    persistent.ch_max_sub_steps = 0 // count all sub steps
+    persistent.ch_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
@@ -468,7 +468,7 @@ class tutorial.chapter_02 extends basic_chapter
         break
 
       case 6:
-        chapter_sub_steps = 2
+        persistent.ch_max_sub_steps = 2
 
         local c_dep = this.my_tile(city1_road_depot)
         local line_name = line2_name //"Test 2"
@@ -486,7 +486,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         //gui.add_message("current_cov "+current_cov+" cov_nr "+cov_nr+" all_result "+all_result+" all_result.cov "+all_result.cov)
         if ( cov_nr>=1 ) {
-          chapter_sub_step = 1  // sub step finish
+          persistent.ch_sub_step = 1  // sub step finish
         }
 
         if (current_cov==ch2_cov_lim2.b){
@@ -503,7 +503,7 @@ class tutorial.chapter_02 extends basic_chapter
         break
 
       case 7:
-        chapter_sub_steps = 3
+        persistent.ch_max_sub_steps = 3
 
         if (pot0==0){
 
@@ -536,7 +536,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         else if (pot1==1 && pot2==0){
-          chapter_sub_step = 1  // sub step finish
+          persistent.ch_sub_step = 1  // sub step finish
           //Comprueba la conexion de la via
           local coora = coord3d(way1_coords.a.x,way1_coords.a.y,way1_coords.a.z)
           local coorb = coord3d(way1_coords.b.x,way1_coords.b.y,way1_coords.b.z)
@@ -571,7 +571,7 @@ class tutorial.chapter_02 extends basic_chapter
         }
 
         else if (pot2==1) {
-          chapter_sub_step = 2  // sub step finish
+          persistent.ch_sub_step = 2  // sub step finish
           local c_dep = this.my_tile(city1_road_depot)
           local line_name = line3_name //"Test 3"
           set_convoy_schedule(pl, c_dep, gl_wt, line_name)
@@ -645,7 +645,7 @@ class tutorial.chapter_02 extends basic_chapter
         //return 100
         break
     }
-    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
+    local percentage = chapter_percentage(persistent.ch_max_steps, chapter_step, persistent.ch_max_sub_steps, persistent.ch_sub_step)
     return percentage
   }
 

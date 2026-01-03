@@ -203,10 +203,10 @@ class tutorial.chapter_06 extends basic_chapter
     save_glsw()
     save_pot()
 
-    local chapter_steps = 4
+    persistent.ch_max_steps = 4
     local chapter_step = persistent.step
-    local chapter_sub_steps = 0 // count all sub steps
-    local chapter_sub_step = 0  // actual sub step
+    persistent.ch_max_sub_steps = 0 // count all sub steps
+    persistent.ch_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
@@ -371,7 +371,7 @@ class tutorial.chapter_06 extends basic_chapter
         //return 100
         break;
     }
-    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
+    local percentage = chapter_percentage(persistent.ch_max_steps, chapter_step, persistent.ch_max_sub_steps, persistent.ch_sub_step)
     return percentage
   }
 
