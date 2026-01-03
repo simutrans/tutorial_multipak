@@ -397,6 +397,11 @@ class tutorial.chapter_02 extends basic_chapter
           }
           local all_result = checks_convoy_schedule(convoy, pl)
           sch_cov_correct = all_result.res == null ? true : false
+
+          if(!all_result.cov ){
+            reset_glsw()
+          }
+
         }
 
         if (cov_valid && current_cov == ch2_cov_lim1.b){
@@ -472,7 +477,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         local c_dep = this.my_tile(city1_road_depot)
         local line_name = line2_name //"Test 2"
-        //set_convoy_schedule(pl,c_dep, gl_wt, line_name)
+        set_convoy_schedule(pl, c_dep, gl_wt, line_name)
 
         local id_start = 1
         local id_end = 3
@@ -1091,7 +1096,7 @@ class tutorial.chapter_02 extends basic_chapter
           tile = my_tile(bridge1_coords.b)
           tile.remove_object(player_x(1), mo_label)
           local t = command_x(tool_build_bridge)
-          t.set_flags(2)
+
           local err = t.work(player_x(pl), my_tile(bridge1_coords.a), my_tile(bridge1_coords.b), sc_bridge_name)
         }
 

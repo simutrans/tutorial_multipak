@@ -2161,7 +2161,7 @@ class tutorial.chapter_03 extends basic_chapter
           t_start.remove_object(player_x(1), mo_label)
 
           local t = command_x(tool_build_bridge)
-          t.set_flags(2)
+
           local err = t.work(player, t_start, t_end, sc_bridge_name)
         }
         //Segundo tramo de rieles
@@ -2483,7 +2483,7 @@ class tutorial.chapter_03 extends basic_chapter
           t_start.remove_object(player_x(1), mo_label)
 
           local t = command_x(tool_build_bridge)
-          t.set_flags(2)
+
           local err = t.work(player, t_start, t_end, sc_bridge_name)
           pot1=1
         }
