@@ -794,7 +794,7 @@ class tutorial.chapter_05 extends basic_chapter
           local c_list = city1_post_halts
           result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
           if(result == null){
-            local line_name = line1_name
+            local line_name = line2_name
             update_convoy_schedule(pl, wt_road, line_name, schedule)
           }
         }
