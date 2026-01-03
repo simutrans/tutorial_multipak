@@ -570,6 +570,9 @@ class tutorial.chapter_06 extends basic_chapter
     local result=null // null is equivalent to 'allowed'
     switch (this.step) {
       case 2:
+        if ( schedule.waytype != wt_air )
+          result = translate("Only road schedules allowed")
+
         reset_glsw()
 
         local selc = 0
@@ -579,12 +582,13 @@ class tutorial.chapter_06 extends basic_chapter
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
         if(result == null){
           local line_name = line1_name
-          update_convoy_schedule(pl, wt_road, line_name, schedule)
+          update_convoy_schedule(pl, wt_air, line_name, schedule)
         }
       break
       case 3:
         if ( schedule.waytype != wt_road )
           result = translate("Only road schedules allowed")
+
         local selc = 0
         local load = veh1_load
         local time = veh1_wait
