@@ -767,13 +767,14 @@ class tutorial.chapter_05 extends basic_chapter
 
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
-    if ( (pl == 0) && (schedule.waytype != wt_road) )
-      result = translate("Only road schedules allowed")
 
     local nr = schedule.entries.len()
 
     switch (this.step) {
       case 2:
+        if ( (pl == 0) && (schedule.waytype != wt_road) )
+          result = translate("Only road schedules allowed")
+
         local selc = 0
         local load = veh1_load
         local time = veh1_wait
@@ -784,6 +785,9 @@ class tutorial.chapter_05 extends basic_chapter
       break
       case 4:
         if (current_cov> ch5_cov_lim2.a && current_cov< ch5_cov_lim2.b){
+          if ( (pl == 0) && (schedule.waytype != wt_road) )
+            result = translate("Only road schedules allowed")
+
           local selc = 0
           local load = veh2_load
           local time = veh2_wait
@@ -795,6 +799,9 @@ class tutorial.chapter_05 extends basic_chapter
           }
         }
         else if (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b){
+          if ( (pl == 0) && (schedule.waytype != wt_water) )
+            result = translate("Only water schedules allowed")
+
           local selc = 0
           local load = veh3_load
           local time = veh3_wait
