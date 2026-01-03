@@ -571,7 +571,7 @@ class tutorial.chapter_06 extends basic_chapter
     switch (this.step) {
       case 2:
         if ( schedule.waytype != wt_air )
-          result = translate("Only road schedules allowed")
+          result = translate("Only air schedules allowed")
 
         reset_glsw()
 
