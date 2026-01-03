@@ -584,6 +584,7 @@ class tutorial.chapter_06 extends basic_chapter
           local line_name = line1_name
           update_convoy_schedule(pl, wt_air, line_name, schedule)
         }
+        return result
       break
       case 3:
         if ( schedule.waytype != wt_road )
