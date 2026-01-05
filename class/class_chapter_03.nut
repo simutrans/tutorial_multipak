@@ -271,6 +271,10 @@ class tutorial.chapter_03 extends basic_chapter
         text.wag = sc_wag2_nr
         text.tile = loc2_tile
         text.load = loc2_load
+        local tile = my_tile(way2_fac2_fac3[0])
+        text.stnam1 = tile.href(""+tile.get_halt().get_name())
+        tile = my_tile(way2_fac2_fac3[way2_fac2_fac3.len()-1])
+        text.stnam2 = tile.href(""+tile.get_halt().get_name())
         text.wait = get_wait_time_text(loc2_wait)
         text.w1 = ch3_rail_depot2.a.href("("+ch3_rail_depot2.a.tostring()+")")
         text.w2 = ch3_rail_depot2.b.href("("+ch3_rail_depot2.b.tostring()+")")
