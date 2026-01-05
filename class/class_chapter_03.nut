@@ -215,6 +215,10 @@ class tutorial.chapter_03 extends basic_chapter
         text.wag = sc_wag1_nr
         text.tile = loc1_tile
         text.load = loc1_load
+        local tile = my_tile(way2_fac1_fac2[0])
+        text.stnam1 = ""+tile.get_halt().get_name()
+        tile = my_tile(way2_fac1_fac2[way2_fac1_fac2.len()-1])
+        text.stnam2 = ""+tile.get_halt().get_name()
         text.wait = get_wait_time_text(loc1_wait)
         break
       case 6:
