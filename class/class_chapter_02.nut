@@ -491,7 +491,7 @@ class tutorial.chapter_02 extends basic_chapter
           reset_glsw()
         }
 
-        gui.add_message("current_cov "+current_cov+" cov_nr "+cov_nr+" all_result "+all_result+" all_result.cov "+all_result.cov)
+        //gui.add_message("current_cov "+current_cov+" cov_nr "+cov_nr+" all_result "+all_result+" all_result.cov "+all_result.cov)
         if ( cov_nr>=1 ) {
           persistent.ch_sub_step = 1  // sub step finish
         }
