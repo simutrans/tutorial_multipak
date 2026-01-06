@@ -99,6 +99,7 @@ coord_st_1 <- coord(117,197)
  *  used chapter 6
  *    city1_city7_air
  *    city1_halt_airport
+ *    city1_halt_airport_extension
  *    city7_halt
  *
  *  used chapter 7
@@ -138,6 +139,9 @@ for ( local i = 0; i < city1_halt_1.len(); i++ ) {
 }
 
 city1_city7_air <- [coord(114,176), coord(168,489)]
+city1_halt_airport <- [coord(114,176)]
+city1_halt_airport_extension <- [coord(115,177)]
+
 city7_halt <- [ coord(168,490), coord(160,493), coord(155,493), coord(150,494), coord(154,500), coord(159,499),
           coord(164,498), coord(166,503), coord(171,501), coord(176,501), coord(173,493)]
 
@@ -159,6 +163,7 @@ ship_depot        <- coord(150, 190)
 
 /**
  *  rail_depot{depot_tile, way_tile}
+ *  air_depot{depot_tile, way_tile}
  *
  *  road depot must be located one field next to a road
  */
@@ -166,6 +171,7 @@ ch3_rail_depot1 <- {b = coord(121,164), a = coord(121,163)}
 ch3_rail_depot2 <- {b = coord(94,160), a = coord(93,160)}
 ch3_rail_depot3 <- {b = coord(108,196), a = coord(108,197)}
 ch5_road_depot  <- {a = coord(131,232), b = coord(132,232)}
+ch6_air_depot  <- {a = coord(113,177), b = coord(113,176)}
 
 /**
  *  define bridges
