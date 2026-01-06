@@ -958,11 +958,13 @@ class tutorial.chapter_06 extends basic_chapter
 
   function is_tool_active(pl, tool_id, wt) {
     local result = false
+
+
     switch (this.step) {
 
       case 1:
         local t_list = [tool_remove_way, tool_build_way, tool_build_station, tool_build_depot]
-        local wt_list = [gl_wt]
+        local wt_list = [gl_wt, 0] // enabled extensions building
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
         if(res.ok)  return result
@@ -997,6 +999,8 @@ class tutorial.chapter_06 extends basic_chapter
 
   function is_tool_allowed(pl, tool_id, wt){
     local gt_list = [ t_icon.tram ]
+
+
     if(step < 4){
         gt_list.push(t_icon.road)
     }
@@ -1006,10 +1010,11 @@ class tutorial.chapter_06 extends basic_chapter
     }
     local result = true
     if(step < 4) {
-      local t_list = [0] // 0 = all tools allowed
-      local wt_list = [gl_wt]
+      local t_list = [0, 4115] // 0 = all tools allowed
+      local wt_list = [gl_wt, 0] // enabled extensions building
       local res = update_tools(t_list, tool_id, wt_list, wt)
       result = res.result
+      //gui.add_message("is_tool_allowed wt " + wt + " : tool_id " + tool_id + " : res.ok " + res.ok + " : result " + result)
       if(res.ok)  return result
       return result
     }
