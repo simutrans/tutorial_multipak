@@ -48,7 +48,7 @@ class tutorial.chapter_06 extends basic_chapter
   // Parada aerea ---------------------------------
   st1_pos = coord(114,176)
   // Terminal -------------------------------------
-  st2_pos = coord(113,175)
+  st2_pos = coord(115,177)
   //  Hangar --------------------------------------
   c_dep_lim1 = {a = coord(113,176), b = coord(113,177)}
   c_dep1 = coord(113,177)
