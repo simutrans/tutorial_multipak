@@ -2701,7 +2701,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 2:
@@ -2709,7 +2708,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 3:
@@ -2717,7 +2715,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 4:
@@ -2725,7 +2722,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 5://Schedule
@@ -2733,7 +2729,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 6:
@@ -2741,7 +2736,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 7:
@@ -2749,7 +2743,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 8:
@@ -2757,7 +2750,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 9:
@@ -2765,7 +2757,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 10:
@@ -2773,7 +2764,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 11://Schedule
@@ -2781,7 +2771,6 @@ class tutorial.chapter_03 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
     }
@@ -2795,9 +2784,7 @@ class tutorial.chapter_03 extends basic_chapter
     local t_list = [-t_icon.tram, 0] // 0 = all tools allowed
     local wt_list = [gl_wt]
     local res = update_tools(t_list, tool_id, wt_list, wt)
-    result = res.result
-    if(res.ok)  return result
-    return result
+    return res.result
   }
 
   function is_stations_building(pl, c_list, st_nr, good)
