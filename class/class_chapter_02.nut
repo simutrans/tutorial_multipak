@@ -1094,12 +1094,13 @@ class tutorial.chapter_02 extends basic_chapter
         }
         if (pot0 == 1){
           local tile = my_tile(bridge1_coords.a)
-          tile.remove_object(player_x(1), mo_label)
-          tile = my_tile(bridge1_coords.b)
-          tile.remove_object(player_x(1), mo_label)
-          local t = command_x(tool_build_bridge)
-
-          local err = t.work(player_x(pl), my_tile(bridge1_coords.a), my_tile(bridge1_coords.b), sc_bridge_name)
+          if ( !tile.find_object(mo_bridge) ) {
+            tile.remove_object(player_x(1), mo_label)
+            tile = my_tile(bridge1_coords.b)
+            tile.remove_object(player_x(1), mo_label)
+            local t = command_x(tool_build_bridge)
+            local err = t.work(player_x(pl), my_tile(bridge1_coords.a), my_tile(bridge1_coords.b), sc_bridge_name)
+          }
         }
 
         return null

@@ -2165,12 +2165,11 @@ class tutorial.chapter_03 extends basic_chapter
         if (pot1==0){
           local t_start = my_tile(bridge2_coords.a)
           local t_end = my_tile(bridge2_coords.b)
-
-          t_start.remove_object(player_x(1), mo_label)
-
-          local t = command_x(tool_build_bridge)
-
-          local err = t.work(player, t_start, t_end, sc_bridge_name)
+          if ( !t_start.find_object(mo_bridge) ) {
+            t_start.remove_object(player_x(1), mo_label)
+            local t = command_x(tool_build_bridge)
+            local err = t.work(player, t_start, t_end, sc_bridge_name)
+          }
         }
         //Segundo tramo de rieles
         if (pot4==0){
@@ -2486,13 +2485,13 @@ class tutorial.chapter_03 extends basic_chapter
         if (pot0==1 && pot1==0){
           local t_start = my_tile(bridge3_coords.a)
           local t_end = my_tile(bridge3_coords.b)
-          t_start.unmark()
-          t_end.unmark()
-          t_start.remove_object(player_x(1), mo_label)
-
-          local t = command_x(tool_build_bridge)
-
-          local err = t.work(player, t_start, t_end, sc_bridge_name)
+          if ( !t_start.find_object(mo_bridge) ) {
+            t_start.unmark()
+            t_end.unmark()
+            t_start.remove_object(player_x(1), mo_label)
+            local t = command_x(tool_build_bridge)
+            local err = t.work(player, t_start, t_end, sc_bridge_name)
+          }
           pot1=1
         }
         if (pot1==1 && pot2==0){
