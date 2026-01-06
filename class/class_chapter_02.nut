@@ -1212,7 +1212,7 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
 
       case 2:
@@ -1220,7 +1220,7 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
 
       case 3:
@@ -1228,7 +1228,7 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
 
       case 4: //Schedule
@@ -1236,14 +1236,14 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [0]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
       case 5:
         local t_list = [-tool_remover, tool_build_bridge]
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
 
       case 6: //Schedule
@@ -1251,7 +1251,7 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [0]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
 
       case 7:
@@ -1260,7 +1260,7 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
 
       case 8: //Make Stop public
@@ -1268,7 +1268,7 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [-1]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        //if(res.ok)  return result
         break
     }
     return result
@@ -1280,17 +1280,13 @@ class tutorial.chapter_02 extends basic_chapter
       local t_list = [-t_icon.tram, -tool_make_stop_public, 0] // 0 = all tools allowed
       local wt_list = [gl_wt]
       local res = update_tools(t_list, tool_id, wt_list, wt)
-      result = res.result
-      if(res.ok)  return result
-      return result
+      return res.result
     }
     else {
       local t_list = [-t_icon.tram, 0] // 0 = all tools allowed
       local wt_list = [gl_wt, -1]
       local res = update_tools(t_list, tool_id, wt_list, wt)
-      result = res.result
-      if(res.ok)  return result
-      return result
+      return res.result
     }
   }
 
