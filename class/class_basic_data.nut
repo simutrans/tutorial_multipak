@@ -880,6 +880,179 @@ function set_train_lenght(id) {
 }
 
 /*
+ *  set count convoys for line
+ *
+ *  id  1 - chapter 2 : city1_halt_1 - halts city 1
+ *  id  2 - chapter 2 : city1_halt_2 - halts connect city 1 dock and station
+ *  id  3 - chapter 2 : city2_halt_1 - halts connect city 2 to city 1
+ *  id  4 - chapter 3 : rail factory 1 -> factory 2
+ *  id  5 - chapter 3 : rail factory 2 -> factory 3
+ *  id  6 - chapter 3 : ch3_rail_stations - city line
+ *  id  7 - chapter 4 : ch4_ship1_halts - dock raffinerie - (coord_fac4)
+ *  id  8 - chapter 4 : ch4_ship2_halts - dock raffinerie - canal stop gas station
+ *  id  9 - chapter 4 : ch4_ship3_halts - passenger ship
+ *  id 10 - chapter 5 : road coal to power plant
+ *  id 11 - chapter 5 : city1_post_halts - halts for post
+ *  id 12 - chapter 5 : post ship dock - oil rigg
+ *  id 13 - chapter 6 : city1_city7_air
+ *  id 14 - chapter 6 : city1_halt_airport
+ *  id 15 - chapter 6 : city7_halt
+ *
+ */
+function set_convoy_count(id) {
+
+  switch (pak_name) {
+    case "pak64":
+      switch (id) {
+        case 1:
+          return 1
+          break
+        case 2:
+          return 3
+        break
+        case 3:
+          return 1
+          break
+        case 4:
+          return 1
+          break
+        case 5:
+          return 1
+        break
+        case 6:
+          return 3
+          break
+        case 7:
+          return 2
+          break
+        case 8:
+          return 2
+          break
+        case 9:
+          return 1
+          break
+        case 10:
+          return 10
+          break
+        case 11:
+          return 3
+        break
+        case 12:
+          return 1
+          break
+        case 13:
+          return 1
+          break
+        case 14:
+          return 2
+          break
+        case 15:
+          return 5
+          break
+      }
+      break
+    case "pak64.german":
+      switch (id) {
+        case 1:
+          return 1
+          break
+        case 2:
+          return 3
+        break
+        case 3:
+          return 1
+          break
+        case 4:
+          return 1
+          break
+        case 5:
+          return 1
+        break
+        case 6:
+          return 2
+          break
+        case 7:
+          return 2
+          break
+        case 8:
+          return 2
+          break
+        case 9:
+          return 1
+          break
+        case 10:
+          return 7
+          break
+        case 11:
+          return 3
+        break
+        case 12:
+          return 1
+          break
+        case 13:
+          return 1
+          break
+        case 14:
+          return 2
+          break
+        case 15:
+          return 5
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return 1
+          break
+        case 2:
+          return 3
+        break
+        case 3:
+          return 1
+          break
+        case 4:
+          return 1
+          break
+        case 5:
+          return 1
+        break
+        case 6:
+          return 3
+          break
+        case 7:
+          return 2
+          break
+        case 8:
+          return 2
+          break
+        case 9:
+          return 1
+          break
+        case 10:
+          return 10
+          break
+        case 11:
+          return 3
+        break
+        case 12:
+          return 1
+          break
+        case 13:
+          return 1
+          break
+        case 14:
+          return 2
+          break
+        case 15:
+          return 5
+          break
+      }
+      break
+  }
+}
+
+/*
  *  set transportet goods
  *
  *  id 1 - chapter 3 : train good Holz
