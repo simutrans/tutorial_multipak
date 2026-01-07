@@ -675,7 +675,7 @@ class tutorial.chapter_05 extends basic_chapter
                   return  translate("There is already a transformer here!")+" ("+pos.tostring()+")."
               }
               else if (glsw[j]==0)
-                result = translate("Build the transformer here!")+" ("+way5_power[j].tostring()+")."
+                result = translate("Build the transformer here!")+" ("+coord3d_to_string(way5_power[j])+")."
             }
           }
           if(tool_id == tool_build_transformer)
