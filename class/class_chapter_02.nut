@@ -1095,7 +1095,7 @@ class tutorial.chapter_02 extends basic_chapter
         if (pot0 == 1){
           local t_start = my_tile(bridge1_coords.a)
           local t_end = my_tile(bridge1_coords.b)
-          if ( !tile.find_object(mo_bridge) ) {
+          if ( !t_start.find_object(mo_bridge) ) {
             t_start.remove_object(player_x(1), mo_label)
             t_end.remove_object(player_x(1), mo_label)
             local t = command_x(tool_build_bridge)
