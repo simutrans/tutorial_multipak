@@ -966,10 +966,13 @@ function set_transportet_goods(id) {
 /*
  *  set loading capacity
  *
- *  id 1 - chapter 2 step 4  : bus city Pollingwick
- *  id 2 - chapter 2 step 6  : bus Pollingwick - Dock
- *  id 3 - chapter 2 step 7  : bus Pollingwick - Malliby
+ *  id 1 - chapter 2 step  4 : bus city Pollingwick
+ *  id 2 - chapter 2 step  6 : bus Pollingwick - Dock
+ *  id 3 - chapter 2 step  7 : bus Pollingwick - Malliby
  *  id 4 - chapter 3 step 11 : city train
+ *  id 5 - chapter 6 step  2 : air city 1 - city 7
+ *  id 6 - chapter 6 step  3 : bus city 1 - Airport
+ *  id 7 - chapter 6 step  4 : bus city 7 - Airport
  *
  */
 function set_loading_capacity(id) {
@@ -989,6 +992,15 @@ function set_loading_capacity(id) {
         case 4:
           return 100
           break
+        case 5:
+          return 100
+          break
+        case 6:
+          return 100
+          break
+        case 7:
+          return 100
+          break
       }
       break
     case "pak64.german":
@@ -1004,6 +1016,15 @@ function set_loading_capacity(id) {
           break
         case 4:
           return 80
+          break
+        case 5:
+          return 100
+          break
+        case 6:
+          return 100
+          break
+        case 7:
+          return 100
           break
       }
       break
@@ -1021,6 +1042,15 @@ function set_loading_capacity(id) {
         case 4:
           return 100
           break
+        case 5:
+          return 100
+          break
+        case 6:
+          return 100
+          break
+        case 7:
+          return 100
+          break
       }
       break
   }
@@ -1030,13 +1060,16 @@ function set_loading_capacity(id) {
 /*
  *  set waiting time
  *
- *  id 1 - chapter 2 step  4 : bus city Pollingwick
- *  id 2 - chapter 2 step  6 : bus Pollingwick - Dock
- *  id 3 - chapter 2 step  7 : bus Pollingwick - Malliby
- *  id 4 - chapter 3 step 11 : city train
- *  id 5 - chapter 4 step  7 : good ship produser -> consumer
- *  id 6 - chapter 5 step  4 : road mail
- *  id 7 - chapter 5 step  4 : ship oil rig
+ *  id  1 - chapter 2 step  4 : bus city Pollingwick
+ *  id  2 - chapter 2 step  6 : bus Pollingwick - Dock
+ *  id  3 - chapter 2 step  7 : bus Pollingwick - Malliby
+ *  id  4 - chapter 3 step 11 : city train
+ *  id  5 - chapter 4 step  7 : good ship produser -> consumer
+ *  id  6 - chapter 5 step  4 : road mail
+ *  id  7 - chapter 5 step  4 : ship oil rig
+ *  id  8 - chapter 6 step  2 : air city 1 - city 7
+ *  id  9 - chapter 6 step  3 : bus city 1 - Airport
+ *  id 10 - chapter 6 step  4 : bus city 7 - Airport
  *
  *  1 day   = 2115
  *  1 hour  = 88
@@ -1067,6 +1100,15 @@ function set_waiting_time(id) {
         case 7:
           return 42282
           break
+        case 8:
+          return 42282
+          break
+        case 9:
+          return 10571
+          break
+        case 10:
+          return 10571
+          break
       }
       break
     case "pak64.german":
@@ -1092,6 +1134,15 @@ function set_waiting_time(id) {
         case 7:
           return 42282
           break
+        case 8:
+          return 42282
+          break
+        case 9:
+          return 10571
+          break
+        case 10:
+          return 10571
+          break
       }
       break
     case "pak128":
@@ -1116,6 +1167,15 @@ function set_waiting_time(id) {
           break
         case 7:
           return 42282
+          break
+        case 8:
+          return 42282
+          break
+        case 9:
+          return 10571
+          break
+        case 10:
+          return 10571
           break
       }
       break

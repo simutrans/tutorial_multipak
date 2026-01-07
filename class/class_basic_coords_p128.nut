@@ -139,7 +139,6 @@ for ( local i = 0; i < city1_halt_1.len(); i++ ) {
 }
 
 city1_city7_air <- [coord(114,176), coord(168,489)]
-city1_halt_airport <- [coord(114,176)]
 city1_halt_airport_extension <- [coord(115,177)]
 
 city7_halt <- [ coord(168,490), coord(160,493), coord(155,493), coord(150,494), coord(154,500), coord(159,499),
@@ -159,6 +158,7 @@ ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), t
  *  define depots
  */
 city1_road_depot <- coord(115,185)
+city7_road_depot  <- coord(167,497)
 ship_depot        <- coord(150, 190)
 
 /**
