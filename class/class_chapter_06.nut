@@ -953,7 +953,6 @@ class tutorial.chapter_06 extends basic_chapter
         local wt_list = [gl_wt, 0] // enabled extensions building
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 2://Schedule
@@ -961,7 +960,6 @@ class tutorial.chapter_06 extends basic_chapter
         local wt_list = []
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 3://Schedule
@@ -969,7 +967,6 @@ class tutorial.chapter_06 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 4:
@@ -977,7 +974,6 @@ class tutorial.chapter_06 extends basic_chapter
         local wt_list = [wt_road]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
     }
     return result
@@ -996,21 +992,16 @@ class tutorial.chapter_06 extends basic_chapter
     }
     local result = true
     if(step < 4) {
-      local t_list = [0, 4115] // 0 = all tools allowed
+      local t_list = [0] // 0 = all tools allowed
       local wt_list = [gl_wt, 0] // enabled extensions building
       local res = update_tools(t_list, tool_id, wt_list, wt)
-      result = res.result
-      //gui.add_message("is_tool_allowed wt " + wt + " : tool_id " + tool_id + " : res.ok " + res.ok + " : result " + result)
-      if(res.ok)  return result
-      return result
+      return res.result
     }
     else {
       local t_list = [0] // 0 = all tools allowed
       local wt_list = [gl_wt, wt_road]
       local res = update_tools(t_list, tool_id, wt_list, wt)
-      result = res.result
-      if(res.ok)  return result
-      return result
+      return res.result
     }
   }
 
