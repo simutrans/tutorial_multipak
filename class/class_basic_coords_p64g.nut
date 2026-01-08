@@ -142,8 +142,6 @@ for ( local i = 0; i < city1_halt_1.len(); i++ ) {
 city1_city7_air <- [coord(114,176), coord(168,489)]
 city1_halt_airport_extension <- [coord(115,177)]
 
-ch5_post_ship_halts <- [ch4_ship3_halts[0], coord_fac_4]
-
 city7_halt <- [ coord(168,490), coord(160,493), coord(155,493), coord(150,494), coord(154,500), coord(159,499),
           coord(164,498), coord(166,503), coord(171,501), coord(176,501), coord(173,493)]
 
@@ -154,6 +152,17 @@ ch3_rail_stations <- [ tile_x(55,197,11), tile_x(116,198,0), tile_x(120,266,3), 
 ch4_ship1_halts <- [coord3d(151, 198, -3)]
 ch4_ship2_halts <- [ch4_ship1_halts[0], coord3d(114, 194, 1)]
 ch4_ship3_halts <- [coord3d(133, 189, -3), coord3d(188, 141, -3), coord3d(179, 135, -3)]
+
+// add Oil rigg ( factory 4 to schedule passenger ship )
+ch4_schedule_line3 <- []
+for ( local i = 0; i < ch4_ship3_halts.len(); i++ ) {
+  ch4_schedule_line3.append(ch4_ship3_halts[i])
+  if ( i == 0 || i == 2 ) {
+    ch4_schedule_line3.append(coord_fac_4)
+  }
+}
+
+ch5_post_ship_halts <- [ch4_ship3_halts[0], coord_fac_4]
 
 ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), tile_x(120,381,9)]
 

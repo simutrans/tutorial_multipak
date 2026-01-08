@@ -47,6 +47,7 @@ class tutorial.chapter_04 extends basic_chapter
   line1_name = "ch4_l1"
   line2_name = "ch4_l2"
   line3_name = "ch4_l3"
+
   //Script
   //----------------------------------------------------------------------------------
   sc_way_name = get_obj_ch4(1)
@@ -77,7 +78,7 @@ class tutorial.chapter_04 extends basic_chapter
     local pl = 0
     if(this.step == 7){
       local c_dep = this.my_tile(ship_depot)
-      local c_list = ch4_ship3_halts //sch_list3
+      local c_list = ch4_schedule_line3 //sch_list3
       start_sch_tmpsw(pl,c_dep, c_list)
     }
     return 0
@@ -171,8 +172,8 @@ class tutorial.chapter_04 extends basic_chapter
 
     case 7:
       local tx_list = ""
-      local nr = ch4_ship3_halts.len() //sch_list3
-      local list = ch4_ship3_halts //sch_list3
+      local nr = ch4_schedule_line3.len() //sch_list3
+      local list = ch4_schedule_line3 //sch_list3
       for (local j=0;j<nr;j++){
         local c = coord(list[j].x, list[j].y)
         local tile = my_tile(c)
@@ -560,9 +561,9 @@ class tutorial.chapter_04 extends basic_chapter
 
       case 7:
         if (tool_id==4108){
-          local c_list = ch4_ship3_halts //Lista de todas las paradas de autobus
-          local c_dep = ship_depot //Coordeadas del deposito
-          local siz = c_list.len()//Numero de paradas
+          local c_list = ch4_schedule_line3 //Lista de todas las paradas de autobus
+          local c_dep = ship_depot          //Coordeadas del deposito
+          local siz = c_list.len()          //Numero de paradas
           result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
           return is_stop_allowed_ex(result, siz, c_list, pos, gl_wt)
         }
@@ -603,7 +604,7 @@ class tutorial.chapter_04 extends basic_chapter
         local selc = 0
         local load = ship2_load
         local time = ship2_wait
-        local c_list = ch4_ship3_halts //sch_list3
+        local c_list = ch4_schedule_line3 //sch_list3
         return compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line1_name
@@ -703,7 +704,7 @@ class tutorial.chapter_04 extends basic_chapter
           local selc = 0
           local load = ship2_load
           local time = ship2_wait
-          local c_list = ch4_ship3_halts
+          local c_list = ch4_schedule_line3
           local siz = c_list.len()
           return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
@@ -893,7 +894,7 @@ class tutorial.chapter_04 extends basic_chapter
           local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
 
           local sched = schedule_x(gl_wt, [])
-          local t_list = is_water_entry(ch4_ship3_halts)
+          local t_list = is_water_entry(ch4_schedule_line3)
           for(local j =0;j<t_list.len();j++){
             if(j == 0)
               sched.entries.append(schedule_entry_x(t_list[j], ship2_load, ship2_wait))
