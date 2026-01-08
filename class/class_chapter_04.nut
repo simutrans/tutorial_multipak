@@ -928,7 +928,6 @@ class tutorial.chapter_04 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 2:
@@ -936,7 +935,6 @@ class tutorial.chapter_04 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 3:
@@ -944,7 +942,6 @@ class tutorial.chapter_04 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 4://Schedule
@@ -952,7 +949,6 @@ class tutorial.chapter_04 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 5:
@@ -960,7 +956,6 @@ class tutorial.chapter_04 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 6:
@@ -968,7 +963,6 @@ class tutorial.chapter_04 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 7://Schedule
@@ -976,7 +970,6 @@ class tutorial.chapter_04 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
     }
     return result
@@ -987,9 +980,7 @@ class tutorial.chapter_04 extends basic_chapter
     local t_list = [0] // 0 = all tools allowed
     local wt_list = [gl_wt]
     local res = update_tools(t_list, tool_id, wt_list, wt)
-    result = res.result
-    if(res.ok)  return result
-    return result
+    return res.result
   }
 
   function is_dock_build(pos, tool_id, c_list, good)
