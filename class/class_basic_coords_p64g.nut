@@ -94,7 +94,8 @@ coord_st_1 <- coord(117,197)
  *    ch4_ship3_halts - passenger ship
  *
  *  used chapter 5
- *    city1_post_halts - halts for post
+ *    city1_post_halts     - halts for post
+ *    ch5_post_ship_halts  - post passenger dock - factory 4 (Oil rigg)
  *
  *  used chapter 6
  *    city1_city7_air
@@ -140,6 +141,8 @@ for ( local i = 0; i < city1_halt_1.len(); i++ ) {
 
 city1_city7_air <- [coord(114,176), coord(168,489)]
 city1_halt_airport_extension <- [coord(115,177)]
+
+ch5_post_ship_halts <- [ch4_ship3_halts[0], coord_fac_4]
 
 city7_halt <- [ coord(168,490), coord(160,493), coord(155,493), coord(150,494), coord(154,500), coord(159,499),
           coord(164,498), coord(166,503), coord(171,501), coord(176,501), coord(173,493)]

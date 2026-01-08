@@ -47,7 +47,7 @@ class tutorial.chapter_05 extends basic_chapter
   line3_name = "ch5_l3"
 
   //Para el barco
-  sch_list3 = [coord(133,189), coord(168,189)]
+  //sch_list3 = [coord(133,189), coord_fac_4]
   veh3_obj = get_veh_ch5(4)
   veh3_load = 100
   veh3_wait = set_waiting_time(7)
@@ -76,8 +76,8 @@ class tutorial.chapter_05 extends basic_chapter
 
     line1_name = get_good_data(5, 3) + " " + fab_list[2].name + " - " + fab_list[3].name
     line2_name = translate("Post") + " City " +  get_city_name(city1_tow)
-    local ta = this.my_tile(sch_list3[0])
-    local tb = this.my_tile(sch_list3[0])
+    local ta = this.my_tile(ch5_post_ship_halts[0])
+    local tb = this.my_tile(ch5_post_ship_halts[1])
     line3_name = translate("Post") + " " + ta.get_halt().get_name() + " - " + tb.get_halt().get_name()
 
     // search free tile for transformer
@@ -198,7 +198,7 @@ class tutorial.chapter_05 extends basic_chapter
         local siz = list.len()
         for(local j=0;j<siz;j++){
           //local c = coord(c_list[j].x, c_list[j].y)
-          local tile = my_tile(city1_post_halts[j])
+          local tile = my_tile(list[j])
           local st_halt = tile.get_halt()
           //local name = list[j].name == ""? get_good_text(list[j].good) : translate(list[j].name)
           local name = st_halt.get_name() //translate(get_obj_ch5(6))
@@ -249,7 +249,7 @@ class tutorial.chapter_05 extends basic_chapter
         text = ttextfile("chapter_05/04_3-3.txt")
         text.tx = "<em>[3/3]</em>"
         local list_tx = ""
-        local c_list = sch_list3
+        local c_list = ch5_post_ship_halts
         local siz = c_list.len()
         for (local j=0;j<siz;j++){
           local c = coord(c_list[j].x, c_list[j].y)
@@ -714,7 +714,7 @@ class tutorial.chapter_05 extends basic_chapter
         break
       case 4:
         if (pot0==1 && pot1==0){
-                    //Permite construir paradas
+          //Permite construir paradas
           if (tool_id==tool_build_station){
             local list = extensions_tiles
             local nr = list.len()
@@ -739,8 +739,8 @@ class tutorial.chapter_05 extends basic_chapter
         }
         if (pot2==1 && pot3==0){
           if (tool_id==4108) {
-            local c_list = sch_list3   //Lista de todas las paradas de autobus
-            local c_dep = ship_depot     //Coordeadas del deposito
+            local c_list = ch5_post_ship_halts   //Lista de todas las paradas de autobus
+            local c_dep = ship_depot   //Coordeadas del deposito
             local siz = c_list.len()   //Numero de paradas
             local wt = wt_water
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
@@ -805,7 +805,7 @@ class tutorial.chapter_05 extends basic_chapter
           local selc = 0
           local load = veh3_load
           local time = veh3_wait
-          local c_list = sch_list3
+          local c_list = ch5_post_ship_halts
           result = compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
         }
         return result
@@ -813,6 +813,7 @@ class tutorial.chapter_05 extends basic_chapter
     }
     return result
   }
+
   function is_convoy_allowed(pl, convoy, depot)
   {
     local result=null // null is equivalent to 'allowed'
@@ -892,7 +893,7 @@ class tutorial.chapter_05 extends basic_chapter
           local selc = 0
           local load = veh3_load
           local time = veh3_wait
-          local c_list = sch_list3
+          local c_list = ch5_post_ship_halts
           local siz = c_list.len()
           return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
         }
@@ -1089,7 +1090,7 @@ class tutorial.chapter_05 extends basic_chapter
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
           local sched = schedule_x(wt, [])
-          local c_list = is_water_entry(sch_list3)
+          local c_list = is_water_entry(ch5_post_ship_halts)
           local siz = c_list.len()
           for(local j = 0;j<siz;j++){
             if(j==0)

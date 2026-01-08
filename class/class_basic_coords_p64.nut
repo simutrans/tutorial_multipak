@@ -94,7 +94,8 @@ coord_st_1 <- coord(117,197)
  *    ch4_ship3_halts - passenger ship
  *
  *  used chapter 5
- *    city1_post_halts - halts for post
+ *    city1_post_halts     - halts for post
+ *    ch5_post_ship_halts  - post passenger dock - factory 4 (Oil rigg)
  *
  *  used chapter 6
  *    city1_city7_air
@@ -152,6 +153,8 @@ ch3_rail_stations <- [ tile_x(55,197,11), tile_x(116,198,0), tile_x(120,266,3), 
 ch4_ship1_halts <- [coord3d(151, 198, -3)]
 ch4_ship2_halts <- [ch4_ship1_halts[0], coord3d(114, 194, 1)]
 ch4_ship3_halts <- [coord3d(133, 189, -3), coord3d(188, 141, -3), coord3d(179, 135, -3)]
+
+ch5_post_ship_halts <- [ch4_ship3_halts[0], coord_fac_4]
 
 ch7_rail_stations <- [tile_x(57,198,11), tile_x(120,267,3), tile_x(120,327,5), tile_x(120,381,9)]
 
