@@ -581,12 +581,12 @@ class tutorial.chapter_05 extends basic_chapter
     local wt = 0
     local slope = t.get_slope()
     local way = t.find_object(mo_way)
-    local powerline = t.find_object(mo_powerline)
-    local bridge = t.find_object(mo_bridge)
+    //local powerline = t.find_object(mo_powerline)
+    //local bridge = t.find_object(mo_bridge)
     local label = t.find_object(mo_label)
-    local building = t.find_object(mo_building)
-    local sign = t.find_object(mo_signal)
-    local roadsign = t.find_object(mo_roadsign)
+    //local building = t.find_object(mo_building)
+    //local sign = t.find_object(mo_signal)
+    //local roadsign = t.find_object(mo_roadsign)
     /*if (way){
       wt = way.get_waytype()
       if (tool_id!=4111)
@@ -730,9 +730,9 @@ class tutorial.chapter_05 extends basic_chapter
         }
         if (pot1==1 && pot2==0){
           if (tool_id==4108) {
-            local c_list = city1_post_halts    //Lista de todas las paradas de autobus
+            local c_list = city1_post_halts   //Lista de todas las paradas de autobus
             local c_dep = city1_road_depot    //Coordeadas del deposito
-            local nr = c_list.len()   //Numero de paradas
+            local nr = c_list.len()           //Numero de paradas
             result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
             return is_stop_allowed(result, nr, c_list, pos)
           }
@@ -1126,14 +1126,13 @@ class tutorial.chapter_05 extends basic_chapter
         local wt_list = [0]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
+        break
 
       case 2:
         local t_list = [tool_build_way, tool_remove_way, tool_remover, tool_build_depot, tool_build_station]
         local wt_list = [wt_road]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 3:
@@ -1141,7 +1140,6 @@ class tutorial.chapter_05 extends basic_chapter
         local wt_list = [wt_power]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 4:
@@ -1149,7 +1147,6 @@ class tutorial.chapter_05 extends basic_chapter
         local wt_list = [0]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
     }
 
@@ -1169,7 +1166,6 @@ class tutorial.chapter_05 extends basic_chapter
         local wt_list = [-1]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 2:
@@ -1177,7 +1173,6 @@ class tutorial.chapter_05 extends basic_chapter
         local wt_list = [wt_road]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        if(res.ok)  return result
         break
 
       case 3:
@@ -1186,7 +1181,6 @@ class tutorial.chapter_05 extends basic_chapter
           local wt_list = [wt_road]
           local res = update_tools(t_list, tool_id, wt_list, wt)
           result = res.result
-          if(res.ok)  return result
           break
         }
         else {
@@ -1194,7 +1188,6 @@ class tutorial.chapter_05 extends basic_chapter
           local wt_list = [wt_power]
           local res = update_tools(t_list, tool_id, wt_list, wt)
           result = res.result
-          if(res.ok)  return result
           break
         }
 
@@ -1204,7 +1197,6 @@ class tutorial.chapter_05 extends basic_chapter
           local wt_list = [wt_road]
           local res = update_tools(t_list, tool_id, wt_list, wt)
           result = res.result
-          if(res.ok)  return result
           break
         }
         else {
@@ -1212,7 +1204,6 @@ class tutorial.chapter_05 extends basic_chapter
           local wt_list = [0, wt_power]
           local res = update_tools(t_list, tool_id, wt_list, wt)
           result = res.result
-          if(res.ok)  return result
           break
         }
     }
