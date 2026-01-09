@@ -356,7 +356,7 @@ function load_chapter(number,pl)
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
     chapter.chap_nr = number
   }
-  else{
+  else if ( persistent.chapter <= chapter_max ) {
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
     if ( (number == persistent.chapter) && (chapter.startcash > 0) )  // set cash money here
       player_x(0).book_cash( (chapter.startcash - player_x(0).get_cash()[0]) * 100)
@@ -375,12 +375,12 @@ function load_conv_ch(number, step, pl)
   } else {
     rules.gui_needs_update()
   }
-  if (!resul_version.pak || !resul_version.st){
+  if (!resul_version.pak || !resul_version.st) {
     number = 0
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
     chapter.chap_nr = number
   }
-  else{
+  else {
     chapter = tutorial["chapter_"+(number < 10 ? "0":"")+number](pl)
 
     if ( (number == persistent.chapter) && (chapter.startcash > 0) )  // set cash money here
@@ -432,14 +432,19 @@ function get_rule_text(pl)
 function get_goal_text(pl)
 {
 
+  if( persistent.chapter == tutorial.len() && chapter.is_chapter_completed(pl) >= 100 ) {
+    return "<p>" + translate("Tutorial Scenario complete.") + "</p>"
+  }
   return chapter.give_title() + chapter.get_goal_text( pl, my_chapter() )
 }
 
 function get_result_text(pl)
 {
    // finished ...
-  if(persistent.chapter>tutorial.len()) {
+  if( persistent.chapter == tutorial.len() && chapter.is_chapter_completed(pl) >= 100 ) {
+    //return ttextfile("finished.txt")
     local text = ttextfile("finished.txt")
+    text.title = "<p><em>" + translate("Tutorial Scenario complete.") + "</em></p>"
     return text
   }
 
@@ -527,44 +532,44 @@ function labels_text_debug()
 }
 
 
-  /*
-   *  calculate percentage chapter complete
-   *
-   *  ch_steps  = count chapter steps
-   *  step      = actual chapter step
-   *  sup_steps = count sub steps in a chapter step
-   *  sub_step  = actual sub step in a chapter step
-   *
-   *  no sub steps in chapter step, then set sub_steps and sub_step to 0
-   *
-   * This function is called during a step() and can alter the map
-   *
-   */
-  function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
-  {
-    local percentage_step = 100 / ch_steps
+/*
+ *  calculate percentage chapter complete
+ *
+ *  ch_steps  = count chapter steps
+ *  step      = actual chapter step
+ *  sup_steps = count sub steps in a chapter step
+ *  sub_step  = actual sub step in a chapter step
+ *
+ *  no sub steps in chapter step, then set sub_steps and sub_step to 0
+ *
+ * This function is called during a step() and can alter the map
+ *
+ */
+function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
+{
+  local percentage_step = 100 / ch_steps
 
-    local percentage = percentage_step * ch_step
+  local percentage = percentage_step * ch_step
 
-    local percentage_sub_step = 0
-    if ( sub_steps > 0 && sub_step > 0) {
-      percentage_sub_step = (percentage_step / sub_steps ) * sub_step
-      percentage += percentage_sub_step
-    }
+  local percentage_sub_step = 0
+  if ( sub_steps > 0 && sub_step > 0) {
+    percentage_sub_step = (percentage_step / sub_steps ) * sub_step
+    percentage += percentage_sub_step
+  }
 
-    if ( ch_step <= ch_steps ) {
-      percentage -= percentage_step
-    }
+  if ( ch_step <= ch_steps ) {
+    percentage -= percentage_step
+  }
 
     //gui.add_message("ch_steps "+ch_steps+" ch_step "+ch_step+" ch_steps "+sub_steps+" sub_step "+sub_step)
 
-    // tutorial finish
-    if ( tutorial.len() == persistent.chapter && ch_steps == ch_step && sub_steps == sub_step ) {
-      percentage = 100
-    }
-
-    return percentage
+  // tutorial finish
+  if ( tutorial.len() == persistent.chapter && ch_steps == ch_step && sub_steps == sub_step ) {
+    percentage = 100
   }
+
+  return percentage
+}
 
 /**
   * This function check whether finished or not
@@ -575,8 +580,18 @@ function labels_text_debug()
 function is_scenario_completed(pl)
 {
   // finished ...
-  if(persistent.chapter > chapter_max) {
-    return 100
+  if( persistent.chapter > chapter_max ) {
+      local text = ttext("Chapter {number} - {cname} complete.")
+      text.number = chapter_max
+      text.cname = translate(""+chapter.chapter_name+"")
+      gui.add_message( text.tostring() )
+
+      rules.clear()
+      rules.gui_needs_update()
+      scr_jump = true
+      text = translate("Tutorial Scenario complete.")
+      gui.add_message( text.tostring() )
+      return 100
   }
 
   //-------Debug ====================================
@@ -680,21 +695,13 @@ function is_scenario_completed(pl)
   gl_percentage = percentage
   persistent.gl_percentage = gl_percentage
 
-  if (percentage >= 100){ // give message , be sure to have 100% or more
+  if ( percentage >= 100 ) { // give message , be sure to have 100% or more
     local text = ttext("Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).")
     text.number = persistent.chapter
     text.cname = translate(""+chapter.chapter_name+"")
 
     persistent.chapter++
     persistent.status.chapter++
-
-    // finished ...
-    if(persistent.chapter > chapter_max) {
-      rules.clear()
-      rules.gui_needs_update()
-      scr_jump = true
-      return 100
-    }
 
     load_chapter(persistent.chapter, pl)
     chapter.chap_nr = persistent.chapter
@@ -704,13 +711,9 @@ function is_scenario_completed(pl)
     text.nextcname = translate(""+chapter.chapter_name+"")
     text.coord = chapter.chapter_coord.tostring()
     chapter.start_chapter()  //Para iniciar variables en los capitulos
-    if (persistent.chapter >1) gui.add_message(text.tostring())
+    if (persistent.chapter > 1 && persistent.chapter < chapter_max ) gui.add_message(text.tostring())
   }
-  percentage = scenario_percentage(percentage)
-  if ( percentage >= 100 ) {    // scenario complete
-    local text = translate("Tutorial Scenario complete.")
-    gui.add_message( text.tostring() )
-  }
+
   return percentage
 }
 

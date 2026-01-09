@@ -140,7 +140,7 @@ class tutorial.chapter_07 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    persistent.ch_max_steps = 5
+    persistent.ch_max_steps = 4
     local chapter_step = persistent.step
     persistent.ch_max_sub_steps = 0 // count all sub steps
     persistent.ch_sub_step = 0  // actual sub step
@@ -228,10 +228,6 @@ class tutorial.chapter_07 extends basic_chapter
           this.next_step()
         }
         //return 75
-        break;
-
-      case 5:
-        // last step no actions
         break;
     }
     local percentage = chapter_percentage(persistent.ch_max_steps, chapter_step, persistent.ch_max_sub_steps, persistent.ch_sub_step)

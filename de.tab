@@ -48,6 +48,8 @@ Chapter
 Kapitel
 Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).
 Kapitel {number} - {cname} abgeschlossen, nächstes Kapitel {nextcname} beginnt hier: ({coord}).
+Chapter {number} - {cname} complete.
+Kapitel {number} - {cname} abgeschlossen.
 Checking Compatibility
 Versionsprüfung
 Choose a different stop.

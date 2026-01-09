@@ -20,6 +20,8 @@ Bus networks
 Bus Networks
 Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).
 Congratulations on completing Chapter {number} - {cname}, Next Chapter '{nextcname}' start here: ({coord}).
+Chapter {number} - {cname} complete.
+Congratulations on completing Chapter {number} - {cname}.
 Dock No.%d must accept [%s]
 Dock No.%d must accept %s
 Here
