@@ -140,7 +140,7 @@ class tutorial.chapter_07 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    persistent.ch_max_steps = 5
+    persistent.ch_max_steps = 4
     local chapter_step = persistent.step
     persistent.ch_max_sub_steps = 0 // count all sub steps
     persistent.ch_sub_step = 0  // actual sub step
@@ -171,12 +171,12 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        local c = 0
         local tile = check_halt_public(ch7_rail_stations[1])
         if ( tile != null ) {
-          if ( c == 0 ) {
+          if ( pass_count == 0 ) {
             transfer_pass = cov_pax(ch7_rail_stations[1], gl_wt, gl_good)
-            c++
+            pass_count++
+          gui.add_message(" ch7 transfer_pass " + transfer_pass)
           }
           load = cov_pax(tile, gl_wt, gl_good) - transfer_pass
         }
@@ -193,12 +193,11 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        local c = 0
         local tile = check_halt_public(ch7_rail_stations[2])
         if ( tile != null ) {
-          if ( c == 0 ) {
+          if ( pass_count == 0 ) {
             transfer_pass = cov_pax(ch7_rail_stations[2], gl_wt, gl_good)
-            c++
+            pass_count++
           }
           load = cov_pax(tile, gl_wt, gl_good) - transfer_pass
         }
@@ -215,12 +214,11 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        local c = 0
         local tile = check_halt_public(ch7_rail_stations[3])
         if ( tile != null ) {
-          if ( c == 0 ) {
+          if ( pass_count == 0 ) {
             transfer_pass = cov_pax(ch7_rail_stations[3], gl_wt, gl_good)
-            c++
+            pass_count++
           }
           load = cov_pax(tile, gl_wt, gl_good) - transfer_pass
         }
