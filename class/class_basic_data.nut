@@ -947,7 +947,7 @@ function set_convoy_count(id) {
           return 2
           break
         case 15:
-          return 5
+          return 4
           break
       }
       break
@@ -996,7 +996,7 @@ function set_convoy_count(id) {
           return 2
           break
         case 15:
-          return 5
+          return 4
           break
       }
       break
@@ -1045,7 +1045,7 @@ function set_convoy_count(id) {
           return 2
           break
         case 15:
-          return 5
+          return 4
           break
       }
       break
@@ -1154,7 +1154,7 @@ function set_loading_capacity(id) {
     case "pak64":
       switch (id) {
         case 1:
-          return 100
+          return 60
           break
         case 2:
           return 100
@@ -1172,7 +1172,7 @@ function set_loading_capacity(id) {
           return 100
           break
         case 7:
-          return 100
+          return 60
           break
       }
       break
@@ -1197,14 +1197,14 @@ function set_loading_capacity(id) {
           return 100
           break
         case 7:
-          return 100
+          return 60
           break
       }
       break
     case "pak128":
       switch (id) {
         case 1:
-          return 100
+          return 60
           break
         case 2:
           return 100
@@ -1222,7 +1222,7 @@ function set_loading_capacity(id) {
           return 100
           break
         case 7:
-          return 100
+          return 60
           break
       }
       break
@@ -1256,7 +1256,7 @@ function set_waiting_time(id) {
           return 10571
           break
         case 2:
-          return 10571
+          return 6345
           break
         case 3:
           return 10571
@@ -1280,7 +1280,7 @@ function set_waiting_time(id) {
           return 10571
           break
         case 10:
-          return 10571
+          return 4230
           break
       }
       break
@@ -1314,7 +1314,7 @@ function set_waiting_time(id) {
           return 10571
           break
         case 10:
-          return 10571
+          return 4230
           break
       }
       break
@@ -1324,7 +1324,7 @@ function set_waiting_time(id) {
           return 10571
           break
         case 2:
-          return 10571
+          return 6345
           break
         case 3:
           return 10571
@@ -1348,7 +1348,7 @@ function set_waiting_time(id) {
           return 10571
           break
         case 10:
-          return 10571
+          return 4230
           break
       }
       break
