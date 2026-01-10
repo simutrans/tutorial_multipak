@@ -1078,7 +1078,7 @@ class basic_chapter
     return null
   }
 
-    function backward_pot(pnr)
+  function backward_pot(pnr)
   {
     if (pnr==0) {pot0 = 0; persistent.pot[pnr]=pot0}
     if (pnr==1) {pot1 = 0; persistent.pot[pnr]=pot1}
@@ -1106,7 +1106,7 @@ class basic_chapter
     return null
   }
 
-    function reset_pot()
+  function reset_pot()
   {
     pot0 = 0
     pot1 = 0
@@ -1135,7 +1135,8 @@ class basic_chapter
   }
 
   function reset_glsw()
-  { for(local j=0;j<20;j++){
+  {
+    for(local j=0;j<20;j++){
       glsw[j]=0
       persistent.glsw[j]=glsw[j]
     }
@@ -1144,7 +1145,8 @@ class basic_chapter
   }
 
   function reset_tmpsw()
-  { for(local j=0;j<20;j++){
+  {
+    for(local j=0;j<20;j++){
       tmpsw[j] = 0
 
     }
@@ -1153,8 +1155,9 @@ class basic_chapter
   }
 
   function reset_stop_flag()
-  { for(local j=0;j<20;j++){
-    stop_flag[j]=0
+  {
+    for(local j=0;j<20;j++){
+      stop_flag[j]=0
     }
     return null
   }
@@ -2137,15 +2140,15 @@ class basic_chapter
     return result
   }
 
-    function get_dep_cov_nr(a,b){
+  function get_dep_cov_nr(a,b){
     local nr = -1
-    for(local j=a;j<b;j++){
+    for(local j = a; j < b; j++){
       nr++
     }
     return nr
   }
 
-    function start_sch_tmpsw(pl,coord, c_list){
+  function start_sch_tmpsw(pl, coord, c_list){
     local depot = null
     try {
       depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
