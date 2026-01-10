@@ -187,7 +187,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
       }
       local c = coord(list[get_waiting_halt(5)].x, list[get_waiting_halt(5)].y)
-      text.stnam = (get_waiting_halt(5)+1)") "+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+      text.stnam = (get_waiting_halt(5)+1) + ") "+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
       text.list = tx_list
       text.ship = translate(ship2_name_obj)
       text.load = ship2_load
@@ -298,7 +298,7 @@ class tutorial.chapter_04 extends basic_chapter
       case 4:
         cov_cir = get_convoy_nr((ch4_cov_lim1.a), d1_cnr)
 
-        if (cov_cir == d1_cnr){
+        if ( cov_cir == d1_cnr ){
           reset_stop_flag()
           this.next_step()
         }
@@ -398,7 +398,7 @@ class tutorial.chapter_04 extends basic_chapter
       case 7:
         local c_dep = this.my_tile(ship_depot)
         local line_name = line1_name
-        set_convoy_schedule(pl,c_dep, gl_wt, line_name)
+        set_convoy_schedule(pl, c_dep, gl_wt, line_name)
         if(current_cov == ch4_cov_lim3.b){
           this.next_step()
         }
