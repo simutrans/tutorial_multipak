@@ -1535,12 +1535,14 @@ function get_info_file(txt_file) {
 /**
  *  set passenger halt for waiting
  *
- *    id  1 = city1_halt_1[id]      - halts city 1
- *    id  2 = city1_halt_2[id]      - halts connect city 1 dock and station
- *    id  3 = city2_halt_1[id]      - halts connect city 2 to city 1
- *    id  4 =
- *
- *
+ *  id  1 = city1_halt_1[id]    - halts city 1
+ *  id  2 = city1_halt_2[id]    - halts connect city 1 dock and station
+ *  id  3 = city2_halt_1[id]    - halts connect city 2 to city 1
+ *  id  4 = ch3_rail_stations   - city line
+ *  id  5 = ch4_ship3_halts     - passenger ship
+ *  id  6 = city1_city7_air     - airplane
+ *  id  7 = city1_halt_airport  - bus airport - city 1
+ *  id  8 = city7_halt          - bus airport - city 7
  *
  */
 function get_waiting_halt(id) {
@@ -1558,7 +1560,7 @@ function get_waiting_halt(id) {
           return 0
           break
         case 4:
-          return 0
+          return 2
           break
         case 5:
           return 0
