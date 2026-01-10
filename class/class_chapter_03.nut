@@ -1305,7 +1305,7 @@ class tutorial.chapter_03 extends basic_chapter
 
       case 11:
         local c_dep = this.my_tile(ch3_rail_depot3.b)
-        set_convoy_schedule(pl, c_dep, gl_wt, line1_name)
+        set_convoy_schedule(pl, c_dep, gl_wt, line3_name)
 
         if (current_cov == ch3_cov_lim3.b){
           this.next_step()
@@ -2011,7 +2011,7 @@ class tutorial.chapter_03 extends basic_chapter
         local c_list = ch3_rail_stations
         result =  compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
-          local line_name = line1_name
+          local line_name = line3_name
           update_convoy_schedule(pl, gl_wt, line_name, schedule)
         }
         return result
