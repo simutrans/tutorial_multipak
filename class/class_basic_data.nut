@@ -31,7 +31,7 @@ function get_factory_data(id) {
   return t
 }
 
-/*
+/**
  *  rename factory names
  *  translate object name in to language by start scenario
  *
@@ -131,7 +131,7 @@ function rename_factory_names() {
 */
 }
 
-/*
+/**
  *  translate objects
  *
  *
@@ -175,7 +175,7 @@ function translate_objects() {
   rename_factory_names()
 }
 
-/*
+/**
  *  set vehicle for chapter 2 step 4
  *
  */
@@ -194,7 +194,7 @@ function get_veh_ch2_st4() {
 
 }
 
-/*
+/**
  *  set objects for chapter 2
  *
  *  id 1 = way name
@@ -256,7 +256,7 @@ function get_obj_ch2(id) {
   }
 }
 
-/*
+/**
  *  set vehicle for chapter 3
  *
  *  id 1 = step 5 loco
@@ -339,7 +339,7 @@ function get_veh_ch3(id) {
 
 }
 
-/*
+/**
  *  set objects for chapter 3
  *
  *  id 1 = way name
@@ -431,7 +431,7 @@ function get_obj_ch3(id) {
   }
 }
 
-/*
+/**
  *  set vehicle for chapter 4
  *
  *  id 1 = step 4 ship
@@ -474,7 +474,7 @@ function get_veh_ch4(id) {
 
 }
 
-/*
+/**
  *  set objects for chapter 4
  *
  *  id 1 = way name
@@ -546,7 +546,7 @@ function get_obj_ch4(id) {
   }
 }
 
-/*
+/**
  *  set vehicle for chapter 5
  *
  *  id 1 = step 2 truck (coal)
@@ -609,7 +609,7 @@ function get_veh_ch5(id) {
 
 }
 
-/*
+/**
  *  set objects for chapter 5
  *
  *  id 1 = road way name
@@ -691,7 +691,7 @@ function get_obj_ch5(id) {
   }
 }
 
-/*
+/**
  *  set vehicle for chapter 6
  *
  *  id 1 = step 2 airplane (passenger)
@@ -744,7 +744,7 @@ function get_veh_ch6(id) {
 
 }
 
-/*
+/**
  *  set objects for chapter 6
  *
  *  id 1 = runway name
@@ -826,7 +826,7 @@ function get_obj_ch6(id) {
   }
 }
 
-/*
+/**
  *  set count wg for train
  *
  *  id 1 - chapter 3 : train good Holz
@@ -879,7 +879,7 @@ function set_train_lenght(id) {
   }
 }
 
-/*
+/**
  *  set count convoys for line
  *
  *  id  1 - chapter 2 : city1_halt_1 - halts city 1
@@ -1052,7 +1052,7 @@ function set_convoy_count(id) {
   }
 }
 
-/*
+/**
  *  set transportet goods
  *
  *  id 1 - chapter 3 : train good Holz
@@ -1136,7 +1136,7 @@ function set_transportet_goods(id) {
 
 }
 
-/*
+/**
  *  set loading capacity
  *
  *  id 1 - chapter 2 step  4 : bus city Pollingwick
@@ -1230,7 +1230,7 @@ function set_loading_capacity(id) {
 
 }
 
-/*
+/**
  *  set waiting time
  *
  *  id  1 - chapter 2 step  4 : bus city Pollingwick
@@ -1256,7 +1256,7 @@ function set_waiting_time(id) {
           return 10571
           break
         case 2:
-          return 6345
+          return 6343
           break
         case 3:
           return 10571
@@ -1356,7 +1356,7 @@ function set_waiting_time(id) {
 
 }
 
-/*
+/**
  *  goods def
  *
  *  id = good id
@@ -1415,7 +1415,7 @@ function get_good_data(id, select = null) {
   return output
 }
 
-/*
+/**
  *  factory prod and good data for textfiles
  *
  *  tile = tile_x factory
@@ -1477,6 +1477,14 @@ function get_good_data(id, select = null) {
 
  }
 
+/**
+ *  add files for more infos
+ *
+ *  bridge - bridge build
+ *  tunnel - tunnel build
+ *  info   - more infos for pakset
+ *
+ */
 function get_info_file(txt_file) {
 
   //ttextfile("info/build_bridge.txt")
@@ -1517,6 +1525,108 @@ function get_info_file(txt_file) {
           break
         case "info":
           return ttextfile("info/info_pak128.txt")
+          break
+      }
+      break
+  }
+
+}
+
+/**
+ *  set passenger halt for waiting
+ *
+ *    id  1 = city1_halt_1[id]      - halts city 1
+ *    id  2 = city1_halt_2      - halts connect city 1 dock and station
+ *    id  3 = city2_halt_1      - halts connect city 2 to city 1
+ *    id  4 = line_connect_halt - halt in all halt lists city1
+ *
+ *
+ *
+ */
+function get_waiting_halt(id) {
+
+  switch (pak_name) {
+    case "pak64":
+      switch (id) {
+        case 1:
+          return 2
+          break
+        case 2:
+          return 4
+          break
+        case 3:
+          return 0
+          break
+        case 4:
+          return 0
+          break
+        case 5:
+          return 0
+          break
+        case 6:
+          return 0
+          break
+        case 7:
+          return 0
+          break
+        case 8:
+          return 0
+          break
+      }
+      break
+    case "pak64.german":
+      switch (id) {
+        case 1:
+          return 2
+          break
+        case 2:
+          return 4
+          break
+        case 3:
+          return 0
+          break
+        case 4:
+          return 0
+          break
+        case 5:
+          return 0
+          break
+        case 6:
+          return 0
+          break
+        case 7:
+          return 0
+          break
+        case 8:
+          return 0
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case 1:
+          return 2
+          break
+        case 2:
+          return 4
+          break
+        case 3:
+          return 0
+          break
+        case 4:
+          return 0
+          break
+        case 5:
+          return 0
+          break
+        case 6:
+          return 0
+          break
+        case 7:
+          return 0
+          break
+        case 8:
+          return 0
           break
       }
       break
