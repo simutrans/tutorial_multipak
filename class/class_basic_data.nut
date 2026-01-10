@@ -1536,9 +1536,9 @@ function get_info_file(txt_file) {
  *  set passenger halt for waiting
  *
  *    id  1 = city1_halt_1[id]      - halts city 1
- *    id  2 = city1_halt_2      - halts connect city 1 dock and station
- *    id  3 = city2_halt_1      - halts connect city 2 to city 1
- *    id  4 = line_connect_halt - halt in all halt lists city1
+ *    id  2 = city1_halt_2[id]      - halts connect city 1 dock and station
+ *    id  3 = city2_halt_1[id]      - halts connect city 2 to city 1
+ *    id  4 =
  *
  *
  *
