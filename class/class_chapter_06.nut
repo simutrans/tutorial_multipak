@@ -329,6 +329,19 @@ class tutorial.chapter_06 extends basic_chapter
 
       case 2:
 
+        local c_dep = my_tile(ch6_air_depot.a)
+        local line_name = line1_name
+        set_convoy_schedule(pl, c_dep, wt_air, line_name)
+
+        local depot = depot_x(c_dep.x, c_dep.y, c_dep.z)
+        local cov_list = depot.get_convoy_list()    //Lista de vehiculos en el deposito
+        local convoy = convoy_x(gcov_id)
+        if (cov_list.len()>=1){
+          convoy = cov_list[0]
+        }
+        local all_result = checks_convoy_schedule(convoy, pl)
+        sch_cov_correct = all_result.res == null ? true : false
+
         if(current_cov == ch6_cov_lim1.b){
           sch_cov_correct = false
           this.next_step()
@@ -535,7 +548,7 @@ class tutorial.chapter_06 extends basic_chapter
       case 2:
 
         if (tool_id==4108) {
-          for ( local j = 0; j < city1_city7_air.len(); j++ ) {
+          /*for ( local j = 0; j < city1_city7_air.len(); j++ ) {
             if (glsw[j]==0){
               if(pos.x == city1_city7_air[j].x && pos.y == city1_city7_air[j].y) {
                 glsw[j]=1
@@ -543,7 +556,12 @@ class tutorial.chapter_06 extends basic_chapter
               }
               else return translate("Click on the stop") + " ("+city1_city7_air[j].tostring()+")!."
             }
-          }
+          }*/
+          local c_list = city1_city7_air   //Lista de todas las paradas de autobus
+          local c_dep = ch6_air_depot.a      //Coordeadas del deposito
+          local siz = c_list.len()            //Numero de paradas
+          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
+          return is_stop_allowed(result, siz, c_list, pos)
 
         }
         break;
@@ -602,8 +620,7 @@ class tutorial.chapter_06 extends basic_chapter
         local c_list = city1_city7_air
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
         if(result == null){
-          local line_name = line1_name
-          update_convoy_schedule(pl, wt_air, line_name, schedule)
+          update_convoy_schedule(pl, wt_air, line1_name, schedule)
         }
         return result
       break
@@ -619,8 +636,7 @@ class tutorial.chapter_06 extends basic_chapter
         local c_list = city1_halt_airport
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
-          local line_name = line2_name
-          update_convoy_schedule(pl, wt_road, line_name, schedule)
+          update_convoy_schedule(pl, wt_road, line2_name, schedule)
         }
         return result
       break
@@ -636,8 +652,7 @@ class tutorial.chapter_06 extends basic_chapter
         local c_list = city7_halt
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
-          local line_name = line3_name
-          update_convoy_schedule(pl, wt_road, line_name, schedule)
+          update_convoy_schedule(pl, wt_road, line3_name, schedule)
         }
         return result
       break
