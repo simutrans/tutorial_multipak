@@ -222,6 +222,7 @@ class basic_chapter
     }
     return format(translate("The number max of vehicles in circulation must be [%d]."),max)
   }
+
   function get_convoy_nr(nr, max)
   {
     local cov_nr = 0
@@ -581,7 +582,7 @@ class basic_chapter
     return null
   }
 
-  function is_waystop_correct(player,schedule,nr,load,wait,coord, line = false)
+  function is_waystop_correct(player, schedule, nr, load, wait, coord, line = false)
   {
     // coord = x,y,z place to compare the waystop
     // nr = number of schedule.entrie to compare
@@ -635,6 +636,7 @@ class basic_chapter
     else if((c_buld1.x == c_buld2.x) && (c_buld1.y == c_buld2.y)) {
       result = null
     }
+
     if (result!=null){
       local text = ttext("The waystop {nr} '{name}' isn't on place {pos}")
       text.name = target_list[0].get_name()
@@ -689,7 +691,7 @@ class basic_chapter
     return result
   }
 
-  function is_convoy_correct(depot,cov,veh,good_list,name, max_tile, is_st_tile = false)
+  function is_convoy_correct(depot, cov, veh, good_list, name, max_tile, is_st_tile = false)
   {
     local cov_list = depot.get_convoy_list()
     local cov_nr = cov_list.len()
@@ -781,7 +783,7 @@ class basic_chapter
     if (cov_nr==cov)
       res.cov = true
 
-        //Check name car and cab
+    //Check name car and cab
     for (local j=0;j<cov_nr;j++){
       local veh_list = cov_list[j].get_vehicles()
 
@@ -822,7 +824,7 @@ class basic_chapter
     local nr = schedule.entries.len()
     local size = c_list.len()
     if (nr > size)
-      return format(translate("The schedule needs to have %d waystops, but there are %d ."),size, nr)
+      return format(translate("The schedule needs to have %d waystops, but there are %d ."), size, nr)
 
     for(local j=0;j<size;j++){
       if(result==null) {
