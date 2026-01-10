@@ -445,7 +445,7 @@ class tutorial.chapter_03 extends basic_chapter
             mark_st++
           }
         }
-        local c = coord(list[0].x, list[0].y)
+        local c = coord(list[get_waiting_halt(4)].x, list[get_waiting_halt(4)].y)
         text.stnam = ""+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
         text.list = tx_list
         text.dep = ch3_rail_depot3.b.href("("+ch3_rail_depot3.b.tostring()+")")
@@ -2005,7 +2005,7 @@ class tutorial.chapter_03 extends basic_chapter
       break
 
       case 11:
-        local selc = 0
+        local selc = get_waiting_halt(4)
         local load = loc3_load
         local time = loc3_wait
         local c_list = ch3_rail_stations
@@ -2027,7 +2027,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 5:
         local wt = gl_wt
         if ((depot.x != ch3_rail_depot1.b.x)||(depot.y != ch3_rail_depot1.b.y))
-          return "Depot coordinate is incorrect ("+coord3d_to_string(depot)+")."
+          return "Depot coordinate is incorrect (" + coord3d_to_string(depot) + ")."
         local cov = 1
         local veh = set_train_lenght(1) + 1
         local good_list = [good_desc_x(good_alias.wood).get_catg_index()] //Wood
@@ -2035,6 +2035,7 @@ class tutorial.chapter_03 extends basic_chapter
         local st_tile = loc1_tile // 3
         local is_st_tile = true
         result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile, is_st_tile)
+        gui.add_message("is_convoy_allowed result " + result)
 
         if (result!=null){
           backward_pot(0)
@@ -2042,13 +2043,20 @@ class tutorial.chapter_03 extends basic_chapter
           return train_result_message(result, translate(name), good, veh, cov, st_tile)
         }
 
+        gui.add_message("is_convoy_allowed current_cov " + current_cov)
+        gui.add_message("is_convoy_allowed ch3_cov_lim1.a " + ch3_cov_lim1.a)
+        gui.add_message("is_convoy_allowed ch3_cov_lim1.b " + ch3_cov_lim1.b)
         if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
           local selc = 0
           local load = loc1_load
           local time = loc1_wait
           local c_list = [way2_fac1_fac2[0], way2_fac1_fac2[5]]
           local siz = c_list.len()
-          return compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+
+          local check_schedule = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
+          gui.add_message("is_convoy_allowed check_schedule " + check_schedule)
+
+          return check_schedule
         }
       break
 
@@ -2104,7 +2112,7 @@ class tutorial.chapter_03 extends basic_chapter
           return train_result_message(result, translate(name), good, veh, cov, st_tile)
         }
 
-        local selc = 0
+        local selc = get_waiting_halt(4)
         local load = loc3_load
         local time = loc3_wait
         local siz = c_list.len()
@@ -2658,7 +2666,7 @@ class tutorial.chapter_03 extends basic_chapter
           local load = loc3_load
           local time = loc3_wait
           for(local j=0;j<sch_siz;j++){
-            if (j==0)
+            if (j==get_waiting_halt(4))
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), load, time))
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))

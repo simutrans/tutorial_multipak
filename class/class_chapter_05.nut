@@ -98,18 +98,18 @@ class tutorial.chapter_05 extends basic_chapter
     d1_cnr = get_dep_cov_nr(ch5_cov_lim1.a,ch5_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch5_cov_lim2.a,ch5_cov_lim2.b)
     d3_cnr = get_dep_cov_nr(ch5_cov_lim3.a,ch5_cov_lim3.b)
-/*
+
     local pl = 0
-    if(this.step == 4){
+    /*if(this.step == 4){
       //Camion de correo
       local c_dep = this.my_tile(city1_road_depot)
       local c_list = city1_post_halts
-      start_sch_tmpsw(pl,c_dep, c_list)
+      start_sch_tmpsw(pl, c_dep, c_list)
 
       //Barco de Correo/Pasajeros
       c_dep = this.my_tile(c_dep3)
       c_list = sch_list3
-      start_sch_tmpsw(pl,c_dep, c_list)
+      start_sch_tmpsw(pl, c_dep, c_list)
     }*/
     return 0
   }

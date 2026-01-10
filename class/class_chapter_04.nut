@@ -75,12 +75,12 @@ class tutorial.chapter_04 extends basic_chapter
     d1_cnr = get_dep_cov_nr(ch4_cov_lim1.a,ch4_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch4_cov_lim2.a,ch4_cov_lim2.b)
 
-    local pl = 0
+    /*local pl = 0
     if(this.step == 7){
       local c_dep = this.my_tile(ship_depot)
       local c_list = ch4_schedule_line3 //sch_list3
-      start_sch_tmpsw(pl,c_dep, c_list)
-    }
+      start_sch_tmpsw(pl, c_dep, c_list)
+    }*/
     return 0
   }
 
@@ -186,7 +186,7 @@ class tutorial.chapter_04 extends basic_chapter
           tx_list += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
         }
       }
-      local c = coord(list[0].x, list[0].y)
+      local c = coord(list[get_waiting_halt(5)].x, list[get_waiting_halt(5)].y)
       text.stnam = ""+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
       text.list = tx_list
       text.ship = translate(ship2_name_obj)
@@ -601,7 +601,7 @@ class tutorial.chapter_04 extends basic_chapter
         return compare_schedule(result, pl, schedule, selc, load, time, c_list, false)
       break
       case 7:
-        local selc = 0
+        local selc = get_waiting_halt(5)
         local load = ship2_load
         local time = ship2_wait
         local c_list = ch4_schedule_line3 //sch_list3
@@ -701,7 +701,7 @@ class tutorial.chapter_04 extends basic_chapter
           return ship_result_message(result, translate(name), good, veh, cov)
         }
         if (current_cov>ch4_cov_lim3.a && current_cov<ch4_cov_lim3.b){
-          local selc = 0
+          local selc = get_waiting_halt(5)
           local load = ship2_load
           local time = ship2_wait
           local c_list = ch4_schedule_line3
