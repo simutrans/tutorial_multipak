@@ -426,7 +426,7 @@ class tutorial.chapter_03 extends basic_chapter
         local list = ch3_rail_stations
 
         local mark_st = 0
-        for (local j=0;j<nr;j++){
+        for ( local j = 0; j < nr; j++ ){
           local c = coord(list[j].x, list[j].y)
           local tile = my_tile(c)
           local st_halt = tile.get_halt()
@@ -436,7 +436,7 @@ class tutorial.chapter_03 extends basic_chapter
             delay_mark_tile(st_list)
           }
 
-          if(tmpsw[j]==0 ){
+          if( tmpsw[j] == 0 ){
             tx_list += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
           }
           else{
@@ -446,7 +446,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         local c = coord(list[get_waiting_halt(4)].x, list[get_waiting_halt(4)].y)
-        text.stnam = ""+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+        text.stnam = (get_waiting_halt(4)+1) + ") " + my_tile(c).get_halt().get_name() + " ("+c.tostring()+")"
         text.list = tx_list
         text.dep = ch3_rail_depot3.b.href("("+ch3_rail_depot3.b.tostring()+")")
         text.loc3 = translate(loc3_name_obj)
@@ -2035,7 +2035,7 @@ class tutorial.chapter_03 extends basic_chapter
         local st_tile = loc1_tile // 3
         local is_st_tile = true
         result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile, is_st_tile)
-        gui.add_message("is_convoy_allowed result " + result)
+        //gui.add_message("is_convoy_allowed result " + result)
 
         if (result!=null){
           backward_pot(0)
@@ -2043,9 +2043,9 @@ class tutorial.chapter_03 extends basic_chapter
           return train_result_message(result, translate(name), good, veh, cov, st_tile)
         }
 
-        gui.add_message("is_convoy_allowed current_cov " + current_cov)
-        gui.add_message("is_convoy_allowed ch3_cov_lim1.a " + ch3_cov_lim1.a)
-        gui.add_message("is_convoy_allowed ch3_cov_lim1.b " + ch3_cov_lim1.b)
+        //gui.add_message("is_convoy_allowed current_cov " + current_cov)
+        //gui.add_message("is_convoy_allowed ch3_cov_lim1.a " + ch3_cov_lim1.a)
+        //gui.add_message("is_convoy_allowed ch3_cov_lim1.b " + ch3_cov_lim1.b)
         if (current_cov>ch3_cov_lim1.a && current_cov<ch3_cov_lim1.b){
           local selc = 0
           local load = loc1_load
@@ -2054,7 +2054,7 @@ class tutorial.chapter_03 extends basic_chapter
           local siz = c_list.len()
 
           local check_schedule = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
-          gui.add_message("is_convoy_allowed check_schedule " + check_schedule)
+          //gui.add_message("is_convoy_allowed check_schedule " + check_schedule)
 
           return check_schedule
         }

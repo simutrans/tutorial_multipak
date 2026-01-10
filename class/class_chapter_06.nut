@@ -136,7 +136,7 @@ class tutorial.chapter_06 extends basic_chapter
           }
         }
         local c = coord(c_list[get_waiting_halt(6)].x, c_list[get_waiting_halt(6)].y)
-        text.stnam = my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+        text.stnam = (get_waiting_halt(6)+1) + ") " + my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
         text.list = list_tx
         text.plane = translate(plane1_obj)
         text.load = set_loading_capacity(5)
@@ -165,8 +165,8 @@ class tutorial.chapter_06 extends basic_chapter
             list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
           }
         }
-        local c = coord(c_list[0].x, c_list[0].y)
-        text.stnam = my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+        local c = coord(c_list[get_waiting_halt(7)].x, c_list[get_waiting_halt(7)].y)
+        text.stnam = (get_waiting_halt(7)+1) + ") " + my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
         text.stx = list_tx
         text.dep2 = "<a href=\"("+city1_road_depot.x+","+city1_road_depot.y+")\"> ("+city1_road_depot.tostring()+")</a>"
         text.load = set_loading_capacity(6)
@@ -194,10 +194,10 @@ class tutorial.chapter_06 extends basic_chapter
             list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
           }
         }
-        local c = coord(c_list[0].x, c_list[0].y)
-        text.stnam = my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+        local c = coord(c_list[get_waiting_halt(8)].x, c_list[get_waiting_halt(8)].y)
+        text.stnam = (get_waiting_halt(8)+1) + ") " + my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
         text.stx = list_tx
-        text.dep3 = "<a href=\"("+city7_road_depot.x+","+city7_road_depot.y+")\"> ("+city7_road_depot.tostring()+")</a>"
+        text.dep3 = "<a href=\"("+city7_road_depot.x+","+city7_road_depot.y+")\">("+city7_road_depot.tostring()+")</a>"
 
         text.load = set_loading_capacity(7)
         text.wait = get_wait_time_text(set_waiting_time(10))

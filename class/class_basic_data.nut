@@ -1533,7 +1533,7 @@ function get_info_file(txt_file) {
 }
 
 /**
- *  set passenger halt for waiting
+ *  set passenger/post halt for waiting
  *
  *  id  1 = city1_halt_1[id]    - halts city 1
  *  id  2 = city1_halt_2[id]    - halts connect city 1 dock and station
@@ -1543,6 +1543,8 @@ function get_info_file(txt_file) {
  *  id  6 = city1_city7_air     - airplane
  *  id  7 = city1_halt_airport  - bus airport - city 1
  *  id  8 = city7_halt          - bus airport - city 7
+ *  id  9 = city1_post_halts     - halts for post
+ *  id 10 = ch5_post_ship_halts  - post passenger dock - factory 4 (Oil rigg)
  *
  */
 function get_waiting_halt(id) {
@@ -1574,6 +1576,12 @@ function get_waiting_halt(id) {
         case 8:
           return 0
           break
+        case 9:
+          return 0
+          break
+        case 10:
+          return 0
+          break
       }
       break
     case "pak64.german":
@@ -1602,6 +1610,12 @@ function get_waiting_halt(id) {
         case 8:
           return 0
           break
+        case 9:
+          return 0
+          break
+        case 10:
+          return 0
+          break
       }
       break
     case "pak128":
@@ -1628,6 +1642,12 @@ function get_waiting_halt(id) {
           return 0
           break
         case 8:
+          return 0
+          break
+        case 9:
+          return 0
+          break
+        case 10:
           return 0
           break
       }

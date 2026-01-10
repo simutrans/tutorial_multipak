@@ -145,8 +145,8 @@ class tutorial.chapter_04 extends basic_chapter
         text = ttextfile("chapter_04/05_3-3.txt")
         text.tx=ttext("<em>[3/3]</em>")
       }
-      text.w1 = c1.href(" ("+c1.tostring()+")")+""
-      text.w2 = c2.href(" ("+c2.tostring()+")")+""
+      text.w1 = c1.href("("+c1.tostring()+")")
+      text.w2 = c2.href("("+c2.tostring()+")")
       text.dock = ch4_ship2_halts[1].href("("+ch4_ship2_halts[1].tostring()+")")+"" //sch_list2
       text.all_cov = d2_cnr
       text.load = ship1_load
@@ -187,7 +187,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
       }
       local c = coord(list[get_waiting_halt(5)].x, list[get_waiting_halt(5)].y)
-      text.stnam = ""+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
+      text.stnam = (get_waiting_halt(5)+1)") "+my_tile(c).get_halt().get_name()+" ("+c.tostring()+")"
       text.list = tx_list
       text.ship = translate(ship2_name_obj)
       text.load = ship2_load

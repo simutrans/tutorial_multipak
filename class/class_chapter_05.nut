@@ -232,9 +232,9 @@ class tutorial.chapter_05 extends basic_chapter
             list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
           }
         }
-        local c = coord(c_list[0].x, c_list[0].y)
+        local c = coord(c_list[get_waiting_halt(9)].x, c_list[get_waiting_halt(9)].y)
         local tile = my_tile(c)
-        text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
+        text.stnam = (get_waiting_halt(9)+1) + ") "+tile.get_halt().get_name()+" ("+c.tostring()+")"
 
         text.list = list_tx
         text.dep = city1_road_depot.href("("+city1_road_depot.tostring()+")")
@@ -266,9 +266,9 @@ class tutorial.chapter_05 extends basic_chapter
             list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
           }
         }
-        local c = coord(c_list[0].x, c_list[0].y)
+        local c = coord(c_list[get_waiting_halt(10)].x, c_list[get_waiting_halt(10)].y)
         local tile = my_tile(c)
-        text.stnam = "1) "+tile.get_halt().get_name()+" ("+c.tostring()+")"
+        text.stnam = (get_waiting_halt(10)+1) + ") "+tile.get_halt().get_name()+" ("+c.tostring()+")"
 
         text.list = list_tx
         text.dep = ship_depot.href("("+ship_depot.tostring()+")")
@@ -278,20 +278,6 @@ class tutorial.chapter_05 extends basic_chapter
         text.nr = siz
       }
       break
-      case 5:
-
-      break
-      case 6:
-
-      break
-      case 7:
-      break
-
-      case 8:
-      break
-
-      case 9:
-        break
     }
 
     text.f1 = fab_list[0].c.href(""+fab_list[0].name+" ("+fab_list[0].c.tostring()+")")+""
@@ -748,8 +734,6 @@ class tutorial.chapter_05 extends basic_chapter
           }
         }
         break
-      case 5:
-        break
 
     }
     if (tool_id == 4096){
@@ -788,7 +772,7 @@ class tutorial.chapter_05 extends basic_chapter
           if ( (pl == 0) && (schedule.waytype != wt_road) )
             result = translate("Only road schedules allowed")
 
-          local selc = 0
+          local selc = get_waiting_halt(9)
           local load = veh2_load
           local time = veh2_wait
           local c_list = city1_post_halts
@@ -802,7 +786,7 @@ class tutorial.chapter_05 extends basic_chapter
           if ( (pl == 0) && (schedule.waytype != wt_water) )
             result = translate("Only water schedules allowed")
 
-          local selc = 0
+          local selc = get_waiting_halt(10)
           local load = veh3_load
           local time = veh3_wait
           local c_list = ch5_post_ship_halts
@@ -870,7 +854,7 @@ class tutorial.chapter_05 extends basic_chapter
             local good = translate(good_alias.mail)
             return truck_result_message(result, translate(name), good, veh, cov)
           }
-          local selc = 0
+          local selc = get_waiting_halt(9)
           local load = veh2_load
           local time = veh2_wait
           local c_list = city1_post_halts
@@ -890,7 +874,7 @@ class tutorial.chapter_05 extends basic_chapter
             local good = translate(good_alias.mail)
             return ship_result_message(result, translate(name), good, veh, cov)
           }
-          local selc = 0
+          local selc = get_waiting_halt(10)
           local load = veh3_load
           local time = veh3_wait
           local c_list = ch5_post_ship_halts
@@ -1061,7 +1045,7 @@ class tutorial.chapter_05 extends basic_chapter
           local c_list = city1_post_halts
           local siz = c_list.len()
           for(local j = 0;j<siz;j++){
-            if(j==0)
+            if(j==get_waiting_halt(9))
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), veh2_load, veh2_wait))
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
@@ -1093,7 +1077,7 @@ class tutorial.chapter_05 extends basic_chapter
           local c_list = is_water_entry(ch5_post_ship_halts)
           local siz = c_list.len()
           for(local j = 0;j<siz;j++){
-            if(j==0)
+            if(j==get_waiting_halt(10))
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), veh3_load, veh3_wait))
             else
               sched.entries.append(schedule_entry_x(my_tile(c_list[j]), 0, 0))
