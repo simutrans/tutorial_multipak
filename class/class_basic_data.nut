@@ -1676,10 +1676,10 @@ function get_gui_img(id) {
           return "<img src='#t1'></img>"
           break
         case "grid":
-          return "<img src='#d1'></img><img src='#s12'></img>"
+          return "<img src='#s12'></img>"
           break
         case "display":
-          return "<img src='#d1'></img><img src='#d7'></img>"
+          return "<img src='#d1'></img> <img src='#d7'></img>"
           break
         case 5:
           return 0
@@ -1744,10 +1744,10 @@ function get_gui_img(id) {
           return "<img src='#t1'></img>"
           break
         case "grid":
-          return "<img src='#d1'></img><img src='#s12'></img>"
+          return "<img src='#s12'></img>"
           break
         case "display":
-          return "<img src='#d1'></img><img src='#d7'></img>"
+          return "<img src='#d1'></img> <img src='#d7'></img>"
           break
         case 5:
           return 0
