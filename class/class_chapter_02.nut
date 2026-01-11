@@ -258,6 +258,10 @@ class tutorial.chapter_02 extends basic_chapter
         text.prce = money_to_string(price)
         break
     }
+
+    // set image for buttons by different in paksets
+    text.img_road_menu = get_gui_img("road_menu")
+
     text.load = veh1_load
     text.wait = get_wait_time_text(veh1_wait)
     text.pos = city1_road_depot.href("("+city1_road_depot.tostring()+")")

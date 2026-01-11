@@ -1655,3 +1655,120 @@ function get_waiting_halt(id) {
   }
 
 }
+
+/**
+ *  return image for icons
+ *
+ *
+ *
+ *
+ *
+ */
+function get_gui_img(id) {
+
+  switch (pak_name) {
+    case "pak64":
+      switch (id) {
+        case "road_menu":
+          return "<img src='#t4'></img>"
+          break
+        case "rail_menu":
+          return "<img src='#t1'></img>"
+          break
+        case "grid":
+          return "<img src='#d1'></img><img src='#s12'></img>"
+          break
+        case "display":
+          return "<img src='#d1'></img><img src='#d7'></img>"
+          break
+        case 5:
+          return 0
+          break
+        case 6:
+          return 0
+          break
+        case 7:
+          return 0
+          break
+        case 8:
+          return 0
+          break
+        case 9:
+          return 0
+          break
+        case 10:
+          return 0
+          break
+      }
+      break
+    case "pak64.german":
+      switch (id) {
+        case "road_menu":
+          return "<img src='#t58'></img> <img src='#t4'></img>"
+          break
+        case "rail_menu":
+          return "<img src='#t58'></img> <img src='#t1'></img>"
+          break
+        case "grid":
+          return "<img src='#s12'></img>"
+          break
+        case "display":
+          return "<img src='#d1'></img>"
+          break
+        case 5:
+          return 0
+          break
+        case 6:
+          return 0
+          break
+        case 7:
+          return 0
+          break
+        case 8:
+          return 0
+          break
+        case 9:
+          return 0
+          break
+        case 10:
+          return 0
+          break
+      }
+      break
+    case "pak128":
+      switch (id) {
+        case "road_menu":
+          return "<img src='#t4'></img>"
+          break
+        case "rail_menu":
+          return "<img src='#t1'></img>"
+          break
+        case "grid":
+          return "<img src='#d1'></img><img src='#s12'></img>"
+          break
+        case "display":
+          return "<img src='#d1'></img><img src='#d7'></img>"
+          break
+        case 5:
+          return 0
+          break
+        case 6:
+          return 0
+          break
+        case 7:
+          return 0
+          break
+        case 8:
+          return 0
+          break
+        case 9:
+          return 0
+          break
+        case 10:
+          return 0
+          break
+      }
+      break
+  }
+
+}
