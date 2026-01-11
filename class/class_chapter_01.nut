@@ -58,6 +58,7 @@ class tutorial.chapter_01 extends basic_chapter
         text.pos2 = coord_fac_1.href(""+translate(ch1_text2)+" ("+coord_fac_1.tostring()+")")
         text.pos3 = coord_st_1.href(""+translate(ch1_text3)+" ("+coord_st_1.tostring()+")")
         text.link = "<a href='script:script_text()'>"+translate(ch1_text4)+"  >></a>"
+        text.next_step = translate("Go to next step")
       break;
       case 3:
         text.pos = "<a href=\"("+city1_mon.x+","+city1_mon.y+")\">"+buil1_name+" ("+city1_mon.tostring()+")</a>"
