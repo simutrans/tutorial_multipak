@@ -606,7 +606,7 @@ class tutorial.chapter_02 extends basic_chapter
             local conv = cov_save[current_cov-1]
             local cov_valid = is_cov_valid(conv)
 
-            if (current_cov == ch2_cov_lim3.b){
+            if (cov_valid && current_cov == ch2_cov_lim3.b){
               if (conv.is_followed()) {
                 pot4 = 1
               }
@@ -1194,8 +1194,13 @@ class tutorial.chapter_02 extends basic_chapter
           local conv = depot.get_convoy_list()
           conv[0].set_line(player, c_line)
           comm_start_convoy(player, conv[0], depot)
-
-          pot4 = 1
+        }
+        if (pot4 == 0){
+          local conv = cov_save[current_cov-1]
+          local cov_valid = is_cov_valid(conv)
+          if (cov_valid && current_cov == ch2_cov_lim3.b){
+            conv.set_followed()
+          }
         }
         return null
         break
@@ -1328,3 +1333,4 @@ class tutorial.chapter_02 extends basic_chapter
 }
 
 // END OF FILE
+
