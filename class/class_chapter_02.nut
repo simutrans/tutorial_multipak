@@ -40,9 +40,9 @@ class tutorial.chapter_02 extends basic_chapter
   // Step 4 =====================================================================================
   //Primer autobus
   line1_name = "ch2_l1"
-  veh1_obj = get_veh_ch2_st4()
-  veh1_load = set_loading_capacity(1)
-  veh1_wait = set_waiting_time(1)
+  veh_obj = get_veh_ch2_st4()
+  veh_load = set_loading_capacity(1)
+  veh_wait = set_waiting_time(1)
   dep_cnr1 = null //auto started
 
   // Step 5 =====================================================================================
@@ -92,6 +92,7 @@ class tutorial.chapter_02 extends basic_chapter
     line2_name = line1_name + " dock/station"
     line3_name = cty1.name + " - " + cty2.name
 
+    // look for streets next to the depot field
     if(this.step == 1) {
       local tile = my_tile(city1_road_depot)
       if ( tile_x(tile.x-1, tile.y, tile.z).get_way(wt_road) != null ) { build_list.append(tile_x(tile.x-1, tile.y, tile.z)) }
@@ -164,8 +165,8 @@ class tutorial.chapter_02 extends basic_chapter
 
         break
       case 6:
-        veh1_load = set_loading_capacity(2)
-        veh1_wait = set_waiting_time(2)
+        veh_load = set_loading_capacity(2)
+        veh_wait = set_waiting_time(2)
 
         if (current_cov==(ch2_cov_lim2.a+1)){
           text = ttextfile("chapter_02/06_1-2.txt")
@@ -189,8 +190,8 @@ class tutorial.chapter_02 extends basic_chapter
 
         break
       case 7:
-        veh1_load = set_loading_capacity(3)
-        veh1_wait = set_waiting_time(3)
+        veh_load = set_loading_capacity(3)
+        veh_wait = set_waiting_time(3)
 
         if (!correct_cov){
           text = ttextfile("chapter_02/07_3-4.txt")
@@ -241,8 +242,6 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
 
-        //text.n1 = city1_tow.href(cty1.name.tostring())
-        //text.n2 = city2_tow.href(cty2.name.tostring())
         local t = coord(way1_coords.a.x, way1_coords.a.y)
         text.pt1 = t.href("("+t.tostring()+")")
         t = coord(way1_coords.b.x, way1_coords.b.y)
@@ -256,18 +255,20 @@ class tutorial.chapter_02 extends basic_chapter
         break
     }
 
-    // text step 2, 6 and 7
+    // depot coord step 1, 2, 4, 6 and 7
     local steps = [1, 2, 4, 6, 7]
     if ( steps.find(this.step) != null ) {
-      // depot coord step 2, 6 and 7
       text.dep = city1_road_depot.href("("+city1_road_depot.tostring()+")")
     }
 
-    // veh load and wait time set to steps
-    text.load = veh1_load
-    text.wait = get_wait_time_text(veh1_wait)
+    // veh load and wait time set to steps 4, 6 and 7
+    local steps = [4, 6, 7]
+    if ( steps.find(this.step) != null ) {
+      text.load = veh_load
+      text.wait = get_wait_time_text(veh_wait)
+      text.bus1 = translate(veh_obj)
+    }
 
-    text.bus1 = translate(veh1_obj)
     text.name = city1_tow.href(cty1.name.tostring())
     text.name2 = city2_tow.href(cty2.name.tostring())
     text.tool1 = translate_objects_list.inspec
@@ -849,16 +850,6 @@ class tutorial.chapter_02 extends basic_chapter
           if (pos.x==city1_halt_2[city1_halt_2.len()-1].x && pos.y==city1_halt_2[city1_halt_2.len()-1].y && glsw[0] > 0){
               return format(translate("Select station No.%d"),2)+" ("+pub_st2.tostring()+")."
           } else { return null }
-          /*if (pos.x==city1_halt_2[city1_halt_2.len()-1].x && pos.y==city1_halt_2[city1_halt_2.len()-1].y && glsw[1] > 0){
-
-              return null
-          }
-          else {
-            if (glsw[0]==0)
-              return format(translate("Select station No.%d"),1)+" ("+city1_halt_2[city1_halt_2.len()-1].tostring()+")."
-            else if (glsw[1]==0)
-              return format(translate("Select station No.%d"),2)+" ("+city1_halt_2[city1_halt_2.len()-1].tostring()+")."
-            }*/
         }
         break;
     }
@@ -885,8 +876,8 @@ class tutorial.chapter_02 extends basic_chapter
     switch (this.step) {
       case 4:
         local selc = get_waiting_halt(1)
-        local load = veh1_load
-        local time = veh1_wait
+        local load = veh_load
+        local time = veh_wait
         local c_list = city1_halt_1
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
@@ -898,8 +889,8 @@ class tutorial.chapter_02 extends basic_chapter
       break
       case 6:
         local selc = get_waiting_halt(2)
-        local load = veh1_load
-        local time = veh1_wait
+        local load = veh_load
+        local time = veh_wait
         local c_list = city1_halt_2
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
@@ -909,8 +900,8 @@ class tutorial.chapter_02 extends basic_chapter
         return result
       break
       case 7:
-        local load = veh1_load
-        local time = veh1_wait
+        local load = veh_load
+        local time = veh_wait
         local c_list = city2_halt_1
         local selc = get_waiting_halt(3)
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
@@ -933,7 +924,7 @@ class tutorial.chapter_02 extends basic_chapter
           local cov = 1
           local veh = 1
           local good_list = [good_desc_x (good_alias.passa).get_catg_index()]    //Passengers
-          local name = veh1_obj
+          local name = veh_obj
           local st_tile = 1
           result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
 
@@ -942,8 +933,8 @@ class tutorial.chapter_02 extends basic_chapter
             return bus_result_message(result, translate(name), veh, cov)
           }
           local selc = get_waiting_halt(1)
-          local load = veh1_load
-          local time = veh1_wait
+          local load = veh_load
+          local time = veh_wait
           local c_list = city1_halt_1
           local siz = c_list.len()
           result = compare_schedule_convoy(result, pl, cov, convoy, selc, load, time, c_list, siz)
@@ -958,7 +949,7 @@ class tutorial.chapter_02 extends basic_chapter
           local cov = cov_list.len()
           local veh = 1
           local good_list = [good_desc_x (good_alias.passa).get_catg_index()]    //Passengers
-          local name = veh1_obj
+          local name = veh_obj
           local st_tile = 1
           result = is_convoy_correct(depot, cov, veh, good_list, name, st_tile)
           if (result!=null){
@@ -967,8 +958,8 @@ class tutorial.chapter_02 extends basic_chapter
           }
 
           local selc = get_waiting_halt(2)
-          local load = veh1_load
-          local time = veh1_wait
+          local load = veh_load
+          local time = veh_wait
           local c_list = city1_halt_2
           local siz = c_list.len()
           local line = true
@@ -983,7 +974,7 @@ class tutorial.chapter_02 extends basic_chapter
           local cov = 1
           local veh = 1
           local good_list = [good_desc_x (good_alias.passa).get_catg_index()]    //Passengers
-          local name = veh1_obj
+          local name = veh_obj
           local st_tile = 1
           result = is_convoy_correct(depot,cov,veh,good_list,name, st_tile)
           if (result!=null){
@@ -991,8 +982,8 @@ class tutorial.chapter_02 extends basic_chapter
             return bus_result_message(result, translate(name), veh, cov)
           }
 
-          local load = veh1_load
-          local time = veh1_wait
+          local load = veh_load
+          local time = veh_wait
           local c_list = city2_halt_1
           local siz = c_list.len()
           local selc = get_waiting_halt(3)
@@ -1070,8 +1061,8 @@ class tutorial.chapter_02 extends basic_chapter
 
           local c_list = city1_halt_1
           local sched = schedule_x(gl_wt, [])
-          local load = veh1_load
-          local wait = veh1_wait
+          local load = veh_load
+          local wait = veh_wait
           local sch_siz = c_list.len()
           for(local j=0;j<sch_siz;j++){
             if (j==get_waiting_halt(1))
@@ -1082,7 +1073,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_line = comm_get_line(player, gl_wt, sched, line1_name)
 
           local good_nr = 0 //Passengers
-          local name = veh1_obj
+          local name = veh_obj
           local cov_nr = 0  //Max convoys nr in depot
           if (!comm_set_convoy(cov_nr, c_depot, name))
             return 0
@@ -1121,8 +1112,8 @@ class tutorial.chapter_02 extends basic_chapter
           local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
           local c_list = city1_halt_2
           local sch_siz = c_list.len()
-          local load = veh1_load
-          local time = veh1_wait
+          local load = veh_load
+          local time = veh_wait
           local sched = schedule_x(gl_wt, [])
           for(local i=0;i<sch_siz;i++){
             if (i==get_waiting_halt(2))
@@ -1133,7 +1124,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_line = comm_get_line(player, gl_wt, sched, line2_name)
 
           local good_nr = 0 //Passengers
-          local name = veh1_obj
+          local name = veh_obj
           local cov_nr = 0  //Max convoys nr in depot
           for (local j = current_cov; j>ch2_cov_lim2.a && j<ch2_cov_lim2.b && correct_cov; j++){
             if (!comm_set_convoy(cov_nr, c_depot, name))
@@ -1172,8 +1163,8 @@ class tutorial.chapter_02 extends basic_chapter
           comm_destroy_convoy(pl, c_depot) // Limpia los vehiculos del deposito
 
           local sched = schedule_x(gl_wt, [])
-          local load = veh1_load
-          local wait = veh1_wait
+          local load = veh_load
+          local wait = veh_wait
           local c_list = city2_halt_1
           local sch_siz = c_list.len()
           for(local j=0;j<sch_siz;j++){
@@ -1185,7 +1176,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_line = comm_get_line(player, gl_wt, sched, line3_name)
 
           local good_nr = 0 //Passengers
-          local name = veh1_obj
+          local name = veh_obj
           local cov_nr = 0  //Max convoys nr in depot
           if (!comm_set_convoy(cov_nr, c_depot, name))
             return 0
@@ -1224,7 +1215,6 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
 
       case 2:
@@ -1232,7 +1222,6 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
 
       case 3:
@@ -1240,7 +1229,6 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
 
       case 4: //Schedule
@@ -1248,14 +1236,12 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [0]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
       case 5:
         local t_list = [-tool_remover, tool_build_bridge]
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
 
       case 6: //Schedule
@@ -1263,7 +1249,6 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [0]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
 
       case 7:
@@ -1272,7 +1257,6 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [gl_wt]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
 
       case 8: //Make Stop public
@@ -1280,7 +1264,6 @@ class tutorial.chapter_02 extends basic_chapter
         local wt_list = [-1]
         local res = update_tools(t_list, tool_id, wt_list, wt)
         result = res.result
-        //if(res.ok)  return result
         break
     }
     return result
@@ -1333,4 +1316,3 @@ class tutorial.chapter_02 extends basic_chapter
 }
 
 // END OF FILE
-
