@@ -38,7 +38,7 @@ class tutorial.chapter_05 extends basic_chapter
 
   //Para el Camion
   veh2_obj = get_veh_ch5(3)
-  veh2_load = 100
+  veh2_load = set_loading_capacity(8)
   veh2_wait = set_waiting_time(6)
   d2_cnr = null //auto started
 
@@ -49,7 +49,7 @@ class tutorial.chapter_05 extends basic_chapter
   //Para el barco
   //sch_list3 = [coord(133,189), coord_fac_4]
   veh3_obj = get_veh_ch5(4)
-  veh3_load = 100
+  veh3_load = set_loading_capacity(9)
   veh3_wait = set_waiting_time(7)
   //c_dep3 = coord(150,190) // depot
   d3_cnr = null //auto started
@@ -74,6 +74,7 @@ class tutorial.chapter_05 extends basic_chapter
           factory_data.rawget("8")
         ]
 
+    // set line names for automatic step
     line1_name = get_good_data(5, 3) + " " + fab_list[2].name + " - " + fab_list[3].name
     line2_name = translate("Post") + " City " +  get_city_name(city1_tow)
     local ta = this.my_tile(ch5_post_ship_halts[0])

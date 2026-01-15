@@ -112,6 +112,7 @@ city1_halt_1 <- []
 city1_halt_2 <- []
 city2_halt_1 <- []
 
+// road halt in all road lines city 1
 line_connect_halt <- coord(126,187)
 
 city1_halt_airport <- [coord(114,177), coord(121,189), line_connect_halt]

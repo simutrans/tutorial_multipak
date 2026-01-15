@@ -935,7 +935,7 @@ function set_convoy_count(id) {
           return 10
           break
         case 11:
-          return 3
+          return 2
         break
         case 12:
           return 1
@@ -1139,13 +1139,15 @@ function set_transportet_goods(id) {
 /**
  *  set loading capacity
  *
- *  id 1 - chapter 2 step  4 : bus city Pollingwick
- *  id 2 - chapter 2 step  6 : bus Pollingwick - Dock
- *  id 3 - chapter 2 step  7 : bus Pollingwick - Malliby
- *  id 4 - chapter 3 step 11 : city train
- *  id 5 - chapter 6 step  2 : air city 1 - city 7
- *  id 6 - chapter 6 step  3 : bus city 1 - Airport
- *  id 7 - chapter 6 step  4 : bus city 7 - Airport
+ *  id  1 - chapter 2 step  4 : bus city Pollingwick
+ *  id  2 - chapter 2 step  6 : bus Pollingwick - Dock
+ *  id  3 - chapter 2 step  7 : bus Pollingwick - Malliby
+ *  id  4 - chapter 3 step 11 : city train
+ *  id  5 - chapter 6 step  2 : air city 1 - city 7
+ *  id  6 - chapter 6 step  3 : bus city 1 - Airport
+ *  id  7 - chapter 6 step  4 : bus city 7 - Airport
+ *  id  8 - chapter 5 step  4 : post city 1
+ *  id  9 - chapter 5 step  4 : ship oil rig
  *
  */
 function set_loading_capacity(id) {
@@ -1174,6 +1176,12 @@ function set_loading_capacity(id) {
         case 7:
           return 60
           break
+        case 8:
+          return 60
+          break
+        case 9:
+          return 100
+          break
       }
       break
     case "pak64.german":
@@ -1198,6 +1206,12 @@ function set_loading_capacity(id) {
           break
         case 7:
           return 60
+          break
+        case 8:
+          return 60
+          break
+        case 9:
+          return 70
           break
       }
       break
@@ -1224,6 +1238,12 @@ function set_loading_capacity(id) {
         case 7:
           return 60
           break
+        case 8:
+          return 60
+          break
+        case 9:
+          return 100
+          break
       }
       break
   }
@@ -1231,7 +1251,7 @@ function set_loading_capacity(id) {
 }
 
 /**
- *  set waiting time
+ *  set waiting time passenger and post
  *
  *  id  1 - chapter 2 step  4 : bus city Pollingwick
  *  id  2 - chapter 2 step  6 : bus Pollingwick - Dock
@@ -1268,7 +1288,7 @@ function set_waiting_time(id) {
           return 42282
           break
         case 6:
-          return 10571
+          return 6343
           break
         case 7:
           return 42282
@@ -1577,7 +1597,7 @@ function get_waiting_halt(id) {
           return 0
           break
         case 9:
-          return 0
+          return 7
           break
         case 10:
           return 0
