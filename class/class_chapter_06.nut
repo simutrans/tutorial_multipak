@@ -455,6 +455,7 @@ class tutorial.chapter_06 extends basic_chapter
 
     if (tool_id==4096)
       return null
+
     switch (this.step) {
       case 1:
         local climate = square_x(pos.x, pos.y).get_climate()
