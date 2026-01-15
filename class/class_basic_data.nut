@@ -769,7 +769,7 @@ function get_obj_ch6(id) {
           return "AirStop"
           break
         case 4:
-          return "Tower1930"
+          return "Terminal1930"
           break
         case 5:
           return "1930AirDepot"
@@ -791,7 +791,7 @@ function get_obj_ch6(id) {
           return "AirStop"
           break
         case 4:
-          return "Tower1930"
+          return "Terminal1930"
           break
         case 5:
           return "1930AirDepot"
