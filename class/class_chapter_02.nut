@@ -41,8 +41,6 @@ class tutorial.chapter_02 extends basic_chapter
   //Primer autobus
   line1_name = "ch2_l1"
   veh_obj = get_veh_ch2_st4()
-  veh_load = set_loading_capacity(1)
-  veh_wait = set_waiting_time(1)
   dep_cnr1 = null //auto started
 
   // Step 5 =====================================================================================
@@ -64,6 +62,8 @@ class tutorial.chapter_02 extends basic_chapter
   line3_name = "ch2_l3"
   dep_cnr3 = null //auto started
 
+  veh_load = 0
+  veh_wait = 0
 
   // Step 8 =====================================================================================
   price = 1200
@@ -146,6 +146,8 @@ class tutorial.chapter_02 extends basic_chapter
       case 2:
         break
       case 3:
+        veh_load = set_loading_capacity(1)
+        veh_wait = set_waiting_time(1)
         text.list = create_halt_list(city1_halt_1)
         break
       case 4:
@@ -179,8 +181,8 @@ class tutorial.chapter_02 extends basic_chapter
         text.list = create_schedule_list(city1_halt_2)
 
         // dock bus halt
-        local tile = my_tile(city1_halt_2[0])
-        text.stnam = ""+tile.get_halt().get_name()+" ("+city1_halt_2[0].tostring()+")"
+        local tile = my_tile(city1_halt_2[get_waiting_halt(2)])
+        text.stnam = ""+tile.get_halt().get_name()+" ("+city1_halt_2[get_waiting_halt(2)].tostring()+")"
 
         local halt = my_tile(city1_halt_2[get_waiting_halt(2)]).get_halt()
         text.line = get_line_name(halt)
@@ -876,8 +878,8 @@ class tutorial.chapter_02 extends basic_chapter
     switch (this.step) {
       case 4:
         local selc = get_waiting_halt(1)
-        local load = veh_load
-        local time = veh_wait
+        local load = set_loading_capacity(1)
+        local time = set_waiting_time(1)
         local c_list = city1_halt_1
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
@@ -889,8 +891,8 @@ class tutorial.chapter_02 extends basic_chapter
       break
       case 6:
         local selc = get_waiting_halt(2)
-        local load = veh_load
-        local time = veh_wait
+        local load = set_loading_capacity(2)
+        local time = set_waiting_time(2)
         local c_list = city1_halt_2
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
@@ -900,10 +902,10 @@ class tutorial.chapter_02 extends basic_chapter
         return result
       break
       case 7:
-        local load = veh_load
-        local time = veh_wait
-        local c_list = city2_halt_1
         local selc = get_waiting_halt(3)
+        local load = set_loading_capacity(3)
+        local time = set_waiting_time(3)
+        local c_list = city2_halt_1
         result = compare_schedule(result, pl, schedule, selc, load, time, c_list, true)
         if(result == null){
           local line_name = line3_name //"Test 3"
