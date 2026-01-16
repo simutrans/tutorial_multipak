@@ -1,4 +1,5 @@
 /*
+ * @file scenario.nut
  *  Tutorial Scenario
  *
  *
@@ -291,9 +292,9 @@ function get_integral(tx)
 {
   //Check version and pakset name
   resul_version = string_analyzer()
-  include(nut_path+"class_basic_convoys")     // include class for detect eliminated convoys
-  include(nut_path+"class_messages")    // include def messages texts
-  include(nut_path+"astar")  // .. route search for way building etc
+  include(nut_path+"class_basic_convoys") // include class for detect eliminated convoys
+  include(nut_path+"class_messages")      // include def messages texts
+  include(nut_path+"astar")               // .. route search for way building etc
 
 }
 
@@ -305,6 +306,7 @@ chapter            <- tutorial.chapter_02       // must be placed here !!!
 
 
 /**
+  * @fn script_text()
   * This function will be called, whenever a user clicks to jump to the next step
   * It must not alter the map or call a tool!
   * Hence we just set a flag and handle all map changes in is_scenario_completed()
@@ -403,9 +405,14 @@ function set_city_names()
 }
 
 
-/*
- * test functions generating the GUI strings
- * These must return fast and must not alter the map!
+/**
+ *  @fn get_info_text(pl)
+ *  test functions generating the GUI strings
+ *  These must return fast and must not alter the map!
+ *
+ *  @param pl = player_x
+ *
+ *  @return
  */
 function get_info_text(pl)
 {
@@ -532,18 +539,20 @@ function labels_text_debug()
 }
 
 
-/*
+/**
+ *  @fn chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
  *  calculate percentage chapter complete
  *
- *  ch_steps  = count chapter steps
- *  step      = actual chapter step
- *  sup_steps = count sub steps in a chapter step
- *  sub_step  = actual sub step in a chapter step
+ *  @param ch_steps  = count chapter steps
+ *  @param step      = actual chapter step
+ *  @param sup_steps = count sub steps in a chapter step
+ *  @param sub_step  = actual sub step in a chapter step
  *
  *  no sub steps in chapter step, then set sub_steps and sub_step to 0
  *
- * This function is called during a step() and can alter the map
+ *  This function is called during a step() and can alter the map
  *
+ *  @return
  */
 function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
 {
@@ -572,10 +581,14 @@ function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
 }
 
 /**
-  * This function check whether finished or not
-  * Is runs in a step, so it can alter the map
-  * @return 100 or more, the scenario will be "win" and the scenario_info window
-  *                      show the result tab
+  *  @fn is_scenario_completed(pl)
+  *  This function check whether finished or not
+  *  Is runs in a step, so it can alter the map
+  *
+  *  @param pl = player_x
+  *
+  *  @return 100 or more, the scenario will be "win" and the scenario_info window
+  *                       show the result tab
   */
 function is_scenario_completed(pl)
 {
