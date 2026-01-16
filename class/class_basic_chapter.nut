@@ -1,4 +1,6 @@
-/*
+/**
+ *  @file class_basic_chapter.nut
+ *
  *  class basis_chapter
  *
  *
@@ -30,8 +32,9 @@ tile_delay      <- 0x0000000f & time()       //delay for mark tiles
 gl_tile_i       <- 0
 
 /**
-  * chapter description : this is a placeholder class
-  */
+ *  class to chapter description : this is a placeholder class
+ *
+ */
 class basic_chapter
 {
 
@@ -108,12 +111,12 @@ class basic_chapter
   // BASIC FUNCTIONS, NO REWRITE
 
   //Para arrancar vehiculos usando comm  ----------------------------------------------------------------
-  function comm_set_convoy(cov_nr, coord, name, veh_nr = false)
+  function comm_set_convoy( cov_nr, coord, name, veh_nr = false ) {
     /*1 Numero de convoy actual,******
     * 2 coord del deposito,        *
     * 3 Name del vehiculo,         *
     * 4 Numero de remolques/bagones)*/
-  {
+
     local pl = player_x(0)
     local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
     local cov_list = depot.get_convoy_list() // Lista de vehiculos en el deposito
@@ -148,7 +151,7 @@ class basic_chapter
     }
   }
 
-  function comm_destroy_convoy(pl, coord){
+  function comm_destroy_convoy( pl, coord ) {
     local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
     local cov_list = depot.get_convoy_list() // Lista de vehiculos en el deposito
     local d_nr = cov_list.len()   //Numero de vehiculos en el deposito
@@ -282,11 +285,13 @@ class basic_chapter
   }
 
   /**
+   *  @fn check_halt_merge(halt1, halt2)
    *  check is tile halt2 in tilelist halt1
    *
-   *  halt1 = tile_x
-   *  halt2 = tile_x
+   *  @param halt1 = tile_x
+   *  @param halt2 = tile_x
    *
+   *  @return true or false
    */
   function check_halt_merge(halt1, halt2) {
     local tile_list = halt1.get_halt().get_tile_list()
@@ -303,12 +308,13 @@ class basic_chapter
   }
 
   /**
+   *  @fn check_halt_wt(halt, search_wt)
    *  check waytype tile in tile list from station
    *
-   *  halt      - tile_x from station
-   *  search_wt - waytype for search tile
+   *  @param halt      - tile_x from station
+   *  @param search_wt - waytype for search tile
    *
-   *  return    - tile_x or null
+   *  @return tile_x or null
    *
    */
   function check_halt_wt(halt, search_wt) {
@@ -3323,14 +3329,16 @@ function station_tiles(tile_a, tile_b, count) {
 }
 
 /**
+ *  @fn check_rail_station(tile, rtype, pos = null)
  *  check rail platform
  *
- *  tile  = tile_x halt pos
- *  rtype = 0 - check pos in platform
- *          1 - return array platform
- *  pos   = tile to click
+ *  @param tile  = tile_x halt pos
+ *  @param rtype = 0 - check pos in platform
+ *                 1 - return array platform
+ *  @param pos   = tile to click
  *
  *
+ *  @return true (rtype = 0) or tiles_x array (rtype = 1)
  */
 function check_rail_station(tile, rtype, pos = null) {
   local halt_tiles = tile.get_halt().get_tile_list()
@@ -3365,8 +3373,13 @@ function check_rail_station(tile, rtype, pos = null) {
 }
 
 /**
- * test tile is empty
- * removed objects for empty tiles: tree, ground_object, moving_object
+ *  @fn test_tile_is_empty(t_tile)
+ *  test tile is empty
+ *  removed objects for empty tiles: tree, ground_object, moving_object
+ *
+ *  @param t_tile = tile_x
+ *
+ *  @return true or false
  *
  */
 function test_tile_is_empty(t_tile) {
@@ -3391,10 +3404,11 @@ function test_tile_is_empty(t_tile) {
 }
 
 /**
+ *  @fn search_tile_in_tiles(tiles, coord)
  *  check tile in tile array
  *
- *  tiles = tile array
- *  coord = tile as coord
+ *  @param tiles = tile array
+ *  @param coord = tile as coord
  *
  */
 function search_tile_in_tiles(tiles, coord) {
@@ -3406,5 +3420,104 @@ function search_tile_in_tiles(tiles, coord) {
   }
 
   return false
+}
+
+/**
+ *  @fn check_post_extension(halt_list)
+ *  check stations enables post / enables pax and post
+ *  search free tile for post extension
+ *  search road tile for post halt
+ *  replace pass halt -> pass/post halt
+ *
+ *  @param halt_list = array[tiles_x, tile_x, .... ]
+ *
+ *  @return array[ {a = build_tile, b = code}, .... ]
+ *      code = 0 - build mail extension
+ *      code = 1 - build mail halt
+ *      code = 3 - replace pass halt to pass/mail halt
+ *      code = 4 - remove city building
+ *
+ */
+function check_post_extension(halt_list) {
+
+  local stations_list_mail = building_desc_x.get_available_stations(building_desc_x.station, wt_road, good_desc_x("Post"))
+  local build_list = []
+
+  local station_mail = null     // halt accepts mail
+  local station_passmail = null // halt accepts passenger and mail
+  // search available halts
+  if ( stations_list_mail.len() > 0 ) {
+    for ( local i = 0; i < stations_list_mail.len(); i++ ) {
+      if ( stations_list_mail[i].enables_pax() && station_passmail == null ) {
+        station_passmail = stations_list_post[i]
+      } else if ( station_mail == null ) {
+        station_mail = stations_list_mail[i]
+      }
+    }
+  }
+
+  if ( station_passmail != null ) { gui.add_message("station_passmail " + station_passmail.get_name()) }
+  if ( station_mail != null ) { gui.add_message("station_mail " + station_mail.get_name()) }
+
+  for ( local i = 0; i < halt_list.len(); i++ ) {
+    local tiles = find_tiles_after_tile(my_tile(halt_list[i]))
+
+    local code_0 = null
+    local code_1 = null
+
+    for ( local j = 0; j < tiles.len(); j++ ) {
+      if ( test_tile_is_empty(tiles[j]) ) {
+        // empty tile build mail extension
+        code_0 = { a = tiles[j], b = 0 }
+        break
+      }
+      if ( tiles[j].get_slope() == 0 && tiles[j].get_way(wt_road) != null && station_mail != null ) {
+        // tile has road and mail halt avai
+        local w_dir = tiles[j].get_way_dirs(wt_road)
+        if ( dir.is_single(w_dir) || dir.is_straight(w_dir) ) {
+          // tile has road for build mail halt available
+          code_1 = { a = tiles[j], b = 1 }
+        }
+      }
+    }
+
+    if ( code_0 != null ) {
+      build_list.append(code_0)
+    } else if ( code_1 != null ) {
+      build_list.append(code_1)
+    }
+
+  }
+
+  for ( local i = 0; i < build_list.len(); i++ ) {
+    gui.add_message("build_list[" + i + "] " + coord3d_to_string(build_list[i].a) + " code " + build_list[i].b )
+    if ( build_list[i].b == 0 ) {
+      extensions_tiles[i] = coord(build_list[i].a.x, build_list[i].a.y)
+    }
+  }
+
+}
+
+/**
+ *  @fn find_tiles_after_tile(tile)
+ *
+ *  @param tile = tile_x
+ *
+ *  @return tile_x array
+ *      array[N, S, E, W, NE, SE, NW, SW]
+ */
+function find_tiles_after_tile(tile) {
+  local t_array = []
+
+  t_array.append( tile_x(tile.x, tile.y-1, tile.z) )
+  t_array.append( tile_x(tile.x, tile.y+1, tile.z) )
+  t_array.append( tile_x(tile.x+1, tile.y, tile.z) )
+  t_array.append( tile_x(tile.x-1, tile.y, tile.z) )
+  t_array.append( tile_x(tile.x+1, tile.y-1, tile.z) )
+  t_array.append( tile_x(tile.x+1, tile.y+1, tile.z) )
+  t_array.append( tile_x(tile.x-1, tile.y-1, tile.z) )
+  t_array.append( tile_x(tile.x-1, tile.y+1, tile.z) )
+
+  return t_array
 }
 // END OF FILE
