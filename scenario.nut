@@ -417,11 +417,14 @@ function set_city_names()
 function get_info_text(pl)
 {
   local info = ttextfile("info.txt")
+  info.dialog = translate("Scenario information")
+
   local help = ""
   local i = 0
   //foreach (chap in tutorial)
-  for (i=1;i<=chapter_max;i++)
-    help+= "<em>"+translate("Chapter")+" "+(i)+"</em> - "+translate(tutorial["chapter_"+(i<10?"0":"")+i].chapter_name)+"<br>"
+  for ( i=1; i<=chapter_max; i++ )
+    help += "<em>"+translate("Chapter")+" "+(i)+"</em> - "+translate(tutorial["chapter_"+(i<10?"0":"")+i].chapter_name)+"<br>"
+
   info.list_of_chapters = help
 
   info.first_link = "<a href=\"goal\">"+(chapter.chap_nr <= 1 ? translate("Let's start!"):translate("Let's go on!") )+"  >></a>"
