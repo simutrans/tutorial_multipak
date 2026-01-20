@@ -112,10 +112,10 @@ city1_halt_1 <- []
 city1_halt_2 <- []
 city2_halt_1 <- []
 
-line_connect_halt <- coord(126,187)
+line_connect_halt <- coord(124,186)
 
 city1_halt_airport <- [coord(114,177), coord(121,189), line_connect_halt]
-local list = [coord(111,183), coord(116,183),  coord(120,183), line_connect_halt, coord(121,189), coord(118,191), coord(113,190)]
+local list = [coord(114,184), coord(118,186),  coord(120,181), line_connect_halt, coord(121,189), coord(118,191), coord(113,190)]
 for ( local i = 0; i < list.len(); i++ ) {
   city1_halt_1.append(list[i])
 }
@@ -272,8 +272,8 @@ way5_fac7_fac8 <- [coord3d(132,233,0), coord3d(131,209,-1)]//{, dir = 2}
  *
  */
 
-extensions_tiles <- [coord(111,182), coord(116,182), coord(121,183), coord(127,187),
-                      coord(132,190), coord(121,190), coord(118,192), coord(113,191)]
+//extensions_tiles <- [coord(111,182), coord(116,182), coord(121,183), coord(127,187),
+//                      coord(132,190), coord(121,190), coord(118,192), coord(113,191)]
 
 /**
  *  set tiles for pos chapter start

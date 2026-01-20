@@ -166,9 +166,11 @@ function translate_objects() {
   if ( pak_name == "pak64.german" ) {
     translate_objects_list.rawset("tools_power", translate("POWERLINE"))
     translate_objects_list.rawset("tools_mail_extension", translate("EXTENSIONS"))
+    translate_objects_list.rawset("tools_road_stations", translate("ROADSTATIONS"))
   } else {
     translate_objects_list.rawset("tools_power", translate("SPECIALTOOLS"))
     translate_objects_list.rawset("tools_mail_extension", translate("SPECIALTOOLS"))
+    translate_objects_list.rawset("tools_road_stations", translate("ROADTOOLS"))
   }
   //gui.add_message("Current: "+translate_objects_list.inspec)
 
@@ -1563,8 +1565,8 @@ function get_info_file(txt_file) {
  *  id  6 = city1_city7_air     - airplane
  *  id  7 = city1_halt_airport  - bus airport - city 1
  *  id  8 = city7_halt          - bus airport - city 7
- *  id  9 = city1_post_halts     - halts for post
- *  id 10 = ch5_post_ship_halts  - post passenger dock - factory 4 (Oil rigg)
+ *  id  9 = city1_post_halts    - road halts for post
+ *  id 10 = ch5_post_ship_halts - post passenger dock - factory 4 (Oil rigg)
  *
  */
 function get_waiting_halt(id) {
@@ -1579,7 +1581,7 @@ function get_waiting_halt(id) {
           return 4
           break
         case 3:
-          return 0
+          return 2
           break
         case 4:
           return 2
@@ -1610,10 +1612,10 @@ function get_waiting_halt(id) {
           return 2
           break
         case 2:
-          return 4
+          return 3
           break
         case 3:
-          return 0
+          return 2
           break
         case 4:
           return 0
@@ -1647,7 +1649,7 @@ function get_waiting_halt(id) {
           return 4
           break
         case 3:
-          return 0
+          return 2
           break
         case 4:
           return 0
@@ -1701,11 +1703,11 @@ function get_gui_img(id) {
         case "display":
           return "<img src='#d1'></img> <img src='#d7'></img>"
           break
-        case 5:
-          return 0
+        case "post_menu":
+          return "<img src='#t7'></img>"
           break
-        case 6:
-          return 0
+        case "road_halts":
+          return "<img src='#t4'></img>"
           break
         case 7:
           return 0
@@ -1735,11 +1737,11 @@ function get_gui_img(id) {
         case "display":
           return "<img src='#d1'></img>"
           break
-        case 5:
-          return 0
+        case "post_menu":
+          return "<img src='#t67'></img>"
           break
-        case 6:
-          return 0
+        case "road_halts":
+          return "<img src='#t29'></img> <img src='#t62'></img>"
           break
         case 7:
           return 0
@@ -1769,11 +1771,11 @@ function get_gui_img(id) {
         case "display":
           return "<img src='#d1'></img> <img src='#d7'></img>"
           break
-        case 5:
-          return 0
+        case "post_menu":
+          return "<img src='#t7'></img>"
           break
-        case 6:
-          return 0
+        case "road_halts":
+          return "<img src='#t4'></img>"
           break
         case 7:
           return 0

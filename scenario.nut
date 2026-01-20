@@ -6,7 +6,7 @@
  *  Can NOT be used in network game !
  */
 const nut_path = "class/"             // path to folder with *.nut files
-const version = 2004
+const version = 2005
 scenario_name               <- "Tutorial Scenario"
 scenario.short_description  = scenario_name
 scenario.author             = "Yona-TYT & Andarix"

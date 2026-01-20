@@ -2013,7 +2013,7 @@ class basic_chapter
     return translate("The signal does not point in the correct direction")+" ("+coord(sigcoord[0].x,sigcoord[0].y).tostring()+")."
   }
 
-    function get_stop(pos,cs,result,load1,load2,cov,count,sw)
+  function get_stop(pos,cs,result,load1,load2,cov,count,sw)
   {
     local allret = {cs=cs,result=result,count=count,pot=null}
     local st_c = coord(pos.x,pos.y)
@@ -2516,7 +2516,7 @@ class basic_chapter
   function is_stop_building_ex(siz, list, lab_name)
   {
     local count = 0
-    for(local j=0;j<siz;j++){
+    for( local j = 0; j < siz; j++ ) {
       local c = list[j]
       local name = get_obj_ch5(6)
       local good = get_good_data(6, 2)
@@ -2533,37 +2533,35 @@ class basic_chapter
         accept_post = halt.accepts_good(good_desc_x(good))
         //gui.add_message(coord3d_to_string(t) + " accept_post " + accept_post)
         if ( accept_post ) {
+          local s = my_tile(extensions_tiles[j].a).find_object(mo_way)
+          if(s){
+            s.unmark()
+          }
+          // change halt to post halt
+          if( extensions_tiles[j].b == 1 ) {
+            city1_post_halts[j] = extensions_tiles[j].a
+          }
           glsw[j]=1
           count++
-          if (count==siz) {
-            return true
-          }
         }
-      }
-
-      if(buil && halt){
+      } else if ( buil && halt ) {
         local desc = buil.get_desc()
         local g_list = get_build_load_type(desc)
-        local is_good = station_compare_load(good, g_list)
-        if(name == "" && is_good) {
-          if(way){
-            way.unmark()
-          }
+        local is_good = station_compare_load(good, g_list) //halt.accepts_good(good_desc_x(good))
+        //gui.add_message(j + " is_good " + is_good)
+        if( extensions_tiles[j].b == 1 && is_good ) {
+          /*local s = my_tile(extensions_tiles[j].a).find_object(mo_way)
+          if(s){
+            s.unmark()
+          }*/
           glsw[j]=1
           count++
-          if (count==siz) {
-            return true
-          }
         }
-        if(name == desc.get_name() && is_good){
+        if( extensions_tiles[j].b == 0 && is_good ) { //name == desc.get_name()
           glsw[j]=1
           count++
-          if (count==siz) {
-            return true
-          }
         }
-      }
-      else {
+      } else {
         if(way){
           way.mark()
         }
@@ -2572,6 +2570,11 @@ class basic_chapter
         }
       }
     }
+
+    if (count==siz) {
+      return true
+    }
+
     return false
   }
 
@@ -2711,17 +2714,23 @@ class basic_chapter
 
       local name = get_obj_ch5(6)
       local good = get_good_data(6, 2)
-      local c = list[j]
-      //gui.add_message(""+glsw[j]+" "+j+" "+nr+" "+c)
+      local c = null
+      try {
+        // array with coord and code
+        c = list[j].a
+      }
+      catch(ev) {
+        c = list[j]
+      }
       local tile = my_tile(c)
       local buil = tile.find_object(mo_building)
       local halt = tile.get_halt()
 
-      local accept_post = null
+      /*local accept_post = null
       if ( halt != null ) {
         accept_post = halt.accepts_good(good_desc_x(good))
-        //gui.add_message(coord3d_to_string(tile) + " accept_post " + accept_post)
-      }
+        gui.add_message(coord3d_to_string(tile) + " accept_post " + accept_post)
+      }*/
 
       if(buil){
         local desc = buil.get_desc()
@@ -2740,13 +2749,17 @@ class basic_chapter
           local tx = "The extension building for station [%s] must be a [%s], use the 'Remove' tool"
           return format(translate(tx), halt_name, st_name )+" ("+c.tostring()+")."
         }
-      } else if ( accept_post ) {
 
-      }
+
+      } /*else if ( accept_post ) {
+      }*/
+
+
     }
+
     for(local j=0; j<nr; j++){
-      local c = list[j]
-      //gui.add_message("a"+glsw[j])
+      local c = list[j].a
+      //gui.add_message("a "+glsw[j])
       if ((tile.x == c.x) && (tile.y == c.y)){
         if (glsw[j]==0){
           return null
@@ -2841,6 +2854,7 @@ class basic_chapter
       }
     }
   }
+
   function label_bord(coora, coorb, opt, del, text, wt=null)
   {
     local c_a = coord(coora.x, coora.y)
@@ -2977,9 +2991,9 @@ class basic_chapter
   {
 
     if (stop){
-      foreach(t in list){
+      foreach(t in list) {
         t.unmark()
-        foreach(obj in t.get_objects()){
+        foreach(obj in t.get_objects()) {
           obj.unmark()
         }
       }
@@ -2988,34 +3002,34 @@ class basic_chapter
     local crr_delay = 0x0000000f & time()
 
     if(crr_delay == tile_delay){
-      for(;gl_tile_i < list.len(); ){
+      for(;gl_tile_i < list.len(); ) {
         local t = list[gl_tile_i]
         t.mark()
-        foreach(obj in t.get_objects()){
+        foreach(obj in t.get_objects()) {
           obj.mark()
         }
 
         gl_tile_i++
         break
       }
-      if(gl_tile_i == list.len()){
+      if(gl_tile_i == list.len()) {
         tile_delay = 0x0000000f & (crr_delay+1)
         gl_tile_i = 0
       }
       return false
     }
     else {
-      for(;gl_tile_i < list.len(); ){
+      for(;gl_tile_i < list.len(); ) {
         local t = list[gl_tile_i]
         t.unmark()
-        foreach(obj in t.get_objects()){
+        foreach(obj in t.get_objects()) {
           obj.unmark()
         }
 
         gl_tile_i++
         break
       }
-      if(gl_tile_i == list.len()){
+      if(gl_tile_i == list.len()) {
         tile_delay = 0x0000000f & (crr_delay+1)
         gl_tile_i = 0
       }
@@ -3026,17 +3040,17 @@ class basic_chapter
   function delay_mark_tile(list, stop = false)
   {
     if (stop){
-      foreach(t in list){
+      foreach(t in list) {
         t.unmark()
-        foreach(obj in t.get_objects()){
+        foreach(obj in t.get_objects()) {
           obj.unmark()
         }
       }
       return true
     }
     local crr_delay = 0x0000000f & time()
-    if(crr_delay == tile_delay){
-      foreach(t in list){
+    if(crr_delay == tile_delay) {
+      foreach(t in list) {
         t.mark()
         foreach(obj in t.get_objects()){
           obj.mark()
@@ -3046,9 +3060,9 @@ class basic_chapter
     }
     else{
       tile_delay = 0x0000000f & (crr_delay+1)
-      foreach(t in list){
+      foreach(t in list) {
         t.unmark()
-        foreach(obj in t.get_objects()){
+        foreach(obj in t.get_objects()) {
           obj.unmark()
         }
       }
@@ -3056,8 +3070,7 @@ class basic_chapter
     }
   }
 
-  function is_water_entry(list, under = false)
-  {
+  function is_water_entry(list, under = false) {
     local siz = list.len()
     local nw_list = []
     local c2d = "coord"
@@ -3109,33 +3122,33 @@ class basic_chapter
     local tool = command_x(tool_remover)
 
     if (opt==1) {
-      for (local j = 0; j<siz;j++){
+      for (local j = 0; j<siz;j++) {
         tool.work(player_x(1), t, "")
         t.x++
 
       }
     }
     else if (opt==2) {
-      for (local j = 0; j<siz;j++){
+      for (local j = 0; j<siz;j++) {
         tool.work(player_x(1), t, "")
         t.y++
       }
     }
     else if (opt==3) {
-      for (local j = 0; j<siz;j++){
+      for (local j = 0; j<siz;j++) {
         tool.work(player_x(1), t, "")
         t.x--
       }
     }
     else if (opt==4) {
-      for (local j = 0; j<siz;j++){
+      for (local j = 0; j<siz;j++) {
         tool.work(player_x(1), t, "")
         t.y--
       }
     }
   }
 
-  function tunnel_build_check(start, end, under,  max, dir){
+  function tunnel_build_check(start, end, under,  max, dir) {
     local count = tunnel_get_max(start, end, max, dir)
     local t = tile_x(r_way.c.x, r_way.c.y, r_way.c.z)
 
@@ -3147,7 +3160,7 @@ class basic_chapter
     return "lol"
   }
 
-  function tunnel_get_max(start, end, max, dir){
+  function tunnel_get_max(start, end, max, dir) {
 
     local count = 0
 
@@ -3175,7 +3188,7 @@ class basic_chapter
     return count
   }
 
-  function under_way_check(under, dir){
+  function under_way_check(under, dir) {
     local result =  translate("The tunnel is not correct, use the [Remove] tool here")+" ("+r_way.c.tostring()+".)"
     local t = tile_x(r_way.c.x, r_way.c.y, r_way.c.z)
     local way = t.find_object(mo_way)
@@ -3198,25 +3211,24 @@ class basic_chapter
     return null
   }
 
-  function underground_message(plus = 0){
+  function underground_message(plus = 0) {
     under_lv = settings.get_underground_view_level()
     if(under_lv == norm_view)
       return translate("First you need to activate the underground view / sliced map view.")
 
-    else if(under_lv != unde_view){
+    else if(under_lv != unde_view) {
       if(under_lv != r_way.c.z + plus)
         return format(translate("Layer level in sliced map view should be: %d"), r_way.c.z + plus)
 
     }
   }
 
-  function public_label(t, name)
-  {
+  function public_label(t, name) {
 
     local label = t.find_object(mo_label)
     local cursor = t.find_object(mo_pointer)
 
-    if(!label && !t.is_marked() && !cursor){
+    if (!label && !t.is_marked() && !cursor) {
       label_x.create(t, pl_unown, name)
 
       label = t.find_object(mo_label)
@@ -3434,8 +3446,8 @@ function search_tile_in_tiles(tiles, coord) {
  *  @return array[ {a = build_tile, b = code}, .... ]
  *      code = 0 - build mail extension
  *      code = 1 - build mail halt
- *      code = 3 - replace pass halt to pass/mail halt
- *      code = 4 - remove city building
+ *      code = 2 - replace pass halt to pass/mail halt (not tested)
+ *      code = 3 - remove city building (not implemented)
  *
  */
 function check_post_extension(halt_list) {
@@ -3449,12 +3461,17 @@ function check_post_extension(halt_list) {
   if ( stations_list_mail.len() > 0 ) {
     for ( local i = 0; i < stations_list_mail.len(); i++ ) {
       if ( stations_list_mail[i].enables_pax() && station_passmail == null ) {
-        station_passmail = stations_list_post[i]
+        station_passmail = stations_list_mail[i]
       } else if ( station_mail == null ) {
         station_mail = stations_list_mail[i]
       }
     }
   }
+
+  if ( station_mail == null && station_passmail != null) {
+    station_mail = station_passmail
+  }
+
 
   if ( station_passmail != null ) { gui.add_message("station_passmail " + station_passmail.get_name()) }
   if ( station_mail != null ) { gui.add_message("station_mail " + station_mail.get_name()) }
@@ -3464,19 +3481,56 @@ function check_post_extension(halt_list) {
 
     local code_0 = null
     local code_1 = null
+    local code_2 = null
+    local code_2_level = null
+    local code_3 = null
+
+    local b_types = ["city_res", "city_com", "city_ind"]
+
+    // check road direction
+    local halt_dir = my_tile(halt_list[i]).get_way_dirs(wt_road)
 
     for ( local j = 0; j < tiles.len(); j++ ) {
       if ( test_tile_is_empty(tiles[j]) ) {
+        local tile_ok = true
+        // not build end of road
+        if ( dir.is_single(halt_dir) ) {
+          if ( (halt_dir == 1 || halt_dir == 4) && halt_list[i].x == tiles[j].x ) {
+            tile_ok = false
+          }
+          if ( (halt_dir == 2 || halt_dir == 8) && halt_list[i].y == tiles[j].y ) {
+            tile_ok = false
+          }
+        }
+
         // empty tile build mail extension
-        code_0 = { a = tiles[j], b = 0 }
-        break
+        if ( tile_ok ) {
+          code_0 = { a = tiles[j], b = 0 }
+          break
+        }
       }
+
       if ( tiles[j].get_slope() == 0 && tiles[j].get_way(wt_road) != null && station_mail != null ) {
-        // tile has road and mail halt avai
+        // tile has road and mail halt available
         local w_dir = tiles[j].get_way_dirs(wt_road)
         if ( dir.is_single(w_dir) || dir.is_straight(w_dir) ) {
-          // tile has road for build mail halt available
           code_1 = { a = tiles[j], b = 1 }
+        }
+      }
+
+      // replace pass halt to pass/mail halt
+      local tile_building = tiles[j].find_object(mo_building)
+      if ( tile_building != null ) {
+        local b_desc = tile_building.get_desc()
+        if ( b_types.find(b_desc.get_type()) ) {
+          if ( code_2 == null ) {
+            code_2 = { a = tiles[j], b = 2 }
+            code_2_level = tile_building.get_passenger_level()
+          } else if ( code_2_level < tile_building.get_passenger_level() ) {
+            code_2 = { a = tiles[j], b = 2 }
+            code_2_level = tile_building.get_passenger_level()
+          }
+
         }
       }
     }
@@ -3485,15 +3539,18 @@ function check_post_extension(halt_list) {
       build_list.append(code_0)
     } else if ( code_1 != null ) {
       build_list.append(code_1)
+    } else if ( code_2 != null ) {
+      build_list.append(code_2)
     }
 
+    //if ( code_2 != null ) { gui.add_message("code_2 " + coord3d_to_string(code_2.a) ) }
   }
 
   for ( local i = 0; i < build_list.len(); i++ ) {
-    gui.add_message("build_list[" + i + "] " + coord3d_to_string(build_list[i].a) + " code " + build_list[i].b )
-    if ( build_list[i].b == 0 ) {
-      extensions_tiles[i] = coord(build_list[i].a.x, build_list[i].a.y)
-    }
+    //gui.add_message("build_list[" + i + "] " + coord3d_to_string(build_list[i].a) + " code " + build_list[i].b )
+    //if ( build_list[i].b == 0 ) {
+      extensions_tiles.append({a = coord(build_list[i].a.x, build_list[i].a.y), b = build_list[i].b})
+    //}
   }
 
 }
@@ -3520,4 +3577,150 @@ function find_tiles_after_tile(tile) {
 
   return t_array
 }
+
+
+/**
+  * @fn find_object(obj, wt, speed, good)
+  * find object tool
+  *
+  * @param obj   = object type ( bridge, tunnel, way, catenary, station, extension )
+  * @param wt    = waytype
+  * @param speed = speed - null by station, extension
+  * @param good  = good
+  */
+function find_object(obj, wt, speed, good = null) {
+
+  local list = []
+  switch ( obj ) {
+    case "bridge":
+      list = bridge_desc_x.get_available_bridges(wt)
+      break
+    case "tunnel":
+      list = tunnel_desc_x.get_available_tunnels(wt)
+      break
+    case "way":
+      list = way_desc_x.get_available_ways(wt, st_flat)
+      break
+    case "catenary":
+      local li = wayobj_desc_x.get_available_wayobjs(wt)
+      for (local j=0; j<li.len(); j++) {
+        if ( li[j].is_overhead_line() ) {
+          /*
+            pak128.german check catenary in name
+          */
+          if ( get_set_name() == "pak128.german" ) {
+            local name = li[j].get_name().tolower()
+            if ( name.find("catenary") != null ) {
+              list.append(li[j])
+            }
+          } else {
+            list.append(li[j])
+          }
+        }
+      }
+      break
+    case "station":
+      list = building_desc_x.get_available_stations(building_desc_x.station, wt, good_desc_x(good))
+      break
+    case "extension":
+      list = building_desc_x.get_available_stations(building_desc_x.station_extension, wt, good_desc_x(good))
+      //gui.add_message(" list extension wt " + list.len())
+      if ( list.len() == 0 ) {
+        list = building_desc_x.get_available_stations(building_desc_x.station_extension, 0, good_desc_x(good))
+        //gui.add_message(" list extension wt=0 " + list.len())
+      }
+      break
+
+  }
+
+
+  local len = list.len()
+  local obj_desc = null
+
+  // sort objects by speed
+  if ( speed != null) {
+    local obj_list = []
+    for(local i=0; i<len; i++) {
+      obj_list.append(list[i].get_topspeed())
+    }
+    obj_list.sort()
+
+    local sort_obj_list = []
+
+    for(local i=0; i<len; i++) {
+      //gui.add_message_at(our_player,i + " obj " + obj_list[i] , world.get_time())
+      for (local j=0; j<len; j++) {
+        if ( obj_list[i] == list[j].get_topspeed() ) {
+          sort_obj_list.append(list[j])
+        }
+      }
+    }
+    list.clear()
+    list = sort_obj_list.slice(0)
+    /*for(local i=0; i<len; i++) {
+      gui.add_message_at(our_player,i + " obj " + list[i].get_name() + " speed " + list[i].get_topspeed(), world.get_time())
+    }*/
+
+    local max_speed = 160
+    local min_len = 5
+
+    if (len>0) {
+      obj_desc = list[0]
+      //gui.add_message_at(our_player,"0  obj_desc " + obj_desc.get_name(), world.get_time())
+
+      for(local i=1; i<len; i++) {
+        local b = list[i]
+        local o = 1
+        if ( obj == "bridge" && b.get_max_length() < min_len ) {
+          o = 0
+        }
+
+        if ( (obj == "way" || obj == "tunnel") && !obj_desc.is_available(world.get_time()) ) {
+          o = 0
+        }
+
+        if ( obj == "catenary" && !obj_desc.is_available(world.get_time()) && obj_desc.is_overhead_line() ) {
+          o = 0
+        }
+
+        if ( o == 1 ) {
+          if (obj_desc.get_topspeed() <= speed) {
+            if ( b.get_topspeed() > obj_desc.get_topspeed() && b.get_topspeed() <= speed ) {
+              obj_desc = b
+              if ( obj_desc.get_topspeed() == speed ) { break }
+            } else {
+              if ( obj_desc.get_topspeed() >= speed ) { break }
+              obj_desc = b
+              //gui.add_message_at(our_player, i + " break obj_desc " + obj_desc.get_name(), world.get_time())
+              break
+            }
+          }
+        }
+      }
+    }
+  } else {
+    if ( list.len() > 0 ) {
+
+      if ( obj == "extension" ) {
+        for ( local i = 0; i < list.len(); i++ ) {
+          //gui.add_message(" list["+i+"].get_name() " + list[i].get_name() + " list[0].get_waytype() " + list[i].get_waytype())
+
+          if ( list[i].get_waytype() == 0 ) {
+            obj_desc = list[i]
+          }
+        }
+
+      } else {
+        obj_desc = list[0]
+      }
+
+    }
+
+  }
+
+  return obj_desc
+}
+
+
+
 // END OF FILE

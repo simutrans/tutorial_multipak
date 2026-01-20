@@ -273,8 +273,8 @@ way5_fac7_fac8 <- [coord3d(132,233,0), coord3d(132,211,0)]//{, dir = 2}
  *
  */
 
-extensions_tiles <- [coord(111,182), coord(116,182), coord(121,183), coord(127,187),
-                      coord(132,190), coord(121,190), coord(118,192), coord(113,191)]
+//extensions_tiles <- [coord(111,182), coord(116,182), coord(121,183), coord(127,187),
+//                      coord(132,190), coord(121,190), coord(118,192), coord(113,191)]
 
 /**
  *  set tiles for pos chapter start

@@ -255,7 +255,6 @@ function chapter_disabled_tools( pl ) {
                           tool_remove_way,
                           tool_remover,
                           tool_make_stop_public,
-                          tool_build_station,
                           tool_build_bridge,
                           tool_build_tunnel,
                           tool_build_depot,
@@ -1139,7 +1138,7 @@ function chapter_step_enabled_tools( pl ) {
   rules.gui_needs_update()
 }
 
-/*
+/**
  *
  *
  *
