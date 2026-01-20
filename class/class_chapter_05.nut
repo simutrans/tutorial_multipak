@@ -512,19 +512,16 @@ class tutorial.chapter_05 extends basic_chapter
             }
           }
 
-          local obj = mo_building
           local station = false
           local lab_name = translate("Mail Extension Here!.")
 
 
-          delete_objet(player, list, obj, lab_name, station, accept_post)
+          delete_objet(player, list, mo_building, lab_name, station, accept_post)
           pot0=1
         }
         if (pot0==1 && pot1==0){
-          local list = city1_post_halts //extensions_tiles
-          local nr = list.len()
           local lab_name = translate("Mail Extension Here!.")
-          local all_stop = is_stop_building_ex(nr, list, lab_name)
+          local all_stop = is_stop_building_ex(city1_post_halts, lab_name)
           if (all_stop && pot1==0){
             pot1=1
             reset_glsw()
@@ -723,20 +720,16 @@ class tutorial.chapter_05 extends basic_chapter
       case 4:
         if (pot0==1 && pot1==0){
           //Permite construir paradas
-          if (tool_id==tool_build_station){
-            local list = extensions_tiles
-            local nr = list.len()
-            return build_stop_ex(nr, list, t)
+          if ( tool_id==tool_build_station ) {
+            return build_stop_ex(extensions_tiles, t)
           }
 
           //Permite eliminar paradas
-          if (tool_id==4097){
-            local list = extensions_tiles
-            local nr = list.len()
-            return delete_stop_ex(nr, list, pos)
+          if ( tool_id==4097 ) {
+            return delete_stop_ex(extensions_tiles, pos)
           }
         }
-        if (pot1==1 && pot2==0){
+        if ( pot1==1 && pot2==0 ) {
           if (tool_id==4108) {
             local c_list = city1_post_halts   //Lista de todas las paradas de autobus
             local c_dep = city1_road_depot    //Coordeadas del deposito
@@ -745,7 +738,7 @@ class tutorial.chapter_05 extends basic_chapter
             return is_stop_allowed(result, nr, c_list, pos)
           }
         }
-        if (pot2==1 && pot3==0){
+        if ( pot2==1 && pot3==0 ) {
           if (tool_id==4108) {
             local c_list = ch5_post_ship_halts   //Lista de todas las paradas de autobus
             local c_dep = ship_depot   //Coordeadas del deposito

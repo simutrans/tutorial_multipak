@@ -2474,10 +2474,10 @@ class basic_chapter
     return format(translate("Select station No.%d"),nr+1)+" ("+c.tostring()+")."
   }
 
-  function is_stop_building(siz, c_list, lab_name, good, label_sw = false)
+  function is_stop_building (siz, c_list, lab_name, good, label_sw = false)
   {
     local count = 0
-    for(local j=0;j<siz;j++){
+    for( local j = 0; j < siz; j++ ) {
       local c = c_list[j]
       local t = my_tile(c)
       local buil = t.find_object(mo_building)
@@ -2485,7 +2485,7 @@ class basic_chapter
       local way = t.find_object(mo_way)
       local halt = t.get_halt()
 
-      if(buil && halt){
+      if( buil && halt ) {
         local desc = buil.get_desc()
         local g_list = get_build_load_type(desc)
         local is_good = station_compare_load(good, g_list)
@@ -2513,14 +2513,13 @@ class basic_chapter
     return false
   }
 
-  function is_stop_building_ex(siz, list, lab_name)
+  function is_stop_building_ex(list, lab_name)
   {
     local count = 0
-    for( local j = 0; j < siz; j++ ) {
-      local c = list[j]
+    for( local j = 0; j < list.len(); j++ ) {
       local name = get_obj_ch5(6)
       local good = get_good_data(6, 2)
-      local t = my_tile(c)
+      local t = my_tile(list[j])
       local label = t.find_object(mo_label)
       local way = t.find_object(mo_way)
       local buil = t.find_object(mo_building)
@@ -2562,7 +2561,7 @@ class basic_chapter
           count++
         }
       } else {
-        if(way){
+        if ( way ) {
           way.mark()
         }
         else{
@@ -2578,7 +2577,7 @@ class basic_chapter
     return false
   }
 
-  function build_stop(nr, c_list, tile, way, slope, ribi, label, pos)
+  function build_stop(c_list, tile, way, slope, ribi, label, pos)
   {
 
     local result = 0
@@ -2593,7 +2592,7 @@ class basic_chapter
     else if (ribi==7 || ribi==11 || ribi==13 || ribi==14 || ribi==15)
       return translate("It is not possible to build stops at intersections")+" ("+pos.tostring()+")."
 
-    for(local j=0;j<nr;j++){
+    for( local j = 0 ; j < c_list.len(); j++ ) {
       local halt = tile_x(c_list[j].x, c_list[j].y, 0).get_halt()
       if (halt){
         local name = halt.get_name()
@@ -2603,7 +2602,7 @@ class basic_chapter
         }
       }
     }
-    for(local j=0;j<nr;j++){
+    for ( local j = 0 ; j < c_list.len() ; j++ ) {
       local st_c = coord(c_list[j].x, c_list[j].y)
       local mail = good_alias.mail
       local goods = good_alias.goods
@@ -2703,10 +2702,10 @@ class basic_chapter
     return "No have way!"
   }
 
-  function build_stop_ex(nr, list, tile)
+  function build_stop_ex ( list, tile )
   {
     local result = 0
-    for(local j=0; j<nr; j++){
+    for(local j=0; j < list.len(); j++){
 
       if ( glsw[j]==1 ) {
         continue
@@ -2714,27 +2713,20 @@ class basic_chapter
 
       local name = get_obj_ch5(6)
       local good = get_good_data(6, 2)
-      local c = null
-      try {
-        // array with coord and code
-        c = list[j].a
-      }
-      catch(ev) {
-        c = list[j]
-      }
-      local tile = my_tile(c)
+      local tile = my_tile(list[j].a)
       local buil = tile.find_object(mo_building)
       local halt = tile.get_halt()
 
-      /*local accept_post = null
+      local accept_post = null
+      local halt_name = null
       if ( halt != null ) {
-        accept_post = halt.accepts_good(good_desc_x(good))
-        gui.add_message(coord3d_to_string(tile) + " accept_post " + accept_post)
-      }*/
+        //accept_post = halt.accepts_good(good_desc_x(good))
+        //gui.add_message(coord3d_to_string(tile) + " accept_post " + accept_post)
+        halt_name = halt.get_name()
+      }
 
       if(buil){
         local desc = buil.get_desc()
-        local halt_name = halt.get_name()
         local g_list = get_build_load_type(desc)
         local is_good = station_compare_load(good, g_list)
         if (!is_good){
@@ -2774,12 +2766,12 @@ class basic_chapter
 
   }
 
-  function delete_stop(nr, c_list, way, pos)
+  function delete_stop(c_list, way, pos)
   {
-    for(local j=0;j<nr;j++){
+    for( local j = 0 ; j < c_list.len(); j++ ) {
       if (c_list[j] != null){
         local stop = tile_x(c_list[j].x,c_list[j].y,0).find_object(mo_building)
-        if ((pos.x==c_list[j].x)&&(pos.y==c_list[j].y)&&(stop)){
+        if ( pos.x == c_list[j].x && pos.y == c_list[j].y && stop ) {
           way.mark()
           return null
         }
@@ -2788,13 +2780,13 @@ class basic_chapter
     return translate("You can only delete the stops.")
   }
 
-  function delete_stop_ex(nr, list, pos)
+  function delete_stop_ex(list, pos)
   {
-    for(local j=0;j<nr;j++){
-      local c = list[j]
+    for( local j = 0; j < list.len(); j++ ) {
+      local c = list[j].a
       if (c != null){
         local stop = my_tile(c).find_object(mo_building)
-        if ((pos.x == c.x)&&(pos.y == c.y)&&(stop)){
+        if ( pos.x == c.x && pos.y == c.y && stop ) {
           return null
         }
       }

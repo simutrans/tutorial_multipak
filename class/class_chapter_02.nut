@@ -731,16 +731,14 @@ class tutorial.chapter_02 extends basic_chapter
         if (pos.x>city1_limit1.a.x && pos.y>city1_limit1.a.y && pos.x<city1_limit1.b.x && pos.y<city1_limit1.b.y){
           //Permite construir paradas
           if (tool_id==tool_build_station){
-            local nr = city1_halt_1.len()
             local c_st = city1_halt_1
-            return build_stop(nr, c_st, t, way, slope, ribi, label, pos)
+            return build_stop(c_st, t, way, slope, ribi, label, pos)
           }
 
           //Permite eliminar paradas
           if (tool_id==tool_remover){
-            local nr = city1_halt_1.len()
             local c_st = city1_halt_1
-            return delete_stop(nr, c_st, way, pos)
+            return delete_stop( c_st, way, pos)
           }
         }
         else if (tool_id==tool_build_station)
