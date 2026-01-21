@@ -719,14 +719,23 @@ class tutorial.chapter_05 extends basic_chapter
         break
       case 4:
         if (pot0==1 && pot1==0){
-          //Permite construir paradas
+          // Permite construir paradas
           if ( tool_id==tool_build_station ) {
             return build_stop_ex(extensions_tiles, t)
           }
 
-          //Permite eliminar paradas
+          // Permite eliminar paradas
           if ( tool_id==4097 ) {
-            return delete_stop_ex(extensions_tiles, pos)
+            for( local j = 0; j < extensions_tiles.len(); j++ ) {
+              local c = extensions_tiles[j].a
+              if (c != null){
+                local stop = my_tile(c).find_object(mo_building)
+                if ( pos.x == c.x && pos.y == c.y && stop ) {
+                  return null
+                }
+              }
+            }
+            return translate("You can only delete the stops/extensions.")
           }
         }
         if ( pot1==1 && pot2==0 ) {
@@ -1229,9 +1238,8 @@ class tutorial.chapter_05 extends basic_chapter
     function delete_objet(player, list, obj, lab_name, station, accept_post)
     {
         for( local j = 0; j < list.len(); j++ ) {
-            local t = null
             // array with coord and code
-            t = my_tile(list[j].a)
+            local t = my_tile(list[j].a)
 
             local is_obj = t.find_object(obj)
             local halt = t.get_halt()

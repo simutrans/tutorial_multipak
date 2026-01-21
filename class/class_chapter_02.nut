@@ -737,8 +737,16 @@ class tutorial.chapter_02 extends basic_chapter
 
           //Permite eliminar paradas
           if (tool_id==tool_remover){
-            local c_st = city1_halt_1
-            return delete_stop( c_st, way, pos)
+            for( local j = 0 ; j < city1_halt_1.len(); j++ ) {
+              if (city1_halt_1[j] != null){
+                local stop = tile_x(city1_halt_1[j].x, city1_halt_1[j].y,0).find_object(mo_building)
+                if ( pos.x == ccity1_halt_1_list[j].x && pos.y == city1_halt_1[j].y && stop ) {
+                  way.mark()
+                  return null
+                }
+              }
+            }
+            return translate("You can only delete the stops.")
           }
         }
         else if (tool_id==tool_build_station)

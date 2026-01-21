@@ -2780,20 +2780,6 @@ class basic_chapter
     return translate("You can only delete the stops.")
   }
 
-  function delete_stop_ex(list, pos)
-  {
-    for( local j = 0; j < list.len(); j++ ) {
-      local c = list[j].a
-      if (c != null){
-        local stop = my_tile(c).find_object(mo_building)
-        if ( pos.x == c.x && pos.y == c.y && stop ) {
-          return null
-        }
-      }
-    }
-    return translate("You can only delete the stops.")
-  }
-
   function tile_bord(coora, coorb, opt, del)
   {
     if (opt==0){
@@ -3431,7 +3417,7 @@ function search_tile_in_tiles(tiles, coord) {
  *  check stations enables post / enables pax and post
  *  search free tile for post extension
  *  search road tile for post halt
- *  replace pass halt -> pass/post halt
+ *  replace pass halt -> pass/post halt (not tested)
  *
  *  @param halt_list = array[tiles_x, tile_x, .... ]
  *
