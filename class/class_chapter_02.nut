@@ -140,8 +140,6 @@ class tutorial.chapter_02 extends basic_chapter
 
     switch (this.step) {
       case 1:
-        // set image for button by different in paksets
-        text.img_road_menu = get_gui_img("road_menu")
         break
       case 2:
         break
@@ -254,17 +252,44 @@ class tutorial.chapter_02 extends basic_chapter
         local st_halt1 = my_tile(city1_halt_2[city1_halt_2.len()-1]).get_halt()
         text.st1 = city1_halt_2[city1_halt_2.len()-1].href(st_halt1.get_name()+" ("+city1_halt_2[city1_halt_2.len()-1].tostring()+")")
         text.prce = money_to_string(price)
+        // toolbar icon make_stop_publuc tooltip
+        local factor = 60 //settings.get_cost_make_public_months()
+        local tool_text = translate_objects_list.public_stop
+        local idx = tool_text.find("%i")
+        local t1 = tool_text.slice(0, idx)
+        local t2 = tool_text.slice(idx+2)
+        tool_text = t1 + factor + t2
+        text.public_stop = tool_text
         break
     }
 
+    // road menu step 1, 2, 4, 5 and 7
+    local steps = [1, 2, 4, 5, 7]
+    if ( steps.find(this.step) != null ) {
+      // set image for button by different in paksets
+      text.img_road_menu = get_gui_img("road_menu")
+      text.toolbar_road = translate_objects_list.tools_road
+    }
+
+    steps.clear()
+    // road halt menu step 3 and 7
+    steps = [3, 7]
+    if ( steps.find(this.step) != null ) {
+      // set image for button by different in paksets
+      text.img_road_menu = get_gui_img("road_halts")
+      text.toolbar_halt = translate_objects_list.tools_road_stations
+    }
+
+    steps.clear()
     // depot coord step 1, 2, 4, 6 and 7
-    local steps = [1, 2, 4, 6, 7]
+    steps = [1, 2, 4, 6, 7]
     if ( steps.find(this.step) != null ) {
       text.dep = city1_road_depot.href("("+city1_road_depot.tostring()+")")
     }
 
+    steps.clear()
     // veh load and wait time set to steps 4, 6 and 7
-    local steps = [4, 6, 7]
+    steps = [4, 6, 7]
     if ( steps.find(this.step) != null ) {
       text.load = veh_load
       text.wait = get_wait_time_text(veh_wait)
@@ -274,8 +299,6 @@ class tutorial.chapter_02 extends basic_chapter
     text.name = city1_tow.href(cty1.name.tostring())
     text.name2 = city2_tow.href(cty2.name.tostring())
     text.tool1 = translate_objects_list.inspec
-    text.tool2 = translate_objects_list.tools_road
-    text.tool3 = translate_objects_list.tools_special
 
     return text
   }

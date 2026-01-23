@@ -174,6 +174,9 @@ function translate_objects() {
   }
   //gui.add_message("Current: "+translate_objects_list.inspec)
 
+  // tools
+  translate_objects_list.rawset("public_stop", translate("Make way or stop public (will join with neighbours), %i times maintainance"))
+
   rename_factory_names()
 }
 
