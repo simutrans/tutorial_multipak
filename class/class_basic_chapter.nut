@@ -2570,7 +2570,7 @@ class basic_chapter
       }
     }
 
-    if (count==siz) {
+    if ( count == list.len() ) {
       return true
     }
 
