@@ -1,5 +1,5 @@
 /*
- * @file scenario.nut
+ * @brief scenario.nut
  *  Tutorial Scenario
  *
  *
@@ -118,7 +118,14 @@ all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
 // Complemento para obtener tiempo de espera
 tick_wait <- 16
 
-//returns pakset name (lower case)
+/**
+  * @fn get_set_name(name)
+  * returns pakset name (lower case)
+  *
+  * @param name mixed case
+  *
+  * @return name lower case
+  */
 function get_set_name(name)
 {
   local s = name.find(" ")

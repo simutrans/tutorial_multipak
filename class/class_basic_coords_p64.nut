@@ -1,13 +1,10 @@
 /**
- *   @file class_basic_coords.nut
- *   @brief sets the pakset specific map coords
- *
- *
- *
- */
+  * @brief class_basic_coords_p64.nut sets the pakset specific map coords for pak64
+  *
+  */
 
 /**
- *  set limit for build
+ *  set limit for build/tool work
  *
  *
  */

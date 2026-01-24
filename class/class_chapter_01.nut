@@ -1,9 +1,9 @@
-/*
- *  class chapter_01
- *
- *
- *  Can NOT be used in network game !
- */
+/**
+  * @brief class_chapter_01.nut Chapter 1 - Basic information about Simutrans
+  *
+  * Can NOT be used in network game !
+  *
+  */
 
 
 class tutorial.chapter_01 extends basic_chapter

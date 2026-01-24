@@ -1,8 +1,10 @@
-/*
- *  tool id list see ../info_files/tool_id_list.ods
- *
- *
- */
+/**
+  * @brief class_basic_gui.nut defines toolbars and tools
+  *
+  *  tool id list see ../info_files/tool_id_list.ods
+  *
+  *
+  */
 
 // placeholder for some menus icon
   switch (pak_name) {
@@ -20,11 +22,12 @@
       break
   }
 
-/*
- *  general disabled not used menu and tools
- *
- */
-function general_disabled_tools( pl ) {
+/**
+  * @fn general_disabled_tools ( pl )
+  * general disabled not used menu and tools
+  *
+  */
+function general_disabled_tools ( pl ) {
   // reset rules
   rules.clear()
 
@@ -81,14 +84,12 @@ function general_disabled_tools( pl ) {
   chapter_disabled_tools( pl )
 }
 
-/*
- *  disabled tools for chapter
- *
- *
- *
- *
- */
-function chapter_disabled_tools( pl ) {
+/**
+  * @fn chapter_disabled_tools( pl )
+  *  disabled tools for chapter
+  *
+  */
+function chapter_disabled_tools ( pl ) {
   /*
   persistent.chapter <- 1     // stores chapter number
   persistent.step    <- 1     // stores step number of chapter
@@ -411,14 +412,15 @@ function chapter_disabled_tools( pl ) {
 
 }
 
-/*
- *  enabled tools for chapter step
- *
- *  allowed tools for steps must be allowed in all subsequent steps of the chapter
- *  allowed tools not persistent save in rules
- *
- */
-function chapter_step_enabled_tools( pl ) {
+/**
+  * @fn chapter_step_enabled_tools ( pl )
+  *  enabled tools for chapter step
+  *
+  *  allowed tools for steps must be allowed in all subsequent steps of the chapter
+  *  allowed tools not persistent save in rules
+  *
+  */
+function chapter_step_enabled_tools ( pl ) {
   /*
   persistent.chapter <- 1     // stores chapter number
   persistent.step    <- 1     // stores step number of chapter
@@ -1139,14 +1141,11 @@ function chapter_step_enabled_tools( pl ) {
 }
 
 /**
- *
- *
- *
- *
- *
- *
- */
- function update_tools(list, id, wt_list, wt) {
+  * @fn update_tools ( list, id, wt_list, wt )
+  *
+  *
+  */
+ function update_tools ( list, id, wt_list, wt ) {
     local res = {ok = false, result = false }
     local wt_res = false
     if(wt < 0){

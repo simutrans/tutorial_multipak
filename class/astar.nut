@@ -1,5 +1,5 @@
 /**
- * @file astar.nut
+ * @brief astar.nut
  * Classes to help with route-searching.
  * Based on the A* algorithm.
  */

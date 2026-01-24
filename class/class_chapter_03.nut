@@ -1,10 +1,9 @@
-//
-/*
- *  class chapter_03
- *
- *
- *  Can NOT be used in network game !
- */
+/**
+  *  @brief class_chapter_03.nut Chapter 3 - Rail transport for goods and passengers
+  *
+  * Can NOT be used in network game !
+  *
+  */
 
 class tutorial.chapter_03 extends basic_chapter
 {

@@ -1,9 +1,9 @@
-/*
- *  class chapter_07
- *
- *
- *  Can NOT be used in network game !
- */
+/**
+  * @brief class_chapter_06.nut Chapter 6 - Air travel with bus connections
+  *
+  * Can NOT be used in network game !
+  *
+  */
 
 class tutorial.chapter_06 extends basic_chapter
 {

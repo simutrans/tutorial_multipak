@@ -1,17 +1,16 @@
-/*
- *  class chapter_07
- *
- *
- *  Can NOT be used in network game !
- */
-
+/**
+  * @brief class_chapter_07.nut Chapter 7 - City transport with buses without step sequence
+  *
+  *
+  * Can NOT be used in network game !
+  */
 
 class tutorial.chapter_07 extends basic_chapter
 {
   chapter_name  = ch7_name
   chapter_coord = coord_chapter_7
-  startcash     = 500000            // pl=0 startcash; 0=no reset
-  load = 0
+  startcash     = 500000  // pl=0 startcash; 0=no reset
+  load = 0                // count for transportet passenger
 
   gl_wt = wt_road
   gl_good = 0 //Passengers
@@ -51,9 +50,9 @@ class tutorial.chapter_07 extends basic_chapter
     local c_nw = city.get_pos_nw()
     local c_se = city.get_pos_se()
 
-    list.push({a = c_nw, b = c_se})                     // N
+    list.push({a = c_nw, b = c_se})                                       // N
     list.push({a =  coord(c_nw.x, c_se.y), b = coord(c_se.x, c_nw.y)})    // W
-    list.push({a = c_se, b = c_nw})                     // S
+    list.push({a = c_se, b = c_nw})                                       // S
     list.push({a =  coord(c_se.x, c_nw.y), b = coord(c_nw.x, c_se.y)})    // E
 
     return list

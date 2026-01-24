@@ -1,10 +1,7 @@
 /**
- *   @file class_basic_coords.nut
- *   @brief sets the pakset specific map coords
- *
- *
- *
- */
+  * @brief class_basic_coords_p64g.nut sets the pakset specific map coords for pak64.german
+  *
+  */
 
 /**
  *  set limit for build

@@ -1,9 +1,9 @@
-/*
- *  class chapter_00
- *
- *
- *  Can NOT be used in network game !
- */
+/**
+  *  @brief class_chapter_00.nut error output for not compatible simutrans and pakset version
+  *
+  *
+  *  Can NOT be used in network game !
+  */
 
 
 class tutorial.chapter_00 extends basic_chapter

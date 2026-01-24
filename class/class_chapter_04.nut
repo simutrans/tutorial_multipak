@@ -1,9 +1,9 @@
-/*
- *  class chapter_04
- *
- *
- *  Can NOT be used in network game !
- */
+/**
+  * @brief class_chapter_04.nut Chapter 4 - Shipping for goods and passengers
+  *
+  * Can NOT be used in network game !
+  *
+  */
 
 class tutorial.chapter_04 extends basic_chapter
 {
