@@ -253,7 +253,7 @@ class tutorial.chapter_02 extends basic_chapter
         text.st1 = city1_halt_2[city1_halt_2.len()-1].href(st_halt1.get_name()+" ("+city1_halt_2[city1_halt_2.len()-1].tostring()+")")
         text.prce = money_to_string(price)
         // toolbar icon make_stop_publuc tooltip
-        local factor = 60 //settings.get_cost_make_public_months()
+        local factor = settings.get_make_public_months()
         local tool_text = translate_objects_list.public_stop
         local idx = tool_text.find("%i")
         local t1 = tool_text.slice(0, idx)
