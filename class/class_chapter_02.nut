@@ -251,7 +251,6 @@ class tutorial.chapter_02 extends basic_chapter
       case 8:
         local st_halt1 = my_tile(city1_halt_2[city1_halt_2.len()-1]).get_halt()
         text.st1 = city1_halt_2[city1_halt_2.len()-1].href(st_halt1.get_name()+" ("+city1_halt_2[city1_halt_2.len()-1].tostring()+")")
-        text.prce = money_to_string(price)
         // toolbar icon make_stop_publuc tooltip
         local factor = settings.get_make_public_months()
         local tool_text = translate_objects_list.public_stop
