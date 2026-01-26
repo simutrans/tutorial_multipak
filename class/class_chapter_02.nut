@@ -1,10 +1,14 @@
+/** @file class_chapter_02.nut
+  * @brief Road traffic for bus and postal service
+  */
+
 /**
-  *  @brief class_chapter_02.nut Chapter 2 - Road traffic for bus and postal service
+  * @brief class_chapter_02.nut
+  * Road traffic for bus and postal service
   *
   *  Can NOT be used in network game !
   *
   */
-
 class tutorial.chapter_02 extends basic_chapter
 {
   chapter_name  = ch2_name

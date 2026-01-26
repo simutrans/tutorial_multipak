@@ -1,17 +1,21 @@
-/**
-  * @brief class_basic_data.nut sets the pakset specific data
+/** @file class_basic_data.nut
+  * @brief sets the pakset specific data
   *
   * all object names correspond to the names in the dat files
   *
   */
 
-// placeholder for tools names in simutrans
+/// placeholder for tools names in simutrans
 tool_alias  <- {inspe = "Abfrage", road= "ROADTOOLS", rail = "RAILTOOLS", ship = "SHIPTOOLS", land = "SLOPETOOLS", spec = "SPECIALTOOLS"}
 
-// placeholder for good names in pak64
+/// placeholder for good names in pak64
 good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Holz", plan = "Bretter", coal = "Kohle", oel = "Oel" , gas = "Gasoline"}
 
-// placeholder for shortcut keys names
+/**
+  * placeholder for shortcut keys names
+  *
+  * @param string pak name
+  */
   switch (pak_name) {
     case "pak64":
       key_alias  <- {plus_s = "+", minus_s = "-"}
@@ -24,6 +28,11 @@ good_alias  <- {mail = "Post", passa= "Passagiere", goods = "Goods", wood = "Hol
       break
   }
 
+/**
+  * factory_data list the factory data
+  *
+  * list factory_data ( id, { translate name, tile list, tile_x(0, 0) } )
+  */
 factory_data <- {}
 function get_factory_data(id) {
   local t = factory_data.rawget(id)
@@ -31,11 +40,11 @@ function get_factory_data(id) {
 }
 
 /**
- *  rename factory names
- *  translate object name in to language by start scenario
- *
- *  set factory data
- */
+  * translate factorys raw name in to game language by start scenario
+  *
+  * set factory_data{}
+  *
+  */
 function rename_factory_names() {
 
   local list = factory_list_x()
@@ -131,10 +140,10 @@ function rename_factory_names() {
 }
 
 /**
- *  translate objects
- *
- *
- */
+  * array to translate texts from simutrans programm
+  *
+  * set translate_objects_list
+  */
 function translate_objects() {
 
   //translate_objects_list.inspec <- translate("Abfrage")
@@ -180,9 +189,10 @@ function translate_objects() {
 }
 
 /**
- *  set vehicle for chapter 2 step 4, 6, 7
- *
- */
+  * vehicle for chapter 2 step 4, 6, 7
+  *
+  * @return string object name
+  */
 function get_veh_ch2_st4() {
   switch (pak_name) {
     case "pak64":
@@ -199,14 +209,16 @@ function get_veh_ch2_st4() {
 }
 
 /**
- *  set objects for chapter 2
- *
- *  id 1 = way name
- *  id 2 = bridge name
- *  id 3 = stations name
- *  id 4 = depot name
- *
- */
+  * set objects for chapter 2
+  *
+  * @param integer id
+  *  @li id 1 = way name
+  *  @li id 2 = bridge name
+  *  @li id 3 = stations name
+  *  @li id 4 = depot name
+  *
+  * @return object raw name
+  */
 function get_obj_ch2(id) {
   switch (pak_name) {
     case "pak64":
@@ -261,16 +273,18 @@ function get_obj_ch2(id) {
 }
 
 /**
- *  set vehicle for chapter 3
- *
- *  id 1 = step 5 loco
- *  id 2 = step 7 loco
- *  id 3 = step 11 loco
- *  id 4 = step 5 wag
- *  id 5 = step 7 wag
- *  id 6 = step 11 wag
- *
- */
+  * vehicle for chapter 3
+  *
+  * @param integer id
+  *  @li id 1 = step 5 loco
+  *  @li id 2 = step 7 loco
+  *  @li id 3 = step 11 loco
+  *  @li id 4 = step 5 wag
+  *  @li id 5 = step 7 wag
+  *  @li id 6 = step 11 wag
+  *
+  * @return object raw name
+  */
 function get_veh_ch3(id) {
   switch (pak_name) {
     case "pak64":
@@ -344,17 +358,19 @@ function get_veh_ch3(id) {
 }
 
 /**
- *  set objects for chapter 3
- *
- *  id 1 = way name
- *  id 2 = bridge name
- *  id 3 = stations name
- *  id 4 = depot name
- *  id 5 = tunnel name
- *  id 6 = signal name
- *  id 7 = overheadpower name
- *
- */
+  * objects for chapter 3
+  *
+  * @param integer id
+  *  @li id 1 = way name
+  *  @li id 2 = bridge name
+  *  @li id 3 = stations name
+  *  @li id 4 = depot name
+  *  @li id 5 = tunnel name
+  *  @li id 6 = signal name
+  *  @li id 7 = overheadpower name
+  *
+  * @return object raw name
+  */
 function get_obj_ch3(id) {
   switch (pak_name) {
     case "pak64":
@@ -436,12 +452,14 @@ function get_obj_ch3(id) {
 }
 
 /**
- *  set vehicle for chapter 4
- *
- *  id 1 = step 4 ship
- *  id 2 = step 7 ship
- *
- */
+  * vehicle for chapter 4
+  *
+  * @param integer id
+  *  @li id 1 = step 4 ship
+  *  @li id 2 = step 7 ship
+  *
+  * @return object raw name
+  */
 function get_veh_ch4(id) {
   switch (pak_name) {
     case "pak64":
@@ -479,15 +497,17 @@ function get_veh_ch4(id) {
 }
 
 /**
- *  set objects for chapter 4
- *
- *  id 1 = way name
- *  id 2 = harbour 1 name (good)
- *  id 3 = cannel stop name
- *  id 4 = harbour 2 name (passenger)
- *  id 5 = depot name
- *
- */
+  * objects for chapter 4
+  *
+  * @param integer id
+  *  @li id 1 = way name
+  *  @li id 2 = harbour 1 name (good)
+  *  @li id 3 = cannel stop name
+  *  @li id 4 = harbour 2 name (passenger)
+  *  @li id 5 = depot name
+  *
+  * @return string object name
+  */
 function get_obj_ch4(id) {
   switch (pak_name) {
     case "pak64":
@@ -551,14 +571,16 @@ function get_obj_ch4(id) {
 }
 
 /**
- *  set vehicle for chapter 5
- *
- *  id 1 = step 2 truck (coal)
- *  id 2 = step 2 truck trail (coal)
- *  id 3 = step 4 truck (post)
- *  id 4 = step 4 ship (post)
- *
- */
+  * vehicle for chapter 5
+  *
+  * @param integer id
+  *  @li id 1 = step 2 truck (coal)
+  *  @li id 2 = step 2 truck trail (coal)
+  *  @li id 3 = step 4 truck (post)
+  *  @li id 4 = step 4 ship (post)
+  *
+  * @return string object name
+  */
 function get_veh_ch5(id) {
   switch (pak_name) {
     case "pak64":
@@ -614,16 +636,18 @@ function get_veh_ch5(id) {
 }
 
 /**
- *  set objects for chapter 5
- *
- *  id 1 = road way name
- *  id 2 = truck stop name (good)
- *  id 3 = powerline way name
- *  id 4 = powerline transformer
- *  id 5 = depot name
- *  id 6 = post extension name
- *
- */
+  * objects for chapter 5
+  *
+  * @param integer id
+  *  @li id 1 = road way name
+  *  @li id 2 = truck stop name (good)
+  *  @li id 3 = powerline way name
+  *  @li id 4 = powerline transformer
+  *  @li id 5 = depot name
+  *  @li id 6 = post extension name
+  *
+  * @return string object name
+  */
 function get_obj_ch5(id) {
   switch (pak_name) {
     case "pak64":
@@ -696,13 +720,15 @@ function get_obj_ch5(id) {
 }
 
 /**
- *  set vehicle for chapter 6
- *
- *  id 1 = step 2 airplane (passenger)
- *  id 2 = step 3 bus
- *  id 3 = step 4 bus
- *
- */
+  * vehicle for chapter 6
+  *
+  * @param integer id
+  *  @li id 1 = step 2 airplane (passenger)
+  *  @li id 2 = step 3 bus
+  *  @li id 3 = step 4 bus
+  *
+  * @return string object name
+  */
 function get_veh_ch6(id) {
   switch (pak_name) {
     case "pak64":
@@ -749,16 +775,18 @@ function get_veh_ch6(id) {
 }
 
 /**
- *  set objects for chapter 6
- *
- *  id 1 = runway name
- *  id 2 = taxiway name
- *  id 3 = air stop name
- *  id 4 = air extension name
- *  id 5 = air depot name
- *  id 6 = road depot name
- *
- */
+  * objects for chapter 6
+  *
+  * @param integer id
+  *  @li id 1 = runway name
+  *  @li id 2 = taxiway name
+  *  @li id 3 = air stop name
+  *  @li id 4 = air extension name
+  *  @li id 5 = air depot name
+  *  @li id 6 = road depot name
+  *
+  * @return string object name
+  */
 function get_obj_ch6(id) {
   switch (pak_name) {
     case "pak64":
@@ -831,13 +859,15 @@ function get_obj_ch6(id) {
 }
 
 /**
- *  set count wg for train
- *
- *  id 1 - chapter 3 : train good Holz
- *  id 2 - chapter 3 : train good Bretter
- *  id 3 - chapter 3 : train good Passagiere
- *
- */
+  * count wg for train
+  *
+  * @param integer id
+  *  @li id 1 - chapter 3 : train good Holz
+  *  @li id 2 - chapter 3 : train good Bretter
+  *  @li id 3 - chapter 3 : train good Passagiere
+  *
+  * @return integer count
+  */
 function set_train_lenght(id) {
 
   switch (pak_name) {
@@ -884,25 +914,27 @@ function set_train_lenght(id) {
 }
 
 /**
- *  set count convoys for line
- *
- *  id  1 - chapter 2 : city1_halt_1 - halts city 1
- *  id  2 - chapter 2 : city1_halt_2 - halts connect city 1 dock and station
- *  id  3 - chapter 2 : city2_halt_1 - halts connect city 2 to city 1
- *  id  4 - chapter 3 : rail factory 1 -> factory 2
- *  id  5 - chapter 3 : rail factory 2 -> factory 3
- *  id  6 - chapter 3 : ch3_rail_stations - city line
- *  id  7 - chapter 4 : ch4_ship1_halts - dock raffinerie - (coord_fac4)
- *  id  8 - chapter 4 : ch4_ship2_halts - dock raffinerie - canal stop gas station
- *  id  9 - chapter 4 : ch4_ship3_halts - passenger ship
- *  id 10 - chapter 5 : road coal to power plant
- *  id 11 - chapter 5 : city1_post_halts - halts for post
- *  id 12 - chapter 5 : post ship dock - oil rigg
- *  id 13 - chapter 6 : city1_city7_air
- *  id 14 - chapter 6 : city1_halt_airport
- *  id 15 - chapter 6 : city7_halt
- *
- */
+  * count convoys for line
+  *
+  * @param integer id
+  *  @li id  1 - chapter 2 : city1_halt_1 - halts city 1
+  *  @li id  2 - chapter 2 : city1_halt_2 - halts connect city 1 dock and station
+  *  @li id  3 - chapter 2 : city2_halt_1 - halts connect city 2 to city 1
+  *  @li id  4 - chapter 3 : rail factory 1 -> factory 2
+  *  @li id  5 - chapter 3 : rail factory 2 -> factory 3
+  *  @li id  6 - chapter 3 : ch3_rail_stations - city line
+  *  @li id  7 - chapter 4 : ch4_ship1_halts - dock raffinerie - (coord_fac4)
+  *  @li id  8 - chapter 4 : ch4_ship2_halts - dock raffinerie - canal stop gas station
+  *  @li id  9 - chapter 4 : ch4_ship3_halts - passenger ship
+  *  @li id 10 - chapter 5 : road coal to power plant
+  *  @li id 11 - chapter 5 : city1_post_halts - halts for post
+  *  @li id 12 - chapter 5 : post ship dock - oil rigg
+  *  @li id 13 - chapter 6 : city1_city7_air
+  *  @li id 14 - chapter 6 : city1_halt_airport
+  *  @li id 15 - chapter 6 : city7_halt
+  *
+  * @return string object name
+  */
 function set_convoy_count(id) {
 
   switch (pak_name) {
@@ -1057,16 +1089,18 @@ function set_convoy_count(id) {
 }
 
 /**
- *  set transportet goods
- *
- *  id 1 - chapter 3 : train good Holz
- *  id 2 - chapter 3 : train good Bretter
- *  id 3 - chapter 7 : bus city Hepplock
- *  id 4 - chapter 7 : bus city Appingbury
- *  id 5 - chapter 7 : bus city Hillcross
- *  id 6 - chapter 7 : bus city Springville
- *
- */
+  *  Number of goods to be transported
+  *
+  * @param integer id
+  *  @li id 1 - chapter 3 : train good Holz
+  *  @li id 2 - chapter 3 : train good Bretter
+  *  @li id 3 - chapter 7 : bus city Hepplock
+  *  @li id 4 - chapter 7 : bus city Appingbury
+  *  @li id 5 - chapter 7 : bus city Hillcross
+  *  @li id 6 - chapter 7 : bus city Springville
+  *
+  * @return integer transport count
+  */
 function set_transportet_goods(id) {
 
   switch (pak_name) {
@@ -1141,19 +1175,21 @@ function set_transportet_goods(id) {
 }
 
 /**
- *  set loading capacity
- *
- *  id  1 - chapter 2 step  4 : bus city Pollingwick
- *  id  2 - chapter 2 step  6 : bus Pollingwick - Dock
- *  id  3 - chapter 2 step  7 : bus Pollingwick - Malliby
- *  id  4 - chapter 3 step 11 : city train
- *  id  5 - chapter 6 step  2 : air city 1 - city 7
- *  id  6 - chapter 6 step  3 : bus city 1 - Airport
- *  id  7 - chapter 6 step  4 : bus city 7 - Airport
- *  id  8 - chapter 5 step  4 : post city 1
- *  id  9 - chapter 5 step  4 : ship oil rig
- *
- */
+  * Number of loading capacity
+  *
+  * @param id
+  *  @li id  1 - chapter 2 step  4 : bus city Pollingwick
+  *  @li id  2 - chapter 2 step  6 : bus Pollingwick - Dock
+  *  @li id  3 - chapter 2 step  7 : bus Pollingwick - Malliby
+  *  @li id  4 - chapter 3 step 11 : city train
+  *  @li id  5 - chapter 6 step  2 : air city 1 - city 7
+  *  @li id  6 - chapter 6 step  3 : bus city 1 - Airport
+  *  @li id  7 - chapter 6 step  4 : bus city 7 - Airport
+  *  @li id  8 - chapter 5 step  4 : post city 1
+  *  @li id  9 - chapter 5 step  4 : ship oil rig
+  *
+  * @return integer loading capacity
+  */
 function set_loading_capacity(id) {
 
   switch (pak_name) {
@@ -1255,22 +1291,25 @@ function set_loading_capacity(id) {
 }
 
 /**
- *  set waiting time passenger and post
- *
- *  id  1 - chapter 2 step  4 : bus city Pollingwick
- *  id  2 - chapter 2 step  6 : bus Pollingwick - Dock
- *  id  3 - chapter 2 step  7 : bus Pollingwick - Malliby
- *  id  4 - chapter 3 step 11 : city train
- *  id  5 - chapter 4 step  7 : good ship produser -> consumer
- *  id  6 - chapter 5 step  4 : road mail
- *  id  7 - chapter 5 step  4 : ship oil rig
- *  id  8 - chapter 6 step  2 : air city 1 - city 7
- *  id  9 - chapter 6 step  3 : bus city 1 - Airport
- *  id 10 - chapter 6 step  4 : bus city 7 - Airport
- *
- *  1 day   = 2115
- *  1 hour  = 88
- */
+  * Number of waiting time passenger and post
+  *
+  *  1 day   = 2115<br>
+  *  1 hour  = 88
+  *
+  * @param id
+  *  @li id  1 - chapter 2 step  4 : bus city Pollingwick
+  *  @li id  2 - chapter 2 step  6 : bus Pollingwick - Dock
+  *  @li id  3 - chapter 2 step  7 : bus Pollingwick - Malliby
+  *  @li id  4 - chapter 3 step 11 : city train
+  *  @li id  5 - chapter 4 step  7 : good ship produser -> consumer
+  *  @li id  6 - chapter 5 step  4 : road mail
+  *  @li id  7 - chapter 5 step  4 : ship oil rig
+  *  @li id  8 - chapter 6 step  2 : air city 1 - city 7
+  *  @li id  9 - chapter 6 step  3 : bus city 1 - Airport
+  *  @li id 10 - chapter 6 step  4 : bus city 7 - Airport
+  *
+  * @return integer waiting time
+  */
 function set_waiting_time(id) {
 
   switch (pak_name) {
@@ -1381,15 +1420,19 @@ function set_waiting_time(id) {
 }
 
 /**
- *  goods def
- *
- *  id = good id
- *  select  = define return data
- *            1 = translate metric
- *            2 = raw good name
- *            3 = translate good name
- *
- */
+  * good data
+  *
+  * @param integer id = good id
+  * @param integer select = define return data
+  *   @li select 1 = translate metric
+  *   @li select 2 = raw good name
+  *   @li select 3 = translate good name
+  *
+  * @return
+  *   @li integer good metric (select 1)
+  *   @li string good raw name (select2)
+  *   @li string good translated name (select=3)
+  */
 function get_good_data(id, select = null) {
 
   local good_n = null
@@ -1440,15 +1483,15 @@ function get_good_data(id, select = null) {
 }
 
 /**
- *  factory prod and good data for textfiles
- *
- *  tile = tile_x factory
- *  g_id = good name
- *  read = "in" / "out"
- *
- *  return array[base_production, base_consumption, factor]
- */
- function read_prod_data(tile, g_id, read = null) {
+  * factory prod and good data for textfiles
+  *
+  * @param coord tile = tile_x factory
+  * @param integer g_id = good name
+  * @param string read = "in" / "out"
+  *
+  * @return array array[base_production, base_consumption, factor]
+  */
+function read_prod_data(tile, g_id, read = null) {
 
   // actual not read good data
   local t = square_x(tile.x, tile.y).get_ground_tile()
@@ -1499,16 +1542,18 @@ function get_good_data(id, select = null) {
 
   return output
 
- }
+}
 
 /**
- *  add files for more infos
- *
- *  bridge - bridge build
- *  tunnel - tunnel build
- *  info   - more infos for pakset
- *
- */
+  * files for more infos
+  *
+  * @param txt_file
+  *  txt_file = bridge - bridge build
+  *  txt_file = tunnel - tunnel build
+  *  txt_file = info   - more infos for pakset
+  *
+  * @return ttextfile(file)
+  */
 function get_info_file(txt_file) {
 
   //ttextfile("info/build_bridge.txt")
@@ -1557,20 +1602,22 @@ function get_info_file(txt_file) {
 }
 
 /**
- *  set passenger/post halt for waiting
- *
- *  id  1 = city1_halt_1[id]    - halts city 1
- *  id  2 = city1_halt_2[id]    - halts connect city 1 dock and station
- *  id  3 = city2_halt_1[id]    - halts connect city 2 to city 1
- *  id  4 = ch3_rail_stations   - city line
- *  id  5 = ch4_ship3_halts     - passenger ship
- *  id  6 = city1_city7_air     - airplane
- *  id  7 = city1_halt_airport  - bus airport - city 1
- *  id  8 = city7_halt          - bus airport - city 7
- *  id  9 = city1_post_halts    - road halts for post
- *  id 10 = ch5_post_ship_halts - post passenger dock - factory 4 (Oil rigg)
- *
- */
+  * halt id for waiting time in the halt list
+  *
+  * @param integer id
+  *  @li id  1 = city1_halt_1[id]    - halts city 1
+  *  @li id  2 = city1_halt_2[id]    - halts connect city 1 dock and station
+  *  @li id  3 = city2_halt_1[id]    - halts connect city 2 to city 1
+  *  @li id  4 = ch3_rail_stations   - city line
+  *  @li id  5 = ch4_ship3_halts     - passenger ship
+  *  @li id  6 = city1_city7_air     - airplane
+  *  @li id  7 = city1_halt_airport  - bus airport - city 1
+  *  @li id  8 = city7_halt          - bus airport - city 7
+  *  @li id  9 = city1_post_halts    - road halts for post
+  *  @li id 10 = ch5_post_ship_halts - post passenger dock - factory 4 (Oil rigg)
+  *
+  * @return integer id for halt list
+  */
 function get_waiting_halt(id) {
 
   switch (pak_name) {
@@ -1681,13 +1728,16 @@ function get_waiting_halt(id) {
 }
 
 /**
- *  return image for icons
- *
- *
- *
- *
- *
- */
+  *  set icon code to text by different icons in paksets
+  *
+  *  The folder info_files/img-tools contains a scenario for displaying the icons with their IDs.
+  *
+  * @param string id = icon code
+  *  The icon code are documented in the file info_files/img-tools.ods.
+  *
+  *
+  * @return string image code for icons in text
+  */
 function get_gui_img(id) {
 
   switch (pak_name) {

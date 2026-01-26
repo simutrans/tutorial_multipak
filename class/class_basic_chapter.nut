@@ -1,11 +1,11 @@
 /**
- *  @file class_basic_chapter.nut
- *
- *  class basis_chapter
- *
- *
- *  Can NOT be used in network game !
- */
+  * @file class_basic_chapter.nut
+  * @brief global parameters and functions
+  *
+  *
+  * Can NOT be used in network game !
+  *
+  */
 
 //Global coordinate for mark build tile
 currt_pos <- null
@@ -32,9 +32,10 @@ tile_delay      <- 0x0000000f & time()       //delay for mark tiles
 gl_tile_i       <- 0
 
 /**
- *  class to chapter description : this is a placeholder class
- *
- */
+  * @class basic_chapter
+  * @brief class to chapter description : this is a placeholder class
+  *
+  */
 class basic_chapter
 {
 

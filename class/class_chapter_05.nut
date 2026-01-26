@@ -1,10 +1,14 @@
+/** @file class_chapter_05.nut
+  * @brief Road freight transport, electricity supply and postal services
+  */
+
 /**
-  * @brief class_chapter_05.nut Chapter 5 - Road freight transport, electricity supply and postal services
+  * @brief class_chapter_05.nut
+  * Road freight transport, electricity supply and postal services
   *
   *  Can NOT be used in network game !
   *
   */
-
 class tutorial.chapter_05 extends basic_chapter
 {
   chapter_name  = ch5_name

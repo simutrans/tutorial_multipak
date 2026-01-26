@@ -1,10 +1,14 @@
+/** @file class_chapter_06.nut
+  * @brief Air travel with bus connections
+  */
+
 /**
-  * @brief class_chapter_06.nut Chapter 6 - Air travel with bus connections
+  * @brief class_chapter_06.nut
+  * Air travel with bus connections
   *
   * Can NOT be used in network game !
   *
   */
-
 class tutorial.chapter_06 extends basic_chapter
 {
   chapter_name  = ch6_name

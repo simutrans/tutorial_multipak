@@ -1,10 +1,10 @@
-/*
- * @brief scenario.nut
- *  Tutorial Scenario
- *
- *
- *  Can NOT be used in network game !
- */
+/**
+  * @file scenario.nut
+  * @brief Tutorial Scenario
+  *
+  *  Can NOT be used in network game !
+  *
+  */
 const nut_path = "class/"             // path to folder with *.nut files
 const version = 2006
 scenario_name               <- "Tutorial Scenario"

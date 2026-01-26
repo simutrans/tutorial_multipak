@@ -1,10 +1,14 @@
+/** @file class_chapter_04.nut
+  * @brief Shipping for goods and passengers
+  */
+
 /**
-  * @brief class_chapter_04.nut Chapter 4 - Shipping for goods and passengers
+  * @brief class_chapter_04.nut
+  * Shipping for goods and passengers
   *
   * Can NOT be used in network game !
   *
   */
-
 class tutorial.chapter_04 extends basic_chapter
 {
   chapter_name  = ch4_name

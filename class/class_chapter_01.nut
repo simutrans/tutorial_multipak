@@ -1,11 +1,15 @@
+/** @file class_chapter_01.nut
+  * @brief Basic information about Simutrans
+  */
+
 /**
-  * @brief class_chapter_01.nut Chapter 1 - Basic information about Simutrans
+  * @class tutorial.chapter_01
+  * @brief class_chapter_01.nut
+  * Basic information about Simutrans
   *
   * Can NOT be used in network game !
   *
   */
-
-
 class tutorial.chapter_01 extends basic_chapter
 {
   chapter_name  = ch1_name

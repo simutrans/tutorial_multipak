@@ -1,11 +1,13 @@
+/** @file class_chapter_00.nut
+  * @brief error output for not compatible simutrans and pakset version
+  */
+
 /**
-  *  @brief class_chapter_00.nut error output for not compatible simutrans and pakset version
-  *
+  * @brief class_chapter_00.nut
+  * error output for not compatible simutrans and pakset version
   *
   *  Can NOT be used in network game !
   */
-
-
 class tutorial.chapter_00 extends basic_chapter
 {
   chapter_name  = "Checking Compatibility"

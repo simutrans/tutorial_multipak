@@ -1,3 +1,7 @@
+/** @file astar.nut
+  * @brief Classes to help with route-searching.
+  */
+
 /**
  * @brief astar.nut
  * Classes to help with route-searching.

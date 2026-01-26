@@ -1,10 +1,14 @@
+/** @file class_chapter_07.nut
+  * @brief City transport with buses without step sequence
+  */
+
 /**
-  * @brief class_chapter_07.nut Chapter 7 - City transport with buses without step sequence
+  * @brief class_chapter_07.nut
+  * City transport with buses without step sequence
   *
   *
   * Can NOT be used in network game !
   */
-
 class tutorial.chapter_07 extends basic_chapter
 {
   chapter_name  = ch7_name

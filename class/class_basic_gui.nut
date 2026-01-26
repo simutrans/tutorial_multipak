@@ -1,5 +1,5 @@
-/**
-  * @brief class_basic_gui.nut defines toolbars and tools
+/** @file class_basic_gui.nut
+  * @brief defines toolbars and tools
   *
   *  tool id list see ../info_files/tool_id_list.ods
   *
