@@ -384,11 +384,10 @@ class tutorial.chapter_05 extends basic_chapter
           }
         }
         else if (pot0==1 && pot1==0){
-          local siz = way5_fac7_fac8.len()
           local c_list = way5_fac7_fac8
           local name =  translate("Place Stop here!.")
           local load = good_alias.goods
-          local all_stop = is_stop_building(siz, c_list, name, load)
+          local all_stop = is_stop_building(c_list, name, load)
 
           if (all_stop){
             reset_glsw()
@@ -644,6 +643,10 @@ class tutorial.chapter_05 extends basic_chapter
           for(local j=0;j<way5_fac7_fac8.len();j++){
             if(pos.x==way5_fac7_fac8[j].x && pos.y==way5_fac7_fac8[j].y){
               if(tool_id==tool_build_station || tool_id==tool_remover){
+                // check selected halt accept passenger
+                local s = check_select_station(name, wt_rail, good_alias.goods)
+                if ( s != null ) return s
+
                 way.unmark()
                 local c_list = way5_fac7_fac8
                 local good = good_alias.goods

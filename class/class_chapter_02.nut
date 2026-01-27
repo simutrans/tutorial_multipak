@@ -380,11 +380,10 @@ class tutorial.chapter_02 extends basic_chapter
           local text = "X"
           pot0=1
         }
-        local siz = city1_halt_1.len()
         local c_list = city1_halt_1
         local name =  translate("Place Stop here!.")
         local load = good_alias.passa
-        local all_stop = is_stop_building(siz, c_list, name, load)
+        local all_stop = is_stop_building(c_list, name, load)
 
         if (all_stop && pot0==1){
           this.next_step()
@@ -549,11 +548,10 @@ class tutorial.chapter_02 extends basic_chapter
 
         if (pot0==0){
 
-          local siz = city2_halt_1.len()
           local c_list = city2_halt_1
           local name = get_label_text(1)
           local load = good_alias.passa
-          local all_stop = is_stop_building(siz, c_list, name, load)
+          local all_stop = is_stop_building(c_list, name, load)
 
           if (all_stop) {
             pot0=1
@@ -753,10 +751,15 @@ class tutorial.chapter_02 extends basic_chapter
       case 3:
 
         if (pos.x == city1_road_depot.x && pos.y == city1_road_depot.y )
-          return format(translate("You must build the %d stops first."),city1_halt_1.len())
-        if (pos.x>city1_limit1.a.x && pos.y>city1_limit1.a.y && pos.x<city1_limit1.b.x && pos.y<city1_limit1.b.y){
+          return format(translate("You must build the %d stops first."), city1_halt_1.len())
+
+        if ( pos.x > city1_limit1.a.x && pos.y > city1_limit1.a.y && pos.x < city1_limit1.b.x && pos.y < city1_limit1.b.y ) {
           //Permite construir paradas
-          if (tool_id==tool_build_station){
+          if ( tool_id == tool_build_station ) {
+            // check selected halt accept passenger
+            local s = check_select_station(name, wt_road, good_alias.passa)
+            if ( s != null ) return s
+
             local c_st = city1_halt_1
             return build_stop(c_st, t, way, slope, ribi, label, pos)
           }
@@ -775,7 +778,7 @@ class tutorial.chapter_02 extends basic_chapter
             return translate("You can only delete the stops.")
           }
         }
-        else if (tool_id==tool_build_station)
+        else if ( tool_id == tool_build_station )
           return result = format(translate("Stops should be built in [%s]"), cty1.name)+" ("+city1_tow.tostring()+")."
 
         break;
@@ -832,9 +835,12 @@ class tutorial.chapter_02 extends basic_chapter
           if ((tool_id==tool_build_station)){
             if (pos.x>city2_limit1.a.x && pos.y>city2_limit1.a.y && pos.x<city2_limit1.b.x && pos.y<city2_limit1.b.y){
 
-              local nr = city2_halt_1.len()
+              // check selected halt accept passenger
+              local s = check_select_station(name, wt_road, good_alias.passa)
+              if ( s != null ) return s
+
               local c_st = city2_halt_1
-              return build_stop(nr, c_st, t, way, slope, ribi, label, pos)
+              return build_stop(c_st, t, way, slope, ribi, label, pos)
             }
 
             else

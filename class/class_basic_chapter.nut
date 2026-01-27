@@ -2475,38 +2475,43 @@ class basic_chapter
     return format(translate("Select station No.%d"),nr+1)+" ("+c.tostring()+")."
   }
 
-  function is_stop_building (siz, c_list, lab_name, good, label_sw = false)
+  function is_stop_building (c_list, lab_name, good, label_sw = false)
   {
     local count = 0
-    for( local j = 0; j < siz; j++ ) {
+    for( local j = 0; j < c_list.len(); j++ ) {
       local c = c_list[j]
       local t = my_tile(c)
-      local buil = t.find_object(mo_building)
+      //local buil = t.find_object(mo_building)
       local label = t.find_object(mo_label)
       local way = t.find_object(mo_way)
       local halt = t.get_halt()
 
-      if( buil && halt ) {
-        local desc = buil.get_desc()
-        local g_list = get_build_load_type(desc)
-        local is_good = station_compare_load(good, g_list)
-        if(is_good) {
-          if(way){
+
+      if( halt ) {
+        //local desc = buil.get_desc()
+        //local g_list = get_build_load_type(desc)
+        //local is_good = station_compare_load(good, g_list)
+        local is_good = halt.accepts_good(good_desc_x(good))
+
+        if ( is_good ) {
+          if ( way ) {
             way.unmark()
           }
-          glsw[j]=1
+          glsw[j] = 1
           count++
-          if (count==siz) {
+          if  (count == c_list.len() ) {
             return true
           }
+        } else {
+
         }
       }
-      else{
-        glsw[j]=0
-        if (way && !way.is_marked()){
+      else {
+        glsw[j] = 0
+        if ( way && !way.is_marked() ) {
           way.mark()
         }
-        if (!label && !t.is_marked()) {
+        if ( !label && !t.is_marked() ) {
           label_x.create(c, pl_unown, lab_name)
         }
       }
@@ -2593,13 +2598,13 @@ class basic_chapter
     else if (ribi==7 || ribi==11 || ribi==13 || ribi==14 || ribi==15)
       return translate("It is not possible to build stops at intersections")+" ("+pos.tostring()+")."
 
-    for( local j = 0 ; j < c_list.len(); j++ ) {
+    for( local j = 0; j < c_list.len(); j++ ) {
       local halt = tile_x(c_list[j].x, c_list[j].y, 0).get_halt()
       if (halt){
         local name = halt.get_name()
         local is_good = halt.accepts_good(good_desc_x(good_alias.passa))
         if (!is_good){
-          return format(translate("The %s stop must be for %s"),name, translate("Passagiere"))+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+          return format(translate("The %s stop must be for %s"), name, translate("Passagiere"))+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
         }
       }
     }
@@ -3222,12 +3227,12 @@ class basic_chapter
 function create_halt_list(cord_list) {
   local list_tx = ""
   local c_list = cord_list
-  for (local j=0;j<c_list.len();j++){
+  for ( local j = 0; j < c_list.len(); j++ ) {
     local c = coord(c_list[j].x, c_list[j].y)
     local tile = my_tile(c)
     local st_halt = tile.get_halt()
     local build = tile.find_object(mo_building)
-    if (build){
+    if ( build && glsw[j] == 1 ){
       local link =  c.href(st_halt.get_name()+" ("+c.tostring()+")")
       list_tx += format("<em>%s %d:</em> %s<br>", translate("Stop"), j+1, link)
     }
@@ -3700,6 +3705,23 @@ function find_object(obj, wt, speed, good = null) {
   return obj_desc
 }
 
-
+/**
+  *
+  * @param wt - waytype
+  * @param good -
+  *
+  * @return error message or null
+  */
+function check_select_station(name, wt, good) {
+  local list = building_desc_x.get_available_stations(building_desc_x.station, wt, good_desc_x(good))
+  local list_name = []
+  for (local i = 0; i < list.len(); i++ ) {
+    list_name.append(list[i].get_name())
+  }
+  if ( list_name.find(name) == null ) {
+    return format(translate("Selected halt accept not %s"), translate(good))+"."
+  }
+  return null
+}
 
 // END OF FILE

@@ -1444,6 +1444,10 @@ class tutorial.chapter_03 extends basic_chapter
       case 3:
         if (pot0==0){
           //Estaciones de la Fabrica
+          // check selected halt accept passenger
+          local s = check_select_station(name, wt_rail, good_alias.goods)
+          if ( s != null ) return s
+
           local good = good_alias.goods
           local c_list = station_tiles(way2_fac1_fac2[5], way2_fac1_fac2[4], loc1_tile)
           local siz = c_list.len()
@@ -1452,6 +1456,10 @@ class tutorial.chapter_03 extends basic_chapter
 
         else if (pot0==1 && pot1==0){
           //Estaciones del Productor
+          // check selected halt accept passenger
+          local s = check_select_station(name, wt_rail, good_alias.goods)
+          if ( s != null ) return s
+
           local good = good_alias.goods
           local c_list = station_tiles(way2_fac1_fac2[0], way2_fac1_fac2[1], loc1_tile)
           local siz = c_list.len()
@@ -1585,6 +1593,10 @@ class tutorial.chapter_03 extends basic_chapter
         }
         //Estaciones de la Fabrica
         else if (pot2==1 && pot3==0){
+          // check selected halt accept passenger
+          local s = check_select_station(name, wt_rail, good_alias.goods)
+          if ( s != null ) return s
+
           local good = good_alias.goods
           local c_list = station_tiles(way2_fac2_fac3[5], way2_fac2_fac3[4], loc2_tile)
           local siz = c_list.len()
@@ -1592,6 +1604,10 @@ class tutorial.chapter_03 extends basic_chapter
         }
         //Estaciones del Productor
         else if (pot3==1 && pot4==0){
+          // check selected halt accept passenger
+          local s = check_select_station(name, wt_rail, good_alias.goods)
+          if ( s != null ) return s
+
           local good = good_alias.goods
           local c_list = station_tiles(way2_fac2_fac3[0], way2_fac2_fac3[1], loc2_tile)
           local siz = c_list.len()

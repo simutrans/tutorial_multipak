@@ -382,5 +382,7 @@ Debes usar la herramienta para elevar el terreno aquí.
 #_________________________________error message_________________________________
 Place the extension building at the marked point
 Coloque el edificio de ampliación en el punto marcado
+Selected halt accept not %s
+La parada seleccionada no acepta %s.
 This stop already accepts mail.
 Esta parada ya acepta correo.

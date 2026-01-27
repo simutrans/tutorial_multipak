@@ -269,12 +269,11 @@ class tutorial.chapter_04 extends basic_chapter
       case 2:
         persistent.ch_max_sub_steps = 0
         //Para los Muelles
-        local siz = ch4_ship1_halts.len()
         local c_list = ch4_ship1_halts
         local name = translate("Build a Dock here!.")
         local good = good_alias.goods
         local label = true
-        local all_stop = is_stop_building(siz, c_list, name, good, label)
+        local all_stop = is_stop_building(c_list, name, good, label)
 
         if (all_stop) {
           this.next_step()
@@ -385,12 +384,11 @@ class tutorial.chapter_04 extends basic_chapter
         break
       case 6:
         //Para los Muelles
-        local siz = ch4_ship3_halts.len()
         local c_list = ch4_ship3_halts
         local name = translate("Build a Dock here!.")
         local good = good_alias.passa
         local label = true
-        local all_stop = is_stop_building(siz, c_list, name, good, label)
+        local all_stop = is_stop_building(c_list, name, good, label)
 
         if (all_stop) {
           this.next_step()
