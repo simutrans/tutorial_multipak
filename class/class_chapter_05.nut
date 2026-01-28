@@ -118,6 +118,11 @@ class tutorial.chapter_05 extends basic_chapter
       c_list = sch_list3
       start_sch_tmpsw(pl, c_dep, c_list)
     }*/
+
+    if ( this.step == 4 && extensions_tiles.len() == 0 ) {
+      check_post_extension(city1_post_halts)
+    }
+
     return 0
   }
 
@@ -211,7 +216,7 @@ class tutorial.chapter_05 extends basic_chapter
         local st_tx = ""
         local list = city1_post_halts //extensions_tiles  //Lista de build
         local siz = list.len()
-        for(local j=0;j<siz;j++){
+        for ( local j = 0; j < siz; j++ ) {
           //local c = coord(c_list[j].x, c_list[j].y)
           local tile = my_tile(list[j])
           local st_halt = tile.get_halt()
@@ -233,7 +238,7 @@ class tutorial.chapter_05 extends basic_chapter
         local c_list = city1_post_halts
         local siz = c_list.len()
 
-        for (local j=0;j<siz;j++){
+        for ( local j = 0; j < siz; j++ ) {
           local c = coord(c_list[j].x, c_list[j].y)
           local tile = my_tile(c)
           local st_halt = tile.get_halt()
@@ -643,8 +648,8 @@ class tutorial.chapter_05 extends basic_chapter
           for(local j=0;j<way5_fac7_fac8.len();j++){
             if(pos.x==way5_fac7_fac8[j].x && pos.y==way5_fac7_fac8[j].y){
               if(tool_id==tool_build_station || tool_id==tool_remover){
-                // check selected halt accept passenger
-                local s = check_select_station(name, wt_rail, good_alias.goods)
+                // check selected halt accept goods
+                local s = check_select_station(name, wt_road, good_alias.goods)
                 if ( s != null ) return s
 
                 way.unmark()
@@ -727,7 +732,20 @@ class tutorial.chapter_05 extends basic_chapter
       case 4:
         if (pot0==1 && pot1==0){
           // Permite construir paradas
+
           if ( tool_id==tool_build_station ) {
+            local wt = wt_road
+            // define station or station_extension
+            for( local j = 0; j < extensions_tiles.len(); j++ ) {
+              if ( pos.x == extensions_tiles[j].a.x && pos.y == extensions_tiles[j].a.y && extensions_tiles[j].b == 0 ) {
+                wt = 0
+                break
+              }
+            }
+            // check selected halt accept mail
+            local s = check_select_station(name, wt, good_alias.mail)
+            if ( s != null ) return s
+
             return build_stop_ex(extensions_tiles, t)
           }
 

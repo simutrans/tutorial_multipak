@@ -2711,7 +2711,7 @@ class basic_chapter
 
     }
 
-    for(local j=0; j<nr; j++){
+    for ( local j = 0; j < list.len(); j++ ) {
       local c = list[j].a
       //gui.add_message("a "+glsw[j])
       if ((tile.x == c.x) && (tile.y == c.y)){
@@ -3709,12 +3709,15 @@ function find_object(obj, wt, speed, good = null) {
 function check_select_station(name, wt, good) {
 
   local sel_obj = null
+  local message = null
   switch (wt) {
     case wt_water:
       sel_obj = building_desc_x.harbour
+      message = "harbour"
       break
     case 0:
       sel_obj = building_desc_x.station_extension
+      message = "extension"
       break
     default:
       sel_obj = building_desc_x.station
@@ -3726,11 +3729,21 @@ function check_select_station(name, wt, good) {
   for (local i = 0; i < list.len(); i++ ) {
     if ( list[i].get_waytype() == wt ) {
       list_name.append(list[i].get_name())
-      gui.add_message(" name " + list_name[i])
+      //gui.add_message(" list_name " + list_name[i])
     }
   }
   if ( list_name.find(name) == null ) {
-    return format(translate("Selected halt accept not %s"), translate(good))+"."
+    switch (message) {
+      case "extension":
+        return format(translate("Selected extension accept not %s."), translate(good))
+        break
+      case "harbour":
+        return format(translate("Selected harbour accept not %s."), translate(good))
+        break
+      default:
+        return format(translate("Selected halt accept not %s."), translate(good))
+    }
+
   }
   return null
 }

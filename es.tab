@@ -378,11 +378,17 @@ You must use the inspection tool
 Debes usar la herramienta de inspección
 You must use the tool to raise the ground here
 Debes usar la herramienta para elevar el terreno aquí.
+#_________________________________errer message_________________________________
+#_________________________________errer message_________________________________
+Selected harbour accept not %s.
+El puerto seleccionado no acepta %s.
 #_________________________________error message_________________________________
 #_________________________________error message_________________________________
 Place the extension building at the marked point
 Coloque el edificio de ampliación en el punto marcado
-Selected halt accept not %s
+Selected extension accept not %s.
+La extensión seleccionada no acepta %s.
+Selected halt accept not %s.
 La parada seleccionada no acepta %s.
 This stop already accepts mail.
 Esta parada ya acepta correo.
