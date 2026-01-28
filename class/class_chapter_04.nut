@@ -483,6 +483,10 @@ class tutorial.chapter_04 extends basic_chapter
         local c_list = ch4_ship1_halts
         local good = good_alias.goods
         if((tool_id != 4096))
+          // check selected halt accept goods
+          local s = check_select_station(name, wt_water, good_alias.goods)
+          if ( s != null ) return s
+
           return is_dock_build(pos, tool_id, c_list, good)
         break
       case 3:
@@ -557,6 +561,10 @@ class tutorial.chapter_04 extends basic_chapter
         local c_list = ch4_ship3_halts
         local good = good_alias.passa
         if((tool_id != 4096))
+          // check selected halt accept passenger
+          local s = check_select_station(name, wt_water, good_alias.passa)
+          if ( s != null ) return s
+
           return is_dock_build(pos, tool_id, c_list, good)
 
         break
