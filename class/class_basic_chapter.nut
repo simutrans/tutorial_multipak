@@ -2569,14 +2569,14 @@ class basic_chapter
       local mail = good_alias.mail
       local goods = good_alias.goods
       if ((pos.x == st_c.x) && (pos.y == st_c.y)){
-        if (glsw[j]==0){
+        if ( glsw[j] == 0 ) {
           way.unmark()
           return null
         }
         else
           return translate("There is already a stop here")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
       }
-      else if (glsw[j]==0)
+      else if ( glsw[j] == 0 )
         result = translate("Place the stops at the marked points")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
     }
     return result
@@ -2715,13 +2715,13 @@ class basic_chapter
       local c = list[j].a
       //gui.add_message("a "+glsw[j])
       if ((tile.x == c.x) && (tile.y == c.y)){
-        if (glsw[j]==0){
+        if ( glsw[j] == 0 ) {
           return null
         }
         else
           return translate("This stop already accepts mail.")+" ("+c.tostring()+")"
       }
-      else if (glsw[j]==0)
+      else if ( glsw[j] == 0 )
         result = translate("Place the extension building at the marked point")+" ("+c.tostring()+")."
     }
     return result
