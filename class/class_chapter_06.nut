@@ -487,7 +487,7 @@ class tutorial.chapter_06 extends basic_chapter
 
             if(tool_id == tool_build_way) return null
           }
-          else return translate("Build here") + ": ("+c_way.tostring()+")!."
+          else return translate("Build here") + ": ("+coord3d_to_stringc_way)+")!."
         }
         else if (pot0==1 && pot1==0){
           if (pos.x == c2_track.a.x && pos.y == c2_track.a.y){
