@@ -41,11 +41,11 @@ persistent.ch_max_steps      <- 1  // stores chapter max steps
 persistent.ch_max_sub_steps  <- 0  // stores chapter max sub steps
 persistent.ch_sub_step       <- 0  // stores actual chapter sub steps
 
-include(nut_path+"class_basic_gui")   // include class for tools disabled/enabled
-include(nut_path+"class_basic_data")  // include class for object data
-include(nut_path+"class_basic_chapter")     // include class for basic chapter structure
-translate_objects_list <- {}          // translate list
-translate_objects()                   // add objects to translate list
+include(nut_path+"class_basic_gui")     // include class for tools disabled/enabled
+include(nut_path+"class_basic_data")    // include class for object data
+include(nut_path+"class_basic_chapter") // include class for basic chapter structure
+translate_objects_list <- {}            // translate list
+translate_objects()                     // add objects to translate list
 
 resul_version <- {pak= false , st = false}
 
@@ -119,7 +119,6 @@ all_systemtypes <- [st_flat, st_elevated, st_runway, st_tram]
 tick_wait <- 16
 
 /**
-  * @fn get_set_name(name)
   * returns pakset name (lower case)
   *
   * @param name mixed case
@@ -313,7 +312,6 @@ chapter            <- tutorial.chapter_02       // must be placed here !!!
 
 
 /**
-  * @fn script_text()
   * This function will be called, whenever a user clicks to jump to the next step
   * It must not alter the map or call a tool!
   * Hence we just set a flag and handle all map changes in is_scenario_completed()
@@ -413,7 +411,6 @@ function set_city_names()
 
 
 /**
- *  @fn get_info_text(pl)
  *  test functions generating the GUI strings
  *  These must return fast and must not alter the map!
  *
@@ -550,7 +547,6 @@ function labels_text_debug()
 
 
 /**
- *  @fn chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
  *  calculate percentage chapter complete
  *
  *  @param ch_steps  = count chapter steps
@@ -591,7 +587,6 @@ function chapter_percentage(ch_steps, ch_step, sub_steps, sub_step)
 }
 
 /**
-  *  @fn is_scenario_completed(pl)
   *  This function check whether finished or not
   *  Is runs in a step, so it can alter the map
   *
@@ -842,6 +837,7 @@ function jump_to_link_executed(pos)
 
 //--------------------------------------------------------
 datasave <- {cov = cov_save}
+
 
 class data_save {
   // Convoys
