@@ -3776,7 +3776,7 @@ function check_select_way(name, wt, st = st_flat) {
   }
 
   if ( list_name.find(name) == null ) {
-    return translate("Selected way is not correct")
+    return translate("Selected way is not correct!")
   }
 
   return null

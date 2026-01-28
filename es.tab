@@ -132,6 +132,8 @@ OK
 Correcto
 Only %d stops are necessary.
 Sólo son necesarias %d paradas.
+Only air schedules allowed
+Solo se permiten horarios de aeronaves
 Only delete signals.
 Solo puedes eliminar señales.
 Only one train is allowed, press the [Sell] button.
@@ -140,6 +142,8 @@ Only railway schedules allowed
 Sólo se permiten itinerarios de tren
 Only road schedules allowed
 Solo se permiten rutas por carretera
+Only water schedules allowed
+Solo se permiten horarios de envío
 Place a block signal here
 Coloca señal de bloqueo aquí
 Place a Tunnel here!.
@@ -330,6 +334,8 @@ You can only delete the stations.
 Solo puedes eliminar estaciones.
 You can only delete the stops.
 Solo se permite eliminar paradas.
+You can only delete the stops/extensions.
+Solo puedes eliminar las paradas/extensiones.
 You can only use this tool in the city
 Solo puedes usar esta herramienta en la ciudad
 You can only use vehicles:
@@ -390,5 +396,7 @@ Selected extension accept not %s.
 La extensión seleccionada no acepta %s.
 Selected halt accept not %s.
 La parada seleccionada no acepta %s.
+Selected way is not correct!
+¡La ruta seleccionada es incorrecta!
 This stop already accepts mail.
 Esta parada ya acepta correo.

@@ -330,6 +330,8 @@ You can only delete the stations.
 Sie können nur den Bahnhof löschen
 You can only delete the stops.
 Sie können nur die Halte löschen
+You can only delete the stops/extensions.
+Sie können nur die Haltestellen/Erweiterungen löschen.
 You can only use this tool in the city
 Sie können dieses Tool nur in der Stadt verwenden
 You can only use vehicles:
@@ -390,5 +392,7 @@ Selected extension accept not %s.
 Ausgewählte Erweiterung akzeptiert keine %s.
 Selected halt accept not %s.
 Ausgewählter Halt akzeptiert keine %s.
+Selected way is not correct!
+Ausgewählter Weg ist nicht Korrekt!
 This stop already accepts mail.
 Dieser Halt akzeptiert bereits Post.
