@@ -3708,8 +3708,8 @@ function find_object(obj, wt, speed = null, good = null) {
 }
 
 /**
-  *
-  * @param wt - waytype
+  * @param name - tool name
+  * @param wt   - waytype
   * @param good -
   *
   * @return error message or null
@@ -3756,4 +3756,30 @@ function check_select_station(name, wt, good) {
   return null
 }
 
+/**
+  * @param name - tool name ( by key select = waytype : not implemented)
+  * @param wt   - waytype
+  * @param st   - systemtype
+  *
+  * @return error message or null
+  */
+function check_select_way(name, wt, st = st_flat) {
+
+  local list = way_desc_x.get_available_ways (wt, st)
+
+  local list_name = []
+  for (local i = 0; i < list.len(); i++ ) {
+    if ( list[i].get_system_type() == st ) {
+      list_name.append(list[i].get_name())
+      //gui.add_message(" list_name " + list_name[i])
+    }
+  }
+
+  if ( list_name.find(name) == null ) {
+    return translate("Selected way is not correct")
+  }
+
+  return null
+
+}
 // END OF FILE

@@ -471,6 +471,11 @@ class tutorial.chapter_06 extends basic_chapter
         //return climate
         if (pot0==0){
           if ((pos.x>=c1_track.a.x)&&(pos.y>=c1_track.a.y)&&(pos.x<=c1_track.b.x)&&(pos.y<=c1_track.b.y)){
+
+            // check selected way
+            local s = check_select_way(name, wt_air, st_runway)
+            if ( s != null ) return s
+
             if (way && way.get_name() != obj1_way_name){
               if(tool_id == tool_remover || tool_id == tool_remove_way) return null
 
@@ -491,6 +496,11 @@ class tutorial.chapter_06 extends basic_chapter
           }
 
           if ((pos.x>=c2_track.a.x)&&(pos.y>=c2_track.a.y)&&(pos.x<=c2_track.b.x)&&(pos.y<=c2_track.b.y)){
+
+            // check selected way
+            local s = check_select_way(name, wt_air)
+            if ( s != null ) return s
+
             if (way && way.get_name() != obj2_way_name){
               if(tool_id == tool_remover || tool_id == tool_remove_way) return null
 
