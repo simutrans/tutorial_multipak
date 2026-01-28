@@ -82,10 +82,10 @@ class tutorial.chapter_06 extends basic_chapter
     ch6_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
     ch6_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
 
-    /// set road depot name
-    sc_dep1 = find_object("depot", wt_road).get_name()
     /// set air depot name
     sc_dep1 = find_object("depot", wt_air).get_name()
+    /// set road depot name
+    sc_dep2 = find_object("depot", wt_road).get_name()
 
     d1_cnr = get_dep_cov_nr(ch6_cov_lim1.a,ch6_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch6_cov_lim2.a,ch6_cov_lim2.b)
@@ -487,7 +487,7 @@ class tutorial.chapter_06 extends basic_chapter
 
             if(tool_id == tool_build_way) return null
           }
-          else return translate("Build here") + ": ("+coord3d_to_stringc_way)+")!."
+          else return translate("Build here") + ": ("+coord3d_to_string(c_way)+")!."
         }
         else if (pot0==1 && pot1==0){
           if (pos.x == c2_track.a.x && pos.y == c2_track.a.y){
