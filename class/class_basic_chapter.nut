@@ -7,6 +7,11 @@
   *
   */
 
+/**
+  * @brief class_basic_chapter.nut
+  * @brief global parameters and functions
+  */
+
 //Global coordinate for mark build tile
 currt_pos <- null
 
@@ -202,10 +207,6 @@ class basic_chapter
     return c_line
   }
 
-  //----------------------------------------------------------------------------------------------------------------
-
-  //-------------------------
-
   function checks_convoy_nr(nr, max)
   {
     for(local j=0;j<max;j++){
@@ -285,50 +286,6 @@ class basic_chapter
     return result
   }
 
-  /**
-   *  @fn check_halt_merge(halt1, halt2)
-   *  check is tile halt2 in tilelist halt1
-   *
-   *  @param halt1 = tile_x
-   *  @param halt2 = tile_x
-   *
-   *  @return true or false
-   */
-  function check_halt_merge(halt1, halt2) {
-    local tile_list = halt1.get_halt().get_tile_list()
-    local check_tile = coord3d_to_string(halt2)
-
-    for ( local x = 0; x < tile_list.len(); x++ ) {
-      if ( coord3d_to_string(tile_list[x]) == check_tile ) {
-        //gui.add_message("check_halt_merge "+check_tile + " return true")
-        return true
-      }
-    }
-
-    return false
-  }
-
-  /**
-   *  @fn check_halt_wt(halt, search_wt)
-   *  check waytype tile in tile list from station
-   *
-   *  @param halt      - tile_x from station
-   *  @param search_wt - waytype for search tile
-   *
-   *  @return tile_x or null
-   *
-   */
-  function check_halt_wt(halt, search_wt) {
-    local tiles = halt.get_halt().get_tile_list()
-    for ( local i = 0; i < tiles.len(); i++ ) {
-      local k = tiles[i].find_object(mo_building).get_desc().get_waytype()
-      if ( k == search_wt ) {
-        return tiles[i]
-      }
-    }
-    return null
-  }
-
   function cov_pax(c, wt, good){
     local halt = tile_x(c.x, c.y, c.z).get_halt()
     local cov_nr = 0
@@ -361,7 +318,6 @@ class basic_chapter
     }
     return cov_nr
   }
-
 
   function checks_convoy_schedule(convoy, pl)
   {
@@ -3224,6 +3180,48 @@ class basic_chapter
 
 }
 
+/**
+  *  check is tile halt2 in tilelist halt1
+  *
+  *  @param halt1 = tile_x
+  *  @param halt2 = tile_x
+  *
+  *  @return true or false
+  */
+function check_halt_merge(halt1, halt2) {
+  local tile_list = halt1.get_halt().get_tile_list()
+  local check_tile = coord3d_to_string(halt2)
+
+  for ( local x = 0; x < tile_list.len(); x++ ) {
+    if ( coord3d_to_string(tile_list[x]) == check_tile ) {
+      //gui.add_message("check_halt_merge "+check_tile + " return true")
+      return true
+    }
+  }
+
+  return false
+}
+
+/**
+  *  check waytype tile in tile list from station
+  *
+  *  @param halt      - tile_x from station
+  *  @param search_wt - waytype for search tile
+  *
+  *  @return tile_x or null
+  *
+  */
+function check_halt_wt(halt, search_wt) {
+  local tiles = halt.get_halt().get_tile_list()
+  for ( local i = 0; i < tiles.len(); i++ ) {
+    local k = tiles[i].find_object(mo_building).get_desc().get_waytype()
+    if ( k == search_wt ) {
+      return tiles[i]
+    }
+  }
+  return null
+}
+
 function create_halt_list(cord_list) {
   local list_tx = ""
   local c_list = cord_list
@@ -3267,13 +3265,13 @@ function create_schedule_list(coord_list) {
 }
 
 /**
- *  calculate station lenght
- *
- *  veh1  = loco
- *  veh2  = wg
- *  veh2c = wg count
- *
- */
+  *  calculate station lenght
+  *
+  *  veh1  = loco
+  *  veh2  = wg
+  *  veh2c = wg count
+  *
+  */
 function calc_station_lenght(veh1, veh2, veh2c) {
     local list = vehicle_desc_x.get_available_vehicles(wt_rail)
     local cnv_lenght = 0
@@ -3294,13 +3292,13 @@ function calc_station_lenght(veh1, veh2, veh2c) {
 }
 
 /**
- *  create array stations tiles
- *
- *  tile_a = tile_x
- *  tile_b = tile_x
- *  count
- *
- */
+  *  create array stations tiles
+  *
+  *  tile_a = tile_x
+  *  tile_b = tile_x
+  *  count
+  *
+  */
 function station_tiles(tile_a, tile_b, count) {
   local st_tiles = []
   st_tiles.append(tile_x(tile_a.x, tile_a.y, tile_a.z))
@@ -3325,17 +3323,16 @@ function station_tiles(tile_a, tile_b, count) {
 }
 
 /**
- *  @fn check_rail_station(tile, rtype, pos = null)
- *  check rail platform
- *
- *  @param tile  = tile_x halt pos
- *  @param rtype = 0 - check pos in platform
- *                 1 - return array platform
- *  @param pos   = tile to click
- *
- *
- *  @return true (rtype = 0) or tiles_x array (rtype = 1)
- */
+  *  check rail platform
+  *
+  *  @param tile  = tile_x halt pos
+  *  @param rtype = 0 - check pos in platform
+  *                 1 - return array platform
+  *  @param pos   = tile to click
+  *
+  *
+  *  @return true (rtype = 0) or tiles_x array (rtype = 1)
+  */
 function check_rail_station(tile, rtype, pos = null) {
   local halt_tiles = tile.get_halt().get_tile_list()
   local d = tile.get_way_dirs(wt_rail)
@@ -3369,15 +3366,14 @@ function check_rail_station(tile, rtype, pos = null) {
 }
 
 /**
- *  @fn test_tile_is_empty(t_tile)
- *  test tile is empty
- *  removed objects for empty tiles: tree, ground_object, moving_object
- *
- *  @param t_tile = tile_x
- *
- *  @return true or false
- *
- */
+  *  test tile is empty
+  *  removed objects for empty tiles: tree, ground_object, moving_object
+  *
+  *  @param t_tile = tile_x
+  *
+  *  @return true or false
+  *
+  */
 function test_tile_is_empty(t_tile) {
   local tile = tile_x(t_tile.x, t_tile.y, t_tile.z)
 
@@ -3400,13 +3396,12 @@ function test_tile_is_empty(t_tile) {
 }
 
 /**
- *  @fn search_tile_in_tiles(tiles, coord)
- *  check tile in tile array
- *
- *  @param tiles = tile array
- *  @param coord = tile as coord
- *
- */
+  *  check tile in tile array
+  *
+  *  @param tiles = tile array
+  *  @param coord = tile as coord
+  *
+  */
 function search_tile_in_tiles(tiles, coord) {
 
   for ( local i = 0; i < tiles.len(); i++ ) {
@@ -3419,21 +3414,20 @@ function search_tile_in_tiles(tiles, coord) {
 }
 
 /**
- *  @fn check_post_extension(halt_list)
- *  check stations enables post / enables pax and post
- *  search free tile for post extension
- *  search road tile for post halt
- *  replace pass halt -> pass/post halt (not tested)
- *
- *  @param halt_list = array[tiles_x, tile_x, .... ]
- *
- *  @return array[ {a = build_tile, b = code}, .... ]
- *      code = 0 - build mail extension
- *      code = 1 - build mail halt
- *      code = 2 - replace pass halt to pass/mail halt (not tested)
- *      code = 3 - remove city building (not implemented)
- *
- */
+  *  check stations enables post / enables pax and post
+  *  search free tile for post extension
+  *  search road tile for post halt
+  *  replace pass halt -> pass/post halt (not tested)
+  *
+  *  @param halt_list = array[tiles_x, tile_x, .... ]
+  *
+  *  @return array[ {a = build_tile, b = code}, .... ]
+  *      code = 0 - build mail extension
+  *      code = 1 - build mail halt
+  *      code = 2 - replace pass halt to pass/mail halt (not tested)
+  *      code = 3 - remove city building (not implemented)
+  *
+  */
 function check_post_extension(halt_list) {
 
   local stations_list_mail = building_desc_x.get_available_stations(building_desc_x.station, wt_road, good_desc_x("Post"))
@@ -3713,10 +3707,27 @@ function find_object(obj, wt, speed, good = null) {
   * @return error message or null
   */
 function check_select_station(name, wt, good) {
-  local list = building_desc_x.get_available_stations(building_desc_x.station, wt, good_desc_x(good))
+
+  local sel_obj = null
+  switch (wt) {
+    case wt_water:
+      sel_obj = building_desc_x.harbour
+      break
+    case 0:
+      sel_obj = building_desc_x.station_extension
+      break
+    default:
+      sel_obj = building_desc_x.station
+      break
+  }
+
+  local list = building_desc_x.get_available_stations(sel_obj, wt, good_desc_x(good))
   local list_name = []
   for (local i = 0; i < list.len(); i++ ) {
-    list_name.append(list[i].get_name())
+    if ( list[i].get_waytype() == wt ) {
+      list_name.append(list[i].get_name())
+      gui.add_message(" name " + list_name[i])
+    }
   }
   if ( list_name.find(name) == null ) {
     return format(translate("Selected halt accept not %s"), translate(good))+"."
