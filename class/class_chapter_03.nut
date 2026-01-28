@@ -1444,7 +1444,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 3:
         if (pot0==0){
           //Estaciones de la Fabrica
-          // check selected halt accept passenger
+          // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
@@ -1456,7 +1456,7 @@ class tutorial.chapter_03 extends basic_chapter
 
         else if (pot0==1 && pot1==0){
           //Estaciones del Productor
-          // check selected halt accept passenger
+          // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
@@ -1593,7 +1593,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
         //Estaciones de la Fabrica
         else if (pot2==1 && pot3==0){
-          // check selected halt accept passenger
+          // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
@@ -1604,7 +1604,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
         //Estaciones del Productor
         else if (pot3==1 && pot4==0){
-          // check selected halt accept passenger
+          // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
@@ -1959,7 +1959,7 @@ class tutorial.chapter_03 extends basic_chapter
         if (tool_id==4108){
           //gui.add_message(""+st_lim_a.len()+"")
 
-          for(local j=0;j<ch3_rail_stations.len();j++){
+          for ( local j = 0; j < ch3_rail_stations.len(); j++ ) {
             result = format(translate("Select station No.%d"),j+1)+" ("+ch3_rail_stations[j].tostring()+".)"
             if(tmpsw[j]==0){
               local check = check_rail_station(ch3_rail_stations[j], 0, pos)
@@ -2858,6 +2858,9 @@ class tutorial.chapter_03 extends basic_chapter
     return false
   }
 
+  /**
+    *
+    */
   function get_stations(pos, tool_id, result, good, c_list, siz)
   {
     for(local j=0;j<siz;j++){
@@ -2900,6 +2903,9 @@ class tutorial.chapter_03 extends basic_chapter
     return result
   }
 
+  /**
+    *
+    */
   function train_result_message(nr, name, good, veh, cov, st_t)
   {
     switch (nr) {
