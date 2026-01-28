@@ -107,21 +107,6 @@ class tutorial.chapter_05 extends basic_chapter
     d3_cnr = get_dep_cov_nr(ch5_cov_lim3.a,ch5_cov_lim3.b)
 
     local pl = 0
-    /*if(this.step == 4){
-      //Camion de correo
-      local c_dep = this.my_tile(city1_road_depot)
-      local c_list = city1_post_halts
-      start_sch_tmpsw(pl, c_dep, c_list)
-
-      //Barco de Correo/Pasajeros
-      c_dep = this.my_tile(c_dep3)
-      c_list = sch_list3
-      start_sch_tmpsw(pl, c_dep, c_list)
-    }*/
-
-    if ( this.step == 4 && extensions_tiles.len() == 0 ) {
-      check_post_extension(city1_post_halts)
-    }
 
     return 0
   }
@@ -169,7 +154,7 @@ class tutorial.chapter_05 extends basic_chapter
 
           local tran_tx = ""
           for(local j=0;j<way5_power.len();j++){
-                if (glsw[j]==0){
+                if ( glsw[j] == 0 ) {
                     tran_tx +=format("<st>%s %d</st> ", trf_name, j+1) + way5_power[j].href("("+coord3d_to_string(way5_power[j])+")") + "<br/>"
                 }
                 else {
@@ -188,7 +173,7 @@ class tutorial.chapter_05 extends basic_chapter
           local tran_tx = ""
           local f_list = fab_list
           for(local j=0;j<f_list.len();j++){
-             if (glsw[j]==0){
+             if ( glsw[j] == 0 ) {
               tran_tx +=format("<st>%s</st> ",translate(f_list[j].name)) + f_list[j].c.href("("+f_list[j].c.tostring()+")") + "<br/>"
              }
              else {
@@ -215,14 +200,13 @@ class tutorial.chapter_05 extends basic_chapter
 
         local st_tx = ""
         local list = city1_post_halts //extensions_tiles  //Lista de build
-        local siz = list.len()
-        for ( local j = 0; j < siz; j++ ) {
+        for ( local j = 0; j < list.len(); j++ ) {
           //local c = coord(c_list[j].x, c_list[j].y)
           local tile = my_tile(list[j])
           local st_halt = tile.get_halt()
           //local name = list[j].name == ""? get_good_text(list[j].good) : translate(list[j].name)
           local name = st_halt.get_name() //translate(get_obj_ch5(6))
-          if (glsw[j]==0){
+          if ( glsw[j] == 0 ) {
             st_tx +=format("%s: <st>%s</st> ", translate("Stop"), name) + list[j].href("("+list[j].tostring()+")")+"<br/>"
           }
           else {
@@ -236,9 +220,8 @@ class tutorial.chapter_05 extends basic_chapter
         text.tx = "<em>[2/3]</em>"
         local list_tx = ""
         local c_list = city1_post_halts
-        local siz = c_list.len()
 
-        for ( local j = 0; j < siz; j++ ) {
+        for ( local j = 0; j < list.len(); j++ ) {
           local c = coord(c_list[j].x, c_list[j].y)
           local tile = my_tile(c)
           local st_halt = tile.get_halt()
@@ -685,13 +668,13 @@ class tutorial.chapter_05 extends basic_chapter
             if (tool_id == tool_build_transformer){
               local f_transf = t.find_object(mo_transformer_c)
               if (pos.x==way5_power[j].x && pos.y==way5_power[j].y){
-                if (glsw[j]==0){
+                if ( glsw[j] == 0 ) {
                   return null
                 }
                 else
                   return  translate("There is already a transformer here!")+" ("+pos.tostring()+")."
               }
-              else if (glsw[j]==0)
+              else if ( glsw[j] == 0 )
                 result = translate("Build the transformer here!")+" ("+coord3d_to_string(way5_power[j])+")."
             }
           }
@@ -1067,7 +1050,7 @@ class tutorial.chapter_05 extends basic_chapter
             local list = extensions_tiles
 
           for(local j=0;j<nr;j++){
-            if (glsw[j]==0){
+            if ( glsw[j] == 0 ) {
               local tile = my_tile(list[j].a)
               local name = st_name //list[j].name == ""? sc_st_name2 : list[j].name
               local label = tile.find_object(mo_label)
