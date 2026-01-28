@@ -70,8 +70,8 @@ class tutorial.chapter_06 extends basic_chapter
 
   sc_sta1 = get_obj_ch6(3)
   sc_sta2 = get_obj_ch6(4)
-  sc_dep1 = get_obj_ch6(5)
-  sc_dep2 = get_obj_ch6(6)
+  sc_dep1 = null
+  sc_dep2 = null
 
 
   function start_chapter()  //Inicia solo una vez por capitulo
@@ -81,6 +81,11 @@ class tutorial.chapter_06 extends basic_chapter
     ch6_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
     ch6_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
     ch6_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
+
+    /// set road depot name
+    sc_dep1 = find_object("depot", wt_road).get_name()
+    /// set air depot name
+    sc_dep1 = find_object("depot", wt_air).get_name()
 
     d1_cnr = get_dep_cov_nr(ch6_cov_lim1.a,ch6_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch6_cov_lim2.a,ch6_cov_lim2.b)

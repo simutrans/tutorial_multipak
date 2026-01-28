@@ -38,7 +38,7 @@ class tutorial.chapter_05 extends basic_chapter
   way5_power = [] // coords transformer
 
   //Step 4 =====================================================================================
-  st_name = get_obj_ch5(6)
+  st_name = null // mail extension
 
   //Para el Camion
   veh2_obj = get_veh_ch5(3)
@@ -65,10 +65,10 @@ class tutorial.chapter_05 extends basic_chapter
   //----------------------------------------------------------------------------------
   sc_way_name = get_obj_ch5(1)
   sc_station_name = get_obj_ch5(2)
-  sc_dep_name = get_obj_ch5(5)
+  sc_dep_name = null
   sc_trail_name = get_veh_ch5(2)
   sc_trail_nr = 1
-  sc_power_name = get_obj_ch5(3)
+  sc_power_name = null
   sc_transf_name = get_obj_ch5(4)
 
   function start_chapter()  //Inicia solo una vez por capitulo
@@ -101,6 +101,13 @@ class tutorial.chapter_05 extends basic_chapter
     ch5_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
     ch5_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
     ch5_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
+
+    /// set depot name
+    sc_dep_name = find_object("depot", wt_road).get_name()
+    /// set mail extension name
+    st_name = find_object("extension", wt_road, null, good_alias.mail).get_name()
+    /// set powerline name
+    sc_power_name = find_object("way", wt_power, 0).get_name()
 
     d1_cnr = get_dep_cov_nr(ch5_cov_lim1.a,ch5_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch5_cov_lim2.a,ch5_cov_lim2.b)
@@ -167,7 +174,7 @@ class tutorial.chapter_05 extends basic_chapter
         else if (pot0==1 && pot1==0){
           text = ttextfile("chapter_05/03_2-2.txt")
           text.tx="<em>[2/2]</em>"
-          text.powerline_tool = translate(get_obj_ch5(3)) // tool powerline
+          text.powerline_tool = translate(sc_power_name) // tool powerline
           text.toolbar = toolbar
 
           local tran_tx = ""
@@ -487,7 +494,7 @@ class tutorial.chapter_05 extends basic_chapter
 
           local player = player_x(1)
           local list = [] //extensions_tiles
-          local good = get_good_data(6, 2)
+          local good = good_alias.mail
           local accept_post = false
 
           for ( local i = 0; i < city1_post_halts.len(); i++ ) {
@@ -1057,14 +1064,14 @@ class tutorial.chapter_05 extends basic_chapter
               local o = null
               if (label) {
                 tile.remove_object(player_x(1), mo_label)
-                o = find_object("extension", wt_road, null, get_good_data(6, 2))
+                o = find_object("extension", wt_road, null, good_alias.mail)
                 name = o.get_name()
               }
 
               local way = tile.find_object(mo_way)
               if(way) {
                 way.unmark()
-                o = find_object("station", wt_road, null, get_good_data(6, 2))
+                o = find_object("station", wt_road, null, good_alias.mail)
                 name = o.get_name()
                 city1_post_halts[j] = coord(tile.x, tile.y)
               }

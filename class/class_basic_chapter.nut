@@ -3566,7 +3566,7 @@ function find_tiles_after_tile(tile) {
   * @param speed = speed - null by station, extension
   * @param good  = good
   */
-function find_object(obj, wt, speed, good = null) {
+function find_object(obj, wt, speed = null, good = null) {
 
   local list = []
   switch ( obj ) {
@@ -3606,6 +3606,14 @@ function find_object(obj, wt, speed, good = null) {
       if ( list.len() == 0 ) {
         list = building_desc_x.get_available_stations(building_desc_x.station_extension, 0, good_desc_x(good))
         //gui.add_message(" list extension wt=0 " + list.len())
+      }
+      break
+    case "depot":
+      list = building_desc_x.get_building_list(building_desc_x.depot)
+      for ( local i = 0; i < list.len(); i++ ) {
+        if ( list[i].get_waytype() == wt ) {
+          return list[i]
+        }
       }
       break
 

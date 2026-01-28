@@ -215,7 +215,6 @@ function get_veh_ch2_st4() {
   *  @li id 1 = way name
   *  @li id 2 = bridge name
   *  @li id 3 = stations name
-  *  @li id 4 = depot name
   *
   * @return object raw name
   */
@@ -232,9 +231,6 @@ function get_obj_ch2(id) {
         case 3:
           return "BusStop"
           break
-        case 4:
-          return "CarDepot"
-          break
       }
       break
     case "pak64.german":
@@ -248,9 +244,6 @@ function get_obj_ch2(id) {
         case 3:
           return "BusHalt_1"
           break
-        case 4:
-          return "CarDepot"
-          break
       }
       break
     case "pak128":
@@ -263,9 +256,6 @@ function get_obj_ch2(id) {
           break
         case 3:
           return "medium_classic_bus_stop"
-          break
-        case 4:
-          return "CarDepot"
           break
       }
       break
@@ -364,7 +354,7 @@ function get_veh_ch3(id) {
   *  @li id 1 = way name
   *  @li id 2 = bridge name
   *  @li id 3 = stations name
-  *  @li id 4 = depot name
+  *  @li id 4 = -
   *  @li id 5 = tunnel name
   *  @li id 6 = signal name
   *  @li id 7 = overheadpower name
@@ -385,7 +375,7 @@ function get_obj_ch3(id) {
           return "FreightTrainStop"
           break
         case 4:
-          return "TrainDepot"
+          return ""
           break
         case 5:
           return "RailTunnel"
@@ -410,7 +400,7 @@ function get_obj_ch3(id) {
           return "MHzPS2FreightTrainStop"
           break
         case 4:
-          return "TrainDepot"
+          return ""
           break
         case 5:
           return "RailTunnel_2"
@@ -435,7 +425,7 @@ function get_obj_ch3(id) {
           return "Container1TrainStop"
           break
         case 4:
-          return "TrainDepot"
+          return ""
           break
         case 5:
           return "Rail_140_Tunnel"
@@ -500,11 +490,10 @@ function get_veh_ch4(id) {
   * objects for chapter 4
   *
   * @param integer id
-  *  @li id 1 = way name
+  *  @li id 1 = -
   *  @li id 2 = harbour 1 name (good)
   *  @li id 3 = cannel stop name
   *  @li id 4 = harbour 2 name (passenger)
-  *  @li id 5 = depot name
   *
   * @return string object name
   */
@@ -513,7 +502,7 @@ function get_obj_ch4(id) {
     case "pak64":
       switch (id) {
         case 1:
-          return "Kanal"
+          return ""
           break
         case 2:
           return "LargeShipStop"
@@ -524,15 +513,12 @@ function get_obj_ch4(id) {
         case 4:
           return "ShipStop"
           break
-        case 5:
-          return "ShipDepot"
-          break
       }
       break
     case "pak64.german":
       switch (id) {
         case 1:
-          return "Kanal"
+          return ""
           break
         case 2:
           return "LargeShipStop"
@@ -543,15 +529,12 @@ function get_obj_ch4(id) {
         case 4:
           return "ShipStop"
           break
-        case 5:
-          return "ShipDepot"
-          break
       }
       break
     case "pak128":
       switch (id) {
         case 1:
-          return "canal_020"
+          return ""
           break
         case 2:
           return "Long_Goods_Dock"
@@ -561,9 +544,6 @@ function get_obj_ch4(id) {
           break
         case 4:
           return "ShipStop"
-          break
-        case 5:
-          return "ShipDepot"
           break
       }
       break
@@ -641,10 +621,8 @@ function get_veh_ch5(id) {
   * @param integer id
   *  @li id 1 = road way name
   *  @li id 2 = truck stop name (good)
-  *  @li id 3 = powerline way name
+  *  @li id 3 = -
   *  @li id 4 = powerline transformer
-  *  @li id 5 = depot name
-  *  @li id 6 = post extension name
   *
   * @return string object name
   */
@@ -659,16 +637,10 @@ function get_obj_ch5(id) {
           return "CarStop"
           break
         case 3:
-          return "Powerline"
+          return ""
           break
         case 4:
           return "Aufspanntransformator"
-          break
-        case 5:
-          return "CarDepot"
-          break
-        case 6:
-          return "PostOffice"
           break
       }
       break
@@ -681,16 +653,10 @@ function get_obj_ch5(id) {
           return "LKW_Station_1"
         break
         case 3:
-          return "Powerline"
+          return ""
           break
         case 4:
           return "Aufspanntransformator" //PowerSource
-          break
-        case 5:
-          return "CarDepot"
-          break
-        case 6:
-          return "SmallPostOffice"
           break
       }
       break
@@ -703,16 +669,10 @@ function get_obj_ch5(id) {
           return "CarStop"
           break
         case 3:
-          return "Powerline"
+          return ""
           break
         case 4:
           return "Aufspanntransformator"
-          break
-        case 5:
-          return "CarDepot"
-          break
-        case 6:
-          return "PostOffice"
           break
       }
       break
@@ -782,8 +742,6 @@ function get_veh_ch6(id) {
   *  @li id 2 = taxiway name
   *  @li id 3 = air stop name
   *  @li id 4 = air extension name
-  *  @li id 5 = air depot name
-  *  @li id 6 = road depot name
   *
   * @return string object name
   */
@@ -803,12 +761,6 @@ function get_obj_ch6(id) {
         case 4:
           return "Terminal1930"
           break
-        case 5:
-          return "1930AirDepot"
-          break
-        case 6:
-          return "CarDepot"
-          break
       }
       break
     case "pak64.german":
@@ -825,12 +777,6 @@ function get_obj_ch6(id) {
         case 4:
           return "Terminal1930"
           break
-        case 5:
-          return "1930AirDepot"
-          break
-        case 6:
-          return "CarDepot"
-          break
       }
       break
     case "pak128":
@@ -846,12 +792,6 @@ function get_obj_ch6(id) {
           break
         case 4:
           return "Terminal1950_AirportBlg_S"
-          break
-        case 5:
-          return "1940AirDepot"
-          break
-        case 6:
-          return "CarDepot"
           break
       }
       break

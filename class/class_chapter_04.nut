@@ -58,7 +58,7 @@ class tutorial.chapter_04 extends basic_chapter
   sc_dock_name1 = get_obj_ch4(2)
   sc_dock_name2 = get_obj_ch4(3)
   sc_dock_name3 = get_obj_ch4(4)
-  sc_dep_name = get_obj_ch4(5)
+  sc_dep_name = null
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
@@ -75,6 +75,11 @@ class tutorial.chapter_04 extends basic_chapter
     ch4_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
     ch4_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
     ch4_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
+
+    /// set depot name
+    sc_dep_name = find_object("depot", wt_water).get_name()
+    /// set way canal
+    sc_way_name = find_object("way", wt_water, 10) //get_obj_ch4(1)
 
     d1_cnr = get_dep_cov_nr(ch4_cov_lim1.a,ch4_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch4_cov_lim2.a,ch4_cov_lim2.b)

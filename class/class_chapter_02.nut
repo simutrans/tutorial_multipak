@@ -77,7 +77,7 @@ class tutorial.chapter_02 extends basic_chapter
   sc_way_name = get_obj_ch2(1)
   sc_bridge_name = get_obj_ch2(2)
   sc_station_name = get_obj_ch2(3)
-  sc_dep_name = get_obj_ch2(4)
+  sc_dep_name = null // depot name
 
   function start_chapter()  //Inicia solo una vez por capitulo
   {
@@ -85,6 +85,9 @@ class tutorial.chapter_02 extends basic_chapter
     ch2_cov_lim1 = {a = cv_lim[lim_idx].a, b = cv_lim[lim_idx].b}
     ch2_cov_lim2 = {a = cv_lim[lim_idx+1].a, b = cv_lim[lim_idx+1].b}
     ch2_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
+
+    /// set depot name
+    sc_dep_name = find_object("depot", wt_road).get_name()
 
     dep_cnr1 = get_dep_cov_nr(ch2_cov_lim1.a,ch2_cov_lim1.b)
     dep_cnr2 = get_dep_cov_nr(ch2_cov_lim2.a,ch2_cov_lim2.b)

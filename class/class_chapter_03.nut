@@ -68,7 +68,7 @@ class tutorial.chapter_03 extends basic_chapter
   sc_tunn_name = get_obj_ch3(5)
   sc_bridge_name = get_obj_ch3(2)
   sc_station_name = get_obj_ch3(3)
-  sc_dep_name = get_obj_ch3(4)
+  sc_dep_name = null
   sc_veh1_name = get_veh_ch3(4)
   sc_veh2_name = get_veh_ch3(5)
   sc_wag3_name = get_veh_ch3(6)
@@ -98,6 +98,9 @@ class tutorial.chapter_03 extends basic_chapter
     ch3_cov_lim3 = {a = cv_lim[lim_idx+2].a, b = cv_lim[lim_idx+2].b}
 
     dep_cnr3 = get_dep_cov_nr(ch3_cov_lim3.a,ch3_cov_lim3.b)
+
+    /// set depot name
+    sc_dep_name = find_object("depot", wt_rail).get_name()
 
     cy1.name = get_city_name(city1_tow)
     cy2.name = get_city_name(city3_tow)
