@@ -1,9 +1,9 @@
-/*
- *  class basic_convoys
- *
- *
- *  Can NOT be used in network game !
- */
+/**
+  * @file class_basic_convoys.nut
+  * @brief convoys
+  *
+  *  Can NOT be used in network game !
+  */
 
 //Number of convoys in each chapter are listed
 cv_list <-  [
