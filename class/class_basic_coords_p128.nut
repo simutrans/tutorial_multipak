@@ -1,6 +1,6 @@
 /**
-  * @brief class_basic_coords_p128.nut sets the pakset specific map coords for pak128
-  *
+  * @file class_basic_coords_p128.nut
+  * @brief sets the pakset specific map coords for pak128
   */
 
 /**

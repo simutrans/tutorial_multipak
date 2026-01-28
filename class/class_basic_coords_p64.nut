@@ -1,6 +1,6 @@
 /**
+  * @file class_basic_coords_p64.nut
   * @brief class_basic_coords_p64.nut sets the pakset specific map coords for pak64
-  *
   */
 
 /**

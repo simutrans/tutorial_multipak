@@ -1,6 +1,6 @@
 /**
-  * @brief class_basic_coords_p64g.nut sets the pakset specific map coords for pak64.german
-  *
+  * @file class_basic_coords_p64g.nut
+  * @brief sets the pakset specific map coords for pak64.german
   */
 
 /**
