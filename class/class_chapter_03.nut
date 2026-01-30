@@ -758,7 +758,6 @@ class tutorial.chapter_03 extends basic_chapter
         local tile = my_tile(ch3_rail_depot1.b)
         if(pot[0]==0){
           local c_list = [my_tile(ch3_rail_depot1.b), my_tile(ch3_rail_depot1.a)]
-          local siz = c_list.len()
 
           local next_mark = true
           try {
@@ -2256,7 +2255,6 @@ class tutorial.chapter_03 extends basic_chapter
         return null
         break
       case 4:
-
         if(pot[0]==0){
           local t_start = my_tile(ch3_rail_depot1.a)
           local t_end = my_tile(ch3_rail_depot1.b)

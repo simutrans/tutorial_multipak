@@ -3525,7 +3525,7 @@ function find_tiles_after_tile(tile) {
   * @fn find_object(obj, wt, speed, good)
   * find object tool
   *
-  * @param obj   = object type ( bridge, tunnel, way, catenary, station, extension )
+  * @param obj   = object type ( bridge, tunnel, way, catenary, station, extension, depot )
   * @param wt    = waytype
   * @param speed = speed - null by station, extension
   * @param good  = good
@@ -3575,7 +3575,7 @@ function find_object(obj, wt, speed = null, good = null) {
     case "depot":
       list = building_desc_x.get_building_list(building_desc_x.depot)
       for ( local i = 0; i < list.len(); i++ ) {
-        if ( list[i].get_waytype() == wt ) {
+        if ( list[i].get_waytype() == wt && list[i].get_type() == building_desc_x.depot) {
           return list[i]
         }
       }
