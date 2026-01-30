@@ -51,15 +51,15 @@ class basic_chapter
   glpos     = coord3d(0,0,0)
   gltool    = null
   glresult  = null
-  tmpsw     = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  tmpsw     = []
   tmpcoor   = []
-  stop_flag = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  stop_flag = []
   st_cover  = settings.get_station_coverage()
 
   glmark = coord3d(0,0,0) //coordenadas para realizar  unmark
 
   //Para las pendientes
-  slope_estatus = [0,0,0,0,0,0]
+  slope_estatus = []
 
   //--------------------way scan ------------------------------------
   cursor_sw     = false
@@ -85,6 +85,11 @@ class basic_chapter
     general_disabled_tools(pl)
     //this.set_all_rules(pl)
     this.step = 1
+
+    // fill arrays
+    reset_tmpsw()
+    reset_stop_flag()
+    slope_estatus.resize(6, 0)
   }
 
   // FUNCTIONS TO REWRITE
@@ -1086,46 +1091,36 @@ class basic_chapter
     pot8 = 0
     pot9 = 0
     pot10 = 0
-    persistent.pot[0]=0
-    persistent.pot[1]=0
-    persistent.pot[2]=0
-    persistent.pot[3]=0
-    persistent.pot[4]=0
-    persistent.pot[5]=0
-    persistent.pot[6]=0
-    persistent.pot[7]=0
-    persistent.pot[8]=0
-    persistent.pot[9]=0
-    persistent.pot[10]=0
+
+    persistent.pot.clear()
+    persistent.pot.resize(11, 0)
 
     return null
   }
 
   function reset_glsw()
   {
-    for(local j=0;j<20;j++){
-      glsw[j]=0
-      persistent.glsw[j]=glsw[j]
-    }
+    persistent.glsw.clear()
+    persistent.glsw.resize(20, 0)
+    glsw.clear()
+    glsw.resize(20, 0)
 
     return null
   }
 
   function reset_tmpsw()
   {
-    for(local j=0;j<20;j++){
-      tmpsw[j] = 0
+    tmpsw.clear()
+    tmpsw.resize(20, 0)
 
-    }
     tmpcoor = []
     return null
   }
 
   function reset_stop_flag()
   {
-    for(local j=0;j<20;j++){
-      stop_flag[j]=0
-    }
+    stop_flag.clear()
+    stop_flag.resize(20, 0)
     return null
   }
 

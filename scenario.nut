@@ -70,11 +70,17 @@ ignore_save <- [{id = -1, ig = true}]   //Marca convoys ingnorados
 
 persistent.ignore_save <- []
 
-//-------------Guarda el estado del script------------------------
-persistent.pot <- [0,0,0,0,0,0,0,0,0,0,0]
+//-------------Save the script state------------------------
+persistent.pot <- []
+persistent.pot.resize(11, 0)
 
-persistent.glsw <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-pglsw <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+persistent.glsw <- []
+persistent.glsw.resize(20, 0)
+glsw <- []
+glsw.resize(20, 0)
+
+pglsw <- []
+pglsw.resize(20, 0)
 
 pot0 <- 0
 pot1 <- 0
@@ -87,9 +93,8 @@ pot7 <- 0
 pot8 <- 0
 pot9 <- 0
 pot10 <- 0
-glsw <- [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-//---------------------Contador global de vehiculos----------------------------
+//---------------------Global vehicle counter----------------------------
 persistent.gcov_nr <- 0
 gcov_nr <- 0
 persistent.gcov_id <- 1
@@ -133,6 +138,9 @@ function get_set_name(name)
   return name
 }
 
+/**
+  * Check version and pakset name
+  */
 function string_analyzer()
 {
   local result = {pak= false , st = false}
