@@ -137,7 +137,7 @@ class tutorial.chapter_03 extends basic_chapter
 
     switch (this.step) {
       case 1:
-        if (pot0==0){
+        if (pot[0]==0){
           text = ttextfile("chapter_03/01_1-2.txt")
           text.tx = ttext("<em>[1/2]</em>")
         }
@@ -152,7 +152,7 @@ class tutorial.chapter_03 extends basic_chapter
         local c3 = way2_fac1_fac2[3].href("("+way2_fac1_fac2[3].tostring()+")")
         local c4 = way2_fac1_fac2[5].href("("+way2_fac1_fac2[5].tostring()+")")
 
-        if (pot0==0){
+        if (pot[0]==0){
           local c = way2_fac1_fac2[1]
           local c_label = c.href("("+c.tostring()+")")
           local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
@@ -161,11 +161,11 @@ class tutorial.chapter_03 extends basic_chapter
           text = ttextfile("chapter_03/02_1-3.txt")
           text.tx = ttext("<em>[1/3]</em>")
         }
-        else if (pot1==0){
+        else if (pot[1]==0){
           text = ttextfile("chapter_03/02_2-3.txt")
           text.tx = ttext("<em>[2/3]</em>")
         }
-        else if (pot2==0){
+        else if (pot[2]==0){
           local c = way2_fac1_fac2[4]
           local c_label = c.href("("+c.tostring()+")")
           local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
@@ -187,26 +187,26 @@ class tutorial.chapter_03 extends basic_chapter
 
         break
       case 3:
-        if (pot0==0){
+        if (pot[0]==0){
           text = ttextfile("chapter_03/03_1-2.txt")
           text.tx = ttext("<em>[1/2]</em>")
         }
-        else if (pot0==1&&pot1==0){
+        else if (pot[0]==1&&pot[1]==0){
           text = ttextfile("chapter_03/03_2-2.txt")
           text.tx = ttext("<em>[2/2]</em>")
         }
         text.tile = loc1_tile
         break
       case 4:
-        if (pot0==0){
+        if (pot[0]==0){
           text = ttextfile("chapter_03/04_1-3.txt")
           text.tx=ttext("<em>[1/3]</em>")
         }
-        else if (pot0==1&&pot1==0){
+        else if (pot[0]==1&&pot[1]==0){
           text = ttextfile("chapter_03/04_2-3.txt")
           text.tx=ttext("<em>[2/3]</em>")
         }
-        else if (pot1==1){
+        else if (pot[1]==1){
           text = ttextfile("chapter_03/04_3-3.txt")
           text.tx=ttext("<em>[3/3]</em>")
         }
@@ -233,7 +233,7 @@ class tutorial.chapter_03 extends basic_chapter
         local c3 = way2_fac2_fac3[3].href("("+way2_fac2_fac3[3].tostring()+")")
         local c4 = way2_fac2_fac3[5].href("("+way2_fac2_fac3[5].tostring()+")")
 
-        if (pot0==0){
+        if (pot[0]==0){
           local c = way2_fac2_fac3[1]
           local c_label = c.href("("+c.tostring()+")")
           local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
@@ -242,11 +242,11 @@ class tutorial.chapter_03 extends basic_chapter
           text = ttextfile("chapter_03/06_1-5.txt")
           text.tx=ttext("<em>[1/5]</em>")
         }
-        else if (pot1==0){
+        else if (pot[1]==0){
           text = ttextfile("chapter_03/06_2-5.txt")
           text.tx=ttext("<em>[2/5]</em>")
         }
-        else if (pot2==0){
+        else if (pot[2]==0){
           local c = way2_fac2_fac3[4]
           local c_label = c.href("("+c.tostring()+")")
           local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
@@ -255,11 +255,11 @@ class tutorial.chapter_03 extends basic_chapter
           text = ttextfile("chapter_03/06_3-5.txt")
           text.tx=ttext("<em>[3/5]</em>")
         }
-        else if (pot3==0){
+        else if (pot[3]==0){
           text = ttextfile("chapter_03/06_4-5.txt")
           text.tx=ttext("<em>[4/5]</em>")
         }
-        else if (pot4==0){
+        else if (pot[4]==0){
           text = ttextfile("chapter_03/06_5-5.txt")
           text.tx = ttext("<em>[5/5]</em>")
         }
@@ -287,23 +287,23 @@ class tutorial.chapter_03 extends basic_chapter
         break
       case 8:
 
-        if(pot0==0){
+        if(pot[0]==0){
           text = ttextfile("chapter_03/08_1-5.txt")
           text.tx = ttext("<em>[1/5]</em>")
           text.w1 = c_way3_lim.b.href("("+c_way3_lim.b.tostring()+")")
           text.w2 = c_way3_lim.a.href("("+c_way3_lim.a.tostring()+")")
         }
-        else if(pot1==0){
+        else if(pot[1]==0){
           text = ttextfile("chapter_03/08_2-5.txt")
           text.tx = ttext("<em>[2/5]</em>")
           text.br = bridge3_coords.a.href("("+bridge3_coords.a.tostring()+")")
         }
-        else if (pot2==0){
+        else if (pot[2]==0){
           text = ttextfile("chapter_03/08_3-5.txt")
           text.tx = ttext("<em>[3/5]</em>")
           text.t1 = "<a href=\"("+ way3_tun_coord[0].x+","+ way3_tun_coord[0].y+")\">("+ way3_tun_coord[0].tostring()+")</a>"
         }
-        else if(pot3==0){
+        else if(pot[3]==0){
           local slope = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).get_slope()
           if(r_way.c.z<way3_tun_list[way3_tun_list.len()-1].z){
             text = ttextfile("chapter_03/08_4-5.txt")
@@ -352,7 +352,7 @@ class tutorial.chapter_03 extends basic_chapter
 
       case 9:
 
-        if (pot0==0){
+        if (pot[0]==0){
           local way_list = ""
           text = ttextfile("chapter_03/09_1-2.txt")
           text.tx = ttext("<em>[1/2]</em>")
@@ -378,7 +378,7 @@ class tutorial.chapter_03 extends basic_chapter
           text.w1 = way3_cy1_cy6[w_nr].b.href("("+way3_cy1_cy6[w_nr].b.tostring()+")")
         }
 
-        else if (pot1==0){
+        else if (pot[1]==0){
           text = ttextfile("chapter_03/09_2-2.txt")
           text.tx = ttext("<em>[2/2]</em>")
           local sigtxt = ""
@@ -402,7 +402,7 @@ class tutorial.chapter_03 extends basic_chapter
         break
 
       case 10:
-        if (pot0==0){
+        if (pot[0]==0){
             if (glsw[1]==0){
             text = ttextfile("chapter_03/10_1-4.txt")
             text.tx = ttext("<em>[1/4]</em>")
@@ -412,11 +412,11 @@ class tutorial.chapter_03 extends basic_chapter
             text.tx = ttext("<em>[2/4]</em>")
           }
         }
-        else if (pot1==0){
+        else if (pot[1]==0){
           text = ttextfile("chapter_03/10_3-4.txt")
           text.tx = ttext("<em>[3/4]</em>")
         }
-        else if (pot2==0){
+        else if (pot[2]==0){
           text = ttextfile("chapter_03/10_4-4.txt")
           text.tx = ttext("<em>[4/4]</em>")
         }
@@ -552,7 +552,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 1:
         persistent.ch_max_sub_steps = 2
         local next_mark = false
-        if (pot0==0 || pot1 == 0) {
+        if (pot[0]==0 || pot[1] == 0) {
           local list = fac_2.c_list
           try {
             next_mark = delay_mark_tile(list)
@@ -560,11 +560,11 @@ class tutorial.chapter_03 extends basic_chapter
           catch(ev) {
             return 0
           }
-          if(next_mark && pot0 == 1) {
-            pot1=1
+          if(next_mark && pot[0] == 1) {
+            pot[1]=1
           }
         }
-        else if (pot2==0 || pot3==0) {
+        else if (pot[2]==0 || pot[3]==0) {
           local list = fac_1.c_list
           try {
             next_mark = delay_mark_tile(list)
@@ -572,12 +572,12 @@ class tutorial.chapter_03 extends basic_chapter
           catch(ev) {
             return 0
           }
-          if(next_mark && pot2 == 1) {
-            pot3=1
+          if(next_mark && pot[2] == 1) {
+            pot[3]=1
           }
           persistent.ch_sub_step = 1
         }
-        else if (pot3==1 && pot4==0) {
+        else if (pot[3]==1 && pot[4]==0) {
           this.next_step()
         }
         //return 5
@@ -585,7 +585,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 2:
         persistent.ch_max_sub_steps = 3
         //Primer tramo de rieles
-        if (pot0==0){
+        if (pot[0]==0){
           local limi = my_tile(way2_fac1_fac2[1])
           local tile1 = my_tile(way2_fac1_fac2[0])
           if (!tile1.find_object(mo_way)){
@@ -647,12 +647,12 @@ class tutorial.chapter_03 extends basic_chapter
             local text = "X"
             label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, opt, del, text)
 
-            pot0=1
+            pot[0]=1
             wayend=0
           }
         }
         //Para el puente
-        else if (pot0==1&&pot1==0) {
+        else if (pot[0]==1&&pot[1]==0) {
           persistent.ch_sub_step = 1  // sub step finish
           local tile = my_tile(bridge2_coords.a)
           if ((!tile.find_object(mo_bridge))){
@@ -665,12 +665,12 @@ class tutorial.chapter_03 extends basic_chapter
             my_tile(bridge2_coords.b).remove_object(player_x(1), mo_label)
 
             if (my_tile(bridge2_coords.a).find_object(mo_bridge)){
-              pot1=1
+              pot[1]=1
             }
           }
         }
         //Segundo tramo de rieles
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           persistent.ch_sub_step = 2  // sub step finish
           local limi = my_tile(coord(way2_fac1_fac2[4].x, way2_fac1_fac2[4].y))
           local tile1 = limi
@@ -724,7 +724,7 @@ class tutorial.chapter_03 extends basic_chapter
         local passa = good_alias.passa
         local mail = good_alias.mail
 
-        if (pot1==0){
+        if (pot[1]==0){
           //Estaciones de la Fabrica
           local pl_nr = 1
           local c_list = station_tiles(way2_fac1_fac2[5], way2_fac1_fac2[4], loc1_tile)
@@ -733,11 +733,11 @@ class tutorial.chapter_03 extends basic_chapter
           local result = is_stations_building(pl_nr, c_list, st_nr, good)
 
           if(result){
-            pot0=1
+            pot[0]=1
           }
         }
 
-        if (pot0==1 && pot1==0){
+        if (pot[0]==1 && pot[1]==0){
           persistent.ch_sub_step = 1  // sub step finish
 
           //Estaciones de la Fabrica
@@ -756,7 +756,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 4:
         persistent.ch_max_sub_steps = 3
         local tile = my_tile(ch3_rail_depot1.b)
-        if(pot0==0){
+        if(pot[0]==0){
           local c_list = [my_tile(ch3_rail_depot1.b), my_tile(ch3_rail_depot1.a)]
           local siz = c_list.len()
 
@@ -778,11 +778,11 @@ class tutorial.chapter_03 extends basic_chapter
             catch(ev) {
               return 0
             }
-            pot0=1
+            pot[0]=1
           }
         }
 
-        else if(pot0==1 && pot1==0){
+        else if(pot[0]==1 && pot[1]==0){
           persistent.ch_sub_step = 1  // sub step finish
           local label = tile.find_object(mo_label)
           if(!tile.find_object(mo_depot_rail)){
@@ -790,15 +790,15 @@ class tutorial.chapter_03 extends basic_chapter
           }
           else{
             tile.remove_object(player_x(1), mo_label)
-            pot1=1
+            pot[1]=1
           }
         }
 
-        else if ( pot0==1 && pot1==1 && pot2==0 ) {
+        else if ( pot[0]==1 && pot[1]==1 && pot[2]==0 ) {
           persistent.ch_sub_step = 2  // sub step finish
         }
 
-        else if(pot2==1){
+        else if(pot[2]==1){
           this.next_step()
         }
         //return 16
@@ -812,11 +812,11 @@ class tutorial.chapter_03 extends basic_chapter
         if (current_cov == ch3_cov_lim1.b){
           reached = get_reached_target(fac_2.c, good_alias.wood )
           if (reached>= f1_reached){
-            pot1=1
+            pot[1]=1
           }
         }
 
-        if (pot1==1 && pot0==0){
+        if (pot[1]==1 && pot[0]==0){
           //Marca tiles para evitar construccion de objetos
           /*local c_list = c_lock
           local siz = c_lock.len()
@@ -834,7 +834,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 6:
         persistent.ch_max_sub_steps = 5
         //Primer tramo de rieles
-        if (pot0==0){
+        if (pot[0]==0){
 
           local limi = way2_fac2_fac3[1]
           local tile1 = my_tile(way2_fac2_fac3[0])
@@ -885,12 +885,12 @@ class tutorial.chapter_03 extends basic_chapter
             local text = "X"
             label_bord(limit_ch3_rail_line_2a.a, limit_ch3_rail_line_2a.b, opt, del, text)
 
-            pot0 = 1
+            pot[0] = 1
             wayend = 0
           }
         }
         //Para el tunel
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           persistent.ch_sub_step = 1  // sub step finish
           local tile = my_tile(way2_fac2_fac3[2])
           if ((!tile.find_object(mo_tunnel))){
@@ -912,12 +912,12 @@ class tutorial.chapter_03 extends basic_chapter
           wayend = coorb
           r_way = get_fullway(coora, coorb, dir, obj, tunnel)
           if (r_way.r){
-            pot1=1
+            pot[1]=1
             wayend = 0
           }
         }
         //Segundo tramo de rieles
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           persistent.ch_sub_step = 2  // sub step finish
           local limi = way2_fac2_fac3[4]
           local tile1 = my_tile(limi)
@@ -957,13 +957,13 @@ class tutorial.chapter_03 extends basic_chapter
             local text = "X"
             label_bord(limit_ch3_rail_line_2b.a, limit_ch3_rail_line_2b.b, opt, del, text)
 
-            pot2=1
+            pot[2]=1
             wayend = 0
           }
         }
 
         //Text label para las estaciones
-        else if (pot2==1 && pot3==0){
+        else if (pot[2]==1 && pot[3]==0){
           persistent.ch_sub_step = 3  // sub step finish
           glresult = null
           local passa = good_alias.passa
@@ -977,10 +977,10 @@ class tutorial.chapter_03 extends basic_chapter
           local result = is_stations_building(pl_nr, c_list, st_nr, good)
 
           if(result){
-            pot3 = 1
+            pot[3] = 1
           }
         }
-        else if (pot3==1 && pot4==0){
+        else if (pot[3]==1 && pot[4]==0){
           persistent.ch_sub_step = 4  // sub step finish
           glresult = null
           local passa = good_alias.passa
@@ -994,10 +994,10 @@ class tutorial.chapter_03 extends basic_chapter
           local result = is_stations_building(pl_nr, c_list, st_nr, good)
 
           if(result){
-            pot4 = 1
+            pot[4] = 1
           }
         }
-        else if (pot4==1 && pot5==0){
+        else if (pot[4]==1 && pot[5]==0){
           //Elimina las Marcas de tiles
           /*local c_list = c_lock
           local siz = c_lock.len()
@@ -1017,7 +1017,7 @@ class tutorial.chapter_03 extends basic_chapter
         local opt = 2
         local wt = gl_wt
         local tile = my_tile(ch3_rail_depot2.a)
-        if(pot0==0){
+        if(pot[0]==0){
           local c_list = [my_tile(ch3_rail_depot2.b), my_tile(ch3_rail_depot2.a)]
           local siz = c_list.len()
 
@@ -1039,29 +1039,29 @@ class tutorial.chapter_03 extends basic_chapter
             catch(ev) {
               return 0
             }
-            pot0=1
+            pot[0]=1
           }
         }
 
-        else if(pot0==1 && pot1==0){
+        else if(pot[0]==1 && pot[1]==0){
           local label = tile.find_object(mo_label)
           if(!tile.find_object(mo_depot_rail)){
             label.set_text(translate("Build Train Depot here!."))
           }
           else{
             tile.remove_object(player_x(1), mo_label)
-            pot1=1
+            pot[1]=1
           }
         }
 
         else if(current_cov == ch3_cov_lim2.b){
           reached = get_reached_target(fac_3.c, good_alias.plan)
           if (reached>=f3_reached){
-            pot3=1
+            pot[3]=1
           }
         }
 
-        if (pot3==1 && pot4==0){
+        if (pot[3]==1 && pot[4]==0){
           this.next_step()
           reset_stop_flag()
           reached = 0
@@ -1072,7 +1072,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 8:
         persistent.ch_max_sub_steps = 5
         //Para el tramo de via
-        if (pot0==0){
+        if (pot[0]==0){
           local coora = coord3d(way3_cy1_cy3.a.x, way3_cy1_cy3.a.y, way3_cy1_cy3.a.z)
           local coorb = coord3d(way3_cy1_cy3.b.x, way3_cy1_cy3.b.y, way3_cy1_cy3.b.z)
           local obj = false
@@ -1080,12 +1080,12 @@ class tutorial.chapter_03 extends basic_chapter
           local dir = get_dir_start(coora)
           r_way = get_fullway(coora, coorb, dir, obj, tunnel)
           if (r_way.r){
-            pot0=1
+            pot[0]=1
             //return 45
           }
         }
         //Para el puente
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           persistent.ch_sub_step = 1  // sub step finish
           local tile = my_tile(bridge3_coords.a)
           if ((!tile.find_object(mo_bridge))){
@@ -1098,12 +1098,12 @@ class tutorial.chapter_03 extends basic_chapter
             my_tile(bridge3_coords.b).remove_object(player_x(1), mo_label)
 
             if (my_tile(bridge3_coords.b).find_object(mo_bridge)){
-              pot1=1
+              pot[1]=1
             }
           }
         }
         //Para la entrada del tunel
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           persistent.ch_sub_step = 2  // sub step finish
           local t_tunn = my_tile(way3_tun_coord[0])
 
@@ -1129,12 +1129,12 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
           else{
-            pot2=1
+            pot[2]=1
             t_tunn.remove_object(player_x(1), mo_label)
           }
         }
         //Para conectar las dos entradas del tunel
-        else if (pot2==1 && pot3==0){
+        else if (pot[2]==1 && pot[3]==0){
           persistent.ch_sub_step = 3  // sub step finish
           local coora = coord3d(way3_tun_coord[0].x, way3_tun_coord[0].y, way3_tun_coord[0].z)
           local coorb = coord3d(way3_tun_coord[2].x, way3_tun_coord[2].y, way3_tun_coord[2].z)
@@ -1144,7 +1144,7 @@ class tutorial.chapter_03 extends basic_chapter
           r_way = get_fullway(coora, coorb, dir, obj, tunnel)
           //gui.add_message("plus "+r_way.p)
           if (r_way.r){
-            pot3=1
+            pot[3]=1
             //return 45
           }
 
@@ -1181,7 +1181,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
         }
-        else if (pot3==1){
+        else if (pot[3]==1){
           this.next_step()
         }
         //return 45
@@ -1190,7 +1190,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 9:
         persistent.ch_max_sub_steps = 2
         //Para las vias
-        if (pot0==0){
+        if (pot[0]==0){
           for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
               local tile_a = my_tile(way3_cy1_cy6[j].a)
@@ -1212,7 +1212,7 @@ class tutorial.chapter_03 extends basic_chapter
                 tile_b.remove_object(player_x(1), mo_label)
                 glsw[j]=1
                 if(j == way3_cy1_cy6.len()-1){
-                  pot0 = 1
+                  pot[0] = 1
                   reset_glsw()
                   r_way.c = 0
                   break
@@ -1223,7 +1223,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         //Para las señales de paso
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           persistent.ch_sub_step = 1  // sub step finish
           local sign_nr = 0
           for(local j=0;j<way3_sign_list.len();j++){
@@ -1257,7 +1257,7 @@ class tutorial.chapter_03 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        if (pot0==0){
+        if (pot[0]==0){
           for(local j=0;j<way3_cate_list1.len();j++){
             if(glsw[j] == 0){
               local coora = coord3d(way3_cate_list1[j].a.x, way3_cate_list1[j].a.y, way3_cate_list1[j].a.z)
@@ -1270,7 +1270,7 @@ class tutorial.chapter_03 extends basic_chapter
               if (r_way.r){
                 glsw[j]=1
                 if(j == way3_cate_list1.len()-1){
-                  pot0 = 1
+                  pot[0] = 1
                   reset_glsw()
                   break
                 }
@@ -1279,31 +1279,31 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
         }
-        if (pot0==1 && pot1==0){
+        if (pot[0]==1 && pot[1]==0){
           persistent.ch_sub_step = 1  // sub step finish
           local tile = my_tile(ch3_rail_depot3.b)
           local way = tile.find_object(mo_way)
           if (way.is_electrified()){
             tile.remove_object(player_x(1), mo_label)
             way.unmark()
-            pot1= 1
+            pot[1]= 1
           }
           else{
             label_x.create(ch3_rail_depot3.b, pl_unown, translate("Here"))
             way.mark()
           }
         }
-        if (pot1==1 && pot2==0){
+        if (pot[1]==1 && pot[2]==0){
           persistent.ch_sub_step = 2  // sub step finish
           local tile = my_tile(ch3_rail_depot3.b)
           if (!tile.find_object(mo_depot_rail))
             label_x.create(ch3_rail_depot3.b, pl_unown, translate("Build Train Depot here!."))
           else{
             tile.remove_object(player_x(1), mo_label)
-            pot2=1
+            pot[2]=1
           }
         }
-        if (pot2==1 && pot3==0){
+        if (pot[2]==1 && pot[3]==0){
           this.next_step()
         }
         //return 97
@@ -1324,7 +1324,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 12:
           //gui.add_message("12!!!!!"+step+"")
         //this.step=1
-        persistent.step=1
+        persistent.step = 1
         persistent.status.step = 1
         reset_stop_flag()
         //return 100
@@ -1364,20 +1364,20 @@ class tutorial.chapter_03 extends basic_chapter
     switch (this.step) {
       case 1:
         if (tool_id == 4096){
-          if (pot0==0){
+          if (pot[0]==0){
             local list = fac_2.c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
-                pot0 = 1
+                pot[0] = 1
                 return null
               }
             }
           }
-          else if (pot1==1){
+          else if (pot[1]==1){
             local list = fac_1.c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
-                pot2 = 1
+                pot[2] = 1
                 return null
               }
             }
@@ -1391,7 +1391,7 @@ class tutorial.chapter_03 extends basic_chapter
         if (tool_id == 4096) return result = null
 
         //Primer tramo de rieles
-        if (pot0==0){
+        if (pot[0]==0){
           local lab_t = my_tile(way2_fac1_fac2[1])
           local lab = lab_t.find_object(mo_label)
           if(pos.x < lab_t.x && lab && lab.get_owner().nr == 0){
@@ -1418,7 +1418,7 @@ class tutorial.chapter_03 extends basic_chapter
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
         }
         //Construye un puente
-        if (pot0==1 && pot1==0){
+        if (pot[0]==1 && pot[1]==0){
           if (pos.x>=bridge2_coords.b.x-1 && pos.y>=bridge2_coords.b.y-1 && pos.x<=bridge2_coords.a.x+1 && pos.y<=bridge2_coords.a.y+1){
             if(tool_id==tool_build_way || tool_id==tool_build_bridge)
               return null
@@ -1427,7 +1427,7 @@ class tutorial.chapter_03 extends basic_chapter
             return translate("You must build the bridge here")+" ("+bridge2_coords.a.tostring()+")."
         }
         //Segundo tramo de rieles
-        if (pot1==1&&pot2==0){
+        if (pot[1]==1&&pot[2]==0){
           if (pos.x>=way2_fac1_fac2[5].x && pos.y>=way2_fac1_fac2[5].y && pos.x<=way2_fac1_fac2[4].x && pos.y<=way2_fac1_fac2[4].y){
             if(tool_id==tool_build_bridge)
               return result
@@ -1445,7 +1445,7 @@ class tutorial.chapter_03 extends basic_chapter
         break;
 
       case 3:
-        if (pot0==0){
+        if (pot[0]==0){
           //Estaciones de la Fabrica
           // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
@@ -1457,7 +1457,7 @@ class tutorial.chapter_03 extends basic_chapter
           return get_stations(pos, tool_id, result, good, c_list, siz)
         }
 
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           //Estaciones del Productor
           // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
@@ -1470,24 +1470,24 @@ class tutorial.chapter_03 extends basic_chapter
         }
         break
       case 4:
-        if(pot0==0){
+        if(pot[0]==0){
           if (pos.x>=ch3_rail_depot1.a.x && pos.y>=ch3_rail_depot1.a.y && pos.x<=ch3_rail_depot1.b.x && pos.y<=ch3_rail_depot1.b.y){
             if (tool_id==tool_build_way)
               return null
           }
           else return translate("You must build track in")+" ("+ch3_rail_depot1.b.tostring()+")."
         }
-        else if(pot0==1 && pot1==0){
+        else if(pot[0]==1 && pot[1]==0){
           if ((pos.x==ch3_rail_depot1.b.x)&&(pos.y==ch3_rail_depot1.b.y)){
             if (tool_id==tool_build_depot)
               return null
           }
           else return translate("You must build the train depot in")+" ("+ch3_rail_depot1.b.tostring()+")."
         }
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           if ((pos.x==ch3_rail_depot1.b.x)&&(pos.y==ch3_rail_depot1.b.y)){
             if (tool_id==4096){
-              pot2=1
+              pot[2]=1
               return null
             }
             else return translate("You must use the inspection tool")+" ("+ch3_rail_depot1.b.tostring()+")."
@@ -1542,7 +1542,7 @@ class tutorial.chapter_03 extends basic_chapter
       //Conectando los rieles con el consumidor final
       case 6:
         //Primer tramo de rieles
-        if (pot0==0){
+        if (pot[0]==0){
           local lab_t = my_tile(way2_fac2_fac3[1])
           local lab = lab_t.find_object(mo_label)
           if(pos.y > lab_t.y && lab && lab.get_owner().nr == 0){
@@ -1569,7 +1569,7 @@ class tutorial.chapter_03 extends basic_chapter
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
         }
         //Construye un tunel
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           if (pos.x>=way2_fac2_fac3[2].x && pos.y>=way2_fac2_fac3[2].y && pos.x<=way2_fac2_fac3[3].x && pos.y<=way2_fac2_fac3[3].y){
             if(tool_id==tool_build_way || tool_id==tool_build_tunnel){
               return null
@@ -1578,7 +1578,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
 
         //Segundo tramo de rieles
-        if (pot1==1&&pot2==0){
+        if (pot[1]==1&&pot[2]==0){
           if (pos.x>=way2_fac2_fac3[4].x && pos.y>=way2_fac2_fac3[4].y && pos.x<=way2_fac2_fac3[5].x && pos.y<=way2_fac2_fac3[5].y){
             if(tool_id==tool_build_bridge)
               return result
@@ -1595,7 +1595,7 @@ class tutorial.chapter_03 extends basic_chapter
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
         }
         //Estaciones de la Fabrica
-        else if (pot2==1 && pot3==0){
+        else if (pot[2]==1 && pot[3]==0){
           // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
@@ -1606,7 +1606,7 @@ class tutorial.chapter_03 extends basic_chapter
           return get_stations(pos, tool_id, result, good, c_list, siz)
         }
         //Estaciones del Productor
-        else if (pot3==1 && pot4==0){
+        else if (pot[3]==1 && pot[4]==0){
           // check selected halt accept goods
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
@@ -1623,25 +1623,25 @@ class tutorial.chapter_03 extends basic_chapter
 
         //Construye rieles y deposito
         if (pos.x>=ch3_rail_depot2.a.x && pos.y>=ch3_rail_depot2.a.y && pos.x<=ch3_rail_depot2.b.x && pos.y<=ch3_rail_depot2.b.y){
-          if (pot0==0){
+          if (pot[0]==0){
             if(tool_id==tool_build_way)
               return null
             else
               return translate("You must build track in")+" ("+ch3_rail_depot2.a.tostring()+")."
           }
-          else if (pot0==1 && pot1==0)
+          else if (pot[0]==1 && pot[1]==0)
             if(tool_id==tool_build_depot)
               return null
             else
               return result = translate("You must build the train depot in")+" ("+ch3_rail_depot2.a.tostring()+")."
         }
-        else if (pot0==0)
+        else if (pot[0]==0)
           return translate("You must build track in")+" ("+ch3_rail_depot2.a.tostring()+")."
-        else if (pot0==1 && pot1==0)
+        else if (pot[0]==1 && pot[1]==0)
           return result = translate("You must build the train depot in")+" ("+ch3_rail_depot2.a.tostring()+")."
 
         //Enrutar vehiculos (estacion nr1)
-        if (pot1==1 && pot2==0){
+        if (pot[1]==1 && pot[2]==0){
           if (building && pos.x>=way2_fac2_fac3[0].x && pos.y>=way2_fac2_fac3[0].y && pos.x<=way2_fac2_fac3[1].x && pos.y<=way2_fac2_fac3[1].y){
             if (tool_id==4108 && building){
               if (stop_flag[0]==0){
@@ -1680,14 +1680,14 @@ class tutorial.chapter_03 extends basic_chapter
               return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
           }
         }
-        if (pot2==1 && pot3==0){
+        if (pot[2]==1 && pot[3]==0){
           return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
         }
         break
 
       case 8:
         //Construye tramo de via para el tunel
-        if (pot0==0){
+        if (pot[0]==0){
           if (pos.x>=c_way3_lim.a.x && pos.y<=c_way3_lim.a.y && pos.x<=c_way3_lim.b.x && pos.y>=c_way3_lim.b.y){
             if (tool_id==tool_build_way || tool_id == tool_build_bridge || tool_id == tool_build_tunnel){
               return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
@@ -1696,7 +1696,7 @@ class tutorial.chapter_03 extends basic_chapter
           else return  translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
         }
         //Construye un puente
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           if (pos.x>=c_bridge3_limit.a.x && pos.y>=c_bridge3_limit.a.y && pos.x<=c_bridge3_limit.b.x && pos.y<=c_bridge3_limit.b.y){
             if(tool_id==tool_build_way || tool_id==tool_build_bridge){
               return null
@@ -1706,7 +1706,7 @@ class tutorial.chapter_03 extends basic_chapter
             return translate("You must build the bridge here")+" ("+bridge3_coords.a.tostring()+")."
         }
         //Construye Entrada del tunel
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           if (tool_id==tool_build_way){
             if(t.find_object(mo_bridge))
               return null
@@ -1723,7 +1723,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         //Conecta los dos extremos del tunel
-        else if (pot2==1 && pot3==0){
+        else if (pot[2]==1 && pot[3]==0){
           if (r_way.c==0) return ""
           local squ_bor = square_x(r_way.c.x, r_way.c.y)
           local z_bor = squ_bor.get_ground_tile().z
@@ -1833,7 +1833,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
         break
       case 9:
-        if (pot0==0){
+        if (pot[0]==0){
           result = r_way.c != 0? translate("Connect the Track here")+" ("+r_way.c.tostring()+").":result
           for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
@@ -1860,7 +1860,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           return result
         }
-        if (pot0==1 && pot1==0){
+        if (pot[0]==1 && pot[1]==0){
           //Elimina las señales
           if (tool_id==tool_remover){
             if (sign || roadsign){
@@ -1907,7 +1907,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 10:
                 //return square_x(pos.x, pos.y).get_climate()
 
-        if (pot0==0){
+        if (pot[0]==0){
           for(local j=0;j<way3_cate_list1.len();j++){
             local limit_t = []
             if ( way3_cate_list1[j].a.x > way3_cate_list1[j].b.x || way3_cate_list1[j].a.y > way3_cate_list1[j].b.y ) {
@@ -1929,7 +1929,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           if ((tool_id == 4114)&&(pos.x==ch3_rail_depot3.b.x)&&(pos.y==ch3_rail_depot3.b.y)) return null
         }
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           local limit_t = []
           if ( ch3_rail_depot3.a.x > ch3_rail_depot3.b.x || ch3_rail_depot3.a.y > ch3_rail_depot3.b.y ) {
             limit_t.append(ch3_rail_depot3.b)
@@ -1947,7 +1947,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           result = translate("Connect the Track here")+" ("+ch3_rail_depot3.a.tostring()+")."
         }
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           if ((pos.x==ch3_rail_depot3.b.x)&&(pos.y==ch3_rail_depot3.b.y)){
             if (tool_id==tool_build_depot){
               return null
@@ -2158,17 +2158,17 @@ class tutorial.chapter_03 extends basic_chapter
     local player = player_x(0)
     switch (this.step) {
       case 1:
-        if(pot0==0){
-          pot0=1
+        if(pot[0]==0){
+          pot[0]=1
         }
-        if (pot2==0){
-          pot2=1
+        if (pot[2]==0){
+          pot[2]=1
         }
         return null
         break;
       case 2:
         //Primer tramo de rieles
-        if (pot0==0){
+        if (pot[0]==0){
           //Station tramo ----------------------------------------------------------------------
           local t_start = my_tile(coord(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y))
           local t_end = my_tile(coord(way2_fac1_fac2[1].x, way2_fac1_fac2[1].y))
@@ -2192,7 +2192,7 @@ class tutorial.chapter_03 extends basic_chapter
           label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, opt, del, text)
         }
         //Para el puente
-        if (pot1==0){
+        if (pot[1]==0){
           local t_start = my_tile(bridge2_coords.a)
           local t_end = my_tile(bridge2_coords.b)
           if ( !t_start.find_object(mo_bridge) ) {
@@ -2202,7 +2202,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         //Segundo tramo de rieles
-        if (pot4==0){
+        if (pot[4]==0){
           //Outside tramo ----------------------------------------------------------------------
           local t_start = my_tile(coord(way2_fac1_fac2[3].x, way2_fac1_fac2[3].y))
           local t_end = my_tile(coord(way2_fac1_fac2[4].x, way2_fac1_fac2[4].y))
@@ -2224,7 +2224,7 @@ class tutorial.chapter_03 extends basic_chapter
         break;
       case 3:
 
-        if (pot0==0){
+        if (pot[0]==0){
           //Estaciones de la Fabrica
           local st_list = station_tiles(way2_fac1_fac2[5], way2_fac1_fac2[4], loc1_tile)
           for(local j=0;j<st_list.len();j++){
@@ -2239,7 +2239,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
 
-        if (pot1==0){
+        if (pot[1]==0){
           //Estaciones del Productor
           local st_list = station_tiles(way2_fac1_fac2[0], way2_fac1_fac2[1], loc1_tile)
           for(local j=0;j<st_list.len();j++){
@@ -2257,7 +2257,7 @@ class tutorial.chapter_03 extends basic_chapter
         break
       case 4:
 
-        if(pot0==0){
+        if(pot[0]==0){
           local t_start = my_tile(ch3_rail_depot1.a)
           local t_end = my_tile(ch3_rail_depot1.b)
           t_start.unmark()
@@ -2266,18 +2266,18 @@ class tutorial.chapter_03 extends basic_chapter
           local t = command_x(tool_build_way)
           local err = t.work(player, t_start, t_end, sc_way_name)
 
-          pot0=1
+          pot[0]=1
         }
 
-        if(pot1==0){
+        if(pot[1]==0){
           local t = my_tile(ch3_rail_depot1.b)
           t.remove_object(player_x(1), mo_label)
           local tool = command_x(tool_build_depot)
           tool.work(player, t, sc_dep_name)
-          pot1=1
+          pot[1]=1
         }
-        if(pot1==1 && pot2==0){
-          pot2=1
+        if(pot[1]==1 && pot[2]==0){
+          pot[2]=1
         }
 
         return null
@@ -2312,7 +2312,7 @@ class tutorial.chapter_03 extends basic_chapter
           conv[0].set_line(player, c_line)
           comm_start_convoy(player, conv[0], depot)
 
-          pot1=1
+          pot[1]=1
         }
 
 
@@ -2320,7 +2320,7 @@ class tutorial.chapter_03 extends basic_chapter
         break
       case 6:
         //Primer tramo de rieles
-        if (pot0==0){
+        if (pot[0]==0){
 
           local t_start = my_tile(way2_fac2_fac3[0])
           local t_end = my_tile(way2_fac2_fac3[1])
@@ -2343,7 +2343,7 @@ class tutorial.chapter_03 extends basic_chapter
           label_bord(limit_ch3_rail_line_2a.a, limit_ch3_rail_line_2a.b, opt, del, text)
         }
         //Para el Tunel
-        if (pot1==0){
+        if (pot[1]==0){
           local t_start = my_tile(way2_fac2_fac3[2])
           // check tile slope ramp ( pak128 )
           if ( t_start.get_slope() == 0 ) {
@@ -2368,7 +2368,7 @@ class tutorial.chapter_03 extends basic_chapter
 
         }
         //Segundo tramo de rieles
-        if (pot2==0){
+        if (pot[2]==0){
           //Outside tramo ----------------------------------------------------------------------
           local t_start = my_tile(coord(way2_fac2_fac3[3].x, way2_fac2_fac3[3].y))
           local t_end = my_tile(way2_fac2_fac3[4])
@@ -2389,7 +2389,7 @@ class tutorial.chapter_03 extends basic_chapter
         local passa = good_alias.passa
         local mail = good_alias.mail
         //Estaciones de la Fabrica
-        if (pot3==0){
+        if (pot[3]==0){
           //Station tramo ----------------------------------------------------------------------
           local st_list = station_tiles(way2_fac2_fac3[5], way2_fac2_fac3[4], loc2_tile)
           for(local j=0;j<st_list.len();j++){
@@ -2415,7 +2415,7 @@ class tutorial.chapter_03 extends basic_chapter
           }*/
         }
         //Estaciones del Productor
-        if (pot4==0){
+        if (pot[4]==0){
           //Outside tramo ----------------------------------------------------------------------
           local st_list = station_tiles(way2_fac2_fac3[0], way2_fac2_fac3[1], loc2_tile)
           for(local j=0;j<st_list.len();j++){
@@ -2449,7 +2449,7 @@ class tutorial.chapter_03 extends basic_chapter
         local opt = 2
         local wt = wt_rail
 
-        if(pot0==0){
+        if(pot[0]==0){
           local t_start = my_tile(ch3_rail_depot2.b)
           local t_end = my_tile(ch3_rail_depot2.a)
           t_start.unmark()
@@ -2458,15 +2458,15 @@ class tutorial.chapter_03 extends basic_chapter
           local t = command_x(tool_build_way)
           t.work(player, t_start, t_end, sc_way_name)
 
-          pot0=1
+          pot[0]=1
         }
 
-        if(pot0==1 && pot1==0){
+        if(pot[0]==1 && pot[1]==0){
           local t = command_x(tool_build_depot)
           t.work(player, my_tile(ch3_rail_depot2.a), sc_dep_name)
-          pot1=1
+          pot[1]=1
         }
-        if(pot1==1 && pot2==0){
+        if(pot[1]==1 && pot[2]==0){
           local wt = wt_rail
           if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
             local c_depot = my_tile(ch3_rail_depot2.a)
@@ -2495,7 +2495,7 @@ class tutorial.chapter_03 extends basic_chapter
             conv[0].set_line(player, c_line)
             comm_start_convoy(player, conv[0], depot)
 
-            pot3=1
+            pot[3]=1
           }
 
         }
@@ -2504,15 +2504,15 @@ class tutorial.chapter_03 extends basic_chapter
         break
 
       case 8:
-        if (pot0==0){
+        if (pot[0]==0){
           local coora = coord3d(way3_cy1_cy3.a.x, way3_cy1_cy3.a.y, way3_cy1_cy3.a.z)
           local coorb = coord3d(way3_cy1_cy3.b.x, way3_cy1_cy3.b.y, way3_cy1_cy3.b.z)
           local t = command_x(tool_build_way)
           t.set_flags(2)
           local err = t.work(player, coora, coorb, sc_way_name)
-          pot0=1
+          pot[0]=1
         }
-        if (pot0==1 && pot1==0){
+        if (pot[0]==1 && pot[1]==0){
           local t_start = my_tile(bridge3_coords.a)
           local t_end = my_tile(bridge3_coords.b)
           if ( !t_start.find_object(mo_bridge) ) {
@@ -2522,15 +2522,15 @@ class tutorial.chapter_03 extends basic_chapter
             local t = command_x(tool_build_bridge)
             local err = t.work(player, t_start, t_end, sc_bridge_name)
           }
-          pot1=1
+          pot[1]=1
         }
-        if (pot1==1 && pot2==0){
+        if (pot[1]==1 && pot[2]==0){
           local t_tunn = my_tile(way3_tun_coord[0])
           t_tunn.remove_object(player_x(1), mo_label)
           local t = command_x(tool_build_tunnel)
           t.set_flags(2)
           t.work(player, t_tunn, sc_tunn_name)
-          pot2=1
+          pot[2]=1
               /*
                *  FIX built tunnel end of bridge pak128
                */
@@ -2554,7 +2554,7 @@ class tutorial.chapter_03 extends basic_chapter
 
               }
         }
-        if (pot2==1 && pot3==0){
+        if (pot[2]==1 && pot[3]==0){
           local siz = (way3_tun_coord[0].x)-(way3_tun_list[0].x)
           local opt = 1 //Incrementa x
           local t = tile_x(way3_tun_list[0].x, way3_tun_list[0].y, way3_tun_list[0].z)
@@ -2563,10 +2563,10 @@ class tutorial.chapter_03 extends basic_chapter
           local c_start = way3_tun_coord[0]
           local c_end = coord3d(way3_tun_list[0].x, way3_tun_list[0].y, way3_tun_list[0].z)
           t_tun.work(player, c_start, c_end, sc_tunn_name)
-          pot3 = 1
+          pot[3] = 1
 
         }
-        if (pot3==1 && pot4==0){
+        if (pot[3]==1 && pot[4]==0){
           local t_tun = command_x(tool_build_tunnel)
           local c_list =  way3_tun_list
           local t_start = my_tile(way3_tun_coord[0])
@@ -2587,7 +2587,7 @@ class tutorial.chapter_03 extends basic_chapter
         break
 
       case 9:
-        if (pot0==0){
+        if (pot[0]==0){
                 for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
               local tile_a = my_tile(way3_cy1_cy6[j].a)
@@ -2606,14 +2606,14 @@ class tutorial.chapter_03 extends basic_chapter
               local err = t.work(player, coora, coorb, sc_way_name)
 
               if(j == way3_cy1_cy6.len()-1){
-                pot0 = 1
+                pot[0] = 1
                 reset_glsw()
                 break
               }
             }
                 }
         }
-        if (pot0==1 && pot1==0){
+        if (pot[0]==1 && pot[1]==0){
           for(local j=0;j<way3_sign_list.len();j++){
             local tile = tile_x(way3_sign_list[j].c.x, way3_sign_list[j].c.y, way3_sign_list[j].c.z)
             local way = tile.find_object(mo_way)
@@ -2647,7 +2647,7 @@ class tutorial.chapter_03 extends basic_chapter
           if(way) way.unmark()
           tile.remove_object(player_x(1), mo_label)
         }
-        if (pot0==0){
+        if (pot[0]==0){
                 for(local j=0;j<way3_cate_list1.len();j++){
             if(glsw[j] == 0){
               local coora = way3_cate_list1[j].a
@@ -2657,14 +2657,14 @@ class tutorial.chapter_03 extends basic_chapter
             }
                 }
         }
-        if (pot1==0){
+        if (pot[1]==0){
           local way = my_tile(ch3_rail_depot3.a).find_object(mo_way)
           way.unmark()
           local t = command_x(tool_build_wayobj)
           local err = t.work(player, my_tile(ch3_rail_depot3.a), my_tile(ch3_rail_depot3.b), sc_caten_name)
 
         }
-        if (pot2==0){
+        if (pot[2]==0){
           local tile = my_tile(ch3_rail_depot3.b)
           tile.remove_object(player_x(1), mo_label) //Elimina texto label
           local t = command_x(tool_build_depot)

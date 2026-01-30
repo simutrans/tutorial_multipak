@@ -92,14 +92,14 @@ class tutorial.chapter_01 extends basic_chapter
     local txt=c_test.tostring()
     switch (this.step) {
       case 1:
-        if (pot0 == 1) {
+        if (pot[0] == 1) {
           this.next_step()
         }
         //return chapter_percentage(persistent.ch_max_steps, 1, 0, 0)
         break
 
       case 2:
-        if (txt!="0,0,1" || pot0 == 1) {
+        if (txt!="0,0,1" || pot[0] == 1) {
           //Creea un cuadro label
           local opt = 0
           local del = false
@@ -115,7 +115,7 @@ class tutorial.chapter_01 extends basic_chapter
         local c_list1 = [my_tile(city1_mon)]
         local c_list2 = [my_tile(city1_cur)]
         local stop_mark = true
-        if (pot0==0) {
+        if (pot[0]==0) {
           try {
              next_mark = delay_mark_tile(c_list_mon)
           }
@@ -123,16 +123,16 @@ class tutorial.chapter_01 extends basic_chapter
             return 0
           }
         }
-        else if (pot0==1 && pot1==0) {
+        else if (pot[0]==1 && pot[1]==0) {
           try {
              next_mark = delay_mark_tile(c_list_mon, stop_mark)
           }
           catch(ev) {
             return 0
           }
-          pot1=1
+          pot[1]=1
         }
-        if (pot1==1 && pot2==0) {
+        if (pot[1]==1 && pot[2]==0) {
           try {
              next_mark = delay_mark_tile(c_list_cur)
           }
@@ -140,16 +140,16 @@ class tutorial.chapter_01 extends basic_chapter
             return 0
           }
         }
-        else if (pot2==1 && pot3==0) {
+        else if (pot[2]==1 && pot[3]==0) {
           try {
              next_mark = delay_mark_tile(c_list_cur, stop_mark)
           }
           catch(ev) {
             return 0
           }
-          pot3=1
+          pot[3]=1
         }
-        if (pot3==1 && pot4==0){
+        if (pot[3]==1 && pot[4]==0){
           comm_script = false
           this.next_step()
         }
@@ -166,7 +166,7 @@ class tutorial.chapter_01 extends basic_chapter
         catch(ev) {
           return 0
         }
-        if (pot0 == 1 && next_mark) {
+        if (pot[0] == 1 && next_mark) {
           next_mark = delay_mark_tile(list, stop_mark)
           comm_script = false
           this.next_step()
@@ -196,15 +196,15 @@ class tutorial.chapter_01 extends basic_chapter
         break
       case 3:
         if(tool_id == 4096) {
-          if(pot0==0){
+          if(pot[0]==0){
             if ((pos.x == city1_mon.x)&&(pos.y == city1_mon.y)){
-              pot0 = 1
+              pot[0] = 1
               return null
             }
           }
-          else if (pot1==1 && pot2==0){
+          else if (pot[1]==1 && pot[2]==0){
             if ((pos.x == city1_cur.x)&&(pos.y == city1_cur.y)){
-              pot2 = 1
+              pot[2] = 1
               return null
             }
           }
@@ -215,7 +215,7 @@ class tutorial.chapter_01 extends basic_chapter
           local list = cit_list
           foreach(t in list){
             if(pos.x == t.x && pos.y == t.y) {
-              pot0 = 1
+              pot[0] = 1
               return null
             }
           }
@@ -250,10 +250,10 @@ class tutorial.chapter_01 extends basic_chapter
   function script_text()
   {
     if (this.step==1){
-      pot0=1
+      pot[0]=1
     }
     else if (this.step==2){
-      pot0 = 1
+      pot[0] = 1
     }
     else if(this.step==3){
       comm_script = true
@@ -262,12 +262,12 @@ class tutorial.chapter_01 extends basic_chapter
       local del = false
       local text = "X"
       label_bord(city1_limit1.a, city1_limit1.b, opt, del, text)
-      pot0=1
-      pot2=1
+      pot[0]=1
+      pot[2]=1
     }
     else if (this.step==4){
       comm_script = true
-      pot0 = 1
+      pot[0] = 1
     }
     return null
   }

@@ -82,17 +82,8 @@ glsw.resize(20, 0)
 pglsw <- []
 pglsw.resize(20, 0)
 
-pot0 <- 0
-pot1 <- 0
-pot2 <- 0
-pot3 <- 0
-pot4 <- 0
-pot5 <- 0
-pot6 <- 0
-pot7 <- 0
-pot8 <- 0
-pot9 <- 0
-pot10 <- 0
+pot <- []
+pot.resize(11, 0)
 
 //---------------------Global vehicle counter----------------------------
 persistent.gcov_nr <- 0
@@ -892,16 +883,9 @@ function resume_game()
   sigcoord = persistent.sigcoord
   ignore_save = persistent.ignore_save
 
-  pot0=persistent.pot[0]
-  pot1=persistent.pot[1]
-  pot2=persistent.pot[2]
-  pot3=persistent.pot[3]
-  pot4=persistent.pot[4]
-  pot5=persistent.pot[5]
-  pot6=persistent.pot[6]
-  pot7=persistent.pot[7]
-  pot8=persistent.pot[8]
-  pot9=persistent.pot[9]
+  // copy persistent.pot[] to pot[]
+  pot.clear()
+  pot.extend(persistent.pot)
 
   gl_percentage = persistent.gl_percentage
 

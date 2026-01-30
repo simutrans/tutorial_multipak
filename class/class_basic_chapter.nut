@@ -1012,29 +1012,15 @@ class basic_chapter
 
   function save_pot()
   {
-    if (persistent.pot[0]!=0)pot0=persistent.pot[0]
-    if (persistent.pot[1]!=0)pot1=persistent.pot[1]
-    if (persistent.pot[2]!=0)pot2=persistent.pot[2]
-    if (persistent.pot[3]!=0)pot3=persistent.pot[3]
-    if (persistent.pot[4]!=0)pot4=persistent.pot[4]
-    if (persistent.pot[5]!=0)pot5=persistent.pot[5]
-    if (persistent.pot[6]!=0)pot6=persistent.pot[6]
-    if (persistent.pot[7]!=0)pot7=persistent.pot[7]
-    if (persistent.pot[8]!=0)pot8=persistent.pot[8]
-    if (persistent.pot[9]!=0)pot9=persistent.pot[9]
-    if (persistent.pot[10]!=0)pot10=persistent.pot[10]
 
-    persistent.pot[0]=pot0
-    persistent.pot[1]=pot1
-    persistent.pot[2]=pot2
-    persistent.pot[3]=pot3
-    persistent.pot[4]=pot4
-    persistent.pot[5]=pot5
-    persistent.pot[6]=pot6
-    persistent.pot[7]=pot7
-    persistent.pot[8]=pot8
-    persistent.pot[9]=pot9
-    persistent.pot[10]=pot10
+    for ( local j = 0; j < pot.len(); j++ ) {
+      if ( persistent.pot[j] != 0 ) {
+        pot[0] = persistent.pot[j]
+      }
+    }
+
+    persistent.pot.clear()
+    persistent.pot.extend(pot)
 
     return null
   }
@@ -1052,17 +1038,9 @@ class basic_chapter
 
   function backward_pot(pnr)
   {
-    if (pnr==0) {pot0 = 0; persistent.pot[pnr]=pot0}
-    if (pnr==1) {pot1 = 0; persistent.pot[pnr]=pot1}
-    if (pnr==2) {pot2 = 0; persistent.pot[pnr]=pot2}
-    if (pnr==3) {pot3 = 0; persistent.pot[pnr]=pot3}
-    if (pnr==4) {pot4 = 0; persistent.pot[pnr]=pot4}
-    if (pnr==5) {pot5 = 0; persistent.pot[pnr]=pot5}
-    if (pnr==6) {pot6 = 0; persistent.pot[pnr]=pot6}
-    if (pnr==7) {pot7 = 0; persistent.pot[pnr]=pot7}
-    if (pnr==8) {pot8 = 0; persistent.pot[pnr]=pot8}
-    if (pnr==9) {pot9 = 0; persistent.pot[pnr]=pot9}
-    if (pnr==10) {pot10 = 0; persistent.pot[pnr]=pot10}
+
+    pot[pnr] = 0
+    persistent.pot[pnr] = 0
 
     return null
   }
@@ -1080,17 +1058,8 @@ class basic_chapter
 
   function reset_pot()
   {
-    pot0 = 0
-    pot1 = 0
-    pot2 = 0
-    pot3 = 0
-    pot4 = 0
-    pot5 = 0
-    pot6 = 0
-    pot7 = 0
-    pot8 = 0
-    pot9 = 0
-    pot10 = 0
+    pot.clear()
+    pot.resize(11, 0)
 
     persistent.pot.clear()
     persistent.pot.resize(11, 0)

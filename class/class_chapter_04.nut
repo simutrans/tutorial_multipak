@@ -102,7 +102,7 @@ class tutorial.chapter_04 extends basic_chapter
    switch (this.step) {
     case 1:
 
-      if (pot0==0){
+      if (pot[0]==0){
         text = ttextfile("chapter_04/01_1-2.txt")
         text.tx=ttext("<em>[1/2]</em>")
       }
@@ -141,16 +141,16 @@ class tutorial.chapter_04 extends basic_chapter
         text = ttextfile("chapter_04/05_3-3.txt")
         text.tx=ttext("<em>[3/3]</em>")
       }
-      else if (pot0==0){
+      else if (pot[0]==0){
         text = ttextfile("chapter_04/05_1-3.txt")
         text.tx=ttext("<em>[1/3]</em>")
       }
-      else if (pot1==0){
+      else if (pot[1]==0){
         text = ttextfile("chapter_04/05_2-3.txt")
         text.tx=ttext("<em>[2/3]</em>")
         text.cdock = translate(get_obj_ch4(3))
       }
-      else if (pot2==0){
+      else if (pot[2]==0){
         text = ttextfile("chapter_04/05_3-3.txt")
         text.tx=ttext("<em>[3/3]</em>")
       }
@@ -241,7 +241,7 @@ class tutorial.chapter_04 extends basic_chapter
         persistent.ch_max_sub_steps = 2
         local next_mark = false
         local stop_mark = true
-        if(pot0==0 || pot1 == 0){
+        if(pot[0]==0 || pot[1] == 0){
           local list = fac_2.c_list
           try {
             next_mark = delay_mark_tile(list)
@@ -249,11 +249,11 @@ class tutorial.chapter_04 extends basic_chapter
           catch(ev) {
             return 0
           }
-          if(next_mark && pot0 == 1){
-            pot1=1
+          if(next_mark && pot[0] == 1){
+            pot[1]=1
           }
         }
-        else if (pot2==0 || pot3==0){
+        else if (pot[2]==0 || pot[3]==0){
           persistent.ch_sub_step = 1
           local list = fac_1.c_list
           try {
@@ -262,11 +262,11 @@ class tutorial.chapter_04 extends basic_chapter
           catch(ev) {
             return 0
           }
-          if(next_mark && pot2 == 1){
-            pot3=1
+          if(next_mark && pot[2] == 1){
+            pot[3]=1
           }
         }
-        else if (pot3==1 && pot4==0){
+        else if (pot[3]==1 && pot[4]==0){
           this.next_step()
         }
         //return 5
@@ -296,9 +296,9 @@ class tutorial.chapter_04 extends basic_chapter
         }
         else{
           t1.remove_object(player_x(1), mo_label)
-          pot0=1
+          pot[0]=1
         }
-        if (pot1==1){
+        if (pot[1]==1){
           this.next_step()
         }
         //return 10+percentage
@@ -317,7 +317,7 @@ class tutorial.chapter_04 extends basic_chapter
         persistent.ch_sub_step = 0
 
         //Para el canal acuatico
-        if (pot0==0){
+        if (pot[0]==0){
           //Inicio del canal
           local c_start = coord(way4_cannal[0].x, way4_cannal[0].y)
           local t_start = my_tile(c_start)
@@ -355,13 +355,13 @@ class tutorial.chapter_04 extends basic_chapter
           local fullway = update_way(coora, coorb, vel_min, wt) //test
 
           if (fullway.result){
-            pot0=1
+            pot[0]=1
           }
           else
             c_way = fullway.c
         }
         //Para el cuarto muelle
-        else if (pot0==1 && pot1==0){
+        else if (pot[0]==1 && pot[1]==0){
           persistent.ch_sub_step = 2
           local t = my_tile(ch4_ship2_halts[1]) //sch_list2
           local dock4 = t.find_object(mo_building)
@@ -369,19 +369,19 @@ class tutorial.chapter_04 extends basic_chapter
           if(dock4){
             if(is_station_build(0, ch4_ship2_halts[1], good_alias.goods)==null){ //sch_list2
               t.remove_object(player_x(1), mo_label)
-              pot1=1
+              pot[1]=1
             }
           }
         }
         //Vehiculos en circulacion
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           persistent.ch_sub_step = 1
           cov_cir = get_convoy_nr((ch4_cov_lim2.a ), d2_cnr)
 
           if (cov_cir==d2_cnr)
-            pot2=1
+            pot[2]=1
         }
-        if (pot2==1 && pot3==0){
+        if (pot[2]==1 && pot[3]==0){
           reset_stop_flag()
           this.next_step()
         }
@@ -460,20 +460,20 @@ class tutorial.chapter_04 extends basic_chapter
     switch (this.step) {
       case 1:
         if (tool_id == 4096){
-          if (pot0==0){
+          if (pot[0]==0){
             local list = fac_2.c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
-                pot0 = 1
+                pot[0] = 1
                 return null
               }
             }
           }
-          else if (pot1==1){
+          else if (pot[1]==1){
             local list = fac_1.c_list
             foreach(t in list){
               if(pos.x == t.x && pos.y == t.y) {
-                pot2 = 1
+                pot[2] = 1
                 return null
               }
             }
@@ -497,20 +497,20 @@ class tutorial.chapter_04 extends basic_chapter
       case 3:
         //Primer Astillero
         if (pos.x==ship_depot.x && pos.y==ship_depot.y){
-          if (pot0==0){
+          if (pot[0]==0){
             if (tool_id == tool_build_depot){
-              pot0=1
+              pot[0]=1
               return null
             }
           }
-          else if (pot0==1 && pot1==0){
+          else if (pot[0]==1 && pot[1]==0){
             if (tool_id == 4096){
-              pot1=1
+              pot[1]=1
               return null
             }
           }
         }
-        else if (pot0==0)
+        else if (pot[0]==0)
           result = translate("Place the shipyard here")+" ("+ship_depot.tostring()+")."
         break
         //Enrutar barcos
@@ -525,7 +525,7 @@ class tutorial.chapter_04 extends basic_chapter
         }
         break
       case 5:
-        if (pot0==0){
+        if (pot[0]==0){
           if(pos.x==way4_cannal[0].x && pos.y==way4_cannal[0].y){
             if(tool_id==tool_remove_way || tool_id==4097)
               return result
@@ -536,7 +536,7 @@ class tutorial.chapter_04 extends basic_chapter
           }
         }
         //Cuarto muelle
-        else if(pot0==1 && pot1==0){
+        else if(pot[0]==1 && pot[1]==0){
           if(my_tile(ch4_ship2_halts[1]).find_object(mo_building)){
             if (tool_id==4097)
               return null
@@ -550,7 +550,7 @@ class tutorial.chapter_04 extends basic_chapter
           }
         }
         //Enrutar Barcos
-        else if (pot1==1 && pot2==0){
+        else if (pot[1]==1 && pot[2]==0){
           if (tool_id==4108){
             local c_list = ch4_ship2_halts   //Lista de todas las paradas de autobus
             local c_dep = ship_depot //Coordeadas del deposito
@@ -733,11 +733,11 @@ class tutorial.chapter_04 extends basic_chapter
     local pl = 0
     switch (this.step) {
       case 1:
-        if(pot0==0){
-          pot0=1
+        if(pot[0]==0){
+          pot[0]=1
         }
-        if (pot2==0){
-          pot2=1
+        if (pot[2]==0){
+          pot[2]=1
         }
         return null
         break;
@@ -766,7 +766,7 @@ class tutorial.chapter_04 extends basic_chapter
         local tool = command_x(tool_build_depot)
         local err = tool.work(player_x(pl), t1, sc_dep_name)
         if (t1.find_object(mo_depot_water)){
-          pot1=1
+          pot[1]=1
         }
         return null
         break;
@@ -810,7 +810,7 @@ class tutorial.chapter_04 extends basic_chapter
 
       case 5:
         //Para el canal acuatico
-        if (pot0==0){
+        if (pot[0]==0){
           local t1 = my_tile(coord(way4_cannal[0].x, way4_cannal[0].y))
           local t2 = my_tile(ch4_ship3_halts[1])
           local way = t1.find_object(mo_way)
@@ -841,7 +841,7 @@ class tutorial.chapter_04 extends basic_chapter
 
         }
         //Para el cuarto muelle
-        if (pot1==0){
+        if (pot[1]==0){
           local t = my_tile(ch4_ship2_halts[1])
           t.unmark()
           local label = t.find_object(mo_label)
