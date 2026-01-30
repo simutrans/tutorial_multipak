@@ -8,11 +8,10 @@
   */
 
 /**
-  * @brief class_basic_chapter.nut
   * @brief global parameters and functions
   */
 
-//Global coordinate for mark build tile
+// Global coordinate for mark build tile
 currt_pos <- null
 
 //----------------Para las señales de paso------------------------
@@ -118,10 +117,11 @@ class basic_chapter
 
   //Para arrancar vehiculos usando comm  ----------------------------------------------------------------
   function comm_set_convoy( cov_nr, coord, name, veh_nr = false ) {
-    /*1 Numero de convoy actual,******
-    * 2 coord del deposito,        *
-    * 3 Name del vehiculo,         *
-    * 4 Numero de remolques/bagones)*/
+    /*  1 Numero de convoy actual,
+     *  2 coord del deposito,
+     *  3 Name del vehiculo,
+     *  4 Numero de remolques/bagones
+     */
 
     local pl = player_x(0)
     local depot = depot_x(coord.x, coord.y, coord.z)  // Deposito /Garaje
