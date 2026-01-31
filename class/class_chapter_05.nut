@@ -720,7 +720,7 @@ class tutorial.chapter_05 extends basic_chapter
         }
         break
       case 4:
-        if (pot[0]==1 && pot[1]==0){
+        if ( pot[0] == 1 && pot[1] == 0 ) {
           // Permite construir paradas
 
           if ( tool_id==tool_build_station ) {
@@ -734,9 +734,20 @@ class tutorial.chapter_05 extends basic_chapter
             }
             // check selected halt accept mail
             local s = check_select_station(name, wt, good_alias.mail)
-            if ( s != null ) return s
+            if ( s != null ) { return s }
 
-            return build_stop_ex(extensions_tiles, t)
+            for ( local j = 0; j < extensions_tiles.len(); j++ ) {
+              if ( pos.x == extensions_tiles[j].a.x && pos.y == extensions_tiles[j].a.y ) {
+                if ( glsw[j] == 0 ) {
+                  return null
+                } else {
+                return translate("This stop already accepts mail.")
+                }
+              } else if ( glsw[j] == 0 ) {
+                return translate("Place the mail extension at the marked tiles.")
+              }
+
+            }
           }
 
           // Permite eliminar paradas

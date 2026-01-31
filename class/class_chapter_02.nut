@@ -694,21 +694,21 @@ class tutorial.chapter_02 extends basic_chapter
 
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
     local t = tile_x(pos.x, pos.y, pos.z)
-    local ribi = 0
-    local slope = t.get_slope()
-    local way = t.find_object(mo_way)
-    local bridge = t.find_object(mo_bridge)
-    local build = t.find_object(mo_building)
+    //local ribi = 0
+    //local slope = t.get_slope()
+    //local way = t.find_object(mo_way)
+    //local bridge = t.find_object(mo_bridge)
+    //local build = t.find_object(mo_building)
     local label = t.find_object(mo_label)
-    local car = t.find_object(mo_car)
-    if (way){
-      if (tool_id!=tool_build_bridge)
+    //local car = t.find_object(mo_car)
+    /*if (way){
+      if ( tool_id != tool_build_bridge )
         ribi = way.get_dirs()
-      if (!t.has_way(gl_wt))
+      if ( !t.has_way(gl_wt) )
         ribi = 0
-    }
-    local st_c = coord(pos.x,pos.y)
-    local result=null // null is equivalent to 'allowed'
+    }*/
+    //local st_c = coord(pos.x,pos.y)
+    local result = null // null is equivalent to 'allowed'
     result = translate("Action not allowed")+" ("+pos.tostring()+")."
     gltool = tool_id
     switch (this.step) {
@@ -716,16 +716,17 @@ class tutorial.chapter_02 extends basic_chapter
       case 1:
         if (tool_id==tool_build_way){
           local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
-          local str_c = tool.start_pos
+          local str_c = tile_x(tool.start_pos.x, tool.start_pos.y, tool.start_pos.z)
+          //local str_way = str_c.is_valid () ? t.find_object(mo_way) : null
           local str_way = world.is_coord_valid(str_c)? tile_x(str_c.x, str_c.y, str_c.z).find_object(mo_way) : null
-          foreach(desc in way_desc){
-            if(desc.get_name() == name){
+          foreach ( desc in way_desc ) {
+            if ( desc.get_name() == name ) {
               for ( local i = 0; i < build_list.len()-1; i++ ) {
-                if ( ((pos.x==build_list[i].x)&&(pos.y==build_list[i].y)) || ((pos.x==city1_road_depot.x)&&(pos.y==city1_road_depot.y)) ) {
+                if ( ( pos.x == build_list[i].x && pos.y == build_list[i].y ) || ( pos.x == city1_road_depot.x && pos.y == city1_road_depot.y ) ) {
                   if(cursor_control(build_list[i])){
                     return null
                   }
-                  if(!str_way){
+                  if( !str_way ){
                     return null
                   }
                 }
@@ -761,10 +762,9 @@ class tutorial.chapter_02 extends basic_chapter
           if ( tool_id == tool_build_station ) {
             // check selected halt accept passenger
             local s = check_select_station(name, wt_road, good_alias.passa)
-            if ( s != null ) return s
+            if ( s != null ) { return s }
 
-            local c_st = city1_halt_1
-            return build_stop(c_st, t, way, slope, ribi, label, pos)
+            return build_stop(city1_halt_1, pos)
           }
 
           //Permite eliminar paradas
@@ -842,8 +842,7 @@ class tutorial.chapter_02 extends basic_chapter
               local s = check_select_station(name, wt_road, good_alias.passa)
               if ( s != null ) return s
 
-              local c_st = city2_halt_1
-              return build_stop(c_st, t, way, slope, ribi, label, pos)
+              return build_stop(city2_halt_1, pos)
             }
 
             else

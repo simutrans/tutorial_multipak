@@ -1,9 +1,8 @@
 /**
- *  list messages
- *
- *
- *
- */
+  * @file class_messages.nut
+  * @brief list messages
+  *
+  */
 
 /**
  *  chapter texts

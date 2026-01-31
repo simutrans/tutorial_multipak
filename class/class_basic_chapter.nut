@@ -2503,50 +2503,50 @@ class basic_chapter
     return false
   }
 
-  function build_stop(c_list, tile, way, slope, ribi, label, pos)
+  /**
+    * check the pos tile to build halt
+    *
+    */
+  function build_stop(c_list, pos)
   {
 
-    local result = 0
-    if (!way)
-      return translate("You can only build stops on roads")+" ("+pos.tostring()+")."
-    else if (slope!=0)
-      return translate("You can only build stops on flat ground")+" ("+pos.tostring()+")."
-    else if (label && label.get_text()=="X")
-      return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
-    else if (ribi==3 || ribi==6 || ribi==9 || ribi==12)
-      return translate("You can only build on a straight road")+" ("+pos.tostring()+")."
-    else if (ribi==7 || ribi==11 || ribi==13 || ribi==14 || ribi==15)
-      return translate("It is not possible to build stops at intersections")+" ("+pos.tostring()+")."
+    local t = tile_x(pos.x, pos.y, pos.z)
+    local bridge = t.find_object(mo_bridge)
 
-    for( local j = 0; j < c_list.len(); j++ ) {
-      local halt = tile_x(c_list[j].x, c_list[j].y, 0).get_halt()
-      if (halt){
-        local name = halt.get_name()
-        local is_good = halt.accepts_good(good_desc_x(good_alias.passa))
-        if (!is_good){
-          return format(translate("The %s stop must be for %s"), name, translate("Passagiere"))+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
-        }
-      }
-    }
-    for ( local j = 0 ; j < c_list.len() ; j++ ) {
-      local st_c = coord(c_list[j].x, c_list[j].y)
-      local mail = good_alias.mail
-      local goods = good_alias.goods
-      if ((pos.x == st_c.x) && (pos.y == st_c.y)){
+    local label = t.find_object(mo_label)
+    if ( label && label.get_text() == "X" )
+      return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+
+    local way = t.find_object(mo_way)
+    if ( !way )
+      return translate("No suitable way on the ground!") // base text error message
+
+    local ribi = way.get_dirs()
+    if ( !dir.is_straight(ribi) || t.get_slope() != 0 )
+      return translate("No suitable way on the ground!") // base text error message
+
+
+    for ( local j = 0; j < c_list.len(); j++ ) {
+      if ( pos.x == c_list[j].x && pos.y == c_list[j].y ) {
         if ( glsw[j] == 0 ) {
           way.unmark()
           return null
-        }
-        else
+        } else {
           return translate("There is already a stop here")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
-      }
-      else if ( glsw[j] == 0 )
-        result = translate("Place the stops at the marked points")+" ("+coord(c_list[j].x,c_list[j].y).tostring()+")."
+        }
+      }/* else if ( glsw[j] == 0 ) {
+        return
+      }*/
     }
-    return result
+
+    return translate("Place the stops at the marked points.")
 
   }
 
+  /**
+    *
+    *
+    */
   function get_build_load_type(desc)
   {
     local list = []
@@ -2562,6 +2562,10 @@ class basic_chapter
     return list
   }
 
+  /**
+    *
+    *
+    */
   function station_compare_load(good, g_list)
   {
     local is_good = false
@@ -2587,6 +2591,10 @@ class basic_chapter
     return is_good
   }
 
+  /**
+    *
+    *
+    */
   function get_good_text(good)
   {
     local tx = ""
@@ -2604,6 +2612,10 @@ class basic_chapter
     return tx
   }
 
+  /**
+    *
+    *
+    */
   function get_build_name(siz, desc, freight, wt)
   {
     local list = building_desc_x.get_available_stations(desc, wt, good_desc_x(freight))
@@ -2616,6 +2628,10 @@ class basic_chapter
     return "No have build!"
   }
 
+  /**
+    *
+    *
+    */
   function get_way_name(kh, wt, st)
   {
     local list = way_desc_x.get_available_ways(wt, st)
@@ -2628,70 +2644,10 @@ class basic_chapter
     return "No have way!"
   }
 
-  function build_stop_ex ( list, tile )
-  {
-    local result = 0
-    for(local j=0; j < list.len(); j++){
-
-      if ( glsw[j]==1 ) {
-        continue
-      }
-
-      local name = get_obj_ch5(6)
-      local good = get_good_data(6, 2)
-      local tile = my_tile(list[j].a)
-      local buil = tile.find_object(mo_building)
-      local halt = tile.get_halt()
-
-      local accept_post = null
-      local halt_name = null
-      if ( halt != null ) {
-        //accept_post = halt.accepts_good(good_desc_x(good))
-        //gui.add_message(coord3d_to_string(tile) + " accept_post " + accept_post)
-        halt_name = halt.get_name()
-      }
-
-      if(buil){
-        local desc = buil.get_desc()
-        local g_list = get_build_load_type(desc)
-        local is_good = station_compare_load(good, g_list)
-        if (!is_good){
-          local tx_good = get_good_text(good)
-          local tx = "The extension building for station [%s] must be for [%s], use the 'Remove' tool"
-          return format(translate(tx), halt_name, tx_good)+" ("+c.tostring()+")."
-        }
-
-        local build_name = buil.get_desc().get_name()
-        local st_name = translate(""+name+"")
-        if (name != "" && build_name != name){
-          local tx = "The extension building for station [%s] must be a [%s], use the 'Remove' tool"
-          return format(translate(tx), halt_name, st_name )+" ("+c.tostring()+")."
-        }
-
-
-      } /*else if ( accept_post ) {
-      }*/
-
-
-    }
-
-    for ( local j = 0; j < list.len(); j++ ) {
-      local c = list[j].a
-      //gui.add_message("a "+glsw[j])
-      if ((tile.x == c.x) && (tile.y == c.y)){
-        if ( glsw[j] == 0 ) {
-          return null
-        }
-        else
-          return translate("This stop already accepts mail.")+" ("+c.tostring()+")"
-      }
-      else if ( glsw[j] == 0 )
-        result = translate("Place the extension building at the marked point")+" ("+c.tostring()+")."
-    }
-    return result
-
-  }
-
+  /**
+    *
+    *
+    */
   function delete_stop(c_list, way, pos)
   {
     for( local j = 0 ; j < c_list.len(); j++ ) {
@@ -3186,6 +3142,14 @@ function check_halt_wt(halt, search_wt) {
   return null
 }
 
+/**
+  * create halt list for text from tiles array
+  *
+  * @param array tile_x coord_list
+  *
+  * @return string
+  *
+  */
 function create_halt_list(cord_list) {
   local list_tx = ""
   local c_list = cord_list
@@ -3219,7 +3183,7 @@ function create_schedule_list(coord_list) {
       continue
     }
     if(tmpsw[j]==0){
-      list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+"("+c.tostring()+")"))
+      list_tx += format("<st>%s %d:</st> %s<br>", translate("Stop"), j+1, c.href(st_halt.get_name()+" ("+c.tostring()+")"))
     }
     else{
       list_tx += format("<em>%s %d:</em> %s <em>%s</em><br>", translate("Stop"), j+1, st_halt.get_name(), translate("OK"))
@@ -3522,13 +3486,14 @@ function find_tiles_after_tile(tile) {
 
 
 /**
-  * @fn find_object(obj, wt, speed, good)
   * find object tool
   *
   * @param obj   = object type ( bridge, tunnel, way, catenary, station, extension, depot )
   * @param wt    = waytype
-  * @param speed = speed - null by station, extension
+  * @param speed = speed - null by station, extension, depot
   * @param good  = good
+  *
+  * @return object
   */
 function find_object(obj, wt, speed = null, good = null) {
 

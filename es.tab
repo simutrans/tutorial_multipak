@@ -100,8 +100,6 @@ It is not allowed to start vehicles.
 No está permitido arrancar vehículos.
 It is not flat terrain.
 No es terreno llano.
-It is not possible to build stops at intersections
-No es posible construir paradas en intersecciones
 It must be a block signal!
 Debe ser una señal de bloqueo
 It must be a slope.
@@ -156,8 +154,8 @@ Place the Road here!.
 Coloca la Carretera aquí.
 Place the shipyard here
 Coloca el astillero aquí
-Place the stops at the marked points
-Coloca las paradas en los puntos marcados
+Place the stops at the marked points.
+Coloca las paradas en los puntos marcados.
 Press [Ctrl] to build a tunnel entrance here
 Presiona [Ctrl] para construir la entrada del Túnel aquí:
 Press the [Copy Backward] button, then set the Minimum Load and Month Wait Time at the first stop!.
@@ -202,8 +200,6 @@ Taking to the Air
 Ascendiendo a los Cielos
 Text label
 Marcador de texto
-The %s stop must be for %s
-La parada (%s) debe ser para %s, usa la herramienta [Eliminar] para quitarla
 The bus must be [Passengers].
 El Autobús debe ser para [Pasajeros].
 The cabin:
@@ -324,12 +320,8 @@ Updating text ... Waiting ...
 Actualizando texto ... Esperando ...
 You are outside the allowed limits!
 ¡Estás fuera de los límites permitidos!
-You can only build on a straight road
-Solo puedes construir paradas en carreteras rectas
 You can only build stops on flat ground
 Solo puedes construir paradas en terreno llano
-You can only build stops on roads
-Solo puedes construir paradas en carreteras
 You can only delete the stations.
 Solo puedes eliminar estaciones.
 You can only delete the stops.
@@ -390,8 +382,8 @@ Selected harbour accept not %s.
 El puerto seleccionado no acepta %s.
 #_________________________________error message_________________________________
 #_________________________________error message_________________________________
-Place the extension building at the marked point
-Coloque el edificio de ampliación en el punto marcado
+Place the mail extension at the marked tiles.
+Coloque el edificio de extensión de postes en las ubicaciones marcadas.
 Selected extension accept not %s.
 La extensión seleccionada no acepta %s.
 Selected halt accept not %s.

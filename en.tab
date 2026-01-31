@@ -34,8 +34,6 @@ Press the [Copy Backward] button, then set the Minimum Load and Month Wait Time 
 Press the [Copy Backward] button, then set Minimum Load and Depart after at the first stop!
 Straight slope here
 Steep slope here
-The %s stop must be for %s
-Stop [%s] must be for [%s], use the 'Remove' tool
 The load of waystop {nr} '{name}' isn't {load}% {pos}
 The load of waystop {name} isn't {load}% {pos}
 The waittime in waystop {nr} '{name}' isn't {wait} {pos}
@@ -46,7 +44,7 @@ HWRead
 #_________________________________errer message_________________________________
 #_________________________________error message_________________________________
 #_________________________________error message_________________________________
-Place the extension building at the marked point
-Place the extension building at the marked points
+Place the mail extension at the marked tiles.
+Place the post extension building in the marked tiles.
 Selected halt accept not %s.
 Selected halt accept not %s

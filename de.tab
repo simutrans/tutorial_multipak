@@ -100,8 +100,6 @@ It is not allowed to start vehicles.
 Fahrzeuge dürfen nicht gestartet werden.
 It is not flat terrain.
 Dies ist keine flache Ebene.
-It is not possible to build stops at intersections
-Es ist nicht möglich, Haltestellen an Kreuzungen zu bauen
 It must be a block signal!
 Es muss ein Blocksignal sein!
 It must be a slope.
@@ -154,8 +152,8 @@ Place the Road here!.
 Platzieren Sie die Straße hier
 Place the shipyard here
 Platzieren Sie die Werft hier
-Place the stops at the marked points
-Platzieren Sie die Stationen an den markierten Stellen
+Place the stops at the marked points.
+Platzieren Sie die Stationen an den markierten Stellen.
 Press [Ctrl] to build a tunnel entrance here
 Drücken Sie [Strg], um hier einen Tunneleingang zu erstellen
 Press the [Copy Backward] button, then set the Minimum Load and Month Wait Time at the first stop!.
@@ -198,8 +196,6 @@ Taking to the Air
 In die Luft gehen
 Text label
 Textmarker
-The %s stop must be for %s
-Stop [%s] muss für [%s] sein. Verwenden Sie das Werkzeug 'Entfernen'
 The bus must be [Passengers].
 Der Bus muss [Passagiere] befördern können.
 The cabin:
@@ -320,12 +316,8 @@ Updating text ... Waiting ...
 Text aktualisieren ... Bitte warten ...
 You are outside the allowed limits!
 Sie befinden sich außerhalb der zulässigen Grenzen!
-You can only build on a straight road
-Sie können nur auf einer geraden Straße bauen
 You can only build stops on flat ground
 Sie können Halte nur auf ebenem Boden bauen
-You can only build stops on roads
-Sie können nur auf Straßen Haltestellen bauen
 You can only delete the stations.
 Sie können nur den Bahnhof löschen
 You can only delete the stops.
@@ -386,8 +378,8 @@ Selected harbour accept not %s.
 Ausgewählter Hafen akzeptiert keine %s.
 #_________________________________error message_________________________________
 #_________________________________error message_________________________________
-Place the extension building at the marked point
-Platzieren Sie den Erweiterungsbau an der markierten Stelle
+Place the mail extension at the marked tiles.
+Platzieren Sie den Post Erweiterungsbau an den markierten Stellen.
 Selected extension accept not %s.
 Ausgewählte Erweiterung akzeptiert keine %s.
 Selected halt accept not %s.
