@@ -54,7 +54,7 @@ class tutorial.chapter_04 extends basic_chapter
 
   //Script
   //----------------------------------------------------------------------------------
-  sc_way_name = get_obj_ch4(1)
+  sc_way_name = null
   sc_dock_name1 = get_obj_ch4(2)
   sc_dock_name2 = get_obj_ch4(3)
   sc_dock_name3 = get_obj_ch4(4)
@@ -79,7 +79,7 @@ class tutorial.chapter_04 extends basic_chapter
     /// set depot name
     sc_dep_name = find_object("depot", wt_water).get_name()
     /// set way canal
-    sc_way_name = find_object("way", wt_water, 10) //get_obj_ch4(1)
+    sc_way_name = find_object("way", wt_water, 10).get_name() //get_obj_ch4(1)
 
     d1_cnr = get_dep_cov_nr(ch4_cov_lim1.a,ch4_cov_lim1.b)
     d2_cnr = get_dep_cov_nr(ch4_cov_lim2.a,ch4_cov_lim2.b)
