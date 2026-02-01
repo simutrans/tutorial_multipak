@@ -228,7 +228,7 @@ class tutorial.chapter_05 extends basic_chapter
         local list_tx = ""
         local c_list = city1_post_halts
 
-        for ( local j = 0; j < list.len(); j++ ) {
+        for ( local j = 0; j < c_list.len(); j++ ) {
           local c = coord(c_list[j].x, c_list[j].y)
           local tile = my_tile(c)
           local st_halt = tile.get_halt()
