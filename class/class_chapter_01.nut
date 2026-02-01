@@ -197,23 +197,24 @@ class tutorial.chapter_01 extends basic_chapter
       case 3:
         if(tool_id == 4096) {
           if(pot[0]==0){
-            if ((pos.x == city1_mon.x)&&(pos.y == city1_mon.y)){
+            if ( pos.x == city1_mon.x && pos.y == city1_mon.y ) {
               pot[0] = 1
               return null
             }
           }
-          else if (pot[1]==1 && pot[2]==0){
-            if ((pos.x == city1_cur.x)&&(pos.y == city1_cur.y)){
-              pot[2] = 1
-              return null
+          else if ( pot[1] == 1 && pot[2] == 0 ) {
+            foreach(t in c_list_cur){
+              if(pos.x == t.x && pos.y == t.y) {
+                pot[2] = 1
+                return null
+              }
             }
           }
         }
         break
       case 4:
         if (tool_id == 4096){
-          local list = cit_list
-          foreach(t in list){
+          foreach( t in cit_list ) {
             if(pos.x == t.x && pos.y == t.y) {
               pot[0] = 1
               return null
