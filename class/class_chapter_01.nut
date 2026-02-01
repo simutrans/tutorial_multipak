@@ -203,22 +203,18 @@ class tutorial.chapter_01 extends basic_chapter
             }
           }
           else if ( pot[1] == 1 && pot[2] == 0 ) {
-            foreach(t in c_list_cur){
-              if(pos.x == t.x && pos.y == t.y) {
-                pot[2] = 1
-                return null
-              }
+            if ( search_tile_in_tiles(c_list_cur, pos) ) {
+              pot[2] = 1
+              return null
             }
           }
         }
         break
       case 4:
         if (tool_id == 4096){
-          foreach( t in cit_list ) {
-            if(pos.x == t.x && pos.y == t.y) {
-              pot[0] = 1
-              return null
-            }
+          if ( search_tile_in_tiles(cit_list, pos) ) {
+            pot[0] = 1
+            return null
           }
         }
         break

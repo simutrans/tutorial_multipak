@@ -459,23 +459,17 @@ class tutorial.chapter_04 extends basic_chapter
 
     switch (this.step) {
       case 1:
-        if (tool_id == 4096){
-          if (pot[0]==0){
-            local list = fac_2.c_list
-            foreach(t in list){
-              if(pos.x == t.x && pos.y == t.y) {
-                pot[0] = 1
-                return null
-              }
+        if ( tool_id == 4096) {
+          if ( pot[0] == 0 ) {
+            if ( search_tile_in_tiles(fac_2.c_list, pos) {
+              pot[0] = 1
+              return null
             }
           }
-          else if (pot[1]==1){
-            local list = fac_1.c_list
-            foreach(t in list){
-              if(pos.x == t.x && pos.y == t.y) {
-                pot[2] = 1
-                return null
-              }
+          else if ( pot[1] == 1 ) {
+            if ( search_tile_in_tiles(fac_1.c_list, pos) {
+              pot[2] = 1
+              return null
             }
           }
         }
