@@ -8,15 +8,15 @@
  *
  *
  */
-city1_limit1          <- {a = coord(109,181), b = coord(128,193)}
+city1_limit1          <- {a = coord(109,180), b = coord(128,193)}
 city2_limit1          <- {a = coord(120,150), b = coord(138,159)}
 
 bridge1_limit         <- {a = coord(119,193), b = coord(128,201)}
 c_bridge1_limit1      <- {a = coord(126,192), b = coord(126,196)}
 change1_city1_limit1  <- {a = coord(120,193), b = coord(127,193)}
 
-c_dock1_limit         <- {a = coord(128,181), b = coord(135,193)}
-change2_city1_limit1  <- {a = coord(128,182), b = coord(128,192)}
+c_dock1_limit         <- {a = coord(128,180), b = coord(135,193)}
+change2_city1_limit1  <- {a = coord(128,181), b = coord(128,192)}
 
 c_way_limit1          <- {a = coord(127,159), b = coord(133,187)}
 
