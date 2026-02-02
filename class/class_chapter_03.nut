@@ -758,7 +758,6 @@ class tutorial.chapter_03 extends basic_chapter
         local tile = my_tile(ch3_rail_depot1.b)
         if(pot[0]==0){
           local c_list = [my_tile(ch3_rail_depot1.b), my_tile(ch3_rail_depot1.a)]
-
           local next_mark = true
           try {
              next_mark = delay_mark_tile(c_list)
@@ -1018,8 +1017,6 @@ class tutorial.chapter_03 extends basic_chapter
         local tile = my_tile(ch3_rail_depot2.a)
         if(pot[0]==0){
           local c_list = [my_tile(ch3_rail_depot2.b), my_tile(ch3_rail_depot2.a)]
-          local siz = c_list.len()
-
           local next_mark = true
           try {
              next_mark = delay_mark_tile(c_list)
@@ -1364,13 +1361,13 @@ class tutorial.chapter_03 extends basic_chapter
       case 1:
         if (tool_id == 4096){
           if (pot[0]==0){
-            if ( search_tile_in_tiles(fac_2.c_list, pos) {
+            if ( search_tile_in_tiles(fac_2.c_list, pos) ) {
               pot[0] = 1
               return null
             }
           }
           else if (pot[1]==1){
-            if ( search_tile_in_tiles(fac_1.c_list, pos) {
+            if ( search_tile_in_tiles(fac_1.c_list, pos) ) {
               pot[2] = 1
               return null
             }
