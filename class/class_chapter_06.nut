@@ -436,7 +436,7 @@ class tutorial.chapter_06 extends basic_chapter
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
     local result = null // null is equivalent to 'allowed'
 
-    result = translate("Action not allowed")
+    result = get_message(2) //translate("Action not allowed")
     local t = tile_x(pos.x, pos.y, pos.z)
     local ribi = 0
     local wt = 0
@@ -687,7 +687,7 @@ class tutorial.chapter_06 extends basic_chapter
         return result
       break
     }
-    return translate("Action not allowed")
+    return get_message(2) //translate("Action not allowed")
   }
 
   function is_convoy_allowed(pl, convoy, depot)

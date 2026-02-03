@@ -378,6 +378,8 @@ Selected harbour accept not %s.
 Ausgewählter Hafen akzeptiert keine %s.
 #_________________________________error message_________________________________
 #_________________________________error message_________________________________
+Action not allowed (%s).
+Aktion auf Feld (%s) nicht erlaubt.
 Place the mail extension at the marked tiles.
 Platzieren Sie den Post Erweiterungsbau an den markierten Stellen.
 Selected extension accept not %s.

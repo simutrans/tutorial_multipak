@@ -382,6 +382,8 @@ Selected harbour accept not %s.
 El puerto seleccionado no acepta %s.
 #_________________________________error message_________________________________
 #_________________________________error message_________________________________
+Action not allowed (%s).
+No se permite la acción en el campo (%s).
 Place the mail extension at the marked tiles.
 Coloque el edificio de extensión de postes en las ubicaciones marcadas.
 Selected extension accept not %s.

@@ -1355,7 +1355,7 @@ class tutorial.chapter_03 extends basic_chapter
     local fac_2 =  factory_data.rawget("2")
     local fac_3 =  factory_data.rawget("3")
 
-    local result = translate("Action not allowed")    // null is equivalent to 'allowed'
+    local result = get_message(2) //translate("Action not allowed")    // null is equivalent to 'allowed'
 
     switch (this.step) {
       case 1:
@@ -1374,7 +1374,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
         }
         else
-          return translate("You must use the inspection tool")+" ("+pos.tostring()+")."
+          return get_tile_message(9, pos) //translate("You must use the inspection tool")+" ("+pos.tostring()+")."
         break;
       //Conectando los rieles con la segunda fabrica
       case 2:
@@ -1480,7 +1480,7 @@ class tutorial.chapter_03 extends basic_chapter
               pot[2]=1
               return null
             }
-            else return translate("You must use the inspection tool")+" ("+ch3_rail_depot1.b.tostring()+")."
+            else return get_tile_message(9, ch3_rail_depot1.b) //translate("You must use the inspection tool")+" ("+ch3_rail_depot1.b.tostring()+")."
           }
         }
         break
@@ -1805,7 +1805,7 @@ class tutorial.chapter_03 extends basic_chapter
                     return null
                   }
                   else if(name == t_name.down){
-                    return translate("Action not allowed")
+                    return get_message(2) //translate("Action not allowed")
                   }
                   return translate("Only up and down movement in the underground!")
                 }
@@ -1815,7 +1815,7 @@ class tutorial.chapter_03 extends basic_chapter
                 return translate("The tunnel is already at the correct level")+" ("+end_z+")."
             }
             else{
-              return translate("Action not allowed")
+              return get_message(2) //translate("Action not allowed")
             }
             if(slope==0) return translate("Modify the terrain here")+" ("+r_way.c.tostring()+")."
           }
@@ -2029,7 +2029,7 @@ class tutorial.chapter_03 extends basic_chapter
         return result
       break
     }
-    return result = translate("Action not allowed")
+    return get_message(2) //translate("Action not allowed")
   }
 
   function is_convoy_allowed(pl, convoy, depot)

@@ -744,7 +744,7 @@ function is_work_allowed_here(pl, tool_id, name, pos, tool)
   if(scr_jump){
     return null
   }
-  local result = translate("Action not allowed")
+  local result = get_message(2) //translate("Action not allowed")
   if (correct_cov){
     local result = chapter.is_work_allowed_here(pl, tool_id, name, pos, tool)
     return fail_count_message(result, tool_id, tool)

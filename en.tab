@@ -44,6 +44,8 @@ HWRead
 #_________________________________errer message_________________________________
 #_________________________________error message_________________________________
 #_________________________________error message_________________________________
+Action not allowed (%s).
+Action on field (%s) is not allowed.
 Place the mail extension at the marked tiles.
 Place the post extension building in the marked tiles.
 Selected halt accept not %s.

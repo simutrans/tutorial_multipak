@@ -604,7 +604,7 @@ class tutorial.chapter_05 extends basic_chapter
           factory_data.rawget("8")
         ]
 
-    local result = translate("Action not allowed")    // null is equivalent to 'allowed'
+    local result = get_message(2) //translate("Action not allowed")    // null is equivalent to 'allowed'
     switch (this.step) {
       case 1:
         if (tool_id == 4096){

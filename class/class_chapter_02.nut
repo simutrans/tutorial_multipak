@@ -709,7 +709,7 @@ class tutorial.chapter_02 extends basic_chapter
     }*/
     //local st_c = coord(pos.x,pos.y)
     local result = null // null is equivalent to 'allowed'
-    result = translate("Action not allowed")+" ("+pos.tostring()+")."
+    result = get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."
     gltool = tool_id
     switch (this.step) {
       //Construye un tramo de carretera
@@ -954,7 +954,7 @@ class tutorial.chapter_02 extends basic_chapter
         return result
       break
     }
-    return translate("Action not allowed")
+    return get_message(2) //translate("Action not allowed")
   }
 
   function is_convoy_allowed(pl, convoy, depot)

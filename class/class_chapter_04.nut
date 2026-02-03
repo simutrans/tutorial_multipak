@@ -453,7 +453,7 @@ class tutorial.chapter_04 extends basic_chapter
       //if (!t.has_way(gl_wt))
         //ribi = 0
     }
-    local result = translate("Action not allowed")    // null is equivalent to 'allowed'
+    local result = get_message(2) //translate("Action not allowed")    // null is equivalent to 'allowed'
     //glbpos = coord3d(pos.x,pos.y,pos.y)
     gltool = tool_id
 
@@ -474,7 +474,7 @@ class tutorial.chapter_04 extends basic_chapter
           }
         }
         else
-          return translate("You must use the inspection tool")+" ("+pos.tostring()+")."
+          return tile_message(9, pos) //translate("You must use the inspection tool")+" ("+pos.tostring()+")."
 
         break;
       //Construyendo los Muelles
@@ -622,7 +622,7 @@ class tutorial.chapter_04 extends basic_chapter
         return result
       break
     }
-    return translate("Action not allowed")
+    return get_message(2) //translate("Action not allowed")
   }
 
   function is_convoy_allowed(pl, convoy, depot)
@@ -1047,10 +1047,10 @@ class tutorial.chapter_04 extends basic_chapter
         }
 
         if(!st.all_correct){
-          result =  st.c ? format(err_tx, st.nr, translate(good))+" ("+st.c.tostring()+")." : translate("Action not allowed")
+          result =  st.c ? format(err_tx, st.nr, translate(good))+" ("+st.c.tostring()+")." : get_message(2) //translate("Action not allowed")
         }
         if(result == 0){
-          result =  translate("Action not allowed")
+          result =  get_message(2) //translate("Action not allowed")
         }
       }
     }

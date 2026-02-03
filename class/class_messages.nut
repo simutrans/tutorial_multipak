@@ -68,7 +68,7 @@ function get_message(id) {
 
 }
 
-/*
+/**
  *  messages with a tile
  *
  *  id    - message id
@@ -83,7 +83,7 @@ function get_message(id) {
  *   6 = Text label (x, y, z).
  *   7 = You must first build a stretch of road (x, y, z).
  *   8 = You must build the depot in (x, y, z).
- *
+ *   9 = You must use the inspection tool (x, y, z).
  *
  *
  */
@@ -116,7 +116,7 @@ function get_tile_message(id, tile) {
 
   switch(id) {
     case 1:
-      txt_message = translate("Action not allowed")+" ("+txt_tile+")."
+      txt_message = format(translate("Action not allowed (%s)."), txt_tile)
       break
     case 2:
       txt_message = translate("Connect the road here")+" ("+txt_tile+")."
@@ -140,7 +140,7 @@ function get_tile_message(id, tile) {
       txt_message = translate("You must build the depot in")+" ("+txt_tile+")."
       break
     case 9:
-
+      txt_message = format(translate("You must use the inspection tool (%s)."), txt_tile)
       break
   }
 

@@ -44,12 +44,7 @@ class tutorial.chapter_00 extends basic_chapter
   }
 
   function is_work_allowed_here(pl, tool_id, pos) {
-    local label = tile_x(pos.x,pos.y,pos.z).find_object(mo_label)
-    local result=null // null is equivalent to 'allowed'
-
-    result = translate("Action not allowed")
-
-    return result
+    return get_message(2) //translate("Action not allowed")
   }
 
   function is_tool_active(pl, tool_id, wt) {

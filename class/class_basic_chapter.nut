@@ -1721,7 +1721,7 @@ class basic_chapter
 
       else {
         local cur_key = coord3d_to_key(pos)
-        result = translate("Action not allowed")+" ("+pos.tostring()+")."
+        result = get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."
         if(way && way.get_desc().get_system_type() == st_elevated)
           return null
 
@@ -1768,7 +1768,7 @@ class basic_chapter
               return null
             }
           }
-          return translate("Action not allowed")+" ("+pos.tostring()+")."
+          return get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."
         }
         else{
           under_lv = settings.get_underground_view_level()
@@ -1785,7 +1785,7 @@ class basic_chapter
         }
       }
       else
-        return translate("Action not allowed")+" ("+pos.tostring()+")."
+        return get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."
     }
     else if(brig) {
       if (tool_id==tool_build_way) {
@@ -1801,7 +1801,7 @@ class basic_chapter
           return translate("Connect the Track here")+" ("+coord3d(coor.x, coor.y, coor.z).tostring()+")."
         }
       }
-      return translate("Action not allowed")+" ("+pos.tostring()+")."
+      return get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."
     }
     return ""
   }
