@@ -810,7 +810,7 @@ class tutorial.chapter_06 extends basic_chapter
         }
       break
     }
-    return result = translate("It is not allowed to start vehicles.")
+    return get_message(3) //translate("It is not allowed to start vehicles.")
   }
 
   function script_text()

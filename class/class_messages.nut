@@ -22,14 +22,14 @@ ch5_name        <- "Industrial Efficiency"
 ch6_name        <- "The forgotten Air transport"
 ch7_name        <- "Bus networks"
 
-/*
+/**
  *  single messages
  *
  *  id - message id
  *   1 = You can only delete the stops.
  *   2 = Action not allowed
  *   3 = Only road schedules allowed
- *
+ *   4 = It is not allowed to start vehicles.
  *
  *
  *
@@ -84,6 +84,12 @@ function get_message(id) {
  *   7 = You must first build a stretch of road (x, y, z).
  *   8 = You must build the depot in (x, y, z).
  *   9 = You must use the inspection tool (x, y, z).
+ *  10 = Depot coordinate is incorrect (x, y, z).
+ *
+ *
+ *
+ *
+ *
  *
  *
  */
@@ -142,13 +148,16 @@ function get_tile_message(id, tile) {
     case 9:
       txt_message = format(translate("You must use the inspection tool (%s)."), txt_tile)
       break
+    case 10:
+      txt_message = format(translate("Depot coordinate is incorrect (%s)."), txt_tile)
+      break
   }
 
   return txt_message
 
 }
 
-/*
+/**
  *  messages with a string/digit include
  *
  *  id    - message id
@@ -195,7 +204,7 @@ function get_data_message(id, data) {
 
 }
 
-/*
+/**
  *  messages with a string/digit and tile
  *
  *  id    - message id
@@ -258,19 +267,18 @@ function get_tiledata_message(id, data, tile) {
 
 }
 
-  function bus_result_message(nr, name, veh, cov)
-  {
+function bus_result_message(nr, name, veh, cov) {
     switch (nr) {
       case 0:
-        return format(translate("Select the Bus [%s]."),name)
+        return format(translate("Select the Bus [%s]."), name)
         break
 
       case 1:
-        return format(translate("The number of bus must be [%d]."),cov)
+        return format(translate("The number of bus must be [%d]."), cov)
         break
 
       case 2:
-        return format(translate("The number of convoys must be [%d], press the [Sell] button."),cov)
+        return format(translate("The number of convoys must be [%d], press the [Sell] button."), cov)
 
       case 3:
         return translate("The bus must be [Passengers].")
@@ -284,7 +292,7 @@ function get_tiledata_message(id, data, tile) {
         return translate("The convoy is not correct.")
         break
     }
-  }
+}
 
 /**
  *  label messages

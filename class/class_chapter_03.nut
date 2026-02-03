@@ -2034,12 +2034,12 @@ class tutorial.chapter_03 extends basic_chapter
 
   function is_convoy_allowed(pl, convoy, depot)
   {
-    local result = translate("It is not allowed to start vehicles.")
+    local result = get_message(3) //translate("It is not allowed to start vehicles.")
     switch (this.step) {
       case 5:
         local wt = gl_wt
         if ((depot.x != ch3_rail_depot1.b.x)||(depot.y != ch3_rail_depot1.b.y))
-          return "Depot coordinate is incorrect (" + coord3d_to_string(depot) + ")."
+          return get_tile_message(10, depot) //"Depot coordinate is incorrect (" + coord3d_to_string(depot) + ")."
         local cov = 1
         local veh = set_train_lenght(1) + 1
         local good_list = [good_desc_x(good_alias.wood).get_catg_index()] //Wood
@@ -2137,7 +2137,7 @@ class tutorial.chapter_03 extends basic_chapter
       break
 
     }
-    return result = translate("It is not allowed to start vehicles.")
+    return get_message(3) //translate("It is not allowed to start vehicles.")
   }
 
   function script_text()
