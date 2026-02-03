@@ -694,13 +694,13 @@ class tutorial.chapter_02 extends basic_chapter
 
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
     local t = tile_x(pos.x, pos.y, pos.z)
-    //local ribi = 0
     //local slope = t.get_slope()
     //local way = t.find_object(mo_way)
     //local bridge = t.find_object(mo_bridge)
     //local build = t.find_object(mo_building)
     local label = t.find_object(mo_label)
     //local car = t.find_object(mo_car)
+    //local ribi = 0
     /*if (way){
       if ( tool_id != tool_build_bridge )
         ribi = way.get_dirs()
@@ -872,7 +872,7 @@ class tutorial.chapter_02 extends basic_chapter
                 return null
             }
             else
-              return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+              return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
 
         }

@@ -1334,22 +1334,22 @@ class tutorial.chapter_03 extends basic_chapter
     gl_tool = tool_id
     //glpos = coord3d(pos.x, pos.y, pos.z)
     local t = tile_x(pos.x, pos.y, pos.z)
-    local ribi = 0
+    //local ribi = 0
     local wt = 0
     local slope = t.get_slope()
-    local way = t.find_object(mo_way)
+    //local way = t.find_object(mo_way)
     local bridge = t.find_object(mo_bridge)
     local label = t.find_object(mo_label)
     local building = t.find_object(mo_building)
     local sign = t.find_object(mo_signal)
     local roadsign = t.find_object(mo_roadsign)
-    if (way){
+    /*if (way){
       wt = way.get_waytype()
       if (tool_id!=tool_build_bridge)
         ribi = way.get_dirs()
       if (!t.has_way(wt_rail))
         ribi = 0
-    }
+    }*/
 
     local fac_1 =  factory_data.rawget("1")
     local fac_2 =  factory_data.rawget("2")
@@ -1399,13 +1399,13 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
           if (pos.x>=limit_ch3_rail_line_1a.a.x && pos.y>=limit_ch3_rail_line_1a.a.y && pos.x<=limit_ch3_rail_line_1a.b.x && pos.y<=limit_ch3_rail_line_1a.b.y){
-            if (!way && label && label.get_text()=="X"){
-              return translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
+            if ( label && label.get_text() == "X" ) {
+              return translate("Indicates the limits for using construction tools")+" ( "+coord3d_to_string(pos)+")."
             }
-            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
-            return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
+            return translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         //Construye un puente
         if (pot[0]==1 && pot[1]==0){
@@ -1414,23 +1414,23 @@ class tutorial.chapter_03 extends basic_chapter
               return null
           }
           else
-            return translate("You must build the bridge here")+" ("+bridge2_coords.a.tostring()+")."
+            return translate("You must build the bridge here")+" ("+coord3d_to_string(bridge2_coords.a)+")."
         }
         //Segundo tramo de rieles
         if (pot[1]==1&&pot[2]==0){
           if (pos.x>=way2_fac1_fac2[5].x && pos.y>=way2_fac1_fac2[5].y && pos.x<=way2_fac1_fac2[4].x && pos.y<=way2_fac1_fac2[4].y){
             if(tool_id==tool_build_bridge)
               return result
-            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           if (pos.x>=limit_ch3_rail_line_1b.a.x && pos.y>=limit_ch3_rail_line_1b.a.y && pos.x<=limit_ch3_rail_line_1b.b.x && pos.y<=limit_ch3_rail_line_1b.b.y){
-            if (!way && label && label.get_text()=="X"){
-              return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+            if ( label && label.get_text() == "X" ) {
+              return translate("Indicates the limits for using construction tools")+" ("+coord3d_to_string(pos)+")."
             }
-            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
-            return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
+            return translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         break;
 
@@ -1553,7 +1553,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (label && label.get_text()=="X"){
               return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
-            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
             return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
@@ -1572,17 +1572,17 @@ class tutorial.chapter_03 extends basic_chapter
           if (pos.x>=way2_fac2_fac3[4].x && pos.y>=way2_fac2_fac3[4].y && pos.x<=way2_fac2_fac3[5].x && pos.y<=way2_fac2_fac3[5].y){
             if(tool_id==tool_build_bridge)
               return result
-            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           if (pos.x>=limit_ch3_rail_line_2b.a.x && pos.y>=limit_ch3_rail_line_2b.a.y && pos.x<=limit_ch3_rail_line_2b.b.x && pos.y<=limit_ch3_rail_line_2b.b.y){
-            if (!way && label && label.get_text()=="X"){
-              return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+            if ( label && label.get_text()=="X"){
+              return translate("Indicates the limits for using construction tools")+" ("+coord3d_to_string(pos)+")."
             }
-            return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+            return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
 
           else if(tool_id==tool_build_way)
-            return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
+            return translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         //Estaciones de la Fabrica
         else if (pot[2]==1 && pot[3]==0){
@@ -1617,7 +1617,7 @@ class tutorial.chapter_03 extends basic_chapter
             if(tool_id==tool_build_way)
               return null
             else
-              return translate("You must build track in")+" ("+ch3_rail_depot2.a.tostring()+")."
+              return translate("You must build track in")+" ("+coord3d_to_string(ch3_rail_depot2.a)+")."
           }
           else if (pot[0]==1 && pot[1]==0)
             if(tool_id==tool_build_depot)
@@ -1680,10 +1680,10 @@ class tutorial.chapter_03 extends basic_chapter
         if (pot[0]==0){
           if (pos.x>=c_way3_lim.a.x && pos.y<=c_way3_lim.a.y && pos.x<=c_way3_lim.b.x && pos.y>=c_way3_lim.b.y){
             if (tool_id==tool_build_way || tool_id == tool_build_bridge || tool_id == tool_build_tunnel){
-              return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name)
+              return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
             }
           }
-          else return  translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
+          else return  translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         //Construye un puente
         else if (pot[0]==1 && pot[1]==0){
@@ -1730,7 +1730,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (pos.x>=c_way3_tun_limit.a.x && pos.y<=c_way3_tun_limit.a.y && pos.x<=c_way3_tun_limit.b.x && pos.y>=c_way3_tun_limit.b.y){
               //El Tunel ya tiene la altura correcta
               if (r_way.c.z+plus == way3_tun_coord[2].z) {
-                return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
+                return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name, plus)
               }
               if(!count_tunn && slope==0 && way && way.is_marked())
                 return null
@@ -1743,7 +1743,7 @@ class tutorial.chapter_03 extends basic_chapter
               //El Tunel ya tiene la altura correcta
               if (r_way.c.z+plus == way3_tun_coord[2].z) {
                 //gui.add_message("Z: "+r_way.c.z+plus)
-                return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
+                return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name, plus)
               }
               local dir = dir_1.r
               local t_r_way = my_tile(r_way.c)
@@ -1761,7 +1761,7 @@ class tutorial.chapter_03 extends basic_chapter
                 if(new_max < max){
                   result = tunnel_build_check(start, pos, under,  max, dir)
                   if(result == null){
-                    return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
+                    return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name, plus)
                   }
                 }
                 else{
@@ -1779,7 +1779,7 @@ class tutorial.chapter_03 extends basic_chapter
                    local new_max = tunnel_get_max(start, pos, max, dir)
                   //return new_max
                   if(new_max < max){
-                    return all_control(result, gl_wt, gl_st, way, ribi, tool_id, pos, r_way.c, name, plus)
+                    return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name, plus)
                   }
                 }
                 else{
@@ -1824,7 +1824,7 @@ class tutorial.chapter_03 extends basic_chapter
         break
       case 9:
         if (pot[0]==0){
-          result = r_way.c != 0? translate("Connect the Track here")+" ("+r_way.c.tostring()+").":result
+          result = r_way.c != 0? translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+").":result
           for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
               local limit_t = []

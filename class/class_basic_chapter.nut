@@ -1702,10 +1702,19 @@ class basic_chapter
 
   }
 
-  function all_control(result, wt, st, way, ribi, tool_id, pos, coor, name, plus = 0){
+  function all_control(result, wt, st, tool_id, pos, coor, name, plus = 0){
     local t = tile_x(coor.x, coor.y, coor.z)
+    local way = t.find_object(mo_way)
     local brig = t.find_object(mo_bridge)
     local desc = way_desc_x.get_available_ways(wt, st)
+    local ribi = 0
+    if ( way ) {
+      if ( tool_id != tool_build_bridge )
+        ribi = way.get_dirs()
+      if ( !t.has_way(gl_wt) )
+        ribi = 0
+    }
+
     if ((tool_id==tool_remove_way)||(tool_id==tool_remover)){
       if (way && way.get_waytype() != wt)
         return result

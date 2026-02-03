@@ -583,7 +583,7 @@ class tutorial.chapter_05 extends basic_chapter
     local ribi = 0
     local wt = 0
     local slope = t.get_slope()
-    local way = t.find_object(mo_way)
+    //local way = t.find_object(mo_way)
     //local powerline = t.find_object(mo_powerline)
     //local bridge = t.find_object(mo_bridge)
     local label = t.find_object(mo_label)
@@ -631,7 +631,7 @@ class tutorial.chapter_05 extends basic_chapter
               if(tool_id==tool_build_way || tool_id==4113 || tool_id==tool_remover)
               return null
             }
-            else return all_control(result, wt_road, st_flat, way, ribi, tool_id, pos, r_way.c, name)
+            else return all_control(result, wt_road, st_flat, tool_id, pos, r_way.c, name)
           }
         }
         else if(pot[0]==1 && pot[1]==0){
