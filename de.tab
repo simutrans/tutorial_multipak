@@ -90,8 +90,8 @@ Here
 Hier
 Incorrect vehicle configuration, check vehicle status.
 Falsche Fahrzeugkonfiguration, Fahrzeugstatus prüfen.
-Indicates the limits for using construction tools
-Gibt die Grenzwerte für die Verwendung von Konstruktionswerkzeugen an.
+Indicates the limits for using construction tools (%s).
+Gibt die Grenzwerte für die Verwendung von Konstruktionswerkzeugen an. (%s)
 Industrial Efficiency
 Produktion steigern bei Industrien
 It is not a slope.

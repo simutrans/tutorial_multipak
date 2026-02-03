@@ -580,13 +580,13 @@ class tutorial.chapter_04 extends basic_chapter
     }
     if (tool_id == 4096){
       if (label && label.get_text()=="X")
-        return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+        return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
       else if (label)
         return translate("Text label")+" ("+pos.tostring()+")."
       result = null // Always allow query tool
     }
     if (label && label.get_text()=="X")
-      return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+      return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
     return result
   }

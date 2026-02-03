@@ -624,7 +624,7 @@ class tutorial.chapter_05 extends basic_chapter
         if(pot[0]==0){
           if(pos.x>=way5_fac7_fac8_lim.a.x && pos.y>=way5_fac7_fac8_lim.a.y && pos.x<=way5_fac7_fac8_lim.b.x && pos.y<=way5_fac7_fac8_lim.b.y){
             if (!way && label && label.get_text()=="X"){
-              return translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
+              return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
             }
             local label = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).find_object(mo_label)
             if(label){
@@ -694,7 +694,7 @@ class tutorial.chapter_05 extends basic_chapter
 
                if (tool_id == tool_build_way || tool_id == tool_build_bridge || tool_id == tool_build_tunnel){
                  if (label && label.get_text()=="X")
-                   return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+                   return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
                  else
                    return null
 
@@ -788,13 +788,13 @@ class tutorial.chapter_05 extends basic_chapter
     }
     if (tool_id == 4096){
       if (label && label.get_text()=="X")
-        return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+        return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
       else if (label)
         return translate("Text label")+" ("+pos.tostring()+")."
       result = null // Always allow query tool
     }
     if (label && label.get_text()=="X")
-      return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+      return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
     return result
   }

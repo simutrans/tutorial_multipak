@@ -2524,7 +2524,7 @@ class basic_chapter
 
     local label = t.find_object(mo_label)
     if ( label && label.get_text() == "X" )
-      return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+      return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
     local way = t.find_object(mo_way)
     if ( !way )

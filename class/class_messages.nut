@@ -87,15 +87,30 @@ function get_message(id) {
  *
  *
  */
-function get_tile_message(id, tx, ty, tz = null) {
+function get_tile_message(id, tile) {
   local txt_tile = ""
-  if ( tz == null ) {
+  /*if ( tz == null ) {
     local tile = coord(tx, ty)
     txt_tile = coord_to_string(tile)
   } else {
     local tile = coord3d(tx, ty, tz)
     txt_tile = coord3d_to_string(tile)
+  }*/
+  local count = 0
+  try {
+    count = tile.len()
+    if ( count == 2 ) {
+      txt_tile = coord_to_string(tile)
+    } else if ( tile.len() == 3 ) {
+      txt_tile = coord3d_to_string(tile)
+    } else {
+      txt_tile = tile
+    }
   }
+  catch(ev) {
+    txt_tile = coord_to_string(tile)
+  }
+
 
   local txt_message = ""
 
@@ -113,7 +128,7 @@ function get_tile_message(id, tx, ty, tz = null) {
       txt_message = translate("You must build the bridge here")+" ("+txt_tile+")."
       break
     case 5:
-      txt_message = translate("Indicates the limits for using construction tools")+" ("+txt_tile+")."
+      txt_message = format(translate("Indicates the limits for using construction tools (%s)."), txt_tile)
       break
     case 6:
       txt_message = translate("Text label")+" ("+txt_tile+")."

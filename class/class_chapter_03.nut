@@ -1400,7 +1400,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           if (pos.x>=limit_ch3_rail_line_1a.a.x && pos.y>=limit_ch3_rail_line_1a.a.y && pos.x<=limit_ch3_rail_line_1a.b.x && pos.y<=limit_ch3_rail_line_1a.b.y){
             if ( label && label.get_text() == "X" ) {
-              return translate("Indicates the limits for using construction tools")+" ( "+coord3d_to_string(pos)+")."
+              return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ( "+coord3d_to_string(pos)+")."
             }
             return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
@@ -1425,7 +1425,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           if (pos.x>=limit_ch3_rail_line_1b.a.x && pos.y>=limit_ch3_rail_line_1b.a.y && pos.x<=limit_ch3_rail_line_1b.b.x && pos.y<=limit_ch3_rail_line_1b.b.y){
             if ( label && label.get_text() == "X" ) {
-              return translate("Indicates the limits for using construction tools")+" ("+coord3d_to_string(pos)+")."
+              return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+coord3d_to_string(pos)+")."
             }
             return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
@@ -1551,7 +1551,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           if (pos.x>=limit_ch3_rail_line_2a.a.x && pos.y>=limit_ch3_rail_line_2a.a.y && pos.x<=limit_ch3_rail_line_2a.b.x && pos.y<=limit_ch3_rail_line_2a.b.y){
             if (label && label.get_text()=="X"){
-              return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+              return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
             }
             return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
@@ -1576,7 +1576,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
           if (pos.x>=limit_ch3_rail_line_2b.a.x && pos.y>=limit_ch3_rail_line_2b.a.y && pos.x<=limit_ch3_rail_line_2b.b.x && pos.y<=limit_ch3_rail_line_2b.b.y){
             if ( label && label.get_text()=="X"){
-              return translate("Indicates the limits for using construction tools")+" ("+coord3d_to_string(pos)+")."
+              return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+coord3d_to_string(pos)+")."
             }
             return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
@@ -1976,13 +1976,13 @@ class tutorial.chapter_03 extends basic_chapter
     }
     if (tool_id == 4096){
       if (label && label.get_text()=="X")
-        return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+        return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
       else if (label)
         return translate("Text label")+" ("+pos.tostring()+")."
       result = null // Always allow query tool
     }
     if (label && label.get_text()=="X")
-      return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+      return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
     return result
   }

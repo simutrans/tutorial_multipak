@@ -731,7 +731,7 @@ class tutorial.chapter_02 extends basic_chapter
                   }
                 }
               }
-              return get_tile_message(2, city1_road_depot.x, city1_road_depot.y)//translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
+              return get_tile_message(2, city1_road_depot)//translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
             }
           }
         }
@@ -897,7 +897,7 @@ class tutorial.chapter_02 extends basic_chapter
     }
     if (tool_id==4096){
       if (label && label.get_text()=="X")
-        return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+        return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
       else if (label)
         return translate("Text label")+" ("+pos.tostring()+")."
@@ -905,7 +905,7 @@ class tutorial.chapter_02 extends basic_chapter
       result = null // Always allow query tool
     }
     if (label && label.get_text()=="X")
-      return translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+      return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
     return result
   }
