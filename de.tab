@@ -58,8 +58,8 @@ Click on the stop
 Klicken Sie auf die Haltestelle
 Connect the road here
 Verbinde die Straße hier
-Connect the Track here
-Verbinde den Weg hier
+Connect the Track here (%s).
+Verbinde den Weg hier (%s).
 Creating Schedules is currently not allowed
 Das Erstellen von Fahrplänen ist derzeit nicht zulässig
 Dock No.%d must accept [%s]
@@ -314,8 +314,8 @@ Tutorial Scenario complete.
 Tutorial Scenario beendet.
 Updating text ... Waiting ...
 Text aktualisieren ... Bitte warten ...
-You are outside the allowed limits!
-Sie befinden sich außerhalb der zulässigen Grenzen!
+You are outside the allowed limits! (%s)
+Sie befinden sich außerhalb der zulässigen Grenzen!  (%s)
 You can only build stops on flat ground
 Sie können Halte nur auf ebenem Boden bauen
 You can only delete the stations.
@@ -340,8 +340,8 @@ You must build the bridge here
 Sie müssen hier eine Brücke bauen
 You must build the depot in
 Sie müssen ein Depot bauen in
-You must build the train depot in
-Sie müssen ein Eisenbahndepot bauen in
+You must build the train depot in (%s).
+Sie müssen ein Eisenbahndepot bauen in (%s).
 You must build track in
 Sie müssen zuerst Schienen bauen in
 You must click on the stops

@@ -1333,22 +1333,27 @@ class tutorial.chapter_03 extends basic_chapter
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
     gl_tool = tool_id
     //glpos = coord3d(pos.x, pos.y, pos.z)
-    local t = tile_x(pos.x, pos.y, pos.z)
+    //local t = tile_x(pos.x, pos.y, pos.z)
+    local label = tile_x(pos.x, pos.y, pos.z).find_object(mo_label)
     //local ribi = 0
     local wt = 0
-    local slope = t.get_slope()
+    //local slope = t.get_slope()
     //local way = t.find_object(mo_way)
-    local bridge = t.find_object(mo_bridge)
-    local label = t.find_object(mo_label)
-    local building = t.find_object(mo_building)
-    local sign = t.find_object(mo_signal)
-    local roadsign = t.find_object(mo_roadsign)
+    //local bridge = t.find_object(mo_bridge)
+    //local building = t.find_object(mo_building)
+    //local sign = t.find_object(mo_signal)
+    //local roadsign = t.find_object(mo_roadsign)
     /*if (way){
       wt = way.get_waytype()
       if (tool_id!=tool_build_bridge)
         ribi = way.get_dirs()
       if (!t.has_way(wt_rail))
         ribi = 0
+    }
+
+    local s_step = []
+    if ( s_step.find(this.step) ) {
+
     }*/
 
     local fac_1 =  factory_data.rawget("1")
@@ -1359,14 +1364,14 @@ class tutorial.chapter_03 extends basic_chapter
 
     switch (this.step) {
       case 1:
-        if (tool_id == 4096){
-          if (pot[0]==0){
+        if ( tool_id == 4096 ) {
+          if ( pot[0] == 0 ) {
             if ( search_tile_in_tiles(fac_2.c_list, pos) ) {
               pot[0] = 1
               return null
             }
           }
-          else if (pot[1]==1){
+          else if ( pot[1] == 1 ) {
             if ( search_tile_in_tiles(fac_1.c_list, pos) ) {
               pot[2] = 1
               return null
@@ -1378,21 +1383,21 @@ class tutorial.chapter_03 extends basic_chapter
         break;
       //Conectando los rieles con la segunda fabrica
       case 2:
-        if (tool_id == 4096) return result = null
+        if ( tool_id == 4096 ) return result = null
 
         //Primer tramo de rieles
-        if (pot[0]==0){
+        if ( pot[0] == 0 ) {
           local lab_t = my_tile(way2_fac1_fac2[1])
           local lab = lab_t.find_object(mo_label)
-          if(pos.x < lab_t.x && lab && lab.get_owner().nr == 0){
-            if(tool_id==tool_build_way)
+          if ( pos.x < lab_t.x && lab && lab.get_owner().nr == 0 ) {
+            if ( tool_id == tool_build_way )
               return ""
           }
-          if (pos.x>=way2_fac1_fac2[1].x && pos.y>=way2_fac1_fac2[1].y && pos.x<=way2_fac1_fac2[0].x && pos.y<=way2_fac1_fac2[0].y){
-            if(tool_id==tool_build_way || tool_id==tool_remove_way || tool_id==tool_remover){
+          if ( pos.x >= way2_fac1_fac2[1].x && pos.y >= way2_fac1_fac2[1].y && pos.x <= way2_fac1_fac2[0].x && pos.y <= way2_fac1_fac2[0].y ) {
+            if( tool_id==tool_build_way || tool_id==tool_remove_way || tool_id==tool_remover ) {
               local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
-              foreach(desc in way_desc){
-                if(desc.get_name() == name){
+              foreach ( desc in way_desc ) {
+                if( desc.get_name() == name ) {
                   return null
                 }
               }
@@ -1405,7 +1410,7 @@ class tutorial.chapter_03 extends basic_chapter
             return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
-            return translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
+            return get_tile_message(11, r_way.c) //translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         //Construye un puente
         if (pot[0]==1 && pot[1]==0){
@@ -1430,7 +1435,7 @@ class tutorial.chapter_03 extends basic_chapter
             return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
-            return translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
+            return get_tile_message(11, r_way.c) //translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         break;
 
@@ -1441,10 +1446,8 @@ class tutorial.chapter_03 extends basic_chapter
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
-          local good = good_alias.goods
           local c_list = station_tiles(way2_fac1_fac2[5], way2_fac1_fac2[4], loc1_tile)
-          local siz = c_list.len()
-          return get_stations(pos, tool_id, result, good, c_list, siz)
+          return get_stations(pos, tool_id, result, good_alias.goods, c_list)
         }
 
         else if (pot[0]==1 && pot[1]==0){
@@ -1453,10 +1456,8 @@ class tutorial.chapter_03 extends basic_chapter
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
-          local good = good_alias.goods
           local c_list = station_tiles(way2_fac1_fac2[0], way2_fac1_fac2[1], loc1_tile)
-          local siz = c_list.len()
-          return get_stations(pos, tool_id, result, good, c_list, siz)
+          return get_stations(pos, tool_id, result, good_alias.goods, c_list)
         }
         break
       case 4:
@@ -1472,7 +1473,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (tool_id==tool_build_depot)
               return null
           }
-          else return translate("You must build the train depot in")+" ("+ch3_rail_depot1.b.tostring()+")."
+          else return get_tile_message(12, ch3_rail_depot1.b) //translate("You must build the train depot in")+" ("+ch3_rail_depot1.b.tostring()+")."
         }
         else if (pot[1]==1 && pot[2]==0){
           if ((pos.x==ch3_rail_depot1.b.x)&&(pos.y==ch3_rail_depot1.b.y)){
@@ -1486,6 +1487,8 @@ class tutorial.chapter_03 extends basic_chapter
         break
       case 5:
         //Enrutar vehiculos (estacion nr1)
+        local t = tile_x(pos.x, pos.y, pos.z)
+        local building = t.find_object(mo_building)
         local st_check = check_rail_station(my_tile(way2_fac1_fac2[0]), 0, pos)
         if (building && st_check){
         //if (building && pos.x>=way2_fac1_fac2[1].x && pos.y>=way2_fac1_fac2[1].y && pos.x<=way2_fac1_fac2[0].x && pos.y<=way2_fac1_fac2[0].y){
@@ -1556,7 +1559,7 @@ class tutorial.chapter_03 extends basic_chapter
             return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
           }
           else if(tool_id==tool_build_way)
-            return translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
+            return get_tile_message(11, r_way.c) //translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
         }
         //Construye un tunel
         else if (pot[0]==1 && pot[1]==0){
@@ -1582,7 +1585,7 @@ class tutorial.chapter_03 extends basic_chapter
           }
 
           else if(tool_id==tool_build_way)
-            return translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
+            return get_tile_message(11, r_way.c) //translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         //Estaciones de la Fabrica
         else if (pot[2]==1 && pot[3]==0){
@@ -1590,10 +1593,8 @@ class tutorial.chapter_03 extends basic_chapter
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
-          local good = good_alias.goods
           local c_list = station_tiles(way2_fac2_fac3[5], way2_fac2_fac3[4], loc2_tile)
-          local siz = c_list.len()
-          return get_stations(pos, tool_id, result, good, c_list, siz)
+          return get_stations(pos, tool_id, result, good_alias.goods, c_list)
         }
         //Estaciones del Productor
         else if (pot[3]==1 && pot[4]==0){
@@ -1601,10 +1602,8 @@ class tutorial.chapter_03 extends basic_chapter
           local s = check_select_station(name, wt_rail, good_alias.goods)
           if ( s != null ) return s
 
-          local good = good_alias.goods
           local c_list = station_tiles(way2_fac2_fac3[0], way2_fac2_fac3[1], loc2_tile)
-          local siz = c_list.len()
-          return get_stations(pos, tool_id, result, good, c_list, siz)
+          return get_stations(pos, tool_id, result, good_alias.goods, c_list)
         }
         break
       case 7:
@@ -1623,12 +1622,15 @@ class tutorial.chapter_03 extends basic_chapter
             if(tool_id==tool_build_depot)
               return null
             else
-              return result = translate("You must build the train depot in")+" ("+ch3_rail_depot2.a.tostring()+")."
+              return get_tile_message(12, ch3_rail_depot2.a) //translate("You must build the train depot in")+" ("+ch3_rail_depot2.a.tostring()+")."
         }
         else if (pot[0]==0)
           return translate("You must build track in")+" ("+ch3_rail_depot2.a.tostring()+")."
         else if (pot[0]==1 && pot[1]==0)
-          return result = translate("You must build the train depot in")+" ("+ch3_rail_depot2.a.tostring()+")."
+          return result = get_tile_message(12, ch3_rail_depot2.a) //translate("You must build the train depot in")+" ("+ch3_rail_depot2.a.tostring()+")."
+
+        local t = tile_x(pos.x, pos.y, pos.z)
+        local building = t.find_object(mo_building)
 
         //Enrutar vehiculos (estacion nr1)
         if (pot[1]==1 && pot[2]==0){
@@ -1676,6 +1678,9 @@ class tutorial.chapter_03 extends basic_chapter
         break
 
       case 8:
+        local t = tile_x(pos.x, pos.y, pos.z)
+        local slope = t.get_slope()
+        local way = t.find_object(mo_way)
         //Construye tramo de via para el tunel
         if (pot[0]==0){
           if (pos.x>=c_way3_lim.a.x && pos.y<=c_way3_lim.a.y && pos.x<=c_way3_lim.b.x && pos.y>=c_way3_lim.b.y){
@@ -1683,7 +1688,7 @@ class tutorial.chapter_03 extends basic_chapter
               return all_control(result, gl_wt, gl_st, tool_id, pos, r_way.c, name)
             }
           }
-          else return  translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
+          else return  get_tile_message(11, r_way.c) //translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."
         }
         //Construye un puente
         else if (pot[0]==1 && pot[1]==0){
@@ -1823,8 +1828,12 @@ class tutorial.chapter_03 extends basic_chapter
         }
         break
       case 9:
+        local t = tile_x(pos.x, pos.y, pos.z)
+        local sign = t.find_object(mo_signal)
+        local roadsign = t.find_object(mo_roadsign)
+
         if (pot[0]==0){
-          result = r_way.c != 0? translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+").":result
+          result = r_way.c != 0? get_tile_message(11, r_way.c) /*translate("Connect the Track here")+" ("+coord3d_to_string(r_way.c)+")."*/ : result
           for(local j=0;j<way3_cy1_cy6.len();j++){
             if(glsw[j] == 0){
               local limit_t = []
@@ -1843,7 +1852,7 @@ class tutorial.chapter_03 extends basic_chapter
                 }
               }
               else if (j == way3_cy1_cy6.len()-1){
-                result = translate("You are outside the allowed limits!")+" ("+pos.tostring()+")."
+                result = get_tile_message(13, pos) //translate("You are outside the allowed limits!")+" ("+pos.tostring()+")."
               }
               break
             }
@@ -1914,7 +1923,7 @@ class tutorial.chapter_03 extends basic_chapter
               }
             }
             else if (j== way3_cate_list1.len()-1){
-              result = translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
+              result = get_tile_message(11, r_way.c) //translate("Connect the Track here")+" ("+r_way.c.tostring()+")."
             }
           }
           if ((tool_id == 4114)&&(pos.x==ch3_rail_depot3.b.x)&&(pos.y==ch3_rail_depot3.b.y)) return null
@@ -1935,7 +1944,7 @@ class tutorial.chapter_03 extends basic_chapter
             }
 
           }
-          result = translate("Connect the Track here")+" ("+ch3_rail_depot3.a.tostring()+")."
+          result = get_tile_message(11, r_way.c) //translate("Connect the Track here")+" ("+ch3_rail_depot3.a.tostring()+")."
         }
         else if (pot[1]==1 && pot[2]==0){
           if ((pos.x==ch3_rail_depot3.b.x)&&(pos.y==ch3_rail_depot3.b.y)){
@@ -1943,7 +1952,7 @@ class tutorial.chapter_03 extends basic_chapter
               return null
             }
           }
-          result = translate("You must build the train depot in")+" ("+ch3_rail_depot3.b.tostring()+")."
+          result = get_tile_message(12, ch3_rail_depot3.b) //translate("You must build the train depot in")+" ("+ch3_rail_depot3.b.tostring()+")."
         }
         break
 
@@ -2853,18 +2862,18 @@ class tutorial.chapter_03 extends basic_chapter
   /**
     *
     */
-  function get_stations(pos, tool_id, result, good, c_list, siz)
+  function get_stations(pos, tool_id, result, good, c_list)
   {
-    for(local j=0;j<siz;j++){
+    for( local j = 0; j < c_list.len(); j++ ) {
       local tile = my_tile(c_list[j])  //tile_x(c_list[j].x, c_list[j].y, 0)
       local halt = tile.get_halt()
       local build = tile.find_object(mo_building)
       local way = tile.find_object(mo_way)
-      if(build){
+      if ( build ) {
         local st_desc = build.get_desc()
         local st_list = building_desc_x.get_available_stations(st_desc.get_type(), st_desc.get_waytype(), good_desc_x(good))
         local sw = false
-        foreach(st in st_list){
+        foreach ( st in st_list ) {
           if (st.get_name() == st_desc.get_name()){
             sw = true
             break

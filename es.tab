@@ -58,8 +58,8 @@ Click on the stop
 Pulse sobre la parada
 Connect the road here
 Conecte la carretera aquí
-Connect the Track here
-Conecte la vía aquí
+Connect the Track here (%s).
+Conecte la vía aquí (%s).
 Creating Schedules is currently not allowed
 La creación de Itineararios no está permitida actualmente
 Dock No.%d must accept [%s]
@@ -318,8 +318,8 @@ Tutorial Scenario complete.
 Escenario Tutorial completado.
 Updating text ... Waiting ...
 Actualizando texto ... Esperando ...
-You are outside the allowed limits!
-¡Estás fuera de los límites permitidos!
+You are outside the allowed limits! (%s)
+¡Estás fuera de los límites permitidos! (%s)
 You can only build stops on flat ground
 Solo puedes construir paradas en terreno llano
 You can only delete the stations.
@@ -344,8 +344,8 @@ You must build the bridge here
 Debes construir el puente aquí
 You must build the depot in
 Debes construir el depósito en
-You must build the train depot in
-Debes construir el depósito de trenes en
+You must build the train depot in (%s).
+Debes construir el depósito de trenes en (%s).
 You must build track in
 Debes construir la vía aquí
 You must click on the stops

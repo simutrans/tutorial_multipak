@@ -711,7 +711,7 @@ class tutorial.chapter_05 extends basic_chapter
                }
             }
             else if (j== way5_power_lim.len()-1){
-              result = translate("You are outside the allowed limits!")+" ("+pos.tostring()+")."
+              result = get_tile_message(13, pos) //translate("You are outside the allowed limits!")+" ("+pos.tostring()+")."
             }
           }
           if (tool_id == tool_build_way)

@@ -1798,7 +1798,7 @@ class basic_chapter
       foreach(d in desc){
         //gui.add_message(d.get_name()+" :: "+name)
         if(d.get_name() == name){
-          return translate("Connect the Track here")+" ("+coord3d(coor.x, coor.y, coor.z).tostring()+")."
+          return get_tile_message(11, coor) //translate("Connect the Track here")+" ("+coord3d(coor.x, coor.y, coor.z).tostring()+")."
         }
       }
       return get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."

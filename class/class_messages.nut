@@ -85,7 +85,7 @@ function get_message(id) {
  *   8 = You must build the depot in (x, y, z).
  *   9 = You must use the inspection tool (x, y, z).
  *  10 = Depot coordinate is incorrect (x, y, z).
- *
+ *  11 = Connect the Track here (x, y, z).
  *
  *
  *
@@ -150,6 +150,27 @@ function get_tile_message(id, tile) {
       break
     case 10:
       txt_message = format(translate("Depot coordinate is incorrect (%s)."), txt_tile)
+      break
+    case 11:
+      txt_message = format(translate("Connect the Track here (%s)."), txt_tile)
+      break
+    case 12:
+      txt_message = format(translate("You must build the train depot in (%s)."), txt_tile)
+      break
+    case 13:
+      txt_message = format(translate("You are outside the allowed limits! (%s)."), txt_tile)
+      break
+    case 14:
+      txt_message = format(translate(" (%s)."), txt_tile)
+      break
+    case 15:
+      txt_message = format(translate(" (%s)."), txt_tile)
+      break
+    case 16:
+      txt_message = format(translate(" (%s)."), txt_tile)
+      break
+    case 17:
+      txt_message = format(translate(" (%s)."), txt_tile)
       break
   }
 
