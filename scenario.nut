@@ -6,7 +6,7 @@
   *
   */
 const nut_path = "class/"             // path to folder with *.nut files
-const version = 2006
+const version = 2007
 scenario_name               <- "Tutorial Scenario"
 scenario.short_description  = scenario_name
 scenario.author             = "Yona-TYT & Andarix"
@@ -47,9 +47,9 @@ include(nut_path+"class_basic_chapter") // include class for basic chapter struc
 translate_objects_list <- {}            // translate list
 translate_objects()                     // add objects to translate list
 
-resul_version <- {pak= false , st = false}
+resul_version <- {pak = false , st = false}
 
-persistent.status <- {chapter=1, step=1} // save step y chapter
+persistent.status <- {chapter = 1, step = 1} // save step y chapter
 
 script_test <- true
 
