@@ -1517,7 +1517,7 @@ class tutorial.chapter_03 extends basic_chapter
             if (stop_flag[0]==0)
               return translate("Select the other station first")+" ("+coord(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y).tostring()+".)"
             else if (stop_flag[0]==1 && stop_flag[1]==1)
-              return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
+              return get_tile_message(3, ch3_rail_depot1.a) //translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
           }
         }
         else if (tool_id==4108){
@@ -1528,7 +1528,7 @@ class tutorial.chapter_03 extends basic_chapter
             return format(translate("Select station No.%d"),2)+" ("+coord(way2_fac1_fac2[5].x, way2_fac1_fac2[5].y).tostring()+".)"
 
           else if (stop_flag[0]==1 && stop_flag[1]==1)
-            return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
+            return get_tile_message(3, ch3_rail_depot1.a) //translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
         }
         break
 
@@ -1658,7 +1658,7 @@ class tutorial.chapter_03 extends basic_chapter
               if (stop_flag[0]==0)
                 return translate("Select the other station first")+" ("+coord(way2_fac2_fac3[0].x, way2_fac2_fac3[0].y).tostring()+".)"
               else if (stop_flag[0]==1 && stop_flag[1]==1)
-                return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
+                return get_tile_message(3, ch3_rail_depot1.a) //translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
             }
           }
           else if (tool_id==4108){
@@ -1669,11 +1669,11 @@ class tutorial.chapter_03 extends basic_chapter
               return format(translate("Select station No.%d"),2)+" ("+coord(way2_fac2_fac3[5].x, way2_fac2_fac3[5].y).tostring()+".)"
 
             else if (stop_flag[0]==1 && stop_flag[1]==1)
-              return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
+              return get_tile_message(3, ch3_rail_depot1.a) //translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
           }
         }
         if (pot[2]==1 && pot[3]==0){
-          return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
+          return get_tile_message(3, ch3_rail_depot1.a) //translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot1.a.tostring()+".)"
         }
         break
 
@@ -1966,17 +1966,13 @@ class tutorial.chapter_03 extends basic_chapter
             if(tmpsw[j]==0){
               local check = check_rail_station(ch3_rail_stations[j], 0, pos)
               if( check ){
-                local c_list = ch3_rail_stations   //Lista de todas las estaciones
-                local c_dep = ch3_rail_depot3.b    //Coordeadas del deposito
-                local siz = ch3_rail_stations.len()  //Numero de paradas
-                result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot3.b.tostring()+")."
-                return is_stop_allowed_ex(result, siz, c_list, pos, gl_wt)
+                return is_stop_allowed_ex(ch3_rail_depot3.b, ch3_rail_stations, pos, gl_wt)
               }
               else
                 return result
             }
             if ((j+1) == ch3_rail_stations.len())
-              return translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot3.b.tostring()+")."
+              return get_tile_message(3, ch3_rail_depot3.b) //translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+ch3_rail_depot3.b.tostring()+")."
           }
           return result
         }

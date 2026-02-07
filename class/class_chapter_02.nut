@@ -798,8 +798,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
         }
         if (tool_id==4108) {
-          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+city1_road_depot.tostring()+")."
-          return is_stop_allowed(result, city1_halt_1.len(), city1_halt_1, pos)
+          return is_stop_allowed(city1_road_depot, city1_halt_1, pos)
         }
 
         break;
@@ -825,10 +824,7 @@ class tutorial.chapter_02 extends basic_chapter
           }
           if (tool_id==4108) {
             stop_mark = true
-            local c_list = city1_halt_2    //Lista de todas las paradas de autobus
-            local siz = c_list.len()     //Numero de paradas
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+city1_road_depot.tostring()+")."
-            return is_stop_allowed(result, siz, c_list, pos)
+            return is_stop_allowed(city1_road_depot, city1_halt_2, pos)
           }
         }
         break;
@@ -880,8 +876,7 @@ class tutorial.chapter_02 extends basic_chapter
         else if (pot[2]==1 && pot[3]==0){
           if (tool_id==4108){
             //Paradas de la primera ciudad
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+city1_road_depot.tostring()+")."
-            return is_stop_allowed(result, city2_halt_1.len(), city2_halt_1, pos)
+            return is_stop_allowed(city1_road_depot, city2_halt_1, pos)
           }
         }
         break;

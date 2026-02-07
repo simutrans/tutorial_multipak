@@ -152,8 +152,8 @@ Place Stop here!.
 Coloca Parada aquí.
 Place the Road here!.
 Coloca la Carretera aquí.
-Place the shipyard here
-Coloca el astillero aquí
+Place the shipyard here (%s).
+Coloca el astillero aquí (%s).
 Place the stops at the marked points.
 Coloca las paradas en los puntos marcados.
 Press [Ctrl] to build a tunnel entrance here
@@ -244,8 +244,8 @@ The number of wagons must be:
 El número de vagones debe ser:
 The Plane must be for [%s].
 El Avión debe ser para [%s].
-The route is complete, now you may dispatch the vehicle from the depot
-La ruta está completa, ahora debe arrancar el vehículo desde el depósito
+The route is complete, now you may dispatch the vehicle from the depot (%s).
+La ruta está completa, ahora debe arrancar el vehículo desde el depósito (%s).
 The schedule is not correct.
 El itinerario no es correcto.
 The schedule list must not be empty.

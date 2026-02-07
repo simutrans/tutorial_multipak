@@ -51,7 +51,7 @@ function get_message(id) {
       txt_message = translate("Only road schedules allowed")
       break
     case 4:
-
+      txt_message = translate("It is not allowed to start vehicles.")
       break
     case 5:
 
@@ -86,11 +86,15 @@ function get_message(id) {
  *   9 = You must use the inspection tool (x, y, z).
  *  10 = Depot coordinate is incorrect (x, y, z).
  *  11 = Connect the Track here (x, y, z).
- *
- *
- *
- *
- *
+ *  12 = You must build the train depot in (%s).
+ *  13 = You are outside the allowed limits! (%s).
+ *  14 = Place the shipyard here (%s).
+ *  15 =
+ *  16 =
+ *  17 =
+ *  18 =
+ *  19 =
+ *  20 =
  *
  */
 function get_tile_message(id, tile) {
@@ -128,7 +132,7 @@ function get_tile_message(id, tile) {
       txt_message = translate("Connect the road here")+" ("+txt_tile+")."
       break
     case 3:
-      txt_message = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+txt_tile+")."
+      txt_message = format(translate("The route is complete, now you may dispatch the vehicle from the depot (%s)."), txt_tile)
       break
     case 4:
       txt_message = translate("You must build the bridge here")+" ("+txt_tile+")."
@@ -161,16 +165,16 @@ function get_tile_message(id, tile) {
       txt_message = format(translate("You are outside the allowed limits! (%s)."), txt_tile)
       break
     case 14:
-      txt_message = format(translate(" (%s)."), txt_tile)
+      txt_message = format(translate("Place the shipyard here (%s)."), txt_tile)
       break
     case 15:
-      txt_message = format(translate(" (%s)."), txt_tile)
+      //txt_message = format(translate(" (%s)."), txt_tile)
       break
     case 16:
-      txt_message = format(translate(" (%s)."), txt_tile)
+      //txt_message = format(translate(" (%s)."), txt_tile)
       break
     case 17:
-      txt_message = format(translate(" (%s)."), txt_tile)
+      //txt_message = format(translate(" (%s)."), txt_tile)
       break
   }
 
@@ -236,7 +240,7 @@ function get_data_message(id, data) {
  *   1 = Stops should be built in [%s] (x, y, z).
  *   2 = You must build a stop in [%s] first (x, y, z).
  *   3 = Select station No.%d") (x, y, z).
- *
+ *   4 = Dock No.%d must accept goods (x, y, z).
  *
  *
  *
@@ -244,13 +248,28 @@ function get_data_message(id, data) {
  */
 function get_tiledata_message(id, data, tile) {
   local txt_tile = ""
-  if ( tile.len() == 2 ) {
+  /*if ( tile.len() == 2 ) {
     txt_tile = coord_to_string(tile)
   } else if ( tile.len() == 3 ) {
     txt_tile = coord3d_to_string(tile)
   } else {
     txt_tile = tile
+  }*/
+  local count = 0
+  try {
+    count = tile.len()
+    if ( count == 2 ) {
+      txt_tile = coord_to_string(tile)
+    } else if ( tile.len() == 3 ) {
+      txt_tile = coord3d_to_string(tile)
+    } else {
+      txt_tile = tile
+    }
   }
+  catch(ev) {
+    txt_tile = coord_to_string(tile)
+  }
+
 
   local txt_message = ""
 
@@ -265,7 +284,7 @@ function get_tiledata_message(id, data, tile) {
       txt_message = format(translate("Select station No.%d"), data)+" ("+txt_tile+")."
       break
     case 4:
-
+      txt_message = format(translate("Dock No.%d must accept goods (%s)."), data, txt_tile)
       break
     case 5:
 

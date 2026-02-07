@@ -578,31 +578,14 @@ class tutorial.chapter_06 extends basic_chapter
       case 2:
 
         if (tool_id==4108) {
-          /*for ( local j = 0; j < city1_city7_air.len(); j++ ) {
-            if (glsw[j]==0){
-              if(pos.x == city1_city7_air[j].x && pos.y == city1_city7_air[j].y) {
-                glsw[j]=1
-                return null
-              }
-              else return translate("Click on the stop") + " ("+city1_city7_air[j].tostring()+")!."
-            }
-          }*/
-          local c_list = city1_city7_air   //Lista de todas las paradas de autobus
-          local c_dep = ch6_air_depot.a      //Coordeadas del deposito
-          local siz = c_list.len()            //Numero de paradas
-          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-          return is_stop_allowed(result, siz, c_list, pos)
+          return is_stop_allowed(ch6_air_depot.a, city1_city7_air, pos)
 
         }
         break;
 
       case 3:
         if (tool_id==4108) {
-          local c_list = city1_halt_airport   //Lista de todas las paradas de autobus
-          local c_dep = city1_road_depot      //Coordeadas del deposito
-          local siz = c_list.len()            //Numero de paradas
-          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-          return is_stop_allowed(result, siz, c_list, pos)
+          return is_stop_allowed(city1_road_depot, city1_halt_airport, pos)
         }
         break;
 
@@ -620,11 +603,7 @@ class tutorial.chapter_06 extends basic_chapter
         }
         if (pot[0]==1 && pot[1]==0){
           if (tool_id==4108) {
-            local c_list = city7_halt      //Lista de todas las paradas de autobus
-            local c_dep = city7_road_depot //Coordeadas del deposito
-            local siz = c_list.len()       //Numero de paradas
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-            return is_stop_allowed(result, siz, c_list, pos)
+            return is_stop_allowed(city7_road_depot, city7_halt, pos)
           }
         }
         break;

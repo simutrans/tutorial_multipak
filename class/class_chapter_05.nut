@@ -659,11 +659,7 @@ class tutorial.chapter_05 extends basic_chapter
         }
         else if(pot[2]==1 && pot[3]==0){
           if (tool_id==4108) {
-            local c_list = way5_fac7_fac8  //Lista de todas las paradas
-            local c_dep = ch5_road_depot.a    //Coordeadas del deposito
-            local nr = c_list.len()   //Numero de paradas
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-            return is_stop_allowed(result, nr, c_list, pos)
+            return is_stop_allowed(ch5_road_depot.a, way5_fac7_fac8, pos)
           }
         }
       break;
@@ -766,21 +762,12 @@ class tutorial.chapter_05 extends basic_chapter
         }
         if ( pot[1]==1 && pot[2]==0 ) {
           if (tool_id==4108) {
-            local c_list = city1_post_halts   //Lista de todas las paradas de autobus
-            local c_dep = city1_road_depot    //Coordeadas del deposito
-            local nr = c_list.len()           //Numero de paradas
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-            return is_stop_allowed(result, nr, c_list, pos)
+            return is_stop_allowed(city1_road_depot, city1_post_halts, pos)
           }
         }
         if ( pot[2]==1 && pot[3]==0 ) {
           if (tool_id==4108) {
-            local c_list = ch5_post_ship_halts   //Lista de todas las paradas de autobus
-            local c_dep = ship_depot   //Coordeadas del deposito
-            local siz = c_list.len()   //Numero de paradas
-            local wt = wt_water
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-            return is_stop_allowed_ex(result, siz, c_list, pos, wt)
+            return is_stop_allowed_ex(ship_depot, ch5_post_ship_halts, pos, wt_water)
           }
         }
         break

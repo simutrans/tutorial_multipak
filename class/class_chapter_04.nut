@@ -434,13 +434,13 @@ class tutorial.chapter_04 extends basic_chapter
     local t = tile_x(pos.x, pos.y, pos.z)
     local ribi = 0
     local wt = 0
-    local slope = t.get_slope()
+      local slope = t.get_slope()
     local way = t.find_object(mo_way)
-    local bridge = t.find_object(mo_bridge)
+    //local bridge = t.find_object(mo_bridge)
     local label = t.find_object(mo_label)
     local building = t.find_object(mo_building)
-    local sign = t.find_object(mo_signal)
-    local roadsign = t.find_object(mo_roadsign)
+    //local sign = t.find_object(mo_signal)
+    //local roadsign = t.find_object(mo_roadsign)
 
     local fac_1 = factory_data.rawget("4")
     local fac_2 = factory_data.rawget("5")
@@ -479,43 +479,38 @@ class tutorial.chapter_04 extends basic_chapter
         break;
       //Construyendo los Muelles
       case 2:
-        local c_list = ch4_ship1_halts
-        local good = good_alias.goods
         if((tool_id != 4096))
           // check selected halt accept goods
           local s = check_select_station(name, wt_water, good_alias.goods)
           if ( s != null ) return s
 
-          return is_dock_build(pos, tool_id, c_list, good)
+          return is_dock_build(pos, tool_id, ch4_ship1_halts, good_alias.goods)
         break
       case 3:
         //Primer Astillero
-        if (pos.x==ship_depot.x && pos.y==ship_depot.y){
-          if (pot[0]==0){
-            if (tool_id == tool_build_depot){
+        if ( pos.x == ship_depot.x && pos.y == ship_depot.y ) {
+          if ( pot[0] == 0) {
+            if (tool_id == tool_build_depot) {
               pot[0]=1
               return null
             }
           }
-          else if (pot[0]==1 && pot[1]==0){
-            if (tool_id == 4096){
+          else if (pot[0] == 1 && pot[1] == 0) {
+            if (tool_id == 4096) {
               pot[1]=1
               return null
             }
           }
         }
         else if (pot[0]==0)
-          result = translate("Place the shipyard here")+" ("+ship_depot.tostring()+")."
+          result = get_tile_message(14, ship_depot) //translate("Place the shipyard here")+" ("+ship_depot.tostring()+")."
         break
         //Enrutar barcos
       case 4:
         if (tool_id==4108){
           local c_list = [coord_fac_4] //Lista de todas las paradas de autobus
           c_list.append(ch4_ship1_halts[0])
-          local c_dep = ship_depot //Coordeadas del deposito
-          local siz = c_list.len() //Numero de paradas
-          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-          return is_stop_allowed_ex(result, siz, c_list, pos, gl_wt)
+          return is_stop_allowed_ex(ship_depot, c_list, pos, gl_wt)
         }
         break
       case 5:
@@ -534,8 +529,8 @@ class tutorial.chapter_04 extends basic_chapter
           if(my_tile(ch4_ship2_halts[1]).find_object(mo_building)){
             if (tool_id==4097)
               return null
-            if (is_station_build(0, ch4_ship2_halts[1], good_alias.goods)!=null)
-              return format(translate("Dock No.%d must accept goods"),4)+" ("+ch4_ship2_halts[1].tostring()+")."
+            if (is_station_build(0, ch4_ship2_halts[1], good_alias.goods) != null)
+              return get_tiledata_message(4, 4, ch4_ship2_halts[1]) //format(translate("Dock No.%d must accept goods"),4)+" ("+ch4_ship2_halts[1].tostring()+")."
           }
           if(pos.x==ch4_ship2_halts[1].x && pos.y==ch4_ship2_halts[1].y){
             if(tool_id==tool_build_station){
@@ -546,11 +541,7 @@ class tutorial.chapter_04 extends basic_chapter
         //Enrutar Barcos
         else if (pot[1]==1 && pot[2]==0){
           if (tool_id==4108){
-            local c_list = ch4_ship2_halts   //Lista de todas las paradas de autobus
-            local c_dep = ship_depot //Coordeadas del deposito
-            local siz = c_list.len() //Numero de paradas
-            result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-            return is_stop_allowed_ex(result, siz, c_list, pos, gl_wt)
+            return is_stop_allowed_ex(ship_depot, ch4_ship2_halts, pos, gl_wt)
           }
         }
         break
@@ -570,11 +561,7 @@ class tutorial.chapter_04 extends basic_chapter
 
       case 7:
         if (tool_id==4108){
-          local c_list = ch4_schedule_line3 //Lista de todas las paradas de autobus
-          local c_dep = ship_depot          //Coordeadas del deposito
-          local siz = c_list.len()          //Numero de paradas
-          result = translate("The route is complete, now you may dispatch the vehicle from the depot")+" ("+c_dep.tostring()+")."
-          return is_stop_allowed_ex(result, siz, c_list, pos, gl_wt)
+          return is_stop_allowed_ex(ship_depot, ch4_schedule_line3, pos, gl_wt)
         }
         break
     }
@@ -1061,19 +1048,19 @@ class tutorial.chapter_04 extends basic_chapter
   {
     switch (nr) {
       case 0:
-        return format(translate("You must select a [%s]."),name)
+        return format(translate("You must select a [%s]."), name)
         break
 
       case 1:
-        return format(translate("The number of ships must be [%d]."),cov)
+        return format(translate("The number of ships must be [%d]."), cov)
         break
 
       case 2:
-        return format(translate("The number of convoys must be [%d], press the [Sell] button."),cov)
+        return format(translate("The number of convoys must be [%d], press the [Sell] button."), cov)
         break
 
       case 3:
-        return format(translate("The ship must be for [%s]."),good)
+        return format(translate("The ship must be for [%s]."), good)
         break
 
       case 4:

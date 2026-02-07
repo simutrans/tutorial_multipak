@@ -150,8 +150,8 @@ Place Stop here!.
 Hier Halt platzieren
 Place the Road here!.
 Platzieren Sie die Straße hier
-Place the shipyard here
-Platzieren Sie die Werft hier
+Place the shipyard here (%s).
+Platzieren Sie die Werft hier (%s).
 Place the stops at the marked points.
 Platzieren Sie die Stationen an den markierten Stellen.
 Press [Ctrl] to build a tunnel entrance here
@@ -240,8 +240,8 @@ The number of wagons must be:
 Die Anzahl an Waggons muss betragen:
 The Plane must be for [%s].
 Das Flugzeug muss für [%s] sein.
-The route is complete, now you may dispatch the vehicle from the depot
-Die Route ist fertiggestellt. Sie mögen nun die Fahrzeuge aus dem Depot lassen.
+The route is complete, now you may dispatch the vehicle from the depot (%s).
+Die Route ist fertiggestellt. Sie mögen nun die Fahrzeuge aus dem Depot (%s) lassen.
 The schedule is not correct.
 Der Fahrplan ist falsch.
 The schedule list must not be empty.

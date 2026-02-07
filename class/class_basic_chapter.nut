@@ -2214,16 +2214,17 @@ class basic_chapter
       return null
     }
 
-  function is_stop_allowed(result, siz, c_list, pos)
-  {
+  function is_stop_allowed(tile, c_list, pos) {
+
+    local result = get_tile_message(3, tile)
     local st_count=0
-    for(local j=0;j<siz;j++){
+    for ( local j = 0; j < c_list.len(); j++ ) {
       if (glsw[j]==1)
         st_count++
     }
     if (st_count<siz){
       local c2d = "coord"
-      for(local j=0;j<siz;j++){
+      for ( local j = 0; j < c_list.len(); j++ ) {
         local c = c_list[j]
         local type = typeof(c)
         local t = type == c2d ? my_tile(c) : tile_x(c.x, c.y, c.z)
@@ -2246,8 +2247,9 @@ class basic_chapter
     return 0
   }
 
-  function is_stop_allowed_ex(result, siz, list, pos, wt)
+  function is_stop_allowed_ex(tile, list, pos, wt)
   {
+    local result = get_tile_message(3, tile)
     local t_list = is_water_entry(list)
     local t = tile_x(pos.x, pos.y, pos.z)
     local buil = t.find_object(mo_building)
@@ -2261,12 +2263,12 @@ class basic_chapter
     }
 
     local get_cl = square_x(pos.x, pos.y).get_climate()
-    local st_count=0
-    for(local j=0;j<siz;j++){
-      if (glsw[j]==1)
+    local st_count = 0
+    for ( local j = 0; j < list.len(); j++ ) {
+      if ( glsw[j] == 1 )
         st_count++
     }
-    if (st_count<siz){
+    if ( st_count < list.len() ) {
       local j = 0
       local c2d = "coord"
       foreach(t in t_list){
@@ -2283,12 +2285,12 @@ class basic_chapter
           //if(max == 1 && t.is_water()) return check_water_tile(result, tile_list[0], pos, j)
           if(wt == wt_water && t.is_water()){
             local area = get_tiles_near_stations(tile_list)
-            for(local i=0;i<area.len();i++){
+            for( local i = 0; i < area.len(); i++ ) {
               local t_water = my_tile(area[i])
               //t_water.mark()
               //gui.add_message(""+t_water.x+","+t_water.y+"")
               if (pos.x == t_water.x && pos.y == t_water.y){
-                if(t_water.is_water()){
+                if ( t_water.is_water() ) {
                   tmpsw[j] = 1
                   tmpcoor.push(t)
                   result = null
