@@ -27,8 +27,8 @@ class tutorial.chapter_05 extends basic_chapter
 
   //Para el Camion
   veh1_obj = get_veh_ch5(1)
-  veh1_load = set_loading_capacity(8)
-  veh1_wait = set_waiting_time(6)
+  veh1_load = 100
+  veh1_wait = 0
   d1_cnr = null //auto started
   f1_good = get_good_data(5, 2)
 
@@ -42,7 +42,7 @@ class tutorial.chapter_05 extends basic_chapter
 
   //Para el Camion
   veh2_obj = get_veh_ch5(3)
-  veh2_load = 100
+  veh2_load = set_loading_capacity(8)
   veh2_wait = set_waiting_time(6)
   d2_cnr = null //auto started
   veh2_waiting_halt = get_waiting_halt(9)
@@ -54,7 +54,7 @@ class tutorial.chapter_05 extends basic_chapter
   //Para el barco
   //sch_list3 = [coord(133,189), coord_fac_4]
   veh3_obj = get_veh_ch5(4)
-  veh3_load = 100
+  veh3_load = set_loading_capacity(9)
   veh3_wait = set_waiting_time(7)
   //c_dep3 = coord(150,190) // depot
   d3_cnr = null //auto started
@@ -258,7 +258,7 @@ class tutorial.chapter_05 extends basic_chapter
         text.cir = cov_cir
         text.load = veh2_load
         text.wait = get_wait_time_text(veh2_wait)
-        text.nr = siz
+        text.nr = c_list.len()
       }
       else if (pot[2]==1 && pot[3]==0 || (current_cov> ch5_cov_lim3.a && current_cov< ch5_cov_lim3.b)){
         text = ttextfile("chapter_05/04_3-3.txt")
@@ -579,14 +579,15 @@ class tutorial.chapter_05 extends basic_chapter
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
     //return tool_id
     glpos = coord3d(pos.x, pos.y, pos.z)
-    local t = tile_x(pos.x, pos.y, pos.z)
-    local ribi = 0
-    local wt = 0
-    local slope = t.get_slope()
+    local label = tile_x(pos.x, pos.y, pos.z).find_object(mo_label)
+    //local t = tile_x(pos.x, pos.y, pos.z)
+    //local ribi = 0
+    //local wt = 0
+    //local slope = t.get_slope()
     //local way = t.find_object(mo_way)
     //local powerline = t.find_object(mo_powerline)
     //local bridge = t.find_object(mo_bridge)
-    local label = t.find_object(mo_label)
+    //local label = t.find_object(mo_label)
     //local building = t.find_object(mo_building)
     //local sign = t.find_object(mo_signal)
     //local roadsign = t.find_object(mo_roadsign)
@@ -597,6 +598,7 @@ class tutorial.chapter_05 extends basic_chapter
       if (!t.has_way(gl_wt))
         ribi = 0
     }*/
+
     local fab_list =  [
           factory_data.rawget("5"),
           factory_data.rawget("3"),
@@ -621,6 +623,7 @@ class tutorial.chapter_05 extends basic_chapter
       break;
 
       case 2:
+        local way = tile_x(pos.x, pos.y, pos.z).find_object(mo_way)
         if(pot[0]==0){
           if(pos.x>=way5_fac7_fac8_lim.a.x && pos.y>=way5_fac7_fac8_lim.a.y && pos.x<=way5_fac7_fac8_lim.b.x && pos.y<=way5_fac7_fac8_lim.b.y){
             if (!way && label && label.get_text()=="X"){
@@ -635,17 +638,14 @@ class tutorial.chapter_05 extends basic_chapter
           }
         }
         else if(pot[0]==1 && pot[1]==0){
-          for(local j=0;j<way5_fac7_fac8.len();j++){
+          for ( local j = 0; j < way5_fac7_fac8.len(); j++ ) {
             if(pos.x==way5_fac7_fac8[j].x && pos.y==way5_fac7_fac8[j].y){
               if(tool_id==tool_build_station || tool_id==tool_remover){
                 // check selected halt accept goods
                 local s = check_select_station(name, wt_road, good_alias.goods)
                 if ( s != null ) return s
 
-                way.unmark()
-                local c_list = way5_fac7_fac8
-                local good = good_alias.goods
-                return is_station_truck_build(pos, tool_id, c_list, good)
+                return is_station_truck_build(pos, tool_id, way5_fac7_fac8, good_alias.goods)
               }
             }
           }
@@ -669,7 +669,7 @@ class tutorial.chapter_05 extends basic_chapter
         if (pot[0]==0){
           for(local j=0;j<way5_power.len();j++){
             if (tool_id == tool_build_transformer){
-              local f_transf = t.find_object(mo_transformer_c)
+              local f_transf = tile_x(pos.x, pos.y, pos.z).find_object(mo_transformer_c)
               if (pos.x==way5_power[j].x && pos.y==way5_power[j].y){
                 if ( glsw[j] == 0 ) {
                   return null
@@ -719,15 +719,24 @@ class tutorial.chapter_05 extends basic_chapter
         if ( pot[0] == 1 && pot[1] == 0 ) {
           // Permite construir paradas
 
-          if ( tool_id==tool_build_station ) {
+          if ( tool_id == tool_build_station ) {
             local wt = wt_road
+            local tile_found = false
             // define station or station_extension
             for( local j = 0; j < extensions_tiles.len(); j++ ) {
-              if ( pos.x == extensions_tiles[j].a.x && pos.y == extensions_tiles[j].a.y && extensions_tiles[j].b == 0 ) {
-                wt = 0
-                break
+              if ( pos.x == extensions_tiles[j].a.x && pos.y == extensions_tiles[j].a.y ) {
+                tile_found = true
+                if ( extensions_tiles[j].b == 0 ) {
+                  wt = 0
+                  break
+                }
               }
             }
+
+            if ( !tile_found ) {
+              return translate("Place the mail extension at the marked tiles.")
+            }
+
             // check selected halt accept mail
             local s = check_select_station(name, wt, good_alias.mail)
             if ( s != null ) { return s }
@@ -739,15 +748,13 @@ class tutorial.chapter_05 extends basic_chapter
                 } else {
                 return translate("This stop already accepts mail.")
                 }
-              } else if ( glsw[j] == 0 ) {
-                return translate("Place the mail extension at the marked tiles.")
               }
 
             }
           }
 
           // Permite eliminar paradas
-          if ( tool_id==4097 ) {
+          if ( tool_id == 4097 ) {
             for( local j = 0; j < extensions_tiles.len(); j++ ) {
               local c = extensions_tiles[j].a
               if (c != null){
@@ -773,6 +780,7 @@ class tutorial.chapter_05 extends basic_chapter
         break
 
     }
+
     if (tool_id == 4096){
       if (label && label.get_text()=="X")
         return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
