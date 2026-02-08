@@ -940,7 +940,7 @@ function chapter_step_enabled_tools ( pl ) {
           enabled_tools.extend(_enabled_tools)
 
           local _pak64_tools = [ 0x8009 ]
-          local _pak64german_tools = [ 0x8011 ]
+          local _pak64german_tools = [ 0x8002, 0x8011 ]
           local _pak128_tools = [ 0x800b ]
 
           enabled_tools_pak64.extend(_pak64_tools)
