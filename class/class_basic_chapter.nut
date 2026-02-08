@@ -2222,7 +2222,7 @@ class basic_chapter
       if (glsw[j]==1)
         st_count++
     }
-    if (st_count<siz){
+    if ( st_count < c_list.len() ) {
       local c2d = "coord"
       for ( local j = 0; j < c_list.len(); j++ ) {
         local c = c_list[j]
@@ -2239,7 +2239,7 @@ class basic_chapter
             return format(translate("Select station No.%d [%s]"),j+1 , halt.get_name())+" ("+coord3d_to_string(t)+")."
           }
         }
-        if (j == siz-(1))
+        if (j == c_list.len()-(1))
           return result
       }
     }

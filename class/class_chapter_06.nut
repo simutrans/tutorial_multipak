@@ -676,7 +676,7 @@ class tutorial.chapter_06 extends basic_chapter
       case 2:
         local wt = gl_wt
         if ((depot.x != ch6_air_depot.a.x)||(depot.y != ch6_air_depot.a.y))
-          return translate("You must select the deposit located in")+" ("+ch6_air_depot.a.tostring()+")."
+          return get_tile_message(15, ch6_air_depot.a) //translate("You must select the deposit located in")+" ("+ch6_air_depot.a.tostring()+")."
         if (current_cov>ch6_cov_lim1.a && current_cov<ch6_cov_lim1.b){
           local cov = d1_cnr
           local veh = 1
@@ -720,7 +720,7 @@ class tutorial.chapter_06 extends basic_chapter
       break
       case 3:
         if ((depot.x != city1_road_depot.x)||(depot.y != city1_road_depot.y))
-          return translate("You must select the deposit located in")+" ("+city1_road_depot.tostring()+")."
+          return get_tile_message(15, city1_road_depot) //translate("You must select the deposit located in")+" ("+city1_road_depot.tostring()+")."
         if (current_cov>ch6_cov_lim2.a && current_cov<ch6_cov_lim2.b){
           local cov_list = depot.get_convoy_list()
           local cov = d2_cnr
@@ -755,7 +755,7 @@ class tutorial.chapter_06 extends basic_chapter
       break
       case 4:
         if ((depot.x != city7_road_depot.x)||(depot.y != city7_road_depot.y))
-          return translate("You must select the deposit located in")+" ("+city7_road_depot.tostring()+")."
+          return get_tile_message(15, city7_road_depot) //translate("You must select the deposit located in")+" ("+city7_road_depot.tostring()+")."
         if (current_cov>ch6_cov_lim3.a && current_cov<ch6_cov_lim3.b){
           local cov_list = depot.get_convoy_list()
           local cov = d3_cnr

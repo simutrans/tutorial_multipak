@@ -1383,7 +1383,7 @@ class tutorial.chapter_03 extends basic_chapter
         break;
       //Conectando los rieles con la segunda fabrica
       case 2:
-        if ( tool_id == 4096 ) return result = null
+        if ( tool_id == 4096 ) return null
 
         //Primer tramo de rieles
         if ( pot[0] == 0 ) {
@@ -2080,7 +2080,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 7:
         local wt = gl_wt
         if ((depot.x != ch3_rail_depot2.a.x)||(depot.y != ch3_rail_depot2.a.y))
-          return translate("You must select the deposit located in")+" ("+ch3_rail_depot2.a.tostring()+")."
+          return get_tile_message(15, ch3_rail_depot2.a) //translate("You must select the deposit located in")+" ("+ch3_rail_depot2.a.tostring()+")."
         local cov = 1
         local veh = set_train_lenght(2) + 1
         local good_list = [good_desc_x(good_alias.plan).get_catg_index()]
@@ -2106,7 +2106,7 @@ class tutorial.chapter_03 extends basic_chapter
       case 11:
       if (current_cov>ch3_cov_lim3.a && current_cov<ch3_cov_lim3.b){
         if ((depot.x != ch3_rail_depot3.b.x)||(depot.y != ch3_rail_depot3.b.y))
-          return translate("You must select the deposit located in")+" ("+ch3_rail_depot3.b.tostring()+")."
+          return get_tile_message(15, ch3_rail_depot3.b) //translate("You must select the deposit located in")+" ("+ch3_rail_depot3.b.tostring()+")."
         local cov = dep_cnr3
         local veh = set_train_lenght(3) + 1
         local good_list = [good_desc_x (good_alias.passa).get_catg_index()]    //Passengers

@@ -1126,7 +1126,7 @@ function set_transportet_goods(id) {
   *  @li id  6 - chapter 6 step  3 : bus city 1 - Airport
   *  @li id  7 - chapter 6 step  4 : bus city 7 - Airport
   *  @li id  8 - chapter 5 step  4 : post city 1
-  *  @li id  9 - chapter 5 step  4 : ship oil rig
+  *  @li id  9 - chapter 5 step  4 : post ship oil rig
   *
   * @return integer loading capacity
   */

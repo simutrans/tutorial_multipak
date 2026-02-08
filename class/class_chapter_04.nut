@@ -430,15 +430,14 @@ class tutorial.chapter_04 extends basic_chapter
   }
 
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
-    glpos = coord3d(pos.x, pos.y, pos.z)
-    local t = tile_x(pos.x, pos.y, pos.z)
-    local ribi = 0
-    local wt = 0
-      local slope = t.get_slope()
-    local way = t.find_object(mo_way)
+    glpos = pos
+    //local t = tile_x(pos.x, pos.y, pos.z)
+    //local ribi = 0
+    //local wt = 0
+    //local slope = t.get_slope()
+    //local way = t.find_object(mo_way)
     //local bridge = t.find_object(mo_bridge)
-    local label = t.find_object(mo_label)
-    local building = t.find_object(mo_building)
+    //local building = t.find_object(mo_building)
     //local sign = t.find_object(mo_signal)
     //local roadsign = t.find_object(mo_roadsign)
 
@@ -446,20 +445,20 @@ class tutorial.chapter_04 extends basic_chapter
     local fac_2 = factory_data.rawget("5")
     local fac_3 = factory_data.rawget("6")
 
-    if (way){
+    /*if (way){
       wt = way.get_waytype()
       if (tool_id!=4111)
         ribi = way.get_dirs()
       //if (!t.has_way(gl_wt))
         //ribi = 0
-    }
+    }*/
     local result = get_message(2) //translate("Action not allowed")    // null is equivalent to 'allowed'
     //glbpos = coord3d(pos.x,pos.y,pos.y)
     gltool = tool_id
 
     switch (this.step) {
       case 1:
-        if ( tool_id == 4096) {
+        if ( tool_id == 4096 ) {
           if ( pot[0] == 0 ) {
             if ( search_tile_in_tiles(fac_2.c_list, pos) ) {
               pot[0] = 1
@@ -479,12 +478,15 @@ class tutorial.chapter_04 extends basic_chapter
         break;
       //Construyendo los Muelles
       case 2:
-        if((tool_id != 4096))
+        if ( tool_id == tool_build_station ) {
           // check selected halt accept goods
           local s = check_select_station(name, wt_water, good_alias.goods)
           if ( s != null ) return s
 
           return is_dock_build(pos, tool_id, ch4_ship1_halts, good_alias.goods)
+        } else if ( tool_id == 4096 ) {
+          return null
+        }
         break
       case 3:
         //Primer Astillero
@@ -507,7 +509,7 @@ class tutorial.chapter_04 extends basic_chapter
         break
         //Enrutar barcos
       case 4:
-        if (tool_id==4108){
+        if ( tool_id == 4108 ) {
           local c_list = [coord_fac_4] //Lista de todas las paradas de autobus
           c_list.append(ch4_ship1_halts[0])
           return is_stop_allowed_ex(ship_depot, c_list, pos, gl_wt)
@@ -515,32 +517,33 @@ class tutorial.chapter_04 extends basic_chapter
         break
       case 5:
         if (pot[0]==0){
-          if(pos.x==way4_cannal[0].x && pos.y==way4_cannal[0].y){
-            if(tool_id==tool_remove_way || tool_id==4097)
+          if ( pos.x == way4_cannal[0].x && pos.y == way4_cannal[0].y ) {
+            if ( tool_id == tool_remove_way || tool_id == 4097 )
               return result
           }
           if (pos.x>=c_cannel_lim.a.x && pos.y>=c_cannel_lim.a.y && pos.x<=c_cannel_lim.b.x && pos.y<=c_cannel_lim.b.y){
-            if (tool_id == tool_build_way && way && wt == wt_water)
+            local way = tile_x(pos.x, pos.y, pos.z).find_object(mo_way)
+            if (tool_id == tool_build_way && way && way.get_waytype() == wt_water)
               return null
           }
         }
         //Cuarto muelle
         else if(pot[0]==1 && pot[1]==0){
-          if(my_tile(ch4_ship2_halts[1]).find_object(mo_building)){
+          if ( my_tile(ch4_ship2_halts[1]).find_object(mo_building) ) {
             if (tool_id==4097)
               return null
-            if (is_station_build(0, ch4_ship2_halts[1], good_alias.goods) != null)
+            if ( is_station_build(0, ch4_ship2_halts[1], good_alias.goods) != null )
               return get_tiledata_message(4, 4, ch4_ship2_halts[1]) //format(translate("Dock No.%d must accept goods"),4)+" ("+ch4_ship2_halts[1].tostring()+")."
           }
-          if(pos.x==ch4_ship2_halts[1].x && pos.y==ch4_ship2_halts[1].y){
-            if(tool_id==tool_build_station){
+          if ( pos.x == ch4_ship2_halts[1].x && pos.y == ch4_ship2_halts[1].y ) {
+            if ( tool_id == tool_build_station ) {
               return null
             }
           }
         }
         //Enrutar Barcos
-        else if (pot[1]==1 && pot[2]==0){
-          if (tool_id==4108){
+        else if ( pot[1] == 1 && pot[2] == 0 ) {
+          if ( tool_id == 4108 ) {
             return is_stop_allowed_ex(ship_depot, ch4_ship2_halts, pos, gl_wt)
           }
         }
@@ -548,31 +551,33 @@ class tutorial.chapter_04 extends basic_chapter
 
       case 6:
 
-        local c_list = ch4_ship3_halts
-        local good = good_alias.passa
-        if((tool_id != 4096))
+        if( tool_id == tool_build_station ) {
           // check selected halt accept passenger
           local s = check_select_station(name, wt_water, good_alias.passa)
           if ( s != null ) return s
 
-          return is_dock_build(pos, tool_id, c_list, good)
-
+          return is_dock_build(pos, tool_id, ch4_ship3_halts, good_alias.passa)
+        } else if ( tool_id == 4096 ) {
+          return null
+        }
         break
 
       case 7:
-        if (tool_id==4108){
+        if ( tool_id == 4108 ) {
           return is_stop_allowed_ex(ship_depot, ch4_schedule_line3, pos, gl_wt)
         }
         break
     }
+
+    local label = tile_x(pos.x, pos.y, pos.z).find_object(mo_label)
     if (tool_id == 4096){
-      if (label && label.get_text()=="X")
+      if ( label && label.get_text() == "X" )
         return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
       else if (label)
         return translate("Text label")+" ("+pos.tostring()+")."
       result = null // Always allow query tool
     }
-    if (label && label.get_text()=="X")
+    if ( label && label.get_text() == "X" )
       return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
     return result
@@ -619,7 +624,7 @@ class tutorial.chapter_04 extends basic_chapter
     switch (this.step) {
       case 4:
         if ((depot.x != ship_depot.x)||(depot.y != ship_depot.y))
-          return translate("You must select the deposit located in")+" ("+ship_depot.tostring()+")."
+          return get_tile_message(15, ship_depot) //translate("You must select the deposit located in")+" ("+ship_depot.tostring()+")."
         local cov = d1_cnr
         local in_dep = true
         local veh = 1
@@ -653,7 +658,7 @@ class tutorial.chapter_04 extends basic_chapter
       break
       case 5:
         if ((depot.x != ship_depot.x)||(depot.y != ship_depot.y))
-          return translate("You must select the deposit located in")+" ("+ship_depot.tostring()+")."
+          return get_tile_message(15, ship_depot) //translate("You must select the deposit located in")+" ("+ship_depot.tostring()+")."
         local cov = d2_cnr
             local in_dep = true
         local veh = 1
@@ -683,7 +688,7 @@ class tutorial.chapter_04 extends basic_chapter
       break
       case 7:
         if ((depot.x != ship_depot.x)||(depot.y != ship_depot.y))
-          return translate("You must select the deposit located in")+" ("+ship_depot.tostring()+")."
+          return get_tile_message(15, ship_depot) //translate("You must select the deposit located in")+" ("+ship_depot.tostring()+")."
         local cov = 1
         local veh = 1
         local good_list = [good_desc_x(good_alias.passa).get_catg_index()] //Passengers
