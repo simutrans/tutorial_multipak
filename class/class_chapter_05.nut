@@ -579,7 +579,6 @@ class tutorial.chapter_05 extends basic_chapter
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
     //return tool_id
     glpos = coord3d(pos.x, pos.y, pos.z)
-    local label = tile_x(pos.x, pos.y, pos.z).find_object(mo_label)
     //local t = tile_x(pos.x, pos.y, pos.z)
     //local ribi = 0
     //local wt = 0
@@ -599,6 +598,12 @@ class tutorial.chapter_05 extends basic_chapter
         ribi = 0
     }*/
 
+    local label = null
+    local st_nr = [2, 3]
+    if ( st_nr.find(this.step) ) {
+      label = tile_x(pos.x, pos.y, pos.z).find_object(mo_label)
+    }
+
     local fab_list =  [
           factory_data.rawget("5"),
           factory_data.rawget("3"),
@@ -607,6 +612,7 @@ class tutorial.chapter_05 extends basic_chapter
         ]
 
     local result = get_message(2) //translate("Action not allowed")    // null is equivalent to 'allowed'
+
     switch (this.step) {
       case 1:
         if (tool_id == 4096){
@@ -629,8 +635,8 @@ class tutorial.chapter_05 extends basic_chapter
             if (!way && label && label.get_text()=="X"){
               return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ( "+pos.tostring()+")."
             }
-            local label = tile_x(r_way.c.x, r_way.c.y, r_way.c.z).find_object(mo_label)
-            if(label){
+
+            if( tile_x(r_way.c.x, r_way.c.y, r_way.c.z).find_object(mo_label) ){
               if(tool_id==tool_build_way || tool_id==4113 || tool_id==tool_remover)
               return null
             }
@@ -706,7 +712,7 @@ class tutorial.chapter_05 extends basic_chapter
                  return result
                }
             }
-            else if (j== way5_power_lim.len()-1){
+            else if ( j == way5_power_lim.len()-1 ) {
               result = get_tile_message(13, pos) //translate("You are outside the allowed limits!")+" ("+pos.tostring()+")."
             }
           }
@@ -781,15 +787,16 @@ class tutorial.chapter_05 extends basic_chapter
 
     }
 
-    if (tool_id == 4096){
+    if ( tool_id == 4096 ){
+      local label = tile_x(pos.x, pos.y, pos.z).find_object(mo_label)
       if (label && label.get_text()=="X")
         return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
-      else if (label)
-        return translate("Text label")+" ("+pos.tostring()+")."
+      //else if (label)
+      //  return translate("Text label")+" ("+pos.tostring()+")."
       result = null // Always allow query tool
     }
-    if (label && label.get_text()=="X")
-      return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
+    //if (label && label.get_text()=="X")
+    //  return get_tile_message(5, pos) //translate("Indicates the limits for using construction tools")+" ("+pos.tostring()+")."
 
     return result
   }
