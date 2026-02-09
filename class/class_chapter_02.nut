@@ -714,13 +714,18 @@ class tutorial.chapter_02 extends basic_chapter
     switch (this.step) {
       //Construye un tramo de carretera
       case 1:
-        if (tool_id==tool_build_way){
-          local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
+        if ( tool_id == tool_build_way ) {
+
+          // check selected way
+          local s = check_select_way(name, wt_road)
+          if ( s != null ) return s
+
+          //local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
           local str_c = tile_x(tool.start_pos.x, tool.start_pos.y, tool.start_pos.z)
           //local str_way = str_c.is_valid () ? t.find_object(mo_way) : null
           local str_way = world.is_coord_valid(str_c)? tile_x(str_c.x, str_c.y, str_c.z).find_object(mo_way) : null
-          foreach ( desc in way_desc ) {
-            if ( desc.get_name() == name ) {
+          //foreach ( desc in way_desc ) {
+            //if ( desc.get_name() == name ) {
               for ( local i = 0; i < build_list.len()-1; i++ ) {
                 if ( ( pos.x == build_list[i].x && pos.y == build_list[i].y ) || ( pos.x == city1_road_depot.x && pos.y == city1_road_depot.y ) ) {
                   if(cursor_control(build_list[i])){
@@ -732,8 +737,8 @@ class tutorial.chapter_02 extends basic_chapter
                 }
               }
               return get_tile_message(2, city1_road_depot)//translate("Connect the road here")+" ("+city1_road_depot.tostring()+")."
-            }
-          }
+            //}
+          //}
         }
         break;
       //Construye un deposito de carreteras
@@ -860,9 +865,9 @@ class tutorial.chapter_02 extends basic_chapter
         }
         //Para construir la carretera
         else if (pot[1]==1 && pot[2]==0){
-          if ((pos.x>=c_way_limit1.a.x)&&(pos.y>=c_way_limit1.a.y)&&(pos.x<=c_way_limit1.b.x)&&(pos.y<=c_way_limit1.b.y)){
-            if((pos.x==way1_coords.a.x)&&(pos.y==way1_coords.a.y)){
-              if (tool_id==tool_remover || tool_id==tool_remove_way)
+          if ( (pos.x>=c_way_limit1.a.x) && (pos.y >= c_way_limit1.a.y) && (pos.x <= c_way_limit1.b.x) && (pos.y <= c_way_limit1.b.y) ) {
+            if( (pos.x == way1_coords.a.x) && (pos.y == way1_coords.a.y) ) {
+              if (tool_id == tool_remover || tool_id == tool_remove_way)
                 return result
               else if (tool_id==tool_build_way)
                 return null

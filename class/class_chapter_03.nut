@@ -1395,12 +1395,15 @@ class tutorial.chapter_03 extends basic_chapter
           }
           if ( pos.x >= way2_fac1_fac2[1].x && pos.y >= way2_fac1_fac2[1].y && pos.x <= way2_fac1_fac2[0].x && pos.y <= way2_fac1_fac2[0].y ) {
             if( tool_id==tool_build_way || tool_id==tool_remove_way || tool_id==tool_remover ) {
-              local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
+              /*local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
               foreach ( desc in way_desc ) {
                 if( desc.get_name() == name ) {
                   return null
                 }
-              }
+              }*/
+              // check selected way
+              local s = check_select_way(name, gl_wt)
+              if ( s != null ) { return s } else { return null }
             }
           }
           if (pos.x>=limit_ch3_rail_line_1a.a.x && pos.y>=limit_ch3_rail_line_1a.a.y && pos.x<=limit_ch3_rail_line_1a.b.x && pos.y<=limit_ch3_rail_line_1a.b.y){
@@ -1544,12 +1547,15 @@ class tutorial.chapter_03 extends basic_chapter
           }
           if (pos.x>=way2_fac2_fac3[0].x && pos.y>=way2_fac2_fac3[0].y && pos.x<=way2_fac2_fac3[1].x && pos.y<=way2_fac2_fac3[1].y){
             if(tool_id==tool_build_way || tool_id==tool_remove_way || tool_id==tool_remover){
-              local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
+              /*local way_desc =  way_desc_x.get_available_ways(gl_wt, gl_st)
               foreach(desc in way_desc){
                 if(desc.get_name() == name){
                   return null
                 }
-              }
+              }*/
+              // check selected way
+              local s = check_select_way(name, gl_wt)
+              if ( s != null ) { return s } else { return null }
             }
           }
           if (pos.x>=limit_ch3_rail_line_2a.a.x && pos.y>=limit_ch3_rail_line_2a.a.y && pos.x<=limit_ch3_rail_line_2a.b.x && pos.y<=limit_ch3_rail_line_2a.b.y){

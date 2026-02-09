@@ -1706,7 +1706,7 @@ class basic_chapter
     local t = tile_x(coor.x, coor.y, coor.z)
     local way = t.find_object(mo_way)
     local brig = t.find_object(mo_bridge)
-    local desc = way_desc_x.get_available_ways(wt, st)
+    //local desc = way_desc_x.get_available_ways(wt, st)
     local ribi = 0
     if ( way ) {
       if ( tool_id != tool_build_bridge )
@@ -1762,13 +1762,17 @@ class basic_chapter
           if(t.find_object(mo_tunnel)){
             return null
           }
-          foreach(d in desc){
+          // check selected way
+          return check_select_way(name, wt)
+
+          /*foreach(d in desc){
             //gui.add_message(d.get_name()+" :: "+name)
             if(d.get_name() == name){
               return null
             }
-          }
-          return get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."
+          }*/
+          //return get_tile_message(1, pos) //translate("Action not allowed")+" ("+pos.tostring()+")."
+
         }
         else{
           under_lv = settings.get_underground_view_level()
@@ -3704,6 +3708,18 @@ function check_select_station(name, wt, good) {
   * @return error message or null
   */
 function check_select_way(name, wt, st = st_flat) {
+
+  gui.add_message(" list name " + name.len())
+  // Selection tool with key
+  if ( name.len() == 1 ) {
+    local s = name.tointeger()
+    if ( s == wt ) {
+      return null
+    } else {
+      return translate("Selected way is not correct!")
+    }
+
+  }
 
   local list = way_desc_x.get_available_ways (wt, st)
 
