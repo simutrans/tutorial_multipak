@@ -2265,8 +2265,6 @@ class tutorial.chapter_03 extends basic_chapter
           t_start.remove_object(player_x(1), mo_label)
           local t = command_x(tool_build_way)
           local err = t.work(player, t_start, t_end, sc_way_name)
-
-          pot[0]=1
         }
 
         if(pot[1]==0){
@@ -2274,8 +2272,8 @@ class tutorial.chapter_03 extends basic_chapter
           t.remove_object(player_x(1), mo_label)
           local tool = command_x(tool_build_depot)
           tool.work(player, t, sc_dep_name)
-          pot[1]=1
         }
+        
         if(pot[1]==1 && pot[2]==0){
           pot[2]=1
         }
@@ -2952,3 +2950,4 @@ class tutorial.chapter_03 extends basic_chapter
 }        // END of class
 
 // END OF FILE
+
