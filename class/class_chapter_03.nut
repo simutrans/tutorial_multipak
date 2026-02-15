@@ -2450,20 +2450,15 @@ class tutorial.chapter_03 extends basic_chapter
         if(pot[0]==0){
           local t_start = my_tile(ch3_rail_depot2.b)
           local t_end = my_tile(ch3_rail_depot2.a)
-          t_start.unmark()
-          t_end.unmark()
-          t_end.remove_object(player_x(1), mo_label)
           local t = command_x(tool_build_way)
           t.work(player, t_start, t_end, sc_way_name)
-
-          pot[0]=1
         }
 
         if(pot[0]==1 && pot[1]==0){
           local t = command_x(tool_build_depot)
           t.work(player, my_tile(ch3_rail_depot2.a), sc_dep_name)
-          pot[1]=1
         }
+        
         if(pot[1]==1 && pot[2]==0){
           local wt = wt_rail
           if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
@@ -2495,7 +2490,6 @@ class tutorial.chapter_03 extends basic_chapter
 
             pot[3]=1
           }
-
         }
 
         return null
@@ -2950,4 +2944,5 @@ class tutorial.chapter_03 extends basic_chapter
 }        // END of class
 
 // END OF FILE
+
 
