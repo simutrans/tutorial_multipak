@@ -3701,7 +3701,7 @@ function check_select_station(name, wt, good) {
 }
 
 /**
-  * @param name - tool name ( by key select = waytype : not implemented)
+  * @param name - tool name ( by key select = waytype )
   * @param wt   - waytype
   * @param st   - systemtype
   *
@@ -3709,19 +3709,13 @@ function check_select_station(name, wt, good) {
   */
 function check_select_way(name, wt, st = st_flat) {
 
-  gui.add_message(" list name " + name.len())
+  //gui.add_message(" list name " + name.len())
   // Selection tool with key
-  if ( name.len() == 1 ) {
-    local s = name.tointeger()
-    if ( s == wt ) {
-      return null
-    } else {
-      return translate("Selected way is not correct!")
-    }
-
+  if ( wt.tostring() == name ) {
+    name = way_desc_x.get_default_way_desc(wt).get_name()
   }
 
-  local list = way_desc_x.get_available_ways (wt, st)
+  local list = way_desc_x.get_available_ways(wt, st)
 
   local list_name = []
   for (local i = 0; i < list.len(); i++ ) {
