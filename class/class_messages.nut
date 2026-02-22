@@ -118,7 +118,12 @@ function get_tile_message(id, tile) {
     }
   }
   catch(ev) {
-    txt_tile = coord_to_string(tile)
+    try {
+      txt_tile = coord_to_string(tile)
+    }
+    catch(ev) {
+      txt_tile = coord3d_to_string(tile)
+    }
   }
 
 
