@@ -143,6 +143,10 @@ class astar
       // investigate neighbours and put them into open list
       process_node(current_node)
 
+      if ( current_node != null ) {
+        check_way_last_tile = current_node
+      }
+
       current_node = null
     }
 
@@ -768,11 +772,51 @@ function test_select_way(start, end, wt = wt_rail) {
   local wayline = asf.search_route([start], [end])
   if ( "err" in wayline ) {
     //gui.add_message_at("no route from " + coord3d_to_string(start) + " to " + coord3d_to_string(end) , start)
+    if ( check_way_last_tile != null ) {
+      local tile = tile_x(check_way_last_tile.x, check_way_last_tile.y, check_way_last_tile.z)
+      //gui.add_message("test_select_way last tile " + coord3d_to_string(tile))
+      r_way.c = tile
+
+      //if ( check_way_mark_tile == null ) { check_way_mark_tile = check_way_last_tile }
+      /*local sasf = astar_route_finder(wt)
+      local waybuild = sasf.search_route([start], [tile])
+      if ( "err" in waybuild ) {
+        //gui.add_message("error build ")
+      } else {
+        foreach(node in waybuild.routes) {
+          local t = tile_x(node.x, node.y, node.z)
+           // gui.add_message("test tile " + coord3d_to_string(t))
+
+
+        }
+      }*/
+
+    } else {
+      //gui.add_message("test_select_way last tile - null")
+    }
 
     return false
   } else {
     //gui.add_message_at("exists route from " + coord3d_to_string(start) + " to " + coord3d_to_string(end) , start)
 
     return true
+  }
+}
+
+function unmark_waybuild() {
+  if ( check_way_mark_tile != null ) {
+
+    local w_dir = my_tile(check_way_mark_tile).get_way_dirs(wt_rail)
+    if ( dir.is_twoway(w_dir) ) {
+
+      gui.add_message("### check_way_mark_tile " + coord3d_to_string(check_way_mark_tile))
+      local r = my_tile(check_way_mark_tile).find_object(mo_way)
+      if ( r ) { r.unmark() }
+      //r = my_tile(check_way_mark_tile).find_object(mo_label)
+      //if ( r ) { r.remove_object(player_x(0), mo_label) }
+      check_way_mark_tile = check_way_last_tile
+    }
+  } else {
+    check_way_mark_tile = check_way_last_tile
   }
 }
