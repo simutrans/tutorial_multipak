@@ -24,6 +24,8 @@ sigcoord  <- null
 r_way <- { c = coord3d(0, 0, 0), p = 0, r = false, m = false, l = false, s = 0, z = null}
 r_way_list <- {}
 wayend <- coord3d(0, 0, 0)
+check_way_last_tile <- null
+check_way_mark_tile <- null
 //-------------------------------------------------------------------------------------------------------------
 
 // Mark / Unmark build in to link
@@ -1706,7 +1708,7 @@ class basic_chapter
     local t = tile_x(coor.x, coor.y, coor.z)
     local way = t.find_object(mo_way)
     local brig = t.find_object(mo_bridge)
-    //local desc = way_desc_x.get_available_ways(wt, st)
+    local desc = way_desc_x.get_available_ways(wt, st)
     local ribi = 0
     if ( way ) {
       if ( tool_id != tool_build_bridge )
