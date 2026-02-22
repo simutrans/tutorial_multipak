@@ -637,7 +637,7 @@ class tutorial.chapter_05 extends basic_chapter
             }
 
             if( tile_x(r_way.c.x, r_way.c.y, r_way.c.z).find_object(mo_label) ){
-              if(tool_id==tool_build_way || tool_id==4113 || tool_id==tool_remover)
+              if(tool_id == tool_build_way || tool_id == 4113 || tool_id == tool_remover)
               return null
             }
             else return all_control(result, wt_road, st_flat, tool_id, pos, r_way.c, name)

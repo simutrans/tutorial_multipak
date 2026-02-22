@@ -521,7 +521,7 @@ class tutorial.chapter_04 extends basic_chapter
             if ( tool_id == tool_remove_way || tool_id == 4097 )
               return result
           }
-          if (pos.x>=c_cannel_lim.a.x && pos.y>=c_cannel_lim.a.y && pos.x<=c_cannel_lim.b.x && pos.y<=c_cannel_lim.b.y){
+          if (pos.x >= c_cannel_lim.a.x && pos.y >= c_cannel_lim.a.y && pos.x <= c_cannel_lim.b.x && pos.y <= c_cannel_lim.b.y) {
             local way = tile_x(pos.x, pos.y, pos.z).find_object(mo_way)
             if (tool_id == tool_build_way && way && way.get_waytype() == wt_water)
               return null

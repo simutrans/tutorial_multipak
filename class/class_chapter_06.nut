@@ -476,8 +476,8 @@ class tutorial.chapter_06 extends basic_chapter
             local s = check_select_way(name, wt_air, st_runway)
             if ( s != null ) return s
 
-            if (way && way.get_name() != obj1_way_name){
-              if(tool_id == tool_remover || tool_id == tool_remove_way) return null
+            if ( way && way.get_name() != obj1_way_name ) {
+              if ( tool_id == tool_remover || tool_id == tool_remove_way ) return null
 
               result = format(translate("The track is not correct it must be: %s, use the 'Remove' tool"),translate(obj1_way_name)) + " ("+c1_start.tostring()+")."
 
