@@ -587,6 +587,10 @@ class tutorial.chapter_02 extends basic_chapter
           local obj = false
           local r_way = get_fullway(coora, coorb, dir, obj)
 
+          //check_way_last_tile
+          //test_select_way(my_tile(way1_coords.a), my_tile(way1_coords.b), wt_road)
+
+
           //Para marcar inicio y fin de la via
           local waya = tile_x(coora.x,coora.y,coora.z).find_object(mo_way)
           local wayb = tile_x(coorb.x,coorb.y,coorb.z).find_object(mo_way)
