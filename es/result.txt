@@ -1,1 +1,1 @@
-<p>El capÃ­tulo se ha completado al {ratio_chapter}%.</p>
+<p>El capítulo se ha completado al {ratio_chapter}%.</p>

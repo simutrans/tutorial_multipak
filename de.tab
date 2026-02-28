@@ -1,23 +1,23 @@
-Â§#################################################################################
+#################################################################################
 #                               for translate see                               #
 #      https://simutrans-germany.com/translator_page/scenarios/scenario_5/      #
 #################################################################################
 Action not allowed
 Aktion nicht erlaubt
 Advance is not allowed with the game paused.
-Kein Fortschritt mÃ¶glich wÃ¤hrend das Spiel in Pause ist.
+Kein Fortschritt möglich während das Spiel in Pause ist.
 Advance not allowed
 Fortschritt nicht erlaubt
 Advanced Topics
 Fortgeschrittene Themen
 All wagons must be for [%s].
-Alle Wagen mÃ¼ssen fÃ¼r [%s] geeignet sein.
+Alle Wagen müssen für [%s] geeignet sein.
 All wagons must be for:
-Alle Wagen mÃ¼ssen geeignet sein fÃ¼r
+Alle Wagen müssen geeignet sein für
 Are you lost ?, see the instructions shown below.
 Sind Sie verloren? Siehe die unten gezeigten Anweisungen.
 Build a Bridge here!.
-Baue eine BrÃ¼cke hier
+Baue eine Brücke hier
 Build a Depot here!.
 Baue hier ein Depot!
 Build a Dock here!.
@@ -47,21 +47,19 @@ Bus-Netzwerk
 Chapter
 Kapitel
 Chapter {number} - {cname} complete, next Chapter {nextcname} start here: ({coord}).
-Kapitel {number} - {cname} abgeschlossen, nÃ¤chstes Kapitel {nextcname} beginnt hier: ({coord}).
-Chapter {number} - {cname} complete.
-Kapitel {number} - {cname} abgeschlossen.
+Kapitel {number} - {cname} abgeschlossen, nächstes Kapitel {nextcname} beginnt hier: ({coord}).
 Checking Compatibility
-VersionsprÃ¼fung
+Versionsprüfung
 Choose a different stop.
-WÃ¤hlen Sie eine andere Haltestelle.
+Wählen Sie eine andere Haltestelle.
 Click on the stop
 Klicken Sie auf die Haltestelle
 Connect the road here
-Verbinde die StraÃŸe hier
-Connect the Track here (%s).
-Verbinde den Weg hier (%s).
+Verbinde die Straße hier
+Connect the Track here
+Verbinde den Weg hier
 Creating Schedules is currently not allowed
-Das Erstellen von FahrplÃ¤nen ist derzeit nicht zulÃ¤ssig
+Das Erstellen von Fahrplänen ist derzeit nicht zulässig
 Dock No.%d must accept [%s]
 Dock Nr.%d muss %s akzeptieren
 empty chapter
@@ -71,35 +69,37 @@ Erweiterungen sind nicht erlaubt.
 First buy an Airplane [%s].
 Kaufen Sie zuerst ein Flugzeug [%s].
 First create a line for the vehicle.
-Erstellen Sie zunÃ¤chst eine Linie fÃ¼r das Fahrzeug.
+Erstellen Sie zunächst eine Linie für das Fahrzeug.
 First you must build a tunnel section.
-Zuerst mÃ¼ssen Sie einen Tunnelabschnitt bauen.
+Zuerst müssen Sie einen Tunnelabschnitt bauen.
 First you must lower the layer level.
-Zuerst mÃ¼ssen Sie die Ebene absenken.
+Zuerst müssen Sie die Ebene absenken.
 First you must Upper the layer level.
-Zuerst mÃ¼ssen Sie den Grund erhÃ¶hen.
+Zuerst müssen Sie den Grund erhöhen.
 First you need to activate the underground view / sliced map view.
-Zuerst mÃ¼ssen Sie die Untergrundansicht / Ebene durch Karte aktivieren.
+Zuerst müssen Sie die Untergrundansicht / Ebene durch Karte aktivieren.
 Flat slope here!.
 Flache Ebene hier!
 Getting Started
 Anfangen
 Go to next step
-weiter zum nÃ¤chsten Schritt
+weiter zum nächsten Schritt
 Here
 Hier
 Incorrect vehicle configuration, check vehicle status.
-Falsche Fahrzeugkonfiguration, Fahrzeugstatus prÃ¼fen.
-Indicates the limits for using construction tools (%s).
-Gibt die Grenzwerte fÃ¼r die Verwendung von Konstruktionswerkzeugen an. (%s)
+Falsche Fahrzeugkonfiguration, Fahrzeugstatus prüfen.
+Indicates the limits for using construction tools
+Gibt die Grenzwerte für die Verwendung von Konstruktionswerkzeugen an.
 Industrial Efficiency
 Produktion steigern bei Industrien
 It is not a slope.
 Dies ist kein Hang.
 It is not allowed to start vehicles.
-Fahrzeuge dÃ¼rfen nicht gestartet werden.
+Fahrzeuge dürfen nicht gestartet werden.
 It is not flat terrain.
 Dies ist keine flache Ebene.
+It is not possible to build stops at intersections
+Es ist nicht möglich, Haltestellen an Kreuzungen zu bauen
 It must be a block signal!
 Es muss ein Blocksignal sein!
 It must be a slope.
@@ -113,33 +113,29 @@ Lasst uns beginnen!
 Mail Extension Here!.
 Post-Erweiterung hier
 Modify the terrain here
-Ã„ndern Sie hier das GelÃ¤nde
+Ändern Sie hier das Gelände
 Must choose a locomotive [%s].
-Muss eine Lok wÃ¤hlen [%s].
+Muss eine Lok wählen [%s].
 Must choose a locomotive:
-WÃ¤hlen Sie eine Lok vom Typ:
+Wählen Sie eine Lok vom Typ:
 Must not use trailers [%d].
-Darf keine AnhÃ¤nger [%d] verwenden.
+Darf keine Anhänger [%d] verwenden.
 No barges allowed.
-Keine LastkÃ¤hne erlaubt.
+Keine Lastkähne erlaubt.
 No intersections allowed
 Keine Kreuzungen erlaubt
 Number of convoys in the depot:
 Anzahl der Konvois im Depot:
 Only %d stops are necessary.
 Es sind nur %d Stopps erforderlich.
-Only air schedules allowed
-Nur FlugzeugfahrplÃ¤ne erlaubt
 Only delete signals.
-Nur Signale lÃ¶schen.
+Nur Signale löschen.
 Only one train is allowed, press the [Sell] button.
-Es ist nur ein Zug zulÃ¤ssig. DrÃ¼cken Sie die Taste [Verkaufen].
+Es ist nur ein Zug zulässig. Drücken Sie die Taste [Verkaufen].
 Only railway schedules allowed
-Nur BahnfahrplÃ¤ne erlaubt
+Nur Bahnfahrpläne erlaubt
 Only road schedules allowed
-Nur StraÃŸenfahrplÃ¤ne erlaubt
-Only water schedules allowed
-Nur SchifffahrplÃ¤ne erlaubt
+Nur Straßenfahrpläne erlaubt
 Place a block signal here
 Platzieren Sie hier ein Blocksignal
 Place a Tunnel here!.
@@ -149,39 +145,39 @@ Platziere hier ein Singnal!
 Place Stop here!.
 Hier Halt platzieren
 Place the Road here!.
-Platzieren Sie die StraÃŸe hier
-Place the shipyard here (%s).
-Platzieren Sie die Werft hier (%s).
-Place the stops at the marked points.
-Platzieren Sie die Stationen an den markierten Stellen.
+Platzieren Sie die Straße hier
+Place the shipyard here
+Platzieren Sie die Werft hier
+Place the stops at the marked points
+Platzieren Sie die Stationen an den markierten Stellen
 Press [Ctrl] to build a tunnel entrance here
-DrÃ¼cken Sie [Strg], um hier einen Tunneleingang zu erstellen
+Drücken Sie [Strg], um hier einen Tunneleingang zu erstellen
 Press the [Copy Backward] button, then set the Minimum Load and Month Wait Time at the first stop!.
-DrÃ¼cken Sie den Button [RÃ¼ckfahrkarte] und stellen Sie die Mindestladung und die maximale monatliche Wartezeit beim ersten Stopp ein!.
+Drücken Sie den Button [Rückfahrkarte] und stellen Sie die Mindestladung und die maximale monatliche Wartezeit beim ersten Stopp ein!.
 Raise ground here
-Ebene hier erhÃ¶hen
+Ebene hier erhöhen
 Riding the Rails
 Auf der Schiene fahren
 Ruling the Roads
-Die StraÃŸen regieren
+Die Straßen regieren
 Savegame has a different {more_info} script version! Maybe, it will work.
 Spielstand hat eine andere {more_info} Skriptversion! Vielleicht wird es funktionieren.
 Select station No.%d
-Station Nr. %d auswÃ¤hlen
+Station Nr. %d auswählen
 Select station No.%d [%s]
-WÃ¤hlen Sie die Station Nr. %d
+Wählen Sie die Station Nr. %d
 Select the Bus [%s].
-WÃ¤hlen Sie den Bus [%s] aus
+Wählen Sie den Bus [%s] aus
 Select the dock No.%d
-WÃ¤hlen Sie das Dock Nr. %d aus
+Wählen Sie das Dock Nr. %d aus
 Select the other station
-WÃ¤hlen Sie die Station 
+Wählen Sie die Station 
 Select the other station first
-WÃ¤hlen Sie zuerst die Station 
+Wählen Sie zuerst die Station 
 Setting Sail
 Segel setzen
 Slope Height.
-HanghÃ¶he
+Hanghöhe
 Station No.%d here
 Station Nr. %d hier
 Station No.%d must accept goods
@@ -196,8 +192,10 @@ Taking to the Air
 In die Luft gehen
 Text label
 Textmarker
+The %s stop must be for %s
+Stop [%s] muss für [%s] sein. Verwenden Sie das Werkzeug 'Entfernen'
 The bus must be [Passengers].
-Der Bus muss [Passagiere] befÃ¶rdern kÃ¶nnen.
+Der Bus muss [Passagiere] befördern können.
 The cabin:
 Die Kabine:
 The convoy is not correct.
@@ -205,9 +203,9 @@ Der Konvoi ist nicht korrekt.
 The Depot is correct.
 Das Depot ist korrekt.
 The extension building for station [%s] must be a [%s], use the 'Remove' tool
-Das ErweiterungsgebÃ¤ude fÃ¼r Station [%s] muss ein [%s] sein. Verwenden Sie das Werkzeug 'Entfernen'
+Das Erweiterungsgebäude für Station [%s] muss ein [%s] sein. Verwenden Sie das Werkzeug 'Entfernen'
 The extension building for station [%s] must be for [%s], use the 'Remove' tool
-Das ErweiterungsgebÃ¤ude fÃ¼r Station [%s] muss fÃ¼r [%s] sein. Verwenden Sie das Werkzeug 'Entfernen'
+Das Erweiterungsgebäude für Station [%s] muss für [%s] sein. Verwenden Sie das Werkzeug 'Entfernen'
 The first train
 Der erste Zug
 The forgotten Air transport
@@ -225,11 +223,11 @@ Die Anzahl der Flugzeuge im Hangar muss [%d] betragen.
 The number of bus must be [%d].
 Die Anzahl der Busse muss [%d] sein.
 The number of convoys must be [%d], press the [Sell] button.
-Die Anzahl der Konvois muss [%d] betragen, drÃ¼cken Sie die SchaltflÃ¤che [Verkaufen].
+Die Anzahl der Konvois muss [%d] betragen, drücken Sie die Schaltfläche [Verkaufen].
 The number of convoys must be [%d].
 Die Anzahl der Konvois muss [%d] betragen.
 The number of planes in the hangar must be [%d], use the [sell] button.
-Die Anzahl an Flugzeugen im Hangar darf [%d] nicht Ã¼berschreiten. Verwende die [Verkaufen]-Taste
+Die Anzahl an Flugzeugen im Hangar darf [%d] nicht überschreiten. Verwende die [Verkaufen]-Taste
 The number of ships must be [%d].
 Die Anzahl der Schiffe muss [%d] betragen.
 The number of trucks must be [%d].
@@ -239,25 +237,25 @@ Die Anzahl der Wagons muss [%d] betragen.
 The number of wagons must be:
 Die Anzahl an Waggons muss betragen:
 The Plane must be for [%s].
-Das Flugzeug muss fÃ¼r [%s] sein.
-The route is complete, now you may dispatch the vehicle from the depot (%s).
-Die Route ist fertiggestellt. Sie mÃ¶gen nun die Fahrzeuge aus dem Depot (%s) lassen.
+Das Flugzeug muss für [%s] sein.
+The route is complete, now you may dispatch the vehicle from the depot
+Die Route ist fertiggestellt. Sie mögen nun die Fahrzeuge aus dem Depot lassen.
 The schedule is not correct.
 Der Fahrplan ist falsch.
 The schedule list must not be empty.
 Der Fahrplan darf nicht leer sein.
 The schedule needs to have %d waystops, but there are %d.
-Der Fahrplan sollte %d Halte beinhalten, gezÃ¤hlt wurden jedoch %d.
+Der Fahrplan sollte %d Halte beinhalten, gezählt wurden jedoch %d.
 The second train
 Der zweite Zug
 The ship must be for [%s].
-Das Schiff muss fÃ¼r [%s] sein.
+Das Schiff muss für [%s] sein.
 The signal does not point in the correct direction
 Das Signal zeigt in die falsche Richtung
 The signal is ready!
 Das Signal ist bereit!
 The slope is ready.
-Die AufschÃ¼ttung ist bereit.
+Die Aufschüttung ist bereit.
 The slope points to the [%s].
 Der Hang zeigt nach [%s].
 The slope points to the Northeast.
@@ -275,19 +273,19 @@ Die Strecke ist falsch, es muss sein: %s. Verwende das Abrisswerkzeug.
 The track is stuck, use the [Remove] tool here!
 Die Strecke ist blockiert. Verwende das Abrisswerkzeug.
 The trailers numbers must be [%d].
-Die Anzahl von AnhÃ¤ngern muss [%d] sein.
+Die Anzahl von Anhängern muss [%d] sein.
 The train cannot be shorter than [%d] tiles.
-Der Zug darf nicht kÃ¼rzer als [%d] Kacheln sein.
+Der Zug darf nicht kürzer als [%d] Kacheln sein.
 The train may not be longer than [%d] tiles.
-Der Zug darf nicht lÃ¤nger als [%d] Kacheln sein.
+Der Zug darf nicht kürzer als [%d] Kacheln sein.
 The truck must be for [%s].
-Der LKW muss fÃ¼r [%s] sein.
+Der LKW muss für [%s] sein.
 The tunnel is already at the correct level
 Der Tunnel ist schon auf der richtigen Ebene.
 The tunnel is not correct, use the [Remove] tool here
-Der Tunnel ist nicht korrekt, verwenden Sie die SchaltflÃ¤che [Entfernen] hier.
+Der Tunnel ist nicht korrekt, verwenden Sie die Schaltfläche [Entfernen] hier.
 The vehicle must be [%s].
-Das Fahrzeug muss [%s] heiÃŸen.
+Das Fahrzeug muss [%s] heißen.
 The waittime in waystop {nr} '{name}' isn't {wait} {pos}
 Die max. Wartezeit bei Halt {name} {pos} ist nicht {wait}
 There is already a station.
@@ -299,7 +297,7 @@ Hier gibt es schon ein Umspannwerk!
 This is a factory
 Das ist eine Fabrik
 This is a link
-Das ist eine VerknÃ¼pfung
+Das ist eine Verknüpfung
 This is a station
 Das ist eine Station
 This is a town centre
@@ -314,79 +312,63 @@ Tutorial Scenario complete.
 Tutorial Scenario beendet.
 Updating text ... Waiting ...
 Text aktualisieren ... Bitte warten ...
-You are outside the allowed limits! (%s)
-Sie befinden sich auÃŸerhalb der zulÃ¤ssigen Grenzen!  (%s)
+You are outside the allowed limits!
+Sie befinden sich außerhalb der zulässigen Grenzen!
+You can only build on a straight road
+Sie können nur auf einer geraden Straße bauen
 You can only build stops on flat ground
-Sie kÃ¶nnen Halte nur auf ebenem Boden bauen
+Sie können Halte nur auf ebenem Boden bauen
+You can only build stops on roads
+Sie können nur auf Straßen Haltestellen bauen
 You can only delete the stations.
-Sie kÃ¶nnen nur den Bahnhof lÃ¶schen
+Sie können nur den Bahnhof löschen
 You can only delete the stops.
-Sie kÃ¶nnen nur die Halte lÃ¶schen
-You can only delete the stops/extensions.
-Sie kÃ¶nnen nur die Haltestellen/Erweiterungen lÃ¶schen.
+Sie können nur die Halte löschen
 You can only use this tool in the city
-Sie kÃ¶nnen dieses Tool nur in der Stadt verwenden
+Sie können dieses Tool nur in der Stadt verwenden
 You can only use vehicles:
-Sie kÃ¶nnen nur folgende Fahrzeuge benutzen:
+Sie können nur folgende Fahrzeuge benutzen:
 You didn't build a station at {pos}
 Du hast noch keine Haltestelle an {pos} gebaut
 You must build a stop in [%s]
-Sie mÃ¼ssen einen Stopp in [%s] bauen
+Sie müssen einen Stopp in [%s] bauen
 You must build a stop in [%s] first
-Sie mÃ¼ssen zuerst den Halt in [%s] bauen
+Sie müssen zuerst den Halt in [%s] bauen
 You must build the %d stops first.
-Sie mÃ¼ssen zuerst den Halt %d bauen
+Sie müssen zuerst den Halt %d bauen
 You must build the bridge here
-Sie mÃ¼ssen hier eine BrÃ¼cke bauen
+Sie müssen hier eine Brücke bauen
 You must build the depot in
-Sie mÃ¼ssen ein Depot bauen in
-You must build the train depot in (%s).
-Sie mÃ¼ssen ein Eisenbahndepot bauen in (%s).
+Sie müssen ein Depot bauen in
+You must build the train depot in
+Sie müssen ein Eisenbahndepot bauen in
 You must build track in
-Sie mÃ¼ssen zuerst Schienen bauen in
+Sie müssen zuerst Schienen bauen in
 You must click on the stops
-Sie mÃ¼ssen auf die Haltestellen klicken
+Sie müssen auf die Haltestellen klicken
 You must connect the two cities first.
-Sie mÃ¼ssen zuerst die beiden StÃ¤dte verbinden
+Sie müssen zuerst die beiden Städte verbinden
 You must first build a stretch of road
-Sie mÃ¼ssen zuerst einen StraÃŸenabschnitt bauen
+Sie müssen zuerst einen Straßenabschnitt bauen
 You must first buy a bus [%s].
-Sie mÃ¼ssen erst den Bus [%s] kaufen
+Sie müssen erst den Bus [%s] kaufen
 You must first buy a locomotive [%s].
-Sie mÃ¼ssen erst die Lokomotive [%s] kaufen
+Sie müssen erst die Lokomotive [%s] kaufen
 You must first buy a ship [%s].
-Sie mÃ¼ssen erst das Schiff [%s] kaufen
+Sie müssen erst das Schiff [%s] kaufen
 You must lift the land with a flat slope first
-Sie mÃ¼ssen den Grund zuerst eben anheben
+Sie müssen den Grund zuerst eben anheben
 You must lower the ground first
-Sie mÃ¼ssen zuerst den Boden absenken
+Sie müssen zuerst den Boden absenken
 You must press the [Copy backward] button to complete the route.
-Sie mÃ¼ssen die Taste [RÃ¼ckfahrkarte] drÃ¼cken, um die Route abzuschlieÃŸen.
+Sie müssen die Taste [Rückfahrkarte] drücken, um die Route abzuschließen.
 You must select a [%s].
-Sie mÃ¼ssen erst [%s] auswÃ¤hlen
-You must select the deposit located in (%s).
-Sie mÃ¼ssen das Depot auswÃ¤hlen in (%s).
+Sie müssen erst [%s] auswählen
+You must select the deposit located in
+Sie müssen das Depot auswählen in
 You must upper the ground first
-Sie mÃ¼ssen zuerst den Boden anheben
+Sie müssen zuerst den Boden anheben
 You must use the inspection tool
-Sie mÃ¼ssen das Abfragewerkzeug (Taste a) benutzen
+Sie müssen das Abfragewerkzeug (Taste a) benutzen
 You must use the tool to raise the ground here
-Sie mÃ¼ssen das Werkzeug verwenden, um den Boden hier anzuheben
-#_________________________________errer message_________________________________
-#_________________________________errer message_________________________________
-Selected harbour accept not %s.
-AusgewÃ¤hlter Hafen akzeptiert keine %s.
-#_________________________________error message_________________________________
-#_________________________________error message_________________________________
-Action not allowed (%s).
-Aktion auf Feld (%s) nicht erlaubt.
-Place the mail extension at the marked tiles.
-Platzieren Sie den Post Erweiterungsbau an den markierten Stellen.
-Selected extension accept not %s.
-AusgewÃ¤hlte Erweiterung akzeptiert keine %s.
-Selected halt accept not %s.
-AusgewÃ¤hlter Halt akzeptiert keine %s.
-Selected way is not correct!
-AusgewÃ¤hlter Weg ist nicht Korrekt!
-This stop already accepts mail.
-Dieser Halt akzeptiert bereits Post.
+Sie müssen das Werkzeug verwenden, um den Boden hier anzuheben

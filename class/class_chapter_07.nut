@@ -1,20 +1,17 @@
-/** @file class_chapter_07.nut
-  * @brief City transport with buses without step sequence
-  */
+/*
+ *  class chapter_07
+ *
+ *
+ *  Can NOT be used in network game !
+ */
 
-/**
-  * @brief class_chapter_07.nut
-  * City transport with buses without step sequence
-  *
-  *
-  * Can NOT be used in network game !
-  */
+
 class tutorial.chapter_07 extends basic_chapter
 {
   chapter_name  = ch7_name
   chapter_coord = coord_chapter_7
-  startcash     = 500000  // pl=0 startcash; 0=no reset
-  load = 0                // count for transportet passenger
+  startcash     = 500000            // pl=0 startcash; 0=no reset
+  load = 0
 
   gl_wt = wt_road
   gl_good = 0 //Passengers
@@ -54,9 +51,9 @@ class tutorial.chapter_07 extends basic_chapter
     local c_nw = city.get_pos_nw()
     local c_se = city.get_pos_se()
 
-    list.push({a = c_nw, b = c_se})                                       // N
+    list.push({a = c_nw, b = c_se})                     // N
     list.push({a =  coord(c_nw.x, c_se.y), b = coord(c_se.x, c_nw.y)})    // W
-    list.push({a = c_se, b = c_nw})                                       // S
+    list.push({a = c_se, b = c_nw})                     // S
     list.push({a =  coord(c_se.x, c_nw.y), b = coord(c_nw.x, c_se.y)})    // E
 
     return list
@@ -143,17 +140,17 @@ class tutorial.chapter_07 extends basic_chapter
   }
 
   function is_chapter_completed(pl) {
-    persistent.ch_max_steps = 4
+    local chapter_steps = 5
     local chapter_step = persistent.step
-    persistent.ch_max_sub_steps = 0 // count all sub steps
-    persistent.ch_sub_step = 0  // actual sub step
+    local chapter_sub_steps = 0 // count all sub steps
+    local chapter_sub_step = 0  // actual sub step
 
     switch (this.step) {
       case 1:
         if (!correct_cov)
           return 0
 
-        local tile = check_halt_wt(ch7_rail_stations[0], wt_road)
+        local tile = check_halt_public(ch7_rail_stations[0])
         if ( tile != null ) {
           if ( pass_count == 0 ) {
             transfer_pass = cov_pax(ch7_rail_stations[0], gl_wt, gl_good)
@@ -174,11 +171,12 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        local tile = check_halt_wt(ch7_rail_stations[1], wt_road)
+        local c = 0
+        local tile = check_halt_public(ch7_rail_stations[1])
         if ( tile != null ) {
-          if ( pass_count == 0 ) {
+          if ( c == 0 ) {
             transfer_pass = cov_pax(ch7_rail_stations[1], gl_wt, gl_good)
-            pass_count++
+            c++
           }
           load = cov_pax(tile, gl_wt, gl_good) - transfer_pass
         }
@@ -195,11 +193,12 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        local tile = check_halt_wt(ch7_rail_stations[2], wt_road)
+        local c = 0
+        local tile = check_halt_public(ch7_rail_stations[2])
         if ( tile != null ) {
-          if ( pass_count == 0 ) {
+          if ( c == 0 ) {
             transfer_pass = cov_pax(ch7_rail_stations[2], gl_wt, gl_good)
-            pass_count++
+            c++
           }
           load = cov_pax(tile, gl_wt, gl_good) - transfer_pass
         }
@@ -216,11 +215,12 @@ class tutorial.chapter_07 extends basic_chapter
         if (!correct_cov)
           return 0
 
-        local tile = check_halt_wt(ch7_rail_stations[3], wt_road)
+        local c = 0
+        local tile = check_halt_public(ch7_rail_stations[3])
         if ( tile != null ) {
-          if ( pass_count == 0 ) {
+          if ( c == 0 ) {
             transfer_pass = cov_pax(ch7_rail_stations[3], gl_wt, gl_good)
-            pass_count++
+            c++
           }
           load = cov_pax(tile, gl_wt, gl_good) - transfer_pass
         }
@@ -232,23 +232,24 @@ class tutorial.chapter_07 extends basic_chapter
         }
         //return 75
         break;
+
+      case 5:
+        // last step no actions
+        break;
     }
-    local percentage = chapter_percentage(persistent.ch_max_steps, chapter_step, persistent.ch_max_sub_steps, persistent.ch_sub_step)
+    local percentage = chapter_percentage(chapter_steps, chapter_step, chapter_sub_steps, chapter_sub_step)
     return percentage
   }
 
   function is_work_allowed_here(pl, tool_id, name, pos, tool) {
-    //local result=null // null is equivalent to 'allowed'
+    local result=null // null is equivalent to 'allowed'
     local t = tile_x(pos.x, pos.y, pos.z)
-    //local way = t.find_object(mo_way)
+    local way = t.find_object(mo_way)
     local nr = compass_nr
-
-    // inspections tool
-    if (tool_id==4096)
-      return null
-
     switch (this.step) {
       case 1:
+        if (tool_id==4096)
+          return null
 
         if ((pos.x>=c_cty_lim1[nr].a.x-(1))&&(pos.y>=c_cty_lim1[nr].a.y-(1))&&(pos.x<=c_cty_lim1[nr].b.x+(1))&&(pos.y<=c_cty_lim1[nr].b.y+(1))){
           return null
@@ -258,6 +259,8 @@ class tutorial.chapter_07 extends basic_chapter
       break;
 
       case 2:
+        if (tool_id==4096)
+          return null
 
         if ((pos.x>=c_cty_lim2[nr].a.x-(1))&&(pos.y>=c_cty_lim2[nr].a.y-(1))&&(pos.x<=c_cty_lim2[nr].b.x+(1))&&(pos.y<=c_cty_lim2[nr].b.y+(1))){
           return null
@@ -267,6 +270,8 @@ class tutorial.chapter_07 extends basic_chapter
       break;
 
       case 3:
+        if (tool_id==4096)
+          return null
 
         if ((pos.x>=c_cty_lim3[nr].a.x-(1))&&(pos.y>=c_cty_lim3[nr].a.y-(1))&&(pos.x<=c_cty_lim3[nr].b.x+(1))&&(pos.y<=c_cty_lim3[nr].b.y+(1))){
           return null
@@ -276,6 +281,8 @@ class tutorial.chapter_07 extends basic_chapter
       break;
 
       case 4:
+        if (tool_id==4096)
+          return null
 
         if ((pos.x>=c_cty_lim4[nr].a.x-(1))&&(pos.y>=c_cty_lim4[nr].a.y-(1))&&(pos.x<=c_cty_lim4[nr].b.x+(1))&&(pos.y<=c_cty_lim4[nr].b.y+(1))){
           return null
@@ -284,7 +291,12 @@ class tutorial.chapter_07 extends basic_chapter
           return translate("You can only use this tool in the city")+cty4.name.tostring()+" ("+city6_tow.tostring()+")."
       break;
 
+      case 5:
+        return null;
+
     }
+    if (tool_id==4096)
+      return null
 
     return tool_id
   }
@@ -310,7 +322,7 @@ class tutorial.chapter_07 extends basic_chapter
       ignore_save.push({id = convoy.id, ig = true})  //Ingnora el vehiculo
       return null
     }
-    return get_message(3) //translate("It is not allowed to start vehicles.")
+    return result = translate("It is not allowed to start vehicles.")
   }
 
   function script_text()

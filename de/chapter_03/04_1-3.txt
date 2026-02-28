@@ -1,1 +1,1 @@
-{step_hinfo}<p>{tx} WÃ¤hlen Sie <em>{tool2}</em> und bauen Sie ein Bahngleis von {w1} nach {w2}.</p>
+{step_hinfo}<p>{tx} Wählen Sie <em>{tool2}</em> und bauen Sie ein Bahngleis von {w1} nach {w2}.</p>

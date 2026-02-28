@@ -1,9 +1,5 @@
-/** @file astar.nut
-  * @brief Classes to help with route-searching.
-  */
-
 /**
- * @brief astar.nut
+ * @file astar.nut
  * Classes to help with route-searching.
  * Based on the A* algorithm.
  */
@@ -125,6 +121,8 @@ class astar
     // compute bounding box of targets
     compute_bounding_box()
 
+    local dist_to_end = 0
+
     local current_node = null
     while (!heap.is_empty()) {
       calls_pop++
@@ -143,10 +141,18 @@ class astar
       // investigate neighbours and put them into open list
       process_node(current_node)
 
+<<<<<<< test_chg_railbuild
+=======
       if ( current_node != null ) {
-        check_way_last_tile = current_node
+        local t = abs(check_way_to_tile.x - current_node.x) + abs(check_way_to_tile.y - current_node.y)
+        if ( dist_to_end == 0 || t <= dist_to_end ) {
+          //gui.add_message("dist to end "+t)
+          check_way_last_tile = current_node
+          dist_to_end = t
+        }
       }
 
+>>>>>>> local
       current_node = null
     }
 
@@ -762,12 +768,26 @@ class astar_builder extends astar
   }
 }
 
+<<<<<<< test_chg_railbuild
 /*
  *
  *
  */
+function test_select_way(start, end, wt) {
+  //gui.add_message_at("start " + coord3d_to_string(start) + " end " + coord3d_to_string(end) + " t_end " + coord3d_to_string(t_end), start)
+  local asf = astar_route_finder(wt_rail)
+  local wayline = asf.search_route([start], [end])
+  if ( "err" in wayline ) {
+    //gui.add_message_at("no route from " + coord3d_to_string(start) + " to " + coord3d_to_string(end) , start)
+=======
+/**
+  *
+  *
+  */
 function test_select_way(start, end, wt = wt_rail) {
   //gui.add_message_at("start " + coord3d_to_string(start) + " end " + coord3d_to_string(end) + " t_end " + coord3d_to_string(t_end), start)
+  check_way_to_tile = end
+
   local asf = astar_route_finder(wt)
   local wayline = asf.search_route([start], [end])
   if ( "err" in wayline ) {
@@ -776,24 +796,10 @@ function test_select_way(start, end, wt = wt_rail) {
       local tile = tile_x(check_way_last_tile.x, check_way_last_tile.y, check_way_last_tile.z)
       //gui.add_message("test_select_way last tile " + coord3d_to_string(tile))
       r_way.c = tile
-
-      //if ( check_way_mark_tile == null ) { check_way_mark_tile = check_way_last_tile }
-      /*local sasf = astar_route_finder(wt)
-      local waybuild = sasf.search_route([start], [tile])
-      if ( "err" in waybuild ) {
-        //gui.add_message("error build ")
-      } else {
-        foreach(node in waybuild.routes) {
-          local t = tile_x(node.x, node.y, node.z)
-           // gui.add_message("test tile " + coord3d_to_string(t))
-
-
-        }
-      }*/
-
     } else {
       //gui.add_message("test_select_way last tile - null")
     }
+>>>>>>> local
 
     return false
   } else {
@@ -802,21 +808,34 @@ function test_select_way(start, end, wt = wt_rail) {
     return true
   }
 }
+<<<<<<< test_chg_railbuild
+=======
 
-function unmark_waybuild() {
+/**
+  *
+  *
+  */
+function unmark_waybuild( wt = wt_rail ) {
+
   if ( check_way_mark_tile != null ) {
 
-    local w_dir = my_tile(check_way_mark_tile).get_way_dirs(wt_rail)
+
+    local w_dir = my_tile(check_way_mark_tile).get_way_dirs(wt)
     if ( dir.is_twoway(w_dir) ) {
 
-      gui.add_message("### check_way_mark_tile " + coord3d_to_string(check_way_mark_tile))
       local r = my_tile(check_way_mark_tile).find_object(mo_way)
       if ( r ) { r.unmark() }
-      //r = my_tile(check_way_mark_tile).find_object(mo_label)
-      //if ( r ) { r.remove_object(player_x(0), mo_label) }
+      r = my_tile(check_way_mark_tile).find_object(mo_label)
+      //gui.add_message("### mo_label " + r)
+      if ( r ) { my_tile(check_way_mark_tile).remove_object(player_x(1), mo_label) }
       check_way_mark_tile = check_way_last_tile
+    } else {
+      check_way_mark_tile = check_way_last_tile
+      //gui.add_message("### check_way_mark_tile " + coord3d_to_string(check_way_mark_tile))
     }
   } else {
+    //gui.add_message("### check_way_mark_tile null" )
     check_way_mark_tile = check_way_last_tile
   }
 }
+>>>>>>> local

@@ -1,8 +1,6 @@
-/**
-  * @file set_data.nut
-  * @brief define set data
-  *
-  */
+/*
+ *  define set data
+ */
 
 // pak64
   pak_name      <- "pak64"  // pak name

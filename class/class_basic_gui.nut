@@ -1,10 +1,8 @@
-/** @file class_basic_gui.nut
-  * @brief defines toolbars and tools
-  *
-  *  tool id list see ../info_files/tool_id_list.ods
-  *
-  *
-  */
+/*
+ *  tool id list see ../info_files/tool_id_list.ods
+ *
+ *
+ */
 
 // placeholder for some menus icon
   switch (pak_name) {
@@ -22,12 +20,11 @@
       break
   }
 
-/**
-  * @fn general_disabled_tools ( pl )
-  * general disabled not used menu and tools
-  *
-  */
-function general_disabled_tools ( pl ) {
+/*
+ *  general disabled not used menu and tools
+ *
+ */
+function general_disabled_tools( pl ) {
   // reset rules
   rules.clear()
 
@@ -48,18 +45,12 @@ function general_disabled_tools ( pl ) {
                           tool_increase_industry,
                           tool_merge_stop,
                           dialog_enlarge_map,
-                          4143, //generate script
+                          tool_raise_land,
+                          tool_lower_land,
+                          tool_restoreslope,
+                          4143, //generate script            
                           4144  //pipette
   ]
-
-  // chapter 7 all slope tools allowed
-  if ( persistent.chapter < 7 ) {
-    local slope_tools = [ tool_raise_land,
-                          tool_lower_land,
-                          tool_restoreslope
-                          ]
-    unused_tools.extend(slope_tools)
-  }
 
   local pak64_tools = [ 0x8004, 0x8005, 0x4022, tool_set_climate ]
   local pak64german_tools = [ 0x800b, 0x800c, 0x800d, 0x8013, 0x8014, 0x8015, 0x8023, 0x8025, 0x8027, 0x8007, 0x8006 ]
@@ -84,12 +75,14 @@ function general_disabled_tools ( pl ) {
   chapter_disabled_tools( pl )
 }
 
-/**
-  * @fn chapter_disabled_tools( pl )
-  *  disabled tools for chapter
-  *
-  */
-function chapter_disabled_tools ( pl ) {
+/*
+ *  disabled tools for chapter
+ *
+ *
+ *
+ *
+ */
+function chapter_disabled_tools( pl ) {
   /*
   persistent.chapter <- 1     // stores chapter number
   persistent.step    <- 1     // stores step number of chapter
@@ -256,6 +249,7 @@ function chapter_disabled_tools ( pl ) {
                           tool_remove_way,
                           tool_remover,
                           tool_make_stop_public,
+                          tool_build_station,
                           tool_build_bridge,
                           tool_build_tunnel,
                           tool_build_depot,
@@ -412,15 +406,14 @@ function chapter_disabled_tools ( pl ) {
 
 }
 
-/**
-  * @fn chapter_step_enabled_tools ( pl )
-  *  enabled tools for chapter step
-  *
-  *  allowed tools for steps must be allowed in all subsequent steps of the chapter
-  *  allowed tools not persistent save in rules
-  *
-  */
-function chapter_step_enabled_tools ( pl ) {
+/*
+ *  enabled tools for chapter step
+ *
+ *  allowed tools for steps must be allowed in all subsequent steps of the chapter
+ *  allowed tools not persistent save in rules
+ *
+ */
+function chapter_step_enabled_tools( pl ) {
   /*
   persistent.chapter <- 1     // stores chapter number
   persistent.step    <- 1     // stores step number of chapter
@@ -940,7 +933,7 @@ function chapter_step_enabled_tools ( pl ) {
           enabled_tools.extend(_enabled_tools)
 
           local _pak64_tools = [ 0x8009 ]
-          local _pak64german_tools = [ 0x8002, 0x8011 ]
+          local _pak64german_tools = [ 0x8011 ]
           local _pak128_tools = [ 0x800b ]
 
           enabled_tools_pak64.extend(_pak64_tools)
@@ -1095,7 +1088,7 @@ function chapter_step_enabled_tools ( pl ) {
         case 5:
           rules.clear()
           break
-      }
+      }		    
 
       break
 
@@ -1140,12 +1133,15 @@ function chapter_step_enabled_tools ( pl ) {
   rules.gui_needs_update()
 }
 
-/**
-  * @fn update_tools ( list, id, wt_list, wt )
-  *
-  *
-  */
- function update_tools ( list, id, wt_list, wt ) {
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+ function update_tools(list, id, wt_list, wt) {
     local res = {ok = false, result = false }
     local wt_res = false
     if(wt < 0){

@@ -1,1 +1,1 @@
-{step_hinfo}<p>{tx} Selecciona <em>'{tool2}'</em> en la barra de herramientas y elige la herramiento de vÃ­as de tren para construir una via de tren que conecte los dos puntos entre {w3} y {w4}.</p><p>Conecta la vÃ­a aquÃ­: {cbor}.</p>
+{step_hinfo}<p>{tx} Selecciona <em>'{tool2}'</em> en la barra de herramientas y elige la herramiento de vías de tren para construir una via de tren que conecte los dos puntos entre {w3} y {w4}.</p><p>Conecta la vía aquí: {cbor}.</p>
