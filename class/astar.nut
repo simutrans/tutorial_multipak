@@ -1,5 +1,9 @@
+/** @file astar.nut
+  * @brief Classes to help with route-searching.
+  */
+
 /**
- * @file astar.nut
+ * @brief astar.nut
  * Classes to help with route-searching.
  * Based on the A* algorithm.
  */
@@ -141,8 +145,6 @@ class astar
       // investigate neighbours and put them into open list
       process_node(current_node)
 
-<<<<<<< test_chg_railbuild
-=======
       if ( current_node != null ) {
         local t = abs(check_way_to_tile.x - current_node.x) + abs(check_way_to_tile.y - current_node.y)
         if ( dist_to_end == 0 || t <= dist_to_end ) {
@@ -152,7 +154,6 @@ class astar
         }
       }
 
->>>>>>> local
       current_node = null
     }
 
@@ -768,18 +769,6 @@ class astar_builder extends astar
   }
 }
 
-<<<<<<< test_chg_railbuild
-/*
- *
- *
- */
-function test_select_way(start, end, wt) {
-  //gui.add_message_at("start " + coord3d_to_string(start) + " end " + coord3d_to_string(end) + " t_end " + coord3d_to_string(t_end), start)
-  local asf = astar_route_finder(wt_rail)
-  local wayline = asf.search_route([start], [end])
-  if ( "err" in wayline ) {
-    //gui.add_message_at("no route from " + coord3d_to_string(start) + " to " + coord3d_to_string(end) , start)
-=======
 /**
   *
   *
@@ -799,7 +788,6 @@ function test_select_way(start, end, wt = wt_rail) {
     } else {
       //gui.add_message("test_select_way last tile - null")
     }
->>>>>>> local
 
     return false
   } else {
@@ -808,8 +796,6 @@ function test_select_way(start, end, wt = wt_rail) {
     return true
   }
 }
-<<<<<<< test_chg_railbuild
-=======
 
 /**
   *
@@ -838,4 +824,3 @@ function unmark_waybuild( wt = wt_rail ) {
     check_way_mark_tile = check_way_last_tile
   }
 }
->>>>>>> local
