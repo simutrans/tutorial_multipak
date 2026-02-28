@@ -166,7 +166,7 @@ class tutorial.chapter_03 extends basic_chapter
           text.tx = ttext("<em>[2/3]</em>")
         }
         else if (pot[2]==0){
-          local c = way2_fac1_fac2[4]
+          local c = way2_fac1_fac2[5]
           local c_label = c.href("("+c.tostring()+")")
           local way = tile_x(c.x, c.y, c.z).find_object(mo_way)
           if(!way) c4 = c_label
@@ -2273,7 +2273,7 @@ class tutorial.chapter_03 extends basic_chapter
           local tool = command_x(tool_build_depot)
           tool.work(player, t, sc_dep_name)
         }
-        
+
         if(pot[1]==1 && pot[2]==0){
           pot[2]=1
         }
@@ -2458,7 +2458,7 @@ class tutorial.chapter_03 extends basic_chapter
           local t = command_x(tool_build_depot)
           t.work(player, my_tile(ch3_rail_depot2.a), sc_dep_name)
         }
-        
+
         if(pot[1]==1 && pot[2]==0){
           local wt = wt_rail
           if (current_cov>ch3_cov_lim2.a && current_cov<ch3_cov_lim2.b){
@@ -2944,5 +2944,4 @@ class tutorial.chapter_03 extends basic_chapter
 }        // END of class
 
 // END OF FILE
-
 
