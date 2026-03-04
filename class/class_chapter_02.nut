@@ -518,7 +518,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         local id_start = 1
         local id_end = 3
-        cov_nr = get_convoy_number_exp(city1_halt_2[0], c_dep, id_start, id_end)
+        cov_nr = get_convoy_number_exp(sch_list2[0], c_dep, id_start, id_end)
 
         local convoy = convoy_x(gcov_id)
         local all_result = checks_convoy_schedule(convoy, pl)
@@ -855,10 +855,10 @@ class tutorial.chapter_02 extends basic_chapter
           }
           //Permite eliminar paradas
           if (tool_id==tool_remover){
-            for(local j=0;j<city2_halt_1.len();j++){
-              if (city2_halt_1[j] != null){
-                local stop = my_tile(city2_halt_1[j]).find_object(mo_building)
-                if (pos.x==city2_halt_1[j].x&&pos.y==city2_halt_1[j].y&&stop){
+            for(local j=0;j<sch_list3.len();j++){
+              if (sch_list3[j] != null){
+                local stop = my_tile(sch_list3[j]).find_object(mo_building)
+                if (pos.x==sch_list3[j].x&&pos.y==sch_list3[j].y&&stop){
                   way.mark()
                   return null
                 }
@@ -1079,8 +1079,8 @@ class tutorial.chapter_02 extends basic_chapter
         break;
       case 3:
 
-        for(local j=0;j<city1_halt_1.len();j++){
-          local t = my_tile(city1_halt_1[j])
+        for(local j=0;j<sch_list1.len();j++){
+          local t = my_tile(sch_list1[j])
           local way = t.find_object(mo_way)
           t.remove_object(player_x(1), mo_label)
           local tool = command_x(tool_build_station)
@@ -1105,7 +1105,7 @@ class tutorial.chapter_02 extends basic_chapter
           local c_depot = my_tile(city1_road_depot)
           comm_destroy_convoy(player, c_depot) // Limpia los vehiculos del deposito
 
-          local c_list = city1_halt_1
+          local c_list = sch_list1
           local sched = schedule_x(gl_wt, [])
           local load = veh_load
           local wait = veh_wait
@@ -1156,7 +1156,7 @@ class tutorial.chapter_02 extends basic_chapter
 
         if (current_cov>ch2_cov_lim2.a && current_cov<ch2_cov_lim2.b){
           local depot = depot_x(c_depot.x, c_depot.y, c_depot.z)
-          local c_list = city1_halt_2
+          local c_list = sch_list2
           local sch_siz = c_list.len()
           local load = veh_load
           local time = veh_wait

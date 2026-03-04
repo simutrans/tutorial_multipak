@@ -295,7 +295,7 @@ class tutorial.chapter_07 extends basic_chapter
 
   function is_convoy_allowed(pl, convoy, depot)
   {
-    if(this.step>4)
+    if(this.step>4) 
       return null
 
     local result=null // null is equivalent to 'allowed'

@@ -804,8 +804,6 @@ class tutorial.chapter_05 extends basic_chapter
   function is_schedule_allowed(pl, schedule) {
     local result=null // null is equivalent to 'allowed'
 
-    local nr = schedule.entries.len()
-
     switch (this.step) {
       case 2:
         if ( (pl == 0) && (schedule.waytype != wt_road) )

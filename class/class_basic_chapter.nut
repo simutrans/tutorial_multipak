@@ -14,7 +14,7 @@
 // Global coordinate for mark build tile
 currt_pos <- null
 
-//----------------Para las señales de paso------------------------
+//----------------Para las seÃ±ales de paso------------------------
 persistent.sigcoord <- null
 sigcoord  <- null
 //-----------------------------------------------------------------
@@ -610,7 +610,6 @@ class basic_chapter
     else if((c_buld1.x == c_buld2.x) && (c_buld1.y == c_buld2.y)) {
       result = null
     }
-
     if (result!=null){
       local text = ttext("The waystop {nr} '{name}' isn't on place {pos}")
       text.name = target_list[0].get_name()
@@ -854,6 +853,13 @@ class basic_chapter
       else if (result==null){
         result = is_waystop_correct(pl, schedule, j, 0, 0, c_list[j], line)
 
+    for(local j=0;j<size;j++){
+      if(result==null) {
+        if (j==selc){
+          result = is_waystop_correct(pl, schedule, j, load, time, c_list[j]), line
+        }
+        else {
+          result = is_waystop_correct(pl, schedule, j, 0, 0, c_list[j], line)
         }
       else
         return result
