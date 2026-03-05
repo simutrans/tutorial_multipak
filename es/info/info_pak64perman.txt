@@ -1,1 +1,1 @@
-<h1>Descripci�n pak64.german</h1>
+<h1>Descripción pak64.german</h1><p>pak64.german es un conjunto de gráficos que solo usa una altura.</p><p>Tampoco hay bonificación de velocidad en pak64.german. Pero esto sigue siendo importante porque no se permite que las estaciones estén abarrotadas. Si las estaciones se saturan, los volúmenes de transporte colapsan.<br>Si se utiliza la carga mínima, tenga cuidado de no llenar excesivamente ninguna estación.</p><p>El maglev y el S-/U-Bahn sólo deberían utilizarse cuando haya un número muy elevado de pasajeros.</p>
