@@ -17,4 +17,4 @@ Supported paksets: pak64, pak64.german, pak128
 > [!IMPORTANT]
 > Do not change the text within **{ }** or these brackets.
 
-The comments are in English and Spanish, due to the developers involved.
+The comments in code are in English and Spanish, due to the developers involved.
