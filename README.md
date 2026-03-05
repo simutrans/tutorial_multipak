@@ -13,6 +13,8 @@ This repo contains the code for a tutorial for Simutrans
 
 Supported paksets: pak64, pak64.german, pak128
 
-Translate: https://simutrans-germany.com/translator_page/scenarios/scenario_5/index.php
+[translate page](https://simutrans-germany.com/translator_page/scenarios/scenario_5/)
+> [!IMPORTANT]
+> Do not change the text within **{ }** or these brackets.
 
 The comments are in English and Spanish, due to the developers involved.
