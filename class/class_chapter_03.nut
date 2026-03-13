@@ -642,25 +642,15 @@ class tutorial.chapter_03 extends basic_chapter
             tile1.remove_object(player_x(1), mo_label)
 
             //elimina el cuadro label
-            local opt = 0
-            local del = true
-            local text = "X"
-            label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, opt, del, text)
+            label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, 0, true, "X")
 
             pot[0]=1
             wayend=0
 
             // rules for bridge build
-            local cube = []
-            cube.append ( square_x(bridge2_coords.b.x-1, bridge2_coords.b.y-1).get_ground_tile() )
-            cube.append ( square_x(bridge2_coords.a.x+1, bridge2_coords.a.y+1).get_ground_tile() )
-            cube.append ( square_x(bridge2_coords.b.x+1, bridge2_coords.b.y-1).get_ground_tile() )
-            cube.append ( square_x(bridge2_coords.a.x-1, bridge2_coords.a.y+1).get_ground_tile() )
-            //gui.add_message("cube 0 + 1 " + coord3d_to_string(cube[0]) + " - " + coord3d_to_string(cube[1]) )
-            //gui.add_message("cube 2 + 3 " + coord3d_to_string(cube[2]) + " - " + coord3d_to_string(cube[3]) )
-            rules.forbid_way_tool_rect(player_all, tool_build_bridge, wt_rail, 0, cube[2], cube[3], "wrong fields")
+            local cube = select_cube(bridge2_coords.b, bridge2_coords.a, "bridge")
+            rules.forbid_way_tool_rect(player_all, tool_build_bridge, wt_rail, 0, cube[2], cube[3], get_message(5) )
             rules.allow_way_tool_cube(player_all, tool_build_bridge, wt_rail, 0, cube[0], cube[1])
-            //rules.gui_needs_update()
           }
         }
         //Para el puente
@@ -678,12 +668,8 @@ class tutorial.chapter_03 extends basic_chapter
 
             if (my_tile(bridge2_coords.a).find_object(mo_bridge)){
               pot[1]=1
-
-              local cube = []
-              cube.append ( square_x(bridge2_coords.b.x-1, bridge2_coords.b.y-1).get_ground_tile() )
-              cube.append ( square_x(bridge2_coords.a.x+1, bridge2_coords.a.y+1).get_ground_tile() )
-              cube.append ( square_x(bridge2_coords.b.x+1, bridge2_coords.b.y-1).get_ground_tile() )
-              cube.append ( square_x(bridge2_coords.a.x-1, bridge2_coords.a.y+1).get_ground_tile() )
+              // clear bridge build rules
+              local cube = select_cube(bridge2_coords.b, bridge2_coords.a, "bridge")
               rules.clear_way_tool_rect(player_all, tool_build_bridge, wt_rail, 0, cube[2], cube[3], true)
               rules.clear_way_tool_cube(player_all, tool_build_bridge, wt_rail, 0, cube[0], cube[1], false)
 
@@ -1438,14 +1424,7 @@ class tutorial.chapter_03 extends basic_chapter
         }
         //Construye un puente
         if (pot[0]==1 && pot[1]==0){
-          /*if ( (pos.x==bridge2_coords.b.x && pos.y==bridge2_coords.b.y) || (pos.x==bridge2_coords.a.x && pos.y==bridge2_coords.a.y)){
-            if(tool_id==tool_build_way || tool_id==tool_build_bridge)
-          }
-          else {
-          gui.add_message("pos " + coord3d_to_string(pos) )
-            return translate("You must build the bridge here")+" ("+coord3d_to_string(bridge2_coords.a)+")."
-          }*/
-              return null
+          return null
         }
         //Segundo tramo de rieles
         if (pot[1]==1&&pot[2]==0){

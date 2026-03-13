@@ -30,7 +30,7 @@ ch7_name        <- "Bus networks"
  *   2 = Action not allowed
  *   3 = Only road schedules allowed
  *   4 = It is not allowed to start vehicles.
- *
+ *   5 = You did not click the correct fields.
  *
  *
  *
@@ -54,7 +54,7 @@ function get_message(id) {
       txt_message = translate("It is not allowed to start vehicles.")
       break
     case 5:
-
+      txt_message = translate("You did not click the correct fields.")
       break
     case 6:
 
