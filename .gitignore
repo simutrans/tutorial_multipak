@@ -7,3 +7,4 @@
 *.ods#
 .~lock*
 /docu
+/*.zip

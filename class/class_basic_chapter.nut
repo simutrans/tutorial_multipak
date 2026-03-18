@@ -3734,4 +3734,47 @@ function check_select_way(name, wt, st = st_flat) {
   return null
 
 }
+
+/**
+  * create tile array for define the construction area
+  *
+  * @param tile_a - build tile start
+  * @param tile_b - build tile end
+  * @param obj    - build object
+  *
+  * @return tile array
+  */
+function select_cube(tile_a, tile_b, obj = "") {
+
+  local cube = []
+
+  if ( tile_a.x < tile_b.x || tile_a.y < tile_b.y ) {
+    // define the construction area
+    cube.append ( coord3d(bridge2_coords.b.x, bridge2_coords.b.y, bridge2_coords.b.z+1) )
+    cube.append ( coord3d(bridge2_coords.a.x, bridge2_coords.a.y, bridge2_coords.a.z) )
+    if ( obj == "bridge" ) {
+      // prohibit the fields between the bridge ends
+      //cube.append ( coord3d(bridge2_coords.b.x-1, bridge2_coords.b.y-1, bridge2_coords.b.z+1) )
+      //cube.append ( coord3d(bridge2_coords.b.x+1, bridge2_coords.b.y+1, bridge2_coords.b.z) )
+      cube.append ( coord(bridge2_coords.b.x+1, bridge2_coords.b.y-1) )
+      cube.append ( coord(bridge2_coords.a.x-1, bridge2_coords.a.y+1) )
+    }
+  } else {
+    // define the construction area
+    cube.append ( coord3d(bridge2_coords.a.x-1, bridge2_coords.a.y-1, bridge2_coords.a.z+1) )
+    cube.append ( coord3d(bridge2_coords.b.x+1, bridge2_coords.b.y+1, bridge2_coords.a.z) )
+    if ( obj == "bridge" ) {
+      // prohibit the fields between the bridge ends
+      cube.append ( coord3d(bridge2_coords.a.x+1, bridge2_coords.a.y-1, bridge2_coords.a.z+1) )
+      cube.append ( coord3d(bridge2_coords.b.x-1, bridge2_coords.b.y+1, bridge2_coords.b.z) )
+    }
+  }
+
+  gui.add_message("cube 0 + 1 " + coord3d_to_string(cube[0]) + " - " + coord3d_to_string(cube[1]) )
+  if ( cube.len() == 4 ) {
+    gui.add_message("cube 2 + 3 " + coord_to_string(cube[2]) + " - " + coord_to_string(cube[3]) )
+  }
+
+  return cube
+}
 // END OF FILE
