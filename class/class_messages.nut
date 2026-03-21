@@ -99,6 +99,10 @@ function get_message(id) {
  */
 function get_tile_message(id, tile) {
   local txt_tile = ""
+  local type = typeof(tile)
+  if(type == "integer"){
+    return ""
+  }
   /*if ( tz == null ) {
     local tile = coord(tx, ty)
     txt_tile = coord_to_string(tile)
