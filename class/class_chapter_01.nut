@@ -73,6 +73,7 @@ class tutorial.chapter_01 extends basic_chapter
 
     }
 
+    text.dialog = translate("Scenario information")
     // set image for buttons by different in paksets
     text.img_grid = get_gui_img("grid")
     text.img_display = get_gui_img("display")
