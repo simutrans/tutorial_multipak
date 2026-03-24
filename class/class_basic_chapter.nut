@@ -2256,7 +2256,7 @@ class basic_chapter
   function is_stop_allowed_ex(tile, list, pos, wt)
   {
     local result = get_tile_message(3, tile)
-    local t_list = is_water_entry(list)
+    local c2d = "coord"
     local t = tile_x(pos.x, pos.y, pos.z)
     local buil = t.find_object(mo_building)
     local is_wt = buil ? buil.get_waytype():null
@@ -2271,24 +2271,19 @@ class basic_chapter
     local get_cl = square_x(pos.x, pos.y).get_climate()
     local st_count = 0
     for ( local j = 0; j < list.len(); j++ ) {
-      if ( glsw[j] == 1 )
+      if ( tmpsw[j] == 1 )
         st_count++
     }
-    if ( st_count < list.len() ) {
-      local j = 0
-      local c2d = "coord"
-      foreach(t in t_list){
 
-        local c = list[j]
+    if ( st_count < list.len() ) {
+        local c = list[st_count]
         local type = typeof(c)
         local st_t = type == c2d ? my_tile(c) : tile_x(c.x, c.y, c.z)
         local halt = st_t.get_halt()
         local tile_list = halt.get_tile_list()
         local max = tile_list.len()
-        //local c_lim_list = {a = tile_list[0], b = tile_list[max-1]}
-        //gui.add_message(""+j+" :: "+tmpsw[j])
-        if(tmpsw[j] == 0){
-          //if(max == 1 && t.is_water()) return check_water_tile(result, tile_list[0], pos, j)
+        if(tmpsw[st_count] == 0){
+          //Water weather checker or wt_water
           if(wt == wt_water && t.is_water()){
             local area = get_tiles_near_stations(tile_list)
             for( local i = 0; i < area.len(); i++ ) {
@@ -2297,40 +2292,38 @@ class basic_chapter
               //gui.add_message(""+t_water.x+","+t_water.y+"")
               if (pos.x == t_water.x && pos.y == t_water.y){
                 if ( t_water.is_water() ) {
-                  tmpsw[j] = 1
-                  tmpcoor.push(t)
+                  tmpsw[st_count] = 1
+                  tmpcoor.push(pos)
                   result = null
                   break
                 }
                 else
-                  result = format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
+                  result = format(translate("Select station No.%d"),st_count+1)+" ("+c.tostring()+")."
               }
               else
-                result = format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
+                result = format(translate("Select station No.%d"),st_count+1)+" ("+c.tostring()+")."
             }
             return result
           }
-          foreach(tile in tile_list){
-            if (pos.x == tile.x && pos.y == tile.y && pos.z == tile.z){
-              if(has_way && wt == is_wt){
-                tmpsw[j] = 1
-                tmpcoor.push(st_t)
-                return null
-              }
-              else
-                return format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
+
+        //If they are land vehicles
+        foreach(tile in tile_list){
+          if (pos.x == tile.x && pos.y == tile.y && pos.z == tile.z){
+            if(has_way && wt == is_wt){
+              tmpsw[st_count] = 1
+              tmpcoor.push(pos)
+              return null
             }
+            else
+              return format(translate("Select station No.%d"),st_count+1)+" ("+c.tostring()+")."
           }
-          return format(translate("Select station No.%d"),j+1)+" ("+c.tostring()+")."
         }
-        j++
-        if (j == t_list.len())
-          return result
+        return format(translate("Select station No.%d"),st_count+1)+" ("+c.tostring()+")."
       }
     }
-
-    return 0
+    return result
   }
+
   function get_c_key(c, i){
     local res =  ("coord_" + c.x + "_" + c.y + "_" + c.z +"_"+i).toalnum()
     gui.add_message(""+res)
