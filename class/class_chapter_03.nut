@@ -1425,7 +1425,7 @@ class tutorial.chapter_03 extends basic_chapter
         //Construye un puente
         if (pot[0]==1 && pot[1]==0){
           return null
-          else
+        } else {
             return translate("You must build the bridge here")+" ("+coord3d_to_string(bridge2_coords.a)+")."
         }
         //Segundo tramo de rieles
@@ -1972,7 +1972,7 @@ class tutorial.chapter_03 extends basic_chapter
           //gui.add_message(""+st_lim_a.len()+"")
 
           for ( local j = 0; j < ch3_rail_stations.len(); j++ ) {
-            result = format(translate("Select station No.%d"),j+1)+" ("+coord3d_to_string(ch3_rail_stations[j])+")."
+            result = format(translate("Select station No.%d"), j+1) + " (" + coord3d_to_string(ch3_rail_stations[j]) + ")."
             if(tmpsw[j]==0){
               local check = check_rail_station(ch3_rail_stations[j], 0, pos)
               if( check ){
@@ -2948,4 +2948,3 @@ class tutorial.chapter_03 extends basic_chapter
 }        // END of class
 
 // END OF FILE
-
