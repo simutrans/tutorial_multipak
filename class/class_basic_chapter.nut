@@ -3777,4 +3777,25 @@ function select_cube(tile_a, tile_b, obj = "") {
 
   return cube
 }
+
+/**
+  * checks list entries for coord3d
+  *
+  * @param array tile list
+  *
+  * @return array tile list coord3d
+  */
+function check_coord3d(tile_list) {
+  local clist = []
+  for ( local i = 0; i < tile_list.len(); i++) {
+    try {
+      local t = tile_list[i].z
+      clist.append(tile_list[i])
+    } catch(ev) {
+      local c = square_x(tile_list[i].x, tile_list[i].y).get_ground_tile()
+      clist.append(coord3d(c.x, c.y, c.z))
+    }
+  }
+  return clist
+}
 // END OF FILE
