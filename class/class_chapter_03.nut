@@ -650,7 +650,7 @@ class tutorial.chapter_03 extends basic_chapter
             // rules for bridge build
             local cube = select_cube(bridge2_coords.b, bridge2_coords.a, "bridge")
             rules.forbid_way_tool_rect(player_all, tool_build_bridge, wt_rail, 0, cube[2], cube[3], get_message(5) )
-            rules.allow_way_tool_cube(player_all, tool_build_bridge, wt_rail, 0, cube[0], cube[1])
+            rules.allow_way_tool_cube(player_all, tool_build_bridge, wt_rail, 0, cube[0], coord3d(cube[1].x, cube[1].y, cube[0].z))
           }
         }
         //Para el puente
@@ -671,7 +671,7 @@ class tutorial.chapter_03 extends basic_chapter
               // clear bridge build rules
               local cube = select_cube(bridge2_coords.b, bridge2_coords.a, "bridge")
               rules.clear_way_tool_rect(player_all, tool_build_bridge, wt_rail, 0, cube[2], cube[3], true)
-              rules.clear_way_tool_cube(player_all, tool_build_bridge, wt_rail, 0, cube[0], cube[1], false)
+              rules.clear_way_tool_cube(player_all, tool_build_bridge, wt_rail, 0, cube[0], coord3d(cube[1].x, cube[1].y, cube[0].z), false)
 
             }
           }
