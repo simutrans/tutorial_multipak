@@ -586,10 +586,6 @@ class tutorial.chapter_03 extends basic_chapter
         persistent.ch_max_sub_steps = 3
         //Primer tramo de rieles
         if ( pot[0] == 0 ) {
-          //local limi = my_tile(way2_fac1_fac2[1])
-
-          //local tile1 = my_tile(way2_fac1_fac2[0])
-          //local tile2 = my_tile(way2_fac1_fac2[1])
 
           if (!my_tile(way2_fac1_fac2[0]).find_object(mo_way)){
             label_x.create(way2_fac1_fac2[0], pl_unown, translate("Build Rails form here"))
@@ -599,15 +595,14 @@ class tutorial.chapter_03 extends basic_chapter
 
           if (!my_tile(way2_fac1_fac2[1]).find_object(mo_way)){
             label_x.create(my_tile(way2_fac1_fac2[1]), pl_unown, translate("Build Rails form here"))
-
+            // rules for build station way
             rules.forbid_way_tool_rect(player_all, tool_build_way, wt_rail, 0, coord(0, 0), coord(191, 511), get_message(5) )
             rules.allow_way_tool_rect( player_all, tool_build_way, wt_rail, "", way2_fac1_fac2[0], way2_fac1_fac2[1] )
           } else {
+            // rules for build step 1 way
             rules.clear_way_tool_rect(player_all, tool_build_way, wt_rail, 0, way2_fac1_fac2[0], way2_fac1_fac2[1], true)
             rules.allow_way_tool_rect( player_all, tool_build_way, wt_rail, "", limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b )
           }
-
-
 
           if ( my_tile(way2_fac1_fac2[1]).find_object(mo_label) ) {
 
@@ -625,19 +620,6 @@ class tutorial.chapter_03 extends basic_chapter
             }
           }
 
-
-          /*local opt = 0
-          local coora = tile_x(way2_fac1_fac2[0].x, way2_fac1_fac2[0].y, way2_fac1_fac2[0].z)
-          local coorb = tile_x(way2_fac1_fac2[2].x, way2_fac1_fac2[2].y, way2_fac1_fac2[2].z)
-          //gui.add_message("get_fullway_dir "+get_fullway_dir(way2_fac1_fac2[0], way2_fac1_fac2[1]))
-          local dir = get_fullway_dir(way2_fac1_fac2[0], way2_fac1_fac2[1])
-          local obj = false
-          local wt = wt_rail
-
-          wayend = coorb
-          r_way = get_fullway(coora, coorb, dir, obj)*/
-
-
           if ( test_select_way(my_tile(way2_fac1_fac2[0]), my_tile(way2_fac1_fac2[2]), wt_rail) ) {
             my_tile(way2_fac1_fac2[0]).find_object(mo_way).unmark()
             my_tile(way2_fac1_fac2[2]).remove_object(player_x(1), mo_label)
@@ -647,24 +629,18 @@ class tutorial.chapter_03 extends basic_chapter
             label_bord(limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, 0, true, "X") //delete
 
             pot[0] = 1
-            //wayend = 0
 
             // rules for bridge build
             local cube = select_cube(bridge2_coords.b, bridge2_coords.a, "bridge")
-            //rules.allow_way_tool_cube(player_all, tool_build_bridge, wt_rail, 0, cube[0], cube[1])
             rules.clear_way_tool_rect(player_all, tool_build_way, wt_rail, 0, limit_ch3_rail_line_1a.a, limit_ch3_rail_line_1a.b, true)
             rules.allow_way_tool_rect( player_all, tool_build_way, wt_rail, "", way2_fac1_fac2[2], bridge2_coords.a )
             rules.allow_way_tool_rect( player_all, tool_build_way, wt_rail, "", bridge2_coords.b, way2_fac1_fac2[3] )
 
             rules.forbid_way_tool_rect(player_all, tool_build_bridge, wt_rail, 0, coord(0, 0), coord(191, 511), get_message(5) )
-
+            // rules for connect bridge
             rules.allow_way_tool_rect( player_all, tool_build_bridge, wt_rail, "", bridge2_coords.b, bridge2_coords.b )
             rules.allow_way_tool_rect( player_all, tool_build_bridge, wt_rail, "", bridge2_coords.a, bridge2_coords.a )
             rules.allow_way_tool_cube( player_all, tool_build_bridge, wt_rail, "", cube[0], cube[1] )
-
-
-            //gui.add_message("cube 0 + 1 " + coord3d_to_string(cube[0]) + " - " + coord3d_to_string(cube[1]) )
-            //gui.add_message("bridge2_coords.a - " + coord3d_to_string(bridge2_coords.a) + " - bridge2_coords.b " + coord3d_to_string(bridge2_coords.b) )
 
             local r = my_tile(check_way_mark_tile).find_object(mo_way)
             if ( r ) { r.unmark() }
@@ -680,7 +656,6 @@ class tutorial.chapter_03 extends basic_chapter
           if ( !tile.find_object(mo_bridge) ) {
             label_x.create(tile, pl_unown, translate("Build a Bridge here!."))
             label_x.create(my_tile(bridge2_coords.b), pl_unown, translate("Build a Bridge here!."))
-            //r_way.c = coord3d(tile.x, tile.y, tile.z)
           }
           else {
             tile.remove_object(player_x(1), mo_label)
@@ -692,12 +667,9 @@ class tutorial.chapter_03 extends basic_chapter
               rules.clear_way_tool_rect(player_all, tool_build_bridge, wt_rail, 0,  coord(0, 0), coord(191, 511), true)
               rules.clear_way_tool_rect( player_all, tool_build_way, wt_rail, "", bridge2_coords.b, way2_fac1_fac2[3], true )
               rules.clear_way_tool_rect( player_all, tool_build_way, wt_rail, "", way2_fac1_fac2[2], bridge2_coords.a, true )
-
+              // rules for build way step 2
               rules.allow_way_tool_rect( player_all, tool_build_way, wt_rail, "", limit_ch3_rail_line_1b.a, limit_ch3_rail_line_1b.b )
 
-              //test_select_way(way2_fac1_fac2[2], way2_fac1_fac2[3], wt_rail)
-
-              //mark_way_last_tile()
             }
           }
         }
@@ -716,9 +688,8 @@ class tutorial.chapter_03 extends basic_chapter
               label_x.create(way2_fac1_fac2[5], pl_unown, translate("Build Rails form here"))
 
             mark_waybuild(way2_fac1_fac2[4])
-
+            // rules for build station way
             rules.clear_way_tool_rect( player_all, tool_build_way, wt_rail, "", limit_ch3_rail_line_1b.a, limit_ch3_rail_line_1b.b, true )
-
             rules.allow_way_tool_rect( player_all, tool_build_way, wt_rail, "", way2_fac1_fac2[4], way2_fac1_fac2[5] )
 
             pot[2] = 1
@@ -735,15 +706,12 @@ class tutorial.chapter_03 extends basic_chapter
             if ( dir.is_twoway(r.get_dirs()) ) {
               r.unmark()
               //unmark_waybuild()
-              //check_way_last_tile = way2_fac1_fac2[3]
               mark_way_last_tile()
             } else {
               check_way_last_tile = way2_fac1_fac2[3]
               r.mark()
             }
 
-            //mark_way_last_tile()
-              gui.add_message("check_way_last_tile " + coord3d_to_string(check_way_last_tile))
           }
 
         } else if ( pot[2] == 1 ) {
@@ -754,7 +722,7 @@ class tutorial.chapter_03 extends basic_chapter
             //elimina el cuadro label
             my_tile(way2_fac1_fac2[5]).remove_object(player_x(1), mo_label)
             my_tile(way2_fac1_fac2[4]).remove_object(player_x(1), mo_label)
-
+            // clear way rules
             rules.clear_way_tool_rect( player_all, tool_build_way, wt_rail, "", way2_fac1_fac2[4], way2_fac1_fac2[5], true )
 
             this.next_step()
