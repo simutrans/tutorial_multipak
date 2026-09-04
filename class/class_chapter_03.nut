@@ -957,9 +957,6 @@ class tutorial.chapter_03 extends basic_chapter
             rules.clear_way_tool_rect( player_all, tool_build_way, wt_rail, "", limit_ch3_rail_line_2b.a, limit_ch3_rail_line_2b.b, true )
             rules.allow_way_tool_rect( player_all, tool_build_way, wt_rail, "", way2_fac2_fac3[4], way2_fac2_fac3[5] )
 
-            //pot[2] = 1
-            //mark_way_last_tile()
-            check_way_last_tile = way2_fac2_fac3[4]
             mark_way_last_tile()
           }
           else {
